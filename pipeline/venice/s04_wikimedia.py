@@ -110,7 +110,8 @@ def wikidata_entities(qids):
             out[qid] = {
                 "labels": {k: v["value"] for k, v in (ent.get("labels") or {}).items()},
                 "descriptions": {k: v["value"] for k, v in (ent.get("descriptions") or {}).items()},
-                "sitelinks": {k: v["title"] for k, v in (ent.get("sitelinks") or {}).items()},
+                # the API answers "itwiki", "enwiki"; keep the plain language code
+                "sitelinks": {k[:-4]: v["title"] for k, v in (ent.get("sitelinks") or {}).items()},
                 "image": first("P18"),
                 "inception": inception.get("time") if isinstance(inception, dict) else None,
                 "inception_year": inception_year,
@@ -145,7 +146,19 @@ def commons_files(titles):
                 "width": info.get("width"), "height": info.get("height"),
                 "uploader": info.get("user"),
             }
+            # the API normalises underscores to spaces; index both spellings
+            out[page.get("title", "").replace(" ", "_")] = out[page.get("title")]
     return out
+
+
+def photo_of(files, image_name):
+    """Commons answer for one P18 file name, whichever way it was spelled."""
+    if not image_name:
+        return {}
+    for key in (f"File:{image_name}", f"File:{image_name.replace(' ', '_')}", image_name):
+        if key in files:
+            return files[key]
+    return {}
 
 
 def wikipedia_geosearch(lat, lon, lang="it", radius=60):
@@ -200,7 +213,8 @@ def main(areas):
                             "inception": e["inception"], "architect_qid": e["architect_qid"],
                             "heritage": e["heritage"]})
                 if e.get("image"):
-                    rec["photo"] = files.get("File:" + e["image"].replace(" ", "_"), {})
+                    rec["photo"] = photo_of(files, e["image"])
+                    rec["image_name"] = e["image"]
             elif bid in cand:
                 rec.update({"qid": None, "status": "candidate", "name": pr.get("name"),
                             "geosearch": cand[bid]["candidates"], "tagged_article": cand[bid]["tagged_article"]})
