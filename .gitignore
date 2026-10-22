@@ -1,0 +1,28 @@
+# raw source data stays on disk, out of the repository
+data/raw/
+data/processed/
+data/ready/
+!data/raw/.gitkeep
+
+# a reference copy of the engine we vendor from (its sample data is 11 MB and not ours)
+research/engines/sydmap-full/
+# heavyweight read-only snapshots taken while auditing other engines
+research/engines/city-sites-audit/
+research/engines/city_engines/
+research/engines/venice-repo-audit/
+research/provenance/venice_probe/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# build output and local tools
+node_modules/
+dist/
+.vite/
+.DS_Store
+Thumbs.db

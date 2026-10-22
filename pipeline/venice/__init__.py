@@ -1,0 +1,1 @@
+"""Independent Venice building-atlas pipeline."""

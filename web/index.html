@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Венеция, здание за зданием</title>
+<meta name="description" content="Здания исторической Венеции в 3D, раскрашенные по эпохам застройки: средневековое ядро, XIX век, XX век и постройки с неизвестным возрастом. Данные муниципальной классификации VPRG и OpenStreetMap.">
+<meta property="og:title" content="Венеция, здание за зданием">
+<meta property="og:description" content="Здания исторической Венеции в 3D, раскрашенные по эпохам застройки.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="scene" aria-label="Трёхмерная модель застройки Венеции"></canvas>
+<div class="veil veil-top" aria-hidden="true"></div>
+<div class="veil veil-bottom" aria-hidden="true"></div>
+
+<!-- Сверху — что смотреть, в середине город, снизу время. Всё, что можно прочитать, открывается справа. -->
+<header class="masthead">
+  <h1><span class="sun-disc" aria-hidden="true"></span>Венеция</h1>
+  <p class="byline"><b>Здание за зданием</b></p>
+</header>
+
+<nav class="bar" aria-label="Венеция">
+  <div class="lenses" role="group" aria-label="Раскрасить город по">
+    <button data-mode="0" aria-pressed="true">Возраст</button>
+    <button data-mode="3" aria-pressed="false">Сюжеты</button>
+    <button data-mode="1" aria-pressed="false">Высоты</button>
+    <button data-mode="2" aria-pressed="false">Наследие</button>
+    <button data-mode="4" aria-pressed="false" hidden>Районы</button>
+  </div>
+  <i class="bar-sep" aria-hidden="true"></i>
+  <button class="walks-open" hidden>Маршруты</button>
+  <button class="notes-open">Заметки</button>
+  <form class="find" role="search" autocomplete="off">
+    <label class="find-field">
+      <svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="M10.4 10.4l3.6 3.6"/></svg>
+      <span class="sr-only">Найти здание или улицу</span>
+      <input id="find" type="search" placeholder="Найти здание или улицу" role="combobox" aria-expanded="false"
+        aria-controls="find-results" aria-autocomplete="list">
+    </label>
+    <ul id="find-results" class="find-results" role="listbox" hidden></ul>
+  </form>
+  <button class="find-open" aria-label="Найти здание или улицу"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="M10.4 10.4l3.6 3.6"/></svg></button>
+</nav>
+
+<!-- Справа: заметки, сюжеты, карточка здания. По одному. -->
+<aside id="dock" class="dock" hidden aria-label="Подробности">
+  <div class="dock-chrome">
+    <button class="dock-back" hidden></button>
+    <button class="dock-close" aria-label="Закрыть"><svg class="x" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9"/></svg></button>
+  </div>
+  <div id="dock-live" class="dock-live"></div>
+
+  <article id="notes" class="dock-page notes" hidden>
+    <h2 id="notes-title">Заметки</h2>
+    <p class="lede">Года постройки каждого венецианского дома нет ни в одном реестре. Атлас собирает возраст по зданию:
+      из муниципальной классификации застройки, исторических реестров и OpenStreetMap.</p>
+
+    <h3>Что вы видите</h3>
+    <p>Все <span data-stat="buildings">11 137</span> зданий исторического центра — остров Венеции, Джудекка,
+      Сан-Джорджо, Ла-Чертоза, Мурано и Бурано — как они стоят сегодня, каждое окрашено по эпохе застройки.
+      Проведите по шкале времени внизу, чтобы увидеть город в любом году, или включите воспроизведение и смотрите,
+      как он собирается.</p>
+
+    <h3>Как здесь оказаться</h3>
+    <p>Потяните город, чтобы повернуть. Чтобы сдвинуть — правая кнопка мыши или Shift с левой. Приблизить — колесо.
+      Двигайте солнце по шкале или включите воспроизведение; выберите здание, чтобы прочитать его карточку.</p>
+
+    <h3>Как известен возраст</h3>
+    <p>Каждое здание несёт то лучшее свидетельство, которое о нём есть, и в карточке сказано, какое именно.</p>
+    <dl class="evidence">
+      <dt>Год по документу <span class="n" data-stat="documented">–</span></dt>
+      <dd>Год указан в самом объекте OpenStreetMap или пришёл из Wikidata. Для Венеции это редкий случай:
+        даты в OSM есть лишь у двух десятков зданий острова.</dd>
+      <dt>Эпоха <span class="n" data-stat="epoch">–</span></dt>
+      <dd>Муниципальная классификация VPRG делит застройку города на три эпохи: preottocentesche (до 1800),
+        ottocentesche (XIX век) и novecentesche (XX век). Это интервал, а не год, и в карточке он показан как интервал.</dd>
+      <dt>Перестроено <span class="n" data-stat="transformed">–</span></dt>
+      <dd>Классы <i>pt</i>, <i>fa</i>, <i>Or</i> и составные коды помечают единицы, частично изменённые, слитые или
+        перестроенные. Их нельзя показывать как сохранившиеся старые дома.</dd>
+      <dt>Неизвестно <span class="n" data-stat="unknown">–</span></dt>
+      <dd>Для части застройки муниципальной классификации нет вовсе — прежде всего на Мурано и Бурано. Такие здания
+        показаны серым, и год постройки у них неизвестен.</dd>
+    </dl>
+    <p>Оценки на карте бледнее, а в карточке написано, откуда они взялись. Читайте их как период, а не как дату.</p>
+
+    <h3>Высоты</h3>
+    <p>Из тега <i>height</i>, где он есть; иначе по числу этажей; иначе взята медиана измеренных зданий той же эпохи,
+      и это прямо помечено в карточке. Крыши и надстройки собраны из частей <i>building:part</i>, где их нанёс OSM.</p>
+
+    <h3>Данные</h3>
+    <ul class="sources">
+      <li><b>Классификация застройки</b> VPRG Città Antica, Comune di Venezia: 15 584 единицы, 56 классов.
+        Получена через публичные картографические сервисы города.</li>
+      <li><b>Геометрия, адреса, части, улицы</b> OpenStreetMap, ODbL 1.0, © участники OpenStreetMap.
+        Извлечение Венето — <a href="https://download.openstreetmap.fr/extracts/europe/italy/veneto.osm.pbf" target="_blank" rel="noopener">openstreetmap.fr</a>.</li>
+      <li><b>Границы</b> остров Венеции (relation 4817103) и исторический центр Венеция-Мурано-Бурано
+        (relation 6628638), OpenStreetMap.</li>
+      <li><b>Имена, фотографии, статьи</b> Wikidata (CC0), Википедия (CC BY-SA) и Викисклад; у каждой фотографии
+        указан автор и лицензия. Связь идёт по тегу <i>wikidata</i>; где тега нет, рядом со зданием ищется статья,
+        и такая связь помечена как предположение.</li>
+      <li><b>Топографические выпуски Венето</b> 1987–2010 годов и исторические реестры 1740, 1808 и 1857 годов
+        сохранены в проекте; в этой сборке возраст по ним ещё не размечался.</li>
+    </ul>
+
+    <h3>Чего здесь нет</h3>
+    <p>Точных годов постройки. Класс VPRG описывает типологию и сохранность, а не дату; <i>DATA_CSC</i> в этих
+      данных — дата решения научной комиссии (2000–2013 годы), а не год постройки. Исторические реестры фиксируют
+      год наблюдения, а не строительства. Материковая часть города — Местре и Маргера — в атлас не входит.</p>
+
+    <h3>Из чего это сделано</h3>
+    <p>Данные подготовлены собственным конвейером, а показываются движком
+      <a href="https://github.com/amarashi/SydMap" target="_blank" rel="noopener">SydMap</a> Амира Мараши
+      (лицензия MIT), который продолжает
+      <a href="https://stop-token.com/lab/amsterdam/" target="_blank" rel="noopener">LAYRS: Амстердам</a>
+      Алекса Баракова и
+      <a href="https://paris.bogachev.fr" target="_blank" rel="noopener">«Париж, здание за зданием»</a>
+      Александра Богачёва.</p>
+
+    <footer class="colophon">
+      <p>Некоммерческий проект: данные города, показанные как есть. Атрибуция обязательна для всех источников,
+        перечисленных выше.</p>
+      <p class="repo"><a href="https://github.com/maximosovsky/venice-by-building" target="_blank" rel="noopener">Код и конвейер данных на GitHub</a></p>
+    </footer>
+  </article>
+</aside>
+
+<div id="tip" class="tip" hidden aria-hidden="true"></div>
+
+<!-- Время: год на табло, затем шкала. Шкала — она же легенда: её станции это эпохи города в их цветах. -->
+<section class="time" aria-label="Время">
+  <div class="time-head">
+    <div class="flaps" aria-hidden="true"><span class="flap">2</span><span class="flap">0</span><span class="flap">2</span><span class="flap">6</span></div>
+    <p class="time-what" aria-live="polite"><i id="era">Сегодня</i><span><span id="year" class="sr-only">Сегодня, </span><span id="count" class="n">11 137 зданий</span></span></p>
+    <div id="key" class="key"></div>
+  </div>
+  <div class="time-line">
+    <button id="play" class="play" aria-label="Воспроизвести рост города">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path id="play-icon" d="M4.5 2.5v11l9-5.5z"/></svg>
+    </button>
+    <div class="track">
+      <canvas id="hist" aria-label="Здания по эпохам. Потяните, чтобы выбрать год."></canvas>
+      <div id="rail" class="rail"></div>
+      <span class="from-mark" hidden aria-hidden="true"></span>
+      <span class="year-ring" aria-hidden="true"></span>
+      <span class="year-sun sun-disc" aria-hidden="true"></span>
+    </div>
+  </div>
+</section>
+<div id="loading" class="loading">Раскладываем город <span id="progress" class="n">0</span>%</div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "delegation_id": "deleg_85c2fb4f",
+  "started": "2026-10-22 20:13:27",
+  "task_count": 2,
+  "model": "gpt-6.1-sol",
+  "provider": "custom:azure-max",
+  "tasks": [
+    {
+      "index": 0,
+      "goal": "Find accessible building construction date/period datasets for Venice Italy in municipal/regional planning sources. Search Venice geoportal, PRG/PI historic centre building typology, epoca costruzione, datazione edifici. Need actual sources, fields, download URLs and licenses if possible. Distinguish survey dates from construction dates. Return concise Russian report with verified URLs and evidence. No file downloads required.",
+      "log": "C:\\Users\\1\\AppData\\Local\\hermes\\cache\\delegation\\live\\deleg_85c2fb4f\\task-0.log",
+      "status": "completed",
+      "exit_reason": "completed"
+    },
+    {
+      "index": 1,
+      "goal": "Investigate Venice Time Machine/TimeMachine Atlas and Parcels of Venice for actual downloadable historical building geometries with start_date/end_date or construction-period data. Follow source code GitHub data assets, EPFL open datasets Zenodo etc. Return verified URLs, field/schema and coverage/licensing/access blockers. Distinguish inferred existence at cadastral year from construction dates.",
+      "log": "C:\\Users\\1\\AppData\\Local\\hermes\\cache\\delegation\\live\\deleg_85c2fb4f\\task-1.log",
+      "status": "completed",
+      "exit_reason": "completed"
+    }
+  ],
+  "completed": "2026-10-22 20:23:14"
+}

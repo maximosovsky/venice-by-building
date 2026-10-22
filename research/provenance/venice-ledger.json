@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://timemachineatlas.eu/build/timemachine.js?t=1677479610",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 2,
+      "url": "https://api.maptiler.com/tiles/40c9608f-bd20-4fb4-90ea-fbded066d866/tiles.json?key=laTrAUbj896UpFd2TvvV",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 3,
+      "url": "https://timemachineatlas.eu/build/search.json",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 4,
+      "url": "https://zenodo.org/records/20715172",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 5,
+      "url": "https://github.com/epfl-timemachine/venice-1808-landregister",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 6,
+      "url": "https://github.com/epfl-timemachine/venice-1740-landregister",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 7,
+      "url": "https://github.com/epfl-timemachine/venice-data-week-data/tree/main/946_1408-dorigo",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 8,
+      "url": "https://parcelsofvenice.epfl.ch/datasets",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 9,
+      "url": "https://github.com/epfl-timemachine/time-atlas-data-production/blob/main/.gitmodules",
+      "title": "",
+      "accessed": "2026-10-22"
+    }
+  ]
+}

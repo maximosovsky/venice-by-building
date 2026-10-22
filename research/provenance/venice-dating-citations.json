@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://jacopoottaviani.com/rome",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 2,
+      "url": "https://milano-by-building-production.up.railway.app",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 3,
+      "url": "https://milano-by-building-production.up.railway.app/app.js",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 4,
+      "url": "https://www.comune.venezia.it/sites/default/files/cartanet/VPRG_Citta_Antica/NTA_CA.pdf",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 5,
+      "url": "https://timemachineatlas.eu/build/search.json",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 6,
+      "url": "https://zenodo.org/records/20715172",
+      "title": "",
+      "accessed": "2026-10-22"
+    }
+  ]
+}

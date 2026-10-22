@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://geoportale.comune.venezia.it/Geocortex/Essentials/REST/sites/GeoUrbanistica/map/mapservices/146",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 2,
+      "url": "https://www.comune.venezia.it/sites/default/files/cartanet/VPRG_Citta_Antica/NTA_CA.pdf",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 3,
+      "url": "https://www.comune.venezia.it/sites/default/files/cartanet/VPRG_Citta_Antica/NTA_Appendice_1.pdf",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 4,
+      "url": "https://www.comune.venezia.it/it/content/clone-vprg-venezia-analisi",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 5,
+      "url": "https://www.comune.venezia.it/it/content/vprg-isola-s-servolo",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 6,
+      "url": "https://portale.comune.venezia.it/node/117/21435867",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 7,
+      "url": "https://portale.comune.venezia.it/node/117/80",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 8,
+      "url": "https://www.comune.venezia.it/it/content/note-legali",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 9,
+      "url": "https://geoportale.comune.venezia.it/Geocortex/Essentials/REST/sites/GeoUrbanistica/map/mapservices/146/layers/14",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 10,
+      "url": "https://www.comune.venezia.it/sites/comune.venezia.it/files/page/files/Tavola%20A.5%20tipologie%20edilizie%20e%20classi%20di%20et%C3%A0_Redatto_OCR.pdf",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 11,
+      "url": "https://www.comune.venezia.it/sites/comune.venezia.it/files/page/files/elaborati_di_analisi.pdf",
+      "title": "",
+      "accessed": "2026-10-22"
+    },
+    {
+      "id": 12,
+      "url": "https://portale.comune.venezia.it/filebrowser/download/21435863",
+      "title": "",
+      "accessed": "2026-10-22"
+    }
+  ]
+}
