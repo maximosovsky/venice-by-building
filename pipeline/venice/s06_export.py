@@ -167,7 +167,10 @@ def main(area="centro"):
 
     feats = load_geojson(config.PROCESSED / f"buildings_dated_{area}.geojson")
     parts_feats = load_geojson(config.PROCESSED / f"parts_{area}.geojson")
-    wikimedia = json.loads((config.READY / "wikimedia.json").read_text(encoding="utf-8"))
+    wikimedia_path = config.READY / "wikimedia.json"
+    wikimedia = json.loads(wikimedia_path.read_text(encoding="utf-8")) if wikimedia_path.exists() else {}
+    if not wikimedia:
+        print("note: data/ready/wikimedia.json not present yet - exporting without wiki cards")
     from shapely.ops import transform as shp_transform
     island_geom = shp_transform(fn, shp_shape(json.loads(config.OSM_POLYGONS["island"].read_text(encoding="utf-8"))["features"][0]["geometry"]))
     vprg_geom = shp_transform(fn, shp_shape(json.loads(config.OSM_POLYGONS["centro"].read_text(encoding="utf-8"))["features"][0]["geometry"]))
@@ -324,7 +327,12 @@ def main(area="centro"):
         if not h:
             h = medians.get(epoch) or global_median
             hsrc = "epoch_median_estimate"
-        floors = int(pr["building:levels"]) if str(pr.get("building:levels", "")).split(".")[0].isdigit() else max(1, round(h / 3.0))
+        try:
+            floors = max(1, int(float(pr.get("building:levels"))))
+            floors_src = 0
+        except (TypeError, ValueError):
+            floors = max(1, round(h / 3.0))
+            floors_src = 1
 
         lay0 = 0
         bits = []
@@ -367,7 +375,7 @@ def main(area="centro"):
         attr_list.append({"osm": pr["osm_id"] * (1 if pr["osm_type"] == "way" else -1),
                           "year": year, "yfrom": yfrom, "yto": yto,
                           "h": int(round(h * 10)), "hsrc": H_SRC.get(hsrc, 3),
-                          "fsrc": 0 if pr.get("building:levels") else 1, "flag": flag,
+                          "fsrc": floors_src, "flag": flag,
                           "heritage": 0, "lay0": lay0, "lay1": 0,
                           "wk": wk_of.get(pr["building_id"], -1), "nm": nm_of.get(pr["building_id"], -1),
                           "hi": hi_of.get(pr["building_id"], -1), "sp": period, "src": 0, "floors": floors,
@@ -401,7 +409,7 @@ def main(area="centro"):
 
     attrs = np.zeros(len(attr_list), dtype=ATTR_DTYPE)
     for name in ATTR_DTYPE.names:
-        attrs[name] = [a[name] for a in attr_list]
+        attrs[name] = [a.get(name, 0) for a in attr_list]
     write_bin(out_dir / "attrs.bin", attrs.tobytes())
 
     # ---- ground: land, water, context ----

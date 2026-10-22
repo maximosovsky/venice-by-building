@@ -101,5 +101,20 @@ research/          engine source snapshots and provenance records
 ## Status
 
 Working: geometry, parts, epochs, unknown-age layer, Wikimedia cards, streets.
-Not yet in this build: the 1987–2010 topographic releases and the 1740/1808/1857 registers as dating
-evidence; those files are on disk and their inventories are in `docs/`.
+Not yet in this build, but held on disk and inventoried in `docs/`:
+
+* **Topographic releases 1987–2010** — `docs/topographic-data-inventory_20261022.md`. Usable 3D inputs
+  exist: base and eaves elevations in 2005 `FABBRIC` and 2006 `EDIFC`/`EDI_MIN`; 181,113 volumetric parts
+  in 2010 `UN_VOL`; 187,161 roof polygons with vertex Z in `ELE_CP`. Legacy horizontal CRS is inferred
+  EPSG:3003, the GEODBT archives declare EPSG:6706, the vertical datum is undocumented, and no stable
+  identifier links a building across all five releases.
+* **Historical registers 1740 / 1808 / 1857 and the TimeMachine Atlas** —
+  `docs/historical-data-inventory_20261022.md`. The nearest thing to per-building age evidence is
+  `2024_Edifici_EPSG32633.geojson`, attribute `description_piamonte`: 929 building-linked descriptions with
+  cited historical prose, from which dates need semantic extraction. Atlas `start_date`/`end_date` are
+  mostly map states; `transform_date` and `fire_date` are sparse candidates. Dorigo observations 976–1408
+  and the 1740/1808 registers date zones and parcels, not modern buildings. The 1808 Zenodo release is
+  CC BY 4.0; other historical datasets have no established reuse grant.
+
+The viewer's data contract, as implemented by `s06_export.py`, is written down in
+`docs/viewer-contract_20261022.md`.

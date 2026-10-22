@@ -1,0 +1,8 @@
+# keep text files as they are written, LF in the repository, so ignore rules and diffs behave
+* text=auto eol=lf
+*.png binary
+*.woff2 binary
+*.bin binary
+*.geojson text eol=lf
+*.json text eol=lf
+*.parquet binary
