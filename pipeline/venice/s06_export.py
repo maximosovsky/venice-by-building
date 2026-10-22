@@ -160,6 +160,15 @@ def polygon_bin(polys, origin):
     return out
 
 
+def extract_for(cards, extracts):
+    """The first paragraph in the first language we have, Italian preferred."""
+    for lang in ("it", "en", "ru"):
+        title = (cards or {}).get(lang)
+        if title and extracts.get(f"{lang}:{title}"):
+            return extracts[f"{lang}:{title}"]
+    return None
+
+
 def main(area="centro"):
     fn = transformer()
     ox, oy = fn(*config.ORIGIN_LONLAT)
@@ -171,6 +180,9 @@ def main(area="centro"):
     wikimedia = json.loads(wikimedia_path.read_text(encoding="utf-8")) if wikimedia_path.exists() else {}
     if not wikimedia:
         print("note: data/ready/wikimedia.json not present yet - exporting without wiki cards")
+    extracts_path = config.READY / "extracts.json"
+    extracts = json.loads(extracts_path.read_text(encoding="utf-8")) if extracts_path.exists() else {}
+    print(f"wiki links={len(wikimedia)} article summaries={len(extracts)}")
     from shapely.ops import transform as shp_transform
     island_geom = shp_transform(fn, shp_shape(json.loads(config.OSM_POLYGONS["island"].read_text(encoding="utf-8"))["features"][0]["geometry"]))
     vprg_geom = shp_transform(fn, shp_shape(json.loads(config.OSM_POLYGONS["centro"].read_text(encoding="utf-8"))["features"][0]["geometry"]))
@@ -292,7 +304,8 @@ def main(area="centro"):
                                     "artist": photo.get("artist"), "license": photo.get("license"),
                                     "licenseUrl": photo.get("license_url")} if photo.get("thumb") else None),
                          "inception": w.get("inception_year"),
-                         "wiki": {"url": url, "title": cards.get("it") or cards.get("en"), "extract": None},
+                         "wiki": {"url": url, "title": cards.get("it") or cards.get("en"),
+                                  "extract": extract_for(cards, extracts)},
                          "area": area})
         elif pr.get("name"):
             nm_of[bid] = len(names)

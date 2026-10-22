@@ -16,6 +16,7 @@ Outputs:
 import json
 import sys
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -27,26 +28,53 @@ CACHE.mkdir(parents=True, exist_ok=True)
 PAUSE = 0.35
 
 
-def api(url, params):
+def api(url, params, pause=None):
     q = urllib.parse.urlencode(params)
     key = urllib.parse.quote_plus(url + "?" + q)
     cache_file = CACHE / (key[:180] + ".json")
     if cache_file.exists():
         return json.loads(cache_file.read_text(encoding="utf-8"))
-    req = urllib.request.Request(f"{url}?{q}", headers={"User-Agent": UA})
-    for attempt in range(4):
+    req = urllib.request.Request(f"{url}?{q}", headers={"User-Agent": UA, "Accept": "application/json"})
+    wait = pause if pause is not None else PAUSE
+    for attempt in range(6):
         try:
             with urllib.request.urlopen(req, timeout=45) as fh:
                 data = json.loads(fh.read().decode("utf-8"))
             cache_file.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
-            time.sleep(PAUSE)
+            time.sleep(wait)
             return data
+        except urllib.error.HTTPError as exc:
+            if exc.code == 429:                      # rate limited: wait it out, then try again
+                retry_after = exc.headers.get("Retry-After")
+                delay = float(retry_after) if (retry_after or "").isdigit() else 15 + 10 * attempt
+                print(f"  429 from {url.split('/')[2]}, waiting {delay:.0f}s")
+                time.sleep(delay)
+                wait = max(wait, 1.5)               # and go slower for the rest of this run
+                continue
+            if attempt == 5:
+                print(f"  ! {url} HTTP {exc.code}")
+                return {}
+            time.sleep(2 + 3 * attempt)
         except Exception as exc:
-            if attempt == 3:
+            if attempt == 5:
                 print(f"  ! {url} {type(exc).__name__}: {exc}")
                 return {}
             time.sleep(2 + 3 * attempt)
     return {}
+
+
+def wikipedia_extracts(titles):
+    """First paragraph of each article, from the REST summary endpoint."""
+    out = {}
+    for lang, title in titles:
+        if not title:
+            continue
+        slug = urllib.parse.quote(title.replace(" ", "_"), safe="")
+        data = api(f"https://{lang}.wikipedia.org/api/rest_v1/page/summary/{slug}", {}, pause=1.2)
+        extract = (data or {}).get("extract")
+        if extract:
+            out[f"{lang}:{title}"] = extract
+    return out
 
 
 def wikidata_entities(qids):
@@ -182,6 +210,17 @@ def main(areas):
             json.dumps(links, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"[{area}] links kept: {len(links)}")
     config.READY.mkdir(parents=True, exist_ok=True)
+    pairs, seen = [], set()
+    for rec in links.values():
+        if rec.get("status") != "confirmed":
+            continue
+        for lang, title in (rec.get("sitelinks") or {}).items():
+            if lang in ("it", "en", "ru") and title and (lang, title) not in seen:
+                seen.add((lang, title)); pairs.append((lang, title))
+    print(f"article summaries to fetch: {len(pairs)}")
+    extracts = wikipedia_extracts(pairs)
+    (config.READY / "extracts.json").write_text(json.dumps(extracts, ensure_ascii=False), encoding="utf-8")
+    print("article summaries fetched:", len(extracts))
     (config.READY / "wikimedia.json").write_text(json.dumps(links, ensure_ascii=False, indent=1),
                                                  encoding="utf-8")
     print("wrote", config.READY / "wikimedia.json", "entries:", len(links))
