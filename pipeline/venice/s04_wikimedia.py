@@ -90,11 +90,11 @@ def wikidata_entities(qids):
         for qid, ent in (data.get("entities") or {}).items():
             claims = ent.get("claims") or {}
 
-            def first(prop, source="value"):
+            def first(prop):
+                """The plain value of the first statement of a property, whatever its type."""
                 for c in claims.get(prop, []):
                     try:
-                        return c["mainsnak"]["datavalue"]["value"][source] if source == "value" \
-                            else c["mainsnak"]["datavalue"]["value"]
+                        return c["mainsnak"]["datavalue"]["value"]
                     except (KeyError, TypeError):
                         continue
                 return None
