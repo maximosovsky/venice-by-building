@@ -13,7 +13,9 @@ Outputs:
   data/ready/wikimedia.json                one merged table for the viewer
   data/processed/api_cache/                raw API answers, so a rerun costs no requests
 """
+import html
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -26,6 +28,16 @@ UA = "venice-building-atlas/1.0 (research pipeline; contact: project owner)"
 CACHE = config.PROCESSED / "api_cache"
 CACHE.mkdir(parents=True, exist_ok=True)
 PAUSE = 0.35
+TAG_RE = re.compile(r"<[^>]+>")
+
+
+def strip_html(value):
+    """Commons returns author and credit as HTML; the card shows plain text."""
+    if not value:
+        return value
+    text = TAG_RE.sub(" ", str(value))
+    text = html.unescape(text).replace("\xa0", " ")
+    return " ".join(text.split())[:300] or None
 
 
 def api(url, params, pause=None):
@@ -124,7 +136,7 @@ def wikidata_entities(qids):
 def commons_files(titles):
     """Photo credit, licence and source page for each Commons file title."""
     out = {}
-    titles = [t for t in titles if t]
+    titles = [t if t.startswith("File:") else "File:" + t for t in titles if t]
     for i in range(0, len(titles), 40):
         chunk = titles[i:i + 40]
         data = api("https://commons.wikimedia.org/w/api.php", {
@@ -132,11 +144,13 @@ def commons_files(titles):
             "prop": "imageinfo", "iiprop": "extmetadata|url|user|size", "iiurlwidth": 640})
         for page in ((data.get("query") or {}).get("pages") or {}).values():
             info = (page.get("imageinfo") or [{}])[0]
+            if not info.get("thumburl"):
+                continue                      # missing page, or no image: nothing to credit
             meta = info.get("extmetadata") or {}
 
             def field(name):
                 v = meta.get(name) or {}
-                return (v.get("value") or "").strip() if isinstance(v, dict) else None
+                return strip_html(v.get("value")) if isinstance(v, dict) else None
 
             out[page.get("title")] = {
                 "artist": field("Artist"), "license": field("LicenseShortName"),
