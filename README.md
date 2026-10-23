@@ -63,6 +63,7 @@ viewer's binary format, so the data stays independent of the viewer.
 | `s04_wikimedia.py` | Wikidata labels, Wikipedia articles, Commons photos with licence and author | `data/ready/wikimedia.json` |
 | `s05_streets.py` | streets as ordered rows of facades, with a side for each house | `data/ready/streets.json` |
 | `s10_itwiki.py` | construction dates from Italian Wikipedia articles, with the sentence and a review list | `data/processed/itwiki_dates_*` |
+| `s11_media.py` | photographs from Wikimedia Commons fetched once, shrunk to 560 px WebP, kept in `web/media/` with author and licence in the manifest | `web/media/` |
 | `s09_municipal.py` | measured heights from the city's 2010 topographic survey, attached to our footprints | `data/processed/municipal_heights_*` |
 | `s07_wikidata.py` | every Wikidata item located in Venice, matched to our footprints by geometry | `data/processed/wikidata_match_*` |
 | `s08_wikidata_enrich.py` | names, articles, dates with precision, architects, styles, heritage, heights, Commons photos | `data/ready/wikidata_enriched.json` |
@@ -78,6 +79,7 @@ python -m venice.s04_wikimedia island centro
 python -m venice.s05_streets island centro
 python -m venice.s09_municipal centro
 python -m venice.s10_itwiki centro
+python -m venice.s11_media centro
 python -m venice.s07_wikidata centro
 python -m venice.s08_wikidata_enrich centro
 python -m venice.s06_export centro

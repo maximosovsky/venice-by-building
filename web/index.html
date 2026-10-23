@@ -12,6 +12,7 @@
 <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="splash.css">
 </head>
 <body>
 <canvas id="scene" aria-label="Трёхмерная модель застройки Венеции"></canvas>
@@ -219,6 +220,7 @@ setTimeout(() => {
     (window.__veniceErrors.length ? ': ' + window.__veniceErrors.join('; ') : ''));
 }, 30000);
 </script>
+<script defer src="splash.js"></script>
 <script type="module" src="app.js"></script>
 </body>
 </html>
