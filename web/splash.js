@@ -95,7 +95,16 @@
     }
   }).catch(() => { /* без числа тоже понятно */ });
 
-  let done = false;
+  // Полная готовность: файлы карты, разобранные тайлы (приложение прячет свою строку), шрифты и собранная сцена.
+  let fontsReady = false;
+  if (document.fonts) document.fonts.ready.then(() => { fontsReady = true; }, () => { fontsReady = true; });
+  else fontsReady = true;
+  const sceneReady = () => {
+    const d = window.__dbg;
+    return !!(d && d.labelGroup && d.labelGroup.parent && d.uniforms);
+  };
+
+  let done = false, revealStarted = false;
   const finish = () => {
     if (done) return;
     done = true;
@@ -118,12 +127,26 @@
       ' ' + t.of + ' ' + total.toLocaleString('ru-RU') + ' — ' + t.count +
       ' · ' + t.files + ' ' + got.size + '/' + NEEDED.length;
     if (performance.now() > 12000) slowEl.hidden = false;
-    // Готово, когда приложение спрятало строку загрузки либо показало ошибку: заставка уходит.
     const line = document.getElementById('loading');
-    if (!line || line.hidden || line.classList.contains('fatal') || document.body.dataset.ready === '1') finish();
+    const fatal = !!line && line.classList.contains('fatal');
+    if (fatal) { finish(); return; }                         // ошибка важнее заставки
+    const filesDone = got.size >= NEEDED.length;
+    const tilesDone = !line || line.hidden || document.body.dataset.ready === '1';
+    const ready = filesDone && tilesDone && fontsReady && sceneReady();
+    if (ready && !revealStarted) {
+      revealStarted = true;
+      // Сборка: часы приложения отводятся назад, город вырастает заново — уже на глазах.
+      setTimeout(() => {
+        const r = window.__veniceReveal;
+        if (r && r.play()) setTimeout(finish, 420);          // заставка тает, пока дома растут
+        else finish();
+      }, 140);
+    }
+    // Страховка: не держим экран дольше 22 секунд (своя планка приложения — 30).
+    if (!done && performance.now() > 22000) finish();
   }, 150);
 
-  // Страховка: если через минуту ничего не произошло, не держим экран закрытым.
+  // Страховка: если через минуту заставка всё ещё висит (что-то пошло не так), уходим молча.
   setTimeout(() => { const line = document.getElementById('loading');
-    if (line && line.classList.contains('fatal')) finish(); }, 60000);
+    if (line && line.classList.contains('fatal')) finish(); if (!done) finish(); }, 60000);
 })();
