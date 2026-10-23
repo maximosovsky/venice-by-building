@@ -94,3 +94,13 @@ fallback dropped from 8 303 objects to 2 055; the tallest measured value is the 
 footprints. Against the 492 OSM `height` tags the survey agrees to a median of 0,18 m. Details and limits —
 the undocumented vertical datum and the unsettled terms of use — are in
 `docs/municipal-heights_20261023.md`.
+
+## Dates from Italian Wikipedia (2026-10-23)
+
+Stage `s10_itwiki.py` reads the 711 Italian articles of our objects and keeps only defensible
+construction dates: 27 found, **11 accepted** where Wikidata is silent, 11 confirming Wikidata, 5 held
+back for review because they disagree by more than five years, 8 founding or consecration dates recorded
+but never drawn, 31 prose turns rejected by the filters. The export marks them `dsrc = 4`; the dating note
+names the article as the source and a card adds the phrase under «Год по статье». The contract test still
+runs 168 265 checks with no failure, the worker smoke test passes, and the language coverage runs 1 272
+checks with nothing untranslated.

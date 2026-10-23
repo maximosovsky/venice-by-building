@@ -67,7 +67,9 @@ ATTR_DTYPE = np.dtype([
 MIN_BUILDING_HEIGHT = 2.0
 H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "municipal_survey_2010": 2,
          "epoch_median_estimate": 3, "bridge_assumed": 4, "wikidata_height": 5}
-D_SRC = {"osm": 0, "vprg": 1, "wikidata": 2, "none": 3}
+# 4 — год из статьи итальянской Википедии: он берётся только там, где Викиданные молчат,
+# и показывается со фразой-свидетельством, потому что говорит иногда о части комплекса.
+D_SRC = {"osm": 0, "vprg": 1, "wikidata": 2, "none": 3, "itwiki": 4}
 
 # Layer bits the story lens switches on and off.
 BIT_ISLAND, BIT_OTHER_ISLANDS, BIT_PRE, BIT_OTT, BIT_NOVE, BIT_TRANSFORMED, BIT_UNDATED = 0, 1, 2, 3, 4, 5, 6
@@ -363,6 +365,12 @@ def main(area="centro"):
             if pr_m.get("building_id") and pr_m.get("height_m"):
                 municipal[pr_m["building_id"]] = float(pr_m["height_m"])
     print(f"муниципальные высоты: {len(municipal)} зданий")
+    # Годы из статей итальянской Википедии (ступень s10): только принятые, без спорных.
+    article_dates = {}
+    itwiki_path = config.PROCESSED / f"itwiki_dates_{area}.json"
+    if itwiki_path.exists():
+        article_dates = json.loads(itwiki_path.read_text(encoding="utf-8")).get("accepted") or {}
+    print(f"годы из статей итальянской Википедии: {len(article_dates)}")
     wd_objects = enriched.get("objects") or {}
     wd_pois = enriched.get("pois") or []
     print(f"wikidata: объектов обогащения={len(wd_objects)} подписей-точек={len(wd_pois)}")
@@ -406,6 +414,14 @@ def main(area="centro"):
                 "wiki": {"url": url, "title": cards.get("it") or cards.get("en"),
                          "extract": ex.get("it") or ex.get("en") or ex.get("ru")},
                 "ex": ex, "area": area}
+        # Год из статьи итальянской Википедии: показываем только там, где Викиданные молчат,
+        # и всегда вместе с фразой, из которой он взят.
+        article = article_dates.get(wd.get("qid")) if not wd.get("date") else None
+        if article and article.get("evidence"):
+            rich["date_from_article"] = {"year": int(article["year"]),
+                                         "from": article.get("source"),
+                                         "sentence": str(article["evidence"])[:180],
+                                         "title": article.get("title")}
         # Пустые поля не пишем: карточек теперь много, и каждая должна быть лёгкой.
         rich = {k: v for k, v in rich.items() if v not in (None, [], {}, "")}
         named = bool(rich.get("la") or rich.get("label"))
@@ -467,6 +483,13 @@ def main(area="centro"):
                 yto = min(2026, int(wd_date.get("to") or wy))
                 year, period, flag = yfrom, (0 if yto < 1800 else 1 if yfrom < 1900 else 2), 1
                 dsrc_code = D_SRC["wikidata"]
+        # Год из статьи итальянской Википедии — только там, где Викиданные молчат.
+        article = article_dates.get(wd.get("qid")) if not wd_date else None
+        if article and flag != 0:
+            ay = int(article.get("year") or 0)
+            if 1000 <= ay <= 2026:
+                year, yfrom, yto, period, flag = ay, ay, ay, (0 if ay < 1800 else 1 if ay < 1900 else 2), 0
+                dsrc_code = D_SRC["itwiki"]
         hist[year][period] += 1 if not is_bridge else 0
 
         h, hsrc = pr.get("height_used"), pr.get("height_source")
@@ -639,6 +662,8 @@ def main(area="centro"):
                                 sum(1 for a in attr_list if int(a["heritage"]) == 2)]},
         "tiles": tile_index, "packs": packs, "shapes": {},
         "stats": {"buildings": len(recs), "bridges": len(bridges), "objects": len(rows),
+                  "byArticle": sum(1 for a in attr_list if a.get("dsrc") == 4),
+                  "measured": sum(1 for a in attr_list if a.get("hsrc") == 2),
                   "flags": {k: int(v) for k, v in Counter(r["flag"] for r in rows).items()},
                   "heightSrc": {k: int(v) for k, v in Counter(int(a["hsrc"]) for a in attr_list).items()},
                   "floorsTagged": sum(1 for a in attr_list if a["fsrc"] == 0),

@@ -313,18 +313,102 @@ def distance_aware_euler_order(circuit, start_node, portals, transfer_distance):
                       'same_augmented_edge_multiset': True}
 
 
+def improve_closed_subtrails(circuit, start_node, portals, transfer_distance):
+    """Deterministic best-improvement reversal of closed subtrails (local heuristic).
+
+    Reversing a subtrail with identical end banks preserves every required edge.
+    Symmetric land distances leave internal costs unchanged. Skip self-loop
+    crossings because their bank alone does not encode their path orientation.
+    """
+    route = list(circuit)
+    def ends(edge):
+        return portals(edge[2], edge[0])
+    def cost(edges):
+        here, total = start_node, 0.0
+        for edge in edges:
+            entry, exit_node = ends(edge)
+            total += transfer_distance(here, entry)
+            here = exit_node
+        return total + transfer_distance(here, start_node)
+    baseline = cost(route)
+    improvements = 0
+    while True:
+        best, move = -1e-7, None
+        for i in range(len(route)):
+            prev = start_node if i == 0 else ends(route[i - 1])[1]
+            first = ends(route[i])[0]
+            for j in range(i + 2, len(route) + 1):
+                if route[j - 1][0] == route[j - 1][1]:
+                    break
+                if any(u == v for u, v, _ in route[i:j]):
+                    break
+                if route[i][0] != route[j - 1][1]:
+                    continue
+                last = ends(route[j - 1])[1]
+                next_node = start_node if j == len(route) else ends(route[j])[0]
+                delta = (transfer_distance(prev, last) + transfer_distance(first, next_node)
+                         - transfer_distance(prev, first) - transfer_distance(last, next_node))
+                if delta < best:
+                    best, move = delta, (i, j)
+        if move is None:
+            break
+        i, j = move
+        route[i:j] = [(v, u, bid) for u, v, bid in reversed(route[i:j])]
+        improvements += 1
+    selected = cost(route)
+    assert selected <= baseline + 1e-6
+    assert Counter((min(u, v), max(u, v), b) for u, v, b in route) == Counter(
+        (min(u, v), max(u, v), b) for u, v, b in circuit)
+    return route, {'baseline_transfer_m': baseline, 'selected_transfer_m': selected,
+                   'closed_subtrail_reversals': improvements}
+
+
+def immediate_deadends(records, land, components):
+    """One-pass leaf-bank test on ORIGINAL real bridge attachments, never a 2-core.
+
+    A real bank has an outward bridge-free pedestrian edge. Isolated stair/deck
+    nodes are not banks. Count distinct physical bridges at all real portals,
+    not representative paths alone; exclude only a selected crossing entering
+    a real bank whose sole incident bridge is itself. Do not recompute leaves.
+    """
+    incident = defaultdict(set)
+    for bid, b in records.items():
+        for bank in b['real_banks']:
+            incident[bank].add(bid)
+    excluded = []
+    for bid, b in records.items():
+        evidence = []
+        for bank in sorted(set(b['banks']) & set(b['real_banks'])):
+            if incident[bank] != {bid} or len(set(b['banks'])) < 2:
+                continue
+            outward = list(land.subgraph(components[bank]).edges(data=True))
+            if not outward:
+                continue
+            evidence.append({'bank_id': bank, 'node_count': len(components[bank]),
+                'representative_node_id': min(components[bank]),
+                'land_edge_count': len(outward),
+                'outward_way_ids': sorted({d['way_id'] for _, _, d in outward}),
+                'portal_node_ids': sorted(set(b['portals']) & components[bank]),
+                'incident_bridge_ids': sorted(incident[bank])})
+        if evidence:
+            excluded.append({'id': bid, 'name': b['name'],
+                             'reason_code': 'immediate_pedestrian_dead_end',
+                             'dead_end_banks': evidence})
+    return excluded
+
+
 def main():
     pbf = config.EXTRACTS['island']
     nodes, ways, tags, relations = read_pbf(pbf)
     polygon = shape(json.loads(config.OSM_POLYGONS['island'].read_text(encoding='utf-8'))['features'][0]['geometry'])
     graph, groups, audit = build_topology(nodes, ways, tags, polygon)
-    # Start is an actual node on a mapped Piazzale Roma walking way, not a snapped invented point.
-    piazzale = {n for w in ways if w['tags'].get('name') == 'Piazzale Roma' and access_reason(w['tags']) is None
+    # Start is an actual node on a mapped Piazza San Marco walking way, not a snapped invented point.
+    piazzale = {n for w in ways if w['tags'].get('name') == 'Piazza San Marco' and access_reason(w['tags']) is None
                 for n in w['nodes'] if n in graph}
     if not piazzale:
-        raise ValueError('No public Piazzale Roma walking node in extract')
+        raise ValueError('No public Piazza San Marco walking node in extract')
     start = min(piazzale, key=lambda n: math.dist(PROJECT.transform(*nodes[n]),
-                                               PROJECT.transform(12.3185, 45.4382)))
+                                               PROJECT.transform(12.3387, 45.4340)))
     reachable = nx.node_connected_component(graph, start)
     graph = graph.subgraph(reachable).copy()
     land = nx.Graph()
@@ -378,7 +462,23 @@ def main():
         inverse = Transformer.from_crs(config.CRS_METRIC, config.CRS_WEB, always_xy=True)
         lon, lat = inverse.transform(mid.x, mid.y)
         records[b['id']] = {**b, 'path': path, 'banks': [a, z], 'length': length,
+                            'real_banks': sorted({component[n] for n in portals if land.degree(n) > 0}),
+                            'portals': portals,
                             'lon': lon, 'lat': lat, 'x': mid.x - ORIGIN[0], 'z': -(mid.y - ORIGIN[1])}
+    original_records = dict(records)
+    deadends = immediate_deadends(records, land, components)
+    audit['dead_end_exclusions'] = deadends
+    audit['dead_end_exclusion_count'] = len(deadends)
+    audit['dead_end_criterion'] = prose(
+        'Однократная проверка исходных берегов: есть пешеходный выход без мостов, но нет другого настоящего моста. Изолированные узлы настила/ступеней не считаются берегом. Цепочки рекурсивно не удаляются.',
+        'Un solo controllo delle rive originali: accesso pedonale senza ponti, ma nessun altro ponte reale. Nodi isolati di impalcato/scale non sono rive. Nessuna rimozione ricorsiva delle catene.',
+        'One-pass test of original banks: outward bridge-free pedestrian access exists, but no other real bridge is incident. Isolated deck/stair nodes are not banks. Bridge chains are not recursively pruned.')
+    for entry in deadends:
+        records.pop(entry['id'])
+    excluded.extend(deadends)
+    required = nx.MultiGraph()
+    for bid, b in records.items():
+        required.add_edge(*b['banks'], key=bid, bridge_id=bid, length=b['length'])
     audit['ambiguous_portals'] = unresolved
     # Publish source tags rather than inferring public/nonpublic from a famous name.
     by_way = {w['id']: w for w in ways}
@@ -418,7 +518,7 @@ def main():
         elif any(s['tags'].get('access') == 'private' for s in source):
             text = 'Private steps/footway are explicit in the group. Its unrestricted stub cannot be reached after private approaches are filtered; not a complete public through-crossing.'
         elif any(s['tags'].get('foot') == 'yes' for s in source):
-            text = 'Explicit foot=yes permits pedestrians, but this scoped segment is disconnected from Piazzale Roma after strict clipping/access filtering. Not classified as private; no connector invented.'
+            text = 'Explicit foot=yes permits pedestrians, but this scoped segment is disconnected from Piazza San Marco after strict clipping/access filtering. Not classified as private; no connector invented.'
         else:
             text = 'Highway=footway without an access prohibition is public by the stated default policy, but its original-node segment is disconnected. Actual public through-access remains unverified.'
         details.append({'id': d['id'], 'name': d['name'], 'category': category,
@@ -449,7 +549,7 @@ def main():
     # Persist diagnostics before solving so a blocker is reproducible, never a invented route.
     (config.PROCESSED / 'bridge_route_audit.json').write_text(json.dumps(audit, ensure_ascii=False, indent=2), encoding='utf-8')
     if component[start] not in required:
-        raise ValueError('Piazzale Roma is disconnected from unambiguous required bridge graph')
+        raise ValueError('Piazza San Marco is disconnected from unambiguous required bridge graph')
     circuit, odd, repeats = postman(required, component[start])
     distance_cache = {}
     def crossing_portals(bid, bank):
@@ -460,6 +560,11 @@ def main():
             distance_cache[a] = nx.single_source_dijkstra_path_length(land, a, weight='length')
         return distance_cache[a][b]
     circuit, order = distance_aware_euler_order(circuit, start, crossing_portals, land_distance)
+    circuit, refinement = improve_closed_subtrails(circuit, start, crossing_portals, land_distance)
+    order['fleury_transfer_m'] = order['selected_transfer_m']
+    order['selected_transfer_m'] = refinement['selected_transfer_m']
+    order['closed_subtrail_reversals'] = refinement['closed_subtrail_reversals']
+    order['method'] += '; best-improvement closed-subtrail reversal'
     deck_distance = sum(records[bid]['length'] for _, _, bid in circuit)
     order.update({'baseline_distance_m': round(order['baseline_transfer_m'] + deck_distance, 3),
                   'selected_distance_m': round(order['selected_transfer_m'] + deck_distance, 3),
@@ -492,9 +597,15 @@ def main():
                     'x': b['x'], 'z': b['z'], 'visits': visits[b['id']]}
                    for b in records.values()]
     for e in excluded:
-        code = e.pop('reason_code')
-        e['reason'] = prose('Исключён по данным OSM: ' + code,
-                            'Escluso secondo OSM: ' + code, 'Excluded according to OSM: ' + code)
+        code = e['reason_code']
+        if code == 'immediate_pedestrian_dead_end':
+            e['reason'] = prose(
+                'Сразу за мостом пешеходный тупик: берег имеет выход без мостов, но не связан с другим настоящим мостом. Проверка однократная; вышележащие мосты сохранены.',
+                'Subito dopo il ponte un vicolo cieco pedonale: la riva ha accesso senza ponti, ma nessun altro ponte reale. Controllo unico; ponti a monte mantenuti.',
+                'Immediately beyond this bridge is a pedestrian cul-de-sac: the bank has bridge-free outward access but no other real bridge. One-pass exclusion; upstream bridges retained.')
+        else:
+            e['reason'] = prose('Исключён по данным OSM: ' + code,
+                                'Escluso secondo OSM: ' + code, 'Excluded according to OSM: ' + code)
     possible = not odd and not unresolved and not any(e['reason']['en'].endswith('disconnected_from_start') for e in excluded)
     explanation = prose(
         f'После сжатия пешеходной связности без мостов: {len(odd)} компонент нечётной степени. '
@@ -526,12 +637,13 @@ def main():
                   'verified': {'continuous_osm_edges': True, 'coverage': True, 'closed': True, 'public_access_policy': True},
                   'pbf_sha256': hashlib.sha256(pbf.read_bytes()).hexdigest(),
                   'generated_at': datetime.now(timezone.utc).isoformat()})
-    data = {'id': 'all-bridges', 'title': prose('Все доступные мосты: замкнутый обход',
-                'Tutti i ponti accessibili: circuito chiuso', 'All accessible bridges: closed circuit'),
-            'summary': prose(f'{len(records)} доступных мостов OSM, {repeats} повторных переходов. Начало и конец — Piazzale Roma. Непроверенные кандидаты указаны в аудите.',
-                f'{len(records)} ponti OSM accessibili, {repeats} attraversamenti ripetuti. Partenza e arrivo a Piazzale Roma. Candidati non risolti nell’audit.',
-                f'{len(records)} accessible OSM bridges, {repeats} repeated crossings. Starts and ends at Piazzale Roma. Unresolved candidates are listed in the audit.'),
-            'status': 'ready', 'start': {'name': 'Piazzale Roma', 'lon': nodes[start][0], 'lat': nodes[start][1]},
+    data = {'id': 'all-bridges', 'title': prose('Мосты без непосредственных тупиков: Сан-Марко — Сан-Марко',
+                'Ponti senza vicoli ciechi immediati: San Marco — San Marco',
+                'Bridges without immediate cul-de-sacs: San Marco — San Marco'),
+            'summary': prose(f'{len(records)} принятых мостов OSM, {repeats} повторных переходов; {len(deadends)} исключено из-за непосредственного пешеходного тупика. Начало и конец — Piazza San Marco. Непроверенные кандидаты указаны в аудите.',
+                f'{len(records)} ponti OSM accettati, {repeats} attraversamenti ripetuti; {len(deadends)} esclusi per vicolo cieco pedonale immediato. Partenza e arrivo a Piazza San Marco. Candidati non risolti nell’audit.',
+                f'{len(records)} accepted OSM bridges, {repeats} repeated crossings; {len(deadends)} excluded for an immediate pedestrian cul-de-sac. Starts and ends at Piazza San Marco. Unresolved candidates are listed in the audit.'),
+            'status': 'ready', 'start': {'name': 'Piazza San Marco', 'lon': nodes[start][0], 'lat': nodes[start][1]},
             'distance_m': round(distance, 3), 'bridge_count': len(records), 'repeat_crossings': repeats,
             'euler': {'possible': possible, 'odd_count': len(odd), 'explanation': explanation},
             'coordinates': coordinates, 'local': local, 'bridges': bridge_rows, 'crossings': crossing_rows,
@@ -542,7 +654,7 @@ def main():
     ET.register_namespace('', ns)
     root = ET.Element('{'+ns+'}gpx', {'version': '1.1', 'creator': 'Venice by Building / OSM audited bridge route'})
     track = ET.SubElement(root, '{'+ns+'}trk')
-    ET.SubElement(track, '{'+ns+'}name').text = 'Piazzale Roma — all accessible OSM bridges — Piazzale Roma'
+    ET.SubElement(track, '{'+ns+'}name').text = 'Piazza San Marco — all accessible OSM bridges — Piazza San Marco'
     segment = ET.SubElement(track, '{'+ns+'}trkseg')
     for lon, lat in coordinates:
         ET.SubElement(segment, '{'+ns+'}trkpt', {'lat': str(lat), 'lon': str(lon)})
@@ -552,6 +664,10 @@ def main():
     audit['verified']['gpx_roundtrip'] = True
     (config.PROCESSED / 'bridge_route_proof.json').write_text(json.dumps({
         'route_node_ids': node_route, 'start_node_id': start,
+        'original_bridges': [{'id': b['id'], 'way_ids': b['way_ids'], 'path': b['path'],
+                              'banks': b['banks'], 'portals': b['portals']}
+                             for b in original_records.values()],
+        'dead_end_exclusions': deadends,
         'bridges': [{'id': b['id'], 'way_ids': b['way_ids'], 'path': b['path'], 'banks': b['banks']}
                     for b in records.values()]}), encoding='utf-8')
     (config.WEB_DATA / 'bridge-route.json').write_text(json.dumps(data, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')

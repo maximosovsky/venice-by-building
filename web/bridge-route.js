@@ -1,7 +1,7 @@
 // Additive all-bridges walk. No production fallback: only the audited JSON supplies geometry/counts.
 export const UI = {
   title: { ru: 'Все пешеходные мосты', it: 'Tutti i ponti pedonali', en: 'All pedestrian bridges' },
-  intro: { ru: 'Кольцевой маршрут по шести сестьери от Piazzale Roma и обратно.', it: 'Un percorso ad anello nei sei sestieri, da Piazzale Roma e ritorno.', en: 'A circuit through the six sestieri, starting and ending at Piazzale Roma.' },
+  intro: { ru: 'Кольцевой маршрут по шести сестьери от Piazza San Marco и обратно.', it: 'Un percorso ad anello nei sei sestieri, da Piazza San Marco e ritorno.', en: 'A circuit through the six sestieri, starting and ending at Piazza San Marco.' },
   open: { ru: 'Открыть маршрут', it: 'Apri il percorso', en: 'Open route' },
   back: { ru: 'Все маршруты', it: 'Tutti i percorsi', en: 'All routes' },
   loading: { ru: 'Загрузка проверенного маршрута…', it: 'Caricamento del percorso verificato…', en: 'Loading the audited route…' },
@@ -139,11 +139,88 @@ function numberedMarker(THREE, n, x, z, selected = false) {
   return marker;
 }
 
+// Each segment is two expanded triangles with round caps. The union of adjacent
+// caps closes even hairpin turns without miter spikes or zoom-dependent widths.
+// THREE is supplied by the atlas: no second library copy or addon dependency.
+export function buildThickRouteLine(THREE, points) {
+  const positions = [], starts = [], ends = [], corners = [];
+  const quad = [[0, -1], [1, -1], [1, 1], [0, -1], [1, 1], [0, 1]];
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1], b = points[i];
+    if (a.every((v, j) => v === b[j])) continue;
+    for (const corner of quad) {
+      positions.push(...(corner[0] ? b : a));
+      starts.push(...a); ends.push(...b); corners.push(...corner);
+    }
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setAttribute('segmentStart', new THREE.Float32BufferAttribute(starts, 3));
+  geometry.setAttribute('segmentEnd', new THREE.Float32BufferAttribute(ends, 3));
+  geometry.setAttribute('corner', new THREE.Float32BufferAttribute(corners, 2));
+  const material = new THREE.ShaderMaterial({
+    uniforms: { resolution: { value: new THREE.Vector2(1, 1) }, strokeWidth: { value: 3 },
+      color: { value: new THREE.Color('#b04f3e') }, opacity: { value: .95 } },
+    depthTest: false, depthWrite: false, transparent: true, side: THREE.DoubleSide,
+    vertexShader: `
+      uniform vec2 resolution;
+      uniform float strokeWidth;
+      attribute vec3 segmentStart;
+      attribute vec3 segmentEnd;
+      attribute vec2 corner;
+      varying vec2 strokePosition;
+      varying float segmentLength;
+      void main() {
+        vec4 start = projectionMatrix * modelViewMatrix * vec4(segmentStart, 1.0);
+        vec4 end = projectionMatrix * modelViewMatrix * vec4(segmentEnd, 1.0);
+        vec2 delta = (end.xy / end.w - start.xy / start.w) * resolution * 0.5;
+        segmentLength = length(delta);
+        vec2 tangent = segmentLength > 0.00001 ? delta / segmentLength : vec2(1.0, 0.0);
+        vec2 normal = vec2(-tangent.y, tangent.x);
+        float halfWidth = strokeWidth * 0.5;
+        vec2 offset = (tangent * (corner.x * 2.0 - 1.0) + normal * corner.y) * halfWidth;
+        vec4 clip = mix(start, end, corner.x);
+        clip.xy += offset * 2.0 / resolution * clip.w;
+        gl_Position = clip;
+        // Screen-space interpolation, including with a perspective camera.
+        strokePosition = vec2(mix(-halfWidth, segmentLength + halfWidth, corner.x), corner.y * halfWidth) * clip.w;
+        segmentLength *= clip.w;
+      }`,
+    fragmentShader: `
+      uniform vec3 color;
+      uniform float opacity;
+      uniform float strokeWidth;
+      varying vec2 strokePosition;
+      varying float segmentLength;
+      void main() {
+        vec2 p = strokePosition * gl_FragCoord.w;
+        float len = segmentLength * gl_FragCoord.w;
+        float cap = max(max(-p.x, p.x - len), 0.0);
+        if (cap > 0.0 && length(vec2(cap, p.y)) > strokeWidth * 0.5) discard;
+        gl_FragColor = vec4(color, opacity);
+      }`
+  });
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.name = 'all-bridges-route-stroke'; mesh.renderOrder = 30;
+  // The shader expands beyond world-space centerline bounds.
+  mesh.frustumCulled = false;
+  const viewport = new THREE.Vector4();
+  mesh.onBeforeRender = renderer => {
+    const resolution = material.uniforms.resolution.value;
+    if (renderer.getCurrentViewport) {
+      renderer.getCurrentViewport(viewport);
+      const dpr = renderer.getPixelRatio();
+      resolution.set(viewport.z / dpr, viewport.w / dpr);
+    } else renderer.getSize(resolution);
+    resolution.x = Math.max(1, resolution.x); resolution.y = Math.max(1, resolution.y);
+  };
+  return mesh;
+}
+
 export function buildRouteOverlay(THREE, route) {
   const group = new THREE.Group(); group.name = 'all-bridges-route';
   const data = routeGeometry(route), vectors = values => values.map(p => new THREE.Vector3(...p));
-  const material = new THREE.LineBasicMaterial({ color: '#b04f3e', depthTest: false, depthWrite: false, transparent: true, opacity: .95 });
-  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(vectors(data.points)), material); line.renderOrder = 30; group.add(line);
+  group.add(buildThickRouteLine(THREE, data.points));
   const arrows = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vectors(data.arrows)),
     new THREE.LineBasicMaterial({ color: '#345a60', depthTest: false, depthWrite: false })); arrows.renderOrder = 31; group.add(arrows);
   // Bound draw calls/textures: sample at most 36 first-visit numbers; any selected crossing gets its own marker.

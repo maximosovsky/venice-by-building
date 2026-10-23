@@ -628,7 +628,8 @@ const whenOf = b => b.flag === 0 ? `${b.year}` : (b.flag === 2 ? t('год не�
 // How the year is known, in a sentence.
 function datingNote(b, w, h) {
   if (b.src === 1) return t('Это мостовое сооружение, а не здание: в OpenStreetMap для венецианских мостов нет ни даты постройки, ни высоты. Настил показан плитой на принятой высоте, год не указан.');
-  const src = [t('OpenStreetMap'), t('классификации VPRG'), t('Wikidata')][b.dsrc] || t('источника');
+  const src = [t('OpenStreetMap'), t('классификации VPRG'), t('Wikidata'),
+               t('статье итальянской Википедии')][b.dsrc] || t('источника');
   switch (b.flag) {
     case 0: return t('Год указан в {src}.', { src });
     case 1: return t('Точного года нет. Муниципальная классификация VPRG относит здание к эпохе «{era}», то есть к интервалу {range}. Формулировка класса записана в таблице свидетельств.',
@@ -663,6 +664,8 @@ function buildingHtml(gid) {
         esc(pickText(hItem.name))],
           hItem?.hca && [t('Охранная зона'), esc(hItem.hca)],
           w?.inception && [t('Дата в Wikidata'), `${w.inception}`],
+      w?.date_from_article && [t('Год по статье'),
+        `${w.date_from_article.year}<small class="src-note">${esc(String(w.date_from_article.sentence || '').slice(0, 150))}</small>`],
       w?.byGeometry && w?.qid && ['Связь', `${t('найдена по координатам')} · ${link('https://www.wikidata.org/wiki/' + w.qid, w.qid)}`],
       w?.height && ['Высота в Wikidata', `${w.height} м`],
         ].filter(Boolean);
@@ -1606,6 +1609,8 @@ document.querySelector('.notes-open').onclick = () => { if (dockView === 'notes'
   set('strata', f[2] || 0);
   set('heritage', f[3] || 0);
   set('neighbours', f[4] || 0);
+  set('byarticle', config.stats.byArticle || 0);
+  set('measured', config.stats.measured || 0);
 }
 
 // ---------- Язык ----------
