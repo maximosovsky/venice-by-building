@@ -27,6 +27,19 @@ export const UI = {
   caveat: { ru: 'Маршрут рассчитан по опубликованному пешеходному графу, а не по обследованию на месте. Доступность, закрытия, ступени и условия прохода могут измениться. Полнота относится к включённым в набор данным мостам, а не к гарантированно полному городскому реестру. Минимальность общей длины не гарантируется.', it: 'Il percorso è calcolato sul grafo pedonale pubblicato, non su un sopralluogo. Accessibilità, chiusure, gradini e condizioni di passaggio possono cambiare. La copertura riguarda i ponti inclusi nei dati, non un registro cittadino garantito completo. La lunghezza totale minima non è garantita.', en: 'The route is calculated from the published pedestrian graph, not a field survey. Access, closures, steps and passage conditions may change. Coverage refers to bridges included in the dataset, not a guaranteed complete city register. Minimum total walking distance is not guaranteed.' },
   excluded: { ru: 'Исключённые объекты', it: 'Elementi esclusi', en: 'Excluded objects' },
   unresolved: { ru: 'Кандидаты, требующие проверки', it: 'Candidati da verificare', en: 'Candidates requiring review' },
+  variant: { ru: 'Вариант маршрута', it: 'Variante del percorso', en: 'Route variant' },
+  original: { ru: 'Полный переход всех мостов пешком', it: 'Attraversamento completo di tutti i ponti a piedi', en: 'Full crossing of all bridges on foot' },
+  midpoint: { ru: 'Цель — посетить середину каждого включённого моста; полный переход не обязателен. Это посещения, а не число физических переходов. Теорема Эйлера о графе мостов не описывает эту задачу.', it: 'L’obiettivo è visitare il punto medio di ogni ponte incluso; non è obbligatorio attraversarlo completamente. Sono visite, non conteggi di attraversamenti fisici. Il teorema di Eulero sul grafo dei ponti non descrive questo obiettivo.', en: 'The goal is to visit the midpoint of every included bridge; a full crossing is not mandatory. These are visits, not counts of physical crossings. The Euler bridge-graph theorem does not describe this goal.' },
+  walkDistance: { ru: 'Пешком', it: 'Distanza a piedi', en: 'Walking distance' },
+  boatDistance: { ru: 'По воде', it: 'Distanza in barca', en: 'Boat distance' },
+  retraceDistance: { ru: 'Повторно пройденное расстояние пешком', it: 'Distanza ripercorsa a piedi', en: 'Retraced walking distance' },
+  visits: { ru: 'Посещения по порядку', it: 'Visite in ordine', en: 'Visits in order' },
+  visitDirections: { ru: 'Все включённые мосты выделены красным и пронумерованы при первом посещении. Пешие участки — сплошная линия 3 px; водные — синий пунктир. Повтор в списке означает повторное посещение, не физический переход.', it: 'Tutti i ponti inclusi sono rossi e numerati alla prima visita. Tratti a piedi: linea continua di 3 px; tratti in barca: blu tratteggiato. Una ripetizione indica una visita ripetuta, non un attraversamento fisico.', en: 'All included bridges are red and numbered at their first visit. Walking legs use a solid 3 px line; boat legs use blue dashes. A repeat in the list means a repeat visit, not a physical crossing.' },
+  showTraghetti: { ru: 'Показать Traghetto', it: 'Mostra Traghetto', en: 'Show Traghetto' },
+  hideTraghetti: { ru: 'Скрыть Traghetto', it: 'Nascondi Traghetto', en: 'Hide Traghetto' },
+  serviceCaveat: { ru: 'Traghetto — необязательный условный вариант. Работа зависит от расписания, дня, времени, погоды и оператора; наличие переправы не гарантируется. Проверьте источники расписаний перед выходом. Синие подписи отмечают оба берега; линия показана только при наличии геометрии в данных.', it: 'Traghetto è un’opzione condizionata e facoltativa. Il servizio dipende da orari, giorno, meteo e operatore; la disponibilità non è garantita. Verificare le fonti degli orari prima di partire. Le etichette blu indicano entrambe le rive; la linea appare solo se i dati forniscono geometria.', en: 'Traghetto is an optional, conditional service. Operation depends on schedule, day, time, weather and operator; availability is not guaranteed. Check schedule sources before setting out. Blue labels mark both banks; a ferry line is shown only where the data supplies geometry.' },
+  variantLoading: { ru: 'Загрузка вариантов и Traghetto… Исходный маршрут остаётся доступен.', it: 'Caricamento varianti e Traghetto… Il percorso originale resta disponibile.', en: 'Loading variants and Traghetto… The original route remains usable.' },
+  variantUnavailable: { ru: 'Варианты или Traghetto недоступны либо не прошли проверку. Исходный маршрут остаётся доступен; замены не создаются.', it: 'Varianti o Traghetto non disponibili o non validati. Il percorso originale resta disponibile; nessun dato sostitutivo.', en: 'Variants or Traghetto are unavailable or failed validation. The original route remains usable; no substitute data is generated.' },
   none: { ru: 'В файле нет исключённых объектов.', it: 'Il file non elenca elementi esclusi.', en: 'No excluded objects are listed in the file.' }
 };
 
@@ -68,6 +81,53 @@ export function validateRoute(route) {
   }
   if (visits.size !== ids.size || repeats !== route.repeat_crossings || route.crossings.length !== route.bridge_count + repeats ||
       route.bridges.some(b => visits.get(b.id) !== b.visits)) fail();
+  if (route.visit_mode !== undefined && typeof route.visit_mode !== 'boolean') fail();
+  if (route.visit_mode) {
+    const s = route.stats;
+    if (!s || !['walk_distance_m', 'boat_distance_m', 'repeat_distance_m'].every(k => finite(s[k]) && s[k] >= 0) ||
+        s.repeat_distance_m > s.walk_distance_m || Math.abs(s.walk_distance_m + s.boat_distance_m - route.distance_m) > 1 ||
+        !Array.isArray(route.legs) || !route.legs.length || !Array.isArray(route.ferry_events)) fail();
+    const local = [], coordinates = [];
+    let boats = 0;
+    for (const leg of route.legs) {
+      if (!['walk', 'boat'].includes(leg.mode) || !Array.isArray(leg.local) || leg.local.length < 2 || !leg.local.every(pair) ||
+          !Array.isArray(leg.coordinates) || leg.coordinates.length !== leg.local.length || !leg.coordinates.every(pair)) fail();
+      if (leg.mode === 'boat') { boats++; if (!leg.traghetto_id) fail(); }
+      const skip = local.length ? 1 : 0;
+      if (skip && (local.at(-1).some((v, i) => v !== leg.local[0][i]) || coordinates.at(-1).some((v, i) => v !== leg.coordinates[0][i]))) fail();
+      local.push(...leg.local.slice(skip)); coordinates.push(...leg.coordinates.slice(skip));
+    }
+    if (JSON.stringify(local) !== JSON.stringify(route.local) || JSON.stringify(coordinates) !== JSON.stringify(route.coordinates) ||
+        (!!boats !== (s.boat_distance_m > 0)) || route.ferry_events.length !== boats ||
+        route.ferry_events.some((e, i) => e.traghetto_id !== route.legs.filter(l => l.mode === 'boat')[i].traghetto_id)) fail();
+  }
+  return true;
+}
+
+function validateTraghetti(traghetti) {
+  const fail = () => { throw new Error('Invalid bridge route Traghetto data'); };
+  if (!Array.isArray(traghetti) || traghetti.length !== 4) fail();
+  const ids = new Set();
+  for (const t of traghetti) {
+    if (!t.id || ids.has(t.id) || !Array.isArray(t.endpoints) || t.endpoints.length !== 2 ||
+        !t.endpoints.every(e => [e.x, e.z, e.lon, e.lat].every(finite))) fail();
+    if (t.local !== undefined && (!Array.isArray(t.local) || t.local.length < 2 || !t.local.every(pair) ||
+        !Array.isArray(t.coordinates) || t.coordinates.length !== t.local.length || !t.coordinates.every(pair))) fail();
+    ids.add(t.id);
+  }
+  return ids;
+}
+
+export function validateVisitRoutes(data) {
+  const fail = () => { throw new Error('Invalid bridge route variants'); };
+  if (!data || !Array.isArray(data.variants)) fail();
+  const ferries = validateTraghetti(data.traghetti), ids = new Set();
+  for (const route of data.variants) {
+    validateRoute(route);
+    if (!route.visit_mode || ids.has(route.id)) fail();
+    ids.add(route.id);
+    if (route.legs.some(l => l.mode === 'boat' && !ferries.has(l.traghetto_id))) fail();
+  }
   return true;
 }
 
@@ -93,22 +153,30 @@ export function routePanelHTML(route, state = {}, pickText) {
   const unresolved = [...(route.audit?.ambiguous_portals || []), ...(route.audit?.unresolved_decks || [])];
   return `<article class="dock-page bridge-route-page" data-no-i18n>
     <h2 id="dock-title">${escapeHTML(pickText(route.title))}</h2><p class="lede">${escapeHTML(pickText(route.summary))}</p>
+    <label>${label('variant', pickText)} <select data-bridge-route-variant>${(state.variants || [route]).map(r => `<option value="${escapeHTML(r.id)}"${r.id === route.id ? ' selected' : ''}>${r.visit_mode ? escapeHTML(pickText(r.title)) : label('original', pickText)}</option>`).join('')}</select></label>
+    ${state.variantStatus !== 'ready' ? `<p role="status">${label(state.variantStatus === 'error' ? 'variantUnavailable' : 'variantLoading', pickText)}</p>${state.variantStatus === 'error' ? `<button class="pill" data-bridge-route-variants-retry>${label('retry', pickText)}</button>` : ''}` : ''}
+    ${route.visit_mode ? `<p class="caveat">${label('midpoint', pickText)}</p>` : ''}
     <dl class="bridge-route-stats"><dt>${label('start', pickText)}</dt><dd>${escapeHTML(pickText(route.start.name))}</dd>
       <dt>${label('length', pickText)}</dt><dd>${length(route, pickText)}</dd>
       <dt>${label('bridges', pickText)}</dt><dd>${number(route.bridge_count, pickText)}</dd>
-      <dt>${label('repeats', pickText)}</dt><dd>${number(route.repeat_crossings, pickText)}</dd></dl>
+      ${route.visit_mode ? ['walkDistance', 'boatDistance', 'retraceDistance'].map((k, i) => `<dt>${label(k, pickText)}</dt><dd>${number(route.stats[['walk_distance_m', 'boat_distance_m', 'repeat_distance_m'][i]] / 1000, pickText, 2)} ${label('km', pickText)}</dd>`).join('') : `<dt>${label('repeats', pickText)}</dt><dd>${number(route.repeat_crossings, pickText)}</dd>`}</dl>
     <div class="walk-actions"><button class="pill primary" data-bridge-route-toggle aria-pressed="${!!state.visible}">${label(state.visible ? 'hide' : 'show', pickText)}</button>
       <button class="pill" data-bridge-route-start>${label('focus', pickText)}</button>
+      <button class="pill" data-bridge-traghetti-toggle aria-pressed="${!!state.traghettiVisible}"${!state.traghetti?.length ? ' disabled' : ''}>${label(state.traghettiVisible ? 'hideTraghetti' : 'showTraghetti', pickText)}</button>
       ${gpxURL ? `<a class="pill" href="${escapeHTML(gpxURL)}" download>${label('gpx', pickText)}</a>` : ''}</div>
-    <h3>${label('euler', pickText)}</h3><p>${label(route.euler.possible ? 'possible' : 'impossible', pickText)}</p>
-    <p>${escapeHTML(pickText(route.euler.explanation))}</p><p>${label('odd', pickText)}: ${number(route.euler.odd_count, pickText)}</p>
+    ${route.visit_mode ? '' : `<h3>${label('euler', pickText)}</h3><p>${label(route.euler.possible ? 'possible' : 'impossible', pickText)}</p>
+    <p>${escapeHTML(pickText(route.euler.explanation))}</p><p>${label('odd', pickText)}: ${number(route.euler.odd_count, pickText)}</p>`}
     <h3>${label('source', pickText)}</h3><p class="src">${sourceURL ? `<a href="${escapeHTML(sourceURL)}" target="_blank" rel="noopener noreferrer">${escapeHTML(sourceURL)}</a>` : escapeHTML(route.source?.url)}
       · ${escapeHTML(route.source?.license)} · ${escapeHTML(route.source?.date)}</p>
     <p class="caveat">${label('caveat', pickText)}</p>${notes.map(n => `<p class="caveat">${escapeHTML(pickText(n))}</p>`).join('')}
+    ${(state.traghetti?.length || route.legs?.some(l => l.mode === 'boat')) ? `<p class="caveat">${label('serviceCaveat', pickText)}</p><ul>${(state.traghetti || []).map(t => {
+      const url = safeSource(t.source?.url);
+      return `<li>Traghetto — ${escapeHTML(pickText(t.name || t.id))} · ${escapeHTML(pickText(t.schedule || ''))} ${url ? `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>` : ''} · ${escapeHTML(t.source?.date || '')}</li>`;
+    }).join('')}</ul>` : ''}
     <details><summary>${label('excluded', pickText)} (${number(route.excluded.length, pickText)})</summary>
       ${route.excluded.length ? `<ul>${route.excluded.map(b => `<li><b>${escapeHTML(pickText(b.name || b.id))}</b> <small>${escapeHTML(b.id)}</small> — ${escapeHTML(pickText(b.reason))}</li>`).join('')}</ul>` : `<p>${label('none', pickText)}</p>`}</details>
     ${unresolved.length ? `<details><summary>${label('unresolved', pickText)} (${number(unresolved.length, pickText)})</summary><ul>${unresolved.map(b => `<li>${escapeHTML(pickText(b.name || b.id))} <small>${escapeHTML(b.id)}</small></li>`).join('')}</ul></details>` : ''}
-    <h3>${label('crossings', pickText)} (${number(route.crossings.length, pickText)})</h3><p class="caveat">${label('directions', pickText)}</p>
+    <h3>${label(route.visit_mode ? 'visits' : 'crossings', pickText)} (${number(route.crossings.length, pickText)})</h3><p class="caveat">${label(route.visit_mode ? 'visitDirections' : 'directions', pickText)}</p>
     <ol class="bridge-crossings">${route.crossings.map((c, i) => `<li><button data-crossing="${i}"${state.selected === i ? ' aria-current="step"' : ''}>
       <span class="bridge-crossing-number">${i + 1}</span><span>${escapeHTML(pickText(c.name || c.bridge_id))}${c.repeat ? ` <small class="bridge-repeat">${label('repeat', pickText)}</small>` : ''}</span></button></li>`).join('')}</ol>
   </article>`;
@@ -168,7 +236,7 @@ export function buildThickRouteLine(THREE, points) {
   geometry.setAttribute('corner', new THREE.Float32BufferAttribute(corners, 2));
   const material = new THREE.ShaderMaterial({
     uniforms: { resolution: { value: new THREE.Vector2(1, 1) }, strokeWidth: { value: 3 },
-      color: { value: new THREE.Color('#b04f3e') }, opacity: { value: .95 } },
+      color: { value: new THREE.Color('#b04f3e') }, opacity: { value: .95 }, dashLength: { value: 0 } },
     depthTest: false, depthWrite: false, transparent: true, side: THREE.DoubleSide,
     vertexShader: `
       uniform vec2 resolution;
@@ -198,11 +266,13 @@ export function buildThickRouteLine(THREE, points) {
       uniform vec3 color;
       uniform float opacity;
       uniform float strokeWidth;
+      uniform float dashLength;
       varying vec2 strokePosition;
       varying float segmentLength;
       void main() {
         vec2 p = strokePosition * gl_FragCoord.w;
         float len = segmentLength * gl_FragCoord.w;
+        if (dashLength > 0.0 && mod(max(p.x, 0.0), dashLength * 1.6) > dashLength) discard;
         float cap = max(max(-p.x, p.x - len), 0.0);
         if (cap > 0.0 && length(vec2(cap, p.y)) > strokeWidth * 0.5) discard;
         gl_FragColor = vec4(color, opacity);
@@ -255,15 +325,54 @@ function bridgeHighlight(THREE, bridge) {
 export function buildRouteOverlay(THREE, route) {
   validateRoute(route);
   const group = new THREE.Group(); group.name = 'all-bridges-route';
-  const data = routeGeometry(route), vectors = values => values.map(p => new THREE.Vector3(...p));
-  group.add(buildThickRouteLine(THREE, data.points));
-  const arrows = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vectors(data.arrows)),
-    new THREE.LineBasicMaterial({ color: '#345a60', depthTest: false, depthWrite: false })); arrows.renderOrder = 31; group.add(arrows);
+  const vectors = values => values.map(p => new THREE.Vector3(...p));
+  const legs = route.visit_mode ? route.legs : [{ mode: 'walk', local: route.local }];
+  legs.forEach((leg, i) => {
+    const data = routeGeometry(leg), line = buildThickRouteLine(THREE, data.points);
+    if (route.visit_mode) { line.userData.route_leg = i; line.userData.mode = leg.mode; }
+    if (leg.mode === 'boat') styleFerryLine(line);
+    group.add(line);
+    const arrows = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vectors(data.arrows)),
+      new THREE.LineBasicMaterial({ color: leg.mode === 'boat' ? '#168bd2' : '#345a60', depthTest: false, depthWrite: false }));
+    arrows.renderOrder = 31; group.add(arrows);
+  });
   route.bridges.forEach(bridge => group.add(bridgeHighlight(THREE, bridge)));
   // Every unique bridge keeps its first-crossing number; repeats remain in the full list.
   route.crossings.forEach((c, index) => {
     if (!c.repeat) { const marker = numberedMarker(THREE, index + 1, c.x, c.z); if (marker) group.add(marker); }
   });
+  return group;
+}
+
+function styleFerryLine(line) {
+  line.material.uniforms.color.value.set('#168bd2');
+  line.material.uniforms.dashLength.value = 10;
+  line.material.uniforms.strokeWidth.value = 4;
+}
+
+export function buildTraghettoOverlay(THREE, traghetti) {
+  validateTraghetti(traghetti);
+  const group = new THREE.Group(); group.name = 'traghetti-stations';
+  for (const t of traghetti) {
+    const station = new THREE.Group(); station.name = `traghetto:${t.id}`; station.userData.traghetto_id = t.id;
+    if (t.local) {
+      const line = buildThickRouteLine(THREE, t.local.map(([x, z]) => [x, 25, z]));
+      styleFerryLine(line); station.add(line);
+    }
+    for (const e of t.endpoints) {
+      const marker = new THREE.Mesh(new THREE.SphereGeometry(5, 8, 6), new THREE.MeshBasicMaterial({ color: '#168bd2', depthTest: false, depthWrite: false }));
+      marker.position.set(e.x, 30, e.z); marker.renderOrder = 32; station.add(marker);
+      if (typeof document === 'undefined') continue;
+      const canvas = document.createElement('canvas'); canvas.width = 256; canvas.height = 64;
+      const ctx = canvas.getContext('2d'); if (!ctx) continue;
+      ctx.clearRect(0, 0, 256, 64); ctx.font = 'bold 30px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 4; ctx.strokeText('Traghetto', 128, 32);
+      ctx.fillStyle = '#168bd2'; ctx.fillText('Traghetto', 128, 32);
+      const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), depthTest: false, depthWrite: false }));
+      sprite.position.set(e.x, 44, e.z); sprite.scale.set(144, 36, 1); sprite.renderOrder = 34; station.add(sprite);
+    }
+    group.add(station);
+  }
   return group;
 }
 
@@ -274,8 +383,9 @@ function disposeObject(object) {
 
 // The installer owns only its dock view and scene group; it does not change quests, picking, cards or renderer.
 export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, onVisibilityChange = () => {}, fetchRoute = (url, options) => fetch(url, options) }) {
-  const state = { status: 'idle', route: null, visible: false, selected: -1 };
-  let pending = null, overlay = null, selectedMarker = null, disposed = false;
+  const state = { status: 'idle', route: null, original: null, visible: false, selected: -1,
+    variants: [], variantStatus: 'idle', traghetti: [], traghettiVisible: false };
+  let pending = null, variantPending = null, overlay = null, ferryOverlay = null, selectedMarker = null, disposed = false;
   const back = () => ({ label: pickText(UI.back), go: showWalks });
   function render(preserveScroll = false) {
     if (disposed) return;
@@ -283,6 +393,9 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     if (state.status === 'ready') {
       openDock('bridge-route', routePanelHTML(state.route, state, pickText), back());
       dockLive.querySelector('[data-bridge-route-toggle]')?.addEventListener('click', () => setVisible(!state.visible));
+      dockLive.querySelector('[data-bridge-route-variant]')?.addEventListener('change', e => selectVariant(e.target.value));
+      dockLive.querySelector('[data-bridge-traghetti-toggle]')?.addEventListener('click', () => setTraghettiVisible(!state.traghettiVisible));
+      dockLive.querySelector('[data-bridge-route-variants-retry]')?.addEventListener('click', retryVariants);
       dockLive.querySelector('[data-bridge-route-start]')?.addEventListener('click', () => { const [x, z] = state.route.local[0]; aimFly(x, z, 900); });
       dockLive.querySelectorAll('[data-crossing]').forEach(b => b.addEventListener('click', () => focusCrossing(Number(b.dataset.crossing))));
     } else {
@@ -307,14 +420,53 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
         const response = await fetchRoute('data/bridge-route.json', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const route = await response.json(); validateRoute(route);
-        if (!disposed) { state.route = route; state.status = 'ready'; }
+        if (!disposed) { state.route = route; state.original = route; state.variants = [route]; state.status = 'ready'; }
       } catch { if (!disposed) { state.route = null; state.status = 'error'; } }
-      finally { pending = null; refresh(); }
+      finally { pending = null; refresh(); if (state.status === 'ready') void loadVariants(); }
       return state.route;
     })();
     return pending;
   }
   function show() { if (disposed) return; render(); void load(); }
+  function loadVariants() {
+    if (variantPending) return variantPending;
+    if (disposed || state.status !== 'ready' || state.variantStatus === 'ready' || state.variantStatus === 'error') return Promise.resolve(state.variants);
+    state.variantStatus = 'loading';
+    variantPending = (async () => {
+      try {
+        const response = await fetchRoute('data/bridge-visit-route.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json(); validateVisitRoutes(data);
+        const inventory = new Set(state.original.bridges.map(b => b.id));
+        if (data.variants.some(r => r.id === state.original.id || r.bridge_count !== state.original.bridge_count ||
+            r.bridges.some(b => !inventory.has(b.id)))) throw new Error('Mismatched bridge inventory');
+        if (!disposed) { state.variants = [state.original, ...data.variants]; state.traghetti = data.traghetti; state.variantStatus = 'ready'; }
+      } catch { if (!disposed) state.variantStatus = 'error'; }
+      finally { variantPending = null; refresh(); }
+      return state.variants;
+    })();
+    return variantPending;
+  }
+  function retryVariants() {
+    if (disposed || variantPending) return variantPending;
+    state.variantStatus = 'idle'; const result = loadVariants(); refresh(); return result;
+  }
+  function selectVariant(id) {
+    const route = state.variants.find(r => r.id === id);
+    if (disposed || !route || route === state.route) return;
+    const hadOverlay = !!overlay;
+    if (overlay) { scene.remove(overlay); disposeObject(overlay); overlay = null; }
+    selectedMarker = null; state.selected = -1; state.route = route;
+    if (state.visible || hadOverlay) ensureOverlay().visible = state.visible;
+    if (getDockView() === 'bridge-route') render(true);
+  }
+  function setTraghettiVisible(visible) {
+    if (disposed || state.variantStatus !== 'ready' || !state.traghetti.length) return;
+    state.traghettiVisible = !!visible;
+    if (state.traghettiVisible && !ferryOverlay) { ferryOverlay = buildTraghettoOverlay(THREE, state.traghetti); scene.add(ferryOverlay); }
+    if (ferryOverlay) ferryOverlay.visible = state.traghettiVisible;
+    if (getDockView() === 'bridge-route') render(true);
+  }
   function retry() { if (pending || disposed) return pending; state.status = 'idle'; const result = load(); refresh(); return result; }
   function ensureOverlay() { if (!overlay && state.route && !disposed) { overlay = buildRouteOverlay(THREE, state.route); scene.add(overlay); } return overlay; }
   function setVisible(visible) {
@@ -336,9 +488,12 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   }
   const unsubscribe = onLang(() => { if (getDockView() === 'bridge-route') render(true); });
   return {
-    show, load, retry, setVisible, focusCrossing,
-    listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML(state, pickText); },
+    show, load, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing,
+    listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML({ ...state, route: state.original }, pickText); },
     wireList() { dockLive.querySelector('[data-bridge-route-open]')?.addEventListener('click', show); },
-    dispose() { disposed = true; onVisibilityChange(false); unsubscribe?.(); if (overlay) { scene.remove(overlay); disposeObject(overlay); overlay = null; } }
+    dispose() { if (disposed) return; disposed = true; onVisibilityChange(false); unsubscribe?.();
+      for (const object of [overlay, ferryOverlay]) if (object) { scene.remove(object); disposeObject(object); }
+      overlay = ferryOverlay = selectedMarker = null;
+    }
   };
 }

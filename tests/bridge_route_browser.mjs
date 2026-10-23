@@ -44,6 +44,27 @@ try {
  }
  const response=await page.request.get(base+'data/bridge-route.gpx');
  assert.equal(response.status(),200); assert.ok((await response.text()).replace(/\r\n/g,'\n') === readFileSync(resolve(root,'data/bridge-route.gpx'),'utf8').replace(/\r\n/g,'\n'), 'live GPX equals local after Git line-ending normalization');
+ const visits = JSON.parse(readFileSync(resolve(root, 'data/bridge-visit-route.json'), 'utf8'));
+ await page.waitForFunction(() => document.querySelector('[data-bridge-route-variant]')?.options.length === 3, null, {timeout:30000});
+ for (const variant of visits.variants) {
+  await page.locator('[data-bridge-route-variant]').selectOption(variant.id);
+  assert.equal(await page.locator('[data-crossing]').count(), variant.crossings.length);
+  assert.equal(await page.locator('a[download]').getAttribute('href'), variant.gpx);
+  await page.locator('[data-bridge-route-toggle]').click();
+  assert.equal(await page.locator('[data-bridge-route-toggle]').getAttribute('aria-pressed'), 'true');
+  await page.locator('[data-crossing="2"]').click();
+  assert.equal(await page.locator('[data-crossing="2"]').getAttribute('aria-current'), 'step');
+  for (const lang of ['it','en','ru']) {
+   await page.locator(`#langs [data-lang="${lang}"]`).click();
+   assert.ok((await panel.innerText()).includes(variant.title[lang]));
+  }
+  await page.locator('[data-bridge-route-toggle]').click();
+ }
+ await page.locator('[data-bridge-traghetti-toggle]').click();
+ assert.equal(await page.locator('[data-bridge-traghetti-toggle]').getAttribute('aria-pressed'), 'true');
+ const visitGPX=await page.request.get(base+'data/bridge-visit-route.gpx');
+ assert.equal(visitGPX.status(),200);
+ assert.ok((await visitGPX.text()).replace(/\r\n/g,'\n') === readFileSync(resolve(root,'data/bridge-visit-route.gpx'),'utf8').replace(/\r\n/g,'\n'));
  assert.deepEqual(errors,[]);
  const screenshot='C:/Users/1/AppData/Local/hermes/cache/scratch/venice-bridge-route-verified.png';
  await page.screenshot({path:screenshot});

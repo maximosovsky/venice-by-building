@@ -26,6 +26,137 @@ const fixture = () => ({
   gpx: 'data/bridge-route.gpx', source: { url: 'https://www.openstreetmap.org/', license: 'ODbL', date: '2026-10-23' }
 });
 
+// All additions are test-only; no fixture is written to the production data directory.
+const traghettiFixture = () => Array.from({ length: 4 }, (_, i) => ({
+  id: `traghetto-${i}`, name: `Station ${i}`, endpoints: [
+    { x: i * 10, z: 0, lon: 12.318, lat: 45.438 }, { x: i * 10 + 5, z: 5, lon: 12.319, lat: 45.439 }
+  ], local: [[i * 10, 0], [i * 10 + 5, 5]],
+  coordinates: [[12.318, 45.438], [12.319, 45.439]],
+  schedule: 'Service days and times vary', source: { url: 'https://example.org/schedule', date: '2026-10-23' }
+}));
+const visitFixture = (boat = false) => {
+  const r = fixture();
+  r.id = boat ? 'traghetto-midpoints' : 'walking-midpoints'; r.visit_mode = true;
+  r.title = text('Посещения середин', 'Visite ai punti medi', 'Midpoint visits');
+  r.distance_m = 300; r.stats = { walk_distance_m: boat ? 200 : 300, boat_distance_m: boat ? 100 : 0, repeat_distance_m: 40 };
+  r.legs = boat ? [
+    { mode: 'walk', local: r.local.slice(0, 2), coordinates: r.coordinates.slice(0, 2) },
+    { mode: 'boat', traghetto_id: 'traghetto-0', local: r.local.slice(1), coordinates: r.coordinates.slice(1) }
+  ] : [{ mode: 'walk', local: r.local, coordinates: r.coordinates }];
+  r.ferry_events = boat ? [{ traghetto_id: 'traghetto-0' }] : [];
+  r.gpx = `data/${r.id}.gpx`; r.audit.conditional_service = boat;
+  return r;
+};
+const wrapperFixture = () => ({ variants: [visitFixture(), visitFixture(true)], traghetti: traghettiFixture() });
+
+test('visit contract validates real per-leg geometry and stats without weakening original validation', async () => {
+  const { validateVisitRoutes } = await import(moduleURL);
+  assert.equal(typeof validateVisitRoutes, 'function', 'new source wrapper validator exists');
+  assert.equal(validateRoute(visitFixture()), true);
+  assert.equal(validateVisitRoutes(wrapperFixture()), true);
+  for (const patch of [{ stats: { walk_distance_m: -1, boat_distance_m: 0, repeat_distance_m: 0 } },
+    { stats: { walk_distance_m: 300, boat_distance_m: 0, repeat_distance_m: 301 } },
+    { stats: { walk_distance_m: 200, boat_distance_m: 100, repeat_distance_m: 0 } },
+    { legs: [] }, { legs: [{ mode: 'fly', local: [[0, 0], [1, 1]], coordinates: [[0, 0], [1, 1]] }] },
+    { legs: [{ mode: 'walk', local: [[0, 0], [1, 1]], coordinates: [[0, 0], [1, 1]] }] },
+    { bridge_count: 2 }]) assert.throws(() => validateRoute({ ...visitFixture(), ...patch }), /route/i);
+  const duplicate = wrapperFixture(); duplicate.variants[1].id = duplicate.variants[0].id;
+  assert.throws(() => validateVisitRoutes(duplicate), /route/i);
+  const unknown = wrapperFixture(); unknown.variants[1].legs[1].traghetto_id = 'absent';
+  assert.throws(() => validateVisitRoutes(unknown), /route/i);
+  const malformed = wrapperFixture(); malformed.traghetti[0].endpoints[0].x = NaN;
+  assert.throws(() => validateVisitRoutes(malformed), /route/i);
+});
+
+test('midpoint panel is honest about visit events, walking/boat/retrace distances and conditional service in all languages', () => {
+  for (const lang of ['ru', 'it', 'en']) {
+    setLang(lang);
+    const panel = routePanelHTML(visitFixture(true), { variants: [fixture(), ...wrapperFixture().variants], variantStatus: 'ready', traghetti: traghettiFixture() }, pick);
+    for (const key of ['variant', 'midpoint', 'walkDistance', 'boatDistance', 'retraceDistance', 'visits', 'visitDirections', 'serviceCaveat', 'showTraghetti']) {
+      assert.ok(UI[key]?.[lang], key); assert.ok(panel.includes(UI[key][lang]), key);
+    }
+    assert.ok(!panel.includes(UI.euler[lang])); assert.ok(!panel.includes(UI.repeats[lang]));
+    assert.ok(!panel.includes(visitFixture().euler.explanation[lang]));
+    assert.match(panel, /data-bridge-route-variant/); assert.match(panel, /value="all-bridges"/);
+    assert.match(panel, /data-bridge-traghetti-toggle/);
+    assert.match(panel, /href="data\/traghetto-midpoints.gpx" download/);
+    assert.ok(panel.includes('https://example.org/schedule')); assert.ok(panel.includes('Service days and times vary'));
+  }
+  setLang('en');
+});
+
+test('variant overlays draw supplied legs separately, keep every red bridge and number, never join walking across boat', async () => withCanvas(async canvases => {
+  const r = visitFixture(true), overlay = buildRouteOverlay(THREE, r);
+  const legs = overlay.children.filter(o => o.userData.route_leg !== undefined);
+  assert.equal(legs.length, 2);
+  for (const [i, leg] of legs.entries()) {
+    assert.equal(leg.userData.mode, r.legs[i].mode);
+    assert.equal(leg.geometry.attributes.position.count, 6);
+    const a = leg.geometry.attributes.segmentStart.array, b = leg.geometry.attributes.segmentEnd.array;
+    assert.deepEqual([a[0], a[2]], r.legs[i].local[0]);
+    assert.deepEqual([b[b.length - 3], b[b.length - 1]], r.legs[i].local.at(-1));
+  }
+  assert.equal(legs[0].material.uniforms.strokeWidth.value, 3);
+  assert.equal(legs[1].material.uniforms.color.value.getHexString(), '168bd2');
+  assert.ok(legs[1].material.uniforms.dashLength.value > 0);
+  assert.equal(highlights(overlay).length, r.bridge_count);
+  assert.deepEqual(canvases.map(c => c.ops.find(o => o[0] === 'fillText')[1]), ['1']);
+  release(overlay);
+}));
+
+test('four independent Traghetto station groups render both labelled endpoints and only supplied ferry geometry', async () => withCanvas(async canvases => {
+  const { buildTraghettoOverlay } = await import(moduleURL);
+  assert.equal(typeof buildTraghettoOverlay, 'function');
+  const ferries = traghettiFixture(); delete ferries[3].local; delete ferries[3].coordinates;
+  const overlay = buildTraghettoOverlay(THREE, ferries);
+  assert.equal(overlay.children.length, 4);
+  assert.equal(new Set(overlay.children.map(o => o.userData.traghetto_id)).size, 4);
+  const labels = []; overlay.traverse(o => { if (o.isSprite) labels.push(o); });
+  assert.equal(labels.length, 8); assert.equal(canvases.length, 8);
+  assert.ok(canvases.every(c => c.ops.some(o => o[0] === 'fillText' && o[1] === 'Traghetto')));
+  const lines = []; overlay.traverse(o => { if (o.isMesh && o.material.isShaderMaterial) lines.push(o); });
+  assert.equal(lines.length, 3, 'no invented ferry line where geometry is missing');
+  for (const line of lines) { assert.equal(line.material.uniforms.color.value.getHexString(), '168bd2'); assert.ok(line.material.uniforms.dashLength.value > 0); }
+  release(overlay);
+}));
+
+test('variant controls fetch no-store, select actual geometry and GPX while original card stays unchanged', async () => {
+  const calls = [], h = harness(async () => ({ ok: true, json: async () => fixture() }),
+    async (url, options) => { calls.push([url, options]); return { ok: true, json: async () => wrapperFixture() }; });
+  h.controller.show(); await h.controller.load(); await h.controller.loadVariants();
+  assert.deepEqual(calls, [['data/bridge-visit-route.json', { cache: 'no-store' }]]);
+  const originalCard = h.controller.listHTML();
+  h.handlers.get('[data-bridge-route-toggle]')();
+  h.handlers.get('[data-bridge-route-variant]')({ target: { value: 'traghetto-midpoints' } });
+  assert.match(h.html, /href="data\/traghetto-midpoints.gpx"/);
+  assert.equal(h.scene.children[0].children.filter(o => o.userData.route_leg !== undefined).length, 2);
+  assert.equal(h.controller.listHTML(), originalCard, 'route cards unchanged by variant selection');
+  h.handlers.get('[data-bridge-traghetti-toggle]')();
+  assert.equal(h.scene.children.length, 2);
+  h.controller.setVisible(false);
+  assert.equal(h.scene.children.find(o => o.name === 'traghetti-stations').visible, true);
+  h.handlers.get('[data-bridge-route-variant]')({ target: { value: 'all-bridges' } });
+  assert.match(h.html, /href="data\/bridge-route.gpx"/);
+  assert.ok(h.html.includes(UI.euler.en));
+  assert.equal(h.scene.children.find(o => o.name === 'all-bridges-route').visible, false);
+  h.controller.selectVariant('missing'); assert.match(h.html, /href="data\/bridge-route.gpx"/);
+  h.controller.dispose(); h.controller.dispose(); assert.equal(h.scene.children.length, 0);
+});
+
+test('missing variant data leaves original usable and retries without replacing another card', async () => {
+  let attempt = 0;
+  const h = harness(async () => ({ ok: true, json: async () => fixture() }), async () => ++attempt === 1 ? { ok: false, status: 404 } : { ok: true, json: async () => wrapperFixture() });
+  h.controller.show(); await h.controller.load(); await h.controller.loadVariants();
+  assert.ok(UI.variantUnavailable?.en); assert.ok(h.html.includes(UI.variantUnavailable.en));
+  assert.match(h.html, /data-bridge-route-variants-retry/);
+  h.controller.setVisible(true); assert.equal(h.scene.children.length, 1);
+  assert.match(h.html, /href="data\/bridge-route.gpx"/);
+  h.setView('building'); await h.controller.retryVariants();
+  assert.equal(h.view, 'building');
+  h.controller.show(); assert.match(h.html, /value="walking-midpoints"/);
+  h.controller.dispose();
+});
+
 test('escapes all HTML contexts and rejects malformed/unready route contracts', () => {
   assert.equal(escapeHTML('<"\'&>'), '&lt;&quot;&#39;&amp;&gt;');
   assert.equal(validateRoute(fixture()), true);
@@ -399,7 +530,7 @@ test('real WebGL rasterizes a 3 CSS px stroke across angles, zoom, DPR and resiz
   });
 
 // Minimal injected dock boundary; real HTML and THREE geometry remain under test.
-function harness(fetchRoute) {
+function harness(fetchRoute, visitFetch = async () => ({ ok: false, status: 404 })) {
   const scene = new THREE.Scene();
   let view = null, html = '', back = null, languageCallback, listRefreshes = 0;
   const handlers = new Map(), flights = [];
@@ -408,7 +539,8 @@ function harness(fetchRoute) {
   const controller = installBridgeRoute({ THREE, scene, aimFly: (...args) => flights.push(args),
     openDock: (v, body, b) => { view = v; html = body; back = b; }, dockLive,
     getDockView: () => view, showWalks: () => { listRefreshes++; view = 'walks'; },
-    pickText: pick, onLang: fn => { languageCallback = fn; return () => {}; }, fetchRoute });
+    pickText: pick, onLang: fn => { languageCallback = fn; return () => {}; },
+    fetchRoute: (url, options) => url === 'data/bridge-visit-route.json' ? visitFetch(url, options) : fetchRoute(url, options) });
   return { controller, scene, flights, handlers, setView: v => { view = v; }, lang: () => languageCallback(),
     get html() { return html; }, get view() { return view; }, get back() { return back; }, get listRefreshes() { return listRefreshes; } };
 }
