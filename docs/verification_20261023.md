@@ -67,3 +67,17 @@ switch goes Russian → Italian → English → Russian and back in any order; t
 ("Building, year unknown", "Street, waterfront", "Canal, lagoon") and a building card ("anno ignoto",
 "Year of construction unknown") all follow the chosen language; a search for *Salute* offers the
 building, the canal and the fondamenta, each named as its own kind.
+## Wikidata enrichment, checked in the browser (2026-10-23, later)
+
+The three suites run against the enriched export: the contract test 150 432 checks with no failure
+(1 290 cards, 1 082 of them with a photograph, 43 heritage designations, 368 bridge cards), the worker
+smoke test, and the language coverage test 1 212 checks with no untranslated string.
+
+In Chrome, on the live site: the scene is ready with no error recorded; the Heritage lens shows both
+«Объект наследия (тег OSM)» and «Охранный статус (Wikidata)»; a search for *Ospedale San Camillo*
+returns «Ospedale San Camillo IRCCS · медицинская организация», that is, the place named as its own
+kind; the card of Ca' d'Oro, which no OSM tag links to Wikidata, shows the photograph, the style, the
+architects, the height, the date with the note that the year comes from Wikidata and the line «связь
+найдена по координатам», all of it switching to «trovata per coordinate», «Stile», «Data in Wikidata»
+in Italian; and the card of Santa Maria Assunta on Torcello carries «часть объекта всемирного
+наследия» as its heritage status.

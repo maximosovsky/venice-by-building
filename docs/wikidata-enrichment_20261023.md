@@ -40,15 +40,16 @@ paragraph of the article. Data land in `data/ready/wikidata_enriched.json`; ever
 
 | | before | after |
 |---|---|---|
-| cards | 385 | **1 460** |
-| cards with a photograph | 374 | **1 312** |
+| cards | 385 | **1 290** (905 of them by coordinates) |
+| cards with a photograph | 374 | **1 082** |
 | exact years on the timeline | 25 | **226** |
 | dates from Wikidata | 0 | 252 objects (225 exact, 53 as an interval) |
 | objects with a heritage status | 0 | 43 (the Heritage lens was empty) |
-| named places (vaporetto landings, hotels, schools) | 0 | 529 |
+| named places (landings, hospitals, schools) | 0 | 529 |
+| article openings | 332 | 1 126 |
 | styles / architects on cards | 0 / 0 | 200 / 121 |
 | heights measured in Wikidata | 0 | 15 buildings (292 items carry one, but nearly all belong to bridges; see below) |
-| names | 818 | 1 128 |
+| names | 818 | 381 (after the filter below) |
 
 ## What is deliberately not taken
 
@@ -59,6 +60,11 @@ paragraph of the article. Data land in `data/ready/wikidata_enriched.json`; ever
 * **A century as a year.** A statement precise to a decade or a century is drawn as an interval
   (`flag = 1`), never as an exact year. Only day-, month- and year-precise statements become exact
   years, and every one of them is recorded with its source (`dsrc = 2`, Wikidata).
+* **A street is not a house.** Points of streets, canals, squares and quays also fall inside or
+  beside a footprint: 396 of the 1 075 first geometry-matched cards carried a street's name. Such
+  items are now recognised by their name and by their stated class (colonnello `P31`) and left out;
+  a card is made only when the item has a name and is a building or a bridge. A bridge matched to a
+  bridge deck stays, which is why 368 cards belong to bridges.
 * **Geography as a building's own tag.** A link found by coordinates is not the same claim as a
   `wikidata` tag on the building itself: such cards say «связь найдена по координатам» and the
   objects fall into the tentative-links layer, so a reader can tell the two apart.
