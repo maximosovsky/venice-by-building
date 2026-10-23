@@ -62,6 +62,7 @@ viewer's binary format, so the data stays independent of the viewer.
 | `s02_dating.py` | municipal classification and OSM dates into one evidence table | `evidence_<area>.csv`, `buildings_dated_*` |
 | `s04_wikimedia.py` | Wikidata labels, Wikipedia articles, Commons photos with licence and author | `data/ready/wikimedia.json` |
 | `s05_streets.py` | streets as ordered rows of facades, with a side for each house | `data/ready/streets.json` |
+| `s09_municipal.py` | measured heights from the city's 2010 topographic survey, attached to our footprints | `data/processed/municipal_heights_*` |
 | `s07_wikidata.py` | every Wikidata item located in Venice, matched to our footprints by geometry | `data/processed/wikidata_match_*` |
 | `s08_wikidata_enrich.py` | names, articles, dates with precision, architects, styles, heritage, heights, Commons photos | `data/ready/wikidata_enriched.json` |
 | `s06_export.py` | tiles, packs, attributes, cards, ground and labels for the viewer | `web/data/*` |
@@ -74,6 +75,7 @@ python -m venice.s01_buildings island centro
 python -m venice.s02_dating island centro
 python -m venice.s04_wikimedia island centro
 python -m venice.s05_streets island centro
+python -m venice.s09_municipal centro
 python -m venice.s07_wikidata centro
 python -m venice.s08_wikidata_enrich centro
 python -m venice.s06_export centro
@@ -81,6 +83,12 @@ python -m venice.s06_export centro
 
 `pipeline/venice/periods.py` holds the epoch table and the state flags read out of the municipal class
 descriptions; nothing there may be turned into a single year.
+
+Heights are **measured, not guessed** for most of the centre. The city's 2010 topographic lot carries
+volume parts with real base, eaves and ridge levels; 8 915 of the 11 602 objects now take their height
+from them, and the estimate from the epoch median is down from 8 303 objects to 2 055. The 2006 lot, whose
+167 939 measured buildings are often quoted, does not cover Venice at all, and the roof layer stops at
+Murano. See `docs/municipal-heights_20261023.md`.
 
 Wikidata is matched **by geometry**: the atlas used to know only the 382 buildings tagged with
 `wikidata` in OpenStreetMap, while the coordinates of 2 685 Venetian items reach 1 536 of our

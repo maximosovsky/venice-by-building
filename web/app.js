@@ -615,8 +615,9 @@ const ageParts = p => {
   return rest.length ? { dates, name: rest.join(' — ') } : { dates: '', name: full };
 };
 const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => (b.wk >= 0 ? pickText(w?.la) || wiki[b.wk]?.label : null) || (b.nm >= 0 ? names[b.nm] : null);
-const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '',
-  'принята для моста: в OSM высот нет', 'измерено по Викиданным'];
+const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM',
+  'измерено съёмкой города 2010 года', '', 'принята для моста: в OSM высот нет',
+  'измерено по Викиданным'];
 const heightNote = i => t(HEIGHT_NOTE[i] || 'оценка');
 const range = b => b.yfrom !== b.yto ? `${b.yfrom}–${b.yto}` : `${b.yfrom}`;
 // The age of a Venice building is rarely a year: an interval is shown as the epoch it belongs to.

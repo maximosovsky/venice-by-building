@@ -62,8 +62,11 @@ ATTR_DTYPE = np.dtype([
     ("src", "u1"), ("floors", "u1"), ("dsrc", "u1"), ("pad", "u1"), ("x", "<f4"), ("z", "<f4"),
 ])
 
-H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "epoch_median_estimate": 3, "bridge_assumed": 4,
-         "wikidata_height": 5}
+# 2 — измеренная высота муниципальной съёмки 2010 года: карниз минус собственное основание.
+# Ниже двух метров это не дом, а парапет, ступень или ограда: такие отметки не берём.
+MIN_BUILDING_HEIGHT = 2.0
+H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "municipal_survey_2010": 2,
+         "epoch_median_estimate": 3, "bridge_assumed": 4, "wikidata_height": 5}
 D_SRC = {"osm": 0, "vprg": 1, "wikidata": 2, "none": 3}
 
 # Layer bits the story lens switches on and off.
@@ -351,6 +354,15 @@ def main(area="centro"):
     # Обогащение из Викиданных: связь по геометрии, а не только по тегу wikidata в OSM.
     enriched_path = config.READY / "wikidata_enriched.json"
     enriched = json.loads(enriched_path.read_text(encoding="utf-8")) if enriched_path.exists() else {}
+    # Измеренные высоты муниципальной съёмки 2010 года (ступень s09).
+    muni_path = config.PROCESSED / f"municipal_heights_{area}.geojson"
+    municipal = {}
+    if muni_path.exists():
+        for f in json.loads(muni_path.read_text(encoding="utf-8"))["features"]:
+            pr_m = f.get("properties") or {}
+            if pr_m.get("building_id") and pr_m.get("height_m"):
+                municipal[pr_m["building_id"]] = float(pr_m["height_m"])
+    print(f"муниципальные высоты: {len(municipal)} зданий")
     wd_objects = enriched.get("objects") or {}
     wd_pois = enriched.get("pois") or []
     print(f"wikidata: объектов обогащения={len(wd_objects)} подписей-точек={len(wd_pois)}")
@@ -458,15 +470,20 @@ def main(area="centro"):
         hist[year][period] += 1 if not is_bridge else 0
 
         h, hsrc = pr.get("height_used"), pr.get("height_source")
+        # Измеренная съёмка города старше и тега OSM, и наших оценок: она измеряет карниз.
+        muni_h = municipal.get(pr["building_id"])
+        if muni_h and not is_bridge:
+            h, hsrc = muni_h, "municipal_survey_2010"
         # Измеренная высота из Викиданных старше любой нашей оценки — но только правдоподобная:
         # в Викиданных попадаются ошибки единиц (1000 м, 395 м, 0,99 м у моста) и они не должны
         # ломать модель. У зданий Венеции разумный предел — 120 м (кампанила Сан-Марко 98,6).
         # У мостов высота из Викиданных — это просвет или высота пролёта, а не настил: настил
         # остаётся принятой плитой, а измеренная высота показывается в карточке отдельной строкой.
         wd_h = wd.get("height")
-        if wd_h and not is_bridge and 2.0 <= float(wd_h) <= 120.0:
+        if not (muni_h and not is_bridge) and wd_h and not is_bridge and 2.0 <= float(wd_h) <= 120.0:
             h, hsrc = float(wd_h), "wikidata_height"
-        if not h:
+        # Очень низкая отметка означает не здание, а парапет или ступень: такой тег не используем.
+        if not h or float(h) < MIN_BUILDING_HEIGHT:
             h = medians.get(epoch) or global_median
             hsrc = "epoch_median_estimate"
         try:

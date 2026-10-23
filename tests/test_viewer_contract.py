@@ -214,11 +214,31 @@ def main():
     wikidata_dates = wd_counts[(2, "dsrc")]
     wikidata_heights = wd_counts.get((5, "hsrc"), 0)
     heritage_wikidata = wd_counts.get((2, "heritage"), 0)
+    # ---- измеренные высоты муниципальной топографической съёмки 2010 года (ступень s09) ----
+    municipal = wd_counts.get((2, "hsrc"), 0)
+    check(municipal > 7000, f"только {municipal} высот из съёмки города: ступень s09 не попала в экспорт")
+    muni_records = 0
+    for rec in range(len(raw) // stride):
+        off = rec * stride
+        if struct.unpack_from("<B", raw, off + field_offset["hsrc"])[0] != 2:
+            continue
+        muni_records += 1
+        h = struct.unpack_from("<H", raw, off + field_offset["h"])[0] / 10
+        check(2.0 <= h <= 80.0, f"запись {rec}: измеренная съёмкой высота {h} м вне правдоподобных границ")
+        check(struct.unpack_from("<B", raw, off + field_offset["src"])[0] == 0,
+              f"запись {rec}: у мостового настила не может стоять высота из съёмки зданий")
     wiki_heritage_expected = range(heritage_wikidata)
+    all_heights = sorted(struct.unpack_from("<H", raw, r * stride + field_offset["h"])[0] / 10
+                             for r in range(len(raw) // stride))
+    median_h = all_heights[len(all_heights) // 2]
+    check(3.0 <= median_h <= 12.0, f"медианная высота {median_h} м неправдоподобна для Венеции")
+    check(all_heights[0] >= 2.0, f"самая низкая высота {all_heights[0]} м: парапет или незаполненное поле")
     check(wikidata_dates > 200, f"только {wikidata_dates} объектов датированы Викиданными — обогащение не доехало")
     # Высоты P2048 в Викиданных редки и почти все стоят у мостов, где означают просвет,
     # а не высоту здания: у наших зданий их полтора десятка, и меньше быть не должно.
-    check(wikidata_heights >= 8, f"только {wikidata_heights} высот из Викиданных")
+    # Муниципальная съёмка теперь старше Викиданных, поэтому от P2048 остаётся один-два случая:
+    # проверяем, что источник всё ещё используется, но не требуем прежнего объёма.
+    check(wikidata_heights >= 1, f"только {wikidata_heights} высот из Викиданных")
     check(heritage_wikidata > 10, f"только {heritage_wikidata} объектов с охранным статусом из Викиданных")
     check(len(cfg["heritage"]["labels"]) >= 2, "у наследия должна быть и подпись для статуса из Викиданных")
     # Зритель берёт подпись labels[i] с числом counts[i + 1] и цвет colors[i + 1],

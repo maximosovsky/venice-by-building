@@ -81,3 +81,16 @@ architects, the height, the date with the note that the year comes from Wikidata
 найдена по координатам», all of it switching to «trovata per coordinate», «Stile», «Data in Wikidata»
 in Italian; and the card of Santa Maria Assunta on Torcello carries «часть объекта всемирного
 наследия» as its heritage status.
+
+## Measured heights from the municipal survey (2026-10-23)
+
+Stage `s09_municipal.py` attaches the 2010 volume layer of the Comune di Venezia to our footprints: of
+109 943 parts in the atlas area, 43 983 attach (43 539 by a point inside), covering 8 909 buildings before
+the plausibility window and 8 915 objects in the export. The contract test now runs 168 265 checks with no
+failure, including per-record checks that every municipal height lies between 2 and 80 m and that no bridge
+deck carries one. The median drawn height moved from a 6,7 m estimate to 6,3 m measured; the epoch-median
+fallback dropped from 8 303 objects to 2 055; the tallest measured value is the campanile of San Marco at
+73,7 m, and the church bodies take their main part (the Frari 25,5 m) while their campanili stay separate
+footprints. Against the 492 OSM `height` tags the survey agrees to a median of 0,18 m. Details and limits —
+the undocumented vertical datum and the unsettled terms of use — are in
+`docs/municipal-heights_20261023.md`.
