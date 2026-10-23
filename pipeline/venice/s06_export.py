@@ -90,28 +90,31 @@ def rings_of(geom):
             yield np.asarray(hole.coords)[:-1], 1
 
 
-def pack_tile(origin, rows):
-    gid, year, pf, floors, heritage, lay0, lay1, part_start = [], [], [], [], [], [], [], [0]
+def pack_tile(origin, rows, base):
+    """origin: the tile's corner in the local frame, base: the city origin in the projected CRS."""
+    gid, year, flag, period, floors, heritage, lay0, lay1, part_start = [], [], [], [], [], [], [], [], [0]
     heights, bases, ring_start, vert_start, holes, verts = [], [], [0], [0], [], []
     for b in rows:
         gid.append(b["gid"])
         year.append(b["year"])
-        pf.append((b["flag"] % 16) * 16 + (b["period"] % 16))   # viewer reads pf%16 period, pf/16 flag
+        # the worker reads four separate bytes in this order: flag, period, floors, heritage
+        flag.append(b["flag"] % 256)
+        period.append(b["period"] % 256)
         floors.append(min(b["floors"], 255))
         heritage.append(b["heritage"])
         lay0.append(b["lay0"]); lay1.append(b["lay1"])
-        for top, base, geom in b["parts"]:
+        for top, base_z, geom in b["parts"]:
             n0 = len(holes)
             for ring, hole in rings_of(geom):
                 if len(ring) < 3:
                     continue
-                loc = (np.c_[ring[:, 0] - origin[0], -(ring[:, 1] - origin[1])]) * 10
+                loc = (np.c_[ring[:, 0] - base[0] - origin[0], -(ring[:, 1] - base[1]) - origin[1]]) * 10
                 verts.append(np.round(loc).astype(np.int16))
                 holes.append(hole)
                 vert_start.append(vert_start[-1] + len(ring))
             if len(holes) == n0:
                 continue
-            heights.append(top); bases.append(base)
+            heights.append(top); bases.append(base_z)
             ring_start.append(len(holes))
         part_start.append(len(heights))
     nB, nP, nR = len(gid), len(heights), len(holes)
@@ -120,7 +123,8 @@ def pack_tile(origin, rows):
     out = struct.pack("<7I2f", MAGIC, nB, nP, nR, len(V), 0, 0, float(origin[0]), float(origin[1]))
     out += pad4(np.array(gid, "<u4").tobytes())
     out += pad4(np.array(year, "<i2").tobytes())
-    out += pad4(np.array(pf, "u1").tobytes())
+    out += pad4(np.array(flag, "u1").tobytes())
+    out += pad4(np.array(period, "u1").tobytes())
     out += pad4(np.array(floors, "u1").tobytes())
     out += pad4(np.array(heritage, "u1").tobytes())
     out += np.array(lay0, "<u4").tobytes() + np.array(lay1, "<u4").tobytes()
@@ -134,7 +138,7 @@ def pack_tile(origin, rows):
     return out
 
 
-def polygon_bin(polys, origin):
+def polygon_bin(polys, base):
     """land/water/context: u32 nPoly, nRing, nVert; ringStart; vertStart; f32 xz[] in the local frame."""
     rings, ring_start, vert_start, verts = [], [0], [0], []
     for geom in polys:
@@ -144,7 +148,7 @@ def polygon_bin(polys, origin):
         for ring, _hole in rings_of(geom):
             if len(ring) < 3:
                 continue
-            loc = np.c_[ring[:, 0] - origin[0], -(ring[:, 1] - origin[1])]
+            loc = np.c_[ring[:, 0] - base[0], -(ring[:, 1] - base[1])]
             verts.append(loc.astype(np.float32))
             rings.append(ring)
             vert_start.append(vert_start[-1] + len(ring))
@@ -406,7 +410,7 @@ def main(area="centro"):
         groups[(tx, tz)].append(i)
     for (tx, tz), idxs in groups.items():
         origin = (tx * TILE, tz * TILE)
-        data = pack_tile(origin, [rows[i] for i in idxs])
+        data = pack_tile(origin, [rows[i] for i in idxs], base=(ox, oy))
         cx, cz = origin[0] + TILE / 2, origin[1] + TILE / 2
         tile_index.append({"file": f"{tx}_{tz}.bin", "tx": tx, "tz": tz, "n": len(idxs),
                            "bytes": len(data), "dist": round(math.hypot(cx, cz))})
@@ -444,9 +448,9 @@ def main(area="centro"):
     land = unary_union(land_parts) if land_parts else None
     water = unary_union(water_parts) if water_parts else None
     origin = (0.0, 0.0)
-    write_bin(out_dir / "land.bin", polygon_bin([land], origin) if land else polygon_bin([], origin))
-    write_bin(out_dir / "water.bin", polygon_bin([water], origin) if water else polygon_bin([], origin))
-    write_bin(out_dir / "context.bin", polygon_bin([land], origin) if land else polygon_bin([], origin))
+    write_bin(out_dir / "land.bin", polygon_bin([land], base=(ox, oy)) if land else polygon_bin([], base=(ox, oy)))
+    write_bin(out_dir / "water.bin", polygon_bin([water], base=(ox, oy)) if water else polygon_bin([], base=(ox, oy)))
+    write_bin(out_dir / "context.bin", polygon_bin([land], base=(ox, oy)) if land else polygon_bin([], base=(ox, oy)))
     (out_dir / "labels.json").write_text(
         json.dumps(labels_from(networks, fn, ox, oy), ensure_ascii=False), encoding="utf-8")
     (out_dir / "wiki.json").write_text(json.dumps(wiki, ensure_ascii=False), encoding="utf-8")

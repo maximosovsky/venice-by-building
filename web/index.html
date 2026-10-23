@@ -152,6 +152,34 @@
   </div>
 </section>
 <div id="loading" class="loading">Раскладываем город <span id="progress" class="n">0</span>%</div>
+<script>
+// Если что-то падает, показать это на экране вместо пустой карты.
+window.__veniceErrors = [];
+function showFatal(text) {
+  const el = document.getElementById('loading');
+  if (!el) return;
+  el.hidden = false;
+  el.style.display = '';
+  el.classList.add('fatal');
+  el.innerHTML = '<b>Не удалось построить карту.</b><br>' + String(text).slice(0, 400) +
+    '<br><small>Подробности — в консоли браузера (F12).</small>';
+}
+window.addEventListener('error', e => {
+  const msg = e.message || (e.target && e.target.src ? 'не загрузился файл ' + e.target.src : 'ошибка');
+  window.__veniceErrors.push(msg);
+  showFatal(msg);
+}, true);
+window.addEventListener('unhandledrejection', e => {
+  const msg = (e.reason && (e.reason.message || e.reason)) || 'запрос отклонён';
+  window.__veniceErrors.push(String(msg));
+  showFatal(String(msg));
+});
+setTimeout(() => {
+  const el = document.getElementById('loading');
+  if (el && !el.hidden) showFatal('загрузка не завершилась за 30 секунд' +
+    (window.__veniceErrors.length ? ': ' + window.__veniceErrors.join('; ') : ''));
+}, 30000);
+</script>
 <script type="module" src="app.js"></script>
 </body>
 </html>
