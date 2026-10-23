@@ -666,7 +666,7 @@ function buildingHtml(gid) {
     hItem?.shrId && link(`https://www.hms.heritage.nsw.gov.au/App/Item/ViewItem?itemId=${hItem.shrId}`, 'State Heritage Register'),
     osmUrl && link(osmUrl, 'OpenStreetMap'),
   ].filter(Boolean);
-  const stories = b.groups.map(g => {
+  const stories = b.groups.filter(g => LAYERS_SHOWN.includes(g.layer)).map(g => {
       const note = g.layer.notes?.[gid];
       return `<li>${dot(groupColor(g))}<div><b>${esc(pickText(g.layer.title))}</b> <span>${esc(pickText(g.label))}</span>
         ${note?.story ? `<p>${esc(note.story)}${note.source ? ` ${link(note.source, t('Source'))}` : ''}</p>` : ''}</div></li>`;
@@ -679,7 +679,7 @@ function buildingHtml(gid) {
         <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
         ${w?.wiki?.url ? `<section class="sources"><p>${link(pickText(w.wiki.url), t('Статья в Википедии'))}${w.qid ? ` · ${link('https://www.wikidata.org/wiki/' + w.qid, 'Wikidata')}` : ''}</p></section>` : ''}
-        ${stories ? `<section><h3>${t('В сюжетах')}</h3><ul class="chips">${stories}</ul></section>` : ''}
+        ${stories ? `<section><h3>${t('Слои')}</h3><ul class="chips">${stories}</ul></section>` : ''}
         ${sources.length ? `<section class="sources"><h3>${t('Источники')}</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
     }
 
@@ -760,7 +760,7 @@ function backFromHere() {
   if (dockView === 'building') return buildingBack;
   if (quest) return { label: 'Back to the walk', go: () => { unpin(); renderQuest(); } };
   if (dockView === 'story' && activeLayer) { const L = activeLayer; return { label: L.title, go: () => { unpin(); showStory(L); } }; }
-  if (dockView === 'stories') return { label: 'All stories', go: () => { unpin(); showStories(); } };
+  if (dockView === 'stories') return { label: t(LAYERS_SHOWN.length === 1 ? 'Мосты' : 'Все слои'), go: () => { unpin(); showStories(); } };
   return null;
 }
 // Kept for the walks and the screenshots: a negative id lets go of the building, any other opens it.
@@ -1158,14 +1158,17 @@ const ICON = {
 };
 const sectionIcon = sec => `<svg class="icon" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">${ICON[sec] || ''}</svg>`;
 
-// The stories, by section, in the dock.
+// В панели сюжетов остался один слой — мосты. Остальные слои живут в данных, но входа отсюда у них нет.
+const BRIDGES = layers.find(L => L.id === 'works') || layers[0] || null;
+const LAYERS_SHOWN = layers.filter(L => L === BRIDGES);
+
+// Единственный сюжет: сразу открываем его, без списка на один пункт.
 function showStories() {
-  const sections = [...new Set(layers.map(L => L.section))].sort((a, b) => SECTION_ORDER.indexOf(a) - SECTION_ORDER.indexOf(b));
-  openDock('stories', `<article class="dock-page"><h2 id="dock-title">Stories</h2>
-    <p class="lede">Threads of Sydney’s history that live in its buildings. Choose one to light up its buildings and read about them.</p>
-    ${sections.map(sec => `<h3 class="st-section">${sectionIcon(sec)}${esc(sec)}</h3><ul class="st-list">${layers.filter(L => L.section === sec).map(L =>
-      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pickText(L.title))}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(pickText(L.era))}</span></button></li>`).join('')}</ul>`).join('')}
-    <p class="add-story"><a href="${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Add a story on GitHub</a></p></article>`);
+  if (LAYERS_SHOWN.length === 1) { setLayer(LAYERS_SHOWN[0]); showStory(LAYERS_SHOWN[0]); return; }
+  openDock('stories', `<article class="dock-page"><h2 id="dock-title">${t('Мосты')}</h2>
+    <p class="lede">${t('Слои карты: выберите слой, чтобы подсветить его объекты и прочитать о них.')}</p>
+    <ul class="st-list">${LAYERS_SHOWN.map(L =>
+      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pickText(L.title))}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(pickText(L.era))}</span></button></li>`).join('')}</ul></article>`);
   dockLive.querySelectorAll('.st-row').forEach(b => b.onclick = () => { setLayer(layers.find(l => l.id === b.dataset.id)); showStory(activeLayer); });
 }
 // One story: what it is, its places and their stories, and where it comes from.
@@ -1173,14 +1176,14 @@ function showStory(L) {
   const seenName = new Set();
   const named = Object.entries(L.notes || {}).filter(([, n]) => n.name && n.at && !seenName.has(n.name) && seenName.add(n.name));
   openDock('story', `<article class="dock-page">
-    <div class="story-head">${sectionIcon(L.section)}<h2 id="dock-title">${esc(L.title)}</h2></div>
-    <p class="story-era">${esc(pickText(L.era))} · <span class="n">${fmt(L.count)}</span> ${t('зданий')}</p>
+    <div class="story-head">${sectionIcon(L.section)}<h2 id="dock-title">${esc(pickText(L.title))}</h2></div>
+    <p class="story-era">${esc(pickText(L.era))} · <span class="n">${fmt(L.count)}</span> ${t('объектов')}</p>
     <p class="story-text">${esc(pickText(L.text))}</p>
-    ${named.length ? `<h3>Places and their stories</h3><ul class="places">${named.map(([gid, n]) => `
+    ${named.length ? `<h3>${t('Места и их истории')}</h3><ul class="places">${named.map(([gid, n]) => `
       <li><button class="place" data-gid="${gid}"><b>${esc(n.name)}</b><span>${esc(n.story || '')}</span></button></li>`).join('')}</ul>` : ''}
     ${L.caveat ? `<p class="caveat">${esc(pickText(L.caveat))}</p>` : ''}
     <p class="src">${link(L.source.url, pickText(L.source.label))}</p></article>`,
-  { label: 'All stories', go: () => { setLayer(null); showStories(); } });
+  LAYERS_SHOWN.length > 1 ? { label: t('Все слои'), go: () => { setLayer(null); showStories(); } } : null);
   dockLive.querySelectorAll('.place').forEach(b => b.onclick = () => {
     const n = L.notes[b.dataset.gid], back = { label: L.title, go: () => { unpin(); showStory(L); } };
     aimFly(n.at[0], n.at[1], 520, () => openBuilding(+b.dataset.gid, back));

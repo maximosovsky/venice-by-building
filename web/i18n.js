@@ -50,8 +50,8 @@ const DICT = {
     'Названия улиц и набережных —': 'I nomi delle vie e delle fondamenta —',
     '— подписаны на карте и видны, когда камера подходит ближе; в поиске по имени ищутся и они, и каналы, и мосты. Отдельным слоем стоят':
       '— sono scritti sulla mappa e compaiono quando la camera si avvicina; la ricerca li trova per nome, insieme ai canali e ai ponti. Su un livello a parte stanno',
-    'мостов: настил каждого показан плитой над каналом. Включите слой «Мосты» в разделе сюжетов, чтобы окрасить только их, и нажмите на мост, чтобы прочитать карточку.':
-      'ponti: l\'impalcato di ognuno è mostrato come una lastra sopra il canale. Attiva il livello «Ponti» nella sezione delle storie per colorare soltanto quelli, e clicca su un ponte per leggere la sua scheda.',
+    'мостов: настил каждого показан плитой над каналом. Включите линзу «Мосты» в верхней панели, чтобы окрасить только их, и нажмите на мост, чтобы прочитать карточку.':
+      'ponti: l\'impalcato di ognuno è mostrato come una lastra sopra il canale. Attiva la lente «Ponti» nella barra in alto per colorare soltanto quelli, e clicca su un ponte per leggere la sua scheda.',
     'Как здесь оказаться': 'Come muoversi',
     'Тяните карту левой кнопкой мыши — город сдвигается, как всякая карта. Правая кнопка или Shift с левой поворачивают и наклоняют его. Колесо приближает и отдаляет; над панелью карточки колесо прокручивает текст, а не карту. Щелчок по зданию открывает его карточку. Двигайте солнце по шкале или включите воспроизведение.':
       'Trascina la mappa con il tasto sinistro — la città si sposta come una mappa qualsiasi. Il tasto destro, o Shift con il sinistro, la ruotano e la inclinano. La rotella avvicina e allontana; sopra il pannello della scheda la rotella scorre il testo, non la mappa. Un clic su un edificio apre la sua scheda. Muovi il sole lungo la barra o avvia la riproduzione.',
@@ -246,6 +246,11 @@ const DICT = {
     'Фото': 'Foto',
     'зданий': 'edifici',
     'Только {name}': 'Solo {name}',
+    'Слои': 'Livelli',
+    'Все слои': 'Tutti i livelli',
+    'объектов': 'oggetti',
+    'Места и их истории': 'Luoghi e le loro storie',
+    'Слои карты: выберите слой, чтобы подсветить его объекты и прочитать о них.': 'Livelli della mappa: scegline uno per mettere in evidenza i suoi oggetti e leggerne la storia.',
     'All stories': 'Tutte le storie',
     'Back to the walk': 'Torna al percorso',
     'State Heritage Register': 'State Heritage Register',
@@ -289,8 +294,8 @@ const DICT = {
     'Названия улиц и набережных —': 'The names of streets and waterfronts —',
     '— подписаны на карте и видны, когда камера подходит ближе; в поиске по имени ищутся и они, и каналы, и мосты. Отдельным слоем стоят':
       '— are labelled on the map and appear as the camera comes closer; the search finds them by name, along with the canals and the bridges. On a layer of their own stand',
-    'мостов: настил каждого показан плитой над каналом. Включите слой «Мосты» в разделе сюжетов, чтобы окрасить только их, и нажмите на мост, чтобы прочитать карточку.':
-      'bridges: each deck is drawn as a slab over the canal. Switch on the «Bridges» layer under stories to colour only them, and click a bridge to read its card.',
+    'мостов: настил каждого показан плитой над каналом. Включите линзу «Мосты» в верхней панели, чтобы окрасить только их, и нажмите на мост, чтобы прочитать карточку.':
+      'bridges: each deck is drawn as a slab over the canal. Switch on the «Bridges» lens in the top bar to colour only them, and click a bridge to read its card.',
     'Как здесь оказаться': 'How to get around',
     'Тяните карту левой кнопкой мыши — город сдвигается, как всякая карта. Правая кнопка или Shift с левой поворачивают и наклоняют его. Колесо приближает и отдаляет; над панелью карточки колесо прокручивает текст, а не карту. Щелчок по зданию открывает его карточку. Двигайте солнце по шкале или включите воспроизведение.':
       'Drag the map with the left button — the city slides like any map. The right button, or Shift with the left, turns and tilts it. The wheel zooms in and out; over a card panel the wheel scrolls the text, not the map. Click a building to open its card. Move the sun along the bar, or press play.',
@@ -485,6 +490,11 @@ const DICT = {
     'Фото': 'Photo',
     'зданий': 'buildings',
     'Только {name}': 'Only {name}',
+    'Слои': 'Layers',
+    'Все слои': 'All layers',
+    'объектов': 'objects',
+    'Места и их истории': 'Places and their stories',
+    'Слои карты: выберите слой, чтобы подсветить его объекты и прочитать о них.': 'Layers of the map: choose one to light its objects up and read about them.',
     'All stories': 'All stories',
     'Back to the walk': 'Back to the walk',
     'State Heritage Register': 'State Heritage Register',

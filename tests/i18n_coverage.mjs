@@ -52,6 +52,7 @@ check(uniqMissing.length === 0,
   `страница: без перевода ${uniqMissing.length} текстов, например:\n    ` + uniqMissing.slice(0, 8).join('\n    '));
 
 // --- 3. Данные конвейера: сюжеты, эпохи, слои — их русский текст тоже должен переводиться.
+const appSrc = read('web/app.js');
 const layers = JSON.parse(read('web/data/layers.json'));
 const cfg = JSON.parse(read('web/data/venezia.json'));
 const dataKeys = new Set();
@@ -65,6 +66,16 @@ for (const h of cfg.heritage?.labels || []) if (CYR.test(h)) dataKeys.add(norm(h
 const dataMissing = [...dataKeys].filter(k => !(k in DICT_ALL.it) || !(k in DICT_ALL.en));
 check(dataMissing.length === 0,
   `данные конвейера: без перевода ${dataMissing.length}, например:\n    ` + dataMissing.slice(0, 6).join('\n    '));
+
+// --- 3б. Тексты, которые код передаёт в t() и pickText(): каждый русский должен быть в словаре.
+const codeKeys = new Set();
+for (const m of appSrc.matchAll(/\b(?:t|pickText)\('((?:[^'\\]|\\.)*)'/g)) {
+  const text = norm(m[1].replace(/\\'/g, "'"));
+  if (CYR.test(text)) codeKeys.add(text);
+}
+const codeMissing = [...codeKeys].filter(k => !(k in DICT_ALL.it) || !(k in DICT_ALL.en));
+check(codeMissing.length === 0,
+  `тексты из кода: без перевода ${codeMissing.length}, например:\n    ` + codeMissing.slice(0, 8).join('\n    '));
 
 // --- 4. Сам перевод работает: подстановка, выбор языка, откат на исходник.
 check(t('Возраст') === 'Возраст', 'на русском t() должна вернуть исходник');
