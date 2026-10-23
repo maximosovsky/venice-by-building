@@ -471,3 +471,19 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 .bridge-crossing-number { min-width: 2.5em; color: var(--teal); font-variant-numeric: tabular-nums; }
 .bridge-repeat { display: inline-block; padding: 0 5px; border: 1px solid var(--rule); border-radius: 4px; color: var(--sun); }
 .bridge-route-entry .route-meta { flex-wrap: wrap; }
+
+/* Additive church route only: one continuous numbered inventory, no day splits. */
+.church-route-entry .route-meta, .church-route-page .walk-actions { flex-wrap: wrap; }
+.church-stops { list-style: none; padding: 0; margin: 8px -8px 0; }
+.church-stops > li { margin: 0 0 16px; }
+.church-stops button { display: flex; align-items: baseline; gap: 10px; width: 100%; padding: 8px;
+  border: 0; border-radius: 6px; background: none; text-align: left; cursor: pointer; }
+.church-stops button:hover { background: var(--hover); }
+.church-stops button[aria-current="step"] { background: var(--stone); box-shadow: inset 3px 0 var(--teal); }
+.church-stop-number { min-width: 2.5em; color: var(--teal); font-variant-numeric: tabular-nums; }
+.church-stop-detail { margin-left: calc(2.5em + 18px); padding-right: 8px; overflow-wrap: anywhere; }
+.church-stop-detail small { color: var(--muted); }
+.church-stop-detail p { margin: 4px 0 8px; }
+.church-route-legend { border-left: 2px dashed var(--teal); padding-left: 10px; }
+.church-transfers { margin-top: 18px; overflow-wrap: anywhere; }
+.church-transfers summary { cursor: pointer; color: var(--teal); }
