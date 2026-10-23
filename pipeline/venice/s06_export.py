@@ -396,17 +396,18 @@ def main(area="centro"):
         wd = wd_objects.get(pr["building_id"]) or {}
         if is_bridge:
             # a bridge is a structure as the city stands today; no age is claimed for it
-            year, yfrom, yto, period, flag = 1000, 0, 0, 3, 2
+            year, yfrom, yto, period, flag, dsrc_code = 1000, 0, 0, 3, 2, D_SRC["none"]
         elif date_kind == "year":
             year = int(pr["osm_year"]); yfrom = yto = year; period, flag = 2, 0
+            dsrc_code = D_SRC["osm"]
         elif epoch == "preottocentesche":
-            year, yfrom, yto, period, flag = 1000, 0, 1800, 0, 1
+            year, yfrom, yto, period, flag, dsrc_code = 1000, 0, 1800, 0, 1, D_SRC["vprg"]
         elif epoch == "ottocentesche":
-            year, yfrom, yto, period, flag = 1800, 1800, 1899, 1, 1
+            year, yfrom, yto, period, flag, dsrc_code = 1800, 1800, 1899, 1, 1, D_SRC["vprg"]
         elif epoch == "novecentesche":
-            year, yfrom, yto, period, flag = 1900, 1900, 2026, 2, 1
+            year, yfrom, yto, period, flag, dsrc_code = 1900, 1900, 2026, 2, 1, D_SRC["vprg"]
         else:
-            year, yfrom, yto, period, flag = 1000, 0, 0, 3, 2
+            year, yfrom, yto, period, flag, dsrc_code = 1000, 0, 0, 3, 2, D_SRC["none"]
         # Викиданные: год постройки, найденный по координатам. День, месяц и год — точная дата;
         # десятилетие и век — интервал, и он показывается как эпоха, а не как год.
         wd_date = wd.get("date") or {}
@@ -414,18 +415,22 @@ def main(area="centro"):
             wy = int(wd_date.get("year") or 0)
             if wd_date.get("kind") == "year" and 1000 <= wy <= 2026:
                 year, yfrom, yto, period, flag = wy, wy, wy, (0 if wy < 1800 else 1 if wy < 1900 else 2), 0
+                dsrc_code = D_SRC["wikidata"]
             elif wd_date.get("kind") == "interval":
                 yfrom = max(1000, int(wd_date.get("from") or wy))
                 yto = min(2026, int(wd_date.get("to") or wy))
                 year, period, flag = yfrom, (0 if yto < 1800 else 1 if yfrom < 1900 else 2), 1
+                dsrc_code = D_SRC["wikidata"]
         hist[year][period] += 1 if not is_bridge else 0
 
         h, hsrc = pr.get("height_used"), pr.get("height_source")
         # Измеренная высота из Викиданных старше любой нашей оценки — но только правдоподобная:
         # в Викиданных попадаются ошибки единиц (1000 м, 395 м, 0,99 м у моста) и они не должны
         # ломать модель. У зданий Венеции разумный предел — 120 м (кампанила Сан-Марко 98,6).
+        # У мостов высота из Викиданных — это просвет или высота пролёта, а не настил: настил
+        # остаётся принятой плитой, а измеренная высота показывается в карточке отдельной строкой.
         wd_h = wd.get("height")
-        if wd_h and 2.0 <= float(wd_h) <= 120.0:
+        if wd_h and not is_bridge and 2.0 <= float(wd_h) <= 120.0:
             h, hsrc = float(wd_h), "wikidata_height"
         if not h:
             h = medians.get(epoch) or global_median
@@ -494,8 +499,7 @@ def main(area="centro"):
                           "wk": wk_of.get(pr["building_id"], -1), "nm": nm_of.get(pr["building_id"], -1),
                           "hi": hi_of.get(pr["building_id"], -1), "sp": period,
                           "src": 1 if is_bridge else 0, "floors": floors,
-                          "dsrc": D_SRC["none"] if is_bridge else
-                                  (D_SRC["osm"] if date_kind == "year" else (D_SRC["vprg"] if date_kind == "interval" else D_SRC["none"])),
+                          "dsrc": dsrc_code,
                           "x": r["cx"] - ox, "z": r["cz"]})
 
     # ---- tiles and packs ----

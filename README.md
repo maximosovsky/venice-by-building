@@ -62,6 +62,8 @@ viewer's binary format, so the data stays independent of the viewer.
 | `s02_dating.py` | municipal classification and OSM dates into one evidence table | `evidence_<area>.csv`, `buildings_dated_*` |
 | `s04_wikimedia.py` | Wikidata labels, Wikipedia articles, Commons photos with licence and author | `data/ready/wikimedia.json` |
 | `s05_streets.py` | streets as ordered rows of facades, with a side for each house | `data/ready/streets.json` |
+| `s07_wikidata.py` | every Wikidata item located in Venice, matched to our footprints by geometry | `data/processed/wikidata_match_*` |
+| `s08_wikidata_enrich.py` | names, articles, dates with precision, architects, styles, heritage, heights, Commons photos | `data/ready/wikidata_enriched.json` |
 | `s06_export.py` | tiles, packs, attributes, cards, ground and labels for the viewer | `web/data/*` |
 
 Run:
@@ -72,11 +74,22 @@ python -m venice.s01_buildings island centro
 python -m venice.s02_dating island centro
 python -m venice.s04_wikimedia island centro
 python -m venice.s05_streets island centro
+python -m venice.s07_wikidata centro
+python -m venice.s08_wikidata_enrich centro
 python -m venice.s06_export centro
 ```
 
 `pipeline/venice/periods.py` holds the epoch table and the state flags read out of the municipal class
 descriptions; nothing there may be turned into a single year.
+
+Wikidata is matched **by geometry**: the atlas used to know only the 382 buildings tagged with
+`wikidata` in OpenStreetMap, while the coordinates of 2 685 Venetian items reach 1 536 of our
+buildings and bridge decks (1 175 points fall inside a contour, 361 within 18 m). That is where the
+cards beyond those 382 come from — 1 460 in all, 1 312 of them with a Commons photograph — as well as
+252 dates (226 exact years, 53 as an interval), 43 heritage designations, 200 styles, 121 architects
+and 529 named places: vaporetto landings, hotels, schools. A link found by coordinates says so on the
+card and counts as tentative; implausible statements are dropped. See
+`docs/wikidata-enrichment_20261023.md`.
 
 ## Viewer
 

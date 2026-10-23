@@ -9,6 +9,7 @@ import gzip
 import json
 import pathlib
 import struct
+from collections import Counter
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -143,12 +144,15 @@ def main():
         year = struct.unpack_from("<h", raw, off + field_offset["year"])[0]
         flag = struct.unpack_from("<B", raw, off + field_offset["flag"])[0]
         src = struct.unpack_from("<B", raw, off + field_offset["src"])[0]
+        dsrc = struct.unpack_from("<B", raw, off + field_offset["dsrc"])[0]
         check(h > 0, f"record {rec}: height {h} decimetres")
         check(cfg["yearMin"] <= year <= cfg["yearMax"], f"record {rec}: year {year} outside the timeline")
         check(0 <= flag <= 2, f"record {rec}: date flag {flag}")
         if src == 1:
             bridges_seen += 1
-            check(h == 30 and flag == 2, f"bridge record {rec}: height {h} dm, date flag {flag}")
+            check(h == 30, f"bridge record {rec}: height {h} dm, the deck is drawn as an assumed slab")
+            # У моста либо дата неизвестна, либо она пришла из Викиданных: в OSM дат нет.
+            check(flag == 2 or dsrc == 2, f"bridge record {rec}: date flag {flag}, source {dsrc}")
         sample += 1
     check(bridges_seen == cfg["stats"].get("bridges", 0),
           f"{bridges_seen} records are marked as bridges, config says {cfg['stats'].get('bridges')}")
@@ -211,7 +215,9 @@ def main():
     wikidata_heights = wd_counts.get((5, "hsrc"), 0)
     heritage_wikidata = wd_counts.get((2, "heritage"), 0)
     check(wikidata_dates > 200, f"только {wikidata_dates} объектов датированы Викиданными — обогащение не доехало")
-    check(wikidata_heights > 100, f"только {wikidata_heights} высот из Викиданных")
+    # Высоты P2048 в Викиданных редки и почти все стоят у мостов, где означают просвет,
+    # а не высоту здания: у наших зданий их полтора десятка, и меньше быть не должно.
+    check(wikidata_heights >= 8, f"только {wikidata_heights} высот из Викиданных")
     check(heritage_wikidata > 10, f"только {heritage_wikidata} объектов с охранным статусом из Викиданных")
     check(len(cfg["heritage"]["labels"]) >= 2, "у наследия должна быть и подпись для статуса из Викиданных")
     check(len(cfg["heritage"]["counts"]) == len(cfg["heritage"]["labels"]), "числа наследия не совпадают с подписями")
