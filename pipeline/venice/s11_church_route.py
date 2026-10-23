@@ -256,7 +256,28 @@ MENTION_OSM = {
     'Oratorio di San Gioacchino (Venezia)': ('mention-san-gioacchino','Castello','Chiese di Venezia',1081020184),
 }
 ALIASES.update({'Santa Maria Ausiliatrice, Venice':'mention-san-gioacchino'})
+MENTION_OSM.update({
+    'oratorio di Cristo Re': ('mention-cristo-re-celestia','Castello','Chiese di Venezia',582322560),
+    'Chiesa di Santa Maria delle Grazie (Burano)': ('mention-grazie-burano','Burano','Burano',176657496),
+})
+ALIASES.update({'Cristo Re, Venice':'mention-cristo-re-celestia',
+                'Santa Maria del Soccorso, Venice':'mention-soccorso-dorsoduro'})
+REVIEWED_COORDINATES = {
+    'Chiesa di Santa Maria del Soccorso (Venezia)': (
+        'mention-soccorso-dorsoduro','Dorsoduro','Chiese di Venezia',
+        12.320225,45.433225,'GCatholic 63813 encoded map coordinate; not entrance'),
+}
+FOLLOWUP_EVIDENCE = {
+    'mention-cristo-re-celestia': 'https://gcatholic.org/churches/italia/47596 — Cristo Re alla Celestia; Italian list identifies the Franciscan oratory in Castello. OSM way/582322560 is the named church building; its QID is not adopted without independent validation.',
+    'mention-grazie-burano': 'https://it.wikipedia.org/wiki/Burano — Santa Maria delle Grazie/Cappuccine, closed in 1806, restored and reopened as an exhibition space in 2006; exact named OSM way/176657496.',
+    'mention-soccorso-dorsoduro': 'https://labiennale.org/en/noticeboard/2196 — renovated surviving seventeenth-century former church at Fondamenta del Soccorso, Dorsoduro. https://gcatholic.org/churches/italia/63813 — map token KgbnTM89I decodes using published gcmap.js to 45.433225,12.320225.',
+}
+REVIEWED_EXCLUSIONS = {
+    'mention-san-vitale-poveglia': ('demolished','https://it.wikipedia.org/wiki/Poveglia — Dell’antica pieve di San Vitale resta solo il campanile. Q18427208 is a disambiguation page, not the church.'),
+    'mention-san-cristoforo-pace': ('demolished','https://www.comune.venezia.it/it/content/cimitero-smichele — existing San Cristoforo della Pace monastery was demolished and terrain levelled for the cemetery in 1807; not San Michele in Isola.'),
+}
 SURVIVING_PARTS = {
+    'Q119156487': ('Cappella di San Teodoro', 'surviving_chapel', 'https://it.wikipedia.org/wiki/Chiesa_di_San_Teodoro_(Venezia) — distinct Renaissance chapel begun in 1486 behind the basilica apses, restored in 1961; access through the canonica and San Pietro chapel. Not the demolished medieval predecessor.'),
     'Q3585424': ('Cappella del Volto Santo', 'surviving_chapel', 'The Servi church was demolished; the Volto Santo chapel survives.'),
     'Q3585448': ('Oratorio di Santo Stefano (Murano)', 'surviving_chapel', 'The parent church was demolished; the Sacrament chapel survives as an oratory.'),
     'Q3585413': ('Ex chiesa di Santa Giustina', 'adapted_building', 'Partial demolition and conversion to a school; substantial adapted building survives.'),
@@ -278,7 +299,18 @@ def build_inventory(records, entities, osm_elements=()):
     for original in records:
         row = dict(original)
         title = row['title']
-        if title in MENTION_IDENTITIES:
+        if title == 'San Vitale' and row.get('area') == 'Poveglia':
+            row['qid'] = 'mention-san-vitale-poveglia'
+        elif title in ('Santa Maria Nascente','San Giuseppe') and row.get('area') == 'Lido':
+            row['qid'] = 'mention-nascente-lido' if title == 'Santa Maria Nascente' else 'mention-san-giuseppe-lido'
+            row.update(entity={}, coordinate=[], text='', description='', missing=True)
+        elif title == 'San Cristoforo di Venezia':
+            row['qid'] = 'mention-san-cristoforo-pace'
+        elif title in REVIEWED_COORDINATES:
+            sid, area, article, lon, lat, source = REVIEWED_COORDINATES[title]
+            row.update(qid=sid, area=area, mention_article=article, reviewed_mention=True,
+                       reviewed_coordinate={'lon':lon,'lat':lat}, reviewed_coordinate_source=source)
+        elif title in MENTION_IDENTITIES:
             row['qid'], row['area'], row['mention_article'] = MENTION_IDENTITIES[title]
             row['reviewed_mention'] = True
         elif title in ALIASES:
@@ -310,7 +342,9 @@ def build_inventory(records, entities, osm_elements=()):
         reviewed = next((r for r in group if r.get('reviewed_mention')), None)
         reason, evidence = None, None
         part = SURVIVING_PARTS.get(qid)
-        if title in ISLAND_DEMOLISHED:
+        if qid in REVIEWED_EXCLUSIONS:
+            reason, evidence = REVIEWED_EXCLUSIONS[qid]
+        elif title in ISLAND_DEMOLISHED:
             parent, evidence = ISLAND_DEMOLISHED[title]
             reason = 'demolished'; evidence = article_url(parent) + ' — ' + evidence
         elif qid in ('Q9592','Q60995','Q64842') or title.startswith('{{'):
@@ -334,6 +368,9 @@ def build_inventory(records, entities, osm_elements=()):
         if reviewed or not coords:
             coords = [c['mainsnak']['datavalue']['value'] for c in entity.get('claims',{}).get('P625',[]) if c['mainsnak'].get('datavalue') and c.get('rank')!='deprecated']
             coord_source = 'Wikidata P625; not a verified entrance'
+        if reviewed and reviewed.get('reviewed_coordinate'):
+            coords = [reviewed['reviewed_coordinate']]
+            coord_source = reviewed['reviewed_coordinate_source']
         # Only known, explicitly identified surviving chapel supersedes its parent.
         if reviewed and reviewed.get('osm_building'):
             el = osm_by_id.get(('way',reviewed['osm_building']))
@@ -395,7 +432,7 @@ def build_inventory(records, entities, osm_elements=()):
         if qid == 'Q1080619': confession = 'Russian Orthodox'
         if qid == 'Q2929845': confession = 'Anglican'
         if qid in ('Q1791020','Q3585410'): confession = 'Armenian Catholic'
-        restricted = area in ('San Clemente','Sacca Sessola',"Sant'Andrea") or qid == 'Q57981283'
+        restricted = area in ('San Clemente','Sacca Sessola',"Sant'Andrea") or qid in ('Q57981283','Q119156487')
         access = translated('Exterior reference only. Opening, worship, entrance and step-free access must be checked locally.', 'Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.', 'Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.')
         if restricted:
             access = translated('Restricted/private site. Permission and a separately arranged landing/access may be required; no routine public visit or ferry is asserted.', 'Sito privato o limitato. Possono servire autorizzazione e approdo/accesso concordati; nessuna visita pubblica o linea regolare è garantita.', 'Частный объект или ограниченный доступ. Возможны разрешение и отдельно согласованный причал/вход; публичное посещение и регулярный паром не гарантируются.')
@@ -408,6 +445,9 @@ def build_inventory(records, entities, osm_elements=()):
         sid = (qid or 'mention-'+hashlib.sha256((area+'|'+name_it).encode()).hexdigest()[:12]) + ('-volto-santo' if qid=='Q3585424' else '')
         stop = {'id':sid, 'name':names, 'lon':lon, 'lat':lat,'local':local_coordinates(lon,lat), 'wikipedia':wikipedia,'area':area,'access_note':access,'access_class':'restricted' if restricted else 'check_opening','confession':confession,'survival_status':status,'coordinate_source':coord_source,'sources':source_kinds,'qid':qid,'source_rows':len(group)}
         if part: stop['survival_evidence'] = part[2]
+        if qid in FOLLOWUP_EVIDENCE:
+            stop['survival_evidence'] = FOLLOWUP_EVIDENCE[qid]
+            if qid != 'mention-cristo-re-celestia': stop['survival_status'] = 'adapted_building'
         if reviewed: stop['mention_only'] = True
         inventory.append(stop)
         rec = {'identity':str(key),'title':title,'stop_id':sid,'decision':'included','evidence':wikipedia,'source_rows':len(group),'sources':source_kinds}

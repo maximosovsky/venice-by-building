@@ -6,12 +6,12 @@
     "en": "Churches and temples of Venice and the lagoon"
   },
   "summary": {
-    "ru": "159 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "159 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "159 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "162 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
+    "it": "162 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
+    "en": "162 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
   },
   "status": "ready",
-  "generated_at": "2026-10-23T18:15:18.166927+00:00",
+  "generated_at": "2026-10-23T18:50:29.075845+00:00",
   "stops": [
     {
       "id": "Q748689",
@@ -2286,19 +2286,19 @@
       "node": 10580359283
     },
     {
-      "id": "Q588559",
+      "id": "mention-soccorso-dorsoduro",
       "name": {
-        "ru": "Chiesa di San Sebastiano (Venezia)",
-        "it": "chiesa di San Sebastiano",
-        "en": "San Sebastiano"
+        "ru": "Chiesa di Santa Maria del Soccorso (Venezia)",
+        "it": "Chiesa di Santa Maria del Soccorso (Venezia)",
+        "en": "Chiesa di Santa Maria del Soccorso (Venezia)"
       },
-      "lon": 12.32005,
-      "lat": 45.43199,
+      "lon": 12.320225,
+      "lat": 45.433225,
       "local": [
-        -1466.19,
-        174.822
+        -1447.927,
+        38.077
       ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Sebastiano_(Venezia)",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Dorsoduro",
       "access_note": {
         "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
@@ -2307,19 +2307,18 @@
       },
       "access_class": "check_opening",
       "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
+      "survival_status": "adapted_building",
+      "coordinate_source": "GCatholic 63813 encoded map coordinate; not entrance",
       "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
         "en_list",
-        "it_category",
         "it_list"
       ],
-      "qid": "Q588559",
-      "source_rows": 6,
-      "network_distance_m": 7.83,
-      "node": 1522237382
+      "qid": "mention-soccorso-dorsoduro",
+      "source_rows": 2,
+      "survival_evidence": "https://labiennale.org/en/noticeboard/2196 — renovated surviving seventeenth-century former church at Fondamenta del Soccorso, Dorsoduro. https://gcatholic.org/churches/italia/63813 — map token KgbnTM89I decodes using published gcmap.js to 45.433225,12.320225.",
+      "mention_only": true,
+      "network_distance_m": 2.96,
+      "node": 5476814790
     },
     {
       "id": "Q1255964",
@@ -2356,6 +2355,42 @@
       "source_rows": 6,
       "network_distance_m": 11.72,
       "node": 1522244472
+    },
+    {
+      "id": "Q588559",
+      "name": {
+        "ru": "Chiesa di San Sebastiano (Venezia)",
+        "it": "chiesa di San Sebastiano",
+        "en": "San Sebastiano"
+      },
+      "lon": 12.32005,
+      "lat": 45.43199,
+      "local": [
+        -1466.19,
+        174.822
+      ],
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Sebastiano_(Venezia)",
+      "area": "Dorsoduro",
+      "access_note": {
+        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
+        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
+        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
+      },
+      "access_class": "check_opening",
+      "confession": "Christian",
+      "survival_status": "surviving_building",
+      "coordinate_source": "Wikipedia article coordinate",
+      "sources": [
+        "cached_wikidata_crosscheck",
+        "en_category",
+        "en_list",
+        "it_category",
+        "it_list"
+      ],
+      "qid": "Q588559",
+      "source_rows": 6,
+      "network_distance_m": 7.83,
+      "node": 1522237382
     },
     {
       "id": "Q3669279",
@@ -3073,9 +3108,9 @@
     {
       "id": "Q119156487",
       "name": {
-        "ru": "Chiesa di San Teodoro (Venezia)",
-        "it": "chiesa di San Teodoro",
-        "en": "Chiesa di San Teodoro"
+        "ru": "Cappella di San Teodoro",
+        "it": "Cappella di San Teodoro",
+        "en": "Cappella di San Teodoro"
       },
       "lon": 12.340367,
       "lat": 45.43495,
@@ -3086,13 +3121,13 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Teodoro_(Venezia)",
       "area": "San Marco",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
+        "ru": "Частный объект или ограниченный доступ. Возможны разрешение и отдельно согласованный причал/вход; публичное посещение и регулярный паром не гарантируются.",
+        "it": "Sito privato o limitato. Possono servire autorizzazione e approdo/accesso concordati; nessuna visita pubblica o linea regolare è garantita.",
+        "en": "Restricted/private site. Permission and a separately arranged landing/access may be required; no routine public visit or ferry is asserted."
       },
-      "access_class": "check_opening",
+      "access_class": "restricted",
       "confession": "Christian",
-      "survival_status": "surviving_building",
+      "survival_status": "surviving_chapel",
       "coordinate_source": "Wikipedia article coordinate",
       "sources": [
         "cached_wikidata_crosscheck",
@@ -3101,8 +3136,8 @@
       ],
       "qid": "Q119156487",
       "source_rows": 3,
-      "network_distance_m": 8.4,
-      "node": 4491293933
+      "survival_evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Teodoro_(Venezia) — distinct Renaissance chapel begun in 1486 behind the basilica apses, restored in 1961; access through the canonica and San Pietro chapel. Not the demolished medieval predecessor.",
+      "network_distance_m": 8.4
     },
     {
       "id": "Q1028202",
@@ -3956,53 +3991,17 @@
       "node": 1935858914
     },
     {
-      "id": "Q3585397",
+      "id": "mention-cristo-re-celestia",
       "name": {
-        "ru": "Chiesa di Sant'Elena (Venezia)",
-        "it": "chiesa di Sant'Elena",
-        "en": "Sant'Elena"
+        "ru": "oratorio di Cristo Re",
+        "it": "oratorio di Cristo Re",
+        "en": "oratorio di Cristo Re"
       },
-      "lon": 12.365644,
-      "lat": 45.427331,
+      "lon": 12.3493237,
+      "lat": 45.4380991,
       "local": [
-        2083.19,
-        810.323
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Elena_(Venezia)",
-      "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585397",
-      "source_rows": 5,
-      "network_distance_m": 33.49,
-      "node": 9956808790
-    },
-    {
-      "id": "Q122152502",
-      "name": {
-        "ru": "oratorio di San Marco in Vinea",
-        "it": "oratorio di san Marco in Vinea",
-        "en": "oratorio di san Marco in Vinea"
-      },
-      "lon": 12.348472,
-      "lat": 45.438,
-      "local": [
-        778.997,
-        -419.112
+        845.973,
+        -427.923
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Castello",
@@ -4014,15 +4013,17 @@
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
+      "coordinate_source": "OSM way/582322560 exact named building centroid; not entrance",
       "sources": [
+        "en_list",
         "it_list"
       ],
-      "qid": "Q122152502",
-      "source_rows": 1,
+      "qid": "mention-cristo-re-celestia",
+      "source_rows": 2,
+      "survival_evidence": "https://gcatholic.org/churches/italia/47596 — Cristo Re alla Celestia; Italian list identifies the Franciscan oratory in Castello. OSM way/582322560 is the named church building; its QID is not adopted without independent validation.",
       "mention_only": true,
-      "network_distance_m": 19.25,
-      "node": 141030360
+      "network_distance_m": 8.45,
+      "node": 5234595621
     },
     {
       "id": "Q946542",
@@ -4059,6 +4060,39 @@
       "source_rows": 5,
       "network_distance_m": 15.73,
       "node": 141030363
+    },
+    {
+      "id": "Q122152502",
+      "name": {
+        "ru": "oratorio di San Marco in Vinea",
+        "it": "oratorio di san Marco in Vinea",
+        "en": "oratorio di san Marco in Vinea"
+      },
+      "lon": 12.348472,
+      "lat": 45.438,
+      "local": [
+        778.997,
+        -419.112
+      ],
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
+      "area": "Castello",
+      "access_note": {
+        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
+        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
+        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
+      },
+      "access_class": "check_opening",
+      "confession": "Christian",
+      "survival_status": "surviving_building",
+      "coordinate_source": "Wikidata P625; not a verified entrance",
+      "sources": [
+        "it_list"
+      ],
+      "qid": "Q122152502",
+      "source_rows": 1,
+      "mention_only": true,
+      "network_distance_m": 19.25,
+      "node": 141030360
     },
     {
       "id": "Q3585413",
@@ -4240,6 +4274,42 @@
       "source_rows": 5,
       "network_distance_m": 28.91,
       "node": 566307910
+    },
+    {
+      "id": "Q3585397",
+      "name": {
+        "ru": "Chiesa di Sant'Elena (Venezia)",
+        "it": "chiesa di Sant'Elena",
+        "en": "Sant'Elena"
+      },
+      "lon": 12.365644,
+      "lat": 45.427331,
+      "local": [
+        2083.19,
+        810.323
+      ],
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Elena_(Venezia)",
+      "area": "Castello",
+      "access_note": {
+        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
+        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
+        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
+      },
+      "access_class": "check_opening",
+      "confession": "Christian",
+      "survival_status": "surviving_building",
+      "coordinate_source": "Wikipedia article coordinate",
+      "sources": [
+        "cached_wikidata_crosscheck",
+        "en_category",
+        "en_list",
+        "it_category",
+        "it_list"
+      ],
+      "qid": "Q3585397",
+      "source_rows": 5,
+      "network_distance_m": 33.49,
+      "node": 9956808790
     },
     {
       "id": "Q122152456",
@@ -4802,6 +4872,40 @@
       "source_rows": 5,
       "network_distance_m": 22.47,
       "node": 1871360377
+    },
+    {
+      "id": "mention-grazie-burano",
+      "name": {
+        "ru": "Chiesa di Santa Maria delle Grazie (Burano)",
+        "it": "Chiesa di Santa Maria delle Grazie (Burano)",
+        "en": "Chiesa di Santa Maria delle Grazie (Burano)"
+      },
+      "lon": 12.4172199,
+      "lat": 45.4838241,
+      "local": [
+        6319.544,
+        -5334.81
+      ],
+      "wikipedia": "https://it.wikipedia.org/wiki/Burano",
+      "area": "Burano",
+      "access_note": {
+        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
+        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
+        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
+      },
+      "access_class": "check_opening",
+      "confession": "Christian",
+      "survival_status": "adapted_building",
+      "coordinate_source": "OSM way/176657496 exact named building centroid; not entrance",
+      "sources": [
+        "it_list"
+      ],
+      "qid": "mention-grazie-burano",
+      "source_rows": 1,
+      "survival_evidence": "https://it.wikipedia.org/wiki/Burano — Santa Maria delle Grazie/Cappuccine, closed in 1806, restored and reopened as an exhibition space in 2006; exact named OSM way/176657496.",
+      "mention_only": true,
+      "network_distance_m": 9.55,
+      "node": 9383629745
     },
     {
       "id": "mention-santa-barbara-burano",
@@ -18343,7 +18447,7 @@
     },
     {
       "from": "Q2780025",
-      "to": "Q588559",
+      "to": "mention-soccorso-dorsoduro",
       "mode": "walk",
       "geometry": [
         [
@@ -18355,321 +18459,116 @@
           45.4335437
         ],
         [
-          12.3223601,
-          45.4335383
+          12.3222231,
+          45.4336964
         ],
         [
-          12.3224275,
-          45.4335659
+          12.3220412,
+          45.4337546
         ],
         [
-          12.3225697,
-          45.4333175
+          12.3217802,
+          45.4338138
         ],
         [
-          12.322616,
-          45.4332286
+          12.3217525,
+          45.4338062
         ],
         [
-          12.3226231,
-          45.4331924
+          12.3210936,
+          45.4336155
         ],
         [
-          12.322601,
-          45.4331582
+          12.3206135,
+          45.4334509
         ],
         [
-          12.3225947,
-          45.4329806
+          12.3203374,
+          45.4333192
         ],
         [
-          12.3225942,
-          45.4329627
-        ],
-        [
-          12.3225929,
-          45.4329158
-        ],
-        [
-          12.3225922,
-          45.432889
-        ],
-        [
-          12.3226952,
-          45.4324645
-        ],
-        [
-          12.3224291,
-          45.4324331
-        ],
-        [
-          12.3220916,
-          45.4323931
-        ],
-        [
-          12.3219776,
-          45.4323806
-        ],
-        [
-          12.3219497,
-          45.4323766
-        ],
-        [
-          12.3218036,
-          45.4323145
-        ],
-        [
-          12.321751,
-          45.4322982
-        ],
-        [
-          12.3216974,
-          45.4322769
-        ],
-        [
-          12.3216141,
-          45.4322571
-        ],
-        [
-          12.3214354,
-          45.4322243
-        ],
-        [
-          12.3212884,
-          45.4321956
-        ],
-        [
-          12.3211419,
-          45.4321669
-        ],
-        [
-          12.321018,
-          45.4321427
-        ],
-        [
-          12.3209967,
-          45.4321385
-        ],
-        [
-          12.3209485,
-          45.4321295
-        ],
-        [
-          12.3208508,
-          45.4321074
-        ],
-        [
-          12.3208317,
-          45.4321031
-        ],
-        [
-          12.3207649,
-          45.432088
-        ],
-        [
-          12.3205846,
-          45.4320424
-        ],
-        [
-          12.3205331,
-          45.4320299
-        ],
-        [
-          12.320442,
-          45.4320077
-        ],
-        [
-          12.3204007,
-          45.4319976
-        ],
-        [
-          12.3203479,
-          45.4319872
-        ],
-        [
-          12.3203271,
-          45.4319831
-        ],
-        [
-          12.3203274,
-          45.4320214
-        ],
-        [
-          12.3203345,
-          45.4320218
-        ],
-        [
-          12.3203345,
-          45.4320463
-        ],
-        [
-          12.3202511,
-          45.4320467
-        ],
-        [
-          12.3202514,
-          45.432049
-        ],
-        [
-          12.3202414,
-          45.4320487
-        ],
-        [
-          12.3202412,
-          45.4320465
-        ],
-        [
-          12.3201882,
-          45.4320468
-        ],
-        [
-          12.3201875,
-          45.4320492
-        ],
-        [
-          12.320176,
-          45.4320493
-        ],
-        [
-          12.3201758,
-          45.4320466
-        ],
-        [
-          12.3201237,
-          45.4320468
-        ],
-        [
-          12.3201237,
-          45.4320599
-        ],
-        [
-          12.3201096,
-          45.4320596
-        ],
-        [
-          12.3201096,
-          45.4320467
-        ],
-        [
-          12.3199905,
-          45.4320466
+          12.3202109,
+          45.4332497
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 367.26,
+      "length_m": 197.26,
       "osm_nodes": [
         10580359283,
         12747432240,
-        1852612485,
-        1852612482,
-        1852612484,
-        1852612486,
-        1852612481,
-        1833539513,
-        1833539781,
-        10580353732,
-        10580353733,
-        1833539502,
-        1833539451,
-        1854261768,
-        1854261797,
-        1852549647,
-        1852549641,
-        5476388279,
-        1852549730,
-        5142780023,
-        566315169,
-        1852549673,
-        14204061913,
-        14204061912,
-        14204061914,
-        5157070278,
-        1852549732,
-        14204061915,
-        5157070275,
-        5142780022,
-        1833539463,
-        10579249116,
-        10579249117,
-        1852491253,
-        10579294678,
-        10579294685,
-        1522237137,
-        1522237136,
-        1522237431,
-        1522237427,
-        1522237430,
-        1522237423,
-        1522237420,
-        1522237408,
-        1522237409,
-        1522237400,
-        1522237405,
-        1522237397,
-        1522237388,
-        1522237394,
-        1522237391,
-        1522237382
+        1852612488,
+        3403782570,
+        1833478982,
+        1833539572,
+        1833539461,
+        1833539779,
+        5142776854,
+        5476814790
       ],
       "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
       "osm_way_ids": [
-        172447991,
-        172447994,
-        172448011,
-        174582201,
-        174582204,
-        174586159,
-        174586160,
-        174586161,
+        174491273,
         174760551,
-        1134825944,
-        1134825945,
-        1134830933,
-        1134989293,
-        1134989294,
+        333247164,
         1376688939
       ]
     },
     {
-      "from": "Q588559",
+      "from": "mention-soccorso-dorsoduro",
       "to": "Q1255964",
       "mode": "walk",
       "geometry": [
         [
-          12.3199905,
-          45.4320466
+          12.3202109,
+          45.4332497
         ],
         [
-          12.3199105,
-          45.4320465
+          12.3201864,
+          45.4332362
         ],
         [
-          12.3199107,
-          45.4320132
+          12.3201588,
+          45.433221
         ],
         [
-          12.3198921,
-          45.4320101
+          12.320051,
+          45.4331657
         ],
         [
-          12.3198698,
-          45.4320389
+          12.3199349,
+          45.4330923
         ],
         [
-          12.319522,
-          45.4320869
+          12.3197015,
+          45.4329332
         ],
         [
-          12.3192968,
-          45.4321702
+          12.3198898,
+          45.4327377
         ],
         [
-          12.319299,
-          45.4321936
+          12.3199061,
+          45.4327208
         ],
         [
-          12.3192737,
-          45.4322548
+          12.3198804,
+          45.4327019
+        ],
+        [
+          12.3198272,
+          45.4326627
+        ],
+        [
+          12.3197964,
+          45.43264
+        ],
+        [
+          12.3194579,
+          45.432481
+        ],
+        [
+          12.3193174,
+          45.4323348
         ],
         [
           12.3192553,
@@ -18793,17 +18692,21 @@
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 144.38,
+      "length_m": 224.06,
       "osm_nodes": [
-        1522237382,
-        1522237381,
-        1522236700,
-        7638851202,
-        10579294676,
-        10579267331,
-        10579294677,
-        1522239116,
-        1522239756,
+        5476814790,
+        1833539586,
+        5476814789,
+        5142776855,
+        1833539570,
+        1833539811,
+        5476820188,
+        5476820189,
+        10579294684,
+        10579294686,
+        1852491230,
+        1852491222,
+        10579252623,
         10579252622,
         1522240635,
         1522242104,
@@ -18837,15 +18740,20 @@
       ],
       "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
       "osm_way_ids": [
+        172448005,
+        174491273,
         174579768,
-        174582201,
+        174582200,
+        174582207,
         174582208,
-        1134830928
+        1134824276,
+        1134830924,
+        1134830930
       ]
     },
     {
       "from": "Q1255964",
-      "to": "Q3669279",
+      "to": "Q588559",
       "mode": "walk",
       "geometry": [
         [
@@ -18959,6 +18867,147 @@
         [
           12.319215,
           45.4324077
+        ],
+        [
+          12.3192317,
+          45.4322897
+        ],
+        [
+          12.3192553,
+          45.4322701
+        ],
+        [
+          12.3192737,
+          45.4322548
+        ],
+        [
+          12.319299,
+          45.4321936
+        ],
+        [
+          12.3192968,
+          45.4321702
+        ],
+        [
+          12.319522,
+          45.4320869
+        ],
+        [
+          12.3198698,
+          45.4320389
+        ],
+        [
+          12.3198921,
+          45.4320101
+        ],
+        [
+          12.3199107,
+          45.4320132
+        ],
+        [
+          12.3199105,
+          45.4320465
+        ],
+        [
+          12.3199905,
+          45.4320466
+        ]
+      ],
+      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
+      "length_m": 144.38,
+      "osm_nodes": [
+        1522244472,
+        1522244476,
+        1522244474,
+        1522244478,
+        1522244481,
+        1522244742,
+        1522244741,
+        1522244743,
+        1522244483,
+        1522244487,
+        1522243929,
+        1522244200,
+        1522242821,
+        1522242819,
+        1522242498,
+        1522242481,
+        1522242434,
+        1522242440,
+        1522242502,
+        1522242443,
+        1522242506,
+        1522242106,
+        1522242112,
+        1522242108,
+        1522242114,
+        1522242109,
+        1522242101,
+        1522242104,
+        1522240635,
+        10579252622,
+        1522239756,
+        1522239116,
+        10579294677,
+        10579267331,
+        10579294676,
+        7638851202,
+        1522236700,
+        1522237381,
+        1522237382
+      ],
+      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
+      "osm_way_ids": [
+        174579768,
+        174582201,
+        174582208,
+        1134830928
+      ]
+    },
+    {
+      "from": "Q588559",
+      "to": "Q3669279",
+      "mode": "walk",
+      "geometry": [
+        [
+          12.3199905,
+          45.4320466
+        ],
+        [
+          12.3199105,
+          45.4320465
+        ],
+        [
+          12.3199107,
+          45.4320132
+        ],
+        [
+          12.3198921,
+          45.4320101
+        ],
+        [
+          12.3198698,
+          45.4320389
+        ],
+        [
+          12.319522,
+          45.4320869
+        ],
+        [
+          12.3192968,
+          45.4321702
+        ],
+        [
+          12.319299,
+          45.4321936
+        ],
+        [
+          12.3192737,
+          45.4322548
+        ],
+        [
+          12.3192553,
+          45.4322701
         ],
         [
           12.3192317,
@@ -19082,36 +19131,18 @@
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 412.34,
+      "length_m": 423.02,
       "osm_nodes": [
-        1522244472,
-        1522244476,
-        1522244474,
-        1522244478,
-        1522244481,
-        1522244742,
-        1522244741,
-        1522244743,
-        1522244483,
-        1522244487,
-        1522243929,
-        1522244200,
-        1522242821,
-        1522242819,
-        1522242498,
-        1522242481,
-        1522242434,
-        1522242440,
-        1522242502,
-        1522242443,
-        1522242506,
-        1522242106,
-        1522242112,
-        1522242108,
-        1522242114,
-        1522242109,
-        1522242101,
-        1522242104,
+        1522237382,
+        1522237381,
+        1522236700,
+        7638851202,
+        10579294676,
+        10579267331,
+        10579294677,
+        1522239116,
+        1522239756,
+        10579252622,
         1522240635,
         1522239752,
         8004045345,
@@ -19153,10 +19184,11 @@
         174579768,
         174579773,
         174579776,
-        174582208,
+        174582201,
         306842738,
         946490748,
-        946490749
+        946490749,
+        1134830928
       ]
     },
     {
@@ -22066,380 +22098,54 @@
     {
       "from": "Q172988",
       "to": "Q119156487",
-      "mode": "walk",
+      "mode": "schematic",
       "geometry": [
         [
-          12.3397708,
-          45.4342088
+          12.339722222222,
+          45.434444444444
         ],
         [
-          12.3395297,
-          45.4341516
-        ],
-        [
-          12.3393681,
-          45.4341132
-        ],
-        [
-          12.3393353,
-          45.4341054
-        ],
-        [
-          12.3392776,
-          45.4342052
-        ],
-        [
-          12.3390378,
-          45.4345921
-        ],
-        [
-          12.3389839,
-          45.4346791
-        ],
-        [
-          12.3391134,
-          45.434755
-        ],
-        [
-          12.3392706,
-          45.4348476
-        ],
-        [
-          12.3394288,
-          45.4348993
-        ],
-        [
-          12.339609,
-          45.4349831
-        ],
-        [
-          12.3397091,
-          45.4350297
-        ],
-        [
-          12.3397481,
-          45.435073
-        ],
-        [
-          12.3401608,
-          45.43518
-        ],
-        [
-          12.3403702,
-          45.4352334
-        ],
-        [
-          12.3403782,
-          45.4352136
-        ],
-        [
-          12.3404353,
-          45.4350733
-        ],
-        [
-          12.3404478,
-          45.4350367
-        ],
-        [
-          12.3404563,
-          45.4350118
-        ],
-        [
-          12.3404725,
-          45.4349641
+          12.340367,
+          45.43495
         ]
       ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 263.12,
-      "osm_nodes": [
-        12453795387,
-        10576341452,
-        10576341448,
-        10574748940,
-        1863759354,
-        4436735135,
-        4436735136,
-        4436735138,
-        4436735141,
-        4436735142,
-        4436735143,
-        4436735144,
-        1832600376,
-        1920010914,
-        5403282193,
-        4484213203,
-        4491293943,
-        4491293941,
-        4491293940,
-        4491293933
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        175922199,
-        175922202,
-        181582340,
-        446393126,
-        446393129,
-        452312319,
-        452312321,
-        452312322,
-        1134466439
-      ]
+      "geometry_semantics": "schematic_non_navigational_connector",
+      "suggested_transport": {
+        "ru": "Проверьте пешеходное соединение на месте.",
+        "it": "Verificare il collegamento pedonale sul posto.",
+        "en": "Check the walking connection on site."
+      },
+      "note": {
+        "ru": "Не для навигации; путь и расстояние не подтверждены.",
+        "it": "Non navigabile; percorso e distanza non verificati.",
+        "en": "Not navigation; no route or length verified."
+      }
     },
     {
       "from": "Q119156487",
       "to": "Q1028202",
-      "mode": "walk",
+      "mode": "schematic",
       "geometry": [
         [
-          12.3404725,
-          45.4349641
+          12.340367,
+          45.43495
         ],
         [
-          12.3404563,
-          45.4350118
-        ],
-        [
-          12.3404478,
-          45.4350367
-        ],
-        [
-          12.3404353,
-          45.4350733
-        ],
-        [
-          12.3403782,
-          45.4352136
-        ],
-        [
-          12.3403702,
-          45.4352334
-        ],
-        [
-          12.3401608,
-          45.43518
-        ],
-        [
-          12.3401542,
-          45.4351949
-        ],
-        [
-          12.3401065,
-          45.4353345
-        ],
-        [
-          12.3397237,
-          45.4352651
-        ],
-        [
-          12.339661,
-          45.4352503
-        ],
-        [
-          12.3394723,
-          45.4352056
-        ],
-        [
-          12.3391955,
-          45.4351125
-        ],
-        [
-          12.3391496,
-          45.4350934
-        ],
-        [
-          12.3390099,
-          45.4352853
-        ],
-        [
-          12.3389686,
-          45.4353256
-        ],
-        [
-          12.3388509,
-          45.435414
-        ],
-        [
-          12.3386787,
-          45.4355679
-        ],
-        [
-          12.3386084,
-          45.4356298
-        ],
-        [
-          12.3385914,
-          45.4356369
-        ],
-        [
-          12.3384733,
-          45.4356823
-        ],
-        [
-          12.3384395,
-          45.4356491
-        ],
-        [
-          12.3383864,
-          45.4356646
-        ],
-        [
-          12.338175,
-          45.4357902
-        ],
-        [
-          12.3377173,
-          45.4360444
-        ],
-        [
-          12.3376902,
-          45.4360588
-        ],
-        [
-          12.3376691,
-          45.43607
-        ],
-        [
-          12.3376461,
-          45.4360823
-        ],
-        [
-          12.3376389,
-          45.4360861
-        ],
-        [
-          12.3376348,
-          45.4361313
-        ],
-        [
-          12.3376336,
-          45.4361493
-        ],
-        [
-          12.3376134,
-          45.4361606
-        ],
-        [
-          12.3375863,
-          45.4361756
-        ],
-        [
-          12.3375529,
-          45.4361943
-        ],
-        [
-          12.337156,
-          45.4364086
-        ],
-        [
-          12.3369321,
-          45.4365183
-        ],
-        [
-          12.337023,
-          45.4366302
-        ],
-        [
-          12.3370224,
-          45.436672
-        ],
-        [
-          12.3370746,
-          45.4367468
-        ],
-        [
-          12.3368996,
-          45.4367835
-        ],
-        [
-          12.3366262,
-          45.4368655
-        ],
-        [
-          12.3366105,
-          45.4368394
-        ],
-        [
-          12.3365858,
-          45.4367983
+          12.3365,
+          45.4366
         ]
       ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 465.09,
-      "osm_nodes": [
-        4491293933,
-        4491293940,
-        4491293941,
-        4491293943,
-        4484213203,
-        5403282193,
-        1920010914,
-        49519725,
-        31317920,
-        4491293954,
-        1920010919,
-        31317919,
-        1920010912,
-        1920010910,
-        1920010922,
-        1920010924,
-        4487602987,
-        1920010939,
-        31317911,
-        1919957603,
-        4436735148,
-        1919932163,
-        1919957606,
-        1920010944,
-        4482727652,
-        4482727654,
-        4482727657,
-        4482727659,
-        5364804368,
-        27341571,
-        4482727665,
-        566309208,
-        4482727673,
-        4482727686,
-        27341572,
-        364713614,
-        566309251,
-        1763336250,
-        27341573,
-        31317912,
-        4470345324,
-        4470345319,
-        4470345305
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        44598941,
-        168053506,
-        168151915,
-        168151917,
-        175922199,
-        175922202,
-        181582318,
-        181582324,
-        181588794,
-        181588841,
-        181588845,
-        446393113,
-        446393114,
-        446393131,
-        446393132,
-        450112713,
-        450112763,
-        451440198,
-        451440199,
-        451440200,
-        451440204,
-        451440205,
-        451440206,
-        452312319,
-        452312321,
-        452312322
-      ]
+      "geometry_semantics": "schematic_non_navigational_connector",
+      "suggested_transport": {
+        "ru": "Проверьте пешеходное соединение на месте.",
+        "it": "Verificare il collegamento pedonale sul posto.",
+        "en": "Check the walking connection on site."
+      },
+      "note": {
+        "ru": "Не для навигации; путь и расстояние не подтверждены.",
+        "it": "Non navigabile; percorso e distanza non verificati.",
+        "en": "Not navigation; no route or length verified."
+      }
     },
     {
       "from": "Q1028202",
@@ -27943,7 +27649,7 @@
     },
     {
       "from": "Q945981",
-      "to": "Q3585397",
+      "to": "mention-cristo-re-celestia",
       "mode": "walk",
       "geometry": [
         [
@@ -27951,959 +27657,396 @@
           45.4346687
         ],
         [
-          12.359255,
-          45.4343764
+          12.3587179,
+          45.4344636
         ],
         [
-          12.3591644,
-          45.4342498
+          12.3586817,
+          45.4344448
         ],
         [
-          12.3590679,
-          45.4342391
+          12.3586657,
+          45.4344271
         ],
         [
-          12.358986,
-          45.4341137
+          12.3586538,
+          45.4344124
         ],
         [
-          12.3590692,
-          45.4340854
+          12.3585919,
+          45.4344246
         ],
         [
-          12.3589914,
-          45.4339781
+          12.3579347,
+          45.4345521
         ],
         [
-          12.3589029,
-          45.4339273
+          12.3578924,
+          45.4345603
         ],
         [
-          12.3585729,
-          45.4338238
+          12.357271,
+          45.4346841
         ],
         [
-          12.3584978,
-          45.4338012
+          12.3572349,
+          45.4345712
         ],
         [
-          12.3585029,
-          45.4337943
+          12.3572149,
+          45.4344984
         ],
         [
-          12.3585804,
-          45.4336893
+          12.3572028,
+          45.4344317
         ],
         [
-          12.358663,
-          45.4335773
+          12.3571976,
+          45.4343639
         ],
         [
-          12.3588117,
-          45.4333758
+          12.3571967,
+          45.4342787
         ],
         [
-          12.3590183,
-          45.4331789
+          12.3572006,
+          45.4341797
         ],
         [
-          12.3590883,
-          45.4331252
+          12.3572089,
+          45.4340878
         ],
         [
-          12.3592217,
-          45.4330227
+          12.3572276,
+          45.4339808
         ],
         [
-          12.3589415,
-          45.432888
+          12.3571764,
+          45.4339247
         ],
         [
-          12.358172,
-          45.4326785
+          12.3571339,
+          45.4338726
         ],
         [
-          12.3581486,
-          45.4326726
+          12.3571623,
+          45.4335545
         ],
         [
-          12.357752,
-          45.4325726
+          12.3571649,
+          45.4335456
         ],
         [
-          12.3577644,
-          45.432541
+          12.3571964,
+          45.4334443
         ],
         [
-          12.3577102,
-          45.4325369
+          12.3572326,
+          45.4333277
         ],
         [
-          12.3577269,
-          45.4324519
+          12.3572407,
+          45.4333106
         ],
         [
-          12.3577509,
-          45.4323297
+          12.3572199,
+          45.4333061
         ],
         [
-          12.3577517,
-          45.4323236
+          12.3570656,
+          45.433272
         ],
         [
-          12.3577582,
-          45.4322765
+          12.3568317,
+          45.4332137
         ],
         [
-          12.3577616,
-          45.4322516
+          12.3568245,
+          45.4332117
         ],
         [
-          12.3577762,
-          45.4321062
+          12.3567992,
+          45.433204
         ],
         [
-          12.3578052,
-          45.432114
+          12.3567752,
+          45.4331967
         ],
         [
-          12.3579289,
-          45.432145
+          12.3567418,
+          45.4331866
         ],
         [
-          12.3580647,
-          45.4321817
+          12.3567315,
+          45.4331841
         ],
         [
-          12.3580927,
-          45.4321322
+          12.3567723,
+          45.4331339
         ],
         [
-          12.3581226,
-          45.4320792
+          12.3568459,
+          45.4330741
         ],
         [
-          12.3582584,
-          45.4318431
+          12.3566311,
+          45.4330156
         ],
         [
-          12.3582899,
-          45.4317884
+          12.3564819,
+          45.4329807
         ],
         [
-          12.3583317,
-          45.4317158
+          12.3565074,
+          45.4328108
         ],
         [
-          12.3583613,
-          45.4316643
+          12.3565332,
+          45.4325767
         ],
         [
-          12.3583815,
-          45.4316695
+          12.35651,
+          45.432576
         ],
         [
-          12.3586049,
-          45.4317267
+          12.3559935,
+          45.4325538
         ],
         [
-          12.3586118,
-          45.4317114
+          12.3559853,
+          45.432558
         ],
         [
-          12.3586758,
-          45.4317279
+          12.3558328,
+          45.4325524
         ],
         [
-          12.3586825,
-          45.4317166
+          12.3558312,
+          45.4325706
         ],
         [
-          12.3586866,
-          45.4317098
+          12.3557668,
+          45.4325707
         ],
         [
-          12.3587167,
-          45.4316591
+          12.3557543,
+          45.4325713
         ],
         [
-          12.3587334,
-          45.4316298
+          12.3557319,
+          45.4327594
         ],
         [
-          12.3587421,
-          45.4316144
+          12.3557324,
+          45.4328108
         ],
         [
-          12.3587624,
-          45.431575
+          12.355725,
+          45.4329269
         ],
         [
-          12.3587905,
-          45.4315208
+          12.3557218,
+          45.4329967
         ],
         [
-          12.3588209,
-          45.4314602
+          12.3557208,
+          45.433017
         ],
         [
-          12.3586552,
-          45.4314173
+          12.3554768,
+          45.4330303
         ],
         [
-          12.35864,
-          45.4314086
+          12.3552958,
+          45.4330443
         ],
         [
-          12.3586185,
-          45.4313383
+          12.3551528,
+          45.4330519
         ],
         [
-          12.3585528,
-          45.4312958
+          12.3539496,
+          45.4331208
         ],
         [
-          12.3586378,
-          45.4311418
+          12.35375,
+          45.4331324
         ],
         [
-          12.3586474,
-          45.431122
+          12.3534743,
+          45.4331484
         ],
         [
-          12.3584325,
-          45.431071
+          12.3532205,
+          45.4331594
         ],
         [
-          12.3584139,
-          45.4310666
+          12.3531923,
+          45.4331596
         ],
         [
-          12.358429,
-          45.4310358
+          12.3528924,
+          45.4330764
         ],
         [
-          12.3584491,
-          45.4309948
+          12.3526237,
+          45.4329965
         ],
         [
-          12.358464,
-          45.4309644
+          12.352319,
+          45.432905
         ],
         [
-          12.358471,
-          45.4309506
+          12.3522627,
+          45.4328879
         ],
         [
-          12.3584797,
-          45.4309336
+          12.3522465,
+          45.4328834
         ],
         [
-          12.3583885,
-          45.4309101
+          12.3522345,
+          45.4329054
         ],
         [
-          12.3584034,
-          45.4308857
+          12.3521861,
+          45.4329945
         ],
         [
-          12.3586588,
-          45.4303974
+          12.352177,
+          45.4330113
         ],
         [
-          12.358244,
-          45.4302582
+          12.3521252,
+          45.4331476
         ],
         [
-          12.3583558,
-          45.4301063
+          12.3516845,
+          45.4331823
         ],
         [
-          12.3585924,
-          45.4301852
+          12.3510747,
+          45.4332337
         ],
         [
-          12.3592597,
-          45.4304075
+          12.3508767,
+          45.433276
         ],
         [
-          12.3593615,
-          45.4302622
+          12.3502137,
+          45.4334309
         ],
         [
-          12.3593766,
-          45.4302407
+          12.3501363,
+          45.4334614
         ],
         [
-          12.3596853,
-          45.4302231
+          12.3500044,
+          45.4335134
         ],
         [
-          12.36044,
-          45.4297421
+          12.3501855,
+          45.4339644
         ],
         [
-          12.3604976,
-          45.4296818
+          12.3502227,
+          45.4340975
         ],
         [
-          12.360773,
-          45.4296807
+          12.350278,
+          45.4345025
         ],
         [
-          12.3609725,
-          45.4297427
+          12.3502853,
+          45.4345132
         ],
         [
-          12.360993,
-          45.4297481
+          12.3503165,
+          45.4345588
         ],
         [
-          12.361547,
-          45.42972
+          12.3503212,
+          45.4345699
         ],
         [
-          12.3615417,
-          45.4296504
+          12.3501947,
+          45.4345832
         ],
         [
-          12.361693,
-          45.4296418
+          12.3501235,
+          45.4345906
         ],
         [
-          12.3619169,
-          45.4296291
+          12.3500078,
+          45.4346028
         ],
         [
-          12.3623775,
-          45.4296039
+          12.3498401,
+          45.4346198
         ],
         [
-          12.3626349,
-          45.4295885
+          12.3498566,
+          45.4347004
         ],
         [
-          12.3626392,
-          45.4295608
+          12.3498643,
+          45.4347377
         ],
         [
-          12.3626963,
-          45.4291594
+          12.3497602,
+          45.4347632
         ],
         [
-          12.3627235,
-          45.4289692
+          12.3497242,
+          45.434798
         ],
         [
-          12.3627693,
-          45.4287378
+          12.3496895,
+          45.4348008
         ],
         [
-          12.362784,
-          45.4286637
+          12.3496645,
+          45.4348028
         ],
         [
-          12.3628473,
-          45.4285642
+          12.3495548,
+          45.4348068
         ],
         [
-          12.362905,
-          45.4282967
+          12.3495389,
+          45.4348072
         ],
         [
-          12.3629111,
-          45.4282687
+          12.349523,
+          45.4348076
         ],
         [
-          12.3629195,
-          45.4282295
+          12.3493121,
+          45.4348137
         ],
         [
-          12.3629916,
-          45.4278954
+          12.3492977,
+          45.434814
         ],
         [
-          12.3630694,
-          45.4275842
+          12.349283,
+          45.4348143
         ],
         [
-          12.363074,
-          45.4275618
+          12.3491398,
+          45.4348195
         ],
         [
-          12.36308,
-          45.4275325
+          12.349117,
+          45.43482
         ],
         [
-          12.3633614,
-          45.4275569
+          12.3489625,
+          45.4348232
         ],
         [
-          12.3633685,
-          45.4275292
-        ],
-        [
-          12.3635214,
-          45.4267252
-        ],
-        [
-          12.3635264,
-          45.4267003
-        ],
-        [
-          12.3636181,
-          45.4267191
-        ],
-        [
-          12.3647238,
-          45.4269454
-        ],
-        [
-          12.3651441,
-          45.4270314
-        ],
-        [
-          12.365375,
-          45.4270787
-        ],
-        [
-          12.3654004,
-          45.4270833
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 1671.61,
-      "osm_nodes": [
-        1935858914,
-        1844015376,
-        1935858906,
-        1844015372,
-        1844015311,
-        1844015307,
-        1844015324,
-        1844015316,
-        1844015335,
-        1844015344,
-        2250299622,
-        2250299603,
-        8122043515,
-        1844015301,
-        1844015334,
-        8541892814,
-        1844015374,
-        27179839,
-        1362732685,
-        2250299533,
-        5373773595,
-        6208108031,
-        6208108035,
-        6208108036,
-        6208108034,
-        8541892816,
-        8541892815,
-        6224562614,
-        6224562605,
-        10578826512,
-        6224562617,
-        7294626269,
-        10578826513,
-        6224562694,
-        6224699514,
-        6224562678,
-        6224562698,
-        6224562695,
-        6224562697,
-        6224562675,
-        6224562691,
-        6224562692,
-        10118200318,
-        8541513669,
-        8541513668,
-        6208005887,
-        8544412019,
-        8544412018,
-        6208005888,
-        6208005886,
-        7941420212,
-        10578804371,
-        10578804370,
-        10578804372,
-        8544362113,
-        1921508952,
-        5363460065,
-        5363460066,
-        9558429428,
-        9558429429,
-        5214562869,
-        8544445096,
-        5214562874,
-        5214562871,
-        8541513674,
-        5214562872,
-        1867945118,
-        1867945168,
-        2407169981,
-        1867945142,
-        9214515187,
-        1831507042,
-        2591390185,
-        2407053242,
-        2407053232,
-        2407053235,
-        2407156701,
-        2407053239,
-        2407053237,
-        2407053241,
-        13674763182,
-        2407156711,
-        5216485059,
-        31317526,
-        4758575828,
-        2407156715,
-        3050505432,
-        2407045621,
-        2407004179,
-        7623429038,
-        5362264255,
-        2407045611,
-        5362264256,
-        1867916295,
-        13674509056,
-        5363481210,
-        1867916202,
-        5363481209,
-        5362264253,
-        5362264249,
-        2407004162,
-        10178890524,
-        10178890521,
-        8080712171,
-        5861134528,
-        9956808790
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        4856025,
-        121811923,
-        172223959,
-        173623348,
-        176243914,
-        176246334,
-        176246344,
-        183218037,
-        232333555,
-        232333556,
-        232333557,
-        232344238,
-        232347639,
-        232363239,
-        232363771,
-        323541363,
-        413121294,
-        538787940,
-        557158384,
-        663196530,
-        663210302,
-        665011185,
-        665011190,
-        665011219,
-        781074215,
-        781074216,
-        781327368,
-        919783441,
-        919783442,
-        919783443,
-        919783446,
-        919783448,
-        919843723,
-        919843724,
-        919843725,
-        920158922,
-        920158925,
-        920169607,
-        922574540,
-        997960650,
-        1037719081,
-        1037719082,
-        1086668476,
-        1134772285,
-        1134772686,
-        1134775571,
-        1134775572,
-        1380042077,
-        1380042078,
-        1492208461,
-        1492208462
-      ]
-    },
-    {
-      "from": "Q3585397",
-      "to": "Q122152502",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.3654004,
-          45.4270833
-        ],
-        [
-          12.365375,
-          45.4270787
-        ],
-        [
-          12.3651441,
-          45.4270314
-        ],
-        [
-          12.3647238,
-          45.4269454
-        ],
-        [
-          12.3636181,
-          45.4267191
-        ],
-        [
-          12.3635264,
-          45.4267003
-        ],
-        [
-          12.3632326,
-          45.4266349
-        ],
-        [
-          12.3631074,
-          45.4266092
-        ],
-        [
-          12.3630023,
-          45.4271085
-        ],
-        [
-          12.3623979,
-          45.4270711
-        ],
-        [
-          12.3621307,
-          45.4271759
-        ],
-        [
-          12.3617233,
-          45.4273547
-        ],
-        [
-          12.3616764,
-          45.4273767
-        ],
-        [
-          12.3613621,
-          45.427413
-        ],
-        [
-          12.3609707,
-          45.427468
-        ],
-        [
-          12.3609245,
-          45.4274671
-        ],
-        [
-          12.3607429,
-          45.427445
-        ],
-        [
-          12.3602794,
-          45.4273887
-        ],
-        [
-          12.3602507,
-          45.4273861
-        ],
-        [
-          12.3600393,
-          45.4273548
-        ],
-        [
-          12.3599374,
-          45.4273464
-        ],
-        [
-          12.3591632,
-          45.4275967
-        ],
-        [
-          12.3591306,
-          45.4276072
-        ],
-        [
-          12.3590385,
-          45.4276193
-        ],
-        [
-          12.3589463,
-          45.4276314
-        ],
-        [
-          12.3588749,
-          45.4276408
-        ],
-        [
-          12.3587554,
-          45.4274428
-        ],
-        [
-          12.3580277,
-          45.4273698
-        ],
-        [
-          12.3579543,
-          45.4273719
-        ],
-        [
-          12.3579103,
-          45.4273932
-        ],
-        [
-          12.3571885,
-          45.4280453
-        ],
-        [
-          12.3569053,
-          45.428321
-        ],
-        [
-          12.3568966,
-          45.4283295
-        ],
-        [
-          12.3566032,
-          45.4286254
-        ],
-        [
-          12.3565963,
-          45.4286323
-        ],
-        [
-          12.3562943,
-          45.4289369
-        ],
-        [
-          12.3562388,
-          45.4289894
-        ],
-        [
-          12.3562328,
-          45.4289951
-        ],
-        [
-          12.3561891,
-          45.4290366
-        ],
-        [
-          12.356083,
-          45.4291429
-        ],
-        [
-          12.3558883,
-          45.4293251
-        ],
-        [
-          12.3558303,
-          45.4293845
-        ],
-        [
-          12.355551,
-          45.4296556
-        ],
-        [
-          12.3551793,
-          45.4298498
-        ],
-        [
-          12.3551383,
-          45.4298798
-        ],
-        [
-          12.3551147,
-          45.4298909
-        ],
-        [
-          12.3550044,
-          45.4299425
-        ],
-        [
-          12.3549397,
-          45.429974
-        ],
-        [
-          12.3547289,
-          45.430066
-        ],
-        [
-          12.3546359,
-          45.4301103
-        ],
-        [
-          12.3545655,
-          45.4301438
-        ],
-        [
-          12.3544835,
-          45.4301829
-        ],
-        [
-          12.3531182,
-          45.4308281
-        ],
-        [
-          12.3529427,
-          45.430911
-        ],
-        [
-          12.3527823,
-          45.4309868
-        ],
-        [
-          12.3519838,
-          45.4313641
-        ],
-        [
-          12.3517826,
-          45.4314592
-        ],
-        [
-          12.3515978,
-          45.4315465
-        ],
-        [
-          12.3507226,
-          45.4319601
-        ],
-        [
-          12.3506329,
-          45.4320013
-        ],
-        [
-          12.3505769,
-          45.4320269
-        ],
-        [
-          12.3504926,
-          45.4320656
-        ],
-        [
-          12.349921,
-          45.4323888
-        ],
-        [
-          12.3498584,
-          45.4324242
-        ],
-        [
-          12.3497613,
-          45.4324982
-        ],
-        [
-          12.349621,
-          45.4325755
-        ],
-        [
-          12.3495042,
-          45.4326396
-        ],
-        [
-          12.349445,
-          45.43267
-        ],
-        [
-          12.3493041,
-          45.4327524
-        ],
-        [
-          12.3492096,
-          45.4328025
-        ],
-        [
-          12.3490415,
-          45.4328917
-        ],
-        [
-          12.3487473,
-          45.4330769
-        ],
-        [
-          12.3485512,
-          45.433198
-        ],
-        [
-          12.3487007,
-          45.4333124
-        ],
-        [
-          12.3489883,
-          45.4335922
-        ],
-        [
-          12.3490552,
-          45.4336591
-        ],
-        [
-          12.3492321,
-          45.4338497
-        ],
-        [
-          12.3493081,
-          45.4339353
-        ],
-        [
-          12.3493631,
-          45.4339985
-        ],
-        [
-          12.348856,
-          45.434122
-        ],
-        [
-          12.3488299,
-          45.4341399
-        ],
-        [
-          12.3487954,
-          45.434262
-        ],
-        [
-          12.3487899,
-          45.4342945
-        ],
-        [
-          12.3487785,
-          45.4343869
-        ],
-        [
-          12.3487775,
-          45.4343945
-        ],
-        [
-          12.3487734,
-          45.4344243
-        ],
-        [
-          12.3487706,
-          45.4344467
-        ],
-        [
-          12.3487697,
-          45.4344537
-        ],
-        [
-          12.3487325,
-          45.4347455
-        ],
-        [
-          12.3487207,
-          45.4348189
-        ],
-        [
-          12.3488816,
-          45.4348233
+          12.3489069,
+          45.4348244
         ],
         [
           12.3488942,
@@ -28966,304 +28109,248 @@
           45.4354697
         ],
         [
-          12.3489884,
-          45.4355194
+          12.3491237,
+          45.43556
         ],
         [
-          12.3489673,
-          45.4355357
+          12.3491739,
+          45.4356187
         ],
         [
-          12.3488735,
-          45.4356079
+          12.3493686,
+          45.4358466
         ],
         [
-          12.3487877,
-          45.4356775
+          12.3495002,
+          45.4360983
         ],
         [
-          12.3487333,
-          45.4357343
+          12.3494861,
+          45.4361036
         ],
         [
-          12.3486534,
-          45.4358193
+          12.3493314,
+          45.4361617
         ],
         [
-          12.3485773,
-          45.4359054
+          12.3493013,
+          45.4361836
         ],
         [
-          12.3484939,
-          45.4360063
+          12.3489975,
+          45.4364051
         ],
         [
-          12.348486,
-          45.4360165
+          12.3489541,
+          45.4364366
         ],
         [
-          12.3484209,
-          45.4361006
+          12.3489449,
+          45.4364433
         ],
         [
-          12.3483339,
-          45.4360662
+          12.3492174,
+          45.4366437
         ],
         [
-          12.3483254,
-          45.4360628
+          12.3492711,
+          45.4366102
         ],
         [
-          12.3483189,
-          45.4360599
+          12.3494307,
+          45.4367409
         ],
         [
-          12.3481421,
-          45.4359748
+          12.3490981,
+          45.4369415
         ],
         [
-          12.3480153,
-          45.4361091
+          12.3490942,
+          45.4369503
         ],
         [
-          12.3480061,
-          45.4361044
+          12.3490692,
+          45.4370071
         ],
         [
-          12.3479769,
-          45.4360898
+          12.3490226,
+          45.4370309
         ],
         [
-          12.3479659,
-          45.4361006
+          12.3487712,
+          45.4371614
         ],
         [
-          12.3478656,
-          45.4360517
+          12.3487409,
+          45.4371762
         ],
         [
-          12.3477876,
-          45.4361407
+          12.3488875,
+          45.4373222
         ],
         [
-          12.3477686,
-          45.4361597
+          12.3489254,
+          45.437352
         ],
         [
-          12.3477516,
-          45.4361799
+          12.3489816,
+          45.4373962
         ],
         [
-          12.3477303,
-          45.436203
+          12.3490128,
+          45.4374207
         ],
         [
-          12.3476313,
-          45.4363512
+          12.3490363,
+          45.4374095
         ],
         [
-          12.347641,
-          45.4363538
+          12.3492935,
+          45.4372994
         ],
         [
-          12.347606,
-          45.4364094
+          12.3494701,
+          45.4375643
         ],
         [
-          12.3475866,
-          45.4364226
+          12.3496423,
+          45.4378592
         ],
         [
-          12.3476557,
-          45.4364491
+          12.3495165,
+          45.4379177
         ],
         [
-          12.3475494,
-          45.4366526
+          12.3494997,
+          45.4379626
         ],
         [
-          12.3474605,
-          45.436831
+          12.3495236,
+          45.4379974
         ],
         [
-          12.3474347,
-          45.4369064
+          12.3495786,
+          45.4380774
         ],
         [
-          12.3473332,
-          45.4369019
+          12.3495611,
+          45.4381002
         ],
         [
-          12.3472867,
-          45.4371476
+          12.3495152,
+          45.4381201
         ],
         [
-          12.3472487,
-          45.4373485
+          12.3495018,
+          45.4381244
         ],
         [
-          12.3472456,
-          45.4373629
-        ],
-        [
-          12.3473031,
-          45.437673
-        ],
-        [
-          12.3473101,
-          45.4377047
-        ],
-        [
-          12.3473131,
-          45.4377185
-        ],
-        [
-          12.3473194,
-          45.4377469
-        ],
-        [
-          12.3473269,
-          45.4377808
-        ],
-        [
-          12.3473325,
-          45.4378061
-        ],
-        [
-          12.3473363,
-          45.4378235
-        ],
-        [
-          12.3473427,
-          45.4378525
-        ],
-        [
-          12.3473579,
-          45.4379252
-        ],
-        [
-          12.3473655,
-          45.4379612
-        ],
-        [
-          12.3476404,
-          45.4379215
-        ],
-        [
-          12.3476417,
-          45.4379256
-        ],
-        [
-          12.3480389,
-          45.4378673
-        ],
-        [
-          12.3480456,
-          45.4378878
-        ],
-        [
-          12.3482737,
-          45.4378457
-        ],
-        [
-          12.3482937,
-          45.4378807
+          12.3493319,
+          45.4381749
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 2449.46,
+      "length_m": 1848.94,
       "osm_nodes": [
-        9956808790,
-        5861134528,
-        8080712171,
-        10178890521,
-        10178890524,
-        2407004162,
-        5362264247,
-        7623429035,
-        7623429034,
-        2407022942,
-        3050496439,
-        14031397047,
-        2407022950,
-        7621962101,
-        14031397049,
-        1831507098,
-        2591369614,
-        1831507062,
-        2591390165,
-        1831507071,
-        1831507027,
-        5374071476,
-        1831507060,
-        8772313651,
-        8772313650,
-        1831507055,
-        1844149089,
-        2456689241,
-        1844149094,
-        2456689242,
-        944188428,
-        14031518641,
-        5342235501,
-        14031518638,
-        9203805810,
-        3586703317,
-        14031518616,
-        5342235502,
-        2715404154,
-        1867916291,
-        944188856,
-        5403050274,
-        5403050275,
-        3586692095,
-        1831507087,
-        3586692091,
-        2715404153,
-        3586692089,
-        1844145416,
-        9558418944,
-        9558418945,
-        1844145444,
-        1921627109,
-        1921627113,
-        1921627116,
-        9127993393,
-        11540381634,
-        1921627134,
-        1844145459,
-        8972363554,
-        8972363555,
-        1844145425,
-        10570555917,
-        12453795400,
-        1863759239,
-        1863759240,
-        8972379539,
-        8972379538,
-        1863759246,
-        3300470553,
-        12453795398,
-        2715404100,
-        1920433109,
-        1862173158,
-        1856296745,
-        1862173148,
-        1862173176,
-        1862173150,
-        1856240126,
-        1856240104,
-        1856240156,
-        3295172940,
-        5216563287,
-        5363800294,
-        10834188195,
-        1856239798,
-        10834188194,
-        5363800295,
-        3295064179,
-        1856240133,
-        5363789689,
+        1935858914,
+        4835256837,
+        4835256835,
+        5362275062,
+        1935858909,
+        1844067122,
+        1844067168,
+        4835256833,
+        3301272049,
+        3301272048,
+        1844067100,
+        3301272046,
+        1844067132,
+        3301272041,
+        1844067102,
+        2284966231,
+        1844067162,
+        3301272034,
+        5373746078,
+        1935858897,
+        3301272029,
+        2284966218,
+        2284966213,
+        1935858892,
+        3301272019,
+        3301272017,
+        2263296573,
+        2263296571,
+        9654352361,
+        9654352360,
+        2263296569,
+        2262616884,
+        2281451956,
+        1935858887,
+        1935858883,
+        1935858882,
+        1935858879,
+        5362280001,
+        5362279997,
+        2263358611,
+        2262616858,
+        2262616855,
+        3301111861,
+        1521827900,
+        4829543731,
+        2263296557,
+        2263296559,
+        2263296561,
+        2263296565,
+        2263296567,
+        3022362021,
+        3300927801,
+        3022362016,
+        1867916235,
+        8058868501,
+        1867916210,
+        1867916159,
+        1855391931,
+        1855391930,
+        1921627222,
+        1921627221,
+        5361893032,
+        5363716171,
+        9782591530,
+        9782591531,
+        1855391927,
+        1855391935,
+        957110953,
+        1855391936,
+        1855391928,
+        1855391923,
+        10033889559,
+        1855391933,
+        2178085645,
+        1855391932,
+        2178085646,
+        9779827281,
+        5363785500,
+        27223839,
+        9775806831,
+        9775806830,
+        3295064174,
+        3295064175,
+        11298013803,
+        3295064177,
+        4829486221,
+        3295064191,
+        11868550888,
+        1856240063,
+        5362321811,
+        3295064195,
+        5362321810,
+        5362321815,
+        3295064199,
+        5362321814,
+        3295064201,
+        1856239984,
+        10578776260,
+        5363789691,
         1856240189,
         9782215802,
         9782215801,
@@ -29279,152 +28366,131 @@
         3294991553,
         6025930415,
         6025930416,
-        3294991557,
-        1920433169,
-        3295064218,
-        2178085647,
-        1920433181,
-        3295064219,
-        3295064220,
-        3295064223,
-        6025930412,
-        6025930413,
-        6025930410,
-        3295064226,
-        1920433210,
-        1920433206,
-        10033889568,
-        1521897201,
-        10001208899,
-        10033889567,
-        1920433209,
-        1920433219,
-        10066995986,
-        11298012020,
-        1920433227,
-        1920433236,
-        3297085380,
-        1521902259,
-        1920433238,
-        1920433239,
-        3297317903,
-        1856296751,
-        1856296705,
-        1856296715,
-        5131599552,
-        1856296703,
-        5131599588,
-        1856239995,
-        5131599596,
-        5131599595,
-        5131599597,
-        5131599598,
-        5131599599,
-        5131599600,
-        1856239953,
-        3791996578,
-        2279496611,
-        255015361,
-        1521932721,
-        5131599610,
-        1863762087,
-        255015358,
-        141030360
+        6025930417,
+        7942627074,
+        1856240120,
+        1856239901,
+        10033889562,
+        1856240060,
+        10033889561,
+        1856240196,
+        11866878674,
+        1856240048,
+        1856240067,
+        1856239811,
+        1856239962,
+        1856240191,
+        11868575417,
+        2256025468,
+        2256024795,
+        3294991884,
+        2507139673,
+        1856240010,
+        11298012022,
+        11298012021,
+        1856240208,
+        5403347419,
+        1863762085,
+        8263993680,
+        2507139678,
+        2507139681,
+        140727942,
+        9908390283,
+        141027758,
+        8010522546,
+        257456249,
+        2256015082,
+        5234595621
       ],
       "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
       "osm_way_ids": [
-        18536448,
-        20706593,
-        47292709,
-        172223960,
-        172223966,
-        173642918,
-        173642919,
-        173642923,
+        29262605,
+        47292823,
+        173629661,
+        173629662,
+        174896351,
+        174896352,
+        174985228,
         174985235,
-        174985241,
+        174985248,
         174985252,
-        174990117,
-        174990119,
-        174990120,
-        174990127,
-        175820923,
-        175821147,
-        175821164,
-        181632920,
-        181632951,
-        181632996,
-        181632998,
-        181633018,
-        181633023,
-        181732580,
-        218723107,
-        232346006,
-        232346007,
-        232346008,
-        232347639,
-        253163042,
-        322726489,
-        322733586,
+        174985256,
+        174985257,
+        175821154,
+        183218027,
+        207546165,
+        216251572,
+        216252696,
+        216252778,
+        216941520,
+        216941521,
+        217003291,
+        217003296,
+        217003297,
+        217003298,
+        217003303,
+        217003305,
+        217625654,
+        218723105,
+        218947197,
+        219330210,
+        219330219,
+        219330220,
+        219330221,
+        243283818,
+        322733592,
         322733603,
-        322924138,
-        322924141,
-        488634225,
-        527940356,
-        527940358,
-        527940359,
-        527940360,
-        527940362,
-        527940363,
-        527940364,
-        527940366,
-        639507925,
-        639507926,
+        323254981,
+        323311289,
+        375858072,
+        488627562,
+        488637411,
+        491410462,
+        491410463,
+        555838447,
+        582603777,
         639507928,
-        816258045,
-        922393677,
-        922574540,
-        947729249,
-        947729250,
-        969577509,
-        969577510,
-        969577558,
-        969577559,
-        1037718752,
-        1037718753,
+        639507929,
+        1050586390,
+        1050586391,
+        1064432638,
+        1064432639,
         1065185424,
         1065185425,
-        1086668476,
-        1092017542,
-        1099669297,
-        1164883714,
-        1164883715,
-        1164883717,
-        1164883719,
-        1219323901,
-        1278249932
+        1065226954,
+        1065226955,
+        1219323900,
+        1219323902,
+        1277813749,
+        1278249931,
+        1278439450,
+        1278439451
       ]
     },
     {
-      "from": "Q122152502",
+      "from": "mention-cristo-re-celestia",
       "to": "Q946542",
       "mode": "walk",
       "geometry": [
         [
-          12.3482937,
-          45.4378807
+          12.3493319,
+          45.4381749
         ],
         [
-          12.3486366,
-          45.4377887
+          12.3491469,
+          45.4382299
         ],
         [
-          12.3487836,
-          45.4380324
+          12.3491312,
+          45.4382041
         ],
         [
-          12.3487938,
-          45.4380493
+          12.3491214,
+          45.4381879
+        ],
+        [
+          12.3490376,
+          45.4380496
         ],
         [
           12.3488195,
@@ -29432,13 +28498,58 @@
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
+      "length_m": 55.21,
+      "osm_nodes": [
+        5234595621,
+        2269264141,
+        5569529132,
+        5569529131,
+        2255994877,
+        141030363
+      ],
+      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
+      "osm_way_ids": [
+        175821161,
+        216251572,
+        582322556,
+        582322557,
+        845391100
+      ]
+    },
+    {
+      "from": "Q946542",
+      "to": "Q122152502",
+      "mode": "walk",
+      "geometry": [
+        [
+          12.3488195,
+          45.4380921
+        ],
+        [
+          12.3487938,
+          45.4380493
+        ],
+        [
+          12.3487836,
+          45.4380324
+        ],
+        [
+          12.3486366,
+          45.4377887
+        ],
+        [
+          12.3482937,
+          45.4378807
+        ]
+      ],
+      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
       "length_m": 65.35,
       "osm_nodes": [
-        141030360,
-        141030361,
-        11860660496,
+        141030363,
         11860660495,
-        141030363
+        11860660496,
+        141030361,
+        141030360
       ],
       "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
       "osm_way_ids": [
@@ -29448,26 +28559,10 @@
       ]
     },
     {
-      "from": "Q946542",
+      "from": "Q122152502",
       "to": "Q3585413",
       "mode": "walk",
       "geometry": [
-        [
-          12.3488195,
-          45.4380921
-        ],
-        [
-          12.3487938,
-          45.4380493
-        ],
-        [
-          12.3487836,
-          45.4380324
-        ],
-        [
-          12.3486366,
-          45.4377887
-        ],
         [
           12.3482937,
           45.4378807
@@ -29542,12 +28637,8 @@
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 336.58,
+      "length_m": 271.23,
       "osm_nodes": [
-        141030363,
-        11860660495,
-        11860660496,
-        141030361,
         141030360,
         255015358,
         1863762087,
@@ -29575,9 +28666,7 @@
         314754897,
         314754898,
         375858069,
-        375858070,
-        1277652692,
-        1277652693
+        375858070
       ]
     },
     {
@@ -29947,12 +29036,1100 @@
     },
     {
       "from": "Q3585357",
+      "to": "Q3585397",
+      "mode": "walk",
+      "geometry": [
+        [
+          12.3423307,
+          45.4413008
+        ],
+        [
+          12.3419417,
+          45.4407233
+        ],
+        [
+          12.3417454,
+          45.4404071
+        ],
+        [
+          12.3417261,
+          45.4403761
+        ],
+        [
+          12.3417171,
+          45.4403614
+        ],
+        [
+          12.3416981,
+          45.4403309
+        ],
+        [
+          12.3412618,
+          45.439628
+        ],
+        [
+          12.341299,
+          45.439571
+        ],
+        [
+          12.3412812,
+          45.4395125
+        ],
+        [
+          12.3416441,
+          45.4391157
+        ],
+        [
+          12.3416881,
+          45.4390763
+        ],
+        [
+          12.3418477,
+          45.4389336
+        ],
+        [
+          12.3419835,
+          45.4389012
+        ],
+        [
+          12.3421828,
+          45.4388495
+        ],
+        [
+          12.3422886,
+          45.4388262
+        ],
+        [
+          12.3425784,
+          45.4387687
+        ],
+        [
+          12.342665,
+          45.4387536
+        ],
+        [
+          12.3429407,
+          45.4386983
+        ],
+        [
+          12.3427684,
+          45.4383456
+        ],
+        [
+          12.3427615,
+          45.4383339
+        ],
+        [
+          12.342759,
+          45.4383296
+        ],
+        [
+          12.342749,
+          45.4383127
+        ],
+        [
+          12.3427413,
+          45.4382996
+        ],
+        [
+          12.3427322,
+          45.4382841
+        ],
+        [
+          12.3427292,
+          45.4382791
+        ],
+        [
+          12.3427583,
+          45.4382743
+        ],
+        [
+          12.3429553,
+          45.4382418
+        ],
+        [
+          12.3433996,
+          45.4381538
+        ],
+        [
+          12.343395,
+          45.4381441
+        ],
+        [
+          12.3433404,
+          45.4380075
+        ],
+        [
+          12.3432667,
+          45.4378608
+        ],
+        [
+          12.3435073,
+          45.4377508
+        ],
+        [
+          12.3436222,
+          45.4377014
+        ],
+        [
+          12.3439365,
+          45.4375758
+        ],
+        [
+          12.3439334,
+          45.4375689
+        ],
+        [
+          12.3439286,
+          45.4375607
+        ],
+        [
+          12.3439793,
+          45.4375432
+        ],
+        [
+          12.3439718,
+          45.4375277
+        ],
+        [
+          12.3439643,
+          45.4375121
+        ],
+        [
+          12.3439543,
+          45.4374871
+        ],
+        [
+          12.3438694,
+          45.4372353
+        ],
+        [
+          12.3442544,
+          45.4372232
+        ],
+        [
+          12.3442507,
+          45.4371178
+        ],
+        [
+          12.3442481,
+          45.4370322
+        ],
+        [
+          12.3442477,
+          45.4370095
+        ],
+        [
+          12.3442473,
+          45.4369829
+        ],
+        [
+          12.3442498,
+          45.4367497
+        ],
+        [
+          12.3442643,
+          45.4365296
+        ],
+        [
+          12.3442924,
+          45.4362673
+        ],
+        [
+          12.3443018,
+          45.4361793
+        ],
+        [
+          12.3443033,
+          45.4361656
+        ],
+        [
+          12.3443821,
+          45.4361675
+        ],
+        [
+          12.3444297,
+          45.4361686
+        ],
+        [
+          12.3445007,
+          45.4361703
+        ],
+        [
+          12.3445106,
+          45.4361705
+        ],
+        [
+          12.3445093,
+          45.4361553
+        ],
+        [
+          12.3445082,
+          45.4361464
+        ],
+        [
+          12.3449781,
+          45.43609
+        ],
+        [
+          12.3451407,
+          45.4360711
+        ],
+        [
+          12.3451266,
+          45.4359144
+        ],
+        [
+          12.34511,
+          45.4358887
+        ],
+        [
+          12.3450935,
+          45.4358629
+        ],
+        [
+          12.3450916,
+          45.4357625
+        ],
+        [
+          12.345091,
+          45.4357396
+        ],
+        [
+          12.3450907,
+          45.4356974
+        ],
+        [
+          12.3451376,
+          45.4356799
+        ],
+        [
+          12.3451688,
+          45.4356694
+        ],
+        [
+          12.3453271,
+          45.4356168
+        ],
+        [
+          12.345397,
+          45.4356007
+        ],
+        [
+          12.3455297,
+          45.4355819
+        ],
+        [
+          12.3455853,
+          45.4355822
+        ],
+        [
+          12.3457551,
+          45.4355893
+        ],
+        [
+          12.3459656,
+          45.4355867
+        ],
+        [
+          12.3459966,
+          45.4355845
+        ],
+        [
+          12.3460101,
+          45.4355818
+        ],
+        [
+          12.346054,
+          45.4355729
+        ],
+        [
+          12.3460749,
+          45.4355687
+        ],
+        [
+          12.3461192,
+          45.4355597
+        ],
+        [
+          12.3461291,
+          45.4355577
+        ],
+        [
+          12.3461638,
+          45.4355506
+        ],
+        [
+          12.3461842,
+          45.4355466
+        ],
+        [
+          12.346195,
+          45.4355032
+        ],
+        [
+          12.3462589,
+          45.435479
+        ],
+        [
+          12.3465707,
+          45.4354238
+        ],
+        [
+          12.3466372,
+          45.4354076
+        ],
+        [
+          12.3466925,
+          45.4353861
+        ],
+        [
+          12.3467251,
+          45.435367
+        ],
+        [
+          12.3467656,
+          45.4353348
+        ],
+        [
+          12.3468935,
+          45.4350294
+        ],
+        [
+          12.3469344,
+          45.4349358
+        ],
+        [
+          12.346956,
+          45.4348855
+        ],
+        [
+          12.3471648,
+          45.4349354
+        ],
+        [
+          12.3471726,
+          45.4348947
+        ],
+        [
+          12.347181,
+          45.4348509
+        ],
+        [
+          12.3472151,
+          45.4346724
+        ],
+        [
+          12.3472213,
+          45.4346402
+        ],
+        [
+          12.3472249,
+          45.4346212
+        ],
+        [
+          12.3473123,
+          45.4346108
+        ],
+        [
+          12.3473936,
+          45.4345916
+        ],
+        [
+          12.3474477,
+          45.4345626
+        ],
+        [
+          12.3474748,
+          45.4345397
+        ],
+        [
+          12.3475224,
+          45.4345036
+        ],
+        [
+          12.3475627,
+          45.4344667
+        ],
+        [
+          12.3476361,
+          45.4343953
+        ],
+        [
+          12.3476811,
+          45.4343306
+        ],
+        [
+          12.347679,
+          45.4342933
+        ],
+        [
+          12.347653,
+          45.434296
+        ],
+        [
+          12.3476438,
+          45.4342447
+        ],
+        [
+          12.3476344,
+          45.4342021
+        ],
+        [
+          12.3476175,
+          45.4341454
+        ],
+        [
+          12.3476026,
+          45.4340956
+        ],
+        [
+          12.3475812,
+          45.4340418
+        ],
+        [
+          12.3475898,
+          45.434021
+        ],
+        [
+          12.3475546,
+          45.4339879
+        ],
+        [
+          12.3475353,
+          45.4339669
+        ],
+        [
+          12.3475137,
+          45.4339408
+        ],
+        [
+          12.3474912,
+          45.4338997
+        ],
+        [
+          12.3474609,
+          45.4338444
+        ],
+        [
+          12.3474235,
+          45.4337637
+        ],
+        [
+          12.3473736,
+          45.4336322
+        ],
+        [
+          12.3474357,
+          45.4336191
+        ],
+        [
+          12.3479631,
+          45.4335189
+        ],
+        [
+          12.348026,
+          45.433492
+        ],
+        [
+          12.3481441,
+          45.4334415
+        ],
+        [
+          12.3482014,
+          45.433417
+        ],
+        [
+          12.3485512,
+          45.433198
+        ],
+        [
+          12.3487473,
+          45.4330769
+        ],
+        [
+          12.3490415,
+          45.4328917
+        ],
+        [
+          12.3492096,
+          45.4328025
+        ],
+        [
+          12.3493041,
+          45.4327524
+        ],
+        [
+          12.349445,
+          45.43267
+        ],
+        [
+          12.3495042,
+          45.4326396
+        ],
+        [
+          12.349621,
+          45.4325755
+        ],
+        [
+          12.3497613,
+          45.4324982
+        ],
+        [
+          12.3498584,
+          45.4324242
+        ],
+        [
+          12.349921,
+          45.4323888
+        ],
+        [
+          12.3504926,
+          45.4320656
+        ],
+        [
+          12.3505769,
+          45.4320269
+        ],
+        [
+          12.3506329,
+          45.4320013
+        ],
+        [
+          12.3507226,
+          45.4319601
+        ],
+        [
+          12.3515978,
+          45.4315465
+        ],
+        [
+          12.3517826,
+          45.4314592
+        ],
+        [
+          12.3519838,
+          45.4313641
+        ],
+        [
+          12.3527823,
+          45.4309868
+        ],
+        [
+          12.3529427,
+          45.430911
+        ],
+        [
+          12.3531182,
+          45.4308281
+        ],
+        [
+          12.3544835,
+          45.4301829
+        ],
+        [
+          12.3545655,
+          45.4301438
+        ],
+        [
+          12.3546359,
+          45.4301103
+        ],
+        [
+          12.3547289,
+          45.430066
+        ],
+        [
+          12.3549397,
+          45.429974
+        ],
+        [
+          12.3550044,
+          45.4299425
+        ],
+        [
+          12.3551147,
+          45.4298909
+        ],
+        [
+          12.3551383,
+          45.4298798
+        ],
+        [
+          12.3551793,
+          45.4298498
+        ],
+        [
+          12.355551,
+          45.4296556
+        ],
+        [
+          12.3558303,
+          45.4293845
+        ],
+        [
+          12.3558883,
+          45.4293251
+        ],
+        [
+          12.356083,
+          45.4291429
+        ],
+        [
+          12.3561891,
+          45.4290366
+        ],
+        [
+          12.3562328,
+          45.4289951
+        ],
+        [
+          12.3562388,
+          45.4289894
+        ],
+        [
+          12.3562943,
+          45.4289369
+        ],
+        [
+          12.3565963,
+          45.4286323
+        ],
+        [
+          12.3566032,
+          45.4286254
+        ],
+        [
+          12.3568966,
+          45.4283295
+        ],
+        [
+          12.3569053,
+          45.428321
+        ],
+        [
+          12.3571885,
+          45.4280453
+        ],
+        [
+          12.3579103,
+          45.4273932
+        ],
+        [
+          12.3579543,
+          45.4273719
+        ],
+        [
+          12.3580277,
+          45.4273698
+        ],
+        [
+          12.3587554,
+          45.4274428
+        ],
+        [
+          12.3588749,
+          45.4276408
+        ],
+        [
+          12.3589463,
+          45.4276314
+        ],
+        [
+          12.3590385,
+          45.4276193
+        ],
+        [
+          12.3591306,
+          45.4276072
+        ],
+        [
+          12.3591632,
+          45.4275967
+        ],
+        [
+          12.3599374,
+          45.4273464
+        ],
+        [
+          12.3600393,
+          45.4273548
+        ],
+        [
+          12.3602507,
+          45.4273861
+        ],
+        [
+          12.3602794,
+          45.4273887
+        ],
+        [
+          12.3607429,
+          45.427445
+        ],
+        [
+          12.3609245,
+          45.4274671
+        ],
+        [
+          12.3609707,
+          45.427468
+        ],
+        [
+          12.3613621,
+          45.427413
+        ],
+        [
+          12.3616764,
+          45.4273767
+        ],
+        [
+          12.3617233,
+          45.4273547
+        ],
+        [
+          12.3621307,
+          45.4271759
+        ],
+        [
+          12.3623979,
+          45.4270711
+        ],
+        [
+          12.3630023,
+          45.4271085
+        ],
+        [
+          12.3631074,
+          45.4266092
+        ],
+        [
+          12.3632326,
+          45.4266349
+        ],
+        [
+          12.3635264,
+          45.4267003
+        ],
+        [
+          12.3636181,
+          45.4267191
+        ],
+        [
+          12.3647238,
+          45.4269454
+        ],
+        [
+          12.3651441,
+          45.4270314
+        ],
+        [
+          12.365375,
+          45.4270787
+        ],
+        [
+          12.3654004,
+          45.4270833
+        ]
+      ],
+      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
+      "length_m": 3037.73,
+      "osm_nodes": [
+        566307910,
+        566307793,
+        4446340945,
+        4446340944,
+        4446340943,
+        4446340942,
+        3294857814,
+        4446340934,
+        3294857806,
+        10579362921,
+        10579362922,
+        29566406,
+        3294857786,
+        3294857784,
+        1831537304,
+        315260238,
+        315260247,
+        222070725,
+        4446340794,
+        4446340792,
+        4446340791,
+        4446340788,
+        4446340787,
+        4449378084,
+        4449378082,
+        5364373782,
+        1920433304,
+        194795622,
+        5364373786,
+        3294991932,
+        194795623,
+        3294991913,
+        3294991912,
+        1920433297,
+        5364320121,
+        3294991900,
+        3294991898,
+        4441294541,
+        4441294538,
+        1920433292,
+        1844132266,
+        1844132221,
+        1844132226,
+        5363941258,
+        5363941263,
+        5363941259,
+        3299197674,
+        1844132265,
+        4441293683,
+        5363941254,
+        1854246767,
+        4438967101,
+        4438967102,
+        4438967103,
+        1854246768,
+        5363941256,
+        1920433220,
+        1920433215,
+        3791996570,
+        4438966988,
+        3791996569,
+        4438966984,
+        1920433186,
+        8078191795,
+        1920433180,
+        1920433178,
+        31119731,
+        4438966955,
+        1920433174,
+        1920433173,
+        566307181,
+        4438966951,
+        5362212635,
+        4438966950,
+        4438966949,
+        2964465707,
+        2964465706,
+        4438966945,
+        4438966944,
+        4438966943,
+        1854243172,
+        1920433167,
+        3302973540,
+        3302973539,
+        1920433161,
+        3302973538,
+        1920433159,
+        1920433158,
+        1920433149,
+        3302973529,
+        1920433142,
+        1920433143,
+        6025930408,
+        6025930407,
+        6025930406,
+        6025930405,
+        1920433127,
+        3302963302,
+        1856305075,
+        1856305081,
+        1856305090,
+        3302963298,
+        1856305074,
+        1856296723,
+        1856305069,
+        1856305095,
+        1521853383,
+        1521852616,
+        1521851455,
+        1521850217,
+        1521849537,
+        1521849311,
+        1856305110,
+        3302963290,
+        1856305055,
+        3302963289,
+        3302963288,
+        1856305060,
+        1856305066,
+        1920433115,
+        1920433114,
+        1920433113,
+        9893852421,
+        9893852420,
+        1920433110,
+        1920433109,
+        2715404100,
+        12453795398,
+        3300470553,
+        1863759246,
+        8972379538,
+        8972379539,
+        1863759240,
+        1863759239,
+        12453795400,
+        10570555917,
+        1844145425,
+        8972363555,
+        8972363554,
+        1844145459,
+        1921627134,
+        11540381634,
+        9127993393,
+        1921627116,
+        1921627113,
+        1921627109,
+        1844145444,
+        9558418945,
+        9558418944,
+        1844145416,
+        3586692089,
+        2715404153,
+        3586692091,
+        1831507087,
+        3586692095,
+        5403050275,
+        5403050274,
+        944188856,
+        1867916291,
+        2715404154,
+        5342235502,
+        14031518616,
+        3586703317,
+        9203805810,
+        14031518638,
+        5342235501,
+        14031518641,
+        944188428,
+        2456689242,
+        1844149094,
+        2456689241,
+        1844149089,
+        1831507055,
+        8772313650,
+        8772313651,
+        1831507060,
+        5374071476,
+        1831507027,
+        1831507071,
+        2591390165,
+        1831507062,
+        2591369614,
+        1831507098,
+        14031397049,
+        7621962101,
+        2407022950,
+        14031397047,
+        3050496439,
+        2407022942,
+        7623429034,
+        7623429035,
+        5362264247,
+        2407004162,
+        10178890524,
+        10178890521,
+        8080712171,
+        5861134528,
+        9956808790
+      ],
+      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
+      "osm_way_ids": [
+        18536448,
+        20706593,
+        24992412,
+        47292709,
+        172223960,
+        172223966,
+        173611984,
+        173640072,
+        173642918,
+        173642919,
+        173642923,
+        174758945,
+        174759409,
+        174991099,
+        174991102,
+        175820923,
+        175820936,
+        175821347,
+        177126453,
+        181632965,
+        181632970,
+        181632983,
+        181632984,
+        181632988,
+        181632989,
+        181633030,
+        181732580,
+        232346006,
+        232346007,
+        232346008,
+        232347639,
+        253163042,
+        292892443,
+        292892444,
+        322711376,
+        322711380,
+        322726504,
+        322726505,
+        323125012,
+        323490410,
+        375858067,
+        375858068,
+        446658043,
+        446658047,
+        446658048,
+        446658049,
+        446658050,
+        446658051,
+        446658052,
+        446658053,
+        446658054,
+        446912118,
+        446912134,
+        446912135,
+        446912136,
+        447536335,
+        447536336,
+        447536337,
+        447536338,
+        447536343,
+        447536344,
+        447536345,
+        447536346,
+        447875004,
+        639507918,
+        639507919,
+        639507920,
+        639507921,
+        816258045,
+        922393677,
+        922574540,
+        947729249,
+        947729250,
+        969577509,
+        969577510,
+        969577558,
+        969577559,
+        1037718752,
+        1037718753,
+        1079296650,
+        1079296651,
+        1086668476,
+        1096497722,
+        1134839947
+      ]
+    },
+    {
+      "from": "Q3585397",
       "to": "Q122152456",
       "mode": "schematic",
       "geometry": [
         [
-          12.34265,
-          45.44117
+          12.365644,
+          45.427331
         ],
         [
           12.314139,
@@ -31999,7 +32176,7 @@
     },
     {
       "from": "Q27116950",
-      "to": "mention-santa-barbara-burano",
+      "to": "mention-grazie-burano",
       "mode": "walk",
       "geometry": [
         [
@@ -32127,144 +32304,308 @@
           45.4875393
         ],
         [
-          12.4146181,
-          45.487485
+          12.4147452,
+          45.487262
         ],
         [
-          12.4148735,
-          45.4873866
+          12.414456,
+          45.486958
         ],
         [
-          12.4160846,
-          45.4869993
+          12.4143054,
+          45.4867855
         ],
         [
-          12.4161574,
-          45.4866321
+          12.4147159,
+          45.4866306
         ],
         [
-          12.4160217,
-          45.4862898
+          12.4150093,
+          45.4865463
         ],
         [
-          12.4159888,
-          45.4862068
+          12.4152134,
+          45.4864812
         ],
         [
-          12.4161482,
-          45.4861899
+          12.4149903,
+          45.4861279
         ],
         [
-          12.4162245,
-          45.4862049
+          12.4149362,
+          45.4860357
         ],
         [
-          12.4164695,
-          45.4861766
+          12.4148012,
+          45.4858785
         ],
         [
-          12.4166794,
-          45.4861524
+          12.4148228,
+          45.4858736
         ],
         [
-          12.4167948,
-          45.4861266
+          12.4152472,
+          45.4856374
         ],
         [
-          12.4168724,
-          45.4861152
+          12.4151748,
+          45.4855518
         ],
         [
-          12.4169821,
-          45.4860935
+          12.4152975,
+          45.4854882
         ],
         [
-          12.4170685,
-          45.4860708
+          12.4153309,
+          45.48547
         ],
         [
-          12.417151,
-          45.4860458
+          12.4154158,
+          45.4854261
         ],
         [
-          12.4171895,
-          45.4860289
+          12.4154539,
+          45.4854014
         ],
         [
-          12.4173177,
-          45.4859598
+          12.4154691,
+          45.4853914
         ],
         [
-          12.4173266,
-          45.4859469
+          12.4157649,
+          45.4852053
         ],
         [
-          12.4173352,
-          45.4859414
+          12.4159684,
+          45.4850773
         ],
         [
-          12.4174221,
-          45.4858863
+          12.4159805,
+          45.4850697
         ],
         [
-          12.417444,
-          45.4858661
+          12.416016,
+          45.4850472
         ],
         [
-          12.4174621,
-          45.4858494
+          12.4161205,
+          45.4849811
         ],
         [
-          12.4174818,
-          45.4858314
+          12.4162823,
+          45.4848647
         ],
         [
-          12.4175067,
-          45.4858084
+          12.4163269,
+          45.4848356
         ],
         [
-          12.4175009,
-          45.4858052
+          12.4163711,
+          45.4848067
         ],
         [
-          12.4174355,
-          45.4857477
+          12.4164525,
+          45.4847313
         ],
         [
-          12.4174522,
-          45.4857302
+          12.4164797,
+          45.4846972
         ],
         [
-          12.4175359,
-          45.4856424
+          12.4165608,
+          45.4846169
         ],
         [
-          12.4176621,
-          45.4855099
+          12.4167155,
+          45.4844636
         ],
         [
-          12.4177435,
-          45.4854244
+          12.4168374,
+          45.4843428
         ],
         [
-          12.4178299,
-          45.4853337
+          12.4169267,
+          45.4842543
         ],
         [
-          12.4179219,
-          45.4852371
+          12.4169655,
+          45.48421
         ],
         [
-          12.4179457,
-          45.4851986
+          12.417058,
+          45.4841051
         ],
         [
-          12.4180595,
-          45.4850052
+          12.4172368,
+          45.4839409
         ],
         [
-          12.4182545,
-          45.4846767
+          12.4171476,
+          45.4838933
+        ]
+      ],
+      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
+      "length_m": 1520.13,
+      "osm_nodes": [
+        1871360377,
+        1871360379,
+        1593919589,
+        13867329510,
+        1593919601,
+        2611219455,
+        1862894681,
+        1593919603,
+        1593919591,
+        671702683,
+        5603418542,
+        1593919625,
+        1593919629,
+        1593919633,
+        13347968506,
+        1862824616,
+        13347968525,
+        1862824617,
+        1862824619,
+        13347954787,
+        295093418,
+        244400830,
+        244400829,
+        13347954786,
+        13347954782,
+        1862824623,
+        27469706,
+        1862824625,
+        1862824622,
+        1862895042,
+        3089652932,
+        13299093270,
+        2247305364,
+        11397713168,
+        13296618885,
+        12269076036,
+        12269076034,
+        13040991644,
+        4805651728,
+        2247305352,
+        1871365005,
+        2247305347,
+        2247305348,
+        5597446240,
+        9383520109,
+        1906034750,
+        9383520108,
+        9383520113,
+        9383697603,
+        9383697609,
+        9383583521,
+        13100459779,
+        1906034703,
+        9383583522,
+        13040991661,
+        1906034691,
+        9383583523,
+        2247305361,
+        5057180675,
+        13040991659,
+        13040991653,
+        1906034685,
+        9383629743,
+        9383629744,
+        1906034678,
+        9383629745
+      ],
+      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
+      "osm_way_ids": [
+        146112318,
+        146112357,
+        175721338,
+        175721339,
+        175721340,
+        175721341,
+        180173701,
+        180173703,
+        180173725,
+        206443773,
+        215326322,
+        215326324,
+        215326325,
+        255435712,
+        1017334327,
+        1017334328,
+        1419126969,
+        1419126970,
+        1419126971,
+        1449972948
+      ]
+    },
+    {
+      "from": "mention-grazie-burano",
+      "to": "mention-santa-barbara-burano",
+      "mode": "walk",
+      "geometry": [
+        [
+          12.4171476,
+          45.4838933
+        ],
+        [
+          12.4172368,
+          45.4839409
+        ],
+        [
+          12.417058,
+          45.4841051
+        ],
+        [
+          12.4169655,
+          45.48421
+        ],
+        [
+          12.4169857,
+          45.4842143
+        ],
+        [
+          12.4170325,
+          45.4842202
+        ],
+        [
+          12.4170687,
+          45.4842247
+        ],
+        [
+          12.4170936,
+          45.4842278
+        ],
+        [
+          12.417149,
+          45.4842347
+        ],
+        [
+          12.4171624,
+          45.4842366
+        ],
+        [
+          12.4173667,
+          45.4843103
+        ],
+        [
+          12.4176307,
+          45.484387
+        ],
+        [
+          12.4176423,
+          45.4843856
+        ],
+        [
+          12.4176553,
+          45.4843835
+        ],
+        [
+          12.4176672,
+          45.4843821
+        ],
+        [
+          12.4177663,
+          45.4843457
         ],
         [
           12.4181311,
@@ -32300,74 +32641,24 @@
         ]
       ],
       "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 1521.84,
+      "length_m": 197.4,
       "osm_nodes": [
-        1871360377,
-        1871360379,
-        1593919589,
-        13867329510,
-        1593919601,
-        2611219455,
-        1862894681,
-        1593919603,
-        1593919591,
-        671702683,
-        5603418542,
-        1593919625,
-        1593919629,
-        1593919633,
-        13347968506,
-        1862824616,
-        13347968525,
-        1862824617,
-        1862824619,
-        13347954787,
-        295093418,
-        244400830,
-        244400829,
-        13347954786,
-        13347954782,
-        1862824623,
-        27469706,
-        1862824625,
-        1862824622,
-        1862895042,
-        3089652932,
-        2164497292,
-        2247305362,
-        2164497283,
-        3089652930,
-        11397738974,
-        1906034855,
-        1906034849,
-        1906034852,
-        10083045251,
-        1906034846,
-        1906034819,
-        1906034817,
-        3255648206,
-        3255648203,
-        9383705391,
-        1906034812,
-        1906034805,
-        3937161028,
-        5597466945,
-        1906034799,
-        9233020833,
-        12596191126,
-        9233020832,
-        1906034795,
-        5597466950,
-        1840679122,
-        13040991634,
-        9978547450,
-        4805673221,
-        9978547434,
-        13330155115,
-        1840679120,
-        2247303172,
-        4805664839,
-        1840679121,
+        9383629745,
+        1906034678,
+        9383629744,
+        9383629743,
+        4470425902,
+        9233339910,
+        9346749784,
+        9233339911,
+        4470425914,
+        1840686311,
+        3799442159,
+        4470430601,
+        4470430599,
+        4470430604,
+        4470430602,
+        1840681513,
         1840692842,
         1871408427,
         1871408326,
@@ -32379,25 +32670,19 @@
       ],
       "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
       "osm_way_ids": [
-        146112318,
-        146112357,
-        173218617,
         173218875,
         173220343,
-        175721338,
-        175721339,
-        175721340,
-        175721341,
-        180173656,
-        180173694,
-        180173704,
-        206443773,
-        255435712,
-        304431987,
-        1000269513,
-        1000269514,
-        1360683652,
-        1416198860
+        180173684,
+        180173701,
+        376533730,
+        376533738,
+        450121807,
+        450121808,
+        450122157,
+        450122159,
+        1000309564,
+        1000309565,
+        1013104620
       ]
     },
     {
@@ -33087,41 +33372,17 @@
   ],
   "audit": {
     "candidate_count": 1196,
-    "identity_group_count": 388,
-    "included_count": 159,
-    "excluded_count": 215,
-    "duplicate_count": 808,
+    "identity_group_count": 386,
+    "included_count": 162,
+    "excluded_count": 217,
+    "duplicate_count": 810,
     "unresolved": [
-      {
-        "identity": "('it', 'oratorio di Cristo Re')",
-        "title": "Oratorio di Cristo Re",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Castello",
-        "source_rows": 1,
-        "sources": [
-          "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
       {
         "identity": "('it', 'oratorio di Santa Maria della Salute')",
         "title": "Oratorio di Santa Maria della Salute",
         "decision": "unresolved",
         "reason": "survival_or_building_location_not_verified",
         "area": "Castello",
-        "source_rows": 1,
-        "sources": [
-          "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
-        "identity": "('it', 'Chiesa di Santa Maria del Soccorso (Venezia)')",
-        "title": "Chiesa di Santa Maria del Soccorso (Venezia)",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Dorsoduro",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -33141,35 +33402,11 @@
         "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
       },
       {
-        "identity": "('it', 'Chiesa di Santa Maria delle Grazie (Burano)')",
-        "title": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Burano",
-        "source_rows": 1,
-        "sources": [
-          "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
         "identity": "('it', 'Chiesa di Santa Barbara e Santa Maria di Loreto')",
         "title": "Chiesa di Santa Barbara e Santa Maria di Loreto",
         "decision": "unresolved",
         "reason": "survival_or_building_location_not_verified",
         "area": "Sant'Andrea",
-        "source_rows": 1,
-        "sources": [
-          "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
-        "identity": "Q18427208",
-        "title": "San Vitale",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Poveglia",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -33189,7 +33426,7 @@
         "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
       },
       {
-        "identity": "Q501107",
+        "identity": "mention-nascente-lido",
         "title": "Natività della Beata Vergine Maria",
         "decision": "unresolved",
         "reason": "survival_or_building_location_not_verified",
@@ -33201,7 +33438,7 @@
         "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
       },
       {
-        "identity": "Q128267",
+        "identity": "mention-san-giuseppe-lido",
         "title": "San Giuseppe",
         "decision": "unresolved",
         "reason": "survival_or_building_location_not_verified",
@@ -33221,42 +33458,6 @@
         "source_rows": 1,
         "sources": [
           "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
-        "identity": "('en', 'Santa Maria del Soccorso, Venice')",
-        "title": "Santa Maria del Soccorso, Venice",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Dorsoduro",
-        "source_rows": 1,
-        "sources": [
-          "en_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
-        "identity": "('en', 'Cristo Re, Venice')",
-        "title": "Cristo Re, Venice",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Castello",
-        "source_rows": 1,
-        "sources": [
-          "en_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
-        "identity": "('en', 'San Cristoforo di Venezia')",
-        "title": "San Cristoforo di Venezia",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "San Michele",
-        "source_rows": 1,
-        "sources": [
-          "en_list"
         ],
         "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
       }
@@ -34120,6 +34321,17 @@
         ]
       },
       {
+        "identity": "mention-san-vitale-poveglia",
+        "title": "San Vitale",
+        "decision": "excluded",
+        "reason": "demolished",
+        "evidence": "https://it.wikipedia.org/wiki/Poveglia — Dell’antica pieve di San Vitale resta solo il campanile. Q18427208 is a disambiguation page, not the church.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
         "identity": "Q112044428",
         "title": "Chiesa di San Cipriano (Venezia, Malamocco)",
         "decision": "excluded",
@@ -34559,6 +34771,17 @@
         "decision": "excluded",
         "reason": "demolished",
         "evidence": "Explicit demolished-list, description or non-empty demolition field.",
+        "source_rows": 1,
+        "sources": [
+          "en_list"
+        ]
+      },
+      {
+        "identity": "mention-san-cristoforo-pace",
+        "title": "San Cristoforo di Venezia",
+        "decision": "excluded",
+        "reason": "demolished",
+        "evidence": "https://www.comune.venezia.it/it/content/cimitero-smichele — existing San Cristoforo della Pace monastery was demolished and terrain levelled for the cemetery in 1807; not San Michele in Isola.",
         "source_rows": 1,
         "sources": [
           "en_list"
@@ -36266,16 +36489,16 @@
         ]
       },
       {
-        "identity": "('it', 'oratorio di Cristo Re')",
+        "identity": "mention-cristo-re-celestia",
         "title": "Oratorio di Cristo Re",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Castello",
-        "source_rows": 1,
+        "stop_id": "mention-cristo-re-celestia",
+        "decision": "included",
+        "evidence": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
+        "source_rows": 2,
         "sources": [
+          "en_list",
           "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
+        ]
       },
       {
         "identity": "Q1290662",
@@ -37133,16 +37356,16 @@
         ]
       },
       {
-        "identity": "('it', 'Chiesa di Santa Maria del Soccorso (Venezia)')",
+        "identity": "mention-soccorso-dorsoduro",
         "title": "Chiesa di Santa Maria del Soccorso (Venezia)",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Dorsoduro",
-        "source_rows": 1,
+        "stop_id": "mention-soccorso-dorsoduro",
+        "decision": "included",
+        "evidence": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
+        "source_rows": 2,
         "sources": [
+          "en_list",
           "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
+        ]
       },
       {
         "identity": "Q16539982",
@@ -38434,16 +38657,15 @@
         ]
       },
       {
-        "identity": "('it', 'Chiesa di Santa Maria delle Grazie (Burano)')",
+        "identity": "mention-grazie-burano",
         "title": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Burano",
+        "stop_id": "mention-grazie-burano",
+        "decision": "included",
+        "evidence": "https://it.wikipedia.org/wiki/Burano",
         "source_rows": 1,
         "sources": [
           "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
+        ]
       },
       {
         "identity": "('it', 'Chiesa di San Mauro (Burano)')",
@@ -38721,16 +38943,15 @@
         ]
       },
       {
-        "identity": "Q18427208",
+        "identity": "mention-san-vitale-poveglia",
         "title": "San Vitale",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Poveglia",
+        "decision": "excluded",
+        "reason": "demolished",
+        "evidence": "https://it.wikipedia.org/wiki/Poveglia — Dell’antica pieve di San Vitale resta solo il campanile. Q18427208 is a disambiguation page, not the church.",
         "source_rows": 1,
         "sources": [
           "it_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
+        ]
       },
       {
         "identity": "Q122152488",
@@ -38837,7 +39058,7 @@
         ]
       },
       {
-        "identity": "Q501107",
+        "identity": "mention-nascente-lido",
         "title": "Natività della Beata Vergine Maria",
         "decision": "unresolved",
         "reason": "survival_or_building_location_not_verified",
@@ -38849,7 +39070,7 @@
         "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
       },
       {
-        "identity": "Q128267",
+        "identity": "mention-san-giuseppe-lido",
         "title": "San Giuseppe",
         "decision": "unresolved",
         "reason": "survival_or_building_location_not_verified",
@@ -39360,30 +39581,6 @@
         ]
       },
       {
-        "identity": "('en', 'Santa Maria del Soccorso, Venice')",
-        "title": "Santa Maria del Soccorso, Venice",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Dorsoduro",
-        "source_rows": 1,
-        "sources": [
-          "en_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
-        "identity": "('en', 'Cristo Re, Venice')",
-        "title": "Cristo Re, Venice",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "Castello",
-        "source_rows": 1,
-        "sources": [
-          "en_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
-      },
-      {
         "identity": "('en', 'San Domenico di Castello')",
         "title": "San Domenico di Castello",
         "decision": "excluded",
@@ -39406,16 +39603,15 @@
         ]
       },
       {
-        "identity": "('en', 'San Cristoforo di Venezia')",
+        "identity": "mention-san-cristoforo-pace",
         "title": "San Cristoforo di Venezia",
-        "decision": "unresolved",
-        "reason": "survival_or_building_location_not_verified",
-        "area": "San Michele",
+        "decision": "excluded",
+        "reason": "demolished",
+        "evidence": "https://www.comune.venezia.it/it/content/cimitero-smichele — existing San Cristoforo della Pace monastery was demolished and terrain levelled for the cemetery in 1807; not San Michele in Isola.",
         "source_rows": 1,
         "sources": [
           "en_list"
-        ],
-        "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia"
+        ]
       },
       {
         "identity": "('en', 'Santa Maria Valverde')",
@@ -40693,9 +40889,9 @@
         "en": "Inventory is reconciled against cached Italian/English Wikipedia lists, categories and Wikidata. Unresolved mentions remain below; this is not a claim of exhaustive coverage."
       },
       {
-        "ru": "Неразрешённых кандидатов: 14. Перед использованием как полного списка изучите аудит и отчёт.",
-        "it": "14 identità candidate irrisolte; consultare audit e rapporto prima di considerare completo l'inventario.",
-        "en": "14 unresolved candidate identities; see the published audit/report before treating the inventory as complete."
+        "ru": "Неразрешённых кандидатов: 7. Перед использованием как полного списка изучите аудит и отчёт.",
+        "it": "7 identità candidate irrisolte; consultare audit e rapporto prima di considerare completo l'inventario.",
+        "en": "7 unresolved candidate identities; see the published audit/report before treating the inventory as complete."
       },
       {
         "ru": "Пешеходная геометрия — кратчайшие пути между ближайшими узлами OSM, не проверенные входы. Подходы вне сети и паромные переезды не являются навигационными путями.",

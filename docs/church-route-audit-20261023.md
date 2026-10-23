@@ -1,11 +1,11 @@
 # Church route audit
 
-Generated UTC: 2026-10-23T18:15:18.166927+00:00
+Generated UTC: 2026-10-23T18:50:29.075845+00:00
 
 **INVENTORY REVIEW INCOMPLETE — not an exhaustive-completeness claim.**
 
-Source rows: 1196; identity groups: 388; included: 159; excluded identities: 215; duplicate rows: 808; unresolved identities: 14.
-Segments: {'walk': 127, 'schematic': 31}. Verified network length only: 45216.77 m (not total trip length).
+Source rows: 1196; identity groups: 386; included: 162; excluded identities: 217; duplicate rows: 810; unresolved identities: 7.
+Segments: {'walk': 128, 'schematic': 33}. Verified network length only: 45504.45 m (not total trip length).
 
 ## Method and access
 
@@ -21,10 +21,10 @@ Segments: {'walk': 127, 'schematic': 31}. Verified network length only: 45216.77
 
 | Area | Stops |
 |---|---:|
-| Burano | 2 |
+| Burano | 3 |
 | Cannaregio | 31 |
-| Castello | 28 |
-| Dorsoduro | 22 |
+| Castello | 29 |
+| Dorsoduro | 23 |
 | Giudecca | 6 |
 | Lido | 7 |
 | Mazzorbo | 1 |
@@ -49,20 +49,13 @@ Segments: {'walk': 127, 'schematic': 31}. Verified network length only: 45216.77
 
 | Identity | Mention | Area | Reason |
 |---|---|---|---|
-| ('it', 'oratorio di Cristo Re') | Oratorio di Cristo Re | Castello | survival_or_building_location_not_verified |
 | ('it', 'oratorio di Santa Maria della Salute') | Oratorio di Santa Maria della Salute | Castello | survival_or_building_location_not_verified |
-| ('it', 'Chiesa di Santa Maria del Soccorso (Venezia)') | Chiesa di Santa Maria del Soccorso (Venezia) | Dorsoduro | survival_or_building_location_not_verified |
 | ('it', 'Chiesa della Santissima Trinità (Giudecca)') | Chiesa della Santissima Trinità (Giudecca) | Giudecca e Sacca Fisola | survival_or_building_location_not_verified |
-| ('it', 'Chiesa di Santa Maria delle Grazie (Burano)') | Chiesa di Santa Maria delle Grazie (Burano) | Burano | survival_or_building_location_not_verified |
 | ('it', 'Chiesa di Santa Barbara e Santa Maria di Loreto') | Chiesa di Santa Barbara e Santa Maria di Loreto | Sant'Andrea | survival_or_building_location_not_verified |
-| Q18427208 | San Vitale | Poveglia | survival_or_building_location_not_verified |
 | ('it', 'Chiesa del Sacro Cuore di Gesù (Lido)') | Chiesa del Sacro Cuore di Gesù (Lido) | Lido | survival_or_building_location_not_verified |
-| Q501107 | Natività della Beata Vergine Maria | Lido | survival_or_building_location_not_verified |
-| Q128267 | San Giuseppe | Lido | survival_or_building_location_not_verified |
+| mention-nascente-lido | Natività della Beata Vergine Maria | Lido | survival_or_building_location_not_verified |
+| mention-san-giuseppe-lido | San Giuseppe | Lido | survival_or_building_location_not_verified |
 | ('it', 'Opera della Carità di Santa Maria del Mare') | Opera della Carità di Santa Maria del Mare | Pellestrina (Diocesi di Chioggia) | survival_or_building_location_not_verified |
-| ('en', 'Santa Maria del Soccorso, Venice') | Santa Maria del Soccorso, Venice | Dorsoduro | survival_or_building_location_not_verified |
-| ('en', 'Cristo Re, Venice') | Cristo Re, Venice | Castello | survival_or_building_location_not_verified |
-| ('en', 'San Cristoforo di Venezia') | San Cristoforo di Venezia | San Michele | survival_or_building_location_not_verified |
 
 ## Included inventory
 
@@ -132,101 +125,104 @@ Segments: {'walk': 127, 'schematic': 31}. Verified network length only: 45216.77
 | 62 | Q3673180 | chiesa di Santa Margherita | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Margherita_(Venezia) |
 | 63 | Q1093901 | chiesa di San Pantalon | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Pantalon |
 | 64 | Q2780025 | chiesa di Santa Maria dei Carmini | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dei_Carmini |
-| 65 | Q588559 | chiesa di San Sebastiano | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Sebastiano_(Venezia) |
+| 65 | mention-soccorso-dorsoduro | Chiesa di Santa Maria del Soccorso (Venezia) | Dorsoduro | GCatholic 63813 encoded map coordinate; not entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
 | 66 | Q1255964 | chiesa di San Raffaele Arcangelo | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dell'Angelo_Raffaele |
-| 67 | Q3669279 | chiesa delle Terese | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_delle_Terese_(Venezia) |
-| 68 | Q2483408 | chiesa di San Nicolò dei Mendicoli | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_dei_Mendicoli |
-| 69 | Q3674171 | chiesa di Santa Marta | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Marta_(Venezia) |
-| 70 | Q2931177 | chiesa dello Spirito Santo | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dello_Spirito_Santo_(Venezia) |
-| 71 | Q21856008 | chiesa dei Catecumeni | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Catecumeni |
-| 72 | Q3670710 | chiesa di San Gregorio | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Gregorio_(Venezia) |
-| 73 | Q52531 | basilica di Santa Maria della Salute | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_della_Salute |
-| 74 | Q220811 | chiesa di Santa Maria del Giglio | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Giglio_(Venezia) |
-| 75 | Q251686 | chiesa di San Maurizio | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Maurizio_(Venezia) |
-| 76 | Q974832 | chiesa di Santo Stefano | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_San_Marco) |
-| 77 | Q3355126 | oratorio di Sant'Angelo degli Zoppi | San Marco | Wikipedia article coordinate | https://en.wikipedia.org/wiki/Oratorio_di_Sant'Angelo_degli_Zoppi |
-| 78 | Q3585318 | chiesa di San Beneto | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Beneto |
-| 79 | Q3585362 | chiesa di San Luca | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Luca_(Venezia) |
-| 80 | Q1407670 | chiesa di San Fantin | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Fantin |
-| 81 | Q1068131 | chiesa di San Moisè | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Mois%C3%A8 |
-| 82 | Q3585339 | chiesa di San Gallo | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Gallo_(Venezia) |
-| 83 | Q3585410 | chiesa di Santa Croce degli Armeni | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_degli_Armeni |
-| 84 | Q1251035 | chiesa di San Zulian | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Zulian |
-| 85 | Q3669580 | chiesa di San Basso | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Basso_(Venezia) |
-| 86 | Q172988 | basilica di San Marco | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_San_Marco |
-| 87 | Q119156487 | chiesa di San Teodoro | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Teodoro_(Venezia) |
-| 88 | Q1028202 | chiesa di San Salvador | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Salvador |
-| 89 | Q1648609 | chiesa di San Bartolomeo | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Bartolomeo_(Venezia) |
-| 90 | Q1895574 | chiesa di San Samuele | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Samuele |
-| 91 | Q769514 | chiesa di San Vidal | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Vidal |
-| 92 | Q3585434 | chiesa di Santa Maria della Fava | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Fava |
-| 93 | Q647427 | chiesa di San Lio | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Lio |
-| 94 | Q1813687 | chiesa di Santa Maria Formosa | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Formosa |
-| 95 | Q3585345 | chiesa di San Giovanni Nuovo | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Nuovo |
-| 96 | Q114790449 | chiesa dei Santi Filippo e Giacomo | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Filippo_e_Giacomo_(Venezia) |
-| 97 | Q794876 | chiesa di San Zaccaria | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Zaccaria |
-| 98 | Q1559661 | chiesa della Pietà | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_della_Piet%C3%A0_(Venezia) |
-| 99 | Q1784082 | chiesa di San Giorgio dei Greci | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giorgio_dei_Greci |
-| 100 | Q1290662 | Scuola di San Giorgio degli Schiavoni | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Scuola_di_San_Giorgio_degli_Schiavoni |
-| 101 | Q935076 | chiesa di San Giovanni di Malta | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_di_Malta_(Venezia) |
-| 102 | Q3585394 | chiesa di Sant'Antonin | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonin |
-| 103 | Q521260 | chiesa di San Giovanni in Bragora | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_in_Bragora |
-| 104 | Q2932203 | Oratorio della Ca' di Dio | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Oratorio_della_Ca'_di_Dio |
-| 105 | Q980366 | chiesa di San Martino | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Castello) |
-| 106 | Q533409 | chiesa di San Biagio | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Biagio_(Venezia) |
-| 107 | Q3585337 | chiesa di San Francesco di Paola | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_di_Paola_(Venezia) |
-| 108 | mention-san-gioacchino | Oratorio di San Gioacchino (Venezia) | Castello | OSM way/1081020184 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
-| 109 | Q3585391 | chiesa di Sant'Anna | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Anna_(Venezia) |
-| 110 | Q938556 | chiesa di San Giuseppe di Castello | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giuseppe_di_Castello |
-| 111 | Q945981 | basilica di San Pietro di Castello | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_San_Pietro_di_Castello |
-| 112 | Q3585397 | chiesa di Sant'Elena | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Elena_(Venezia) |
-| 113 | Q122152502 | oratorio di san Marco in Vinea | Castello | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
+| 67 | Q588559 | chiesa di San Sebastiano | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Sebastiano_(Venezia) |
+| 68 | Q3669279 | chiesa delle Terese | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_delle_Terese_(Venezia) |
+| 69 | Q2483408 | chiesa di San Nicolò dei Mendicoli | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_dei_Mendicoli |
+| 70 | Q3674171 | chiesa di Santa Marta | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Marta_(Venezia) |
+| 71 | Q2931177 | chiesa dello Spirito Santo | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dello_Spirito_Santo_(Venezia) |
+| 72 | Q21856008 | chiesa dei Catecumeni | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Catecumeni |
+| 73 | Q3670710 | chiesa di San Gregorio | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Gregorio_(Venezia) |
+| 74 | Q52531 | basilica di Santa Maria della Salute | Dorsoduro | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_della_Salute |
+| 75 | Q220811 | chiesa di Santa Maria del Giglio | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Giglio_(Venezia) |
+| 76 | Q251686 | chiesa di San Maurizio | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Maurizio_(Venezia) |
+| 77 | Q974832 | chiesa di Santo Stefano | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_San_Marco) |
+| 78 | Q3355126 | oratorio di Sant'Angelo degli Zoppi | San Marco | Wikipedia article coordinate | https://en.wikipedia.org/wiki/Oratorio_di_Sant'Angelo_degli_Zoppi |
+| 79 | Q3585318 | chiesa di San Beneto | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Beneto |
+| 80 | Q3585362 | chiesa di San Luca | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Luca_(Venezia) |
+| 81 | Q1407670 | chiesa di San Fantin | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Fantin |
+| 82 | Q1068131 | chiesa di San Moisè | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Mois%C3%A8 |
+| 83 | Q3585339 | chiesa di San Gallo | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Gallo_(Venezia) |
+| 84 | Q3585410 | chiesa di Santa Croce degli Armeni | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_degli_Armeni |
+| 85 | Q1251035 | chiesa di San Zulian | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Zulian |
+| 86 | Q3669580 | chiesa di San Basso | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Basso_(Venezia) |
+| 87 | Q172988 | basilica di San Marco | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_San_Marco |
+| 88 | Q119156487 | Cappella di San Teodoro | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Teodoro_(Venezia) |
+| 89 | Q1028202 | chiesa di San Salvador | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Salvador |
+| 90 | Q1648609 | chiesa di San Bartolomeo | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Bartolomeo_(Venezia) |
+| 91 | Q1895574 | chiesa di San Samuele | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Samuele |
+| 92 | Q769514 | chiesa di San Vidal | San Marco | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Vidal |
+| 93 | Q3585434 | chiesa di Santa Maria della Fava | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Fava |
+| 94 | Q647427 | chiesa di San Lio | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Lio |
+| 95 | Q1813687 | chiesa di Santa Maria Formosa | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Formosa |
+| 96 | Q3585345 | chiesa di San Giovanni Nuovo | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Nuovo |
+| 97 | Q114790449 | chiesa dei Santi Filippo e Giacomo | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Filippo_e_Giacomo_(Venezia) |
+| 98 | Q794876 | chiesa di San Zaccaria | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Zaccaria |
+| 99 | Q1559661 | chiesa della Pietà | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_della_Piet%C3%A0_(Venezia) |
+| 100 | Q1784082 | chiesa di San Giorgio dei Greci | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giorgio_dei_Greci |
+| 101 | Q1290662 | Scuola di San Giorgio degli Schiavoni | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Scuola_di_San_Giorgio_degli_Schiavoni |
+| 102 | Q935076 | chiesa di San Giovanni di Malta | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_di_Malta_(Venezia) |
+| 103 | Q3585394 | chiesa di Sant'Antonin | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonin |
+| 104 | Q521260 | chiesa di San Giovanni in Bragora | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_in_Bragora |
+| 105 | Q2932203 | Oratorio della Ca' di Dio | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Oratorio_della_Ca'_di_Dio |
+| 106 | Q980366 | chiesa di San Martino | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Castello) |
+| 107 | Q533409 | chiesa di San Biagio | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Biagio_(Venezia) |
+| 108 | Q3585337 | chiesa di San Francesco di Paola | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_di_Paola_(Venezia) |
+| 109 | mention-san-gioacchino | Oratorio di San Gioacchino (Venezia) | Castello | OSM way/1081020184 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
+| 110 | Q3585391 | chiesa di Sant'Anna | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Anna_(Venezia) |
+| 111 | Q938556 | chiesa di San Giuseppe di Castello | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Giuseppe_di_Castello |
+| 112 | Q945981 | basilica di San Pietro di Castello | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_San_Pietro_di_Castello |
+| 113 | mention-cristo-re-celestia | oratorio di Cristo Re | Castello | OSM way/582322560 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
 | 114 | Q946542 | chiesa di San Francesco della Vigna | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_della_Vigna |
-| 115 | Q3585413 | Ex chiesa di Santa Giustina | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Giustina_(Venezia) |
-| 116 | Q3673752 | chiesa di Santa Maria del Pianto | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Pianto_(Venezia) |
-| 117 | Q3668820 | chiesa dell'Ospedaletto | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dell'Ospedaletto |
-| 118 | Q155225 | basilica dei Santi Giovanni e Paolo | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_dei_Santi_Giovanni_e_Paolo_(Venezia) |
-| 119 | Q3585357 | chiesa di San Lazzaro dei Mendicanti | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Lazzaro_dei_Mendicanti |
-| 120 | Q122152456 | chiesa di San Gerardo Sagredo Martire | Sacca Fisola | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Sacca_Fisola |
-| 121 | Q57981283 | Convento delle Convertite | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Convento_delle_Convertite |
-| 122 | Q95451292 | chiesa dei Santi Cosma e Damiano | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Cosma_e_Damiano_(Venezia) |
-| 123 | Q3585398 | chiesa di Sant'Eufemia | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Eufemia_(Venezia) |
-| 124 | Q830807 | basilica del Redentore | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_del_Redentore |
-| 125 | Q3673008 | chiesa di Santa Croce | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_(Venezia%2C_Giudecca) |
-| 126 | Q753370 | chiesa delle Zitelle | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_delle_Zitelle |
-| 127 | Q713558 | basilica di San Giorgio Maggiore | San Giorgio Maggiore | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_San_Giorgio_Maggiore |
-| 128 | Q1449262 | chiesa di San Michele in Isola | San Michele | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Michele_in_Isola |
-| 129 | Q3585409 | chiesa di Santa Chiara | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Murano) |
-| 130 | Q70112034 | Oratorio dei Santi Giuseppe e Teresa | Murano | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Murano |
-| 131 | Q3585377 | chiesa di San Pietro martire | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_Martire_(Venezia) |
-| 132 | Q3585448 | Oratorio di Santo Stefano (Murano) | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Murano) |
-| 133 | Q2545358 | Duomo di Murano | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Duomo_di_Murano |
-| 134 | Q3585423 | chiesa di Santa Maria degli Angeli | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_degli_Angeli_(Murano) |
-| 135 | Q27116950 | chiesa dei Santi Pietro e Caterina | Mazzorbo | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Pietro_e_Caterina_(Venezia) |
-| 136 | mention-santa-barbara-burano | Oratorio di Santa Barbara (Burano) | Burano | OSM way/176657686 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Burano |
-| 137 | Q3585364 | chiesa di San Martino | Burano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Burano) |
-| 138 | Q3585411 | chiesa di Santa Fosca | Torcello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Fosca_(Venezia%2C_Torcello) |
-| 139 | Q1149886 | basilica di Santa Maria Assunta | Torcello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Assunta_(Torcello) |
-| 140 | Q122152501 | oratorio di San Marco Evangelista | Torcello | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
-| 141 | Q281139 | Chiesa di San Francesco del Deserto | San Francesco del Deserto | OSM way/75935317 church building; not island centroid or entrance | https://en.wikipedia.org/wiki/San_Francesco_del_Deserto |
-| 142 | Q121598793 | chiesa di Cristo Re | Sant'Erasmo | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Sant'Erasmo_(Venezia) |
-| 143 | Q122152492 | chiesa di Sant'Eurosia Vergine | Vignole | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Vignole |
-| 144 | Q379102 | chiesa di San Nicolò | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_(Venezia%2C_Lido) |
-| 145 | Q86664730 | tempio Votivo di Santa Maria Immacolata | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Tempio_votivo_(Venezia) |
-| 146 | Q107301282 | chiesa di Santa Maria Elisabetta | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Elisabetta_(Venezia%2C_Lido) |
-| 147 | Q3585395 | chiesa di Sant'Antonio | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Lido) |
-| 148 | Q122152493 | chiesa di Sant'Ignazio di Loyola | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Ignazio_di_Loyola_(Venezia%2C_Lido) |
-| 149 | Q585738 | chiesa di Santa Maria Assunta | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Assunta_(Venezia%2C_Malamocco) |
-| 150 | Q122152488 | chiesa di Santa Maria della Salute | Lido | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Alberoni_(Venezia) |
-| 151 | Q1791020 | Chiesa di San Lazzaro degli Armeni | San Lazzaro degli Armeni | Wikidata Q116056745 P625 (church, not island centre) | https://it.wikipedia.org/wiki/San_Lazzaro_degli_Armeni |
-| 152 | Q98781254 | chiesa di San Servolo | San Servolo | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
-| 153 | Q109466368 | chiesa di San Pietro in Volta | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_in_Volta |
-| 154 | Q109466355 | chiesa di Santo Stefano Protomartire | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Portosecco) |
-| 155 | Q109466379 | chiesa di Sant'Antonio | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Pellestrina) |
-| 156 | Q109466385 | Santuario della Madonna dell'Apparizione | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Santuario_della_Madonna_dell'Apparizione |
-| 157 | Q109466393 | chiesa di Ognissanti | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Ognissanti_(Venezia%2C_Pellestrina) |
-| 158 | Q3585324 | chiesa di San Clemente | San Clemente | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Clemente_(Venezia) |
-| 159 | mention-chiesa-sacca-sessola | Chiesa di Sacca Sessola | Sacca Sessola | OSM way/140873400 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Sacca_Sessola |
+| 115 | Q122152502 | oratorio di san Marco in Vinea | Castello | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
+| 116 | Q3585413 | Ex chiesa di Santa Giustina | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Giustina_(Venezia) |
+| 117 | Q3673752 | chiesa di Santa Maria del Pianto | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Pianto_(Venezia) |
+| 118 | Q3668820 | chiesa dell'Ospedaletto | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dell'Ospedaletto |
+| 119 | Q155225 | basilica dei Santi Giovanni e Paolo | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_dei_Santi_Giovanni_e_Paolo_(Venezia) |
+| 120 | Q3585357 | chiesa di San Lazzaro dei Mendicanti | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Lazzaro_dei_Mendicanti |
+| 121 | Q3585397 | chiesa di Sant'Elena | Castello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Elena_(Venezia) |
+| 122 | Q122152456 | chiesa di San Gerardo Sagredo Martire | Sacca Fisola | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Sacca_Fisola |
+| 123 | Q57981283 | Convento delle Convertite | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Convento_delle_Convertite |
+| 124 | Q95451292 | chiesa dei Santi Cosma e Damiano | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Cosma_e_Damiano_(Venezia) |
+| 125 | Q3585398 | chiesa di Sant'Eufemia | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Eufemia_(Venezia) |
+| 126 | Q830807 | basilica del Redentore | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_del_Redentore |
+| 127 | Q3673008 | chiesa di Santa Croce | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_(Venezia%2C_Giudecca) |
+| 128 | Q753370 | chiesa delle Zitelle | Giudecca | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_delle_Zitelle |
+| 129 | Q713558 | basilica di San Giorgio Maggiore | San Giorgio Maggiore | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_San_Giorgio_Maggiore |
+| 130 | Q1449262 | chiesa di San Michele in Isola | San Michele | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Michele_in_Isola |
+| 131 | Q3585409 | chiesa di Santa Chiara | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Murano) |
+| 132 | Q70112034 | Oratorio dei Santi Giuseppe e Teresa | Murano | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Murano |
+| 133 | Q3585377 | chiesa di San Pietro martire | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_Martire_(Venezia) |
+| 134 | Q3585448 | Oratorio di Santo Stefano (Murano) | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Murano) |
+| 135 | Q2545358 | Duomo di Murano | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Duomo_di_Murano |
+| 136 | Q3585423 | chiesa di Santa Maria degli Angeli | Murano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_degli_Angeli_(Murano) |
+| 137 | Q27116950 | chiesa dei Santi Pietro e Caterina | Mazzorbo | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Pietro_e_Caterina_(Venezia) |
+| 138 | mention-grazie-burano | Chiesa di Santa Maria delle Grazie (Burano) | Burano | OSM way/176657496 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Burano |
+| 139 | mention-santa-barbara-burano | Oratorio di Santa Barbara (Burano) | Burano | OSM way/176657686 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Burano |
+| 140 | Q3585364 | chiesa di San Martino | Burano | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Burano) |
+| 141 | Q3585411 | chiesa di Santa Fosca | Torcello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Fosca_(Venezia%2C_Torcello) |
+| 142 | Q1149886 | basilica di Santa Maria Assunta | Torcello | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Assunta_(Torcello) |
+| 143 | Q122152501 | oratorio di San Marco Evangelista | Torcello | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
+| 144 | Q281139 | Chiesa di San Francesco del Deserto | San Francesco del Deserto | OSM way/75935317 church building; not island centroid or entrance | https://en.wikipedia.org/wiki/San_Francesco_del_Deserto |
+| 145 | Q121598793 | chiesa di Cristo Re | Sant'Erasmo | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Sant'Erasmo_(Venezia) |
+| 146 | Q122152492 | chiesa di Sant'Eurosia Vergine | Vignole | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Vignole |
+| 147 | Q379102 | chiesa di San Nicolò | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_(Venezia%2C_Lido) |
+| 148 | Q86664730 | tempio Votivo di Santa Maria Immacolata | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Tempio_votivo_(Venezia) |
+| 149 | Q107301282 | chiesa di Santa Maria Elisabetta | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Elisabetta_(Venezia%2C_Lido) |
+| 150 | Q3585395 | chiesa di Sant'Antonio | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Lido) |
+| 151 | Q122152493 | chiesa di Sant'Ignazio di Loyola | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Ignazio_di_Loyola_(Venezia%2C_Lido) |
+| 152 | Q585738 | chiesa di Santa Maria Assunta | Lido | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Assunta_(Venezia%2C_Malamocco) |
+| 153 | Q122152488 | chiesa di Santa Maria della Salute | Lido | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Alberoni_(Venezia) |
+| 154 | Q1791020 | Chiesa di San Lazzaro degli Armeni | San Lazzaro degli Armeni | Wikidata Q116056745 P625 (church, not island centre) | https://it.wikipedia.org/wiki/San_Lazzaro_degli_Armeni |
+| 155 | Q98781254 | chiesa di San Servolo | San Servolo | Wikidata P625; not a verified entrance | https://it.wikipedia.org/wiki/Chiese_di_Venezia |
+| 156 | Q109466368 | chiesa di San Pietro in Volta | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_in_Volta |
+| 157 | Q109466355 | chiesa di Santo Stefano Protomartire | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Portosecco) |
+| 158 | Q109466379 | chiesa di Sant'Antonio | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Pellestrina) |
+| 159 | Q109466385 | Santuario della Madonna dell'Apparizione | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Santuario_della_Madonna_dell'Apparizione |
+| 160 | Q109466393 | chiesa di Ognissanti | Pellestrina | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_Ognissanti_(Venezia%2C_Pellestrina) |
+| 161 | Q3585324 | chiesa di San Clemente | San Clemente | Wikipedia article coordinate | https://it.wikipedia.org/wiki/Chiesa_di_San_Clemente_(Venezia) |
+| 162 | mention-chiesa-sacca-sessola | Chiesa di Sacca Sessola | Sacca Sessola | OSM way/140873400 exact named building centroid; not entrance | https://it.wikipedia.org/wiki/Sacca_Sessola |
 
 ## Exclusions
 
@@ -301,6 +297,7 @@ Segments: {'walk': 127, 'schematic': 31}. Verified network length only: 45216.77
 | Q3947956 | Secondo (martire legione tebea) | demolished | https://it.wikipedia.org/wiki/San_Secondo_(isola) — Island church demolished by 1824; saint article is not the building. |
 | ('it', 'Chiesa di Santa Maria delle Grazie (Venezia)') | Chiesa di Santa Maria delle Grazie (Venezia) | demolished | https://it.wikipedia.org/wiki/Santa_Maria_della_Grazia_(isola) — Church exploded in 1849. |
 | ('it', 'Santo spirito') | Santo spirito | demolished | https://it.wikipedia.org/wiki/Santo_Spirito_(isola) — Church and monastery demolished for military buildings. |
+| mention-san-vitale-poveglia | San Vitale | demolished | https://it.wikipedia.org/wiki/Poveglia — Dell’antica pieve di San Vitale resta solo il campanile. Q18427208 is a disambiguation page, not the church. |
 | Q112044428 | Chiesa di San Cipriano (Venezia, Malamocco) | demolished | Explicit demolished-list, description or non-empty demolition field. |
 | ('it', "Chiesa di Sant'Erasmo (Venezia, Malamocco)") | Chiesa di Sant'Erasmo (Venezia, Malamocco) | demolished | Explicit demolished-list, description or non-empty demolition field. |
 | ('it', "Chiesa di Santa Maria dell'Orazione (Venezia, Malamocco)") | Chiesa di Santa Maria dell'Orazione (Venezia, Malamocco) | demolished | Explicit demolished-list, description or non-empty demolition field. |
@@ -339,6 +336,7 @@ Segments: {'walk': 127, 'schematic': 31}. Verified network length only: 45216.77
 | Q60995 | Russian Orthodox Church | parser_non_building_link | Source row linked a confession/bibliographic template rather than a building. |
 | ('en', 'San Domenico di Castello') | San Domenico di Castello | demolished | Explicit demolished-list, description or non-empty demolition field. |
 | ('en', 'San Niccolo di Bari') | San Niccolo di Bari | demolished | Explicit demolished-list, description or non-empty demolition field. |
+| mention-san-cristoforo-pace | San Cristoforo di Venezia | demolished | https://www.comune.venezia.it/it/content/cimitero-smichele — existing San Cristoforo della Pace monastery was demolished and terrain levelled for the cemetery in 1807; not San Michele in Isola. |
 | ('en', 'Santa Maria Valverde') | Santa Maria Valverde | demolished | Explicit demolished-list, description or non-empty demolition field. |
 | Q951105 | The Feast in the House of Levi | non_temple_category_member | Category member is not a church/temple building (artwork, person, institution or other object). |
 | Q3721366 | St Antoninus Giving Alms | non_temple_category_member | Category member is not a church/temple building (artwork, person, institution or other object). |

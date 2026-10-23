@@ -163,6 +163,66 @@ def test_inventory_keeps_surviving_chapel_not_demolished_parent():
     assert not audit['unresolved']
 
 
+def test_verified_followup_mentions_merge_without_generic_qids():
+    m = module()
+    records = [{'title':t, 'lang':lang, 'area':area, 'sources':[lang+'_list'],
+                'missing':True, 'coordinate':[], 'text':'', 'description':''}
+               for t,lang,area in [('oratorio di Cristo Re','it','Castello'),
+                                    ('Cristo Re, Venice','en','Castello'),
+                                    ('Chiesa di Santa Maria del Soccorso (Venezia)','it','Dorsoduro'),
+                                    ('Santa Maria del Soccorso, Venice','en','Dorsoduro'),
+                                    ('Chiesa di Santa Maria delle Grazie (Burano)','it','Burano')]]
+    osm = [{'type':'way','id':582322560,'center':{'lat':45.4380991,'lon':12.3493237},'tags':{'name':'Chiesa di Cristo Re alla Celestia','wikidata':'Q385975'}},
+           {'type':'way','id':176657496,'center':{'lat':45.4838241,'lon':12.4172199},'tags':{'name':'Chiesa di Santa Maria delle Grazie'}}]
+    stops,audit = m.build_inventory(records, {}, osm)
+    assert len(stops) == 3
+    assert not audit['unresolved']
+    assert audit['duplicate_count'] == 2
+    assert all(s.get('survival_evidence') for s in stops)
+    assert not any(s['qid']=='Q385975' for s in stops), 'Do not adopt an independently unverified OSM QID'
+
+
+def test_poveglia_disambiguation_is_resolved_as_demolished_church():
+    m = module()
+    records = [{'title':'San Vitale','qid':'Q18427208','lang':'it','area':'Poveglia',
+                'sources':['it_list'],'missing':False,'coordinate':[], 'text':'{{Disambigua}}','description':'disambiguation'}]
+    stops,audit=m.build_inventory(records,{})
+    assert not stops and not audit['unresolved']
+    assert audit['excluded'][0]['reason']=='demolished'
+    assert 'Poveglia' in audit['excluded'][0]['evidence']
+    assert audit['excluded'][0]['identity'] != 'Q18427208'
+
+
+def test_san_cristoforo_is_not_a_surviving_cemetery_temple():
+    m=module()
+    stops,audit=m.build_inventory([{'title':'San Cristoforo di Venezia','lang':'en','area':'San Michele','sources':['en_list'],'missing':True,'coordinate':[]}],{})
+    assert not stops and not audit['unresolved']
+    assert audit['excluded'][0]['reason']=='demolished'
+
+
+def test_san_teodoro_retains_the_surviving_renaissance_chapel():
+    m=module()
+    records=json.loads((ROOT/'data/processed/church_research/resolved.json').read_text(encoding='utf-8'))
+    entities=json.loads((ROOT/'data/processed/church_research/entities.json').read_text(encoding='utf-8'))
+    rows=[r for r in records if r.get('qid')=='Q119156487']
+    assert '1486' in rows[0]['text'] and 'restaurata nel 1961' in rows[0]['text']
+    stops,audit=m.build_inventory(rows,entities)
+    assert len(stops)==1 and not audit['unresolved']
+    assert stops[0]['survival_status']=='surviving_chapel'
+    assert stops[0]['access_class']=='restricted'
+    assert 'canonica' in stops[0]['survival_evidence']
+
+
+def test_generic_lido_entities_never_become_building_identities():
+    m=module()
+    records=[{'title':t,'qid':q,'lang':'it','area':'Lido','sources':['it_list'],
+              'missing':False,'coordinate':[],'text':'','description':'generic entity'}
+             for t,q in [('Santa Maria Nascente','Q501107'),('San Giuseppe','Q128267')]]
+    stops,audit=m.build_inventory(records,{})
+    assert not stops and len(audit['unresolved'])==2
+    assert {r['identity'] for r in audit['unresolved']} == {'mention-nascente-lido','mention-san-giuseppe-lido'}
+
+
 def test_generated_partial_artifact_geometry_and_disclosure():
     m = module()
     data = json.loads((ROOT/'web/data/church-route.json').read_text(encoding='utf-8'))
