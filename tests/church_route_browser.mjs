@@ -55,8 +55,8 @@ try{
  const knownMissing=new Set(['/img/sun.webp','/data/suburbs.json','/data/suburbs.bin']);
  const unrelated404s=httpErrors.filter(e=>e.status===404&&knownMissing.has(new URL(e.url).pathname));
  assert.deepEqual(errors,[]);assert.deepEqual(httpErrors.filter(e=>!unrelated404s.includes(e)),[]);
- const resource404='Failed to load resource: the server responded with a status of 404 (Not Found)';
- assert.deepEqual(consoleErrors.filter(e=>e!==resource404),[]);assert.ok(consoleErrors.length<=unrelated404s.length);
+ const resource404=/^Failed to load resource: the server responded with a status of 404 \((?:Not Found)?\)$/;
+ assert.deepEqual(consoleErrors.filter(e=>!resource404.test(e)),[]);assert.ok(consoleErrors.length<=unrelated404s.length);
  const screenshot='C:/Users/1/AppData/Local/hermes/cache/scratch/venice-church-route-verified.png';await page.screenshot({path:screenshot});
  console.log(JSON.stringify({base,testFixture:!!fixtureData,stops:data.stops.length,markers:markerCount,bridgeEntryPreserved:true,sanLazzaroIndex:laz,pointFocusVerified:true,languages:['ru','it','en'],pageErrors:errors,consoleErrors,httpErrors,unrelated404s,screenshot}));
  }
