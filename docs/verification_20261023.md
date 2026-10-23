@@ -5,6 +5,7 @@ Run after every export. Both tests read the produced files exactly the way the v
 ```bash
 python tests/test_viewer_contract.py          # layout, bounds, cards, ground, assets
 node   tests/worker_smoke.mjs                 # the viewer's own worker code on real tiles
+node   tests/i18n_coverage.mjs                # every text has Italian and English
 VENICE_DATA=/path/to/downloaded/data node tests/worker_smoke.mjs   # the same, for a deployment
 ```
 
@@ -52,3 +53,17 @@ The page also gained an error overlay: if the module fails to load, a fetch fail
 WebGL rendering, shaders, camera framing and interaction. The scene has never been looked at in a
 browser from here: the cloud browser refuses localhost and carries no WebGL, and no local Chrome with
 a debugging port was available. A visual pass by a person is still outstanding.
+
+## Checked in a real browser, through the debug protocol
+
+A headless Chrome driven over the DevTools protocol, with the software renderer, at a small window
+size: the wheels and buttons were sent as real input events and the page was read back. This is how
+three faults were caught that no file-level test could see — the left button turning the city instead
+of moving it, the wheel only working over the bare canvas, and (after the translation) a name clash in
+`app.js` that stopped the module entirely.
+
+On the live site: `?lang=it` and `?lang=en` load the map with the scene ready and **0 errors**; the
+switch goes Russian → Italian → English → Russian and back in any order; the notes, the search labels
+("Building, year unknown", "Street, waterfront", "Canal, lagoon") and a building card ("anno ignoto",
+"Year of construction unknown") all follow the chosen language; a search for *Salute* offers the
+building, the canal and the fondamenta, each named as its own kind.
