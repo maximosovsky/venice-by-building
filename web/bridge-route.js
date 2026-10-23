@@ -22,7 +22,7 @@ export const UI = {
   focus: { ru: 'К началу маршрута', it: 'Vai alla partenza', en: 'Go to start' },
   gpx: { ru: 'Скачать GPX', it: 'Scarica GPX', en: 'Download GPX' },
   crossings: { ru: 'Переходы по порядку', it: 'Attraversamenti in ordine', en: 'Crossings in order' },
-  directions: { ru: 'Стрелки показывают направление. Номера на карте показаны выборочно; выбранный переход отмечается отдельно. Полный порядок — в списке ниже.', it: 'Le frecce indicano la direzione. Sulla mappa appare una selezione di numeri; l’attraversamento scelto è evidenziato separatamente. L’elenco seguente riporta l’ordine completo.', en: 'Arrows show direction. Map numbers are sampled; the selected crossing is marked separately. The full order is listed below.' },
+  directions: { ru: 'Стрелки показывают направление. Красным выделены все включённые мосты; у каждого — номер первого перехода. Выбранный переход отмечается отдельно. Полный порядок, включая повторы, — в списке ниже.', it: 'Le frecce indicano la direzione. Tutti i ponti inclusi sono evidenziati in rosso e numerati al primo attraversamento. L’attraversamento scelto è segnato separatamente. L’elenco seguente riporta l’ordine completo, comprese le ripetizioni.', en: 'Arrows show direction. All included bridges are highlighted red and numbered at their first crossing. The selected crossing is marked separately. The full order, including repeats, is listed below.' },
   source: { ru: 'Источник и ограничения', it: 'Fonte e limiti', en: 'Source and limitations' },
   caveat: { ru: 'Маршрут рассчитан по опубликованному пешеходному графу, а не по обследованию на месте. Доступность, закрытия, ступени и условия прохода могут измениться. Полнота относится к включённым в набор данным мостам, а не к гарантированно полному городскому реестру. Минимальность общей длины не гарантируется.', it: 'Il percorso è calcolato sul grafo pedonale pubblicato, non su un sopralluogo. Accessibilità, chiusure, gradini e condizioni di passaggio possono cambiare. La copertura riguarda i ponti inclusi nei dati, non un registro cittadino garantito completo. La lunghezza totale minima non è garantita.', en: 'The route is calculated from the published pedestrian graph, not a field survey. Access, closures, steps and passage conditions may change. Coverage refers to bridges included in the dataset, not a guaranteed complete city register. Minimum total walking distance is not guaranteed.' },
   excluded: { ru: 'Исключённые объекты', it: 'Elementi esclusi', en: 'Excluded objects' },
@@ -50,6 +50,12 @@ export function validateRoute(route) {
   const ids = new Set(), visits = new Map();
   for (const b of route.bridges) {
     if (!b.id || ids.has(b.id) || ![b.x, b.z, b.lon, b.lat].every(finite) || !Number.isInteger(b.visits) || b.visits < 1) fail();
+    const deck = b.deck_local;
+    if (deck !== undefined && (!Array.isArray(deck) || !deck.every(polygon => Array.isArray(polygon) && polygon.length > 0 &&
+        polygon.every(ring => Array.isArray(ring) && ring.length >= 3 && ring.every(pair) &&
+          new Set(ring.map(p => p.join(','))).size >= 3)))) fail();
+    if (!deck?.length && (!Array.isArray(b.path_local) || b.path_local.length < 2 || !b.path_local.every(pair) ||
+        !b.path_local.some(p => p.some((v, i) => v !== b.path_local[0][i])))) fail();
     ids.add(b.id);
   }
   let repeats = 0;
@@ -130,9 +136,11 @@ function numberedMarker(THREE, n, x, z, selected = false) {
   if (typeof document === 'undefined') return null;
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 64;
   const ctx = canvas.getContext('2d'); if (!ctx) return null;
-  ctx.fillStyle = selected ? '#b04f3e' : '#345a60'; ctx.beginPath(); ctx.arc(32, 32, 28, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 3; ctx.stroke();
-  ctx.fillStyle = '#ffffff'; ctx.font = 'bold 24px sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(String(n), 32, 33);
+  ctx.clearRect(0, 0, 64, 64);
+  ctx.font = `bold ${String(n).length > 3 ? 18 : 24}px sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  // Only glyphs: the canvas stays transparent around digits, even when selected.
+  ctx.strokeStyle = '#ffffff'; ctx.lineWidth = selected ? 4 : 3; ctx.strokeText(String(n), 32, 33);
+  ctx.fillStyle = '#ff0000'; ctx.fillText(String(n), 32, 33);
   const texture = new THREE.CanvasTexture(canvas);
   const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, depthWrite: false }));
   marker.position.set(x, 38, z); marker.scale.set(48, 48, 1); marker.renderOrder = selected ? 33 : 32;
@@ -217,20 +225,50 @@ export function buildThickRouteLine(THREE, points) {
   return mesh;
 }
 
+// One group and one mesh per included physical bridge; never synthesize deck bounds.
+function bridgeHighlight(THREE, bridge) {
+  const group = new THREE.Group();
+  group.name = `bridge-highlight:${bridge.id}`; group.userData.bridge_id = bridge.id;
+  let mesh;
+  if (bridge.deck_local?.length) {
+    const shapes = bridge.deck_local.map(polygon => {
+      const shape = new THREE.Shape(polygon[0].map(([x, z]) => new THREE.Vector2(x, -z)));
+      shape.holes = polygon.slice(1).map(ring => new THREE.Path(ring.map(([x, z]) => new THREE.Vector2(x, -z))));
+      return shape;
+    });
+    const geometry = new THREE.ShapeGeometry(shapes);
+    geometry.rotateX(-Math.PI / 2); geometry.translate(0, 26, 0);
+    mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: '#ff0000',
+      side: THREE.DoubleSide, depthTest: false, depthWrite: false }));
+    group.userData.geometry_source = 'deck_local';
+  } else {
+    mesh = buildThickRouteLine(THREE, bridge.path_local.map(([x, z]) => [x, 26, z]));
+    mesh.material.uniforms.color.value.set('#ff0000');
+    mesh.material.uniforms.strokeWidth.value = 7; mesh.material.uniforms.opacity.value = 1;
+    group.userData.geometry_source = 'path_local';
+  }
+  mesh.name = `bridge-highlight-mesh:${bridge.id}`; mesh.renderOrder = 31;
+  group.add(mesh);
+  return group;
+}
+
 export function buildRouteOverlay(THREE, route) {
+  validateRoute(route);
   const group = new THREE.Group(); group.name = 'all-bridges-route';
   const data = routeGeometry(route), vectors = values => values.map(p => new THREE.Vector3(...p));
   group.add(buildThickRouteLine(THREE, data.points));
   const arrows = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vectors(data.arrows)),
     new THREE.LineBasicMaterial({ color: '#345a60', depthTest: false, depthWrite: false })); arrows.renderOrder = 31; group.add(arrows);
-  // Bound draw calls/textures: sample at most 36 first-visit numbers; any selected crossing gets its own marker.
-  const first = route.crossings.map((c, i) => ({ ...c, index: i })).filter(c => !c.repeat), stride = Math.max(1, Math.ceil(first.length / 36));
-  first.forEach((c, i) => { if (i % stride === 0) { const marker = numberedMarker(THREE, c.index + 1, c.x, c.z); if (marker) group.add(marker); } });
+  route.bridges.forEach(bridge => group.add(bridgeHighlight(THREE, bridge)));
+  // Every unique bridge keeps its first-crossing number; repeats remain in the full list.
+  route.crossings.forEach((c, index) => {
+    if (!c.repeat) { const marker = numberedMarker(THREE, index + 1, c.x, c.z); if (marker) group.add(marker); }
+  });
   return group;
 }
 
 function disposeObject(object) {
-  object.traverse(o => { o.geometry?.dispose(); const materials = Array.isArray(o.material) ? o.material : [o.material];
+  object.traverse(o => { if (!o.isSprite) o.geometry?.dispose(); const materials = Array.isArray(o.material) ? o.material : [o.material];
     materials.forEach(m => { m?.map?.dispose(); m?.dispose(); }); });
 }
 

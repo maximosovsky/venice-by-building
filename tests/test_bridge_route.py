@@ -228,6 +228,101 @@ def test_closed_subtrail_reversal_shortens_order_with_identical_crossings():
     assert all(a[1] == b[0] for a, b in zip(route, route[1:]))
 
 
+def test_historic_scope_excludes_actual_port_not_modern_central_bridges():
+    data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
+    names = {b['name'] for b in data['bridges']}
+    for landmark in ['Ponte della Costituzione', 'Ponte degli Scalzi', 'Ponte di Rialto', "Ponte dell'Accademia", 'Ponte Valeria Solesin']:
+        assert landmark in names
+    assert 'Ponte della Libertà' not in names
+    scope = data['audit'].get('historic_pedestrian_scope')
+    assert scope, 'Port/transport scope evidence is missing'
+    assert scope['source_features']
+    assert scope['construction_year_filter'] is False
+    excluded = [e for e in data['excluded'] if e['reason_code'] == 'peripheral_port_transport']
+    assert excluded
+    for e in excluded:
+        assert e['evidence_ids'] and e['source_tags']
+        assert isinstance(e['lon'], float) and isinstance(e['lat'], float)
+        assert set(e['reason']) == {'ru', 'it', 'en'}
+    assert {e['id'] for e in data['audit']['dead_end_exclusions']} == {
+        'd555835400', 'd556088894', 'd556447173', 'd560266949', 'd556119022',
+        'd569490898', 'd1232484227', 'd569414984', 'd555707815', 'd559549197',
+        'd560278015', 'd780023286', 'd556030300', 'd556029640', 'd569488629',
+        'd555811633', 'd527940372', 'd569474627', 'd1232707310'}
+
+
+def test_real_bridge_overlay_uses_original_geometry_and_entire_crossing():
+    import osmium
+    data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
+    wanted = {int(d[1:]) for b in data['audit']['inventory'] for d in b['deck_ids']}
+    nodes, decks = {}, {}
+    class Read(osmium.SimpleHandler):
+        def node(self, n):
+            nodes[n.id] = [n.location.lon, n.location.lat]
+        def way(self, w):
+            if w.id in wanted:
+                assert w.tags.get('man_made') == 'bridge'
+                decks['d' + str(w.id)] = [n.ref for n in w.nodes]
+    Read().apply_file(str(ROOT / 'data/raw/osm/venezia_island.osm.pbf'))
+    project = Transformer.from_crs('EPSG:4326', 'EPSG:32633', always_xy=True)
+    ox, oy = project.transform(12.3387, 45.4340)
+    def local(refs):
+        return [[round(x - ox, 4), round(-(y - oy), 4)]
+                for x, y in [project.transform(*nodes[n]) for n in refs]]
+    inventory = {b['id']: b for b in data['audit']['inventory']}
+    for b in data['bridges']:
+        assert 'deck_local' in b and 'path_local' in b
+        crossing = next(c for c in data['crossings'] if c['bridge_id'] == b['id'])
+        path = data['local'][crossing['start_index']:crossing['end_index'] + 1]
+        assert b['path_local'] in [path, list(reversed(path))]
+        expected = [[local(decks[d])] for d in inventory[b['id']]['deck_ids']]
+        assert b['deck_local'] == expected, 'No buffered/invented deck footprints'
+        assert len(b['path_local']) >= 2
+
+
+def test_scope_blocks_excluded_bridge_edges_from_transfers():
+    data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
+    proof = json.loads((ROOT / 'data/processed/bridge_route_proof.json').read_text(encoding='utf-8'))
+    pairs = {frozenset(pair) for pair in zip(proof['route_node_ids'], proof['route_node_ids'][1:])}
+    forbidden = data['audit'].get('peripheral_excluded_node_pairs')
+    assert forbidden, 'Excluded edges must be explicitly removed, not used for land transfers'
+    assert not pairs.intersection(frozenset(pair) for pair in forbidden)
+
+
+def test_every_exclusion_has_original_osm_evidence_coordinates():
+    data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
+    for e in data['excluded']:
+        assert e.get('evidence_ids') and e.get('source_tags'), e['id']
+        assert e.get('name') and isinstance(e.get('lon'), float) and isinstance(e.get('lat'), float)
+        assert e['reason_code'] not in e['reason']['en'], 'Explain raw codes in human language'
+    for e in data['audit']['historic_pedestrian_scope']['scope_matches']:
+        assert set(e.get('reason', {})) == {'ru', 'it', 'en'}
+        assert e['evidence_ids'] and e['source_tags']
+
+
+def test_scope_polygon_coordinates_match_original_pbf():
+    import osmium
+    scope = json.loads((ROOT / 'data/routes/bridge-route-scope.geojson').read_text(encoding='utf-8'))
+    features = {f['properties']['osm_way_id']: f for f in scope['features']}
+    nodes, refs = {}, {}
+    class Read(osmium.SimpleHandler):
+        def node(self, n):
+            nodes[n.id] = [n.location.lon, n.location.lat]
+        def way(self, w):
+            if w.id in features:
+                refs[w.id] = [n.ref for n in w.nodes]
+                assert dict(w.tags) == features[w.id]['properties']['tags']
+    Read().apply_file(str(ROOT / 'data/raw/osm/venezia_island.osm.pbf'))
+    assert set(refs) == set(features)
+    for wid, f in features.items():
+        assert f['geometry']['coordinates'] == [[nodes[n] for n in refs[wid]]]
+    data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
+    assert {e['id'] for e in data['excluded'] if e['reason_code'] == 'peripheral_port_transport'} == {
+        'd583724426', 'w161639264', 'd569427399', 'w176184207',
+        'w888348569', 'w898631459', 'w898914789', 'w898914810'}
+    assert len(data['audit']['historic_pedestrian_scope']['scope_matches']) == 10
+
+
 def test_real_ordering_evidence_and_unresolved_source_tags():
     data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
     order = data['audit']['walking_order']
@@ -275,7 +370,7 @@ def test_real_repeat_minimum_is_independent_unweighted_matching():
     lower_bound = sum(closure[u][v]['weight'] for u, v in matching)
     assert len(matching) * 2 == len(odd)
     assert lower_bound == data['repeat_crossings'] == 74
-    assert len(odd) == data['euler']['odd_count'] == 88
+    assert len(odd) == data['euler']['odd_count'] == 86
 
 
 def test_real_deadend_banks_reconstructed_from_original_pbf():

@@ -1,4 +1,4 @@
-"""OSM pedestrian bridge postman route, scoped to Venice main-island relation 4817103.
+"""OSM pedestrian bridge postman route, historic Venice inside island relation 4817103.
 
 Run: python -m venice.s10_bridge_route (with PYTHONPATH=pipeline).
 No fabricated shortcuts: every emitted segment is an original adjacent OSM node pair.
@@ -184,6 +184,7 @@ def build_topology(nodes, ways, node_tags, polygon, decks=None):
                         'allowed_way_ids': [r['id'] for r in allowed],
                         'restricted_ways': [{'id': r['id'], 'reason': r['reason']} for r in rows if r['reason']],
                         'names': sorted(names), 'deck_ids': [decks[i]['id'] for i in sorted(deck_indices)],
+                        'deck_geometries': [decks[i]['geometry'] for i in sorted(deck_indices)],
                         'geometry': rows[0]['line']})
         for r in rows:
             way_bridge[r['id']] = bid
@@ -465,7 +466,7 @@ def main():
                             'real_banks': sorted({component[n] for n in portals if land.degree(n) > 0}),
                             'portals': portals,
                             'lon': lon, 'lat': lat, 'x': mid.x - ORIGIN[0], 'z': -(mid.y - ORIGIN[1])}
-    original_records = dict(records)
+    original_records = {bid: dict(b) for bid, b in records.items()}
     deadends = immediate_deadends(records, land, components)
     audit['dead_end_exclusions'] = deadends
     audit['dead_end_exclusion_count'] = len(deadends)
@@ -476,6 +477,63 @@ def main():
     for entry in deadends:
         records.pop(entry['id'])
     excluded.extend(deadends)
+    # Evaluate scope on original geometry AFTER the frozen one-pass leaf test.
+    # Removing transport first would silently turn upstream bridges into new leaves.
+    by_way = {w['id']: w for w in ways}
+    scope_file = config.ROOT / 'data/routes/bridge-route-scope.geojson'
+    scope_data = json.loads(scope_file.read_text(encoding='utf-8'))
+    assert scope_data['metadata']['source_sha256'] == hashlib.sha256(pbf.read_bytes()).hexdigest()
+    zones = [(f['properties']['osm_way_id'], transform(PROJECT.transform, shape(f['geometry'])))
+             for f in scope_data['features']]
+    peripheral, forbidden_pairs = [], set()
+    for b in groups:
+        lines = [LineString([PROJECT.transform(*nodes[n]) for n in by_way[wid]['nodes']])
+                 for wid in b['way_ids']]
+        evidence_ids = [f'way/{wid}' for wid, geom in zones
+                        if any(geom.intersection(line).length > 0.5 for line in lines)]
+        port = next(geom for wid, geom in zones if wid == 306834563)
+        category = any(by_way[wid]['tags'].get('man_made') == 'pier' or
+                       by_way[wid]['tags'].get('parking') == 'underground' for wid in b['way_ids'])
+        if category and min(port.distance(line) for line in lines) <= scope_data['metadata']['category_context_distance_m']:
+            evidence_ids.append('way/306834563')
+        if not evidence_ids:
+            continue
+        for wid in b['way_ids']:
+            forbidden_pairs.update(tuple(sorted(pair)) for pair in zip(by_way[wid]['nodes'], by_way[wid]['nodes'][1:]))
+        lon, lat = Transformer.from_crs(config.CRS_METRIC, config.CRS_WEB, always_xy=True).transform(
+            b['geometry'].centroid.x, b['geometry'].centroid.y)
+        e = {'id': b['id'], 'name': b['name'] or f"OSM bridge {b['id']}",
+             'reason_code': 'peripheral_port_transport', 'lon': lon, 'lat': lat,
+             'evidence_ids': sorted(set(evidence_ids)),
+             'source_tags': [{'way_id': wid, 'tags': by_way[wid]['tags']} for wid in b['way_ids']],
+             'scope_match': 'original segment overlap >0.5m' if not category else 'spatial overlap or explicit pier/parking ramp within 100m of port'}
+        peripheral.append(e)
+        # Preserve earlier exclusions, while recording overlapping scope evidence separately.
+        if b['id'] in records:
+            records.pop(b['id'])
+            excluded.append(e)
+        elif b['id'] not in {row['id'] for row in excluded}:
+            unresolved = [row for row in unresolved if row['id'] != b['id']]
+            excluded.append(e)
+    graph.remove_edges_from(forbidden_pairs)
+    # Rebuild land components, without turning excluded bridges into free land edges.
+    reachable = nx.node_connected_component(graph, start)
+    graph = graph.subgraph(reachable).copy()
+    land = nx.Graph()
+    land.add_nodes_from(graph)
+    land.add_edges_from((u, v, dict(d)) for u, v, d in graph.edges(data=True) if not d['bridge_id'])
+    components = sorted(nx.connected_components(land), key=lambda s: min(s))
+    component = {n: i for i, c in enumerate(components) for n in c}
+    for b in records.values():
+        assert all(n in graph for n in b['path']), f"Scope disconnected retained bridge {b['id']}"
+        b['banks'] = [component[b['path'][0]], component[b['path'][-1]]]
+    audit['historic_pedestrian_scope'] = {**scope_data['metadata'],
+        'source_file': str(scope_file.relative_to(config.ROOT)),
+        'source_features': [{'osm_way_id': f['properties']['osm_way_id'], 'tags': f['properties']['tags']}
+                            for f in scope_data['features']],
+        'scope_matches': peripheral, 'new_exclusion_count': sum(e['reason_code'] == 'peripheral_port_transport' for e in excluded),
+        'explicitly_retained': ['Ponte della Costituzione', 'Ponte degli Scalzi', 'Ponte di Rialto', "Ponte dell'Accademia", 'Ponte Valeria Solesin']}
+    audit['peripheral_excluded_node_pairs'] = [list(pair) for pair in sorted(forbidden_pairs)]
     required = nx.MultiGraph()
     for bid, b in records.items():
         required.add_edge(*b['banks'], key=bid, bridge_id=bid, length=b['length'])
@@ -593,20 +651,61 @@ def main():
     assert all(graph.has_edge(u, v) for u, v in zip(node_route, node_route[1:]))
     assert sum(n - 1 for n in visits.values()) == repeats
     assert all(not restriction(tags.get(n, {})) for n in node_route)
-    bridge_rows = [{'id': b['id'], 'name': b['name'], 'lon': b['lon'], 'lat': b['lat'],
-                    'x': b['x'], 'z': b['z'], 'visits': visits[b['id']]}
-                   for b in records.values()]
+    bridge_rows = []
+    for b in records.values():
+        deck_local = []
+        for geom in b['deck_geometries']:
+            polygons = list(geom.geoms) if geom.geom_type == 'MultiPolygon' else [geom]
+            for deck in polygons:
+                deck_local.append([[[round(x - ORIGIN[0], 4), round(-(y - ORIGIN[1]), 4)]
+                                    for x, y in [PROJECT.transform(*ll) for ll in ring.coords]]
+                                   for ring in [deck.exterior, *deck.interiors]])
+        path_local = [[round(x - ORIGIN[0], 4), round(-(y - ORIGIN[1]), 4)]
+                      for x, y in [PROJECT.transform(*nodes[n]) for n in b['path']]]
+        bridge_rows.append({'id': b['id'], 'name': b['name'], 'lon': b['lon'], 'lat': b['lat'],
+                            'x': b['x'], 'z': b['z'], 'visits': visits[b['id']],
+                            'deck_local': deck_local, 'path_local': path_local})
+    group_by_id = {b['id']: b for b in groups}
     for e in excluded:
+        b = group_by_id[e['id']]
+        e['name'] = e['name'] or f"OSM bridge {e['id']}"
+        e.setdefault('evidence_ids', [f'way/{wid}' for wid in b['way_ids']] +
+                     [f"way/{did[1:]}" for did in b['deck_ids']])
+        e.setdefault('source_tags', [{'way_id': wid, 'tags': by_way[wid]['tags']}
+                                    for wid in sorted(set(b['way_ids'] + [int(d[1:]) for d in b['deck_ids']]))])
+        lon, lat = Transformer.from_crs(config.CRS_METRIC, config.CRS_WEB, always_xy=True).transform(
+            b['geometry'].centroid.x, b['geometry'].centroid.y)
+        e.setdefault('lon', lon)
+        e.setdefault('lat', lat)
         code = e['reason_code']
         if code == 'immediate_pedestrian_dead_end':
             e['reason'] = prose(
                 'Сразу за мостом пешеходный тупик: берег имеет выход без мостов, но не связан с другим настоящим мостом. Проверка однократная; вышележащие мосты сохранены.',
                 'Subito dopo il ponte un vicolo cieco pedonale: la riva ha accesso senza ponti, ma nessun altro ponte reale. Controllo unico; ponti a monte mantenuti.',
                 'Immediately beyond this bridge is a pedestrian cul-de-sac: the bank has bridge-free outward access but no other real bridge. One-pass exclusion; upstream bridges retained.')
+        elif code == 'peripheral_port_transport':
+            e['reason'] = prose(
+                'Периферийная портовая/транспортная инфраструктура Тронкетто, Стационе Мариттима или подхода с материка. Исключена по исходной геометрии и категории OSM; не по возрасту моста. Ponte della Costituzione сохранён.',
+                'Infrastruttura periferica portuale/di trasporto del Tronchetto, Stazione Marittima o accesso dalla terraferma. Esclusa per geometria e categoria OSM, non per età. Ponte della Costituzione mantenuto.',
+                'Peripheral port/transport infrastructure at Tronchetto, Stazione Marittima or the mainland approach. Excluded by original OSM geometry and category, not bridge age. Ponte della Costituzione retained.')
         else:
-            e['reason'] = prose('Исключён по данным OSM: ' + code,
-                                'Escluso secondo OSM: ' + code, 'Excluded according to OSM: ' + code)
-    possible = not odd and not unresolved and not any(e['reason']['en'].endswith('disconnected_from_start') for e in excluded)
+            e['reason'] = {
+                'access:private': prose('Частный пешеходный доступ по явным тегам OSM; публичный проход не подтверждён.',
+                    'Accesso pedonale privato indicato esplicitamente in OSM; passaggio pubblico non confermato.',
+                    'Explicit OSM tags restrict pedestrian access to private use; public passage is not established.'),
+                'access:no': prose('Пешеходный доступ запрещён явными тегами OSM.',
+                    'Accesso pedonale vietato dai tag espliciti OSM.',
+                    'Explicit OSM tags prohibit pedestrian access.'),
+                'disconnected_from_start': prose('Исходные пешеходные узлы не связаны с Piazza San Marco после фильтрации доступа и границы острова. Это не доказательство частного доступа; вымышленное соединение не добавлено.',
+                    'Nodi pedonali originali non connessi a Piazza San Marco dopo filtri di accesso e confine. Non dimostra accesso privato; nessun collegamento inventato.',
+                    'Original pedestrian nodes are disconnected from Piazza San Marco after access and island-boundary filtering. This is not evidence of private access; no connector is invented.')
+            }[code]
+    for e in peripheral:
+        if 'reason' not in e:
+            e['reason'] = prose('Также соответствует критерию периферийной портовой/транспортной инфраструктуры; первоначальное исключение сохранено.',
+                'Corrisponde anche al criterio periferico portuale/di trasporto; esclusione originale mantenuta.',
+                'Also matches the peripheral port/transport criterion; its original exclusion is retained.')
+    possible = not odd and not unresolved and not any(e['reason_code'] == 'disconnected_from_start' for e in excluded)
     explanation = prose(
         f'После сжатия пешеходной связности без мостов: {len(odd)} компонент нечётной степени. '
         f'Замкнутый обход каждого принятого моста ровно один раз {"возможен" if not odd else "невозможен"}. '
@@ -617,9 +716,9 @@ def main():
         f'After contracting bridge-free walking connectivity: {len(odd)} odd-degree land components. '
         f'A closed once-per-accepted-bridge circuit is {"possible" if not odd else "impossible"}. '
         f'Matching gives a minimum of {repeats} repeated crossings in the accepted model; total walking length is not proven optimal.')
-    audit.update({'scope_relation': 4817103, 'scope': prose('Настроенный полигон главного острова, включая западные транспортные/портовые зоны; без Джудекки и внешних островов. Это не шесть отдельных административных полигонов.',
-                  'Poligono configurato dell’isola principale, incluse le aree occidentali di trasporto/porto; escluse Giudecca e isole esterne. Non sono sei poligoni amministrativi separati.',
-                  'Configured main-island polygon includes western transport/port areas; excludes Giudecca and outer islands. Not six separate administrative district polygons.'),
+    audit.update({'scope_relation': 4817103, 'scope': prose('Историческая пешеходная Венеция в полигоне главного острова: исключены периферийные портовые и транспортные мосты по геометрии OSM. Современные мосты центра, включая Ponte della Costituzione, сохранены. Без Джудекки и внешних островов.',
+                  'Venezia storica pedonale nel poligono dell’isola principale: esclusi ponti periferici portuali e di trasporto secondo geometria OSM. Ponti moderni del centro, incluso Ponte della Costituzione, mantenuti. Escluse Giudecca e isole esterne.',
+                  'Historic pedestrian Venice within the main-island polygon: peripheral port/transport bridges excluded by OSM geometry. Modern central bridges, including Ponte della Costituzione, retained. Giudecca and outer islands excluded.'),
                   'reachable_nodes': graph.number_of_nodes(), 'reachable_edges': graph.number_of_edges(),
                   'land_components': len(components), 'odd_components': [
                       {'id': c, 'degree': required.degree(c), 'representative_node_id': min(components[c]),
@@ -640,9 +739,9 @@ def main():
     data = {'id': 'all-bridges', 'title': prose('Мосты без непосредственных тупиков: Сан-Марко — Сан-Марко',
                 'Ponti senza vicoli ciechi immediati: San Marco — San Marco',
                 'Bridges without immediate cul-de-sacs: San Marco — San Marco'),
-            'summary': prose(f'{len(records)} принятых мостов OSM, {repeats} повторных переходов; {len(deadends)} исключено из-за непосредственного пешеходного тупика. Начало и конец — Piazza San Marco. Непроверенные кандидаты указаны в аудите.',
-                f'{len(records)} ponti OSM accettati, {repeats} attraversamenti ripetuti; {len(deadends)} esclusi per vicolo cieco pedonale immediato. Partenza e arrivo a Piazza San Marco. Candidati non risolti nell’audit.',
-                f'{len(records)} accepted OSM bridges, {repeats} repeated crossings; {len(deadends)} excluded for an immediate pedestrian cul-de-sac. Starts and ends at Piazza San Marco. Unresolved candidates are listed in the audit.'),
+            'summary': prose(f'{len(records)} принятых мостов OSM, {repeats} повторных переходов; {len(deadends)} исключено из-за непосредственного пешеходного тупика, {audit["historic_pedestrian_scope"]["new_exclusion_count"]} — периферийная портовая/транспортная инфраструктура. Ponte della Costituzione сохранён. Начало и конец — Piazza San Marco. Непроверенные кандидаты указаны в аудите.',
+                f'{len(records)} ponti OSM accettati, {repeats} attraversamenti ripetuti; {len(deadends)} esclusi per vicolo cieco pedonale immediato, {audit["historic_pedestrian_scope"]["new_exclusion_count"]} per infrastruttura periferica portuale/di trasporto. Ponte della Costituzione mantenuto. Partenza e arrivo a Piazza San Marco. Candidati non risolti nell’audit.',
+                f'{len(records)} accepted OSM bridges, {repeats} repeated crossings; {len(deadends)} excluded for an immediate pedestrian cul-de-sac, {audit["historic_pedestrian_scope"]["new_exclusion_count"]} for peripheral port/transport infrastructure. Ponte della Costituzione retained. Starts and ends at Piazza San Marco. Unresolved candidates are listed in the audit.'),
             'status': 'ready', 'start': {'name': 'Piazza San Marco', 'lon': nodes[start][0], 'lat': nodes[start][1]},
             'distance_m': round(distance, 3), 'bridge_count': len(records), 'repeat_crossings': repeats,
             'euler': {'possible': possible, 'odd_count': len(odd), 'explanation': explanation},

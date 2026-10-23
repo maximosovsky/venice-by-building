@@ -19,7 +19,7 @@ const fixture = () => ({
   euler: { possible: false, odd_count: 2, explanation: text('Две нечётные вершины: нужны повторы.', 'Due vertici dispari: servono ripetizioni.', 'Two odd vertices: repeats are required.') },
   coordinates: [[12.318, 45.438], [12.319, 45.439], [12.318, 45.438]],
   local: [[0, 0], [100, -100], [0, 0]],
-  bridges: [{ id: 'way/1', name: 'Ponte <script>', lon: 12.319, lat: 45.439, x: 100, z: -100, visits: 2 }],
+  bridges: [{ id: 'way/1', name: 'Ponte <script>', lon: 12.319, lat: 45.439, x: 100, z: -100, visits: 2, deck_local: [], path_local: [[90, -90], [100, -100], [110, -105]] }],
   crossings: [false, true].map(repeat => ({ bridge_id: 'way/1', name: 'Ponte <script>', lon: 12.319, lat: 45.439, x: 100, z: -100, repeat })),
   excluded: [{ id: 'way/2', name: 'Private & closed', reason: text('Частный', 'Privato', 'Private') }],
   audit: { limitations: text('Доступность не проверена на месте.', 'Accessibilità non verificata sul posto.', 'Access not checked on site.') },
@@ -167,6 +167,137 @@ test('installer disposes thick stroke geometry and shader exactly once without r
   assert.equal(h.scene.children.length, 0);
 });
 
+const highlights = overlay => overlay.children.filter(o => o.userData.bridge_id);
+const release = overlay => overlay.traverse(o => { o.geometry?.dispose(); o.material?.map?.dispose(); o.material?.dispose(); });
+const deckFixture = () => {
+  const route = fixture();
+  route.bridges[0].deck_local = [
+    [[[10, 20], [30, 20], [30, 40], [10, 40], [10, 20]], [[15, 25], [15, 35], [25, 35], [25, 25], [15, 25]]],
+    [[[40, 20], [45, 20], [45, 25], [40, 25], [40, 20]]]
+  ];
+  return route;
+};
+
+test('every included bridge owns exactly one true-red deck highlight; holes and multipart geometry retain actual local footprint', () => {
+  const route = deckFixture(), overlay = buildRouteOverlay(THREE, route);
+  const objects = highlights(overlay);
+  assert.equal(objects.length, route.bridge_count);
+  assert.equal(objects[0].userData.bridge_id, route.bridges[0].id);
+  assert.equal(objects[0].children.length, 1, 'one independently identifiable highlight per bridge');
+  const mesh = objects[0].children[0];
+  assert.ok(mesh.isMesh);
+  assert.equal(mesh.material.color.getHexString(), 'ff0000');
+  assert.equal(mesh.material.depthTest, false);
+  assert.equal(mesh.material.depthWrite, false);
+  assert.ok(mesh.renderOrder > overlay.children[0].renderOrder);
+  mesh.updateWorldMatrix(true, false);
+  const p = mesh.geometry.attributes.position, indices = mesh.geometry.index.array;
+  let area = 0;
+  for (let i = 0; i < indices.length; i += 3) {
+    const vertices = [0, 1, 2].map(j => new THREE.Vector3().fromBufferAttribute(p, indices[i + j]).applyMatrix4(mesh.matrixWorld));
+    assert.ok(vertices.every(v => v.y > 24));
+    const [a, b, c] = vertices;
+    area += Math.abs((b.x - a.x) * (c.z - a.z) - (b.z - a.z) * (c.x - a.x)) / 2;
+    const x = (a.x + b.x + c.x) / 3, z = (a.z + b.z + c.z) / 3;
+    assert.ok(!(x > 15 && x < 25 && z > 25 && z < 35), 'no triangle fills the mapped hole');
+  }
+  assert.ok(Math.abs(area - 325) < .001, `actual deck area minus hole: ${area}`);
+  const xs = [], zs = [];
+  for (let i = 0; i < p.count; i++) { const v = new THREE.Vector3().fromBufferAttribute(p, i).applyMatrix4(mesh.matrixWorld); xs.push(v.x); zs.push(v.z); }
+  assert.deepEqual([Math.min(...xs), Math.max(...xs), Math.min(...zs), Math.max(...zs)], [10, 45, 20, 40]);
+  assert.ok(!highlights(overlay).some(o => o.userData.bridge_id === route.excluded[0].id));
+  release(overlay);
+});
+
+test('unmapped bridge uses its entire supplied path as stronger red stroke, never a fake deck', () => {
+  const route = fixture(), overlay = buildRouteOverlay(THREE, route), objects = highlights(overlay);
+  assert.equal(objects.length, route.bridge_count);
+  const mesh = objects[0].children[0];
+  assert.ok(mesh.material.isShaderMaterial);
+  assert.equal(mesh.material.uniforms.color.value.getHexString(), 'ff0000');
+  assert.ok(mesh.material.uniforms.strokeWidth.value > 3);
+  assert.equal(mesh.material.depthTest, false);
+  const a = mesh.geometry.attributes.segmentStart.array, b = mesh.geometry.attributes.segmentEnd.array;
+  assert.deepEqual([a[0], a[2]], route.bridges[0].path_local[0]);
+  assert.deepEqual([b[b.length - 3], b[b.length - 1]], route.bridges[0].path_local.at(-1));
+  assert.equal(mesh.geometry.attributes.position.count, (route.bridges[0].path_local.length - 1) * 6);
+  release(overlay);
+});
+
+test('missing or malformed deck/path geometry fails closed instead of fabricating a footprint', () => {
+  for (const geometry of [{ deck_local: [], path_local: undefined }, { deck_local: [], path_local: [[1, 2]] },
+    { deck_local: [[[[NaN, 0], [1, 1], [2, 0]]]], path_local: [[1, 2], [3, 4]] }]) {
+    const route = fixture(); Object.assign(route.bridges[0], geometry);
+    assert.throws(() => validateRoute(route), /route/i);
+  }
+  assert.equal(validateRoute(deckFixture()), true);
+});
+
+function withCanvas(fn) {
+  const previous = globalThis.document, canvases = [];
+  globalThis.document = { createElement: () => {
+    const ops = [], ctx = new Proxy({}, { get: (_, key) => (...args) => ops.push([key, ...args]), set: (target, key, value) => { target[key] = value; return true; } });
+    const canvas = { getContext: () => ctx, ops }; canvases.push(canvas); return canvas;
+  } };
+  return Promise.resolve().then(() => fn(canvases)).finally(() => { if (previous === undefined) delete globalThis.document; else globalThis.document = previous; });
+}
+
+test('all unique first-crossing numbers render digits only on transparent canvases, including selected repeat', async () => withCanvas(async canvases => {
+  const route = fixture(); route.bridges = []; route.crossings = []; route.bridge_count = 80; route.repeat_crossings = 1;
+  for (let i = 0; i < 80; i++) {
+    const bridge = { ...fixture().bridges[0], id: `way/${i + 10}`, visits: i === 0 ? 2 : 1 };
+    route.bridges.push(bridge); route.crossings.push({ ...fixture().crossings[0], bridge_id: bridge.id });
+    if (i === 0) route.crossings.push({ ...fixture().crossings[1], bridge_id: bridge.id });
+  }
+  const h = harness(async () => ({ ok: true, json: async () => route }));
+  await h.controller.load(); h.controller.setVisible(true);
+  const overlay = h.scene.children[0];
+  assert.equal(overlay.children.filter(o => o.isSprite).length, 80, 'no first-visit sampler');
+  assert.equal(highlights(overlay).length, 80);
+  assert.equal(new Set(highlights(overlay).map(o => o.userData.bridge_id)).size, 80);
+  assert.deepEqual(canvases.map(c => c.ops.find(op => op[0] === 'fillText')[1]), route.crossings.flatMap((c, i) => c.repeat ? [] : [String(i + 1)]));
+  h.controller.focusCrossing(1);
+  assert.equal(canvases.at(-1).ops.find(op => op[0] === 'fillText')[1], '2');
+  for (const canvas of canvases) {
+    assert.ok(canvas.ops.every(op => ['clearRect', 'fillText', 'strokeText'].includes(op[0])), JSON.stringify(canvas.ops));
+    assert.ok(canvas.ops.filter(op => /Text$/.test(op[0])).every(op => /^\d+$/.test(op[1])));
+  }
+  const replaced = overlay.children.at(-1), replacementDisposals = { material: 0, texture: 0 };
+  replaced.material.addEventListener('dispose', () => replacementDisposals.material++);
+  replaced.material.map.addEventListener('dispose', () => replacementDisposals.texture++);
+  h.controller.focusCrossing(0);
+  assert.deepEqual(replacementDisposals, { material: 1, texture: 1 });
+  assert.ok(!overlay.children.includes(replaced));
+  const disposals = [], spriteGeometry = overlay.children.find(o => o.isSprite).geometry;
+  let sharedSpriteDisposals = 0; const onSharedDispose = () => sharedSpriteDisposals++;
+  spriteGeometry.addEventListener('dispose', onSharedDispose);
+  overlay.traverse(o => { for (const resource of [o.isSprite ? null : o.geometry, o.material, o.material?.map].filter(Boolean)) {
+    const record = { resource, count: 0 }; resource.addEventListener('dispose', () => record.count++); disposals.push(record);
+  } });
+  h.controller.dispose(); h.controller.dispose();
+  assert.ok(disposals.every(d => d.count === 1), 'all highlight and label resources disposed exactly once');
+  assert.equal(sharedSpriteDisposals, 0, 'THREE owns the shared sprite geometry; do not dispose other components’ geometry');
+  spriteGeometry.removeEventListener('dispose', onSharedDispose);
+  assert.equal(h.scene.children.length, 0);
+}));
+
+test('installer disposes mapped deck geometry and material exactly once', async () => {
+  const h = harness(async () => ({ ok: true, json: async () => deckFixture() }));
+  await h.controller.load(); h.controller.setVisible(true);
+  const mesh = highlights(h.scene.children[0])[0].children[0], counts = { geometry: 0, material: 0 };
+  mesh.geometry.addEventListener('dispose', () => counts.geometry++);
+  mesh.material.addEventListener('dispose', () => counts.material++);
+  h.controller.setVisible(false); h.controller.setVisible(true);
+  assert.deepEqual(counts, { geometry: 0, material: 0 }, 'hide/show reuses existing resources');
+  h.controller.dispose(); h.controller.dispose();
+  assert.deepEqual(counts, { geometry: 1, material: 1 });
+  assert.equal(h.scene.children.length, 0);
+});
+
+test('directions describe all first-crossing numbers instead of sampled markers in each language', () => {
+  for (const lang of ['ru', 'it', 'en']) assert.ok(!/выборочно|selezione|sampled/.test(UI.directions[lang]));
+});
+
 // Run BRIDGE_ROUTE_WEBGL=1 node --test tests/bridge_route_ui.mjs for SwiftShader.
 test('real WebGL rasterizes a 3 CSS px stroke across angles, zoom, DPR and resize',
   { skip: process.env.BRIDGE_ROUTE_WEBGL !== '1', timeout: 120000 }, async () => {
@@ -188,7 +319,7 @@ test('real WebGL rasterizes a 3 CSS px stroke across angles, zoom, DPR and resiz
       page.on('pageerror', e => errors.push(e.message));
       page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
       await page.goto(`http://127.0.0.1:${server.address().port}/`);
-      const samples = await page.evaluate(async () => {
+      const report = await page.evaluate(async route => {
         const THREE = await import('/three.js');
         const { buildThickRouteLine } = await import('/route.js');
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
@@ -220,8 +351,43 @@ test('real WebGL rasterizes a 3 CSS px stroke across angles, zoom, DPR and resiz
             scene.remove(stroke); stroke.geometry.dispose(); stroke.material.dispose();
           }
         }
-        renderer.dispose(); return results;
-      });
+        const { buildRouteOverlay } = await import('/route.js');
+        const fallback = { ...route.bridges[0], id: 'fallback/2', deck_local: [], visits: 1 };
+        route.bridges.push(fallback); route.bridge_count = 2;
+        route.crossings.push({ ...route.crossings[0], bridge_id: fallback.id, repeat: false });
+        renderer.setPixelRatio(1); renderer.setSize(600, 680);
+        const top = new THREE.OrthographicCamera(0, 150, 120, -50, .1, 200);
+        top.position.set(0, 100, 0); top.up.set(0, 0, -1); top.lookAt(0, 0, 0); top.updateMatrixWorld();
+        const overlay = buildRouteOverlay(THREE, route); scene.add(overlay);
+        overlay.children.filter(o => !o.userData.bridge_id).forEach(o => { o.visible = false; });
+        const readPixel = (x, z) => {
+          const p = new THREE.Vector3(x, 26, z).project(top), gl = renderer.getContext(), pixel = new Uint8Array(4);
+          gl.readPixels(Math.floor((p.x + 1) * 300), Math.floor((p.y + 1) * 340), 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, pixel);
+          return [...pixel];
+        };
+        renderer.render(scene, top);
+        const highlightPixels = { deck: readPixel(20, 22), hole: readPixel(20, 30), multipart: readPixel(42, 22), fallback: readPixel(100, -100) };
+        const occluder = new THREE.Mesh(new THREE.PlaneGeometry(500, 500), new THREE.MeshBasicMaterial({ color: '#00ff00' }));
+        occluder.rotation.x = -Math.PI / 2; occluder.position.y = 60; scene.add(occluder);
+        renderer.render(scene, top); highlightPixels.aboveOccluder = readPixel(20, 22);
+        scene.remove(occluder); occluder.geometry.dispose(); occluder.material.dispose();
+        const labels = overlay.children.filter(o => o.isSprite);
+        const canvasReport = labels.map(o => {
+          const canvas = o.material.map.image, pixels = canvas.getContext('2d').getImageData(0, 0, 64, 64).data;
+          const alpha = (x, y) => pixels[(y * 64 + x) * 4 + 3];
+          return { corners: [[0, 0], [32, 0], [0, 32], [63, 63], [32, 6]].map(([x, y]) => alpha(x, y)),
+            ink: [...pixels].filter((v, i) => i % 4 === 3 && v > 0).length };
+        });
+        scene.remove(overlay);
+        overlay.traverse(o => { if (!o.isSprite) o.geometry?.dispose(); o.material?.map?.dispose(); o.material?.dispose(); });
+        renderer.dispose(); return { samples: results, highlightPixels, canvasReport };
+      }, deckFixture());
+      const samples = report.samples;
+      assert.deepEqual(report.highlightPixels.hole, [0, 0, 0, 0], 'mapped deck hole stays transparent in actual WebGL');
+      for (const key of ['deck', 'multipart', 'fallback', 'aboveOccluder']) assert.deepEqual(report.highlightPixels[key], [255, 0, 0, 255], key);
+      assert.equal(report.canvasReport.length, 2);
+      for (const canvas of report.canvasReport) { assert.deepEqual(canvas.corners, [0, 0, 0, 0, 0]); assert.ok(canvas.ink > 0); }
+      console.log('WebGL bridge raster:', JSON.stringify({ pixels: report.highlightPixels, labels: report.canvasReport }));
       for (const sample of samples) {
         assert.deepEqual(sample.resolution, [sample.width, sample.height]);
         // Four-sample MSAA quantizes diagonal coverage; geometric width remains exactly 3.
@@ -295,7 +461,8 @@ test('late loading cannot replace a building card; existing quest insertion and 
   assert.equal(h.view, 'building');
   const app = readFileSync(new URL('../web/app.js', import.meta.url), 'utf8');
   assert.match(app, /import \{ installBridgeRoute \} from '\.\/bridge-route\.js'/);
-  assert.match(app, /\$\{bridgeRoute\.listHTML\(\)\}\$\{quests\.map\(route\)\.join\(''\)\}/);
+  assert.ok(app.includes('${bridgeRoute.listHTML()}'), 'bridge entry remains in existing routes');
+  assert.ok(app.includes("${quests.map(route).join('')}"), 'existing quests remain in routes');
   assert.match(app, /bridgeRoute\.wireList\(\)/);
   assert.match(app, /dockView === 'bridge-route'/);
   assert.match(app, /function renderQuest\(\)/);
