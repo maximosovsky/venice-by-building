@@ -204,6 +204,14 @@ def main():
         check(asset.split("/")[-1] in page, f"index.html never references {asset}")
         check((ROOT / "web" / asset).exists(), f"index.html needs {asset}, which is missing")
     check("data/venezia.json" in app, "app.js does not fetch data/venezia.json")
+    # Управление должно оставаться картографическим: левая кнопка сдвигает, правая и Shift поворачивают,
+    # колесо приближает и работает в любом месте над городом, а не только над холстом.
+    check("LEFT: THREE.MOUSE.PAN" in app, "the left button no longer pans the map")
+    check("RIGHT: THREE.MOUSE.ROTATE" in app, "the right button no longer turns the city")
+    check("controls.enableZoom = true" in app, "zoom is no longer switched on")
+    check("new WheelEvent('wheel'" in app, "the wheel is no longer forwarded from the panels to the canvas")
+    check("leftButtonRotates" in app, "Shift with the left button no longer turns the city")
+    check("левой кнопкой" in page, "the notes no longer explain how to move the map")
     for asset in ("vendor/three.module.js", "vendor/MapControls.js"):
         check(asset in app, f"app.js never imports {asset}")
         check((ROOT / "web" / asset).exists(), f"app.js imports {asset}, which is missing")

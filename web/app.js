@@ -63,12 +63,34 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(35, 1, 5, 60000);
 const controls = new MapControls(camera, canvas);
 controls.enableDamping = true;
-// Left drag turns and tilts the city; right drag, or Shift with the left, moves it.
-controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
+// Как на карте, и как на карте Парижа: левая кнопка сдвигает город, правая (или Shift с левой)
+// поворачивает и наклоняет его, колесо приближает и отдаляет.
+controls.mouseButtons = { LEFT: THREE.MOUSE.PAN, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.ROTATE };
 controls.rotateSpeed = 0.6;
+controls.panSpeed = 1.1;
+controls.zoomSpeed = 1.2;
+controls.enableZoom = true;
+controls.enablePan = true;
+controls.enableRotate = true;
 controls.maxPolarAngle = Math.PI * 0.47;
 controls.minDistance = 60;
 controls.maxDistance = 22000;
+
+// Shift с левой кнопкой поворачивает: так город можно повернуть и на ноутбуке без правой кнопки.
+const leftButtonRotates = on => { controls.mouseButtons.LEFT = on ? THREE.MOUSE.ROTATE : THREE.MOUSE.PAN; };
+addEventListener('keydown', e => { if (e.key === 'Shift') leftButtonRotates(true); });
+addEventListener('keyup', e => { if (e.key === 'Shift') leftButtonRotates(false); });
+addEventListener('blur', () => leftButtonRotates(false));
+
+// Колесо слушается в любом месте над городом, а не только над самим холстом: панели закрывают
+// часть экрана. Внутри прокручиваемых панелей колесо остаётся прокруткой текста.
+addEventListener('wheel', e => {
+  if (e.target === canvas || e.ctrlKey || e.metaKey) return;
+  if (e.target.closest?.('.dock, .find, .find-results')) return;
+  e.preventDefault();
+  canvas.dispatchEvent(new WheelEvent('wheel', { deltaY: e.deltaY, deltaX: e.deltaX, deltaMode: e.deltaMode,
+    clientX: e.clientX, clientY: e.clientY, ctrlKey: e.ctrlKey, bubbles: false }));
+}, { passive: false });
 
 // ?cam=x,z,azimuth,elevation,span overrides the home view (for sharing a view, and for screenshots).
 const camParam = new URLSearchParams(location.search).get('cam')?.split(',').map(Number);
