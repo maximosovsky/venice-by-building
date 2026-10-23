@@ -1,0 +1,75 @@
+name: Test and deploy
+
+# The site is web/ and its data is committed with it, so a push that touches either one is a deploy.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - 'pipeline/**'
+      - 'tests/**'
+      - 'vercel.json'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: Contract and worker tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Viewer data contract
+        run: python3 tests/test_viewer_contract.py
+      - name: The viewer's own worker on real tiles
+        run: node tests/worker_smoke.mjs
+
+  deploy:
+    name: Deploy to Vercel
+    needs: test
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: team_GP4JvSl1tuPebcm0Shs8AmvN
+      VERCEL_PROJECT_ID: prj_YrbWq0TdTlXNxfnP4TXIpkpt37BD
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Is a Vercel token configured?
+        id: token
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "skip=1" >> "$GITHUB_OUTPUT"
+            echo "::warning::Repository secret VERCEL_TOKEN is not set, so the deploy is skipped. Add it under Settings > Secrets and variables > Actions (create a token at https://vercel.com/account/tokens)."
+          else
+            echo "skip=0" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-node@v4
+        if: steps.token.outputs.skip == '0'
+        with:
+          node-version: '22'
+
+      - name: Deploy
+        if: steps.token.outputs.skip == '0'
+        working-directory: web
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: npx --yes vercel@latest deploy --prod --yes --token="$VERCEL_TOKEN"
+
+      - name: Verify the live site answers
+        if: steps.token.outputs.skip == '0'
+        run: |
+          set -e
+          for path in "" "data/venezia.json" "data/pack0.bin"; do
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "https://venice-by-building.vercel.app/$path")
+            echo "/$path -> $code"
+            [ "$code" = "200" ] || { echo "::error::$path answered $code"; exit 1; }
+          done
