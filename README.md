@@ -5,6 +5,19 @@ epoch it belongs to, with a timeline that lets the city assemble itself.
 
 Live site: https://venice-by-building.vercel.app (Vercel, from this repository)
 
+## Languages
+
+The site speaks Russian, Italian and English: the switch sits in the top bar, `?lang=it` or
+`?lang=en` sets it from a link, and the choice is remembered in the browser. Russian is the source
+of every text; `web/i18n.js` holds the dictionaries keyed by the Russian original, and both the
+page and the pipeline's own prose (stories, eras, layers) go through it. Wikipedia extracts and
+article titles are shown in the language of the map where Wikidata has that sitelink, and fall back
+to the Italian one.
+
+`node tests/i18n_coverage.mjs` fails if any Russian text the reader can see — on the page, in the
+code or in the exported data — has no Italian and English line, or if a translation lost its
+placeholders or kept Cyrillic in it.
+
 ## What the map shows
 
 11,137 buildings of the historic centre — the island of Venice, Giudecca, San Giorgio Maggiore,

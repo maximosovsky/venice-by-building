@@ -175,13 +175,14 @@ def polygon_bin(polys, base):
     return out
 
 
-def extract_for(cards, extracts):
-    """The first paragraph in the first language we have, Italian preferred."""
-    for lang in ("it", "en", "ru"):
+def extracts_for(cards, extracts):
+    """Первый абзац статьи на каждом языке, где он есть: карточка показывает его на языке карты."""
+    out = {}
+    for lang in ("ru", "it", "en"):
         title = (cards or {}).get(lang)
         if title and extracts.get(f"{lang}:{title}"):
-            return extracts[f"{lang}:{title}"]
-    return None
+            out[lang] = extracts[f"{lang}:{title}"]
+    return out or None
 
 
 def main(area="centro"):
@@ -327,15 +328,18 @@ def main(area="centro"):
                     url = f"https://{lang}.wikipedia.org/wiki/" + cards[lang].replace(" ", "_")
                     break
             photo = w.get("photo") or {}
+            ex = extracts_for(cards, extracts) or {}
             wk_of[bid] = len(wiki)
             wiki.append({"qid": w.get("qid"), "label": w.get("label") or pr.get("name"),
+                         "la": cards,
                          "architects": [], "styles": [],
                          "image": ({"thumb": photo.get("thumb"), "page": photo.get("page") or photo.get("thumb"),
                                     "artist": photo.get("artist"), "license": photo.get("license"),
                                     "licenseUrl": photo.get("license_url")} if photo.get("thumb") else None),
                          "inception": w.get("inception_year"),
                          "wiki": {"url": url, "title": cards.get("it") or cards.get("en"),
-                                  "extract": extract_for(cards, extracts)},
+                                  "extract": ex.get("it") or ex.get("en") or ex.get("ru")},
+                         "ex": ex,
                          "area": area})
         elif pr.get("name"):
             nm_of[bid] = len(names)

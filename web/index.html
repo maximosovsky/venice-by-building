@@ -45,7 +45,13 @@
     <ul id="find-results" class="find-results" role="listbox" hidden></ul>
   </form>
   <button class="find-open" aria-label="Найти здание, улицу или мост"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="M10.4 10.4l3.6 3.6"/></svg></button>
-</nav>
+    <i class="bar-sep" aria-hidden="true"></i>
+    <div class="langs" id="langs" role="group" aria-label="Язык" data-no-i18n>
+      <button type="button" data-lang="ru" lang="ru" aria-pressed="true">РУС</button>
+      <button type="button" data-lang="it" lang="it" aria-pressed="false">ITA</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">ENG</button>
+    </div>
+  </nav>
 
 <!-- Справа: заметки, сюжеты, карточка здания. По одному. -->
 <aside id="dock" class="dock" hidden aria-label="Подробности">
@@ -163,14 +169,28 @@
 <script>
 // Если что-то падает, показать это на экране вместо пустой карты.
 window.__veniceErrors = [];
+// Сообщения об ошибке на трёх языках: этот скрипт работает раньше app.js, словарь у него свой.
+const FATAL = {
+  ru: { title: 'Не удалось построить карту.', hint: 'Подробности — в консоли браузера (F12).', late: 'загрузка не завершилась за 30 секунд' },
+  it: { title: 'Non è stato possibile costruire la mappa.', hint: 'Dettagli nella console del browser (F12).', late: 'il caricamento non è finito entro 30 secondi' },
+  en: { title: 'The map could not be built.', hint: 'Details in the browser console (F12).', late: 'loading did not finish within 30 seconds' },
+};
+function fatalLang() {
+  const q = new URLSearchParams(location.search).get('lang');
+  if (q && FATAL[q]) return q;
+  try { const s = localStorage.getItem('venice-lang'); if (s && FATAL[s]) return s; } catch (e) { /* приватный режим */ }
+  const n = (navigator.language || 'en').slice(0, 2).toLowerCase();
+  return FATAL[n] ? n : 'en';
+}
 function showFatal(text) {
   const el = document.getElementById('loading');
   if (!el) return;
+  const w = FATAL[fatalLang()];
   el.hidden = false;
   el.style.display = '';
   el.classList.add('fatal');
-  el.innerHTML = '<b>Не удалось построить карту.</b><br>' + String(text).slice(0, 400) +
-    '<br><small>Подробности — в консоли браузера (F12).</small>';
+  el.innerHTML = '<b>' + w.title + '</b><br>' + String(text).slice(0, 400) +
+    '<br><small>' + w.hint + '</small>';
 }
 window.addEventListener('error', e => {
   const msg = e.message || (e.target && e.target.src ? 'не загрузился файл ' + e.target.src : 'ошибка');
@@ -184,7 +204,7 @@ window.addEventListener('unhandledrejection', e => {
 });
 setTimeout(() => {
   const el = document.getElementById('loading');
-  if (el && !el.hidden) showFatal('загрузка не завершилась за 30 секунд' +
+  if (el && !el.hidden) showFatal(FATAL[fatalLang()].late +
     (window.__veniceErrors.length ? ': ' + window.__veniceErrors.join('; ') : ''));
 }, 30000);
 </script>

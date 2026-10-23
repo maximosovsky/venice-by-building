@@ -107,6 +107,12 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 .find-results .empty { color: var(--muted); cursor: default; }
 .find-results .empty:hover { background: none; }
 .find-open { display: none; }
+/* Язык карты: три буквы, выбранный язык подчёркнут, как и разделы. */
+.langs { display: flex; gap: 10px; }
+.langs button { color: var(--muted); font-size: 12px; letter-spacing: .06em; padding: 8px 2px;
+  border-bottom: 2px solid transparent; transition: color .3s var(--ease), border-color .3s var(--ease); }
+.langs button:hover { color: var(--ink); }
+.langs button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
 
 /* ---------- Hover: a small label at the pointer ---------- */
 .tip { position: fixed; z-index: 9; pointer-events: none; padding: 7px 11px 8px; background: var(--paper); border-radius: 8px;

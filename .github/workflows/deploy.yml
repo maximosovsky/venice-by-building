@@ -29,6 +29,8 @@ jobs:
         run: python3 tests/test_viewer_contract.py
       - name: The viewer's own worker on real tiles
         run: node tests/worker_smoke.mjs
+      - name: Every text in Italian and English
+        run: node tests/i18n_coverage.mjs
 
   deploy:
     name: Deploy to Vercel

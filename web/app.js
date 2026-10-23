@@ -1,8 +1,11 @@
 import * as THREE from './vendor/three.module.js';
 import { MapControls } from './vendor/MapControls.js';
+import { t, pick, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
+// Тексты живут в трёх языках: русский исходник страницы переводится словарём i18n.js при загрузке,
+// а всё, что рисуется кодом, проходит через t() и pick().
 
 // Colours are authored in sRGB and drawn as they are.
 THREE.ColorManagement.enabled = false;
@@ -605,22 +608,29 @@ const phone = matchMedia('(max-width: 720px)');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const dot = color => `<i class="dot" style="background:${color}"></i>`;
 // An age's label is its dates and its name ("1870–1890 The boom years"); the line shows them apart.
-const ageParts = p => { const m = p.label.match(/^(Before \d{4}|\d{4}–(?:\d{4})?)\s+(.*)$/); return m ? { dates: m[1], name: m[2] } : { dates: '', name: p.label }; };
-const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => w?.label || (b.nm >= 0 ? names[b.nm] : null);
-
+const ageParts = p => {
+  // Подпись эпохи в трёх языках разделена длинным тире: слева годы, справа название.
+  const full = pick(p.label);
+  const [dates, ...rest] = full.split(' — ');
+  return rest.length ? { dates, name: rest.join(' — ') } : { dates: '', name: full };
+};
+const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => (b.wk >= 0 ? pick(w?.la) || wiki[b.wk]?.label : null) || (b.nm >= 0 ? names[b.nm] : null);
 const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '', 'принята для моста: в OSM высот нет'];
+const heightNote = i => t(HEIGHT_NOTE[i] || 'оценка');
 const range = b => b.yfrom !== b.yto ? `${b.yfrom}–${b.yto}` : `${b.yfrom}`;
 // The age of a Venice building is rarely a year: an interval is shown as the epoch it belongs to.
 const EPOCH_NAME = ['до 1800 года', 'XIX век', 'XX век', 'неизвестен'];
-const whenOf = b => b.flag === 0 ? `${b.year}` : (b.flag === 2 ? 'год неизвестен' : `${EPOCH_NAME[b.sp] || 'эпоха'}`);
+const epochName = i => t(EPOCH_NAME[i] || 'неизвестен');
+const whenOf = b => b.flag === 0 ? `${b.year}` : (b.flag === 2 ? t('год неизвестен') : epochName(b.sp));
 // How the year is known, in a sentence.
 function datingNote(b, w, h) {
-  if (b.src === 1) return 'Это мостовое сооружение, а не здание: в OpenStreetMap для венецианских мостов нет ни даты постройки, ни высоты. Настил показан плитой на принятой высоте, год не указан.';
-  const src = { 0: 'OpenStreetMap', 1: 'классификации VPRG', 2: 'Wikidata' }[b.dsrc] || 'источника';
+  if (b.src === 1) return t('Это мостовое сооружение, а не здание: в OpenStreetMap для венецианских мостов нет ни даты постройки, ни высоты. Настил показан плитой на принятой высоте, год не указан.');
+  const src = [t('OpenStreetMap'), t('классификации VPRG'), t('Wikidata')][b.dsrc] || t('источника');
   switch (b.flag) {
-    case 0: return `Год указан в ${src}.`;
-    case 1: return `Точного года нет. Муниципальная классификация VPRG относит здание к эпохе «${EPOCH_NAME[b.sp] || ''}», то есть к интервалу ${range(b)}. Формулировка класса записана в таблице свидетельств.`;
-    default: return 'Год постройки неизвестен: муниципальной классификации для этого здания нет, и даты в OSM тоже нет. Здание показано серым.';
+    case 0: return t('Год указан в {src}.', { src });
+    case 1: return t('Точного года нет. Муниципальная классификация VPRG относит здание к эпохе «{era}», то есть к интервалу {range}. Формулировка класса записана в таблице свидетельств.',
+                     { era: epochName(b.sp), range: range(b) });
+    default: return t('Год постройки неизвестен: муниципальной классификации для этого здания нет, и даты в OSM тоже нет. Здание показано серым.');
   }
 }
 function groupColor(g) {
@@ -636,19 +646,19 @@ function buildingHtml(gid) {
   const period = periods[b.sp] || periodOf(b.year);
     const shape = config.shapes?.[gid];
     const im = w?.image;
-    const photo = im?.thumb ? `<figure class="b-photo"><img src="${esc(im.thumb)}" alt=""><figcaption>Фото: ${link(im.page || im.thumb, im.artist || 'Wikimedia Commons')}${im.license ? `, ${im.licenseUrl ? link(im.licenseUrl, im.license) : esc(im.license)}` : ''}</figcaption></figure>` : '';
-    const facts = [
-      b.src === 1 && ['Сооружение', 'Мост<small class="src-note">настил над каналом, OSM</small>'],
-            ['Высота', `${b.height.toFixed(1)} м<small class="src-note">${HEIGHT_NOTE[b.hsrc] || 'оценка'}</small>`],
-            shape && ['Форма', `${esc(shape[0])}<small class="src-note">${link(shape[2], shape[1])}</small>`],
-            !(b.src === 1) && !(shape && b.fsrc !== 0) && ['Этажи', `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : 'высота ÷ 3 м'}</small>`],
-      w?.architects?.length && [w.architects.length > 1 ? 'Архитекторы' : 'Архитектор', w.architects.map(esc).join(', ')],
-      w?.styles?.length && ['Стиль', w.styles.map(esc).join(', ')],
-      b.heritage && ['Наследие', `${esc(config.heritage.labels[b.heritage - 1])}`],
-      hItem?.name && [hItem.kind === 'shr' ? 'Охрана' : 'Объект наследия', esc(hItem.name)],
-      hItem?.hca && ['Охранная зона', esc(hItem.hca)],
-      w?.inception && ['Дата в Wikidata', `${w.inception}`],
-    ].filter(Boolean);
+    const photo = im?.thumb ? `<figure class="b-photo"><img src="${esc(im.thumb)}" alt=""><figcaption>${t('Фото')}: ${link(im.page || im.thumb, im.artist || 'Wikimedia Commons')}${im.license ? `, ${im.licenseUrl ? link(im.licenseUrl, im.license) : esc(im.license)}` : ''}</figcaption></figure>` : '';
+        const facts = [
+          b.src === 1 && [t('Сооружение'), `${t('Мост')}<small class="src-note">${t('настил над каналом, OSM')}</small>`],
+                [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
+                shape && [t('Форма'), `${esc(pick(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
+                !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : t('высота ÷ 3 м')}</small>`],
+          w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'), w.architects.map(esc).join(', ')],
+          w?.styles?.length && [t('Стиль'), w.styles.map(esc).join(', ')],
+          b.heritage && [t('Наследие'), `${esc(pick(config.heritage.labels[b.heritage - 1]))}`],
+          hItem?.name && [t(hItem.kind === 'shr' ? 'Охрана' : 'Объект наследия'), esc(hItem.name)],
+          hItem?.hca && [t('Охранная зона'), esc(hItem.hca)],
+          w?.inception && [t('Дата в Wikidata'), `${w.inception}`],
+        ].filter(Boolean);
   const osmUrl = b.osm > 0 ? `https://www.openstreetmap.org/way/${b.osm}` : b.osm < 0 ? `https://www.openstreetmap.org/relation/${-b.osm}` : null;
   const sources = [
     w?.wiki?.url && link(w.wiki.url, 'Wikipedia'),
@@ -657,20 +667,21 @@ function buildingHtml(gid) {
     osmUrl && link(osmUrl, 'OpenStreetMap'),
   ].filter(Boolean);
   const stories = b.groups.map(g => {
-    const note = g.layer.notes?.[gid];
-    return `<li>${dot(groupColor(g))}<div><b>${esc(g.layer.title)}</b> <span>${esc(g.label)}</span>
-      ${note?.story ? `<p>${esc(note.story)}${note.source ? ` ${link(note.source, 'Source')}` : ''}</p>` : ''}</div></li>`;
-  }).join('');
-  return `<article class="dock-page b-card${photo ? ' has-photo' : ''}">${photo}
-      <header class="b-head"><h2 id="dock-title">${name ? esc(name) : (b.src === 1 ? 'Мост' : 'Здание')}</h2>
-              <div class="b-when"><span class="y">${b.src === 1 ? 'мост, год неизвестен' : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(period.label)}</span></div></header>
-      <section><h3>Как известен возраст</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
-      <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
-      ${w?.wiki?.extract ? `<section><h3>Из Википедии</h3><p class="extract">${esc(w.wiki.extract)}</p><button class="read-on" hidden>Читать далее</button></section>` : ''}
-      ${w?.wiki?.url ? `<section class="sources"><p>${link(w.wiki.url, 'Статья в Википедии')}${w.qid ? ` · ${link('https://www.wikidata.org/wiki/' + w.qid, 'Wikidata')}` : ''}</p></section>` : ''}
-      ${stories ? `<section><h3>В сюжетах</h3><ul class="chips">${stories}</ul></section>` : ''}
-      ${sources.length ? `<section class="sources"><h3>Источники</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
-  }
+      const note = g.layer.notes?.[gid];
+      return `<li>${dot(groupColor(g))}<div><b>${esc(pick(g.layer.title))}</b> <span>${esc(pick(g.label))}</span>
+        ${note?.story ? `<p>${esc(note.story)}${note.source ? ` ${link(note.source, t('Source'))}` : ''}</p>` : ''}</div></li>`;
+    }).join('');
+    const extract = b.wk >= 0 ? (wiki[b.wk]?.ex?.[getLang()] || wiki[b.wk]?.extract) : null;
+    return `<article class="dock-page b-card${photo ? ' has-photo' : ''}">${photo}
+        <header class="b-head"><h2 id="dock-title">${name ? esc(name) : t(b.src === 1 ? 'Мост' : 'Здание')}</h2>
+                <div class="b-when"><span class="y">${b.src === 1 ? t('мост, год неизвестен') : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(pick(period.label))}</span></div></header>
+        <section><h3>${t('Как известен возраст')}</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
+        <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
+        ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
+        ${w?.wiki?.url ? `<section class="sources"><p>${link(pick(w.wiki.url), t('Статья в Википедии'))}${w.qid ? ` · ${link('https://www.wikidata.org/wiki/' + w.qid, 'Wikidata')}` : ''}</p></section>` : ''}
+        ${stories ? `<section><h3>${t('В сюжетах')}</h3><ul class="chips">${stories}</ul></section>` : ''}
+        ${sources.length ? `<section class="sources"><h3>${t('Источники')}</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
+    }
 
 // ---------- The dock ----------
 // One thing to read at a time, on the right (a sheet from the bottom on a phone): the notes, the stories, a story, a
@@ -686,7 +697,7 @@ function openDock(view, html, back = null) {
   dockLive.innerHTML = view === 'notes' ? '' : html;
   dock.classList.toggle('has-back', !!back);
   dockBack.hidden = !back;
-  if (back) { dockBack.innerHTML = `${BACK}${esc(back.label)}`; dockBack.onclick = back.go; }
+  if (back) { dockBack.innerHTML = `${BACK}${esc(pick(back.label))}`; dockBack.onclick = back.go; }
   dock.setAttribute('aria-label', (view === 'notes' ? notesEl : dockLive).querySelector('h2')?.textContent || 'Details');
   dock.hidden = false;
   dock.scrollTop = 0;
@@ -818,7 +829,7 @@ ready.then(() => {
   const [ow, on, oy, ox, oz, oh, osc] = ['wk', 'nm', 'year', 'x', 'z', 'h', 'src'].map(k => config.attrFields[k][0]);
     for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
       const wk = attrs.getInt32(o + ow, true), nm = attrs.getInt32(o + on, true);
-      const label = wk >= 0 ? wiki[wk]?.label : nm >= 0 ? names[nm] : null;
+      const label = wk >= 0 ? (pick(wiki[wk]?.la) || wiki[wk]?.label) : nm >= 0 ? names[nm] : null;
       if (!label) continue;
       const h = attrs.getUint16(o + oh, true), prev = seen.get(label);
       if (prev && prev.h >= h) continue;
@@ -850,8 +861,8 @@ function renderFind() {
   findAt = findHits.length ? 0 : -1;
   const q = findInput.value.trim();
   findList.innerHTML = findHits.length ? findHits.map((e, i) => `<li role="option" id="find-${i}" data-i="${i}" aria-selected="${i === findAt}">
-        <b>${esc(e.label)}</b><small>${e.bridge ? 'Мост' : e.kind === 'building' ? (e.known ? `Здание, ${e.year} г.` : 'Здание, год неизвестен') : e.kind === 'water' ? 'Канал, лагуна' : e.kind === 'suburb' ? 'Район' : 'Улица, набережная'}</small></li>`).join('')
-      : q.length >= 2 ? `<li class="empty">Ничего с таким названием на карте нет.</li>` : '';
+        <b>${esc(e.label)}</b><small>${e.bridge ? t('Мост') : e.kind === 'building' ? (e.known ? t('Здание, {year} г.', { year: e.year }) : t('Здание, год неизвестен')) : e.kind === 'water' ? t('Канал, лагуна') : e.kind === 'suburb' ? t('Район') : t('Улица, набережная')}</small></li>`).join('')
+      : q.length >= 2 ? `<li class="empty">${t('Ничего с таким названием на карте нет.')}</li>` : '';
   findList.hidden = !findList.innerHTML;
   findInput.setAttribute('aria-expanded', String(!findList.hidden));
   findInput.setAttribute('aria-activedescendant', findAt >= 0 ? `find-${findAt}` : '');
@@ -1153,7 +1164,7 @@ function showStories() {
   openDock('stories', `<article class="dock-page"><h2 id="dock-title">Stories</h2>
     <p class="lede">Threads of Sydney’s history that live in its buildings. Choose one to light up its buildings and read about them.</p>
     ${sections.map(sec => `<h3 class="st-section">${sectionIcon(sec)}${esc(sec)}</h3><ul class="st-list">${layers.filter(L => L.section === sec).map(L =>
-      `<li><button class="st-row" data-id="${L.id}"><b>${esc(L.title)}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(L.era)}</span></button></li>`).join('')}</ul>`).join('')}
+      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pick(L.title))}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(pick(L.era))}</span></button></li>`).join('')}</ul>`).join('')}
     <p class="add-story"><a href="${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Add a story on GitHub</a></p></article>`);
   dockLive.querySelectorAll('.st-row').forEach(b => b.onclick = () => { setLayer(layers.find(l => l.id === b.dataset.id)); showStory(activeLayer); });
 }
@@ -1163,12 +1174,12 @@ function showStory(L) {
   const named = Object.entries(L.notes || {}).filter(([, n]) => n.name && n.at && !seenName.has(n.name) && seenName.add(n.name));
   openDock('story', `<article class="dock-page">
     <div class="story-head">${sectionIcon(L.section)}<h2 id="dock-title">${esc(L.title)}</h2></div>
-    <p class="story-era">${esc(L.era)} · <span class="n">${fmt(L.count)}</span> buildings</p>
-    <p class="story-text">${esc(L.text)}</p>
+    <p class="story-era">${esc(pick(L.era))} · <span class="n">${fmt(L.count)}</span> ${t('зданий')}</p>
+    <p class="story-text">${esc(pick(L.text))}</p>
     ${named.length ? `<h3>Places and their stories</h3><ul class="places">${named.map(([gid, n]) => `
       <li><button class="place" data-gid="${gid}"><b>${esc(n.name)}</b><span>${esc(n.story || '')}</span></button></li>`).join('')}</ul>` : ''}
-    ${L.caveat ? `<p class="caveat">${esc(L.caveat)}</p>` : ''}
-    <p class="src">${link(L.source.url, L.source.label)}</p></article>`,
+    ${L.caveat ? `<p class="caveat">${esc(pick(L.caveat))}</p>` : ''}
+    <p class="src">${link(L.source.url, pick(L.source.label))}</p></article>`,
   { label: 'All stories', go: () => { setLayer(null); showStories(); } });
   dockLive.querySelectorAll('.place').forEach(b => b.onclick = () => {
     const n = L.notes[b.dataset.gid], back = { label: L.title, go: () => { unpin(); showStory(L); } };
@@ -1243,12 +1254,12 @@ function showSuburbs() {
   openDock('suburbs', `<article class="dock-page"><h2 id="dock-title">Suburbs</h2>
     <p class="lede">${esc(m.what)}</p>
     <p class="sub-measures">${MEASURES.map(x => `<button class="pill" data-m="${x.key}" aria-pressed="${x === m}">${esc(x.short)}</button>`).join('')}</p>
-    <p class="sub-year"><b>${esc(m.label)}</b>, ${esc(yearWords(m, Y))}</p>
+    <p class="sub-year"><b>${esc(pick(m.label))}</b>, ${esc(yearWords(m, Y))}</p>
     <ol class="sub-rank">${rows.map(({ S, s, a }) => `<li><button class="sub-row" data-s="${s}"><b>${esc(S.name)}</b>
       <span class="n">${a ? fmtM(m, a.v) : 'no figure'}</span>
       <i class="bar"><i style="width:${a ? (4 + 96 * subT(m, a.v)).toFixed(1) : 0}%;background:${a ? subColor(subT(m, a.v)) : 'none'}"></i></i></button></li>`).join('')}</ol>
     ${m.note ? `<p class="caveat">${esc(m.note)}</p>` : ''}
-    <p class="src">${link(m.source.url, m.source.label)}</p></article>`);
+    <p class="src">${link(m.source.url, pick(m.source.label))}</p></article>`);
   dockLive.querySelectorAll('.sub-measures [data-m]').forEach(b => b.onclick = () => setMeasure(MEASURES.find(x => x.key === b.dataset.m)));
   dockLive.querySelectorAll('.sub-row').forEach(b => b.onclick = () => {
     const s = +b.dataset.s;
@@ -1268,7 +1279,7 @@ function spark(m, s, Y) {
   const X = y => 6 + (y - x0) / (x1 - x0) * (W - 12), Yp = v => H - 14 - (v - lo + pad) / (hi - lo + 2 * pad) * (H - 22);
   const path = pts.map(([y, v], k) => `${k ? 'L' : 'M'}${X(y).toFixed(1)},${Yp(v).toFixed(1)}`).join('');
   const at = Math.max(x0, Math.min(x1, Y));
-  return `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(m.label)}: ${pts.map(([y, v]) => `${y} ${fmtM(m, v)}`).join(', ')}">
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(pick(m.label))}: ${pts.map(([y, v]) => `${y} ${fmtM(m, v)}`).join(', ')}">
     ${Y >= x0 ? `<line class="now" x1="${X(at)}" x2="${X(at)}" y1="4" y2="${H - 12}"/>` : ''}
     <path d="${path}"/>
     ${pts.map(([y, v]) => `<circle cx="${X(y).toFixed(1)}" cy="${Yp(v).toFixed(1)}" r="${pts.length > 12 ? 2 : 3.2}" style="fill:${subColor(subT(m, v))}"><title>${y}: ${fmtM(m, v)}</title></circle>`).join('')}
@@ -1285,7 +1296,7 @@ function showSuburb(s, gid = -1, back = null) {
     <p class="story-era">${S.postcode ? `${S.postcode} · ` : ''}${S.km2.toFixed(2)} km² · <span class="n">${fmt(S.buildings)}</span> buildings on the map</p>
     ${gid >= 0 ? `<p><button class="pill sub-bld">The building you chose</button></p>` : ''}
     ${MEASURES.map(m => { const a = subAt(m, s, Y);
-      return `<section class="sub-m${m === measure ? ' on' : ''}"><h3><button class="sub-pick" data-m="${m.key}" aria-pressed="${m === measure}">${esc(m.label)}</button></h3>
+      return `<section class="sub-m${m === measure ? ' on' : ''}"><h3><button class="sub-pick" data-m="${m.key}" aria-pressed="${m === measure}">${esc(pick(m.label))}</button></h3>
         <p class="sub-val">${a ? `<span class="v">${fmtM(m, a.v)}</span> ${esc(m.unit)}` : '<span class="none">No figure</span>'}<small>${esc(yearWords(m, Y))}${a ? ` · ${rank(m)}` : ''}</small></p>
         ${spark(m, s, Y)}<p class="src-note">${link(m.source.url, m.source.label)}</p></section>`; }).join('')}
     <p class="caveat">The figures are for the whole suburb, even where the map shows only part of it.</p></article>`, back);
@@ -1320,7 +1331,7 @@ function renderKey() {
   if (mode === MODE.period) {
     const on = maskTarget.map((v, i) => v ? i : -1).filter(i => i >= 0);
     const solo = on.length === 1 ? periods[on[0]] : null;
-    keyEl.innerHTML = (solo ? `<button class="chip k-all">${dot(solo.color)}Only ${esc(ageParts(solo).name.replace(/^The /, 'the '))} <span class="n">${fmt(totals[on[0]])}</span>${CLOSE}</button>`
+    keyEl.innerHTML = (solo ? `<button class="chip k-all">${dot(solo.color)}${t('Только {name}', { name: ageParts(solo).name })} <span class="n">${fmt(totals[on[0]])}</span>${CLOSE}</button>`
       : `<span class="key-label">Each station on the line is an age: choose one to see its buildings</span>`) +
       `<button class="chip k-est" aria-pressed="${!uniforms.uDocOnly.value}" title="Estimated years are paler; switch them off to see the documented and strata years alone">${dot('#d9b2a8')}Estimated years</button>`;
     keyEl.querySelector('.k-all')?.addEventListener('click', () => { maskTarget = periods.map(() => 1); updateRail(); renderKey(); drawHist(); });
@@ -1337,13 +1348,13 @@ function renderKey() {
     if (!m) { keyEl.innerHTML = `<span class="key-label">No suburb figures on this map</span>`; return; }
     const ticks = SUB_RAMP.map((_, i) => fmtM(m, subInv(m, i / (SUB_RAMP.length - 1)), true));
     keyEl.innerHTML = MEASURES.map(x => `<button class="chip" data-m="${x.key}" aria-pressed="${x === m}">${esc(x.short)}</button>`).join('') +
-      `<span class="key-label">${esc(m.label)}, ${esc(yearWords(m))}</span><span class="ramp">${SUB_RAMP.map((c, i) =>
+      `<span class="key-label">${esc(pick(m.label))}, ${esc(yearWords(m))}</span><span class="ramp">${SUB_RAMP.map((c, i) =>
         `<div><span>${ticks[i]}${i === SUB_RAMP.length - 1 && m.domainCut ? '+' : ''}</span><i style="background:linear-gradient(90deg,${c},${SUB_RAMP[Math.min(i + 1, SUB_RAMP.length - 1)]})"></i></div>`).join('')}</span>`;
     keyEl.querySelectorAll('[data-m]').forEach(b => b.onclick = () => setMeasure(MEASURES.find(x => x.key === b.dataset.m)));
   } else if (!activeLayer) {
     keyEl.innerHTML = `<span class="key-label">Choose a story to light up its buildings</span>`;
   } else if (activeLayer.groups.length > 1) {
-    keyEl.innerHTML = activeLayer.groups.map((g, i) => `<button class="chip" data-bit="${g.bit}" aria-pressed="${groupOn[g.bit] !== false}">${dot(GROUP_COLORS[i])}${esc(g.label)} <span class="n">${fmt(g.count)}</span></button>`).join('');
+    keyEl.innerHTML = activeLayer.groups.map((g, i) => `<button class="chip" data-bit="${g.bit}" aria-pressed="${groupOn[g.bit] !== false}">${dot(GROUP_COLORS[i])}${esc(pick(g.label))} <span class="n">${fmt(g.count)}</span></button>`).join('');
     keyEl.querySelectorAll('[data-bit]').forEach(b => b.onclick = () => { groupOn[b.dataset.bit] = groupOn[b.dataset.bit] === false; setLayer(activeLayer); });
   } else {
     keyEl.innerHTML = `<span class="chip plain">${dot(GROUP_COLORS[0])}${esc(activeLayer.title)} <span class="n">${fmt(activeLayer.count)}</span></span>`;
@@ -1441,6 +1452,15 @@ function visibleCount() {
 
 // The year on paper flaps: a digit turns over when it changes.
 const flaps = [...document.querySelectorAll('.flap')];
+// Счётчик на шкале: по-русски числительное согласуется с числом, в двух других языках — нет.
+function countWord(n) {
+  if (getLang() === 'ru') {
+    if (n % 10 === 1 && n % 100 !== 11) return 'здание или сооружение';
+    if (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) return 'здания и сооружения';
+    return 'зданий и сооружений';
+  }
+  return n === 1 ? 'здание или сооружение' : 'здания и сооружения';
+}
 const eraEl = document.getElementById('era'), yearEl = document.getElementById('year'), countEl = document.getElementById('count');
 function showYear(Y) {
   const y = Math.min(config.yearMax, Math.round(Y)), digits = String(y).padStart(4, ' ');
@@ -1450,12 +1470,11 @@ function showYear(Y) {
     if (!reduceMotion.matches) { f.classList.remove('turn'); void f.offsetWidth; f.classList.add('turn'); }
   });
   eraEl.textContent = ageParts(periodOf(y)).name;
-  yearEl.textContent = Y >= config.yearMax ? 'Сегодня, ' : `${y}, `;
+  yearEl.textContent = Y >= config.yearMax ? `${t('Сегодня')}, ` : `${y}, `;
     const n = visibleCount();
-    const word = n % 10 === 1 && n % 100 !== 11 ? 'здание или сооружение' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'здания и сооружения' : 'зданий и сооружений';
-    countEl.textContent = `${fmt(n)} ${n === 1 ? 'здание или сооружение' : word} на карте`;
+    countEl.textContent = `${fmt(n)} ${t(countWord(n))} ${t('на карте')}`;
   hist.setAttribute('aria-valuenow', String(y));
-  hist.setAttribute('aria-valuetext', `${Y >= config.yearMax ? 'Сегодня' : y}: ${countEl.textContent}`);
+  hist.setAttribute('aria-valuetext', `${Y >= config.yearMax ? t('Сегодня') : y}: ${countEl.textContent}`);
 }
 
 function drawHist() {
@@ -1573,6 +1592,32 @@ document.querySelector('.notes-open').onclick = () => { if (dockView === 'notes'
   set('strata', f[2] || 0);
   set('heritage', f[3] || 0);
   set('neighbours', f[4] || 0);
+}
+
+// ---------- Язык ----------
+// Русский текст страницы переводится словарём сразу, до первой отрисовки.
+applyStatic();
+// Всё, что нарисовано кодом, перерисовывается при смене языка: ключ, шкала, открытая панель.
+function relayoutTexts() {
+  applyStatic();
+  renderKey();
+  drawHist();
+  showYear(uniforms.uYear.value);
+  tip.hidden = true;
+  if (dockView === 'notes') openDock('notes');
+  else if (dockView === 'stories') showStories();
+  else if (dockView === 'story' && activeLayer) showStory(activeLayer);
+  else if (dockView === 'building' && pinnedGid >= 0) openBuilding(pinnedGid, buildingBack);
+  else if (dockView === 'walk') renderQuest();
+  else if (dockView === 'walks') showWalks();
+  else if (dockView === 'suburbs') showSuburbs();
+}
+{
+  const bar = document.getElementById('langs');
+  const paint = () => bar.querySelectorAll('[data-lang]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === getLang())));
+  bar.querySelectorAll('[data-lang]').forEach(b => { b.onclick = () => setLang(b.dataset.lang); });
+  onLang(() => { paint(); relayoutTexts(); });
+  paint();
 }
 
 // ---------- Loop ----------
