@@ -580,8 +580,12 @@ def main(area="centro"):
         "histogram": {str(k): v for k, v in sorted(hist.items())},
         "attrStride": ATTR_DTYPE.itemsize,
         "attrFields": {n: [ATTR_DTYPE.fields[n][1], ATTR_DTYPE.fields[n][0].str] for n in ATTR_DTYPE.names if n != "pad"},
-        "heritage": {"labels": HERITAGE, "colors": ["#f1eee8", "#6e2418"],
-                     "counts": [len(recs) - len(heritage), len(heritage)]},
+        # The viewer pairs labels[i] with counts[i + 1] and paints code i + 1 with colors[i + 1]:
+        # counts[0] is the total, and a heritage code of 1 or 2 picks the first or second label.
+        "heritage": {"labels": HERITAGE, "colors": ["#f1eee8", "#6e2418", "#8a6b3f"],
+                     "counts": [len(attr_list),
+                                sum(1 for a in attr_list if int(a["heritage"]) == 1),
+                                sum(1 for a in attr_list if int(a["heritage"]) == 2)]},
         "tiles": tile_index, "packs": packs, "shapes": {},
         "stats": {"buildings": len(recs), "bridges": len(bridges), "objects": len(rows),
                   "flags": {k: int(v) for k, v in Counter(r["flag"] for r in rows).items()},

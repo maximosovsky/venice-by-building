@@ -214,13 +214,22 @@ def main():
     wikidata_dates = wd_counts[(2, "dsrc")]
     wikidata_heights = wd_counts.get((5, "hsrc"), 0)
     heritage_wikidata = wd_counts.get((2, "heritage"), 0)
+    wiki_heritage_expected = range(heritage_wikidata)
     check(wikidata_dates > 200, f"только {wikidata_dates} объектов датированы Викиданными — обогащение не доехало")
     # Высоты P2048 в Викиданных редки и почти все стоят у мостов, где означают просвет,
     # а не высоту здания: у наших зданий их полтора десятка, и меньше быть не должно.
     check(wikidata_heights >= 8, f"только {wikidata_heights} высот из Викиданных")
     check(heritage_wikidata > 10, f"только {heritage_wikidata} объектов с охранным статусом из Викиданных")
     check(len(cfg["heritage"]["labels"]) >= 2, "у наследия должна быть и подпись для статуса из Викиданных")
-    check(len(cfg["heritage"]["counts"]) == len(cfg["heritage"]["labels"]), "числа наследия не совпадают с подписями")
+    # Зритель берёт подпись labels[i] с числом counts[i + 1] и цвет colors[i + 1],
+    # то есть в counts на одну запись больше: первая — общее число объектов.
+    check(len(cfg["heritage"]["counts"]) == len(cfg["heritage"]["labels"]) + 1,
+          "числа наследия должны быть на одну длиннее подписей")
+    check(len(cfg["heritage"]["colors"]) == len(cfg["heritage"]["labels"]) + 1,
+          "цветов наследия должно быть на один больше подписей")
+    check(cfg["heritage"]["counts"][1] + cfg["heritage"]["counts"][2] == len(wiki_heritage_expected),
+          "числа наследия не сходятся с числом записей")
+
 
     rich = [c for c in wiki if c.get("byGeometry")]
     check(len(wiki) > 900, f"карточек {len(wiki)}: связи по координатам не попали в карточки")
