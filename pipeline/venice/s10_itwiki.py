@@ -90,9 +90,13 @@ def clean(sentence: str) -> str:
     text = re.sub(r"https?://\S+", " ", text)
     text = re.sub(r"==+[^=]+==+", " ", text)
     text = re.sub(r"(?:File|Immagine|Image):[^\]]*", " ", text)
-    text = re.sub(r"(?:thumb|right|left|miniatura|senza bordo|\d+px)", " ", text, flags=re.I)
-    # Остатки шаблонов-сносок: sito=…, lingua=it, accesso=2024-10-28.
-    text = re.sub(r"\w+=[^\s|)]*", " ", text)
+    # Хвосты картинок и шаблонов, у которых начало окна обрезано: |thumb|, |200px|, sito=…, accesso=…
+    text = re.sub(r"\|\s*(?:thumb|miniatura|senza bordo|right|left|\d+px)\s*", "|", text, flags=re.I)
+    text = re.sub(r"[A-Za-z_]+=[^\s|)\]}]*", " ", text)
+    text = re.sub(r"\}{1,2}|\]{1,2}|<[^>]{0,20}>", " ", text)
+    # Хвост подписи к картинке без префикса File: — оставляем часть после последней черты.
+    if "|" in text:
+        text = text.split("|")[-1]
     text = re.sub(r"\s+", " ", text)
     text = text.strip(" .,;:|-")
     # Обрезка окна может начаться посреди слова — начинаем с целого слова.
