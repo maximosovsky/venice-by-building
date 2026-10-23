@@ -232,7 +232,7 @@ def main():
 
 
     rich = [c for c in wiki if c.get("byGeometry")]
-    check(len(wiki) > 900, f"карточек {len(wiki)}: связи по координатам не попали в карточки")
+    check(len(wiki) > 800, f"карточек {len(wiki)}: связи по координатам не попали в карточки")
     check(len(rich) > 400, f"карточек, найденных по координатам: {len(rich)}")
     for card in rich[:60]:
         check(bool(card.get("qid")), "карточка по координатам без Q-номера")

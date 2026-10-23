@@ -23,6 +23,7 @@ epoch's measured buildings, and the source is recorded in the hsrc field either 
 import gzip
 import json
 import math
+import re
 import struct
 import sys
 from collections import Counter, defaultdict
@@ -186,6 +187,37 @@ def extracts_for(cards, extracts):
     return out or None
 
 
+# A street, a canal or a square is not a building: Wikidata items for those sit inside or beside a
+# footprint and would otherwise put a street's name on a house. A bridge matched to a bridge deck is
+# the right link and stays.
+PLACE_WORDS = re.compile(
+    r"^(via|viale|calle|calletta|salizada|traversa|campo|campiello|corte|ramo|sotoportego|"
+    r"fondamenta|riva|molo|lista|strada|piazza|piazzetta|rio|riello|canale|canal|laguna|"
+    r"ponte|banchina|lungofiume)" r"(\s|$)", re.I)
+PLACE_CLASSES = re.compile(
+    r"street|calle|salizada|campo|campiello|corte|square|piazza|piazzetta|canal|canale|waterway|"
+    r"rio\b|riello|road|quay|banchina|fondamenta|riva|molo|lungofiume|embankment|landing|pier|"
+    r"stop|ferry|harbour|harbor|bridge|ponte|district|distretto|island|sestiere", re.I)
+
+
+def place_like(wd, name, is_bridge):
+    """True when an item is a place in the city rather than a building standing here."""
+    head = (name or "").strip().lower()
+    if head and PLACE_WORDS.match(head) and not (is_bridge and head.startswith("ponte")):
+        return True
+    for c in wd.get("classes") or ():
+        la = c.get("la") or {}
+        text = ((la.get("it") or "") + " " + (la.get("en") or "")).strip()
+        if not text:
+            continue
+        # Мост, привязанный к настилу моста, — верная связь, а не чужое место.
+        if is_bridge and re.search(r"bridge|ponte", text):
+            continue
+        if PLACE_CLASSES.search(text):
+            return True
+    return False
+
+
 def main(area="centro"):
     fn = transformer()
     ox, oy = fn(*config.ORIGIN_LONLAT)
@@ -335,6 +367,7 @@ def main(area="centro"):
     for r in recs + bridges:
         pr = r["pr"]
         bid = pr["building_id"]
+        is_bridge = bool(pr.get("is_bridge"))
         w = wikimedia.get(bid)
         wd = wd_objects.get(bid) or {}
         # Связь по тегу wikidata в OSM — или, если тега нет, по геометрии из Викиданных.
@@ -363,10 +396,11 @@ def main(area="centro"):
                 "ex": ex, "area": area}
         # Пустые поля не пишем: карточек теперь много, и каждая должна быть лёгкой.
         rich = {k: v for k, v in rich.items() if v not in (None, [], {}, "")}
-        if covered:
+        named = bool(rich.get("la") or rich.get("label"))
+        if covered and named:
             wk_of[bid] = len(wiki)
             wiki.append(rich)
-        elif wd and (image or url or labels_la.get("it") or pr.get("name")):
+        elif wd and named and not place_like(wd, labels_la.get("it") or "", is_bridge):
             # Новое: имя, фотография или статья, найденные сопоставлением по координатам.
             wk_of[bid] = len(wiki)
             wiki.append(rich)
