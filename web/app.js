@@ -1195,7 +1195,7 @@ function showStories() {
   openDock('stories', `<article class="dock-page"><h2 id="dock-title">${t('Мосты')}</h2>
     <p class="lede">${t('Слои карты: выберите слой, чтобы подсветить его объекты и прочитать о них.')}</p>
     <ul class="st-list">${LAYERS_SHOWN.map(L =>
-      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pickText(L.title))}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(pickText(L.era))}</span></button></li>`).join('')}</ul></article>`);
+      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pickText(L.title))}</b><span class="n">${fmt(L.count ?? L.groups.reduce((sum, g) => sum + (g.count || 0), 0))}</span><span class="era">${esc(pickText(L.era))}</span></button></li>`).join('')}</ul></article>`);
   dockLive.querySelectorAll('.st-row').forEach(b => b.onclick = () => { setLayer(layers.find(l => l.id === b.dataset.id)); showStory(activeLayer); });
 }
 // One story: what it is, its places and their stories, and where it comes from.
@@ -1204,7 +1204,7 @@ function showStory(L) {
   const named = Object.entries(L.notes || {}).filter(([, n]) => n.name && n.at && !seenName.has(n.name) && seenName.add(n.name));
   openDock('story', `<article class="dock-page">
     <div class="story-head">${sectionIcon(L.section)}<h2 id="dock-title">${esc(pickText(L.title))}</h2></div>
-    <p class="story-era">${esc(pickText(L.era))} · <span class="n">${fmt(L.count)}</span> ${t('объектов')}</p>
+    <p class="story-era">${esc(pickText(L.era))} · <span class="n">${fmt(L.count ?? L.groups.reduce((sum, g) => sum + (g.count || 0), 0))}</span> ${t('объектов')}</p>
     <p class="story-text">${esc(pickText(L.text))}</p>
     ${named.length ? `<h3>${t('Места и их истории')}</h3><ul class="places">${named.map(([gid, n]) => `
       <li><button class="place" data-gid="${gid}"><b>${esc(n.name)}</b><span>${esc(n.story || '')}</span></button></li>`).join('')}</ul>` : ''}
