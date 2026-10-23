@@ -78,7 +78,17 @@ const app = read('web/app.js');
 check(app.includes("from './i18n.js'"), 'app.js не подключает словарь');
 check(/setLang\(b\.dataset\.lang\)/.test(app), 'кнопки языка не связаны со сменой языка');
 check(/onLang\(/.test(app), 'смена языка не перерисовывает карточки и подписи');
-check(/pick\(/.test(app), 'подписи из данных не проходят через pick()');
+check(/pick\(/.test(app) || /pickText\(/.test(app), 'подписи из данных не проходят через pickText()');
+
+// Имена, взятые из словаря, не должны совпадать с тем, что объявлено в app.js: одна такая
+// ошибка («Identifier 'pick' has already been declared») гасит весь модуль и карта не грузится.
+const imported = (app.match(/import\s*\{([^}]+)\}\s*from\s*'\.\/i18n\.js'/) || [, ''])[1]
+  .split(',').map(s => s.trim().split(/\s+as\s+/).pop()).filter(Boolean);
+check(imported.length >= 5, `не разобрать список импорта из i18n.js: ${imported.join(', ')}`);
+for (const name of imported) {
+  const declared = new RegExp(`(?:^|\\n)\\s*(?:function|const|let|var|class)\\s+${name}\\b`).test(app);
+  check(!declared, `имя «${name}» импортировано из i18n.js и объявлено в app.js — модуль не соберётся`);
+}
 
 // --- 6. Сам обход страницы: на маленьком дереве проверяем и замену, и сохранение пробелов.
 const text = v => ({ nodeType: 3, nodeValue: v });

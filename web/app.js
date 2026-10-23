@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three.module.js';
 import { MapControls } from './vendor/MapControls.js';
-import { t, pick, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
+import { t, pick as pickText, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -205,8 +205,8 @@ scene.add(labelGroup);
 const labelTex = new Map();
 const LABEL_PX = 64;
 function textureFor(L) {
-  let t = labelTex.get(L.name + L.water);
-  if (t) return t;
+  let tex = labelTex.get(L.name + L.water);
+  if (tex) return tex;
   const c = document.createElement('canvas'), ctx = c.getContext('2d');
   // Water names in the serif's italic, as on an old harbour chart; streets in the sans.
   const font = L.water ? `italic 400 ${LABEL_PX * 0.8}px "Cormorant Garamond", Georgia, serif` : `500 ${LABEL_PX * 0.6}px Inter, sans-serif`;
@@ -296,9 +296,9 @@ const subOk = !!(subData && subOf && subOf.length === nB);
 const subOfTex = (() => {
   const rows = Math.ceil(nB / SUB_W), d = new Float32Array(SUB_W * rows).fill(255);
   if (subOk) d.set(subOf);
-  const t = new THREE.DataTexture(d, SUB_W, rows, THREE.RedFormat, THREE.FloatType);
-  t.needsUpdate = true;
-  return t;
+  const tex = new THREE.DataTexture(d, SUB_W, rows, THREE.RedFormat, THREE.FloatType);
+  tex.needsUpdate = true;
+  return tex;
 })();
 const subValTex = new THREE.DataTexture(new Float32Array(256).fill(-1), 256, 1, THREE.RedFormat, THREE.FloatType);
 subValTex.needsUpdate = true;
@@ -542,10 +542,10 @@ function addTile(m) {
 const packs = Object.fromEntries(config.packs.map(name => [name, fetchBin(`data/${name}`)]));
 for (const w of pool) {
   const next = async () => {
-    const t = queue.shift();
-    if (!t) return;
-    const buf = (await packs[t.pack]).slice(t.offset, t.offset + t.length);
-    w.postMessage({ buf, id: t.file }, [buf]);
+    const task = queue.shift();
+    if (!task) return;
+    const buf = (await packs[task.pack]).slice(task.offset, task.offset + task.length);
+    w.postMessage({ buf, id: task.file }, [buf]);
   };
   w.onmessage = ({ data }) => {
     addTile(data);
@@ -610,11 +610,11 @@ const dot = color => `<i class="dot" style="background:${color}"></i>`;
 // An age's label is its dates and its name ("1870–1890 The boom years"); the line shows them apart.
 const ageParts = p => {
   // Подпись эпохи в трёх языках разделена длинным тире: слева годы, справа название.
-  const full = pick(p.label);
+  const full = pickText(p.label);
   const [dates, ...rest] = full.split(' — ');
   return rest.length ? { dates, name: rest.join(' — ') } : { dates: '', name: full };
 };
-const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => (b.wk >= 0 ? pick(w?.la) || wiki[b.wk]?.label : null) || (b.nm >= 0 ? names[b.nm] : null);
+const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => (b.wk >= 0 ? pickText(w?.la) || wiki[b.wk]?.label : null) || (b.nm >= 0 ? names[b.nm] : null);
 const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '', 'принята для моста: в OSM высот нет'];
 const heightNote = i => t(HEIGHT_NOTE[i] || 'оценка');
 const range = b => b.yfrom !== b.yto ? `${b.yfrom}–${b.yto}` : `${b.yfrom}`;
@@ -650,11 +650,11 @@ function buildingHtml(gid) {
         const facts = [
           b.src === 1 && [t('Сооружение'), `${t('Мост')}<small class="src-note">${t('настил над каналом, OSM')}</small>`],
                 [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
-                shape && [t('Форма'), `${esc(pick(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
+                shape && [t('Форма'), `${esc(pickText(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
                 !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : t('высота ÷ 3 м')}</small>`],
           w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'), w.architects.map(esc).join(', ')],
           w?.styles?.length && [t('Стиль'), w.styles.map(esc).join(', ')],
-          b.heritage && [t('Наследие'), `${esc(pick(config.heritage.labels[b.heritage - 1]))}`],
+          b.heritage && [t('Наследие'), `${esc(pickText(config.heritage.labels[b.heritage - 1]))}`],
           hItem?.name && [t(hItem.kind === 'shr' ? 'Охрана' : 'Объект наследия'), esc(hItem.name)],
           hItem?.hca && [t('Охранная зона'), esc(hItem.hca)],
           w?.inception && [t('Дата в Wikidata'), `${w.inception}`],
@@ -668,17 +668,17 @@ function buildingHtml(gid) {
   ].filter(Boolean);
   const stories = b.groups.map(g => {
       const note = g.layer.notes?.[gid];
-      return `<li>${dot(groupColor(g))}<div><b>${esc(pick(g.layer.title))}</b> <span>${esc(pick(g.label))}</span>
+      return `<li>${dot(groupColor(g))}<div><b>${esc(pickText(g.layer.title))}</b> <span>${esc(pickText(g.label))}</span>
         ${note?.story ? `<p>${esc(note.story)}${note.source ? ` ${link(note.source, t('Source'))}` : ''}</p>` : ''}</div></li>`;
     }).join('');
     const extract = b.wk >= 0 ? (wiki[b.wk]?.ex?.[getLang()] || wiki[b.wk]?.extract) : null;
     return `<article class="dock-page b-card${photo ? ' has-photo' : ''}">${photo}
         <header class="b-head"><h2 id="dock-title">${name ? esc(name) : t(b.src === 1 ? 'Мост' : 'Здание')}</h2>
-                <div class="b-when"><span class="y">${b.src === 1 ? t('мост, год неизвестен') : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(pick(period.label))}</span></div></header>
+                <div class="b-when"><span class="y">${b.src === 1 ? t('мост, год неизвестен') : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(pickText(period.label))}</span></div></header>
         <section><h3>${t('Как известен возраст')}</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
         <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
-        ${w?.wiki?.url ? `<section class="sources"><p>${link(pick(w.wiki.url), t('Статья в Википедии'))}${w.qid ? ` · ${link('https://www.wikidata.org/wiki/' + w.qid, 'Wikidata')}` : ''}</p></section>` : ''}
+        ${w?.wiki?.url ? `<section class="sources"><p>${link(pickText(w.wiki.url), t('Статья в Википедии'))}${w.qid ? ` · ${link('https://www.wikidata.org/wiki/' + w.qid, 'Wikidata')}` : ''}</p></section>` : ''}
         ${stories ? `<section><h3>${t('В сюжетах')}</h3><ul class="chips">${stories}</ul></section>` : ''}
         ${sources.length ? `<section class="sources"><h3>${t('Источники')}</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
     }
@@ -697,7 +697,7 @@ function openDock(view, html, back = null) {
   dockLive.innerHTML = view === 'notes' ? '' : html;
   dock.classList.toggle('has-back', !!back);
   dockBack.hidden = !back;
-  if (back) { dockBack.innerHTML = `${BACK}${esc(pick(back.label))}`; dockBack.onclick = back.go; }
+  if (back) { dockBack.innerHTML = `${BACK}${esc(pickText(back.label))}`; dockBack.onclick = back.go; }
   dock.setAttribute('aria-label', (view === 'notes' ? notesEl : dockLive).querySelector('h2')?.textContent || 'Details');
   dock.hidden = false;
   dock.scrollTop = 0;
@@ -829,7 +829,7 @@ ready.then(() => {
   const [ow, on, oy, ox, oz, oh, osc] = ['wk', 'nm', 'year', 'x', 'z', 'h', 'src'].map(k => config.attrFields[k][0]);
     for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
       const wk = attrs.getInt32(o + ow, true), nm = attrs.getInt32(o + on, true);
-      const label = wk >= 0 ? (pick(wiki[wk]?.la) || wiki[wk]?.label) : nm >= 0 ? names[nm] : null;
+      const label = wk >= 0 ? (pickText(wiki[wk]?.la) || wiki[wk]?.label) : nm >= 0 ? names[nm] : null;
       if (!label) continue;
       const h = attrs.getUint16(o + oh, true), prev = seen.get(label);
       if (prev && prev.h >= h) continue;
@@ -1164,7 +1164,7 @@ function showStories() {
   openDock('stories', `<article class="dock-page"><h2 id="dock-title">Stories</h2>
     <p class="lede">Threads of Sydney’s history that live in its buildings. Choose one to light up its buildings and read about them.</p>
     ${sections.map(sec => `<h3 class="st-section">${sectionIcon(sec)}${esc(sec)}</h3><ul class="st-list">${layers.filter(L => L.section === sec).map(L =>
-      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pick(L.title))}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(pick(L.era))}</span></button></li>`).join('')}</ul>`).join('')}
+      `<li><button class="st-row" data-id="${L.id}"><b>${esc(pickText(L.title))}</b><span class="n">${fmt(L.count)}</span><span class="era">${esc(pickText(L.era))}</span></button></li>`).join('')}</ul>`).join('')}
     <p class="add-story"><a href="${REPO}/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Add a story on GitHub</a></p></article>`);
   dockLive.querySelectorAll('.st-row').forEach(b => b.onclick = () => { setLayer(layers.find(l => l.id === b.dataset.id)); showStory(activeLayer); });
 }
@@ -1174,12 +1174,12 @@ function showStory(L) {
   const named = Object.entries(L.notes || {}).filter(([, n]) => n.name && n.at && !seenName.has(n.name) && seenName.add(n.name));
   openDock('story', `<article class="dock-page">
     <div class="story-head">${sectionIcon(L.section)}<h2 id="dock-title">${esc(L.title)}</h2></div>
-    <p class="story-era">${esc(pick(L.era))} · <span class="n">${fmt(L.count)}</span> ${t('зданий')}</p>
-    <p class="story-text">${esc(pick(L.text))}</p>
+    <p class="story-era">${esc(pickText(L.era))} · <span class="n">${fmt(L.count)}</span> ${t('зданий')}</p>
+    <p class="story-text">${esc(pickText(L.text))}</p>
     ${named.length ? `<h3>Places and their stories</h3><ul class="places">${named.map(([gid, n]) => `
       <li><button class="place" data-gid="${gid}"><b>${esc(n.name)}</b><span>${esc(n.story || '')}</span></button></li>`).join('')}</ul>` : ''}
-    ${L.caveat ? `<p class="caveat">${esc(pick(L.caveat))}</p>` : ''}
-    <p class="src">${link(L.source.url, pick(L.source.label))}</p></article>`,
+    ${L.caveat ? `<p class="caveat">${esc(pickText(L.caveat))}</p>` : ''}
+    <p class="src">${link(L.source.url, pickText(L.source.label))}</p></article>`,
   { label: 'All stories', go: () => { setLayer(null); showStories(); } });
   dockLive.querySelectorAll('.place').forEach(b => b.onclick = () => {
     const n = L.notes[b.dataset.gid], back = { label: L.title, go: () => { unpin(); showStory(L); } };
@@ -1254,12 +1254,12 @@ function showSuburbs() {
   openDock('suburbs', `<article class="dock-page"><h2 id="dock-title">Suburbs</h2>
     <p class="lede">${esc(m.what)}</p>
     <p class="sub-measures">${MEASURES.map(x => `<button class="pill" data-m="${x.key}" aria-pressed="${x === m}">${esc(x.short)}</button>`).join('')}</p>
-    <p class="sub-year"><b>${esc(pick(m.label))}</b>, ${esc(yearWords(m, Y))}</p>
+    <p class="sub-year"><b>${esc(pickText(m.label))}</b>, ${esc(yearWords(m, Y))}</p>
     <ol class="sub-rank">${rows.map(({ S, s, a }) => `<li><button class="sub-row" data-s="${s}"><b>${esc(S.name)}</b>
       <span class="n">${a ? fmtM(m, a.v) : 'no figure'}</span>
       <i class="bar"><i style="width:${a ? (4 + 96 * subT(m, a.v)).toFixed(1) : 0}%;background:${a ? subColor(subT(m, a.v)) : 'none'}"></i></i></button></li>`).join('')}</ol>
     ${m.note ? `<p class="caveat">${esc(m.note)}</p>` : ''}
-    <p class="src">${link(m.source.url, pick(m.source.label))}</p></article>`);
+    <p class="src">${link(m.source.url, pickText(m.source.label))}</p></article>`);
   dockLive.querySelectorAll('.sub-measures [data-m]').forEach(b => b.onclick = () => setMeasure(MEASURES.find(x => x.key === b.dataset.m)));
   dockLive.querySelectorAll('.sub-row').forEach(b => b.onclick = () => {
     const s = +b.dataset.s;
@@ -1279,7 +1279,7 @@ function spark(m, s, Y) {
   const X = y => 6 + (y - x0) / (x1 - x0) * (W - 12), Yp = v => H - 14 - (v - lo + pad) / (hi - lo + 2 * pad) * (H - 22);
   const path = pts.map(([y, v], k) => `${k ? 'L' : 'M'}${X(y).toFixed(1)},${Yp(v).toFixed(1)}`).join('');
   const at = Math.max(x0, Math.min(x1, Y));
-  return `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(pick(m.label))}: ${pts.map(([y, v]) => `${y} ${fmtM(m, v)}`).join(', ')}">
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(pickText(m.label))}: ${pts.map(([y, v]) => `${y} ${fmtM(m, v)}`).join(', ')}">
     ${Y >= x0 ? `<line class="now" x1="${X(at)}" x2="${X(at)}" y1="4" y2="${H - 12}"/>` : ''}
     <path d="${path}"/>
     ${pts.map(([y, v]) => `<circle cx="${X(y).toFixed(1)}" cy="${Yp(v).toFixed(1)}" r="${pts.length > 12 ? 2 : 3.2}" style="fill:${subColor(subT(m, v))}"><title>${y}: ${fmtM(m, v)}</title></circle>`).join('')}
@@ -1296,7 +1296,7 @@ function showSuburb(s, gid = -1, back = null) {
     <p class="story-era">${S.postcode ? `${S.postcode} · ` : ''}${S.km2.toFixed(2)} km² · <span class="n">${fmt(S.buildings)}</span> buildings on the map</p>
     ${gid >= 0 ? `<p><button class="pill sub-bld">The building you chose</button></p>` : ''}
     ${MEASURES.map(m => { const a = subAt(m, s, Y);
-      return `<section class="sub-m${m === measure ? ' on' : ''}"><h3><button class="sub-pick" data-m="${m.key}" aria-pressed="${m === measure}">${esc(pick(m.label))}</button></h3>
+      return `<section class="sub-m${m === measure ? ' on' : ''}"><h3><button class="sub-pick" data-m="${m.key}" aria-pressed="${m === measure}">${esc(pickText(m.label))}</button></h3>
         <p class="sub-val">${a ? `<span class="v">${fmtM(m, a.v)}</span> ${esc(m.unit)}` : '<span class="none">No figure</span>'}<small>${esc(yearWords(m, Y))}${a ? ` · ${rank(m)}` : ''}</small></p>
         ${spark(m, s, Y)}<p class="src-note">${link(m.source.url, m.source.label)}</p></section>`; }).join('')}
     <p class="caveat">The figures are for the whole suburb, even where the map shows only part of it.</p></article>`, back);
@@ -1348,13 +1348,13 @@ function renderKey() {
     if (!m) { keyEl.innerHTML = `<span class="key-label">No suburb figures on this map</span>`; return; }
     const ticks = SUB_RAMP.map((_, i) => fmtM(m, subInv(m, i / (SUB_RAMP.length - 1)), true));
     keyEl.innerHTML = MEASURES.map(x => `<button class="chip" data-m="${x.key}" aria-pressed="${x === m}">${esc(x.short)}</button>`).join('') +
-      `<span class="key-label">${esc(pick(m.label))}, ${esc(yearWords(m))}</span><span class="ramp">${SUB_RAMP.map((c, i) =>
+      `<span class="key-label">${esc(pickText(m.label))}, ${esc(yearWords(m))}</span><span class="ramp">${SUB_RAMP.map((c, i) =>
         `<div><span>${ticks[i]}${i === SUB_RAMP.length - 1 && m.domainCut ? '+' : ''}</span><i style="background:linear-gradient(90deg,${c},${SUB_RAMP[Math.min(i + 1, SUB_RAMP.length - 1)]})"></i></div>`).join('')}</span>`;
     keyEl.querySelectorAll('[data-m]').forEach(b => b.onclick = () => setMeasure(MEASURES.find(x => x.key === b.dataset.m)));
   } else if (!activeLayer) {
     keyEl.innerHTML = `<span class="key-label">Choose a story to light up its buildings</span>`;
   } else if (activeLayer.groups.length > 1) {
-    keyEl.innerHTML = activeLayer.groups.map((g, i) => `<button class="chip" data-bit="${g.bit}" aria-pressed="${groupOn[g.bit] !== false}">${dot(GROUP_COLORS[i])}${esc(pick(g.label))} <span class="n">${fmt(g.count)}</span></button>`).join('');
+    keyEl.innerHTML = activeLayer.groups.map((g, i) => `<button class="chip" data-bit="${g.bit}" aria-pressed="${groupOn[g.bit] !== false}">${dot(GROUP_COLORS[i])}${esc(pickText(g.label))} <span class="n">${fmt(g.count)}</span></button>`).join('');
     keyEl.querySelectorAll('[data-bit]').forEach(b => b.onclick = () => { groupOn[b.dataset.bit] = groupOn[b.dataset.bit] === false; setLayer(activeLayer); });
   } else {
     keyEl.innerHTML = `<span class="chip plain">${dot(GROUP_COLORS[0])}${esc(activeLayer.title)} <span class="n">${fmt(activeLayer.count)}</span></span>`;
@@ -1644,11 +1644,11 @@ renderer.setAnimationLoop(now => {
   uniforms.uFog.value.set(dist * 1.6, dist * 4);
   if (frame % 6 === 0) updateLabels(dist);
   if (playing) {
-    const t = Math.min(1, playT0 + (now - playStart) / DURATION);
-    uniforms.uYear.value = playYear(t);
+    const prog = Math.min(1, playT0 + (now - playStart) / DURATION);
+    uniforms.uYear.value = playYear(prog);
     // A flight lasts about 0.8 s on screen whatever the film's pace: as many years as the film covers in that time.
-    uniforms.uRise.value = Math.max(2, (playYear(Math.min(1, t + 800 / DURATION)) - playYear(t)));
-    if (t >= 1) stopPlay();
+    uniforms.uRise.value = Math.max(2, (playYear(Math.min(1, prog + 800 / DURATION)) - playYear(prog)));
+    if (prog >= 1) stopPlay();
     drawHist();
   }
   if (pointer && !dragging && frame % 3 === 0) {
