@@ -1,6 +1,7 @@
 import * as THREE from './vendor/three.module.js';
 import { MapControls } from './vendor/MapControls.js';
 import { t, pick as pickText, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
+import { installBridgeRoute } from './bridge-route.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -722,7 +723,7 @@ dock.querySelector('.dock-close').onclick = () => {
   closeDock();
 };
 function syncBar() {
-  document.querySelector('.walks-open').setAttribute('aria-pressed', String(dockView === 'walks' || dockView === 'walk'));
+  document.querySelector('.walks-open').setAttribute('aria-pressed', String(dockView === 'walks' || dockView === 'walk' || dockView === 'bridge-route'));
   document.querySelector('.notes-open').setAttribute('aria-pressed', String(dockView === 'notes'));
 }
 
@@ -913,6 +914,8 @@ document.querySelector('.find-open').onclick = () => { document.body.classList.a
 let quests = [];
 fetch('data/quests.json').then(r => r.ok ? r.json() : []).then(q => { quests = q; }).catch(() => {});
 const LEVEL = ['', 'Easy', 'Medium', 'Hard'];
+const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive,
+  getDockView: () => dockView, showWalks, pickText, onLang });
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}
@@ -935,7 +938,8 @@ function showWalks() {
     <p class="lede">Five short routes through the city, told as riddles. Find each stop on the map, guess a building’s age
       with the colours off, or pick the right answer. Each stop earns up to three suns; a hint or a wrong guess costs one.</p>
     <p class="walk-score">Your suns: <b>${total}</b> of ${max}</p>
-    <ul class="routes">${quests.map(route).join('')}</ul></article>`);
+    <ul class="routes">${bridgeRoute.listHTML()}${quests.map(route).join('')}</ul></article>`);
+  bridgeRoute.wireList();
   dockLive.querySelectorAll('[data-q]').forEach(b => b.onclick = () => {
     const q = quests.find(q => q.id === b.dataset.q), st = qStore()[q.id] || {};
     const fresh = !st.step || st.step >= q.steps.length;

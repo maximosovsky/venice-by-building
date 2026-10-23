@@ -31,6 +31,8 @@ jobs:
         run: node tests/worker_smoke.mjs
       - name: Every text in Italian and English
         run: node tests/i18n_coverage.mjs
+      - name: Bridge route UI contract
+        run: node tests/bridge_route_ui.mjs
 
   deploy:
     name: Deploy to Vercel

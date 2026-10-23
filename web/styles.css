@@ -453,3 +453,21 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
   * { transition: none !important; }
   .dock, .flap.turn, .stamp, .feedback.miss { animation: none; }
 }
+
+/* Additive all-bridges route: scoped to its own entry/detail, leaving quests and cards intact. */
+.bridge-route-stats { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; margin: 18px 0; }
+.bridge-route-stats dt { color: var(--muted); }
+.bridge-route-stats dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.bridge-route-page .walk-actions { flex-wrap: wrap; }
+.bridge-route-page a.pill { display: inline-flex; align-items: center; text-decoration: none; }
+.bridge-route-page .src, .bridge-route-page details li { overflow-wrap: anywhere; }
+.bridge-route-page details { margin-top: 18px; }
+.bridge-route-page summary { cursor: pointer; color: var(--teal); }
+.bridge-crossings { list-style: none; margin: 8px -8px 0; padding: 0; }
+.bridge-crossings button { display: flex; align-items: baseline; gap: 10px; width: 100%; padding: 8px;
+  border: 0; border-radius: 6px; background: none; text-align: left; cursor: pointer; }
+.bridge-crossings button:hover { background: var(--hover); }
+.bridge-crossings button[aria-current="step"] { background: var(--stone); box-shadow: inset 3px 0 var(--sun); }
+.bridge-crossing-number { min-width: 2.5em; color: var(--teal); font-variant-numeric: tabular-nums; }
+.bridge-repeat { display: inline-block; padding: 0 5px; border: 1px solid var(--rule); border-radius: 4px; color: var(--sun); }
+.bridge-route-entry .route-meta { flex-wrap: wrap; }
