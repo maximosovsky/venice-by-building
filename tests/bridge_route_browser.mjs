@@ -24,6 +24,7 @@ try {
  const page=await browser.newPage({viewport:{width:1440,height:1000}});
  const errors=[]; page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base+'?lang=ru',{waitUntil:'networkidle',timeout:120000});
+ await page.waitForFunction(() => typeof document.querySelector('.walks-open')?.onclick === 'function', null, {timeout:120000});
  await page.locator('.walks-open').click();
  await page.locator('[data-bridge-route-open]').click();
  await page.locator('[data-bridge-route-toggle]').waitFor({timeout:30000});
@@ -42,7 +43,7 @@ try {
   assert.ok((await panel.innerText()).includes(data.audit.crossing_model_limitation[lang]));
  }
  const response=await page.request.get(base+'data/bridge-route.gpx');
- assert.equal(response.status(),200); assert.equal(await response.text(),readFileSync(resolve(root,'data/bridge-route.gpx'),'utf8'));
+ assert.equal(response.status(),200); assert.ok((await response.text()).replace(/\r\n/g,'\n') === readFileSync(resolve(root,'data/bridge-route.gpx'),'utf8').replace(/\r\n/g,'\n'), 'live GPX equals local after Git line-ending normalization');
  assert.deepEqual(errors,[]);
  const screenshot='C:/Users/1/AppData/Local/hermes/cache/scratch/venice-bridge-route-verified.png';
  await page.screenshot({path:screenshot});
