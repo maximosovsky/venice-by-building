@@ -273,7 +273,7 @@ function disposeObject(object) {
 }
 
 // The installer owns only its dock view and scene group; it does not change quests, picking, cards or renderer.
-export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, fetchRoute = (url, options) => fetch(url, options) }) {
+export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, onVisibilityChange = () => {}, fetchRoute = (url, options) => fetch(url, options) }) {
   const state = { status: 'idle', route: null, visible: false, selected: -1 };
   let pending = null, overlay = null, selectedMarker = null, disposed = false;
   const back = () => ({ label: pickText(UI.back), go: showWalks });
@@ -322,11 +322,13 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     state.visible = !!visible;
     if (state.visible) ensureOverlay();
     if (overlay) overlay.visible = state.visible;
+    onVisibilityChange(state.visible);
     if (getDockView() === 'bridge-route') render(true);
   }
   function focusCrossing(index) {
     if (disposed || !Number.isInteger(index) || !state.route?.crossings[index]) return;
     const c = state.route.crossings[index]; state.selected = index; state.visible = true; ensureOverlay().visible = true;
+    onVisibilityChange(true);
     if (selectedMarker) { overlay.remove(selectedMarker); disposeObject(selectedMarker); }
     selectedMarker = numberedMarker(THREE, index + 1, c.x, c.z, true); if (selectedMarker) overlay.add(selectedMarker);
     aimFly(c.x, c.z, 260);
@@ -337,6 +339,6 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     show, load, retry, setVisible, focusCrossing,
     listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML(state, pickText); },
     wireList() { dockLive.querySelector('[data-bridge-route-open]')?.addEventListener('click', show); },
-    dispose() { disposed = true; unsubscribe?.(); if (overlay) { scene.remove(overlay); disposeObject(overlay); overlay = null; } }
+    dispose() { disposed = true; onVisibilityChange(false); unsubscribe?.(); if (overlay) { scene.remove(overlay); disposeObject(overlay); overlay = null; } }
   };
 }

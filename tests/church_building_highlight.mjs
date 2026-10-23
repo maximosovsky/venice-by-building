@@ -1,0 +1,27 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import * as THREE from '../web/vendor/three.module.js';
+assert.ok(existsSync('web/church-building-highlight.js'), 'whole-building church highlight module is missing');
+const { extractChurchGeometry, installChurchBuildingHighlight } = await import('../web/church-building-highlight.js');
+const data=JSON.parse(readFileSync('web/data/church-buildings.json','utf8'));
+assert.equal(data.inventory_stops,162);
+assert.equal(data.buildings.length,new Set(data.buildings.map(b=>b.gid)).size);
+assert.equal(data.matched_stops+data.unmatched.length,162);
+for(const qid of ['Q172988','Q52531'])assert.ok(data.buildings.some(b=>b.qid===qid));
+// Two buildings plus a shaped roof whose high bit belongs to church 7.
+const tile={pos:new Int16Array([0,0,0, 30,0,0, 0,90,0, 0,100,0, 30,100,0, 0,120,30, 80,0,0, 90,0,0, 80,80,0]),bld:new Uint16Array([0,0,0,32768,32768,32768,1,1,1]),idx:new Uint32Array([0,1,2,3,4,5,6,7,8]),attr:new Float32Array([0,0,0,7,0,0,0,0,0,0,0,8,0,0,0,0]),nB:2};
+const g=extractChurchGeometry(THREE,tile,new Set([7]));
+assert.equal(g.index.count,6,'all walls and shaped roofs, no neighbor');
+assert.deepEqual([...g.attributes.position.array],[...tile.pos.slice(0,18)]);
+assert.equal(extractChurchGeometry(THREE,tile,new Set([999])),null);
+const scene=new THREE.Scene(),parent=new THREE.Mesh();scene.add(parent);parent.scale.setScalar(.1);parent.position.set(70,0,80);
+const manifest={...data,buildings:[{gid:7,qid:'Q172988'}]};
+const h=installChurchBuildingHighlight({THREE,fetchData:async()=>({ok:true,json:async()=>manifest})});
+h.registerTile(tile,parent);await h.load();assert.equal(h.overlays.length,1);assert.equal(h.overlays[0].visible,false);
+h.setSourceVisible('bridge',true);assert.equal(h.overlays[0].visible,true);assert.equal(h.overlays[0].material.color.getHexString(),'808080');
+h.overlays[0].updateWorldMatrix(true,false);assert.deepEqual(new THREE.Vector3(30,100,0).applyMatrix4(h.overlays[0].matrixWorld).toArray(),[73,10,80]);
+h.setPicking(true);assert.equal(h.overlays[0].visible,false,'does not contaminate atlas ID picking');h.setPicking(false);assert.equal(h.overlays[0].visible,true);
+h.setSourceVisible('church',true);h.setSourceVisible('bridge',false);assert.equal(h.overlays[0].visible,true);
+h.setSourceVisible('church',false);assert.equal(h.overlays[0].visible,false);
+h.dispose();h.dispose();assert.equal(parent.children.length,0);
+console.log('church building highlight: full walls/parts/roofs, exact GIDs, transforms, visibility union and disposal PASS');

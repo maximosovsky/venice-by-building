@@ -3,6 +3,7 @@ import { MapControls } from './vendor/MapControls.js';
 import { t, pick as pickText, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
 import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
+import { installChurchBuildingHighlight } from './church-building-highlight.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -517,6 +518,7 @@ function makeMaterial(tex, pick, born) {
 
 // ---------- Tiles ----------
 const meshes = [];
+const churchBuildingHighlight = installChurchBuildingHighlight({ THREE });
 let loaded = 0;
 const queue = [...config.tiles];
 const pool = Array.from({ length: WORKERS }, () => new Worker('worker.js', { type: 'module' }));
@@ -538,6 +540,7 @@ function addTile(m) {
   mesh.position.set(m.origin[0], 0, m.origin[1]);
   scene.add(mesh);
   meshes.push(mesh);
+  churchBuildingHighlight.registerTile(m, mesh);
 }
 
 // Tiles come in packs (see pipeline/s03_tiles.py); a tile is ready once its pack has arrived.
@@ -568,6 +571,7 @@ function pick(x, y) {
   for (const m of meshes) m.material = m.userData.pick;
   flat.visible = false;
   labelGroup.visible = false;
+  churchBuildingHighlight.setPicking(true);
   renderer.setRenderTarget(pickTarget);
   renderer.setClearColor(0x000000, 0);
   renderer.clear();
@@ -577,6 +581,7 @@ function pick(x, y) {
   renderer.setClearColor(SKY, 1);
   flat.visible = true;
   labelGroup.visible = true;
+  churchBuildingHighlight.setPicking(false);
   for (const m of meshes) m.material = m.userData.draw;
   camera.clearViewOffset();
   return pickPixel[0] + pickPixel[1] * 256 + pickPixel[2] * 65536 - 1;
@@ -920,9 +925,11 @@ let quests = [];
 fetch('data/quests.json').then(r => r.ok ? r.json() : []).then(q => { quests = q; }).catch(() => {});
 const LEVEL = ['', 'Easy', 'Medium', 'Hard'];
 const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive,
-  getDockView: () => dockView, showWalks, pickText, onLang });
+  getDockView: () => dockView, showWalks, pickText, onLang,
+  onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('bridge', visible) });
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
-  getDockView: () => dockView, showWalks, pickText, onLang });
+  getDockView: () => dockView, showWalks, pickText, onLang,
+  onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}
@@ -1683,4 +1690,4 @@ renderer.setAnimationLoop(now => {
   renderer.render(scene, camera);
 });
 
-window.__dbg = { churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };
+window.__dbg = { churchBuildingHighlight, bridgeRoute, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };

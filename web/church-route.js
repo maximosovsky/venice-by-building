@@ -84,7 +84,7 @@ export function buildRouteOverlay(THREE,route){
  return group;
 }
 function disposeObject(object){object.traverse(o=>{o.geometry?.dispose();const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>{m?.map?.dispose();m?.dispose();});});}
-export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDockView,showWalks,pickText,onLang,fetchRoute=url=>fetch(url)}){
+export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDockView,showWalks,pickText,onLang,onVisibilityChange=()=>{},fetchRoute=url=>fetch(url)}){
  const state={status:'idle',route:null,visible:false,selected:-1};let overlay=null,pending=null,disposed=false;
  const back=()=>({label:pickText(UI.back),go:showWalks});
  function render(preserveScroll=false){if(disposed)return;const dock=dockLive.closest?.('.dock'),scroll=dock?.scrollTop||0;
@@ -99,10 +99,11 @@ export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDock
  function show(){if(disposed)return;render();void load();}
  function retry(){if(pending||disposed)return pending;state.status='idle';const result=load();refresh();return result;}
  function ensureOverlay(){if(!overlay&&state.route&&!disposed){overlay=buildRouteOverlay(THREE,state.route);scene.add(overlay);}return overlay;}
- function setVisible(visible){if(disposed||state.status!=='ready')return;state.visible=!!visible;if(state.visible)ensureOverlay();if(overlay)overlay.visible=state.visible;if(getDockView()==='church-route')render(true);}
+ function setVisible(visible){if(disposed||state.status!=='ready')return;state.visible=!!visible;if(state.visible)ensureOverlay();if(overlay)overlay.visible=state.visible;onVisibilityChange(state.visible);if(getDockView()==='church-route')render(true);}
  function focusStop(index){if(disposed||!Number.isInteger(index)||!state.route?.stops[index])return;state.selected=index;state.visible=true;ensureOverlay().visible=true;
+  onVisibilityChange(true);
   overlay.children.filter(o=>o.userData.stop_id).forEach(o=>{const selected=o.userData.number===index+1;o.scale.setScalar(selected?1.5:1);o.userData.selected=selected;});const [x,z]=state.route.stops[index].local;aimFly(x,z,420);if(getDockView()==='church-route')render(true);
  }
  const unsubscribe=onLang(()=>{if(getDockView()==='church-route')render(true);});
- return {show,load,retry,setVisible,focusStop,get overlay(){return overlay;},listHTML(){if(state.status==='idle')void load();return routeEntryHTML(state,pickText);},wireList(){dockLive.querySelector('[data-church-route-open]')?.addEventListener('click',show);},dispose(){if(disposed)return;disposed=true;unsubscribe?.();if(overlay){scene.remove(overlay);disposeObject(overlay);overlay=null;}}};
+ return {show,load,retry,setVisible,focusStop,get overlay(){return overlay;},listHTML(){if(state.status==='idle')void load();return routeEntryHTML(state,pickText);},wireList(){dockLive.querySelector('[data-church-route-open]')?.addEventListener('click',show);},dispose(){if(disposed)return;disposed=true;onVisibilityChange(false);unsubscribe?.();if(overlay){scene.remove(overlay);disposeObject(overlay);overlay=null;}}};
 }

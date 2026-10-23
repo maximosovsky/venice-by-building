@@ -1,0 +1,1383 @@
+{
+  "version": 1,
+  "inventory_stops": 162,
+  "matched_stops": 125,
+  "buildings": [
+    {
+      "gid": 691,
+      "building_id": "w132937433",
+      "osm_type": "way",
+      "osm_id": 132937433,
+      "qid": "Q1149886",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 698,
+      "building_id": "w175718783",
+      "osm_type": "way",
+      "osm_id": 175718783,
+      "qid": "Q3585411",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 1409,
+      "building_id": "w176654997",
+      "osm_type": "way",
+      "osm_id": 176654997,
+      "qid": "Q27116950",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 1431,
+      "building_id": "w176657474",
+      "osm_type": "way",
+      "osm_id": 176657474,
+      "qid": "Q3585364",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 2351,
+      "building_id": "w142023283",
+      "osm_type": "way",
+      "osm_id": 142023283,
+      "qid": "Q3585423",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 2521,
+      "building_id": "w141996824",
+      "osm_type": "way",
+      "osm_id": 141996824,
+      "qid": "Q121598793",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 2573,
+      "building_id": "w142023249",
+      "osm_type": "way",
+      "osm_id": 142023249,
+      "qid": "Q2545358",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 2922,
+      "building_id": "w142022332",
+      "osm_type": "way",
+      "osm_id": 142022332,
+      "qid": "Q3585448",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 2994,
+      "building_id": "w142022351",
+      "osm_type": "way",
+      "osm_id": 142022351,
+      "qid": "Q3585377",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3283,
+      "building_id": "w1220054619",
+      "osm_type": "way",
+      "osm_id": 1220054619,
+      "qid": "Q70112034",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3401,
+      "building_id": "w1219737892",
+      "osm_type": "way",
+      "osm_id": 1219737892,
+      "qid": "Q3585409",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3563,
+      "building_id": "w142022168",
+      "osm_type": "way",
+      "osm_id": 142022168,
+      "qid": "Q1449262",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3704,
+      "building_id": "w138841141",
+      "osm_type": "way",
+      "osm_id": 138841141,
+      "qid": "Q3585321",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3848,
+      "building_id": "w138842933",
+      "osm_type": "way",
+      "osm_id": 138842933,
+      "qid": "Q1400201",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3933,
+      "building_id": "w410353935",
+      "osm_type": "way",
+      "osm_id": 410353935,
+      "qid": "Q3585437",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 3965,
+      "building_id": "w138841129",
+      "osm_type": "way",
+      "osm_id": 138841129,
+      "qid": "Q3585897",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 4047,
+      "building_id": "w142378731",
+      "osm_type": "way",
+      "osm_id": 142378731,
+      "qid": "Q861436",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 4136,
+      "building_id": "w138841903",
+      "osm_type": "way",
+      "osm_id": 138841903,
+      "qid": "Q3585350",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 4516,
+      "building_id": "w138843137",
+      "osm_type": "way",
+      "osm_id": 138843137,
+      "qid": "Q2717507",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5033,
+      "building_id": "w138801607",
+      "osm_type": "way",
+      "osm_id": 138801607,
+      "qid": "Q1059409",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5048,
+      "building_id": "w439574789",
+      "osm_type": "way",
+      "osm_id": 439574789,
+      "qid": "Q690779",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5149,
+      "building_id": "w138843471",
+      "osm_type": "way",
+      "osm_id": 138843471,
+      "qid": "Q3585356",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5241,
+      "building_id": "w138803921",
+      "osm_type": "way",
+      "osm_id": 138803921,
+      "qid": "Q46592",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5284,
+      "building_id": "w138842954",
+      "osm_type": "way",
+      "osm_id": 138842954,
+      "qid": "Q2268642",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5287,
+      "building_id": "w138843630",
+      "osm_type": "way",
+      "osm_id": 138843630,
+      "qid": "Q1585514",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5289,
+      "building_id": "w316454133",
+      "osm_type": "way",
+      "osm_id": 316454133,
+      "qid": "Q3884410",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5314,
+      "building_id": "w138842110",
+      "osm_type": "way",
+      "osm_id": 138842110,
+      "qid": "Q3585412",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5348,
+      "building_id": "w138843633",
+      "osm_type": "way",
+      "osm_id": 138843633,
+      "qid": "Q1040043",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5585,
+      "building_id": "w138801433",
+      "osm_type": "way",
+      "osm_id": 138801433,
+      "qid": "Q3585332",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5602,
+      "building_id": "w138843459",
+      "osm_type": "way",
+      "osm_id": 138843459,
+      "qid": "Q748689",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5610,
+      "building_id": "w138842007",
+      "osm_type": "way",
+      "osm_id": 138842007,
+      "qid": "Q1080619",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5737,
+      "building_id": "w138843762",
+      "osm_type": "way",
+      "osm_id": 138843762,
+      "qid": "Q2220127",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5757,
+      "building_id": "w140952439",
+      "osm_type": "way",
+      "osm_id": 140952439,
+      "qid": "Q122152492",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5895,
+      "building_id": "w138801086",
+      "osm_type": "way",
+      "osm_id": 138801086,
+      "qid": "Q3585442",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5904,
+      "building_id": "w138802170",
+      "osm_type": "way",
+      "osm_id": 138802170,
+      "qid": "Q3585357",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 5948,
+      "building_id": "w138841670",
+      "osm_type": "way",
+      "osm_id": 138841670,
+      "qid": "Q3585385",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6133,
+      "building_id": "w138841179",
+      "osm_type": "way",
+      "osm_id": 138841179,
+      "qid": "Q185910",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6190,
+      "building_id": "w138801674",
+      "osm_type": "way",
+      "osm_id": 138801674,
+      "qid": "Q2717786",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6271,
+      "building_id": "w138843481",
+      "osm_type": "way",
+      "osm_id": 138843481,
+      "qid": "Q1150698",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6330,
+      "building_id": "w410353934",
+      "osm_type": "way",
+      "osm_id": 410353934,
+      "qid": "Q520477",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6334,
+      "building_id": "w138800835",
+      "osm_type": "way",
+      "osm_id": 138800835,
+      "qid": "Q55599854",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6391,
+      "building_id": "w138803207",
+      "osm_type": "way",
+      "osm_id": 138803207,
+      "qid": "Q1400212",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6506,
+      "building_id": "w138841900",
+      "osm_type": "way",
+      "osm_id": 138841900,
+      "qid": "Q3585323",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6575,
+      "building_id": "w138801532",
+      "osm_type": "way",
+      "osm_id": 138801532,
+      "qid": "Q3673752",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6632,
+      "building_id": "w138841938",
+      "osm_type": "way",
+      "osm_id": 138841938,
+      "qid": "Q3580188",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6691,
+      "building_id": "w138800840",
+      "osm_type": "way",
+      "osm_id": 138800840,
+      "qid": "Q533680",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6830,
+      "building_id": "w138804284",
+      "osm_type": "way",
+      "osm_id": 138804284,
+      "qid": "Q915746",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 6851,
+      "building_id": "w153483298",
+      "osm_type": "way",
+      "osm_id": 153483298,
+      "qid": "Q155225",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7009,
+      "building_id": "w138801138",
+      "osm_type": "way",
+      "osm_id": 138801138,
+      "qid": "Q3668820",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7027,
+      "building_id": "w56054567",
+      "osm_type": "way",
+      "osm_id": 56054567,
+      "qid": "Q3672485",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7032,
+      "building_id": "w1001557907",
+      "osm_type": "way",
+      "osm_id": 1001557907,
+      "qid": "Q1543347",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7125,
+      "building_id": "w138800508",
+      "osm_type": "way",
+      "osm_id": 138800508,
+      "qid": "Q922677",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7207,
+      "building_id": "w138841671",
+      "osm_type": "way",
+      "osm_id": 138841671,
+      "qid": "Q3585347",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7367,
+      "building_id": "w138801285",
+      "osm_type": "way",
+      "osm_id": 138801285,
+      "qid": "Q1403387",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7376,
+      "building_id": "w138804285",
+      "osm_type": "way",
+      "osm_id": 138804285,
+      "qid": "Q3585413",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7416,
+      "building_id": "w138804531",
+      "osm_type": "way",
+      "osm_id": 138804531,
+      "qid": "Q946542",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7446,
+      "building_id": "w138841815",
+      "osm_type": "way",
+      "osm_id": 138841815,
+      "qid": "Q2219891",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7621,
+      "building_id": "w138801057",
+      "osm_type": "way",
+      "osm_id": 138801057,
+      "qid": "Q1648609",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7639,
+      "building_id": "w138803218",
+      "osm_type": "way",
+      "osm_id": 138803218,
+      "qid": "Q647427",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7648,
+      "building_id": "w138803603",
+      "osm_type": "way",
+      "osm_id": 138803603,
+      "qid": "Q3585383",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7739,
+      "building_id": "w138842011",
+      "osm_type": "way",
+      "osm_id": 138842011,
+      "qid": "Q1281097",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7789,
+      "building_id": "w138843642",
+      "osm_type": "way",
+      "osm_id": 138843642,
+      "qid": "Q5418235",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7839,
+      "building_id": "w138841819",
+      "osm_type": "way",
+      "osm_id": 138841819,
+      "qid": "Q224961",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7913,
+      "building_id": "w138804512",
+      "osm_type": "way",
+      "osm_id": 138804512,
+      "qid": "Q1813687",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 7933,
+      "building_id": "w138803318",
+      "osm_type": "way",
+      "osm_id": 138803318,
+      "qid": "Q3585434",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8033,
+      "building_id": "w138800353",
+      "osm_type": "way",
+      "osm_id": 138800353,
+      "qid": "Q1028202",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8242,
+      "building_id": "w314754899",
+      "osm_type": "way",
+      "osm_id": 314754899,
+      "qid": "Q935076",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8276,
+      "building_id": "w138842879",
+      "osm_type": "way",
+      "osm_id": 138842879,
+      "qid": "Q3585387",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8338,
+      "building_id": "w138842015",
+      "osm_type": "way",
+      "osm_id": 138842015,
+      "qid": "Q1093901",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8344,
+      "building_id": "w314636453",
+      "osm_type": "way",
+      "osm_id": 314636453,
+      "qid": "Q1290662",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8426,
+      "building_id": "w138800554",
+      "osm_type": "way",
+      "osm_id": 138800554,
+      "qid": "Q3585362",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8471,
+      "building_id": "w138802078",
+      "osm_type": "way",
+      "osm_id": 138802078,
+      "qid": "Q1251035",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8477,
+      "building_id": "w166171823",
+      "osm_type": "way",
+      "osm_id": 166171823,
+      "qid": "Q3585318",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8568,
+      "building_id": "w410105958",
+      "osm_type": "way",
+      "osm_id": 410105958,
+      "qid": "Q3585345",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8589,
+      "building_id": "w416123114",
+      "osm_type": "way",
+      "osm_id": 416123114,
+      "qid": "Q3585410",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8602,
+      "building_id": "w138842969",
+      "osm_type": "way",
+      "osm_id": 138842969,
+      "qid": "Q3673484",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8638,
+      "building_id": "w138841764",
+      "osm_type": "way",
+      "osm_id": 138841764,
+      "qid": "Q3673180",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8667,
+      "building_id": "w370395380",
+      "osm_type": "way",
+      "osm_id": 370395380,
+      "qid": "Q3585394",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8713,
+      "building_id": "w138801661",
+      "osm_type": "way",
+      "osm_id": 138801661,
+      "qid": "Q1784082",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8868,
+      "building_id": "w451956687",
+      "osm_type": "way",
+      "osm_id": 451956687,
+      "qid": "Q3669580",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8995,
+      "building_id": "w162035005",
+      "osm_type": "way",
+      "osm_id": 162035005,
+      "qid": "Q794876",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 8999,
+      "building_id": "w410105957",
+      "osm_type": "way",
+      "osm_id": 410105957,
+      "qid": "Q3585339",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9029,
+      "building_id": "w138800932",
+      "osm_type": "way",
+      "osm_id": 138800932,
+      "qid": "Q172988",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9046,
+      "building_id": "w1103897423",
+      "osm_type": "way",
+      "osm_id": 1103897423,
+      "qid": "Q3355126",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9097,
+      "building_id": "w138803652",
+      "osm_type": "way",
+      "osm_id": 138803652,
+      "qid": "Q980366",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9160,
+      "building_id": "w138801077",
+      "osm_type": "way",
+      "osm_id": 138801077,
+      "qid": "Q521260",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9200,
+      "building_id": "w138800730",
+      "osm_type": "way",
+      "osm_id": 138800730,
+      "qid": "Q945981",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9205,
+      "building_id": "w138803298",
+      "osm_type": "way",
+      "osm_id": 138803298,
+      "qid": "Q1559661",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9236,
+      "building_id": "w138803200",
+      "osm_type": "way",
+      "osm_id": 138803200,
+      "qid": "Q1407670",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9262,
+      "building_id": "w138841723",
+      "osm_type": "way",
+      "osm_id": 138841723,
+      "qid": "Q1895574",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9270,
+      "building_id": "w138842928",
+      "osm_type": "way",
+      "osm_id": 138842928,
+      "qid": "Q974832",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9313,
+      "building_id": "w138843914",
+      "osm_type": "way",
+      "osm_id": 138843914,
+      "qid": "Q2780025",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9328,
+      "building_id": "w138841482",
+      "osm_type": "way",
+      "osm_id": 138841482,
+      "qid": "Q3669279",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9414,
+      "building_id": "w138843464",
+      "osm_type": "way",
+      "osm_id": 138843464,
+      "qid": "Q2356961",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9463,
+      "building_id": "w205848942",
+      "osm_type": "way",
+      "osm_id": 205848942,
+      "qid": "Q251686",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9490,
+      "building_id": "w138804072",
+      "osm_type": "way",
+      "osm_id": 138804072,
+      "qid": "Q1068131",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9520,
+      "building_id": "w138841862",
+      "osm_type": "way",
+      "osm_id": 138841862,
+      "qid": "Q2483408",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9560,
+      "building_id": "w138843126",
+      "osm_type": "way",
+      "osm_id": 138843126,
+      "qid": "Q1255964",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9606,
+      "building_id": "w138800998",
+      "osm_type": "way",
+      "osm_id": 138800998,
+      "qid": "Q220811",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9638,
+      "building_id": "w138842959",
+      "osm_type": "way",
+      "osm_id": 138842959,
+      "qid": "Q769514",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9697,
+      "building_id": "w138843118",
+      "osm_type": "way",
+      "osm_id": 138843118,
+      "qid": "Q588559",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9754,
+      "building_id": "w410105956",
+      "osm_type": "way",
+      "osm_id": 410105956,
+      "qid": "Q3585337",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9769,
+      "building_id": "w138803212",
+      "osm_type": "way",
+      "osm_id": 138803212,
+      "qid": "Q533409",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9770,
+      "building_id": "w416601131",
+      "osm_type": "way",
+      "osm_id": 416601131,
+      "qid": "Q3585917",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9808,
+      "building_id": "w410105959",
+      "osm_type": "way",
+      "osm_id": 410105959,
+      "qid": "Q3585391",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9883,
+      "building_id": "w138843174",
+      "osm_type": "way",
+      "osm_id": 138843174,
+      "qid": "Q3669447",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9893,
+      "building_id": "w138842956",
+      "osm_type": "way",
+      "osm_id": 138842956,
+      "qid": "Q2929873",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 9966,
+      "building_id": "w104686433",
+      "osm_type": "way",
+      "osm_id": 104686433,
+      "qid": "Q1129555",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10008,
+      "building_id": "w313876759",
+      "osm_type": "way",
+      "osm_id": 313876759,
+      "qid": "Q2929845",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10022,
+      "building_id": "w138800410",
+      "osm_type": "way",
+      "osm_id": 138800410,
+      "qid": "Q3670710",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10042,
+      "building_id": "w138801509",
+      "osm_type": "way",
+      "osm_id": 138801509,
+      "qid": "Q52531",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10106,
+      "building_id": "w1105486385",
+      "osm_type": "way",
+      "osm_id": 1105486385,
+      "qid": "Q21856008",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10110,
+      "building_id": "w138803936",
+      "osm_type": "way",
+      "osm_id": 138803936,
+      "qid": "Q938556",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10124,
+      "building_id": "w138842963",
+      "osm_type": "way",
+      "osm_id": 138842963,
+      "qid": "Q2929832",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10141,
+      "building_id": "w205850072",
+      "osm_type": "way",
+      "osm_id": 205850072,
+      "qid": "Q2223139",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10160,
+      "building_id": "w118714648",
+      "osm_type": "way",
+      "osm_id": 118714648,
+      "qid": "Q1093909",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10229,
+      "building_id": "w138804537",
+      "osm_type": "way",
+      "osm_id": 138804537,
+      "qid": "Q713558",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10298,
+      "building_id": "w205849816",
+      "osm_type": "way",
+      "osm_id": 205849816,
+      "qid": "Q2931177",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10465,
+      "building_id": "w88078531",
+      "osm_type": "way",
+      "osm_id": 88078531,
+      "qid": "Q122152456",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10511,
+      "building_id": "w410344929",
+      "osm_type": "way",
+      "osm_id": 410344929,
+      "qid": "Q3585398",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10598,
+      "building_id": "w138800732",
+      "osm_type": "way",
+      "osm_id": 138800732,
+      "qid": "Q3585397",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10778,
+      "building_id": "w154856677",
+      "osm_type": "way",
+      "osm_id": 154856677,
+      "qid": "Q830807",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 10817,
+      "building_id": "w138804279",
+      "osm_type": "way",
+      "osm_id": 138804279,
+      "qid": "Q3673008",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 11041,
+      "building_id": "w141988629",
+      "osm_type": "way",
+      "osm_id": 141988629,
+      "qid": "Q98781254",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 11082,
+      "building_id": "w141985400",
+      "osm_type": "way",
+      "osm_id": 141985400,
+      "qid": "Q3585324",
+      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    }
+  ],
+  "unmatched": [
+    {
+      "id": "Q2897799",
+      "qid": "Q2897799",
+      "name": {
+        "ru": "Scola Ponentina",
+        "it": "scola Spagnola",
+        "en": "Spanish Synagogue"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q62259167",
+      "qid": "Q62259167",
+      "name": {
+        "ru": "Levantine Synagogue",
+        "it": "scola Luzzatto",
+        "en": "Scola Levantina"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q65015",
+      "qid": "Q65015",
+      "name": {
+        "ru": "Scola Italiana",
+        "it": "scola Italiana",
+        "en": "Italian Synagogue"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q28035407",
+      "qid": "Q28035407",
+      "name": {
+        "ru": "Кантонская синагога",
+        "it": "scola Canton",
+        "en": "Canton Synagogue"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q12051106",
+      "qid": "Q12051106",
+      "name": {
+        "ru": "Great German Synagogue",
+        "it": "scola Grande Tedesca",
+        "en": "Scola Grande Tedesca"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q3585424-volto-santo",
+      "qid": "Q3585424",
+      "name": {
+        "ru": "Cappella del Volto Santo",
+        "it": "Cappella del Volto Santo",
+        "en": "Cappella del Volto Santo"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q3585408",
+      "qid": "Q3585408",
+      "name": {
+        "ru": "Chiesa di Santa Caterina (Venezia)",
+        "it": "chiesa di Santa Caterina",
+        "en": "Santa Caterina"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-santi-rocco-margherita",
+      "qid": "mention-santi-rocco-margherita",
+      "name": {
+        "ru": "Santi Rocco e Margherita",
+        "it": "Santi Rocco e Margherita",
+        "en": "Santi Rocco e Margherita"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-soccorso-dorsoduro",
+      "qid": "mention-soccorso-dorsoduro",
+      "name": {
+        "ru": "Chiesa di Santa Maria del Soccorso (Venezia)",
+        "it": "Chiesa di Santa Maria del Soccorso (Venezia)",
+        "en": "Chiesa di Santa Maria del Soccorso (Venezia)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q3674171",
+      "qid": "Q3674171",
+      "name": {
+        "ru": "Chiesa di Santa Marta (Venezia)",
+        "it": "chiesa di Santa Marta",
+        "en": "Santa Marta"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q119156487",
+      "qid": "Q119156487",
+      "name": {
+        "ru": "Cappella di San Teodoro",
+        "it": "Cappella di San Teodoro",
+        "en": "Cappella di San Teodoro"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q114790449",
+      "qid": "Q114790449",
+      "name": {
+        "ru": "Chiesa dei Santi Filippo e Giacomo (Venezia)",
+        "it": "chiesa dei Santi Filippo e Giacomo",
+        "en": "Santi Filippo e Giacomo"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q2932203",
+      "qid": "Q2932203",
+      "name": {
+        "ru": "Oratorio della Ca' di Dio",
+        "it": "Oratorio della Ca' di Dio",
+        "en": "Santa Maria della Ca' di Dio"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-san-gioacchino",
+      "qid": "mention-san-gioacchino",
+      "name": {
+        "ru": "Oratorio di San Gioacchino (Venezia)",
+        "it": "Oratorio di San Gioacchino (Venezia)",
+        "en": "Oratorio di San Gioacchino (Venezia)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-cristo-re-celestia",
+      "qid": "mention-cristo-re-celestia",
+      "name": {
+        "ru": "oratorio di Cristo Re",
+        "it": "oratorio di Cristo Re",
+        "en": "oratorio di Cristo Re"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q122152502",
+      "qid": "Q122152502",
+      "name": {
+        "ru": "oratorio di San Marco in Vinea",
+        "it": "oratorio di san Marco in Vinea",
+        "en": "oratorio di san Marco in Vinea"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q57981283",
+      "qid": "Q57981283",
+      "name": {
+        "ru": "Convento delle Convertite",
+        "it": "Convento delle Convertite",
+        "en": "Convent of Santa Maria Maddalena"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q95451292",
+      "qid": "Q95451292",
+      "name": {
+        "ru": "Chiesa dei Santi Cosma e Damiano (Venezia)",
+        "it": "chiesa dei Santi Cosma e Damiano",
+        "en": "chiesa dei Santi Cosma e Damiano"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q753370",
+      "qid": "Q753370",
+      "name": {
+        "ru": "Церковь делле Цителле",
+        "it": "chiesa delle Zitelle",
+        "en": "Le Zitelle"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-grazie-burano",
+      "qid": "mention-grazie-burano",
+      "name": {
+        "ru": "Chiesa di Santa Maria delle Grazie (Burano)",
+        "it": "Chiesa di Santa Maria delle Grazie (Burano)",
+        "en": "Chiesa di Santa Maria delle Grazie (Burano)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-santa-barbara-burano",
+      "qid": "mention-santa-barbara-burano",
+      "name": {
+        "ru": "Oratorio di Santa Barbara (Burano)",
+        "it": "Oratorio di Santa Barbara (Burano)",
+        "en": "Oratorio di Santa Barbara (Burano)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q122152501",
+      "qid": "Q122152501",
+      "name": {
+        "ru": "Oratorio di San Marco (Torcello)",
+        "it": "oratorio di San Marco Evangelista",
+        "en": "Oratorio di San Marco (Torcello)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q281139",
+      "qid": "Q281139",
+      "name": {
+        "ru": "Церковь Сан-Франческо-дель-Дезерто",
+        "it": "Chiesa di San Francesco del Deserto",
+        "en": "Church of San Francesco del Deserto"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q379102",
+      "qid": "Q379102",
+      "name": {
+        "ru": "Chiesa di San Nicolò (Venezia, Lido)",
+        "it": "chiesa di San Nicolò",
+        "en": "San Nicolò al Lido"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q86664730",
+      "qid": "Q86664730",
+      "name": {
+        "ru": "Tempio votivo (Venezia)",
+        "it": "tempio Votivo di Santa Maria Immacolata",
+        "en": "votive temple of Santa Maria Immacolata"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q107301282",
+      "qid": "Q107301282",
+      "name": {
+        "ru": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
+        "it": "chiesa di Santa Maria Elisabetta",
+        "en": "Santa Maria Elisabetta"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q3585395",
+      "qid": "Q3585395",
+      "name": {
+        "ru": "Chiesa di Sant'Antonio (Venezia, Lido)",
+        "it": "chiesa di Sant'Antonio",
+        "en": "Sant'Antonio"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q122152493",
+      "qid": "Q122152493",
+      "name": {
+        "ru": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)",
+        "it": "chiesa di Sant'Ignazio di Loyola",
+        "en": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q585738",
+      "qid": "Q585738",
+      "name": {
+        "ru": "Chiesa di Santa Maria Assunta (Venezia, Malamocco)",
+        "it": "chiesa di Santa Maria Assunta",
+        "en": "Santa Maria Assunta"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q122152488",
+      "qid": "Q122152488",
+      "name": {
+        "ru": "Chiesa di Santa Maria della Salute (Alberoni)",
+        "it": "chiesa di Santa Maria della Salute",
+        "en": "Chiesa di Santa Maria della Salute (Alberoni)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q1791020",
+      "qid": "Q1791020",
+      "name": {
+        "ru": "Церковь Сан-Ладзаро-дельи-Армени",
+        "it": "Chiesa di San Lazzaro degli Armeni",
+        "en": "Church of San Lazzaro degli Armeni"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q109466368",
+      "qid": "Q109466368",
+      "name": {
+        "ru": "Chiesa di San Pietro in Volta",
+        "it": "chiesa di San Pietro in Volta",
+        "en": "Chiesa di San Pietro in Volta"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q109466355",
+      "qid": "Q109466355",
+      "name": {
+        "ru": "Chiesa di Santo Stefano (Venezia, Portosecco)",
+        "it": "chiesa di Santo Stefano Protomartire",
+        "en": "Chiesa di Santo Stefano (Venezia, Portosecco)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q109466379",
+      "qid": "Q109466379",
+      "name": {
+        "ru": "Chiesa di Sant'Antonio (Venezia, Pellestrina)",
+        "it": "chiesa di Sant'Antonio",
+        "en": "Chiesa di Sant'Antonio (Venezia, Pellestrina)"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q109466385",
+      "qid": "Q109466385",
+      "name": {
+        "ru": "Santuario della Madonna dell'Apparizione",
+        "it": "Santuario della Madonna dell'Apparizione",
+        "en": "Santuario della Madonna dell'Apparizione"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "Q109466393",
+      "qid": "Q109466393",
+      "name": {
+        "ru": "Chiesa di Ognissanti (Venezia, Pellestrina)",
+        "it": "chiesa di Ognissanti",
+        "en": "Ognissanti Church"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    },
+    {
+      "id": "mention-chiesa-sacca-sessola",
+      "qid": "mention-chiesa-sacca-sessola",
+      "name": {
+        "ru": "Chiesa di Sacca Sessola",
+        "it": "Chiesa di Sacca Sessola",
+        "en": "Chiesa di Sacca Sessola"
+      },
+      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
+    }
+  ],
+  "atlas_attrs_sha256": "2ad58841d957045834c13ae65c6b4247b7cc8f1fb81699a1e9ee532e0da00143",
+  "geometry_source": "existing_atlas_worker_mesh_including_all_parts_and_roofs",
+  "source": "data/processed/buildings_centro.geojson",
+  "limitations": "Only unique exact OSM Wikidata tags are used. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged."
+}
