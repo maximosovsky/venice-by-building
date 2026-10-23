@@ -6,12 +6,12 @@
     "en": "Churches and temples of Venice and the lagoon"
   },
   "summary": {
-    "ru": "162 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "162 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "162 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "150 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
+    "it": "150 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
+    "en": "150 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
   },
   "status": "ready",
-  "generated_at": "2026-10-23T18:50:29.075845+00:00",
+  "generated_at": "2026-10-23T20:07:45.787312+00:00",
   "stops": [
     {
       "id": "Q748689",
@@ -5180,241 +5180,6 @@
       "node": 9891101874
     },
     {
-      "id": "Q379102",
-      "name": {
-        "ru": "Chiesa di San Nicolò (Venezia, Lido)",
-        "it": "chiesa di San Nicolò",
-        "en": "San Nicolò al Lido"
-      },
-      "lon": 12.38074,
-      "lat": 45.42792,
-      "local": [
-        3266.224,
-        783.484
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_(Venezia%2C_Lido)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q379102",
-      "source_rows": 5,
-      "network_distance_m": 32.94,
-      "node": 1303944196
-    },
-    {
-      "id": "Q86664730",
-      "name": {
-        "ru": "Tempio votivo (Venezia)",
-        "it": "tempio Votivo di Santa Maria Immacolata",
-        "en": "votive temple of Santa Maria Immacolata"
-      },
-      "lon": 12.370721,
-      "lat": 45.417823,
-      "local": [
-        2445.793,
-        1879.61
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Tempio_votivo_(Venezia)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q86664730",
-      "source_rows": 3,
-      "network_distance_m": 126.34
-    },
-    {
-      "id": "Q107301282",
-      "name": {
-        "ru": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
-        "it": "chiesa di Santa Maria Elisabetta",
-        "en": "Santa Maria Elisabetta"
-      },
-      "lon": 12.368908,
-      "lat": 45.417272,
-      "local": [
-        2301.941,
-        1936.181
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Elisabetta_(Venezia%2C_Lido)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q107301282",
-      "source_rows": 4,
-      "network_distance_m": 38.02,
-      "node": 4926878971
-    },
-    {
-      "id": "Q3585395",
-      "name": {
-        "ru": "Chiesa di Sant'Antonio (Venezia, Lido)",
-        "it": "chiesa di Sant'Antonio",
-        "en": "Sant'Antonio"
-      },
-      "lon": 12.3618,
-      "lat": 45.4037,
-      "local": [
-        1696.334,
-        3425.719
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Lido)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585395",
-      "source_rows": 3,
-      "network_distance_m": 843.96
-    },
-    {
-      "id": "Q122152493",
-      "name": {
-        "ru": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)",
-        "it": "chiesa di Sant'Ignazio di Loyola",
-        "en": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)"
-      },
-      "lon": 12.352917,
-      "lat": 45.392194,
-      "local": [
-        959.084,
-        4681.115
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Ignazio_di_Loyola_(Venezia%2C_Lido)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q122152493",
-      "source_rows": 3,
-      "network_distance_m": 2210.75
-    },
-    {
-      "id": "Q585738",
-      "name": {
-        "ru": "Chiesa di Santa Maria Assunta (Venezia, Malamocco)",
-        "it": "chiesa di Santa Maria Assunta",
-        "en": "Santa Maria Assunta"
-      },
-      "lon": 12.3385,
-      "lat": 45.3725,
-      "local": [
-        -241.796,
-        6831.741
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Assunta_(Venezia%2C_Malamocco)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q585738",
-      "source_rows": 3,
-      "network_distance_m": 3750.14
-    },
-    {
-      "id": "Q122152488",
-      "name": {
-        "ru": "Chiesa di Santa Maria della Salute (Alberoni)",
-        "it": "chiesa di Santa Maria della Salute",
-        "en": "Chiesa di Santa Maria della Salute (Alberoni)"
-      },
-      "lon": 12.318314,
-      "lat": 45.347333,
-      "local": [
-        -1915.578,
-        9575.128
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Alberoni_(Venezia)",
-      "area": "Lido",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "Q122152488",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 6313.08
-    },
-    {
       "id": "Q1791020",
       "name": {
         "ru": "Церковь Сан-Ладзаро-дельи-Армени",
@@ -5479,170 +5244,6 @@
       "mention_only": true,
       "network_distance_m": 17.37,
       "node": 10757698768
-    },
-    {
-      "id": "Q109466368",
-      "name": {
-        "ru": "Chiesa di San Pietro in Volta",
-        "it": "chiesa di San Pietro in Volta",
-        "en": "Chiesa di San Pietro in Volta"
-      },
-      "lon": 12.315972,
-      "lat": 45.317528,
-      "local": [
-        -2209.437,
-        12880.125
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_in_Volta",
-      "area": "Pellestrina",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q109466368",
-      "source_rows": 3,
-      "network_distance_m": 9630.76
-    },
-    {
-      "id": "Q109466355",
-      "name": {
-        "ru": "Chiesa di Santo Stefano (Venezia, Portosecco)",
-        "it": "chiesa di Santo Stefano Protomartire",
-        "en": "Chiesa di Santo Stefano (Venezia, Portosecco)"
-      },
-      "lon": 12.310361,
-      "lat": 45.309639,
-      "local": [
-        -2678.487,
-        13741.858
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Portosecco)",
-      "area": "Pellestrina",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q109466355",
-      "source_rows": 3,
-      "network_distance_m": 10533.62
-    },
-    {
-      "id": "Q109466379",
-      "name": {
-        "ru": "Chiesa di Sant'Antonio (Venezia, Pellestrina)",
-        "it": "chiesa di Sant'Antonio",
-        "en": "Chiesa di Sant'Antonio (Venezia, Pellestrina)"
-      },
-      "lon": 12.302417,
-      "lat": 45.282667,
-      "local": [
-        -3401.551,
-        16717.402
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Pellestrina)",
-      "area": "Pellestrina",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q109466379",
-      "source_rows": 3,
-      "network_distance_m": 13577.71
-    },
-    {
-      "id": "Q109466385",
-      "name": {
-        "ru": "Santuario della Madonna dell'Apparizione",
-        "it": "Santuario della Madonna dell'Apparizione",
-        "en": "Santuario della Madonna dell'Apparizione"
-      },
-      "lon": 12.301083,
-      "lat": 45.272278,
-      "local": [
-        -3544.828,
-        17868.03
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Santuario_della_Madonna_dell'Apparizione",
-      "area": "Pellestrina",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q109466385",
-      "source_rows": 2,
-      "network_distance_m": 14737.04
-    },
-    {
-      "id": "Q109466393",
-      "name": {
-        "ru": "Chiesa di Ognissanti (Venezia, Pellestrina)",
-        "it": "chiesa di Ognissanti",
-        "en": "Ognissanti Church"
-      },
-      "lon": 12.300972,
-      "lat": 45.265583,
-      "local": [
-        -3578.444,
-        18611.496
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Ognissanti_(Venezia%2C_Pellestrina)",
-      "area": "Pellestrina",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q109466393",
-      "source_rows": 3,
-      "network_distance_m": 15478.0
     },
     {
       "id": "Q3585324",
@@ -32955,194 +32556,12 @@
     },
     {
       "from": "Q122152492",
-      "to": "Q379102",
+      "to": "Q1791020",
       "mode": "schematic",
       "geometry": [
         [
           12.377389,
           45.442306
-        ],
-        [
-          12.38074,
-          45.42792
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q379102",
-      "to": "Q86664730",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.38074,
-          45.42792
-        ],
-        [
-          12.370721,
-          45.417823
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q86664730",
-      "to": "Q107301282",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.370721,
-          45.417823
-        ],
-        [
-          12.368908,
-          45.417272
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q107301282",
-      "to": "Q3585395",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.368908,
-          45.417272
-        ],
-        [
-          12.3618,
-          45.4037
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q3585395",
-      "to": "Q122152493",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.3618,
-          45.4037
-        ],
-        [
-          12.352917,
-          45.392194
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q122152493",
-      "to": "Q585738",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.352917,
-          45.392194
-        ],
-        [
-          12.3385,
-          45.3725
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q585738",
-      "to": "Q122152488",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.3385,
-          45.3725
-        ],
-        [
-          12.318314,
-          45.347333
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q122152488",
-      "to": "Q1791020",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.318314,
-          45.347333
         ],
         [
           12.36175,
@@ -33189,142 +32608,12 @@
     },
     {
       "from": "Q98781254",
-      "to": "Q109466368",
+      "to": "Q3585324",
       "mode": "schematic",
       "geometry": [
         [
           12.356278,
           45.420028
-        ],
-        [
-          12.315972,
-          45.317528
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q109466368",
-      "to": "Q109466355",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.315972,
-          45.317528
-        ],
-        [
-          12.310361,
-          45.309639
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q109466355",
-      "to": "Q109466379",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.310361,
-          45.309639
-        ],
-        [
-          12.302417,
-          45.282667
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q109466379",
-      "to": "Q109466385",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.302417,
-          45.282667
-        ],
-        [
-          12.301083,
-          45.272278
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q109466385",
-      "to": "Q109466393",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.301083,
-          45.272278
-        ],
-        [
-          12.300972,
-          45.265583
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Проверьте пешеходное соединение на месте.",
-        "it": "Verificare il collegamento pedonale sul posto.",
-        "en": "Check the walking connection on site."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q109466393",
-      "to": "Q3585324",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.300972,
-          45.265583
         ],
         [
           12.3356,
@@ -33373,8 +32662,8 @@
   "audit": {
     "candidate_count": 1196,
     "identity_group_count": 386,
-    "included_count": 162,
-    "excluded_count": 217,
+    "included_count": 150,
+    "excluded_count": 229,
     "duplicate_count": 810,
     "unresolved": [
       {
@@ -34332,6 +33621,98 @@
         ]
       },
       {
+        "identity": "Q122152488",
+        "title": "Chiesa di Santa Maria della Salute (Alberoni)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q585738",
+        "title": "Chiesa di Santa Maria Assunta (Venezia, Malamocco)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585395",
+        "title": "Chiesa di Sant'Antonio (Venezia, Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q122152493",
+        "title": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q107301282",
+        "title": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 4,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q86664730",
+        "title": "Tempio votivo (Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q379102",
+        "title": "Chiesa di San Nicolò (Venezia, Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 5,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
         "identity": "Q112044428",
         "title": "Chiesa di San Cipriano (Venezia, Malamocco)",
         "decision": "excluded",
@@ -34362,6 +33743,70 @@
         "evidence": "Explicit demolished-list, description or non-empty demolition field.",
         "source_rows": 1,
         "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q109466355",
+        "title": "Chiesa di Santo Stefano (Venezia, Portosecco)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q109466368",
+        "title": "Chiesa di San Pietro in Volta",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q109466379",
+        "title": "Chiesa di Sant'Antonio (Venezia, Pellestrina)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q109466393",
+        "title": "Chiesa di Ognissanti (Venezia, Pellestrina)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q109466385",
+        "title": "Santuario della Madonna dell'Apparizione",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 2,
+        "sources": [
+          "it_category",
           "it_list"
         ]
       },
@@ -38956,9 +38401,9 @@
       {
         "identity": "Q122152488",
         "title": "Chiesa di Santa Maria della Salute (Alberoni)",
-        "stop_id": "Q122152488",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Alberoni_(Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -38967,9 +38412,9 @@
       {
         "identity": "Q585738",
         "title": "Chiesa di Santa Maria Assunta (Venezia, Malamocco)",
-        "stop_id": "Q585738",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Assunta_(Venezia%2C_Malamocco)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -38980,9 +38425,9 @@
       {
         "identity": "Q3585395",
         "title": "Chiesa di Sant'Antonio (Venezia, Lido)",
-        "stop_id": "Q3585395",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -38993,9 +38438,9 @@
       {
         "identity": "Q122152493",
         "title": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)",
-        "stop_id": "Q122152493",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Ignazio_di_Loyola_(Venezia%2C_Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39006,9 +38451,9 @@
       {
         "identity": "Q107301282",
         "title": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
-        "stop_id": "Q107301282",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Elisabetta_(Venezia%2C_Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 4,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39020,9 +38465,9 @@
       {
         "identity": "Q86664730",
         "title": "Tempio votivo (Venezia)",
-        "stop_id": "Q86664730",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Tempio_votivo_(Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39045,9 +38490,9 @@
       {
         "identity": "Q379102",
         "title": "Chiesa di San Nicolò (Venezia, Lido)",
-        "stop_id": "Q379102",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_(Venezia%2C_Lido)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 5,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39118,9 +38563,9 @@
       {
         "identity": "Q109466355",
         "title": "Chiesa di Santo Stefano (Venezia, Portosecco)",
-        "stop_id": "Q109466355",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Portosecco)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39131,9 +38576,9 @@
       {
         "identity": "Q109466368",
         "title": "Chiesa di San Pietro in Volta",
-        "stop_id": "Q109466368",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_in_Volta",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39156,9 +38601,9 @@
       {
         "identity": "Q109466379",
         "title": "Chiesa di Sant'Antonio (Venezia, Pellestrina)",
-        "stop_id": "Q109466379",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_(Venezia%2C_Pellestrina)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39169,9 +38614,9 @@
       {
         "identity": "Q109466393",
         "title": "Chiesa di Ognissanti (Venezia, Pellestrina)",
-        "stop_id": "Q109466393",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Ognissanti_(Venezia%2C_Pellestrina)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -39182,9 +38627,9 @@
       {
         "identity": "Q109466385",
         "title": "Santuario della Madonna dell'Apparizione",
-        "stop_id": "Q109466385",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Santuario_della_Madonna_dell'Apparizione",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 2,
         "sources": [
           "it_category",

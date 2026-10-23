@@ -233,7 +233,7 @@ def test_generated_partial_artifact_geometry_and_disclosure():
     assert audit['inventory_complete'] == (not audit['unresolved'])
     assert len(data['stops']) >= 140
     assert sum(s['confession']=='Jewish' for s in data['stops']) == 5
-    assert {'San Lazzaro degli Armeni','Murano','Burano','Torcello','Lido','Pellestrina','San Francesco del Deserto','Sacca Sessola'} <= {s['area'] for s in data['stops']}
+    assert {'San Lazzaro degli Armeni','San Servolo','San Clemente','Murano','Burano','Torcello','San Francesco del Deserto','Sacca Sessola'} <= {s['area'] for s in data['stops']}
     assert all(all(s['name'].get(k) and s['access_note'].get(k) for k in ('ru','it','en')) for s in data['stops'])
     assert all(s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02) for s in data['stops'])
     assert all(all(n.get(k) for k in ('ru','it','en')) for n in audit['limitations'])
@@ -270,7 +270,7 @@ def test_generated_artifact_reconciles_every_candidate_and_required_islands():
     audit = data['audit']
     assert audit['candidate_count'] == audit['included_count'] + audit['excluded_count'] + audit['duplicate_count']
     assert audit['included_count'] == len(data['stops'])
-    assert {'San Lazzaro degli Armeni','Murano','Burano','Torcello','Lido','Pellestrina'} <= {s['area'] for s in data['stops']}
+    assert {'San Lazzaro degli Armeni','San Servolo','San Clemente','Sacca Sessola','Murano','Burano','Torcello'} <= {s['area'] for s in data['stops']}
     assert any(s.get('confession') == 'Jewish' for s in data['stops'])
     for s in data['stops']:
         assert all(s['name'].get(k) and s['access_note'].get(k) for k in ('ru','it','en'))
@@ -280,3 +280,56 @@ def test_generated_artifact_reconciles_every_candidate_and_required_islands():
     assert len(data['segments']) == len(data['stops'])-1
     assert not any(s.get('day') for s in data['stops'])
     assert not any(s['mode']=='boat' for s in data['segments']), 'boat geometry needs independent proof'
+
+
+USER_APPROVED_ROUTE_EXCLUSIONS = {
+    'Q379102', 'Q86664730', 'Q107301282', 'Q3585395', 'Q122152493',
+    'Q585738', 'Q122152488', 'Q109466368', 'Q109466355', 'Q109466379',
+    'Q109466385', 'Q109466393',
+}
+PRESERVED_ISLAND_STOPS = {
+    'Q1791020', 'Q98781254', 'Q3585324', 'mention-chiesa-sacca-sessola',
+}
+
+
+def test_cached_inventory_excludes_exact_user_approved_route_identities():
+    m = module()
+    cache = ROOT/'data/processed/church_research'
+    records = json.loads((cache/'resolved.json').read_text(encoding='utf-8'))
+    entities = json.loads((cache/'entities.json').read_text(encoding='utf-8'))
+    osm = {(el['type'], el['id']):el
+           for name in ('overpass_worship.json','overpass_buildings.json','overpass_chapels.json')
+           for el in json.loads((cache/name).read_text(encoding='utf-8'))['elements']}
+    stops, audit = m.build_inventory(records, entities, list(osm.values()))
+    ids = {s['id'] for s in stops}
+    assert not (ids & USER_APPROVED_ROUTE_EXCLUSIONS)
+    assert PRESERVED_ISLAND_STOPS <= ids
+    assert len(ids) == audit['included_count'] == 150
+    user_excluded = [r for r in audit['excluded']
+                     if r['reason'] == 'user_excluded_no_atlas_geometry']
+    assert {r['identity'] for r in user_excluded} == USER_APPROVED_ROUTE_EXCLUSIONS
+    assert len(user_excluded) == 12
+    assert all(r['decision'] == 'excluded' and r['evidence'] for r in user_excluded)
+    assert (audit['candidate_count'], audit['identity_group_count'],
+            audit['excluded_count'], audit['duplicate_count'], len(audit['unresolved'])) == (1196,386,229,810,7)
+    assert not audit['inventory_complete']
+    assert sum(r['source_rows'] for r in audit['reconciliation']) == 1196
+    assert 1196 == len(stops) + audit['excluded_count'] + audit['duplicate_count'] + len(audit['unresolved'])
+
+
+def test_generated_route_has_150_continuous_stops_and_no_user_excluded_waypoints():
+    data = json.loads((ROOT/'web/data/church-route.json').read_text(encoding='utf-8'))
+    ids = [s['id'] for s in data['stops']]
+    assert len(ids) == len(set(ids)) == 150
+    assert not (set(ids) & USER_APPROVED_ROUTE_EXCLUSIONS)
+    assert PRESERVED_ISLAND_STOPS <= set(ids)
+    assert [(s['from'],s['to']) for s in data['segments']] == list(zip(ids,ids[1:]))
+    module().validate_route(data, allow_incomplete=True)
+    ns = {'g':'http://www.topografix.com/GPX/1/1'}
+    gpx = ET.parse(ROOT/'web/data/church-route.gpx')
+    waypoints = gpx.findall('g:wpt',ns)
+    assert len(waypoints) == 150
+    for i, (wpt, stop) in enumerate(zip(waypoints,data['stops']),1):
+        assert wpt.find('g:name',ns).text == f"{i:03d} {stop['name']['en']}"
+        assert float(wpt.attrib['lon']) == stop['lon']
+        assert float(wpt.attrib['lat']) == stop['lat']

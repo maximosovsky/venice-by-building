@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "inventory_stops": 162,
+  "inventory_stops": 150,
   "matched_stops": 125,
   "buildings": [
     {
@@ -1236,132 +1236,12 @@
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     },
     {
-      "id": "Q379102",
-      "qid": "Q379102",
-      "name": {
-        "ru": "Chiesa di San Nicolò (Venezia, Lido)",
-        "it": "chiesa di San Nicolò",
-        "en": "San Nicolò al Lido"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q86664730",
-      "qid": "Q86664730",
-      "name": {
-        "ru": "Tempio votivo (Venezia)",
-        "it": "tempio Votivo di Santa Maria Immacolata",
-        "en": "votive temple of Santa Maria Immacolata"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q107301282",
-      "qid": "Q107301282",
-      "name": {
-        "ru": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
-        "it": "chiesa di Santa Maria Elisabetta",
-        "en": "Santa Maria Elisabetta"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q3585395",
-      "qid": "Q3585395",
-      "name": {
-        "ru": "Chiesa di Sant'Antonio (Venezia, Lido)",
-        "it": "chiesa di Sant'Antonio",
-        "en": "Sant'Antonio"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q122152493",
-      "qid": "Q122152493",
-      "name": {
-        "ru": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)",
-        "it": "chiesa di Sant'Ignazio di Loyola",
-        "en": "Chiesa di Sant'Ignazio di Loyola (Venezia, Lido)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q585738",
-      "qid": "Q585738",
-      "name": {
-        "ru": "Chiesa di Santa Maria Assunta (Venezia, Malamocco)",
-        "it": "chiesa di Santa Maria Assunta",
-        "en": "Santa Maria Assunta"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q122152488",
-      "qid": "Q122152488",
-      "name": {
-        "ru": "Chiesa di Santa Maria della Salute (Alberoni)",
-        "it": "chiesa di Santa Maria della Salute",
-        "en": "Chiesa di Santa Maria della Salute (Alberoni)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
       "id": "Q1791020",
       "qid": "Q1791020",
       "name": {
         "ru": "Церковь Сан-Ладзаро-дельи-Армени",
         "it": "Chiesa di San Lazzaro degli Armeni",
         "en": "Church of San Lazzaro degli Armeni"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q109466368",
-      "qid": "Q109466368",
-      "name": {
-        "ru": "Chiesa di San Pietro in Volta",
-        "it": "chiesa di San Pietro in Volta",
-        "en": "Chiesa di San Pietro in Volta"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q109466355",
-      "qid": "Q109466355",
-      "name": {
-        "ru": "Chiesa di Santo Stefano (Venezia, Portosecco)",
-        "it": "chiesa di Santo Stefano Protomartire",
-        "en": "Chiesa di Santo Stefano (Venezia, Portosecco)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q109466379",
-      "qid": "Q109466379",
-      "name": {
-        "ru": "Chiesa di Sant'Antonio (Venezia, Pellestrina)",
-        "it": "chiesa di Sant'Antonio",
-        "en": "Chiesa di Sant'Antonio (Venezia, Pellestrina)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q109466385",
-      "qid": "Q109466385",
-      "name": {
-        "ru": "Santuario della Madonna dell'Apparizione",
-        "it": "Santuario della Madonna dell'Apparizione",
-        "en": "Santuario della Madonna dell'Apparizione"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q109466393",
-      "qid": "Q109466393",
-      "name": {
-        "ru": "Chiesa di Ognissanti (Venezia, Pellestrina)",
-        "it": "chiesa di Ognissanti",
-        "en": "Ognissanti Church"
       },
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     },

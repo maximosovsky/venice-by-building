@@ -293,6 +293,13 @@ def article_url(title, lang='it'):
     return f'https://{lang}.wikipedia.org/wiki/' + urllib.parse.quote(title.replace(' ', '_'), safe="()'_")
 
 
+USER_EXCLUDED_NO_ATLAS_GEOMETRY = {
+    'Q379102', 'Q86664730', 'Q107301282', 'Q3585395', 'Q122152493',
+    'Q585738', 'Q122152488', 'Q109466368', 'Q109466355', 'Q109466379',
+    'Q109466385', 'Q109466393',
+}
+
+
 def build_inventory(records, entities, osm_elements=()):
     """Reconcile every input row; unknown survival/location stays unresolved."""
     groups = defaultdict(list)
@@ -344,6 +351,9 @@ def build_inventory(records, entities, osm_elements=()):
         part = SURVIVING_PARTS.get(qid)
         if qid in REVIEWED_EXCLUSIONS:
             reason, evidence = REVIEWED_EXCLUSIONS[qid]
+        if qid in USER_EXCLUDED_NO_ATLAS_GEOMETRY:
+            reason = 'user_excluded_no_atlas_geometry'
+            evidence = 'User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.'
         elif title in ISLAND_DEMOLISHED:
             parent, evidence = ISLAND_DEMOLISHED[title]
             reason = 'demolished'; evidence = article_url(parent) + ' — ' + evidence

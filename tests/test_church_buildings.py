@@ -18,7 +18,7 @@ def test_real_church_buildings_match_exact_atlas_identifiers():
     if raw[:2] == b'\x1f\x8b':
         raw = gzip.decompress(raw)
     qids = {s['qid'] for s in route['stops'] if s.get('qid')}
-    assert data['inventory_stops'] == len(route['stops']) == 162
+    assert data['inventory_stops'] == len(route['stops']) == 150
     assert len(data['buildings']) == len({b['gid'] for b in data['buildings']})
     for b in data['buildings']:
         f = source[b['building_id']]
@@ -32,5 +32,7 @@ def test_real_church_buildings_match_exact_atlas_identifiers():
     assert {'Q172988', 'Q52531'} <= matched
     assert data['matched_stops'] == sum(s.get('qid') in matched for s in route['stops'])
     assert {s['id'] for s in data['unmatched']} == {s['id'] for s in route['stops'] if s.get('qid') not in matched}
-    assert data['matched_stops'] + len(data['unmatched']) == 162
+    assert data['matched_stops'] == 125
+    assert len(data['unmatched']) == 25
+    assert data['matched_stops'] + len(data['unmatched']) == 150
     assert data['geometry_source'] == 'existing_atlas_worker_mesh_including_all_parts_and_roofs'
