@@ -438,13 +438,14 @@ def main(area="centro"):
             continue
         nat, lu, water = pr.get("natural"), pr.get("landuse"), pr.get("water")
         if nat == "water" or water:
-            water_parts.append(geom)
+            water_parts.append(shp_transform(fn, geom))
         elif nat in ("wetland", "wood", "scrub", "grassland", "heath") or lu or pr.get("leisure") == "park" \
                 or pr.get("place") in ("island", "islet", "square"):
-            land_parts.append(geom)
-    for name in ("island", "centro"):
-        g = shp_shape(json.loads(config.OSM_POLYGONS[name].read_text(encoding="utf-8"))["features"][0]["geometry"])
-        land_parts.append(shp_transform(fn, g))
+            land_parts.append(shp_transform(fn, geom))
+    if not land_parts:                      # no land polygons mapped: fall back to the administrative outlines
+        for name in ("island", "centro"):
+            g = shp_shape(json.loads(config.OSM_POLYGONS[name].read_text(encoding="utf-8"))["features"][0]["geometry"])
+            land_parts.append(shp_transform(fn, g))
     land = unary_union(land_parts) if land_parts else None
     water = unary_union(water_parts) if water_parts else None
     origin = (0.0, 0.0)

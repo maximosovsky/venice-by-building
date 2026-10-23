@@ -11,7 +11,7 @@ import zlib from 'node:zlib';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const dataDir = path.join(root, 'web', 'data');
+const dataDir = process.env.VENICE_DATA || path.join(root, 'web', 'data');
 
 // worker.js ends with `self.onmessage = ...`; give it a self to attach to and a postMessage to capture
 let received = null;

@@ -163,6 +163,11 @@ def main():
         check(len(buf) == xz_off + 8 * n_vert, f"{name}: size does not match its own header")
         check(ring_start[-1] == n_ring and vert_start[-1] == n_vert, f"{name}: index arrays do not span the data")
         check(n_poly > 0, f"{name}: no polygons, the ground would be missing")
+        check(len(buf) == xz_off + 8 * n_vert, f"{name}: size does not match its own header")
+        coords = struct.unpack_from(f"<{2 * n_vert}f", buf, xz_off)
+        span = max(abs(v) for v in coords) if coords else 0
+        check(span < 60000, f"{name}: a ground vertex sits {span:.0f} m from the city origin, "
+                            "which means a layer was written in the wrong coordinate system")
 
     # ---- the page's own assets: index.html loads the module, which imports the vendor files ----
     page = (ROOT / "web" / "index.html").read_text(encoding="utf-8")
