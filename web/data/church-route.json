@@ -6,12 +6,12 @@
     "en": "Churches and temples of Venice and the lagoon"
   },
   "summary": {
-    "ru": "147 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "147 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "147 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "145 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
+    "it": "145 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
+    "en": "145 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
   },
   "status": "ready",
-  "generated_at": "2026-10-23T20:22:35.710643+00:00",
+  "generated_at": "2026-10-23T20:36:30.086392+00:00",
   "stops": [
     {
       "id": "Q748689",
@@ -5140,72 +5140,6 @@
       "mention_only": true,
       "network_distance_m": 17.37,
       "node": 10757698768
-    },
-    {
-      "id": "Q3585324",
-      "name": {
-        "ru": "Chiesa di San Clemente (Venezia)",
-        "it": "chiesa di San Clemente",
-        "en": "Church of San Clemente"
-      },
-      "lon": 12.3356,
-      "lat": 45.4121,
-      "local": [
-        -323.12,
-        2424.923
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Clemente_(Venezia)",
-      "area": "San Clemente",
-      "access_note": {
-        "ru": "Частный объект или ограниченный доступ. Возможны разрешение и отдельно согласованный причал/вход; публичное посещение и регулярный паром не гарантируются.",
-        "it": "Sito privato o limitato. Possono servire autorizzazione e approdo/accesso concordati; nessuna visita pubblica o linea regolare è garantita.",
-        "en": "Restricted/private site. Permission and a separately arranged landing/access may be required; no routine public visit or ferry is asserted."
-      },
-      "access_class": "restricted",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585324",
-      "source_rows": 4,
-      "network_distance_m": 39.37
-    },
-    {
-      "id": "mention-chiesa-sacca-sessola",
-      "name": {
-        "ru": "Chiesa di Sacca Sessola",
-        "it": "Chiesa di Sacca Sessola",
-        "en": "Chiesa di Sacca Sessola"
-      },
-      "lon": 12.3201064,
-      "lat": 45.4054258,
-      "local": [
-        -1560.165,
-        3126.089
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Sacca_Sessola",
-      "area": "Sacca Sessola",
-      "access_note": {
-        "ru": "Частный объект или ограниченный доступ. Возможны разрешение и отдельно согласованный причал/вход; публичное посещение и регулярный паром не гарантируются.",
-        "it": "Sito privato o limitato. Possono servire autorizzazione e approdo/accesso concordati; nessuna visita pubblica o linea regolare è garantita.",
-        "en": "Restricted/private site. Permission and a separately arranged landing/access may be required; no routine public visit or ferry is asserted."
-      },
-      "access_class": "restricted",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "OSM way/140873400 exact named building centroid; not entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "mention-chiesa-sacca-sessola",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 8.75
     }
   ],
   "segments": [
@@ -32351,65 +32285,13 @@
         "it": "Non navigabile; percorso e distanza non verificati.",
         "en": "Not navigation; no route or length verified."
       }
-    },
-    {
-      "from": "Q98781254",
-      "to": "Q3585324",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.356278,
-          45.420028
-        ],
-        [
-          12.3356,
-          45.4121
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q3585324",
-      "to": "mention-chiesa-sacca-sessola",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.3356,
-          45.4121
-        ],
-        [
-          12.3201064,
-          45.4054258
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
     }
   ],
   "audit": {
     "candidate_count": 1196,
     "identity_group_count": 386,
-    "included_count": 147,
-    "excluded_count": 232,
+    "included_count": 145,
+    "excluded_count": 234,
     "duplicate_count": 810,
     "unresolved": [
       {
@@ -33379,6 +33261,31 @@
         "decision": "excluded",
         "reason": "demolished",
         "evidence": "https://it.wikipedia.org/wiki/Santa_Maria_della_Grazia_(isola) — Church exploded in 1849.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585324",
+        "title": "Chiesa di San Clemente (Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 4,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "mention-chiesa-sacca-sessola",
+        "title": "Chiesa di Sacca Sessola",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -38140,9 +38047,9 @@
       {
         "identity": "Q3585324",
         "title": "Chiesa di San Clemente (Venezia)",
-        "stop_id": "Q3585324",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Clemente_(Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 4,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -38154,9 +38061,9 @@
       {
         "identity": "mention-chiesa-sacca-sessola",
         "title": "Chiesa di Sacca Sessola",
-        "stop_id": "mention-chiesa-sacca-sessola",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Sacca_Sessola",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"

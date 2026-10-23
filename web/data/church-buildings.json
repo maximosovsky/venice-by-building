@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "inventory_stops": 147,
-  "matched_stops": 123,
+  "inventory_stops": 145,
+  "matched_stops": 122,
   "buildings": [
     {
       "gid": 1409,
@@ -978,14 +978,6 @@
       "osm_id": 141988629,
       "qid": "Q98781254",
       "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 11082,
-      "building_id": "w141985400",
-      "osm_type": "way",
-      "osm_id": 141985400,
-      "qid": "Q3585324",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
     }
   ],
   "unmatched": [
@@ -1216,16 +1208,6 @@
         "ru": "Церковь Сан-Ладзаро-дельи-Армени",
         "it": "Chiesa di San Lazzaro degli Armeni",
         "en": "Church of San Lazzaro degli Armeni"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "mention-chiesa-sacca-sessola",
-      "qid": "mention-chiesa-sacca-sessola",
-      "name": {
-        "ru": "Chiesa di Sacca Sessola",
-        "it": "Chiesa di Sacca Sessola",
-        "en": "Chiesa di Sacca Sessola"
       },
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     }
