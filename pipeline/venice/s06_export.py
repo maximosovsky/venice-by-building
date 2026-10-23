@@ -83,6 +83,23 @@ STREET_WIDTH = {"pedestrian": 3.5, "footway": 3.0, "steps": 2.0, "residential": 
                 "tertiary": 7.0, "secondary": 8.0, "primary": 9.0}
 
 
+MEDIA_MANIFEST = config.WEB_DATA.parent / "media" / "manifest.json"
+_MEDIA_CACHE = None
+
+
+def local_photo(qid):
+    """Файл локальной копии фотографии, если ступень s11_media его уже сделала."""
+    global _MEDIA_CACHE
+    if _MEDIA_CACHE is None:
+        _MEDIA_CACHE = {}
+        if MEDIA_MANIFEST.exists():
+            try:
+                _MEDIA_CACHE = json.loads(MEDIA_MANIFEST.read_text(encoding="utf-8"))
+            except Exception as exc:                       # битый манифест не должен ломать выгрузку
+                print("   манифест фотографий не прочитан:", exc)
+                _MEDIA_CACHE = {}
+    return (_MEDIA_CACHE.get(qid) or {}).get("file")
+
 def write_bin(path, blob):
     path.write_bytes(gzip.compress(bytes(blob), compresslevel=9, mtime=0))
 
@@ -405,6 +422,13 @@ def main(area="centro"):
         image = ({"thumb": photo.get("thumb"), "page": photo.get("page") or photo.get("thumb"),
                   "artist": photo.get("artist"), "license": photo.get("license"),
                   "licenseUrl": photo.get("license_url")} if photo.get("thumb") else None)
+        if image:
+            # Локальная уменьшенная копия: карточка берёт её, а страница файла и автор остаются для атрибуции.
+            local = local_photo(qid)
+            if local:
+                image["remote"] = image["thumb"]
+                image["thumb"] = local
+                image["local"] = True
         rich = {"qid": qid, "label": labels_la.get("it") or pr.get("name"), "la": labels_la,
                 "architects": wd_lang(wd.get("architects"), "it"), "styles": wd_lang(wd.get("styles"), "it"),
                 "architects_la": {k: wd_lang(wd.get("architects"), k) for k in ("ru", "it", "en")},
