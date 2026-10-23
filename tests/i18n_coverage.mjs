@@ -114,6 +114,17 @@ check(page.childNodes[2].nodeValue === 'Что-то своё, чего в сло
 check(page.childNodes[3].childNodes[0].nodeValue === 'Возраст', 'текст внутри <script> переводить нельзя');
 check(page.childNodes[4].childNodes[0].nodeValue === 'РУС', 'содержимое с data-no-i18n переводить нельзя');
 check(page.childNodes[4].hasAttribute('data-no-i18n'), 'поддельный узел должен нести data-no-i18n, иначе проверка пустая');
+
+// Переключение туда и обратно: исходный русский текст должен храниться, иначе с итальянского
+// на английский уже не перейти — в разметке остался перевод.
+setLang('it'); translateTree(page);
+check(page.childNodes[1].childNodes[0].nodeValue === 'Età', 'итальянский текст не встал после английского');
+check(page.childNodes[1].getAttribute('placeholder') === 'Cerca un edificio, una via o un ponte', 'подпись поиска не переключилась на итальянский');
+setLang('ru'); translateTree(page);
+check(page.childNodes[1].childNodes[0].nodeValue === 'Возраст', 'русский текст не вернулся');
+check(page.childNodes[0].nodeValue === '  Венеция  ', `русский текст вернулся с потерей пробелов: «${page.childNodes[0].nodeValue}»`);
+setLang('en'); translateTree(page);
+check(page.childNodes[0].nodeValue === '  Venice  ', 'после возврата к английскому текст не перевёлся');
 setLang('ru');
 
 console.log(`проверок: ${checks}, без перевода: ${uniqMissing.length + dataMissing.length + onlyIt.length + onlyEn.length}`);

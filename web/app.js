@@ -220,12 +220,12 @@ function textureFor(L) {
   ctx.fillStyle = L.water ? '#2a535a' : MUTED;
   ctx.strokeText(L.name, LABEL_PX * 0.2, LABEL_PX / 2);
   ctx.fillText(L.name, LABEL_PX * 0.2, LABEL_PX / 2);
-  t = new THREE.CanvasTexture(c);
-  t.anisotropy = 4;
-  t.userData = { aspect: c.width / c.height };
-  labelTex.set(L.name + L.water, t);
-  return t;
-}
+  tex = new THREE.CanvasTexture(c);
+    tex.anisotropy = 4;
+    tex.userData = { aspect: c.width / c.height };
+    labelTex.set(L.name + L.water, tex);
+    return tex;
+  }
 const labelPlane = new THREE.PlaneGeometry(1, 1);
 const labels = labelData.flatMap(L => L.pts.map(([x, z, ang, len, wid]) => ({ L, x, z, ang, len, wid: wid || 20, mesh: null })))
   .sort((a, b) => a.L.tier - b.L.tier || b.len - a.len);

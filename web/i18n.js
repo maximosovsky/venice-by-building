@@ -543,26 +543,41 @@ export const onLang = fn => { listeners.add(fn); return () => listeners.delete(f
 
 const ATTRS = ['placeholder', 'aria-label', 'title', 'alt', 'content'];
 const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'CODE', 'PRE']);
+// Исходный русский текст каждого узла и подписи: без него нельзя вернуться к русскому
+// и нельзя перейти с итальянского на английский — исходник в разметке уже заменён.
+const ORIG_NODE = new WeakMap();
+const ORIG_ATTR = new WeakMap();
+const known = key => key in DICT.it || key in DICT.en;
 
 // Обход страницы: текстовые узлы и подписи. Посторонние тексты остаются как есть.
 export function translateTree(start) {
-  if (lang === 'ru' || !start) return start;
+  if (!start) return start;
   const walk = node => {
     for (const child of node.childNodes) {
       if (child.nodeType === 3) {
-        const raw = child.nodeValue;
+        if (!ORIG_NODE.has(child)) {
+          const raw = child.nodeValue;
+          if (norm(raw).length < 2 || !known(norm(raw))) continue;
+          ORIG_NODE.set(child, raw);
+        }
+        const raw = ORIG_NODE.get(child);
         const key = norm(raw);
-        if (key.length < 2) continue;
-        const out = DICT[lang][key];
-        if (!out) continue;
+        const out = lang === 'ru' ? key : (DICT[lang][key] ?? DICT[OTHER[lang]]?.[key] ?? key);
         const lead = raw.match(/^\s*/)[0], tail = raw.match(/\s*$/)[0];
         child.nodeValue = lead + out + tail;
       } else if (child.nodeType === 1) {
         if (SKIP.has(child.tagName) || (child.hasAttribute && child.hasAttribute('data-no-i18n'))) continue;
+        let store = ORIG_ATTR.get(child);
         for (const a of ATTRS) {
           if (!child.hasAttribute(a)) continue;
-          const raw = child.getAttribute(a), key = norm(raw);
-          if (DICT[lang][key]) child.setAttribute(a, DICT[lang][key]);
+          if (!store) { store = {}; ORIG_ATTR.set(child, store); }
+          if (!(a in store)) {
+            const raw = child.getAttribute(a);
+            if (!known(norm(raw))) continue;
+            store[a] = raw;
+          }
+          const key = norm(store[a]);
+          child.setAttribute(a, lang === 'ru' ? store[a] : (DICT[lang][key] ?? DICT[OTHER[lang]]?.[key] ?? store[a]));
         }
         walk(child);
       }
@@ -573,8 +588,11 @@ export function translateTree(start) {
 }
 
 export function applyStatic(root) {
-  if (lang === 'ru' || typeof document === 'undefined') return;
+  if (typeof document === 'undefined') return;
   translateTree(root || document.body);
 }
 
 export const DICT_ALL = DICT;
+
+// Язык документа сразу: от него зависит перенос строк и произношение в читалках.
+if (typeof document !== 'undefined') document.documentElement.lang = lang;
