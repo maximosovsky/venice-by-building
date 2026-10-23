@@ -586,13 +586,14 @@ const dot = color => `<i class="dot" style="background:${color}"></i>`;
 const ageParts = p => { const m = p.label.match(/^(Before \d{4}|\d{4}–(?:\d{4})?)\s+(.*)$/); return m ? { dates: m[1], name: m[2] } : { dates: '', name: p.label }; };
 const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => w?.label || (b.nm >= 0 ? names[b.nm] : null);
 
-const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '', ''];
+const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '', 'принята для моста: в OSM высот нет'];
 const range = b => b.yfrom !== b.yto ? `${b.yfrom}–${b.yto}` : `${b.yfrom}`;
 // The age of a Venice building is rarely a year: an interval is shown as the epoch it belongs to.
 const EPOCH_NAME = ['до 1800 года', 'XIX век', 'XX век', 'неизвестен'];
 const whenOf = b => b.flag === 0 ? `${b.year}` : (b.flag === 2 ? 'год неизвестен' : `${EPOCH_NAME[b.sp] || 'эпоха'}`);
 // How the year is known, in a sentence.
 function datingNote(b, w, h) {
+  if (b.src === 1) return 'Это мостовое сооружение, а не здание: в OpenStreetMap для венецианских мостов нет ни даты постройки, ни высоты. Настил показан плитой на принятой высоте, год не указан.';
   const src = { 0: 'OpenStreetMap', 1: 'классификации VPRG', 2: 'Wikidata' }[b.dsrc] || 'источника';
   switch (b.flag) {
     case 0: return `Год указан в ${src}.`;
@@ -615,9 +616,10 @@ function buildingHtml(gid) {
     const im = w?.image;
     const photo = im?.thumb ? `<figure class="b-photo"><img src="${esc(im.thumb)}" alt=""><figcaption>Фото: ${link(im.page || im.thumb, im.artist || 'Wikimedia Commons')}${im.license ? `, ${im.licenseUrl ? link(im.licenseUrl, im.license) : esc(im.license)}` : ''}</figcaption></figure>` : '';
     const facts = [
-      ['Высота', `${b.height.toFixed(1)} м<small class="src-note">${HEIGHT_NOTE[b.hsrc] || 'оценка'}</small>`],
-      shape && ['Форма', `${esc(shape[0])}<small class="src-note">${link(shape[2], shape[1])}</small>`],
-      !(shape && b.fsrc !== 0) && ['Этажи', `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : 'высота ÷ 3 м'}</small>`],
+      b.src === 1 && ['Сооружение', 'Мост<small class="src-note">настил над каналом, OSM</small>'],
+            ['Высота', `${b.height.toFixed(1)} м<small class="src-note">${HEIGHT_NOTE[b.hsrc] || 'оценка'}</small>`],
+            shape && ['Форма', `${esc(shape[0])}<small class="src-note">${link(shape[2], shape[1])}</small>`],
+            !(b.src === 1) && !(shape && b.fsrc !== 0) && ['Этажи', `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : 'высота ÷ 3 м'}</small>`],
       w?.architects?.length && [w.architects.length > 1 ? 'Архитекторы' : 'Архитектор', w.architects.map(esc).join(', ')],
       w?.styles?.length && ['Стиль', w.styles.map(esc).join(', ')],
       b.heritage && ['Наследие', `${esc(config.heritage.labels[b.heritage - 1])}`],
@@ -638,8 +640,8 @@ function buildingHtml(gid) {
       ${note?.story ? `<p>${esc(note.story)}${note.source ? ` ${link(note.source, 'Source')}` : ''}</p>` : ''}</div></li>`;
   }).join('');
   return `<article class="dock-page b-card${photo ? ' has-photo' : ''}">${photo}
-      <header class="b-head"><h2 id="dock-title">${name ? esc(name) : 'Здание'}</h2>
-        <div class="b-when"><span class="y">${whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(period.label)}</span></div></header>
+      <header class="b-head"><h2 id="dock-title">${name ? esc(name) : (b.src === 1 ? 'Мост' : 'Здание')}</h2>
+              <div class="b-when"><span class="y">${b.src === 1 ? 'мост, год неизвестен' : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(period.label)}</span></div></header>
       <section><h3>Как известен возраст</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
       <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
       ${w?.wiki?.extract ? `<section><h3>Из Википедии</h3><p class="extract">${esc(w.wiki.extract)}</p><button class="read-on" hidden>Читать далее</button></section>` : ''}
@@ -791,18 +793,21 @@ const findIndex = [];
 const fold = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 ready.then(() => {
   const seen = new Map();
-  const [ow, on, oy, ox, oz, oh] = ['wk', 'nm', 'year', 'x', 'z', 'h'].map(k => config.attrFields[k][0]);
-  for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
-    const wk = attrs.getInt32(o + ow, true), nm = attrs.getInt32(o + on, true);
-    const label = wk >= 0 ? wiki[wk]?.label : nm >= 0 ? names[nm] : null;
-    if (!label) continue;
-    const h = attrs.getUint16(o + oh, true), prev = seen.get(label);
-    if (prev && prev.h >= h) continue;
-    seen.set(label, { label, kind: 'building', gid, h, known: wk >= 0, year: attrs.getInt16(o + oy, true), x: attrs.getFloat32(o + ox, true), z: attrs.getFloat32(o + oz, true) });
-  }
-  findIndex.push(...seen.values());
-  const places = new Map();
-  for (const L of labelData) if (!places.has(L.name) && L.pts?.length) places.set(L.name, { label: L.name, kind: L.water ? 'water' : 'street', x: L.pts[0][0], z: L.pts[0][1] });
+  const [ow, on, oy, ox, oz, oh, osc] = ['wk', 'nm', 'year', 'x', 'z', 'h', 'src'].map(k => config.attrFields[k][0]);
+    for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
+      const wk = attrs.getInt32(o + ow, true), nm = attrs.getInt32(o + on, true);
+      const label = wk >= 0 ? wiki[wk]?.label : nm >= 0 ? names[nm] : null;
+      if (!label) continue;
+      const h = attrs.getUint16(o + oh, true), prev = seen.get(label);
+      if (prev && prev.h >= h) continue;
+      seen.set(label, { label, kind: 'building', gid, h, known: wk >= 0, bridge: attrs.getUint8(o + osc, true) === 1,
+                        year: attrs.getInt16(o + oy, true), x: attrs.getFloat32(o + ox, true), z: attrs.getFloat32(o + oz, true) });
+    }
+    findIndex.push(...seen.values());
+    const places = new Map();
+    for (const L of labelData) if (!places.has(L.name) && L.pts?.length)
+      places.set(L.name, { label: L.name, kind: L.water ? 'water' : L.bridge ? 'bridge' : 'street',
+                           x: L.pts[0][0], z: L.pts[0][1] });
   findIndex.push(...places.values());
   SUBS.forEach((S, s) => findIndex.push({ label: S.name, kind: 'suburb', s, x: S.x, z: S.z }));
   for (const e of findIndex) e.key = fold(e.label);
@@ -823,8 +828,8 @@ function renderFind() {
   findAt = findHits.length ? 0 : -1;
   const q = findInput.value.trim();
   findList.innerHTML = findHits.length ? findHits.map((e, i) => `<li role="option" id="find-${i}" data-i="${i}" aria-selected="${i === findAt}">
-      <b>${esc(e.label)}</b><small>${e.kind === 'building' ? `Built ${e.year}` : e.kind === 'water' ? 'Water' : e.kind === 'suburb' ? 'Suburb' : 'Street'}</small></li>`).join('')
-    : q.length >= 2 ? `<li class="empty">Nothing by that name on the map.</li>` : '';
+        <b>${esc(e.label)}</b><small>${e.bridge ? 'Мост' : e.kind === 'building' ? (e.known ? `Здание, ${e.year} г.` : 'Здание, год неизвестен') : e.kind === 'water' ? 'Канал, лагуна' : e.kind === 'suburb' ? 'Район' : 'Улица, набережная'}</small></li>`).join('')
+      : q.length >= 2 ? `<li class="empty">Ничего с таким названием на карте нет.</li>` : '';
   findList.hidden = !findList.innerHTML;
   findInput.setAttribute('aria-expanded', String(!findList.hidden));
   findInput.setAttribute('aria-activedescendant', findAt >= 0 ? `find-${findAt}` : '');
@@ -839,9 +844,11 @@ function choose(e) {
   closeFind();
   findInput.value = '';
   findInput.blur();
-  if (e.kind === 'building') aimFly(e.x, e.z, 420, () => openBuilding(e.gid));
-  else if (e.kind === 'suburb') flySuburb(e.s, () => { if (uniforms.uMode.value === MODE.suburbs) showSuburb(e.s, -1, { label: 'All suburbs', go: showSuburbs }); });
-  else aimFly(e.x, e.z, e.kind === 'water' ? 1800 : 900);
+  if (e.kind === 'building' && e.bridge) aimFly(e.x, e.z, 260, () => openBuilding(e.gid));
+    else if (e.kind === 'building') aimFly(e.x, e.z, 420, () => openBuilding(e.gid));
+    else if (e.kind === 'suburb') flySuburb(e.s, () => { if (uniforms.uMode.value === MODE.suburbs) showSuburb(e.s, -1, { label: 'All suburbs', go: showSuburbs }); });
+    else if (e.kind === 'bridge') aimFly(e.x, e.z, 260);
+    else aimFly(e.x, e.z, e.kind === 'water' ? 1800 : 900);
 }
 function closeFind() {
   findList.hidden = true;
@@ -1421,11 +1428,12 @@ function showYear(Y) {
     if (!reduceMotion.matches) { f.classList.remove('turn'); void f.offsetWidth; f.classList.add('turn'); }
   });
   eraEl.textContent = ageParts(periodOf(y)).name;
-  yearEl.textContent = Y >= config.yearMax ? 'Today, ' : `${y}, `;
-  const n = visibleCount();
-  countEl.textContent = `${fmt(n)} ${n === 1 ? 'building' : 'buildings'} standing`;
+  yearEl.textContent = Y >= config.yearMax ? 'Сегодня, ' : `${y}, `;
+    const n = visibleCount();
+    const word = n % 10 === 1 && n % 100 !== 11 ? 'здание или сооружение' : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14)) ? 'здания и сооружения' : 'зданий и сооружений';
+    countEl.textContent = `${fmt(n)} ${n === 1 ? 'здание или сооружение' : word} на карте`;
   hist.setAttribute('aria-valuenow', String(y));
-  hist.setAttribute('aria-valuetext', `${Y >= config.yearMax ? 'Today' : y}: ${countEl.textContent}`);
+  hist.setAttribute('aria-valuetext', `${Y >= config.yearMax ? 'Сегодня' : y}: ${countEl.textContent}`);
 }
 
 function drawHist() {
@@ -1538,6 +1546,7 @@ document.querySelector('.notes-open').onclick = () => { if (dockView === 'notes'
 {
   const f = config.stats.flags, set = (k, v) => notesEl.querySelectorAll(`[data-stat="${k}"]`).forEach(el => { el.textContent = fmt(v); });
   set('buildings', config.stats.buildings);
+  set('bridges', config.stats.bridges || 0);
   set('documented', (f[0] || 0) + (f[1] || 0));
   set('strata', f[2] || 0);
   set('heritage', f[3] || 0);

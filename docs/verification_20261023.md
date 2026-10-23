@@ -18,8 +18,13 @@ Result on the current data: **110 637 checks, 0 failures**.
 tile of a pack and inspects what comes back: triangle indexes inside the vertex array, building ids per
 vertex, int16 coordinate range, world position against the frame the centroids sit in, and genuinely
 degenerate triangles (area measured in three dimensions, because walls have no area in plan).
-Result on the current data: **9 787 buildings built from pack0, 487 845 vertices, 272 812 triangles,
-0 wrapped coordinates, 0 degenerate triangles, 0 vertices outside the frame**.
+Result on the current data: **11 602 objects built from pack0, 0 wrapped coordinates, 0 degenerate
+triangles, 0 vertices outside the frame**.
+
+The contract test also covers the two additions: the bridge layer exists and counts 465, every bridge
+record carries the assumed deck height and an unknown date, and the labels hold at least 500 street
+names including fondamenta and riva, 375 named bridges, each with a length, a width and an angle, and
+are ordered by importance so that search offers a fondamenta before a back alley.
 
 ## What the first deployment got wrong
 

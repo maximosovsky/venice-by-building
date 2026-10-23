@@ -121,28 +121,37 @@ def main():
             gid_global.extend(t["gid"])
 
     check(len(gid_global) == len(set(gid_global)), "a building id appears in more than one tile")
-    check(total_buildings == cfg["stats"]["buildings"],
-          f"tiles hold {total_buildings} buildings, config says {cfg['stats']['buildings']}")
+    check(total_buildings == cfg["stats"]["objects"],
+          f"tiles hold {total_buildings} objects, config says {cfg['stats']['objects']}")
+    check(cfg["stats"]["objects"] == cfg["stats"]["buildings"] + cfg["stats"].get("bridges", 0),
+          "buildings and bridges do not add up to the number of objects in the tiles")
 
     # ---- attrs.bin, read with the offsets and stride the app uses ----
     raw = fetch_bin(DATA / "attrs.bin")
     stride = cfg["attrStride"]
     check(len(raw) % stride == 0, f"attrs.bin is {len(raw)} bytes, not a multiple of the {stride}-byte stride")
-    check(len(raw) // stride == cfg["stats"]["buildings"], "attrs.bin record count differs from the building count")
+    check(len(raw) // stride == cfg["stats"]["objects"], "attrs.bin record count differs from the object count")
     field_offset = {name: off for name, (off, _kind) in cfg["attrFields"].items()}
-    for name in ("osm", "year", "yfrom", "yto", "h", "hsrc", "flag", "wk", "nm", "x", "z"):
+    for name in ("osm", "year", "yfrom", "yto", "h", "hsrc", "flag", "wk", "nm", "x", "z", "src"):
         check(name in field_offset, f"attrs.bin layout lacks {name}")
     check(max(field_offset.values()) < stride, "an attribute offset lies past the record stride")
     sample = 0
-    for rec in range(0, len(raw) // stride, max(1, len(raw) // stride // 500)):
+    bridges_seen = 0
+    for rec in range(len(raw) // stride):
         off = rec * stride
         h = struct.unpack_from("<H", raw, off + field_offset["h"])[0]
         year = struct.unpack_from("<h", raw, off + field_offset["year"])[0]
         flag = struct.unpack_from("<B", raw, off + field_offset["flag"])[0]
+        src = struct.unpack_from("<B", raw, off + field_offset["src"])[0]
         check(h > 0, f"record {rec}: height {h} decimetres")
         check(cfg["yearMin"] <= year <= cfg["yearMax"], f"record {rec}: year {year} outside the timeline")
         check(0 <= flag <= 2, f"record {rec}: date flag {flag}")
+        if src == 1:
+            bridges_seen += 1
+            check(h == 30 and flag == 2, f"bridge record {rec}: height {h} dm, date flag {flag}")
         sample += 1
+    check(bridges_seen == cfg["stats"].get("bridges", 0),
+          f"{bridges_seen} records are marked as bridges, config says {cfg['stats'].get('bridges')}")
     check(sample > 0, "no attribute record sampled")
 
     # ---- cards, and the ground polygons the app parses itself ----
@@ -168,6 +177,25 @@ def main():
         span = max(abs(v) for v in coords) if coords else 0
         check(span < 60000, f"{name}: a ground vertex sits {span:.0f} m from the city origin, "
                             "which means a layer was written in the wrong coordinate system")
+
+    # ---- bridges: a layer of their own, and streets and bridges named in the labels ----
+    layers = json.loads((DATA / "layers.json").read_text(encoding="utf-8"))
+    works = [g for L in layers for g in L.get("groups", []) if g.get("bit") == 12]
+    check(bool(works), "no layer uses the bridge bit, so bridges cannot be switched on")
+    check(all(g.get("count", 0) > 0 for g in works), "the bridge layer is present but counts nothing")
+    labels = json.loads((DATA / "labels.json").read_text(encoding="utf-8"))
+    streets = [L for L in labels if L.get("tier", 9) <= 3 and not L.get("water") and not L.get("bridge")]
+    bridges_labelled = [L for L in labels if L.get("bridge")]
+    check(len(streets) > 500, f"only {len(streets)} street labels: names of streets and embankments would not show")
+    check(len(bridges_labelled) > 100, f"only {len(bridges_labelled)} named bridges in the labels")
+    check(any(L["name"].startswith(("Fondamenta", "Riva")) for L in streets),
+          "no embankment (fondamenta or riva) is labelled")
+    for L in labels[:400]:
+        check(len(L["pts"][0]) == 5, f"label {L['name']!r} does not carry a length and a width")
+        check(L["pts"][0][3] > 0 and L["pts"][0][4] > 0, f"label {L['name']!r} has a zero length or width")
+        check(-360 <= L["pts"][0][2] <= 360, f"label {L['name']!r} has an impossible angle")
+    check(labels == sorted(labels, key=lambda L: (L["tier"], -L["pts"][0][3])),
+          "labels are not ordered by importance, so search would return a back alley over a fondamenta")
 
     # ---- the page's own assets: index.html loads the module, which imports the vendor files ----
     page = (ROOT / "web" / "index.html").read_text(encoding="utf-8")

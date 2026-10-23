@@ -30,7 +30,7 @@ from collections import Counter, defaultdict
 import numpy as np
 from pyproj import Transformer
 from shapely.geometry import shape as shp_shape, Point, mapping
-from shapely.ops import unary_union
+from shapely.ops import unary_union, transform as shp_transform
 from shapely.strtree import STRtree
 
 from venice import config
@@ -61,8 +61,19 @@ ATTR_DTYPE = np.dtype([
     ("src", "u1"), ("floors", "u1"), ("dsrc", "u1"), ("pad", "u1"), ("x", "<f4"), ("z", "<f4"),
 ])
 
-H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "epoch_median_estimate": 3}
+H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "epoch_median_estimate": 3, "bridge_assumed": 4}
 D_SRC = {"osm": 0, "vprg": 1, "wikidata": 2, "none": 3}
+
+# Layer bits the story lens switches on and off.
+BIT_ISLAND, BIT_OTHER_ISLANDS, BIT_PRE, BIT_OTT, BIT_NOVE, BIT_TRANSFORMED, BIT_UNDATED = 0, 1, 2, 3, 4, 5, 6
+BIT_HOLE, BIT_PART, BIT_PHOTO, BIT_ARTICLE, BIT_CANDIDATE, BIT_BRIDGE = 7, 8, 9, 10, 11, 12
+
+BRIDGE_DECK_TOP = 3.0        # metres above water: assumed, OSM carries no bridge heights
+BRIDGE_DECK_BASE = 1.5       # the deck hovers over the canal instead of filling it
+
+STREET_WIDTH = {"pedestrian": 3.5, "footway": 3.0, "steps": 2.0, "residential": 5.0, "service": 4.0,
+                "unclassified": 4.0, "living_street": 4.0, "cycleway": 3.0, "path": 2.5,
+                "tertiary": 7.0, "secondary": 8.0, "primary": 9.0}
 
 
 def write_bin(path, blob):
@@ -187,9 +198,9 @@ def main(area="centro"):
     extracts_path = config.READY / "extracts.json"
     extracts = json.loads(extracts_path.read_text(encoding="utf-8")) if extracts_path.exists() else {}
     print(f"wiki links={len(wikimedia)} article summaries={len(extracts)}")
-    from shapely.ops import transform as shp_transform
     island_geom = shp_transform(fn, shp_shape(json.loads(config.OSM_POLYGONS["island"].read_text(encoding="utf-8"))["features"][0]["geometry"]))
     vprg_geom = shp_transform(fn, shp_shape(json.loads(config.OSM_POLYGONS["centro"].read_text(encoding="utf-8"))["features"][0]["geometry"]))
+    networks = load_geojson(config.PROCESSED / f"networks_{area}.geojson")
 
     # ---- geometry into the local metric frame ----
     recs = []
@@ -202,6 +213,11 @@ def main(area="centro"):
         recs.append({"pr": pr, "geom": geom, "pt": c, "cx": c.x, "cz": -(c.y - oy), "x": c.x - ox})
     recs.sort(key=lambda r: (r["cz"], r["x"]))
     print(f"buildings: {len(recs)}")
+
+    # ---- bridges: mapped decks, drawn as their own layer ----
+    bridges = bridge_records(networks, fn, ox, oy)
+    bridges.sort(key=lambda r: (r["cz"], r["x"]))
+    print(f"bridges: {len(bridges)}")
 
     # ---- heights, with a labelled epoch median as the last resort ----
     def level_height(pr):
@@ -285,11 +301,21 @@ def main(area="centro"):
          "groups": [{"key": "photo", "label": "Есть фотография", "bit": 9},
                     {"key": "article", "label": "Есть статья", "bit": 10},
                     {"key": "candidate", "label": "Связь предположительная", "bit": 11}]},
+        {"id": "works", "section": "Сооружения", "title": "Мосты",
+         "era": "как стоят сегодня",
+         "text": "465 мостовых сооружений, нанесённых в OpenStreetMap отдельными площадками: настил показан "
+                 "плитой над каналом. У 375 мостов есть имя — от Понте-деи-Соспири до Понте-делла-Коституцьоне; "
+                 "имена видны на карте и находятся через поиск.",
+         "caveat": "В OSM у венецианских мостов нет ни высот, ни дат постройки: высота настила принята за "
+                   "3 метра, год не указан. Это сооружение, а не здание.",
+         "source": {"label": "OpenStreetMap, man_made=bridge, ODbL 1.0",
+                    "url": "https://www.openstreetmap.org"},
+         "groups": [{"key": "bridges", "label": "Мосты", "bit": 12}]},
     ]
 
     # ---- wiki.json, names.json, heritage.json ----
     wiki, names, heritage, wk_of, nm_of, hi_of = [], [], [], {}, {}, {}
-    for r in recs:
+    for r in recs + bridges:
         pr = r["pr"]
         bid = pr["building_id"]
         w = wikimedia.get(bid)
@@ -324,11 +350,15 @@ def main(area="centro"):
     hist = defaultdict(lambda: [0, 0, 0, 0])
     layer_counts = Counter()
     layer_years = defaultdict(Counter)
-    for gid, r in enumerate(recs):
+    for gid, r in enumerate(recs + bridges):
         pr = r["pr"]
+        is_bridge = bool(pr.get("is_bridge"))
         epoch = pr.get("vprg_epoch")
         date_kind = pr.get("date_kind")
-        if date_kind == "year":
+        if is_bridge:
+            # a bridge is a structure as the city stands today; no age is claimed for it
+            year, yfrom, yto, period, flag = 1000, 0, 0, 3, 2
+        elif date_kind == "year":
             year = int(pr["osm_year"]); yfrom = yto = year; period, flag = 2, 0
         elif epoch == "preottocentesche":
             year, yfrom, yto, period, flag = 1000, 0, 1800, 0, 1
@@ -338,7 +368,7 @@ def main(area="centro"):
             year, yfrom, yto, period, flag = 1900, 1900, 2026, 2, 1
         else:
             year, yfrom, yto, period, flag = 1000, 0, 0, 3, 2
-        hist[year][period] += 1
+        hist[year][period] += 1 if not is_bridge else 0
 
         h, hsrc = pr.get("height_used"), pr.get("height_source")
         if not h:
@@ -353,33 +383,39 @@ def main(area="centro"):
 
         lay0 = 0
         bits = []
-        if island_geom.intersects(r["geom"]):
-            bits.append(0)
-        if not vprg_geom.contains(r["pt"]):
-            bits.append(1)
-        bits.append({"preottocentesche": 2, "ottocentesche": 3, "novecentesche": 4}.get(epoch, 6))
-        flags_txt = pr.get("vprg_state_flags") or ""
-        if any(f in flags_txt for f in ("partial", "merged", "rebuilt")):
-            bits.append(5)
-        if pr.get("has_hole"):
-            bits.append(7)
-        if gid in parts_by_idx:
-            bits.append(8)
-        w = wikimedia.get(pr["building_id"])
-        if w and w.get("status") == "confirmed" and (w.get("photo") or {}).get("thumb"):
-            bits.append(9)
-        if w and w.get("status") == "confirmed":
-            bits.append(10)
-        if w and w.get("status") == "candidate":
-            bits.append(11)
+        if is_bridge:
+            bits = [BIT_BRIDGE]          # a bridge is its own layer; it belongs to no age and no island set
+        else:
+            if island_geom.intersects(r["geom"]):
+                bits.append(BIT_ISLAND)
+            if not vprg_geom.contains(r["pt"]):
+                bits.append(BIT_OTHER_ISLANDS)
+            bits.append({"preottocentesche": BIT_PRE, "ottocentesche": BIT_OTT,
+                         "novecentesche": BIT_NOVE}.get(epoch, BIT_UNDATED))
+            flags_txt = pr.get("vprg_state_flags") or ""
+            if any(f in flags_txt for f in ("partial", "merged", "rebuilt")):
+                bits.append(BIT_TRANSFORMED)
+            if pr.get("has_hole"):
+                bits.append(BIT_HOLE)
+            if gid in parts_by_idx:
+                bits.append(BIT_PART)
+            w = wikimedia.get(pr["building_id"])
+            if w and w.get("status") == "confirmed" and (w.get("photo") or {}).get("thumb"):
+                bits.append(BIT_PHOTO)
+            if w and w.get("status") == "confirmed":
+                bits.append(BIT_ARTICLE)
+            if w and w.get("status") == "candidate":
+                bits.append(BIT_CANDIDATE)
         for b in bits:
             if b < 32:
                 lay0 |= 1 << b
             layer_counts[b] += 1
             layer_years[b][year] += 1
 
-        own_parts = parts_by_idx.get(gid)
-        if own_parts:
+        own_parts = None if is_bridge else parts_by_idx.get(gid)
+        if is_bridge:
+            parts = [(BRIDGE_DECK_TOP, BRIDGE_DECK_BASE, r["geom"])]
+        elif own_parts:
             parts = []
             for top, base, pgeom in own_parts:
                 parts.append((float(top) if top else float(h), float(base or 0.0), pgeom))
@@ -395,8 +431,10 @@ def main(area="centro"):
                           "fsrc": floors_src, "flag": flag,
                           "heritage": 0, "lay0": lay0, "lay1": 0,
                           "wk": wk_of.get(pr["building_id"], -1), "nm": nm_of.get(pr["building_id"], -1),
-                          "hi": hi_of.get(pr["building_id"], -1), "sp": period, "src": 0, "floors": floors,
-                          "dsrc": D_SRC["osm"] if date_kind == "year" else (D_SRC["vprg"] if date_kind == "interval" else D_SRC["none"]),
+                          "hi": hi_of.get(pr["building_id"], -1), "sp": period,
+                          "src": 1 if is_bridge else 0, "floors": floors,
+                          "dsrc": D_SRC["none"] if is_bridge else
+                                  (D_SRC["osm"] if date_kind == "year" else (D_SRC["vprg"] if date_kind == "interval" else D_SRC["none"])),
                           "x": r["cx"] - ox, "z": r["cz"]})
 
     # ---- tiles and packs ----
@@ -453,7 +491,7 @@ def main(area="centro"):
     write_bin(out_dir / "water.bin", polygon_bin([water], base=(ox, oy)) if water else polygon_bin([], base=(ox, oy)))
     write_bin(out_dir / "context.bin", polygon_bin([land], base=(ox, oy)) if land else polygon_bin([], base=(ox, oy)))
     (out_dir / "labels.json").write_text(
-        json.dumps(labels_from(networks, fn, ox, oy), ensure_ascii=False), encoding="utf-8")
+        json.dumps(labels_from(networks, bridges, fn, ox, oy), ensure_ascii=False), encoding="utf-8")
     (out_dir / "wiki.json").write_text(json.dumps(wiki, ensure_ascii=False), encoding="utf-8")
     (out_dir / "names.json").write_text(json.dumps(names, ensure_ascii=False), encoding="utf-8")
     (out_dir / "heritage.json").write_text(json.dumps(heritage, ensure_ascii=False), encoding="utf-8")
@@ -480,7 +518,7 @@ def main(area="centro"):
         "heritage": {"labels": HERITAGE, "colors": ["#f1eee8", "#6e2418"],
                      "counts": [len(recs) - len(heritage), len(heritage)]},
         "tiles": tile_index, "packs": packs, "shapes": {},
-        "stats": {"buildings": len(recs),
+        "stats": {"buildings": len(recs), "bridges": len(bridges), "objects": len(rows),
                   "flags": {k: int(v) for k, v in Counter(r["flag"] for r in rows).items()},
                   "heightSrc": {k: int(v) for k, v in Counter(int(a["hsrc"]) for a in attr_list).items()},
                   "floorsTagged": sum(1 for a in attr_list if a["fsrc"] == 0),
@@ -496,28 +534,92 @@ def main(area="centro"):
     print("date kinds:", cfg["dateKind"])
 
 
-def labels_from(networks, fn, ox, oy):
-    """Place labels for the map: canals and squares, from OSM names, in the local frame."""
+def bridge_records(networks, fn, ox, oy):
+    """Bridges as drawn objects: the mapped deck polygon, no date, an assumed deck height.
+
+    OSM carries no height for any bridge in these extracts, so the deck is drawn as a slab
+    hovering over the canal and the card says the height is assumed, not measured.
+    """
     out = []
-    seen = set()
+    for n in networks:
+        pr = n["properties"]
+        if pr.get("man_made") != "bridge":
+            continue
+        geom = shp_transform(fn, shp_shape(n["geometry"]))
+        if geom.is_empty:
+            continue
+        if geom.geom_type == "MultiPolygon":
+            geom = max(geom.geoms, key=lambda g: g.area)
+        if geom.geom_type != "Polygon":
+            continue
+        c = geom.representative_point()
+        out.append({"pr": {"building_id": f"b{pr.get('osm_id')}", "osm_type": "way", "osm_id": pr.get("osm_id"),
+                           "name": pr.get("name"), "is_bridge": True, "date_kind": "unknown",
+                           "vprg_epoch": None, "height_used": BRIDGE_DECK_TOP,
+                           "height_source": "bridge_assumed", "has_hole": len(geom.interiors) > 0},
+                    "geom": geom, "pt": c, "cx": c.x, "cz": -(c.y - oy), "x": c.x - ox})
+    return out
+
+
+def labels_from(networks, bridges, fn, ox, oy):
+    """Place labels for the map, in the viewer's own form: [[x, z, angle, stretch length, width]].
+
+    angle is degrees from +x towards +z in the local frame, which is what the viewer's label
+    rotation expects; the length lets the viewer drop a name that would spill over the buildings.
+    """
+    out = []
     for n in networks:
         pr = n["properties"]
         name = pr.get("name")
-        if not name or name in seen:
+        if not name:
             continue
-        water = pr.get("water") in ("canal", "river", "lagoon", "harbour") or pr.get("natural") == "water"
-        square = pr.get("place") in ("square", "island", "islet") or pr.get("highway") == "pedestrian"
-        if not (water or square):
-            continue
-        geom = shp_shape(n["geometry"])
+        geom = shp_transform(fn, shp_shape(n["geometry"]))
         if geom.is_empty:
             continue
+        nat, water, place, highway = pr.get("natural"), pr.get("water"), pr.get("place"), pr.get("highway")
+        if geom.geom_type == "Polygon":
+            c = geom.representative_point()
+            span = math.sqrt(geom.area)
+            if nat == "water" or water:
+                wide = water in ("lagoon", "bay", "harbour") and geom.area > 2e5
+                out.append({"name": name, "water": True, "tier": 0 if wide else 1,
+                            "pts": [[round(c.x - ox, 1), round(-(c.y - oy), 1), 0,
+                                     round(max(span, 60), 1), round(max(30, span * 0.4), 1)]]})
+            elif place in ("island", "islet", "square"):
+                out.append({"name": name, "water": False, "tier": 1 if place == "island" else 2,
+                            "pts": [[round(c.x - ox, 1), round(-(c.y - oy), 1), 0,
+                                     round(max(span, 40), 1), round(max(24, span * 0.5), 1)]]})
+        elif geom.geom_type == "LineString" and highway in STREET_WIDTH:
+            length = geom.length
+            if length < 14:
+                continue
+            p1 = geom.interpolate(length / 2)
+            p2 = geom.interpolate(min(length / 2 + 2, length))
+            ang = math.degrees(math.atan2(-(p2.y - p1.y), p2.x - p1.x))
+            # Набережные и главные проходы читаются раньше и с большего расстояния, чем калле.
+            waterfront = name.startswith(("Fondamenta", "Fond", "Riva", "Molo", "Lista", "Strada", "Via ",
+                                          "Calle Larga", "Rio Ter", "Salizada"))
+            tier = 1 if waterfront else (3 if highway == "steps" else 2)
+            out.append({"name": name, "water": False, "tier": tier,
+                        "pts": [[round(p1.x - ox, 1), round(-(p1.y - oy), 1), round(ang, 1),
+                                 round(length, 1), round(max(STREET_WIDTH[highway], 5.5), 1)]]})
+    for b in bridges:
+        pr = b["pr"]
+        name = pr.get("name")
+        if not name:
+            continue
+        geom = b["geom"]
         c = geom.representative_point()
-        lx, lz = c.x - ox, -(c.y - oy)
-        seen.add(name)
-        out.append({"name": name, "water": bool(water),
-                    "tier": 1 if water else 2,
-                    "pts": [[round(lx, 1), round(lz, 1), 0.0, 600, 200]]})
+        coords = list(geom.minimum_rotated_rectangle.exterior.coords)
+        lengths = [(math.dist(coords[i], coords[i + 1]), coords[i], coords[i + 1]) for i in range(4)]
+        longest = max(lengths, key=lambda t: t[0])
+        ang = math.degrees(math.atan2(-(longest[2][1] - longest[1][1]), longest[2][0] - longest[1][0]))
+        width = min(l for l, _, _ in lengths)
+        out.append({"name": name, "water": False, "tier": 2, "bridge": True,
+                    "pts": [[round(c.x - ox, 1), round(-(c.y - oy), 1), round(ang, 1),
+                             round(longest[0], 1), round(max(width, 4.0), 1)]]})
+    # most important first: this is also the order the viewer builds its search list in
+    out.sort(key=lambda L: (L["tier"], -L["pts"][0][3]))
     return out
 
 
