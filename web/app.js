@@ -628,7 +628,8 @@ const whenOf = b => b.flag === 0 ? `${b.year}` : (b.flag === 2 ? t('год не�
 // How the year is known, in a sentence.
 function datingNote(b, w, h) {
   if (b.src === 1) return t('Это мостовое сооружение, а не здание: в OpenStreetMap для венецианских мостов нет ни даты постройки, ни высоты. Настил показан плитой на принятой высоте, год не указан.');
-  const src = [t('OpenStreetMap'), t('классификации VPRG'), t('Wikidata'),
+  // Место 3 — «источника нет»: без него год из статьи сдвигался и подпись пропадала.
+  const src = [t('OpenStreetMap'), t('классификации VPRG'), t('Wikidata'), '',
                t('статье итальянской Википедии')][b.dsrc] || t('источника');
   switch (b.flag) {
     case 0: return t('Год указан в {src}.', { src });
