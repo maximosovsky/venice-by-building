@@ -85,7 +85,7 @@ descriptions; nothing there may be turned into a single year.
 Wikidata is matched **by geometry**: the atlas used to know only the 382 buildings tagged with
 `wikidata` in OpenStreetMap, while the coordinates of 2 685 Venetian items reach 1 536 of our
 buildings and bridge decks (1 175 points fall inside a contour, 361 within 18 m). That is where the
-cards beyond those 382 come from — 1 460 in all, 1 312 of them with a Commons photograph — as well as
+cards beyond those 382 come from — 1 290 in all, 1 082 of them with a Commons photograph — as well as
 252 dates (226 exact years, 53 as an interval), 43 heritage designations, 200 styles, 121 architects
 and 529 named places: vaporetto landings, hotels, schools. A link found by coordinates says so on the
 card and counts as tentative; implausible statements are dropped. See
