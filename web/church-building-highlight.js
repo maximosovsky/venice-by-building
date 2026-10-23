@@ -24,7 +24,7 @@ export function extractChurchGeometry(THREE, tile, gids) {
 export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch(url) }) {
   const tiles = [], overlays = [], sources = new Set();
   let manifest = null, pending = null, disposed = false, picking = false, error = null;
-  const material = new THREE.MeshBasicMaterial({ color: '#808080', side: THREE.DoubleSide,
+  const material = new THREE.MeshBasicMaterial({ color: '#436817', side: THREE.DoubleSide,
     polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
   const sync = () => { for (const mesh of overlays) mesh.visible = !disposed && !picking && sources.size > 0; };
   function attach(entry) {

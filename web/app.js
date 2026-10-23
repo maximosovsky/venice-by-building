@@ -1392,6 +1392,7 @@ function renderKey() {
 
 function setMode(m) {
   uniforms.uMode.value = m;
+  churchBuildingHighlight.setSourceVisible('bridges-tab', m === MODE.layers);
   hoverGid = -1;
   document.querySelectorAll('.lenses button').forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.mode === m)));
   const bits = Array(MAX_GROUPS).fill(-1);
