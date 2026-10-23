@@ -273,7 +273,7 @@ function disposeObject(object) {
 }
 
 // The installer owns only its dock view and scene group; it does not change quests, picking, cards or renderer.
-export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, fetchRoute = url => fetch(url) }) {
+export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, fetchRoute = (url, options) => fetch(url, options) }) {
   const state = { status: 'idle', route: null, visible: false, selected: -1 };
   let pending = null, overlay = null, selectedMarker = null, disposed = false;
   const back = () => ({ label: pickText(UI.back), go: showWalks });
@@ -304,7 +304,7 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     state.status = 'loading';
     pending = (async () => {
       try {
-        const response = await fetchRoute('data/bridge-route.json');
+        const response = await fetchRoute('data/bridge-route.json', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const route = await response.json(); validateRoute(route);
         if (!disposed) { state.route = route; state.status = 'ready'; }

@@ -413,6 +413,14 @@ function harness(fetchRoute) {
     get html() { return html; }, get view() { return view; }, get back() { return back; }, get listRefreshes() { return listRefreshes; } };
 }
 
+test('route loader bypasses stale browser data cache', async () => {
+  let options;
+  const h = harness(async (url, init) => { options = init; return { ok: true, json: async () => fixture() }; });
+  h.controller.show(); await h.controller.load();
+  assert.equal(options?.cache, 'no-store');
+  assert.match(h.html, /data-crossing="1"/);
+});
+
 test('installer fetches real URL once, renders loading, then detail; toggles and focuses real scene route', async () => {
   let resolve, calls = [];
   const h = harness(url => { calls.push(url); return new Promise(r => { resolve = r; }); });
