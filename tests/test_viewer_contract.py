@@ -197,6 +197,39 @@ def main():
     check(labels == sorted(labels, key=lambda L: (L["tier"], -L["pts"][0][3])),
           "labels are not ordered by importance, so search would return a back alley over a fondamenta")
 
+    # ---- обогащение из Викиданных: связи по геометрии, даты, охрана, высоты, места ----
+    wd_counts = Counter()
+    for rec in range(len(raw) // stride):
+        off = rec * stride
+        dsrc = struct.unpack_from("<B", raw, off + field_offset["dsrc"])[0]
+        hsrc = struct.unpack_from("<B", raw, off + field_offset["hsrc"])[0]
+        heritage = struct.unpack_from("<B", raw, off + field_offset["heritage"])[0]
+        wd_counts[(dsrc, "dsrc")] += 1
+        wd_counts[(hsrc, "hsrc")] += 1
+        wd_counts[(heritage, "heritage")] += 1
+    wikidata_dates = wd_counts[(2, "dsrc")]
+    wikidata_heights = wd_counts.get((5, "hsrc"), 0)
+    heritage_wikidata = wd_counts.get((2, "heritage"), 0)
+    check(wikidata_dates > 200, f"только {wikidata_dates} объектов датированы Викиданными — обогащение не доехало")
+    check(wikidata_heights > 100, f"только {wikidata_heights} высот из Викиданных")
+    check(heritage_wikidata > 10, f"только {heritage_wikidata} объектов с охранным статусом из Викиданных")
+    check(len(cfg["heritage"]["labels"]) >= 2, "у наследия должна быть и подпись для статуса из Викиданных")
+    check(len(cfg["heritage"]["counts"]) == len(cfg["heritage"]["labels"]), "числа наследия не совпадают с подписями")
+
+    rich = [c for c in wiki if c.get("byGeometry")]
+    check(len(wiki) > 900, f"карточек {len(wiki)}: связи по координатам не попали в карточки")
+    check(len(rich) > 400, f"карточек, найденных по координатам: {len(rich)}")
+    for card in rich[:60]:
+        check(bool(card.get("qid")), "карточка по координатам без Q-номера")
+        check(bool(card.get("la") or card.get("label")), f"карточка {card.get('qid')} без названия")
+    with_facts = [c for c in wiki if c.get("styles") or c.get("architects") or c.get("heritageItems")]
+    check(sum(1 for c in wiki if c.get("styles_la") or c.get("styles")) > 100, "стили из Викиданных не доехали")
+    check(sum(1 for c in wiki if c.get("architects_la") or c.get("architects")) > 50, "архитекторы из Викиданных не доехали")
+    pois = [L for L in labels if L.get("poi")]
+    check(len(pois) > 100, f"подписей-мест из Викиданных: {len(pois)}")
+    for L in pois[:40]:
+        check(bool((L.get("poi") or {}).get("it")), f"место {L['name']!r} без вида на итальянском")
+
     # ---- the page's own assets: index.html loads the module, which imports the vendor files ----
     page = (ROOT / "web" / "index.html").read_text(encoding="utf-8")
     app = (ROOT / "web" / "app.js").read_text(encoding="utf-8")

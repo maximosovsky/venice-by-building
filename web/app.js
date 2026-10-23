@@ -615,7 +615,8 @@ const ageParts = p => {
   return rest.length ? { dates, name: rest.join(' — ') } : { dates: '', name: full };
 };
 const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => (b.wk >= 0 ? pickText(w?.la) || wiki[b.wk]?.label : null) || (b.nm >= 0 ? names[b.nm] : null);
-const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '', 'принята для моста: в OSM высот нет'];
+const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM', '', '',
+  'принята для моста: в OSM высот нет', 'измерено по Викиданным'];
 const heightNote = i => t(HEIGHT_NOTE[i] || 'оценка');
 const range = b => b.yfrom !== b.yto ? `${b.yfrom}–${b.yto}` : `${b.yfrom}`;
 // The age of a Venice building is rarely a year: an interval is shown as the epoch it belongs to.
@@ -652,12 +653,16 @@ function buildingHtml(gid) {
                 [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
                 shape && [t('Форма'), `${esc(pickText(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
                 !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : t('высота ÷ 3 м')}</small>`],
-          w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'), w.architects.map(esc).join(', ')],
-          w?.styles?.length && [t('Стиль'), w.styles.map(esc).join(', ')],
+          w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'),
+        (w.architects_la ? pickText(w.architects_la) : w.architects).map(esc).join(', ')],
+          w?.styles?.length && [t('Стиль'), (w.styles_la ? pickText(w.styles_la) : w.styles).map(esc).join(', ')],
           b.heritage && [t('Наследие'), `${esc(pickText(config.heritage.labels[b.heritage - 1]))}`],
-          hItem?.name && [t(hItem.kind === 'shr' ? 'Охрана' : 'Объект наследия'), esc(hItem.name)],
+          hItem?.name && [t(hItem.kind === 'shr' ? 'Охрана' : hItem.kind === 'wd' ? 'Охранный статус' : 'Объект наследия'),
+        esc(pickText(hItem.name))],
           hItem?.hca && [t('Охранная зона'), esc(hItem.hca)],
           w?.inception && [t('Дата в Wikidata'), `${w.inception}`],
+      w?.byGeometry && w?.qid && ['Связь', `${t('найдена по координатам')} · ${link('https://www.wikidata.org/wiki/' + w.qid, w.qid)}`],
+      w?.height && ['Высота в Wikidata', `${w.height} м`],
         ].filter(Boolean);
   const osmUrl = b.osm > 0 ? `https://www.openstreetmap.org/way/${b.osm}` : b.osm < 0 ? `https://www.openstreetmap.org/relation/${-b.osm}` : null;
   const sources = [
@@ -839,7 +844,8 @@ ready.then(() => {
     findIndex.push(...seen.values());
     const places = new Map();
     for (const L of labelData) if (!places.has(L.name) && L.pts?.length)
-      places.set(L.name, { label: L.name, kind: L.water ? 'water' : L.bridge ? 'bridge' : 'street',
+      places.set(L.name, { label: L.name, kind: L.water ? 'water' : L.bridge ? 'bridge' : L.poi ? 'poi' : 'street',
+                         poi: L.poi,
                            x: L.pts[0][0], z: L.pts[0][1] });
   findIndex.push(...places.values());
   SUBS.forEach((S, s) => findIndex.push({ label: S.name, kind: 'suburb', s, x: S.x, z: S.z }));
@@ -861,7 +867,7 @@ function renderFind() {
   findAt = findHits.length ? 0 : -1;
   const q = findInput.value.trim();
   findList.innerHTML = findHits.length ? findHits.map((e, i) => `<li role="option" id="find-${i}" data-i="${i}" aria-selected="${i === findAt}">
-        <b>${esc(e.label)}</b><small>${e.bridge ? t('Мост') : e.kind === 'building' ? (e.known ? t('Здание, {year} г.', { year: e.year }) : t('Здание, год неизвестен')) : e.kind === 'water' ? t('Канал, лагуна') : e.kind === 'suburb' ? t('Район') : t('Улица, набережная')}</small></li>`).join('')
+        <b>${esc(e.label)}</b><small>${e.bridge ? t('Мост') : e.kind === 'building' ? (e.known ? t('Здание, {year} г.', { year: e.year }) : t('Здание, год неизвестен')) : e.kind === 'water' ? t('Канал, лагуна') : e.kind === 'suburb' ? t('Район') : e.kind === 'poi' ? esc(pickText(e.poi || 'Место')) : t('Улица, набережная')}</small></li>`).join('')
       : q.length >= 2 ? `<li class="empty">${t('Ничего с таким названием на карте нет.')}</li>` : '';
   findList.hidden = !findList.innerHTML;
   findInput.setAttribute('aria-expanded', String(!findList.hidden));

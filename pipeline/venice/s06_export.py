@@ -52,7 +52,7 @@ PERIODS = [
      "from": 1000, "to": 2026, "color": "#9aa0a6"},
 ]
 
-HERITAGE = ["Объект наследия (тег OSM)"]
+HERITAGE = ["Объект наследия (тег OSM)", "Охранный статус (Wikidata)"]
 
 ATTR_DTYPE = np.dtype([
     ("osm", "<f8"), ("year", "<i2"), ("yfrom", "<i2"), ("yto", "<i2"),
@@ -61,7 +61,8 @@ ATTR_DTYPE = np.dtype([
     ("src", "u1"), ("floors", "u1"), ("dsrc", "u1"), ("pad", "u1"), ("x", "<f4"), ("z", "<f4"),
 ])
 
-H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "epoch_median_estimate": 3, "bridge_assumed": 4}
+H_SRC = {"osm_height": 0, "osm_levels_estimate": 1, "epoch_median_estimate": 3, "bridge_assumed": 4,
+         "wikidata_height": 5}
 D_SRC = {"osm": 0, "vprg": 1, "wikidata": 2, "none": 3}
 
 # Layer bits the story lens switches on and off.
@@ -315,38 +316,71 @@ def main(area="centro"):
     ]
 
     # ---- wiki.json, names.json, heritage.json ----
+    # Обогащение из Викиданных: связь по геометрии, а не только по тегу wikidata в OSM.
+    enriched_path = config.READY / "wikidata_enriched.json"
+    enriched = json.loads(enriched_path.read_text(encoding="utf-8")) if enriched_path.exists() else {}
+    wd_objects = enriched.get("objects") or {}
+    wd_pois = enriched.get("pois") or []
+    print(f"wikidata: объектов обогащения={len(wd_objects)} подписей-точек={len(wd_pois)}")
+
+    def wd_lang(items, lang):
+        """Названия свойств (архитектор, стиль, статус) на языке карты, иначе на итальянском."""
+        out = []
+        for item in items or []:
+            la = (item or {}).get("la") or {}
+            out.append(la.get(lang) or la.get("it") or la.get("en") or "")
+        return [x for x in out if x]
+
     wiki, names, heritage, wk_of, nm_of, hi_of = [], [], [], {}, {}, {}
     for r in recs + bridges:
         pr = r["pr"]
         bid = pr["building_id"]
         w = wikimedia.get(bid)
-        if w and w.get("status") == "confirmed":
-            cards = w.get("sitelinks") or {}
-            url = None
-            for lang in ("it", "en", "ru"):
-                if cards.get(lang):
-                    url = f"https://{lang}.wikipedia.org/wiki/" + cards[lang].replace(" ", "_")
-                    break
-            photo = w.get("photo") or {}
-            ex = extracts_for(cards, extracts) or {}
+        wd = wd_objects.get(bid) or {}
+        # Связь по тегу wikidata в OSM — или, если тега нет, по геометрии из Викиданных.
+        covered = bool(w and w.get("status") == "confirmed")
+        cards = (w.get("sitelinks") if covered else None) or (wd.get("sl") or {})
+        qid = (w.get("qid") if covered else None) or wd.get("qid")
+        photo = (w.get("photo") if covered else None) or wd.get("photo") or {}
+        labels_la = ({"it": w.get("label")} if covered and w.get("label") else {}) or (wd.get("la") or {})
+        ex = extracts_for(cards, extracts) or {}
+        url = None
+        for lang in ("it", "en", "ru"):
+            if cards.get(lang):
+                url = f"https://{lang}.wikipedia.org/wiki/" + cards[lang].replace(" ", "_")
+                break
+        image = ({"thumb": photo.get("thumb"), "page": photo.get("page") or photo.get("thumb"),
+                  "artist": photo.get("artist"), "license": photo.get("license"),
+                  "licenseUrl": photo.get("license_url")} if photo.get("thumb") else None)
+        rich = {"qid": qid, "label": labels_la.get("it") or pr.get("name"), "la": labels_la,
+                "architects": wd_lang(wd.get("architects"), "it"), "styles": wd_lang(wd.get("styles"), "it"),
+                "architects_la": {k: wd_lang(wd.get("architects"), k) for k in ("ru", "it", "en")},
+                "styles_la": {k: wd_lang(wd.get("styles"), k) for k in ("ru", "it", "en")},
+                "image": image, "inception": (w.get("inception_year") if covered else None) or (wd.get("date") or {}).get("year"),
+                "height": wd.get("height"), "byGeometry": not covered,
+                "wiki": {"url": url, "title": cards.get("it") or cards.get("en"),
+                         "extract": ex.get("it") or ex.get("en") or ex.get("ru")},
+                "ex": ex, "area": area}
+        # Пустые поля не пишем: карточек теперь много, и каждая должна быть лёгкой.
+        rich = {k: v for k, v in rich.items() if v not in (None, [], {}, "")}
+        if covered:
             wk_of[bid] = len(wiki)
-            wiki.append({"qid": w.get("qid"), "label": w.get("label") or pr.get("name"),
-                         "la": cards,
-                         "architects": [], "styles": [],
-                         "image": ({"thumb": photo.get("thumb"), "page": photo.get("page") or photo.get("thumb"),
-                                    "artist": photo.get("artist"), "license": photo.get("license"),
-                                    "licenseUrl": photo.get("license_url")} if photo.get("thumb") else None),
-                         "inception": w.get("inception_year"),
-                         "wiki": {"url": url, "title": cards.get("it") or cards.get("en"),
-                                  "extract": ex.get("it") or ex.get("en") or ex.get("ru")},
-                         "ex": ex,
-                         "area": area})
+            wiki.append(rich)
+        elif wd and (image or url or labels_la.get("it") or pr.get("name")):
+            # Новое: имя, фотография или статья, найденные сопоставлением по координатам.
+            wk_of[bid] = len(wiki)
+            wiki.append(rich)
         elif pr.get("name"):
             nm_of[bid] = len(names)
             names.append(pr["name"])
-        if pr.get("heritage"):
+        heritage_items = wd.get("heritage") or []
+        if heritage_items or pr.get("heritage"):
             hi_of[bid] = len(heritage)
-            heritage.append({"kind": pr.get("heritage"), "name": pr.get("name") or bid})
+            heritage.append({"kind": "wd" if heritage_items else pr.get("heritage"),
+                             "name": {"ru": wd_lang(heritage_items, "ru"), "it": wd_lang(heritage_items, "it"),
+                                      "en": wd_lang(heritage_items, "en")} if heritage_items
+                                     else (pr.get("name") or bid),
+                             "qid": qid})
     print(f"wiki cards={len(wiki)} names={len(names)} heritage={len(heritage)}")
 
     # ---- per-building records ----
@@ -359,6 +393,7 @@ def main(area="centro"):
         is_bridge = bool(pr.get("is_bridge"))
         epoch = pr.get("vprg_epoch")
         date_kind = pr.get("date_kind")
+        wd = wd_objects.get(pr["building_id"]) or {}
         if is_bridge:
             # a bridge is a structure as the city stands today; no age is claimed for it
             year, yfrom, yto, period, flag = 1000, 0, 0, 3, 2
@@ -372,17 +407,34 @@ def main(area="centro"):
             year, yfrom, yto, period, flag = 1900, 1900, 2026, 2, 1
         else:
             year, yfrom, yto, period, flag = 1000, 0, 0, 3, 2
+        # Викиданные: год постройки, найденный по координатам. День, месяц и год — точная дата;
+        # десятилетие и век — интервал, и он показывается как эпоха, а не как год.
+        wd_date = wd.get("date") or {}
+        if wd_date and flag != 0:
+            wy = int(wd_date.get("year") or 0)
+            if wd_date.get("kind") == "year" and 1000 <= wy <= 2026:
+                year, yfrom, yto, period, flag = wy, wy, wy, (0 if wy < 1800 else 1 if wy < 1900 else 2), 0
+            elif wd_date.get("kind") == "interval":
+                yfrom = max(1000, int(wd_date.get("from") or wy))
+                yto = min(2026, int(wd_date.get("to") or wy))
+                year, period, flag = yfrom, (0 if yto < 1800 else 1 if yfrom < 1900 else 2), 1
         hist[year][period] += 1 if not is_bridge else 0
 
         h, hsrc = pr.get("height_used"), pr.get("height_source")
+        # Измеренная высота из Викиданных старше любой нашей оценки — но только правдоподобная:
+        # в Викиданных попадаются ошибки единиц (1000 м, 395 м, 0,99 м у моста) и они не должны
+        # ломать модель. У зданий Венеции разумный предел — 120 м (кампанила Сан-Марко 98,6).
+        wd_h = wd.get("height")
+        if wd_h and 2.0 <= float(wd_h) <= 120.0:
+            h, hsrc = float(wd_h), "wikidata_height"
         if not h:
             h = medians.get(epoch) or global_median
             hsrc = "epoch_median_estimate"
         try:
-            floors = max(1, int(float(pr.get("building:levels"))))
+            floors = max(1, min(120, int(float(pr.get("building:levels")))))
             floors_src = 0
         except (TypeError, ValueError):
-            floors = max(1, round(h / 3.0))
+            floors = max(1, min(120, round(h / 3.0)))
             floors_src = 1
 
         lay0 = 0
@@ -404,11 +456,15 @@ def main(area="centro"):
             if gid in parts_by_idx:
                 bits.append(BIT_PART)
             w = wikimedia.get(pr["building_id"])
-            if w and w.get("status") == "confirmed" and (w.get("photo") or {}).get("thumb"):
+            # Фотография и статья теперь считаются по карточке: она может прийти и от связи
+            # по координатам, а не только от тега wikidata в самом здании.
+            wk = wk_of.get(pr["building_id"], -1)
+            card = wiki[wk] if 0 <= wk < len(wiki) else None
+            if card and (card.get("image") or {}).get("thumb"):
                 bits.append(BIT_PHOTO)
-            if w and w.get("status") == "confirmed":
+            if card and (card.get("wiki") or {}).get("url"):
                 bits.append(BIT_ARTICLE)
-            if w and w.get("status") == "candidate":
+            if (w and w.get("status") == "candidate") or (card and card.get("byGeometry")):
                 bits.append(BIT_CANDIDATE)
         for b in bits:
             if b < 32:
@@ -433,7 +489,8 @@ def main(area="centro"):
                           "year": year, "yfrom": yfrom, "yto": yto,
                           "h": int(round(h * 10)), "hsrc": H_SRC.get(hsrc, 3),
                           "fsrc": floors_src, "flag": flag,
-                          "heritage": 0, "lay0": lay0, "lay1": 0,
+                          "heritage": (2 if (wd.get("heritage") or []) else (1 if pr.get("heritage") else 0)),
+                          "lay0": lay0, "lay1": 0,
                           "wk": wk_of.get(pr["building_id"], -1), "nm": nm_of.get(pr["building_id"], -1),
                           "hi": hi_of.get(pr["building_id"], -1), "sp": period,
                           "src": 1 if is_bridge else 0, "floors": floors,
@@ -495,7 +552,7 @@ def main(area="centro"):
     write_bin(out_dir / "water.bin", polygon_bin([water], base=(ox, oy)) if water else polygon_bin([], base=(ox, oy)))
     write_bin(out_dir / "context.bin", polygon_bin([land], base=(ox, oy)) if land else polygon_bin([], base=(ox, oy)))
     (out_dir / "labels.json").write_text(
-        json.dumps(labels_from(networks, bridges, fn, ox, oy), ensure_ascii=False), encoding="utf-8")
+        json.dumps(labels_from(networks, bridges, fn, ox, oy, wd_pois), ensure_ascii=False), encoding="utf-8")
     (out_dir / "wiki.json").write_text(json.dumps(wiki, ensure_ascii=False), encoding="utf-8")
     (out_dir / "names.json").write_text(json.dumps(names, ensure_ascii=False), encoding="utf-8")
     (out_dir / "heritage.json").write_text(json.dumps(heritage, ensure_ascii=False), encoding="utf-8")
@@ -565,7 +622,7 @@ def bridge_records(networks, fn, ox, oy):
     return out
 
 
-def labels_from(networks, bridges, fn, ox, oy):
+def labels_from(networks, bridges, fn, ox, oy, pois=()):
     """Place labels for the map, in the viewer's own form: [[x, z, angle, stretch length, width]].
 
     angle is degrees from +x towards +z in the local frame, which is what the viewer's label
@@ -622,6 +679,18 @@ def labels_from(networks, bridges, fn, ox, oy):
         out.append({"name": name, "water": False, "tier": 2, "bridge": True,
                     "pts": [[round(c.x - ox, 1), round(-(c.y - oy), 1), round(ang, 1),
                              round(longest[0], 1), round(max(width, 4.0), 1)]]})
+    # Предметы Викиданных, которым не нашлось здания: причалы, отели, школы, библиотеки.
+    # Это подписи-точки: имя и вид места, без геометрии.
+    for poi in pois or ():
+        la = poi.get("la") or {}
+        name = la.get("it") or la.get("en")
+        if not name or not poi.get("lat"):
+            continue
+        x, y = fn(poi["lon"], poi["lat"])
+        classes = [c for c in (poi.get("classes") or []) if (c.get("la") or {}).get("it")]
+        kind = (classes[0].get("la") if classes else {}) or {}
+        out.append({"name": name, "water": False, "tier": 2, "poi": kind,
+                    "pts": [[round(x - ox, 1), round(-(y - oy), 1), 0.0, 90.0, 12.0]]})
     # most important first: this is also the order the viewer builds its search list in
     out.sort(key=lambda L: (L["tier"], -L["pts"][0][3]))
     return out
