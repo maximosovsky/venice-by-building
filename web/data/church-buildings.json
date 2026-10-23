@@ -1,24 +1,8 @@
 {
   "version": 1,
-  "inventory_stops": 150,
-  "matched_stops": 125,
+  "inventory_stops": 147,
+  "matched_stops": 123,
   "buildings": [
-    {
-      "gid": 691,
-      "building_id": "w132937433",
-      "osm_type": "way",
-      "osm_id": 132937433,
-      "qid": "Q1149886",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 698,
-      "building_id": "w175718783",
-      "osm_type": "way",
-      "osm_id": 175718783,
-      "qid": "Q3585411",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
     {
       "gid": 1409,
       "building_id": "w176654997",
@@ -1212,16 +1196,6 @@
         "ru": "Oratorio di Santa Barbara (Burano)",
         "it": "Oratorio di Santa Barbara (Burano)",
         "en": "Oratorio di Santa Barbara (Burano)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q122152501",
-      "qid": "Q122152501",
-      "name": {
-        "ru": "Oratorio di San Marco (Torcello)",
-        "it": "oratorio di San Marco Evangelista",
-        "en": "Oratorio di San Marco (Torcello)"
       },
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     },

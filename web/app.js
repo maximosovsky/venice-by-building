@@ -555,8 +555,9 @@ for (const w of pool) {
   w.onmessage = ({ data }) => {
     addTile(data);
     loaded++;
-    document.getElementById('progress').textContent = Math.round(100 * loaded / config.tiles.length);
-    if (loaded === config.tiles.length) { document.getElementById('loading').hidden = true; document.body.dataset.ready = '1'; }
+    const progress = document.getElementById('progress');
+    if (progress) progress.textContent = Math.round(100 * loaded / config.tiles.length);
+    if (loaded === config.tiles.length) { const loading = document.getElementById('loading'); if (loading) loading.hidden = true; document.body.dataset.ready = '1'; }
     next();
   };
   next();
@@ -1386,7 +1387,7 @@ function renderKey() {
     keyEl.innerHTML = activeLayer.groups.map((g, i) => `<button class="chip" data-bit="${g.bit}" aria-pressed="${groupOn[g.bit] !== false}">${dot(GROUP_COLORS[i])}${esc(pickText(g.label))} <span class="n">${fmt(g.count)}</span></button>`).join('');
     keyEl.querySelectorAll('[data-bit]').forEach(b => b.onclick = () => { groupOn[b.dataset.bit] = groupOn[b.dataset.bit] === false; setLayer(activeLayer); });
   } else {
-    keyEl.innerHTML = `<span class="chip plain">${dot(GROUP_COLORS[0])}${esc(activeLayer.title)} <span class="n">${fmt(activeLayer.count)}</span></span>`;
+    keyEl.innerHTML = `<span class="chip plain">${dot(GROUP_COLORS[0])}${esc(activeLayer.title)} <span class="n">${fmt(activeLayer.count ?? activeLayer.groups.reduce((sum, g) => sum + (g.count || 0), 0))}</span></span>`;
   }
 }
 

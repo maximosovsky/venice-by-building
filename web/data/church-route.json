@@ -6,12 +6,12 @@
     "en": "Churches and temples of Venice and the lagoon"
   },
   "summary": {
-    "ru": "150 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "150 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "150 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "147 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
+    "it": "147 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
+    "en": "147 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
   },
   "status": "ready",
-  "generated_at": "2026-10-23T20:07:45.787312+00:00",
+  "generated_at": "2026-10-23T20:22:35.710643+00:00",
   "stops": [
     {
       "id": "Q748689",
@@ -4975,110 +4975,6 @@
       "source_rows": 5,
       "network_distance_m": 14.75,
       "node": 10082281557
-    },
-    {
-      "id": "Q3585411",
-      "name": {
-        "ru": "Санта-Фоска (Торчелло)",
-        "it": "chiesa di Santa Fosca",
-        "en": "Santa Fosca"
-      },
-      "lon": 12.4186,
-      "lat": 45.4981,
-      "local": [
-        6478.388,
-        -6917.325
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Fosca_(Venezia%2C_Torcello)",
-      "area": "Torcello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585411",
-      "source_rows": 4,
-      "network_distance_m": 21.82,
-      "node": 4838436019
-    },
-    {
-      "id": "Q1149886",
-      "name": {
-        "ru": "Собор Санта Мария Ассунта",
-        "it": "basilica di Santa Maria Assunta",
-        "en": "Torcello Cathedral"
-      },
-      "lon": 12.419167,
-      "lat": 45.498333,
-      "local": [
-        6523.519,
-        -6941.785
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Assunta_(Torcello)",
-      "area": "Torcello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q1149886",
-      "source_rows": 6,
-      "network_distance_m": 10.53,
-      "node": 4838683072
-    },
-    {
-      "id": "Q122152501",
-      "name": {
-        "ru": "Oratorio di San Marco (Torcello)",
-        "it": "oratorio di San Marco Evangelista",
-        "en": "Oratorio di San Marco (Torcello)"
-      },
-      "lon": 12.420139,
-      "lat": 45.498194,
-      "local": [
-        6598.962,
-        -6923.902
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
-      "area": "Torcello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "Q122152501",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 15.3,
-      "node": 2169586260
     },
     {
       "id": "Q281139",
@@ -32328,162 +32224,12 @@
     },
     {
       "from": "Q3585364",
-      "to": "Q3585411",
+      "to": "Q281139",
       "mode": "schematic",
       "geometry": [
         [
           12.41878,
           45.484177
-        ],
-        [
-          12.4186,
-          45.4981
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q3585411",
-      "to": "Q1149886",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.4188322,
-          45.4979911
-        ],
-        [
-          12.4190609,
-          45.4982746
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 36.23,
-      "osm_nodes": [
-        4838436019,
-        4838683072
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        491756979
-      ]
-    },
-    {
-      "from": "Q1149886",
-      "to": "Q122152501",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.4190609,
-          45.4982746
-        ],
-        [
-          12.4190076,
-          45.498298
-        ],
-        [
-          12.4189324,
-          45.4983279
-        ],
-        [
-          12.4188096,
-          45.4983737
-        ],
-        [
-          12.4188452,
-          45.4984351
-        ],
-        [
-          12.4188854,
-          45.4984891
-        ],
-        [
-          12.4189193,
-          45.498503
-        ],
-        [
-          12.4189544,
-          45.4985115
-        ],
-        [
-          12.4190225,
-          45.4985191
-        ],
-        [
-          12.4191233,
-          45.4985677
-        ],
-        [
-          12.4191783,
-          45.4985484
-        ],
-        [
-          12.4191992,
-          45.4985684
-        ],
-        [
-          12.4192943,
-          45.4985478
-        ],
-        [
-          12.4198694,
-          45.4983294
-        ],
-        [
-          12.419902,
-          45.4983455
-        ],
-        [
-          12.4203317,
-          45.4981699
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 165.98,
-      "osm_nodes": [
-        4838683072,
-        4838683073,
-        4838683074,
-        1862801332,
-        1862801340,
-        1862801341,
-        3855558079,
-        1862801349,
-        1862801351,
-        1862801360,
-        3855558080,
-        1862801356,
-        2169586271,
-        2169586266,
-        2169586262,
-        2169586260
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        175718785,
-        206896240,
-        491783175,
-        491783177,
-        1411216021
-      ]
-    },
-    {
-      "from": "Q122152501",
-      "to": "Q281139",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.420139,
-          45.498194
         ],
         [
           12.4171872,
@@ -32662,8 +32408,8 @@
   "audit": {
     "candidate_count": 1196,
     "identity_group_count": 386,
-    "included_count": 150,
-    "excluded_count": 229,
+    "included_count": 147,
+    "excluded_count": 232,
     "duplicate_count": 810,
     "unresolved": [
       {
@@ -33489,6 +33235,46 @@
         "decision": "excluded",
         "reason": "demolished",
         "evidence": "Explicit demolished-list, description or non-empty demolition field.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585411",
+        "title": "Chiesa di Santa Fosca (Venezia, Torcello)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 4,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q1149886",
+        "title": "Basilica di Santa Maria Assunta (Torcello)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 6,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q122152501",
+        "title": "Oratorio di San Marco (Torcello)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -38126,9 +37912,9 @@
       {
         "identity": "Q3585411",
         "title": "Chiesa di Santa Fosca (Venezia, Torcello)",
-        "stop_id": "Q3585411",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Fosca_(Venezia%2C_Torcello)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 4,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -38140,9 +37926,9 @@
       {
         "identity": "Q1149886",
         "title": "Basilica di Santa Maria Assunta (Torcello)",
-        "stop_id": "Q1149886",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Assunta_(Torcello)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 6,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -38155,9 +37941,9 @@
       {
         "identity": "Q122152501",
         "title": "Oratorio di San Marco (Torcello)",
-        "stop_id": "Q122152501",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
