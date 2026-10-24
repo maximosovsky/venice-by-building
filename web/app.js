@@ -1385,8 +1385,7 @@ function renderKey() {
     keyEl.innerHTML = `<span class="key-label">Storeys</span><span class="ramp">${stops.map((s, i) =>
       `<div><span>${s}</span><i style="background:linear-gradient(90deg,${RAMP[i]},${RAMP[Math.min(i + 1, 4)]})"></i></div>`).join('')}</span>`;
   } else if (mode === MODE.heritage) {
-    const h = config.heritage;
-    keyEl.innerHTML = h.labels.map((l, i) => `<span class="chip plain">${dot(h.colors[i + 1])}${esc(l)} <span class="n">${fmt(h.counts[i + 1])}</span></span>`).join('');
+    keyEl.innerHTML = '';
   } else if (mode === MODE.suburbs) {
     const m = measure;
     if (!m) { keyEl.innerHTML = `<span class="key-label">No suburb figures on this map</span>`; return; }
