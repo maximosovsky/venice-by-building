@@ -715,6 +715,7 @@ function buildingHtml(gid) {
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
 
         ${stories ? `<section><h3>${t('Слои')}</h3><ul class="chips">${stories}</ul></section>` : ''}
+        ${w?.wiki?.url ? `<p class="src">${link(w.wiki.url, 'Wikipedia')}</p>` : ''}
         ${photoCredit}</article>`;
     }
 
