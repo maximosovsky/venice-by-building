@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import zlib from 'node:zlib';
+assert.ok(fs.existsSync('web/palazzo-highlight.js'), 'Palazzo highlight module is missing');
+const { hasPalazzoName, buildPalazzoMask } = await import('../web/palazzo-highlight.js');
+assert.equal(hasPalazzoName('Palazzo Grimani'), true);
+assert.equal(hasPalazzoName('Museo di palazzo Mocenigo'), true);
+assert.equal(hasPalazzoName('PALAZZO CINI'), true);
+assert.equal(hasPalazzoName('Palazzolo'), false);
+assert.equal(hasPalazzoName(null), false);
+const cfg = JSON.parse(fs.readFileSync('web/data/venezia.json'));
+const raw = zlib.gunzipSync(fs.readFileSync('web/data/attrs.bin'));
+const wiki = JSON.parse(fs.readFileSync('web/data/wiki.json'));
+const names = JSON.parse(fs.readFileSync('web/data/names.json'));
+const view = new DataView(raw.buffer, raw.byteOffset, raw.byteLength);
+const mask = buildPalazzoMask(view, cfg, wiki, names);
+const expected = [];
+for (let gid = 0, o = 0; o < raw.length; gid++, o += cfg.attrStride) {
+  const wi = view.getInt32(o + cfg.attrFields.wk[0], true);
+  const ni = view.getInt32(o + cfg.attrFields.nm[0], true);
+  const w = wiki[wi];
+  const labels = [names[ni], w?.label, ...Object.values(w?.la || {}).flat()];
+  if (labels.some(s => typeof s === 'string' && /\bPalazzo\b/i.test(s))) expected.push(gid);
+}
+assert.ok(expected.length > 0);
+assert.deepEqual([...mask].flatMap((v, gid) => v ? [gid] : []), expected);
+const synthetic = new DataView(new ArrayBuffer(16));
+synthetic.setInt32(0, 0, true); synthetic.setInt32(4, 0, true);
+synthetic.setInt32(8, -1, true); synthetic.setInt32(12, 1, true);
+assert.deepEqual([...buildPalazzoMask(synthetic, {attrStride:8, attrFields:{wk:[0],nm:[4]}}, [{label:'Дворец',la:{it:'Palazzo Test'}}], ['Anonymous','Palazzo OSM'])], [1,1]);
+const app = fs.readFileSync('web/app.js', 'utf8');
+assert.match(app, /uPalazzo/);
+assert.match(app, /uMode > 1\.5 && uMode < 2\.5/);
+console.log(`PASS: ${expected.length} Palazzo objects; OSM and all language labels, complete GID mask, heritage-only shader`);

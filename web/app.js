@@ -4,6 +4,7 @@ import { t, pick as pickText, getLang, setLang, LANGS, applyStatic, onLang, fmtN
 import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
+import { buildPalazzoMask } from './palazzo-highlight.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -305,6 +306,9 @@ const subOfTex = (() => {
 })();
 const subValTex = new THREE.DataTexture(new Float32Array(256).fill(-1), 256, 1, THREE.RedFormat, THREE.FloatType);
 subValTex.needsUpdate = true;
+// Independent GID mask: preserve heritage records and all other rendering modes.
+const palazzoTex = new THREE.DataTexture(new Uint8Array(SUB_W * Math.ceil(nB / SUB_W)), SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.UnsignedByteType);
+palazzoTex.needsUpdate = true;
 const uniforms = {
   uYear: { value: config.yearMax },
   uYearFrom: { value: config.yearMin - 1 },
@@ -319,6 +323,7 @@ const uniforms = {
   uGroupColor: { value: GROUP_COLORS.map(col) },
   uMaquette: { value: col(MAQUETTE) },
   uHeritage: { value: HERITAGE_COLORS.map(col) },
+  uPalazzo: { value: palazzoTex },
   uDocOnly: { value: 0 },                          // 1: estimated years in white, documented ones in colour
   uHover: { value: -1 },
   uSelected: { value: -1 },
@@ -375,7 +380,7 @@ if (subOk) {
 
 const VERT = /* glsl */`
   in float bld;
-  uniform sampler2D uAttr, uSubOf, uSubVal;
+  uniform sampler2D uAttr, uSubOf, uSubVal, uPalazzo;
   uniform float uYear, uYearFrom, uMode, uHover, uSelected, uBlind, uNow, uBorn, uPlaying, uRise, uLayerAt, uDocOnly;
   uniform vec3 uPalette[${periods.length}];
   uniform float uMask[${periods.length}];
@@ -469,6 +474,7 @@ const VERT = /* glsl */`
     if (uBlind > 0.5 && vGid == uSelected) c = vec3(0.690, 0.310, 0.243);
     else if (uBlind > 0.5 && uBlind < 1.5) c = uMaquette;
     if (vGid == uHover || (vGid == uSelected && uBlind < 0.5)) c = mix(c, vec3(0.173, 0.184, 0.165), 0.38);
+    if (uMode > 1.5 && uMode < 2.5 && texelFetch(uPalazzo, ivec2(int(a.w + 0.5) % ${SUB_W}, int(a.w + 0.5) / ${SUB_W}), 0).r > 0.0) c = vec3(0.0);
     vColor = c;
     vec4 w = modelMatrix * vec4(p, 1.0);
     vWorld = w.xyz;
@@ -609,7 +615,10 @@ const ready = Promise.all([
   fetch('data/wiki.json').then(r => r.json()).then(w => { wiki = w; }),
   fetch('data/names.json').then(r => r.json()).then(n => { names = n; }),
   fetch('data/heritage.json').then(r => r.json()).then(h => { heritageItems = h; }),
-]);
+]).then(() => {
+  palazzoTex.image.data.set(buildPalazzoMask(attrs, config, wiki, names));
+  palazzoTex.needsUpdate = true;
+});
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const link = (href, text) => `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(text)}</a>`;
 const phone = matchMedia('(max-width: 720px)');
