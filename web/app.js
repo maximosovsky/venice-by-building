@@ -6,7 +6,6 @@ import { installChurchRoute } from './church-route.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
-import { installBuildingTimeline } from './building-timeline-view.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -1438,24 +1437,7 @@ const rail = document.getElementById('rail');
 const yearSun = track.querySelector('.year-sun'), yearRing = track.querySelector('.year-ring'), fromMark = track.querySelector('.from-mark');
 const T0 = Math.floor(config.yearMin / 25) * 25, T1 = config.yearMax + 1;
 const years = Object.entries(config.histogram).map(([y, v]) => [+y, v]);
-const timeline = installBuildingTimeline({ attrs, config, host: track.closest('.time'), lang: getLang,
-  presentation(b) {
-    const Y = uniforms.uYear.value, Yf = uniforms.uYearFrom.value;
-    if (!b) return { year: Y };
-    const ages = uniforms.uMode.value === MODE.period;
-    const period = b.kind === 'unknown' ? periods.find(p => p.key === 'unknown') : periodOf(b.kind === 'exact' ? b.date : b.yto);
-    const i = periods.indexOf(period);
-    const groups = layerGroupsShown();
-    const group = groups.find(g => g.bit < 32 ? (b.lay0 >>> g.bit) & 1 : (b.lay1 >>> (g.bit - 32)) & 1);
-    const active = (!ages || maskTarget[i]) && (uniforms.uMode.value !== MODE.layers || !!group);
-    // Only exact dates may be gated by a year. Intervals/unknown remain visible;
-    // never use the renderer's placeholder year as historical evidence.
-    const future = b.kind === 'exact' && b.date > Y;
-    const before = b.kind === 'exact' && b.date <= Yf;
-    return { color: b.kind === 'unknown' ? '#9aa0a6' : group?.color || period.color,
-      alpha: !active || future ? 0.25 : before ? 0.4 : 1 };
-  }
-});
+const yMax = Math.max(...years.map(([, v]) => v.reduce((a, b) => a + b, 0)));
 const xOf = y => (y - T0) / (T1 - T0) * hist.clientWidth;
 const yearOf = x => Math.round(T0 + x / hist.clientWidth * (T1 - T0));
 const pct = y => `${((y - T0) / (T1 - T0) * 100).toFixed(3)}%`;
@@ -1545,12 +1527,37 @@ function drawHist() {
   hist.width = w * dpr; hist.height = h * dpr;
   hctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   hctx.clearRect(0, 0, w, h);
-  const plotH = phone.matches ? 36 : 56;
-  const Y = uniforms.uYear.value, Yf = uniforms.uYearFrom.value;
-  timeline.refresh();
-  // The compact lower canvas remains the time scrubber, not an aggregate chart.
-  hctx.strokeStyle = '#c9c4ba'; hctx.lineWidth = 1;
-  hctx.beginPath(); hctx.moveTo(0, plotH); hctx.lineTo(w, plotH); hctx.stroke();
+  const plotH = phone.matches ? 36 : 56, bw = Math.max(1, w / (T1 - T0));
+  const Y = uniforms.uYear.value, Yf = uniforms.uYearFrom.value, ages = uniforms.uMode.value === MODE.period;
+  const shown = layerGroupsShown();
+  const bar = (y, bh, top, color, on) => {
+    hctx.fillStyle = color;
+    hctx.globalAlpha = on ? (y <= Yf ? 0.3 : 1) : 0.16;
+    hctx.fillRect(xOf(y), top - bh, bw, bh);
+  };
+  if (shown.length) {
+    // A story: the city in grey behind, the story's own buildings in its colours.
+    for (const [y, v] of years) bar(y, Math.sqrt(v.reduce((a, b) => a + b, 0) / yMax) * (plotH - 4), plotH, '#d6d1c8', false);
+    const total = {};
+    for (const g of shown) for (const [y, c] of Object.entries(g.years)) total[y] = (total[y] || 0) + c;
+    const lMax = Math.max(1, ...Object.values(total)), stack = {};
+    for (const g of shown) for (const [ys, c] of Object.entries(g.years)) {
+      const y = +ys, full = Math.sqrt(total[ys] / lMax) * (plotH - 4) * 0.9, bh = full * c / total[ys];
+      bar(y, bh, plotH - (stack[y] || 0), g.color, y <= Y);
+      stack[y] = (stack[y] || 0) + bh;
+    }
+  } else {
+    for (const [y, v] of years) {
+      let top = plotH;
+      v.forEach((c, i) => {
+        if (!c) return;
+        const bh = Math.sqrt(c / yMax) * (plotH - 4);
+        const alone = ages && maskTarget.filter(Boolean).length === 1 && maskTarget[i];
+        bar(y, bh, top, alone ? periods[i].color : '#c9c4ba', !(ages && !maskTarget[i]) && y <= Y);
+        top -= bh;
+      });
+    }
+  }
   hctx.globalAlpha = 1;
   if (Yf >= config.yearMin) { hctx.fillStyle = MUTED; hctx.fillRect(xOf(Yf) - 0.5, 0, 1, plotH); }
   hctx.fillStyle = INK;
@@ -1705,4 +1712,4 @@ renderer.setAnimationLoop(now => {
   renderer.render(scene, camera);
 });
 
-window.__dbg = { timeline, churchBuildingHighlight, bridgeRoute, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };
+window.__dbg = { churchBuildingHighlight, bridgeRoute, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };
