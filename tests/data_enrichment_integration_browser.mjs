@@ -20,8 +20,10 @@ try{
  const addresses=await get('addresses'),evidence=await get('evidence'),bridges=await get('bridges'),history=await get('history');
  assert.equal(addresses.records.length,31623);assert.equal(evidence.source_catalog.descriptions.length,929);assert.equal(evidence.source_catalog.vprg.filter(r=>r.url).length,5371);assert.equal(bridges.record_count,328);assert.equal(history.record_count,98613);
  await page.locator('.walks-open').click();await page.waitForSelector('[data-bridge-route-open]');await page.waitForSelector('[data-church-route-open]');
+ await page.waitForFunction(() => !document.querySelector('.bridge-route-entry [role="status"]') && ![...document.querySelectorAll('.route')].some(e => /Loading/.test(e.textContent)), null, {timeout:60000});
  const routesBefore=await page.locator('.route').allTextContents();
  await page.locator('.data-open').click();await page.waitForFunction(()=>document.querySelector('[data-de-catalog="history"] summary')?.textContent.includes('98613')).catch(async e=>{console.error(await page.locator('#dock-live').textContent(),errors);throw e;});
+ await page.waitForFunction(() => document.querySelector('[data-de-catalog="addresses"] summary')?.textContent.includes('31623') && document.querySelector('[data-de-catalog="evidence"]')?.textContent.includes('929') && document.querySelector('[data-de-catalog="bridges"] summary')?.textContent.includes('328'), null, {timeout:120000});
  assert.equal(await page.locator('.data-open').getAttribute('aria-pressed'),'true');
  assert.match(await page.locator('[data-de-catalog="addresses"] summary').textContent(),/31623/);
  assert.match(await page.locator('[data-de-catalog="evidence"]').textContent(),/929/);
@@ -62,6 +64,7 @@ try{
  await page.waitForFunction(()=>!!document.querySelector('.data-enrichment-card')&&!document.querySelector('[data-de-card-loading]'));
  assert.match(await page.locator('.data-enrichment-card').textContent(),/Addresses/);assert.match(await page.locator('.data-enrichment-card').textContent(),/Historical notes/);assert.match(await page.locator('.data-enrichment-card').textContent(),/Historical registers/);
  assert.ok((await page.locator('.data-enrichment-card').textContent()).includes('Gothic'));
+ await page.waitForFunction(() => { const e = document.querySelector('.b-photo img'); return e?.complete && e.naturalWidth > 0; }, null, {timeout:60000});
  assert.equal(await page.locator('.b-photo img').evaluate(e=>e.complete&&e.naturalWidth>0),true);
  const existingCard=await page.locator('.b-card').evaluate(e=>{const c=e.cloneNode(true);c.querySelector('.data-enrichment-card')?.remove();return c.innerHTML;});
  const checkFooter=()=>page.locator('.b-card').evaluate(e=>e.lastElementChild.classList.contains('b-photo-credit')&&e.firstElementChild.classList.contains('b-photo'));
