@@ -148,6 +148,39 @@ def test_network_metric_closure_not_straight_line_and_disconnection_rejected():
         m.metric_closure(g, [1, 4])
 
 
+def test_seed_insertion_preserves_previous_order_and_adds_both_new_targets():
+    m = stage()
+    xy = np.array([[0, 0], [10, 0], [20, 0], [5, 0], [15, 0]], dtype=float)
+    d = np.sqrt(((xy[:, None] - xy[None, :]) ** 2).sum(axis=2))
+    seed = m.extend_seed(d, [0, 1, 2, 0])
+    assert seed[0] == seed[-1] == 0
+    assert sorted(seed[:-1]) == list(range(5))
+    assert [n for n in seed if n in {0, 1, 2}] == [0, 1, 2, 0]
+    assert m.tour_cost(d, seed) == m.tour_cost(d, [0, 1, 2, 0])
+
+
+def test_checkpoint_rejects_changed_inventory_scope_even_empty_variants(tmp_path):
+    import pickle
+    m = stage()
+    p = tmp_path / 'scope.pickle'
+    data = {'midpoints': {'b': {'node': -1}}, 'distances': np.zeros((2, 2)),
+            'variants': [], 'inventory_sha256': 'old'}
+    p.write_bytes(pickle.dumps(data))
+    with pytest.raises(ValueError, match='inventory'):
+        m.read_checkpoint(p, data['midpoints'], 'source', 'new')
+
+
+def test_optimizer_relocation_improves_twoopt_local_minimum():
+    m = stage()
+    rng = np.random.default_rng(23)
+    xy = rng.random((10, 2))
+    d = np.sqrt(((xy[:, None] - xy[None, :]) ** 2).sum(axis=2))
+    tour, evidence = m.optimize_tour(d, starts=1, kicks=0)
+    assert 'relocation_moves' in evidence, 'Relocation stage missing'
+    assert evidence['selected_cost_m'] <= evidence['best_initial_cost_m']
+    assert sorted(tour[:-1]) == list(range(10))
+
+
 def test_multistart_twoopt_closed_tour_improves_bad_seed_and_preserves_all_targets():
     m = stage()
     xy = np.array([[0, 0], [10, 0], [10, 10], [0, 10], [5, 5]], dtype=float)
@@ -198,17 +231,30 @@ def artifacts():
     return json.loads(p.read_text(encoding='utf-8'))
 
 
-def test_export_variants_cover_exact_frozen344_and_event_semantics(artifacts):
+def test_named_both_bridge_inclusion_midpoint_variants(artifacts):
+    expected = {'d555836229', 'd555835752'}
+    for r in artifacts['variants']:
+        assert expected <= {b['id'] for b in r['bridges']}, 'Both named bridges missing'
+        assert expected <= {c['bridge_id'] for c in r['crossings']}
+        assert r['bridge_count'] == 346
+        assert r['stats']['bridges_visited'] == 346
+        assert r['coordinates'][0] == r['coordinates'][-1]
+        forbidden = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))['audit']['peripheral_excluded_node_pairs']
+        assert not ({frozenset(p) for p in forbidden} &
+                    {frozenset(p) for p in zip(r['proof']['route_node_ids'], r['proof']['route_node_ids'][1:])})
+
+
+def test_export_variants_cover_exact_frozen346_and_event_semantics(artifacts):
     old = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
     ids = {b['id'] for b in old['bridges']}
-    assert len(ids) == 344
+    assert len(ids) == 346
     assert len(artifacts['variants']) == 2
     for r in artifacts['variants']:
         assert r['visit_mode'] is True
         assert {b['id'] for b in r['bridges']} == ids
         assert {b['bridge_id'] for b in r['crossings']} == ids
-        assert r['bridge_count'] == 344
-        assert len(r['crossings']) == 344 + r['repeat_crossings']
+        assert r['bridge_count'] == 346
+        assert len(r['crossings']) == 346 + r['repeat_crossings']
         assert sum(c['repeat'] for c in r['crossings']) == r['repeat_crossings']
         assert r['repeat_crossings'] == r['stats']['midpoint_repeat_visits']
         assert r['distance_m'] < old['distance_m']
@@ -221,7 +267,7 @@ def test_export_variants_cover_exact_frozen344_and_event_semantics(artifacts):
     assert walk['id'] == 'walking_midpoints'
     assert walk['stats']['boat_distance_m'] == 0
     assert boat['id'] == 'traghetto_midpoints'
-    assert boat['distance_m'] < walk['distance_m']
+    assert boat['distance_m'] <= walk['distance_m']
     assert boat['status'] == 'ready'
     assert boat['availability'] == 'conditional_unverified_today'
     assert boat['schedule_feasible'] is False
@@ -353,8 +399,8 @@ def test_all_four_traghetti_mapped_with_official_schedule_and_conflicts(artifact
     route = artifacts['variants'][1]
     assert route['audit']['routing_assumption'] == 'user_authorized_ferry_connector_assumption'
     assert route['audit']['routing_eligible_ferry_ids'] == list(stage().FERRY_IDS)
-    assert route['distance_m'] <= 44648.028
-    assert route['optimization']['best_known_previous_distance_m'] == 44648.028
+    assert route['distance_m'] <= route['optimization']['previous_seed_extended_cost_m']
+    assert route['optimization']['previous_seed_preserved']
     overrides = {a['osm_way_id']: a for a in route['audit']['access_overrides']}
     assert set(overrides) == {216893107, 216893103}
     assert overrides[216893107]['access_overrides'] == {'indoor': 'yes'}

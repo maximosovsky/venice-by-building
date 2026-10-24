@@ -398,11 +398,33 @@ def immediate_deadends(records, land, components):
     return excluded
 
 
+def route_scope():
+    """Union the original Venezia boundary with original San Pietro land/decks.
+
+    Bridge polygons join the two genuine banks geometrically; they create no
+    graph edges. Walking remains strict whole-way original OSM adjacency.
+    """
+    source = config.ROOT / 'data/routes/bridge-route-san-pietro-scope.geojson'
+    data = json.loads(source.read_text(encoding='utf-8'))
+    assert data['metadata']['source_sha256'] == hashlib.sha256(config.EXTRACTS['island'].read_bytes()).hexdigest()
+    from shapely.ops import unary_union
+    base = shape(json.loads(config.OSM_POLYGONS['island'].read_text(encoding='utf-8'))['features'][0]['geometry'])
+    polygon = unary_union([base] + [shape(f['geometry']) for f in data['features']])
+    assert polygon.is_valid
+    return polygon, {**data['metadata'], 'source_file': str(source.relative_to(config.ROOT)),
+                     'added_area_m2': transform(PROJECT.transform, polygon.difference(base)).area,
+                     'source_features': [f['properties'] for f in data['features']]}
+
+
 def main():
     pbf = config.EXTRACTS['island']
     nodes, ways, tags, relations = read_pbf(pbf)
-    polygon = shape(json.loads(config.OSM_POLYGONS['island'].read_text(encoding='utf-8'))['features'][0]['geometry'])
+    polygon, correction = route_scope()
     graph, groups, audit = build_topology(nodes, ways, tags, polygon)
+    audit['geographic_scope_correction'] = correction
+    baseline_groups = set(correction['baseline_inventory_ids'])
+    audit['geographic_scope_correction']['new_source_candidates'] = [
+        {'id': b['id'], 'name': b['name'], 'way_ids': b['way_ids']} for b in groups if b['id'] not in baseline_groups]
     # Start is an actual node on a mapped Piazza San Marco walking way, not a snapped invented point.
     piazzale = {n for w in ways if w['tags'].get('name') == 'Piazza San Marco' and access_reason(w['tags']) is None
                 for n in w['nodes'] if n in graph}
@@ -597,6 +619,15 @@ def main():
         f'У {len(audit.get("multi_portal_bridges", []))} мостов несколько ветвей/порталов; выбран один полный путь. Минимум повторов и нечётность относятся к этой модели, а не доказаны для всех альтернативных ветвей. Мост Ferrovia без полного перехода и непривязанные настилы остаются неразрешёнными.',
         f'{len(audit.get("multi_portal_bridges", []))} ponti hanno più rami/portali; scelto un percorso completo. Ripetizioni minime e parità valgono per questo modello, non per tutte le alternative. Ferrovia senza attraversamento completo e impalcati senza percorso restano irrisolti.',
         f'{len(audit.get("multi_portal_bridges", []))} bridges have multiple branches/portals; one complete path is selected. Minimum repeats and parity apply to this model, not proven across alternative branches. Ferrovia without a full crossing and unmatched decks remain unresolved.')
+    retained = set(correction['baseline_required_ids'])
+    additions = set(records) - retained
+    removed = retained - set(records)
+    correction['added_required_ids'] = sorted(additions)
+    correction['removed_required_ids'] = sorted(removed)
+    assert not removed, f'Scope unexpectedly removed existing bridges: {sorted(removed)}'
+    assert additions == {'d555836229', 'd555835752'}, f'Additional source candidates require audit: {sorted(additions)}'
+    assert len(records) == 346
+    assert {e['id'] for e in excluded} == set(correction['baseline_excluded_ids'])
     audit['required_components_detail'] = [list(c) for c in nx.connected_components(required)]
     audit['required_bridges_detail'] = [{'id': b['id'], 'name': b['name'], 'banks': b['banks']} for b in records.values()]
     audit['bridge_relations'] = relations
@@ -716,9 +747,10 @@ def main():
         f'After contracting bridge-free walking connectivity: {len(odd)} odd-degree land components. '
         f'A closed once-per-accepted-bridge circuit is {"possible" if not odd else "impossible"}. '
         f'Matching gives a minimum of {repeats} repeated crossings in the accepted model; total walking length is not proven optimal.')
-    audit.update({'scope_relation': 4817103, 'scope': prose('Историческая пешеходная Венеция в полигоне главного острова: исключены периферийные портовые и транспортные мосты по геометрии OSM. Современные мосты центра, включая Ponte della Costituzione, сохранены. Без Джудекки и внешних островов.',
-                  'Venezia storica pedonale nel poligono dell’isola principale: esclusi ponti periferici portuali e di trasporto secondo geometria OSM. Ponti moderni del centro, incluso Ponte della Costituzione, mantenuti. Escluse Giudecca e isole esterne.',
-                  'Historic pedestrian Venice within the main-island polygon: peripheral port/transport bridges excluded by OSM geometry. Modern central bridges, including Ponte della Costituzione, retained. Giudecca and outer islands excluded.'),
+    audit['geographic_scope_correction'].update({'added_required_ids': sorted(additions), 'removed_required_ids': sorted(removed)})
+    audit.update({'scope_relation': 4817103, 'scope': prose('Историческая пешеходная Венеция: исходный полигон Venezia дополнен исходным островом San Pietro di Castello (way/173629664) и настилами Ponte San Pietro / Ponte de Quintavale. Периферийные портовые и транспортные мосты исключены по геометрии OSM; Ponte della Costituzione сохранён. Без Джудекки и внешних островов.',
+                  'Venezia storica pedonale: poligono Venezia unito all’isola originale San Pietro di Castello (way/173629664) e agli impalcati Ponte San Pietro / Ponte de Quintavale. Esclusi ponti periferici portuali e di trasporto; Ponte della Costituzione mantenuto. Escluse Giudecca e isole esterne.',
+                  'Historic pedestrian Venice: original Venezia polygon plus original San Pietro di Castello island (way/173629664) and Ponte San Pietro / Ponte de Quintavale decks. Peripheral port/transport bridges excluded by OSM geometry; Ponte della Costituzione retained. Giudecca and outer islands excluded.'),
                   'reachable_nodes': graph.number_of_nodes(), 'reachable_edges': graph.number_of_edges(),
                   'land_components': len(components), 'odd_components': [
                       {'id': c, 'degree': required.degree(c), 'representative_node_id': min(components[c]),

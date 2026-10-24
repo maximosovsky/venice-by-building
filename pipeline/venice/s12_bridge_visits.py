@@ -141,6 +141,17 @@ def tour_cost(distances, tour):
     return float(sum(distances[u, v] for u, v in zip(tour, tour[1:])))
 
 
+def extend_seed(distances, seed):
+    """Cheapest network insertion of new targets; preserve all old target order."""
+    route = list(seed)
+    for target in sorted(set(range(len(distances))) - set(route)):
+        position = min(range(1, len(route)), key=lambda i: (
+            distances[route[i - 1], target] + distances[target, route[i]]
+            - distances[route[i - 1], route[i]], i))
+        route.insert(position, target)
+    return route
+
+
 def optimize_tour(distances, starts=32, seeds=(), kicks=64):
     """Deterministic multi-start NN + best 2-opt + seeded perturb/re-optimize.
 
@@ -186,7 +197,7 @@ def optimize_tour(distances, starts=32, seeds=(), kicks=64):
         if c[0] != c[-1] or sorted(c[:-1]) != list(range(n)):
             raise ValueError('Invalid TSP seed')
     initial = min(tour_cost(distances, c) for c in candidates)
-    best, best_cost, moves = None, math.inf, 0
+    best, best_cost, moves = list(min(candidates, key=lambda c: tour_cost(distances, c))), initial, 0
     for c in candidates:
         c, count = improve(c)
         cost = tour_cost(distances, c)
@@ -208,7 +219,34 @@ def optimize_tour(distances, starts=32, seeds=(), kicks=64):
         if cost < best_cost - 1e-7:
             best, best_cost = candidate, cost
             improvements += 1
-    return best, {'method': 'network metric closure; multi-start nearest neighbour; best-improvement 2-opt; deterministic four-cut kicks',
+    relocation_moves = 0
+    # Bounded Or-opt blocks escape 2-opt local minima. Actual closure costs,
+    # never geometry shortcuts; retain every candidate only if strictly better.
+    for _ in range(80):
+        change, candidate_best = -1e-7, None
+        p = best[:-1]
+        for size in (1, 2, 3):
+            for i in range(1, n - size + 1):
+                block = p[i:i + size]
+                rest = p[:i] + p[i + size:]
+                removal = (distances[p[i - 1], p[(i + size) % n]]
+                           - distances[p[i - 1], block[0]] - distances[block[-1], p[(i + size) % n]])
+                for j in range(1, len(rest) + 1):
+                    a, z = rest[j - 1], rest[j % len(rest)]
+                    delta = removal + distances[a, block[0]] + distances[block[-1], z] - distances[a, z]
+                    if delta < change:
+                        change, candidate_best = delta, rest[:j] + block + rest[j:] + [0]
+        if candidate_best is None:
+            break
+        candidate, count = improve(candidate_best)
+        cost = tour_cost(distances, candidate)
+        if cost >= best_cost - 1e-7:
+            break
+        best, best_cost = candidate, cost
+        moves += count
+        relocation_moves += 1
+    return best, {'method': 'network metric closure; multi-start nearest neighbour; best-improvement 2-opt; deterministic four-cut kicks; bounded Or-opt',
+                  'relocation_moves': relocation_moves,
                   'starts': len(candidates), 'kicks': kicks, 'kick_improvements': improvements,
                   'twoopt_moves': moves, 'best_initial_cost_m': initial, 'selected_cost_m': best_cost,
                   'global_optimum_claimed': False, 'random_seed': 4817103}
@@ -282,10 +320,11 @@ def load_inputs():
     pbf = config.EXTRACTS['island']
     sha = hashlib.sha256(pbf.read_bytes()).hexdigest()
     assert sha == old['audit']['pbf_sha256'], 'Source changed: re-audit inventory first'
-    assert len(proof['bridges']) == old['bridge_count'] == 344
+    assert len(proof['bridges']) == old['bridge_count'] == 346
     assert {b['id'] for b in proof['bridges']} == {b['id'] for b in old['bridges']}
     nodes, ways, tags, relations = s10.read_pbf(pbf)
-    polygon = shape(json.loads(config.OSM_POLYGONS['island'].read_text(encoding='utf-8'))['features'][0]['geometry'])
+    polygon, correction = s10.route_scope()
+    assert correction['source_sha256'] == old['audit']['geographic_scope_correction']['source_sha256']
     graph, groups, audit = s10.build_topology(nodes, ways, tags, polygon)
     graph.remove_edges_from(old['audit']['peripheral_excluded_node_pairs'])
     graph = graph.subgraph(nx.node_connected_component(graph, proof['start_node_id'])).copy()
@@ -359,10 +398,12 @@ def load_inputs():
     return graph, nodes, tags, proof, old, ferries, approaches
 
 
-def read_checkpoint(path, midpoints, source_sha):
+def read_checkpoint(path, midpoints, source_sha, inventory_sha=None):
     """Load ONLY an explicitly trusted internal pickle, checking source identity."""
     with Path(path).open('rb') as stream:
         data = pickle.load(stream)
+    if inventory_sha is not None and data.get('inventory_sha256') != inventory_sha:
+        raise ValueError('checkpoint inventory/scope changed')
     if data['midpoints'] != midpoints:
         raise ValueError('checkpoint midpoint definitions changed')
     n = len(midpoints) + 1
@@ -420,7 +461,7 @@ def main():
         midpoints[b['id']] = evidence
     start = proof['start_node_id']
     targets = [start] + [b['node'] for b in midpoints.values()]
-    assert len(set(targets)) == 345
+    assert len(set(targets)) == 347
     index = {bid: i + 1 for i, bid in enumerate(midpoints)}
     seen = set()
     old_order = [0]
@@ -432,7 +473,10 @@ def main():
     stamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%SZ')
     checkpoint = Path(os.environ.get('TMPDIR', str(config.ROOT))) / ('venice-midpoint-progress-' + stamp + '.pickle')
     variants, previous_tour = [], None
-    resumed = read_checkpoint(args.resume, midpoints, old['audit']['pbf_sha256']) if args.resume else None
+    inventory_sha = hashlib.sha256((config.WEB_DATA / 'bridge-route.json').read_bytes()).hexdigest()
+    resumed = read_checkpoint(args.resume, midpoints, old['audit']['pbf_sha256'], inventory_sha) if args.resume else None
+    if resumed and resumed.get('matrix_mode') != 'walking':
+        raise ValueError('checkpoint matrix is not walking closure')
     for assisted in (False, True):
         working = graph.copy()
         if assisted:
@@ -441,64 +485,47 @@ def main():
             for f in ferries:
                 if f['routing_eligible']:
                     assert add_ferry(working, xy, f)
-        if not assisted:
-            saved = preserved_walk
-            assert saved['id'] == ('traghetto_midpoints' if assisted else 'walking_midpoints')
-            assert saved['proof']['original_route_sha256'] == hashlib.sha256((config.WEB_DATA / 'bridge-route.json').read_bytes()).hexdigest()
-            ids = saved['proof']['route_node_ids']
-            assert ids[0] == ids[-1] == start
-            assert all(working.has_edge(u, v) for u, v in zip(ids, ids[1:]))
-            actual = route_stats(working, ids, midpoints, banks)
-            assert actual['bridges_visited'] == 344
-            assert abs(actual['total_distance_m'] - saved['distance_m']) < .001
-            variants.append(saved)
-            seen_ids = set()
-            previous_tour = [0]
-            for event in saved['crossings']:
-                if event['bridge_id'] not in seen_ids:
-                    seen_ids.add(event['bridge_id'])
-                    previous_tour.append(index[event['bridge_id']])
-            previous_tour.append(0)
-            print('Resumed and source-validated ' + saved['id'] + ' ' + str(saved['distance_m']), flush=True)
-            continue
         print('Metric closure', 'traghetto' if assisted else 'walking', flush=True)
         distances = resumed['distances'] if not assisted and resumed else metric_closure(working, targets)
         with checkpoint.open('wb') as stream:
-            pickle.dump({'midpoints': midpoints, 'distances': distances, 'variants': variants}, stream)
+            pickle.dump({'midpoints': midpoints, 'distances': distances, 'variants': variants,
+                         'inventory_sha256': inventory_sha, 'matrix_mode': 'traghetto' if assisted else 'walking'}, stream)
         seeds = [old_order] + ([previous_tour] if previous_tour else [])
-        if assisted:
-            seed = [0]
-            seen_seed = set()
-            for e in best_known_ferry['crossings']:
-                if e['bridge_id'] not in seen_seed:
-                    seen_seed.add(e['bridge_id'])
-                    seed.append(index[e['bridge_id']])
-            seeds.append(seed + [0])
+        saved = best_known_ferry if assisted else preserved_walk
+        seed, seen_seed = [0], set()
+        for e in saved['crossings']:
+            if e['bridge_id'] not in seen_seed and e['bridge_id'] in index:
+                seen_seed.add(e['bridge_id'])
+                seed.append(index[e['bridge_id']])
+        seed = extend_seed(distances, seed + [0])
+        seeds.append(seed)
+        # Independently refine the previous optimum's extended order, so a
+        # walking local minimum cannot suppress a different ferry basin.
+        seeded_tour, seeded_optimization = optimize_tour(distances, starts=0, seeds=[seed], kicks=0)
+        seeds.append(seeded_tour)
         tour, optimization = optimize_tour(distances, args.starts, seeds, args.kicks)
+        optimization['previous_seed_refined_cost_m'] = seeded_optimization['selected_cost_m']
+        optimization.update({'best_known_previous_distance_m': saved['distance_m'],
+                             'previous_seed_extended_cost_m': tour_cost(distances, seed),
+                             'previous_seed_inserted_ids': sorted(set(midpoints) - seen_seed),
+                             'previous_seed_preserved': True})
         previous_tour = tour
         route = [start]
         for a, b in zip(tour, tour[1:]):
             route.extend(nx.shortest_path(working, targets[a], targets[b], weight='length')[1:])
         stats = route_stats(working, route, midpoints, banks)
-        if assisted:
-            previous_ids = best_known_ferry['proof']['route_node_ids']
-            assert all(working.has_edge(u, v) for u, v in zip(previous_ids, previous_ids[1:]))
-            previous_stats = route_stats(working, previous_ids, midpoints, banks)
-            assert abs(previous_stats['total_distance_m'] - best_known_ferry['distance_m']) < .001
-            optimization['candidate_distance_m'] = stats['total_distance_m']
-            optimization['best_known_previous_distance_m'] = best_known_ferry['distance_m']
-            optimization['kept_previous_route'] = previous_stats['total_distance_m'] < stats['total_distance_m']
-            if optimization['kept_previous_route']:
-                route, stats = previous_ids, previous_stats
-                optimization['selected_cost_m'] = stats['total_distance_m']
+        # The old route cannot be reused after negative midpoint IDs or scope
+        # change. Its validated target order is instead extended and re-expanded.
         assert route[0] == route[-1] == start
         assert all(working.has_edge(u, v) for u, v in zip(route, route[1:]))
         assert {b['node'] for b in midpoints.values()} <= set(route)
-        assert stats['bridges_visited'] == 344
+        assert stats['bridges_visited'] == 346
         assert abs(stats['total_distance_m'] - optimization['selected_cost_m']) < 1e-6
         assert stats['total_distance_m'] < old['distance_m']
         if assisted:
-            assert stats['total_distance_m'] < variants[0]['distance_m'], 'Ferry heuristic did not improve: refuse export'
+            assert stats['total_distance_m'] <= variants[0]['distance_m'] + .001, 'Ferry heuristic regressed from walking seed'
+            optimization['ferry_improvement_m'] = max(0., variants[0]['distance_m'] - stats['total_distance_m'])
+            optimization['optional_ferries_used'] = stats['boat_distance_m'] > 0
         coordinates = [list(INVERSE.transform(*xy[n])) for n in route]
         local = [[round(xy[n][0] - s10.ORIGIN[0], 4), round(-(xy[n][1] - s10.ORIGIN[1]), 4)] for n in route]
         old_by_id = {b['id']: b for b in old['bridges']}
@@ -545,9 +572,9 @@ def main():
             legs.append(leg)
             i = j
         limitations = s10.prose(
-            'Эвристика сетевого TSP, не глобальный оптимум; точные середины исходных 344 мостов, полный переход необязателен. Возвраты по половине моста учтены. Исходные исключения и ограничения сохранены. Пользователь разрешил считать четыре трагетто соединителями графа: это лодки, не мосты и не 24/7. Явные исключения только Santa Sofia: исходный пирс indoor=yes, Giglio: паром foot=no; Dogana: исходный сегмент пирса за строгой границей. Работа и доступ сегодня, ожидание и расписание не проверены, однодневность не доказана.',
-            'Euristica TSP di rete, non ottimo globale; punti medi esatti dei 344 ponti originali, attraversamento completo facoltativo. Ritorni su mezzo ponte conteggiati; esclusioni originali mantenute. Ipotesi autorizzata: quattro traghetti come connessioni, barche non ponti né servizio 24/7. Deroghe solo Santa Sofia pontile originale indoor=yes, Giglio traghetto foot=no; Dogana segmento originale oltre confine. Servizio/accesso odierni, attese e fattibilità giornaliera non verificati.',
-            'Network TSP heuristic, not global optimum; exact original 344 bridge midpoints, full crossing optional. Half-deck retrace counted; original exclusions/restrictions retained. User-authorized bridge-like graph assumption for all four traghetti: boats, not physical bridges or 24/7 service. Overrides only Santa Sofia original pier indoor=yes and Giglio ferry foot=no; Dogana original pier boundary exception. Current service/access, waiting times and one-day schedule feasibility unverified.')
+            'Эвристика сетевого TSP, не глобальный оптимум; точные середины исходных 346 мостов, полный переход необязателен. Возвраты по половине моста учтены. Исходные исключения и ограничения сохранены. Пользователь разрешил считать четыре трагетто соединителями графа: это лодки, не мосты и не 24/7. Явные исключения только Santa Sofia: исходный пирс indoor=yes, Giglio: паром foot=no; Dogana: исходный сегмент пирса за строгой границей. Работа и доступ сегодня, ожидание и расписание не проверены, однодневность не доказана.',
+            'Euristica TSP di rete, non ottimo globale; punti medi esatti dei 346 ponti originali, attraversamento completo facoltativo. Ritorni su mezzo ponte conteggiati; esclusioni originali mantenute. Ipotesi autorizzata: quattro traghetti come connessioni, barche non ponti né servizio 24/7. Deroghe solo Santa Sofia pontile originale indoor=yes, Giglio traghetto foot=no; Dogana segmento originale oltre confine. Servizio/accesso odierni, attese e fattibilità giornaliera non verificati.',
+            'Network TSP heuristic, not global optimum; exact original 346 bridge midpoints, full crossing optional. Half-deck retrace counted; original exclusions/restrictions retained. User-authorized bridge-like graph assumption for all four traghetti: boats, not physical bridges or 24/7 service. Overrides only Santa Sofia original pier indoor=yes and Giglio ferry foot=no; Dogana original pier boundary exception. Current service/access, waiting times and one-day schedule feasibility unverified.')
         semantics = s10.prose(
             'crossings — события достижения середины, repeat_crossings — повторные посещения середины, НЕ полные переходы. Полные переходы и их повторы отдельно в stats; это проход между различными исходными береговыми компонентами по одному мосту.',
             'crossings indica arrivi al punto medio; repeat_crossings conta visite ripetute, NON attraversamenti completi. Attraversamenti completi e ripetizioni separati in stats: percorso su un ponte tra due componenti originali di riva diverse.',
@@ -556,28 +583,28 @@ def main():
         total = round(stats['total_distance_m'], 3)
         stats = {k: round(v, 3) if isinstance(v, float) else v for k, v in stats.items()}
         summary = s10.prose(
-            f'344 середины мостов; {total / 1000:.3f} км, {stats["midpoint_repeat_visits"]} повторных посещений середины; возвраты: {stats["bridge_visit_reversals"]}. Сан-Марко — Сан-Марко. ' + ('Условный маршрут с трагетто; не однодневное расписание.' if assisted else 'Только пешком.'),
-            f'344 punti medi; {total / 1000:.3f} km, {stats["midpoint_repeat_visits"]} visite ripetute; ritorni: {stats["bridge_visit_reversals"]}. San Marco — San Marco. ' + ('Traghetti condizionali; non orario giornaliero.' if assisted else 'Solo a piedi.'),
-            f'344 bridge midpoints; {total / 1000:.3f} km, {stats["midpoint_repeat_visits"]} repeated midpoint arrivals; returns: {stats["bridge_visit_reversals"]}. San Marco — San Marco. ' + ('Conditional traghetti, not a one-day timetable.' if assisted else 'Walking only.'))
+            f'346 середины мостов; {total / 1000:.3f} км, {stats["midpoint_repeat_visits"]} повторных посещений середины; возвраты: {stats["bridge_visit_reversals"]}. Сан-Марко — Сан-Марко. ' + ('Условный маршрут с трагетто; не однодневное расписание.' if assisted else 'Только пешком.'),
+            f'346 punti medi; {total / 1000:.3f} km, {stats["midpoint_repeat_visits"]} visite ripetute; ritorni: {stats["bridge_visit_reversals"]}. San Marco — San Marco. ' + ('Traghetti condizionali; non orario giornaliero.' if assisted else 'Solo a piedi.'),
+            f'346 bridge midpoints; {total / 1000:.3f} km, {stats["midpoint_repeat_visits"]} repeated midpoint arrivals; returns: {stats["bridge_visit_reversals"]}. San Marco — San Marco. ' + ('Conditional traghetti, not a one-day timetable.' if assisted else 'Walking only.'))
         variant = {'id': name, 'visit_mode': True, 'title': s10.prose(
-            'Середины 344 мостов' + (' + трагетто (условно)' if assisted else ' — пешком'),
-            'Punti medi di 344 ponti' + (' + traghetti (condizionale)' if assisted else ' — a piedi'),
-            '344 bridge midpoints' + (' + traghetti (conditional)' if assisted else ' — walking')),
+            'Середины 346 мостов' + (' + трагетто (условно)' if assisted else ' — пешком'),
+            'Punti medi di 346 ponti' + (' + traghetti (condizionale)' if assisted else ' — a piedi'),
+            '346 bridge midpoints' + (' + traghetti (conditional)' if assisted else ' — walking')),
             'summary': summary, 'limitations': limitations, 'event_semantics': semantics,
             'status': 'conditional' if assisted else 'ready', 'start': dict(old['start']),
             'distance_m': total, 'walk_distance_m': stats['walk_distance_m'],
             'boat_distance_m': stats['boat_distance_m'], 'total_distance_m': total,
             'repeat_distance_m': stats['repeat_distance_m'], 'stats': stats,
-            'bridge_count': 344, 'repeat_crossings': stats['midpoint_repeat_visits'],
+            'bridge_count': 346, 'repeat_crossings': stats['midpoint_repeat_visits'],
             'coordinates': coordinates, 'local': local, 'bridges': bridge_rows, 'crossings': events,
             'legs': legs, 'ferry_events': ferry_events, 'traghetti': ferries,
             'schedule_feasible': False, 'optimization': optimization,
             'excluded': old['excluded'], 'source': old['source'],
             'gpx': 'data/bridge-visit-route.gpx', 'gpx_track_id': name,
             'baseline_distance_m': old['distance_m'], 'savings_m': round(old['distance_m'] - total, 3),
-            'audit': {'limitations': limitations, 'verified': {'closed': True, 'midpoints_344': True,
+            'audit': {'limitations': limitations, 'verified': {'closed': True, 'midpoints_346': True,
                       'original_or_split_adjacency': True, 'ferry_membership': True},
-                      'scope': old['audit']['scope'], 'dead_end_exclusion_count': 19,
+                      'scope': old['audit']['scope'], 'geographic_scope_correction': old['audit']['geographic_scope_correction'], 'dead_end_exclusion_count': 19,
                       'routing_assumption': ASSUMPTION if assisted else None,
                       'routing_eligible_ferry_ids': [f['id'] for f in ferries if f['routing_eligible']] if assisted else [],
                       'access_overrides': ([{'osm_way_id': a['osm_way_id'], 'node_ids': a['node_ids'],
@@ -593,9 +620,10 @@ def main():
                       'split_crs': config.CRS_METRIC, 'landing_approaches': approaches if assisted else []}}
         variants.append(variant)
         with checkpoint.open('wb') as stream:
-            pickle.dump({'midpoints': midpoints, 'distances': distances, 'variants': variants}, stream)
+            pickle.dump({'midpoints': midpoints, 'distances': distances, 'variants': variants,
+                         'inventory_sha256': inventory_sha, 'matrix_mode': 'traghetto' if assisted else 'walking'}, stream)
         print(json.dumps({'variant': name, 'stats': stats, 'optimization': optimization}, ensure_ascii=False), flush=True)
-    prepare_export(variants[1:], ferries, old['euler'])
+    prepare_export(variants, ferries, old['euler'])
     for r in variants:
         # Preserve literal original San Marco longitude/latitude; avoid inverse
         # projection roundoff changing the frozen start coordinate identifier.

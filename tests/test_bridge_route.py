@@ -228,6 +228,29 @@ def test_closed_subtrail_reversal_shortens_order_with_identical_crossings():
     assert all(a[1] == b[0] for a, b in zip(route, route[1:]))
 
 
+def test_named_both_bridge_inclusion_full_crossing():
+    data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
+    proof = json.loads((ROOT / 'data/processed/bridge_route_proof.json').read_text(encoding='utf-8'))
+    by_id = {b['id']: b for b in data['bridges']}
+    expected = {'d555836229': ('Ponte San Pietro', 173629661),
+                'd555835752': ('Ponte de Quintavale', 121811923)}
+    assert set(expected) <= set(by_id), 'Both named San Pietro bridges must be included'
+    assert data['bridge_count'] == 346
+    scope = data['audit']['geographic_scope_correction']
+    assert set(by_id) == set(scope['baseline_required_ids']) | set(expected)
+    assert not scope['removed_required_ids']
+    assert set(scope['added_required_ids']) == set(expected)
+    assert {e['id'] for e in data['excluded']} == set(scope['baseline_excluded_ids'])
+    original = {b['id']: b for b in proof['bridges']}
+    for bid, (name, wid) in expected.items():
+        assert by_id[bid]['name'] == name
+        assert wid in original[bid]['way_ids']
+        assert by_id[bid]['deck_local']
+        for event in [c for c in data['crossings'] if c['bridge_id'] == bid]:
+            actual = proof['route_node_ids'][event['start_index']:event['end_index'] + 1]
+            assert actual in [original[bid]['path'], original[bid]['path'][::-1]]
+
+
 def test_historic_scope_excludes_actual_port_not_modern_central_bridges():
     data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
     names = {b['name'] for b in data['bridges']}
@@ -300,6 +323,33 @@ def test_every_exclusion_has_original_osm_evidence_coordinates():
         assert e['evidence_ids'] and e['source_tags']
 
 
+def test_san_pietro_scope_is_exact_original_osm_land_and_decks():
+    import osmium
+    from shapely.geometry import shape, LineString
+    from shapely.ops import unary_union
+    source = json.loads((ROOT / 'data/routes/bridge-route-san-pietro-scope.geojson').read_text(encoding='utf-8'))
+    features = {f['properties']['osm_way_id']: f for f in source['features']}
+    assert set(features) == {173629664, 555836229, 555835752}
+    nodes, refs = {}, {}
+    class Reader(osmium.SimpleHandler):
+        def node(self, n):
+            nodes[n.id] = [n.location.lon, n.location.lat]
+        def way(self, w):
+            if w.id in features:
+                refs[w.id] = [n.ref for n in w.nodes]
+                assert dict(w.tags) == features[w.id]['properties']['tags']
+    Reader().apply_file(str(ROOT / 'data/raw/osm/venezia_island.osm.pbf'))
+    for wid, f in features.items():
+        assert f['properties']['node_ids'] == refs[wid]
+        assert f['geometry']['coordinates'] == [[nodes[n] for n in refs[wid]]]
+    polygon, correction = stage().route_scope()
+    assert polygon.is_valid and polygon.geom_type == 'Polygon'
+    proof = json.loads((ROOT / 'data/processed/bridge_route_proof.json').read_text(encoding='utf-8'))
+    for b in proof['bridges']:
+        assert polygon.covers(LineString([nodes[n] for n in b['path']]))
+    assert features[173629664]['properties']['tags']['place'] == 'islet'
+
+
 def test_scope_polygon_coordinates_match_original_pbf():
     import osmium
     scope = json.loads((ROOT / 'data/routes/bridge-route-scope.geojson').read_text(encoding='utf-8'))
@@ -370,7 +420,7 @@ def test_real_repeat_minimum_is_independent_unweighted_matching():
     lower_bound = sum(closure[u][v]['weight'] for u, v in matching)
     assert len(matching) * 2 == len(odd)
     assert lower_bound == data['repeat_crossings'] == 74
-    assert len(odd) == data['euler']['odd_count'] == 86
+    assert len(odd) == data['euler']['odd_count'] == 88
 
 
 def test_real_deadend_banks_reconstructed_from_original_pbf():
@@ -378,7 +428,9 @@ def test_real_deadend_banks_reconstructed_from_original_pbf():
     from shapely.geometry import LineString, shape
     data = json.loads((ROOT / 'web/data/bridge-route.json').read_text(encoding='utf-8'))
     proof = json.loads((ROOT / 'data/processed/bridge_route_proof.json').read_text(encoding='utf-8'))
-    boundary = shape(json.loads((ROOT / 'data/raw/osm/venice_island_polygon_osm_4817103.geojson').read_text(encoding='utf-8'))['features'][0]['geometry'])
+    from shapely.ops import unary_union
+    source_scope = json.loads((ROOT / 'data/routes/bridge-route-san-pietro-scope.geojson').read_text(encoding='utf-8'))
+    boundary = unary_union([shape(json.loads((ROOT / 'data/raw/osm/venice_island_polygon_osm_4817103.geojson').read_text(encoding='utf-8'))['features'][0]['geometry'])] + [shape(f['geometry']) for f in source_scope['features']])
     bridge_way_ids = {w for b in data['audit']['inventory'] for w in b['way_ids']}
     blocked_way_ids = {w['id'] for b in data['audit']['inventory'] for w in b['restricted_ways']}
     coords, ways, blocked_nodes = {}, [], set()
@@ -455,7 +507,9 @@ def test_real_candidate_inventory_reconciles_required_excluded_unresolved():
     for b in audit['inventory']:
         assert b['way_ids']
     from shapely.geometry import Point, shape
-    boundary = shape(json.loads((ROOT / 'data/raw/osm/venice_island_polygon_osm_4817103.geojson').read_text(encoding='utf-8'))['features'][0]['geometry'])
+    from shapely.ops import unary_union
+    source_scope = json.loads((ROOT / 'data/routes/bridge-route-san-pietro-scope.geojson').read_text(encoding='utf-8'))
+    boundary = unary_union([shape(json.loads((ROOT / 'data/raw/osm/venice_island_polygon_osm_4817103.geojson').read_text(encoding='utf-8'))['features'][0]['geometry'])] + [shape(f['geometry']) for f in source_scope['features']])
     assert all(boundary.covers(Point(ll)) for ll in data['coordinates'])
     assert audit['source_date_semantics']['en']
 
