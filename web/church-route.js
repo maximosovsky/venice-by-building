@@ -87,7 +87,7 @@ export function buildRouteOverlay(THREE,route){
  return group;
 }
 function disposeObject(object){object.traverse(o=>{o.geometry?.dispose();const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>{m?.map?.dispose();m?.dispose();});});}
-export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDockView,showWalks,pickText,onLang,onVisibilityChange=()=>{},fetchRoute=url=>fetch(url)}){
+export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDockView,showWalks,pickText,onLang,onVisibilityChange=()=>{},fetchRoute=url=>fetch(url,{cache:'no-store'})}){
  const state={status:'idle',route:null,visible:false,selected:-1};let overlay=null,pending=null,disposed=false;
  const back=()=>({label:pickText(UI.back),go:showWalks});
  function render(preserveScroll=false){if(disposed)return;const dock=dockLive.closest?.('.dock'),scroll=dock?.scrollTop||0;
