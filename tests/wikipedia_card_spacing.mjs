@@ -1,0 +1,5 @@
+import assert from 'node:assert/strict';
+import { chromium } from 'playwright';
+const base=process.argv[2]||'http://127.0.0.1:8873/';
+const b=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--enable-unsafe-swiftshader','--use-angle=swiftshader','--no-sandbox']});
+try{const p=await b.newPage();await p.goto(base+'?lang=ru',{waitUntil:'networkidle',timeout:120000});await p.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});await p.evaluate(()=>window.__dbg.openBuilding(9270));const values=await p.evaluate(()=>{const wiki=[...document.querySelectorAll('.b-card a')].find(a=>a.textContent==='Wikipedia').parentElement;const photo=document.querySelector('.b-photo-credit');const style=e=>{const s=getComputedStyle(e);return {left:s.marginLeft,right:s.marginRight,top:s.marginTop,x:e.getBoundingClientRect().x}};return {wiki:style(wiki),photo:style(photo)}});assert.deepEqual(values.wiki,values.photo,'Wikipedia and photo credit must have identical insets');console.log('PASS identical Wikipedia/photo insets',JSON.stringify(values));}finally{await b.close()}
