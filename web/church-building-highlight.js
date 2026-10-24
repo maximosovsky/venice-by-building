@@ -26,13 +26,13 @@ export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch
   const tiles = [], overlays = [], sources = new Set();
   let manifest = null, pending = null, disposed = false, picking = false, error = null;
   const materials = new Map([['#436817', new THREE.MeshBasicMaterial({ color: '#436817', side: THREE.DoubleSide,
-    polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 })]]);
+    polygonOffset: true, polygonOffsetFactor: -8, polygonOffsetUnits: -8, depthTest: true, depthWrite: false })]]);
   function materialFor(color, ageShading, parent) {
     if (ageShading) {
       const key = `age:${color}`;
       if (!materials.has(key)) materials.set(key, new THREE.ShaderMaterial({
         glslVersion: THREE.GLSL3, side: THREE.DoubleSide,
-        polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2,
+        polygonOffset: true, polygonOffsetFactor: -8, polygonOffsetUnits: -8, depthTest: true, depthWrite: false,
         uniforms: { uColor: { value: new THREE.Color(color) },
           uFogColor: parent.userData?.draw?.uniforms.uFogColor || { value: new THREE.Color('#ffffff') },
           uFog: parent.userData?.draw?.uniforms.uFog || { value: new THREE.Vector2(9000, 26000) } },
@@ -55,7 +55,7 @@ export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch
       return materials.get(key);
     }
     if (!materials.has(color)) materials.set(color, new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide,
-      polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+      polygonOffset: true, polygonOffsetFactor: -8, polygonOffsetUnits: -8, depthTest: true, depthWrite: false }));
     return materials.get(color);
   }
   const sync = () => { for (const mesh of overlays) mesh.visible = !disposed && !picking && sources.size > 0; };
