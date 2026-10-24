@@ -1,0 +1,199 @@
+{
+  "report_path": "D:\\100_star\\venice\\docs\\municipal-ponte-audit-20261024_091400Z.md",
+  "report_sha256": "78546abd40aa5cf9add10973e42c2cb8d713278c4b3b1067397786134d5da8a0",
+  "classification_counts": {
+    "candidate_geometry_mismatch_near_known_osm_bridge": 2,
+    "candidate_missing_osm_bridge_identity_no_verified_network": 5,
+    "known_osm_deck_public_access_connectivity_unresolved": 1,
+    "known_osm_railway_not_public_pedestrian_required": 3,
+    "osm_known_port_transport_not_route_required": 1,
+    "known_osm_parallel_deck_path_identity_ambiguous_transport": 2
+  },
+  "strict_inside_nonport_physical_groups": 384,
+  "protected_files_unchanged": true,
+  "candidate_count": 14,
+  "complete": true,
+  "git_status": " M tests/bridge_route_browser.mjs\n M tests/bridge_route_ui.mjs\n?? Coat_of_Arms_of_the_Republic_of_Venice.svg\n?? Venice-merian-1642-HIGHRES.jpg\n?? docs/bridge-midpoints-mandatory-traghetto-20261024_070355Z.md\n?? docs/municipal-ponte-audit-20261024_091400Z.md\n?? favicon.png\n?? reports/\n?? tests/building_timeline.mjs\n?? web/building-timeline.js\n",
+  "artifacts": [
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\audit.py",
+      "bytes": 31655,
+      "sha256": "759ee77d18c84f597b0f27bd5be9f7d4cf6b9142c5933b5127f6c6c3dfb67bc4"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\baseline.json",
+      "bytes": 116429,
+      "sha256": "46ab6a16de91e94bbc337f4ee28d78100b2f1617427391968af7786a0fe877d9"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-00.json",
+      "bytes": 365751,
+      "sha256": "f56d178c198b17be157975a6c63bfac9db3cad9b9a3bc3b3f15986a32928d7d6"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-01.json",
+      "bytes": 282277,
+      "sha256": "5ea0c61b110d263fe721fb7940bc10073b5b100e48d1a580471fe18f31d6536d"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-02.json",
+      "bytes": 395002,
+      "sha256": "dbea3e1dd687b402a0fbf53dc20cd7493f985614d8d747c2b329355c57682fd2"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-03.json",
+      "bytes": 401493,
+      "sha256": "ac0abd6590d8b148ce7ca72c2fbb2e001a38ecef9b10d7e0d5693bd9602e4601"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-04.json",
+      "bytes": 618288,
+      "sha256": "284f3a95670647a911142634b22bef75f8f9c710ac05c9c3e06a6419d52168de"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-05.json",
+      "bytes": 533612,
+      "sha256": "8aa5f4686ab111880b2e7816c42e2591938b9318bfd86f588a18299e89adccff"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-06.json",
+      "bytes": 400613,
+      "sha256": "6fb05ccbd72f262a36fb0d30cd92ec34ad78e7af0450c350f87f434799f540da"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-07.json",
+      "bytes": 364537,
+      "sha256": "82c00678040c0f08620eafe2066ef64000580b46828a8453be4cbae85228ed3d"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-08.json",
+      "bytes": 806805,
+      "sha256": "3af4e1bb5c1e12a1d2bb98fc8995526d028a07c9ca029d56059bfbd2ca258ee9"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-09.json",
+      "bytes": 677613,
+      "sha256": "6b15ff355816ae73af5b8b0e3d54a0f3e5667b9ffce961e3a334dadee0fbcd91"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-10.json",
+      "bytes": 631355,
+      "sha256": "27ca54037f8643c60ea84defe65fe9a444b0ce55c20e14d025ee5b0aa4985c24"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-11.json",
+      "bytes": 491301,
+      "sha256": "d6002e73fff7f385c9497a04779501a66795d59e63da64344d88a23c11989007"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\checkpoint-12.json",
+      "bytes": 228278,
+      "sha256": "497046eb21fa87c383a047648a48be123ced271dd14087d164ee367219ebf346"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\context-summary.json",
+      "bytes": 1669,
+      "sha256": "ebfbe48a2444f1c8f8e0e2f1fc19851fe2635cb8d565b72c06d48583a67b829e"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\context_review.py",
+      "bytes": 6010,
+      "sha256": "40c344aa915214a498a0b4576ed7b0dc033aa23e8c9c60f5c7b0d0b46443be91"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\final-dispositions.csv",
+      "bytes": 6805,
+      "sha256": "5d294a4da6b2367eda4e627a204daa35fcb7bcc6a383a0a95f8f6f57f1eae2d1"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\final-dispositions.json",
+      "bytes": 12230,
+      "sha256": "5056a13142d1928999476512413bee4df6f3a5a918e4f84054b598e97bba70f0"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\finalize.py",
+      "bytes": 15908,
+      "sha256": "b2ff15023718868bd247ffeb48f5388fa662994365f37cc0d99d23298e08c5ef"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\island-partition.json",
+      "bytes": 277271,
+      "sha256": "f00a04e25d8547a59769e4a9f26b139ae1cd08abaf8ae020a59237b7e6fef51f"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\municipal-census.csv",
+      "bytes": 3342847,
+      "sha256": "0b4209b4ce5c8630c5e81c872618c980c30444d214bcb5e18c6e3a15c0db603e"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\municipal-census.json",
+      "bytes": 6286350,
+      "sha256": "707adf18af86837fb641c3dcfd7c32950ebfd9fc03ce5d553dca94405b6cd1ec"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\osm-route-reconciliation.csv",
+      "bytes": 247872,
+      "sha256": "e6e562da13d9ae4cda66aec8e87a5fc0d2827236303716bece130d51a47f09c2"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\osm-route-reconciliation.json",
+      "bytes": 450408,
+      "sha256": "fcfa2cc7442c79d34f9ca71177ad84de86126c73d5f63c9e356efd07f5b8ab7b"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\osm-source-stats.json",
+      "bytes": 9963,
+      "sha256": "60a41f261c2db6f47b501c1826cc7861f9685fd97a17a0fc0af1a059d8c5e84e"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\part-grouping-evidence.json",
+      "bytes": 2763,
+      "sha256": "2324a7808be4dca43d6431c36293322cb5aaebd4765df2bd63dee872c8f8b587"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\physical-groups.csv",
+      "bytes": 1342860,
+      "sha256": "5d55c0d3a41d364491d1d2c508ff07468087f81ce7aff8c79772b9db2961cdd1"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\physical-groups.json",
+      "bytes": 3169868,
+      "sha256": "a5da6ab71630ea45d7b4d436b39ec001acf787ae255f4d31c54aad669489e31d"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\review-candidates-enriched.csv",
+      "bytes": 3200,
+      "sha256": "c60755cfe8b087186722a46572ef0f1182416df986bf318a35612e62fb291a44"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\review-candidates-enriched.json",
+      "bytes": 566687,
+      "sha256": "a750f611ff6016ecd4bc59b39204e389c73403ceac8c4b4bb7f9009dd6608f07"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\review-candidates.csv",
+      "bytes": 74405,
+      "sha256": "1a23756485c78fe146b740b2c3a5c9585b7414ac85f9a112f004b258a6066f79"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\review-candidates.json",
+      "bytes": 110862,
+      "sha256": "50807f47d9cf2431dc9f14d8d4e1c65f939916f91368b98bfd00671a2b0754c4"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\source-manifest.json",
+      "bytes": 19579,
+      "sha256": "ed8a5fdf027e295ff8e987b91747cb053bc1cc48a5eeaa36123018abdfcddfac"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\summary.json",
+      "bytes": 3344,
+      "sha256": "ca49ec6c2038a228d3287c14beff821e4201bccc80d247e1a982775a493e2c46"
+    },
+    {
+      "path": "D:\\100_star\\venice\\reports\\municipal-ponte-audit_20261024_091400Z\\verification.json",
+      "bytes": 8227,
+      "sha256": "0ac8ec768bafc8a791770bd3c01b31a8a1db5753a3ceec258a4913c5b3965cce"
+    }
+  ]
+}

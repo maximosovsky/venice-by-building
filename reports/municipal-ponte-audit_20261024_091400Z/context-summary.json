@@ -1,0 +1,50 @@
+{
+  "all_source_rows": 1259,
+  "island_partition_row_counts": {
+    "outside_route_no_named_island_identity_proven": 739,
+    "current_route_geographic_population": 400,
+    "Tronchetto": 3,
+    "Isola Santa Cristina": 1,
+    "Giudecca": 20,
+    "Isola dei Petroli": 1,
+    "Sacca Fisola": 5,
+    "Isola di San Giorgio Maggiore": 1,
+    "Isola San Clemente": 1,
+    "Isola San Servolo": 1,
+    "Sant'Erasmo": 32,
+    "Burano": 10,
+    "Murano": 10,
+    "Isola Le Vignole": 9,
+    "Mazzorbo": 3,
+    "Isola Torcello": 18,
+    "Isola San Pieretto": 1,
+    "Mazzorbetto": 2,
+    "Isola Lazzaretto Nuovo": 2
+  },
+  "enriched_review_counts": {
+    "ambiguous_identity_review": 2,
+    "known_osm_deck_unresolved_public_connectivity": 3,
+    "candidate_missing_osm_bridge_identity_unconfirmed": 7,
+    "osm_known_port_transport_not_route_required": 2
+  },
+  "excluded_municipal_row_reasons": {
+    "peripheral_port_transport": 1,
+    "access:private": 36,
+    "immediate_pedestrian_dead_end": 16,
+    "disconnected_from_start": 2
+  },
+  "outside_route_osm_coverage_not_claimed": true,
+  "confirmed_probable_missing": 0,
+  "rejected_false_positive": {
+    "municipal_id": "PONTE2010:fID000226",
+    "osm_way_id": 240496222,
+    "reason": "area=yes closed pedestrian square boundary, not a mapped bridge crossing; 2.1073m overlap does not prove a two-bank bridge."
+  },
+  "broader_boundary_name": "Venezia-Murano-Burano administrative municipalita (relation/6628638, admin_level=10)",
+  "source_context_checks": {
+    "review_count_14": true,
+    "all_1259_island_rows": true,
+    "unique_ids": true,
+    "no_autoadd": true
+  }
+}

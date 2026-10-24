@@ -168,3 +168,4 @@ def test_current_gids_decode_actual_double_attribute_and_skip_duplicate_ids(tmp_
     (web / 'attrs.bin').write_bytes(gzip.compress(struct.pack('<d', 123.25)))
     with pytest.raises(ValueError, match='integer'):
         m.current_buildings(tmp_path)
+

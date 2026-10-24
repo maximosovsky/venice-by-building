@@ -10,20 +10,148 @@
   "deployment_warning": "Local uploads must exclude prepared files above; UI URL redirection alone is not a release gate. Parent owns Vercel ignore configuration.",
   "files": {
     "addresses.json": {
-      "sha256": "fb718d7adf9648ef435dfff1ee34aee1419073183b2d8a3308da02a5c155a740",
-      "bytes": 12598350
+      "sha256": "ee28c27c0ec759d15773244cd302f6384791fe51fdb6c8c9c4355f6165fce76f",
+      "bytes": 12598392
     },
     "building-evidence.json": {
-      "sha256": "749a0eac0bc7e4054a4f5055183555a7109e4fc7d03a771ebf69f81a5dc62ede",
-      "bytes": 5622842
+      "sha256": "d0942bb33c36722ac43d6c9780118119c4cb0cab227dbd39ea62dbb12a8063e4",
+      "bytes": 6010484
     },
     "bridge-characteristics.json": {
-      "sha256": "935f99e72d0704a2b60090c195e6857c7bf2d1c064da5b6cdca9e81f8739a9d2",
-      "bytes": 759903
+      "sha256": "b316c0dbfea801127d7fd91de0bfe8962dd5409621ac7b8a1513a078c9cded91",
+      "bytes": 1576475
     },
     "history-registers.json": {
-      "sha256": "851d9e8833ba671ae724e5ca64912b736b0ab0bf2431c57738e252293ab7d9a9",
-      "bytes": 319490
+      "sha256": "745d532667cc464336f460b9ac5515e6fa72029b1e1fe3feb5227f79ff2b1b9f",
+      "bytes": 335910
+    },
+    "history-registers/register-1740-000.json": {
+      "sha256": "5e784f5c99f424b9db55214d4a50cb19d903b100a1ca50ea2f4e1534ce306802",
+      "bytes": 1898901
+    },
+    "history-registers/register-1740-001.json": {
+      "sha256": "be574e6a8b770ce9063168ec442df506ae032ddc4c4da27a5412c371125e4b3d",
+      "bytes": 1899093
+    },
+    "history-registers/register-1740-002.json": {
+      "sha256": "8df4003a76af07a85e2cac7b59a492b8fa7701fef9f8e10331541d5e20bd7f5e",
+      "bytes": 1899993
+    },
+    "history-registers/register-1740-003.json": {
+      "sha256": "ff1fb35703c654bfc6e5b3351243ca8f6ae60d7f5b146c6d032ec2f48a8ca56e",
+      "bytes": 1899791
+    },
+    "history-registers/register-1740-004.json": {
+      "sha256": "c7d58eacd05b2b84b4f7c0784e2b340f1682d9df453f51760ea1928d8abe27e6",
+      "bytes": 1898930
+    },
+    "history-registers/register-1740-005.json": {
+      "sha256": "9477ba11fdef5b83701a4fa03bbbac41e8bcb804300580e7a6777d22d5737e45",
+      "bytes": 1899551
+    },
+    "history-registers/register-1740-006.json": {
+      "sha256": "84e258fa148a81f031db5271b0b11b9c6af03d7d19d91ee947711d11fa114bc9",
+      "bytes": 1899439
+    },
+    "history-registers/register-1740-007.json": {
+      "sha256": "02baecd0bb8284629f66ff535a7b1f5cba290dd67bafd7d256b846a2f175c0ee",
+      "bytes": 1898212
+    },
+    "history-registers/register-1740-008.json": {
+      "sha256": "0b050a7b988262551c16b0b41b914f91124e4066f397403848a70d2b89cb759b",
+      "bytes": 1899134
+    },
+    "history-registers/register-1740-009.json": {
+      "sha256": "bc10798d3c7d52920f1e99c6599183decc99c9bc83f3cd0d8cb0d335d05981c2",
+      "bytes": 1898873
+    },
+    "history-registers/register-1740-010.json": {
+      "sha256": "f39e2be9fb6308599ce2b96808a97b84625bd2333b37f851f88b1e6c0a740697",
+      "bytes": 1899309
+    },
+    "history-registers/register-1740-011.json": {
+      "sha256": "96cdad26b84695f643617e2ee4b90660f0d9e1b1aa0d92492028ea1982a44e32",
+      "bytes": 1899111
+    },
+    "history-registers/register-1740-012.json": {
+      "sha256": "1e6eba5dc5747ee663f0b8ff36707475ba246eba72c13c21373f46c55228d689",
+      "bytes": 1899578
+    },
+    "history-registers/register-1740-013.json": {
+      "sha256": "c9247258a7fc1ab350ca0bab97ef9d856610f76b3de09582f4486fe46089c316",
+      "bytes": 1899879
+    },
+    "history-registers/register-1740-014.json": {
+      "sha256": "77f9d106ccf3302f341baaf28b4dc86f2e39f1242f79686c79c9fd2f0dcabde7",
+      "bytes": 1898886
+    },
+    "history-registers/register-1740-015.json": {
+      "sha256": "f801b521f8456561455e795c4e98a64ddf39f32fb74f9f816d27d14a87b22f70",
+      "bytes": 1898321
+    },
+    "history-registers/register-1740-016.json": {
+      "sha256": "730026d8c126c23379adf12a935a13217dbe413c23bbf4e8e405daf0484ec47d",
+      "bytes": 1898850
+    },
+    "history-registers/register-1740-017.json": {
+      "sha256": "25e8d4efff2e39b8cda76fec21d28d535f70af0836e1d10817ee41be8e935b75",
+      "bytes": 1898907
+    },
+    "history-registers/register-1740-018.json": {
+      "sha256": "3b55da0e1635e40dd1a38fb65c660a7f622c9c393251c151704cda6d9fb2aabd",
+      "bytes": 1899064
+    },
+    "history-registers/register-1740-019.json": {
+      "sha256": "bfb97590bb5995d9e542d2ab8fe8a9e79fd2eb0debdadbb419deba4d72ed4e40",
+      "bytes": 1898591
+    },
+    "history-registers/register-1740-020.json": {
+      "sha256": "e94983a401111e2d65d3aab06d602d83f9552653d4b24513be217dc9817b0130",
+      "bytes": 1898559
+    },
+    "history-registers/register-1740-021.json": {
+      "sha256": "9ad84ef3a8bf492b2f57cc31fbd629c475d77f61966ed2221098442f876cbb35",
+      "bytes": 1899183
+    },
+    "history-registers/register-1740-022.json": {
+      "sha256": "fc698261743a5e04760c1ad308b15ff3dbd4c159c5355fed1c7d34e54ad1a639",
+      "bytes": 1899709
+    },
+    "history-registers/register-1740-023.json": {
+      "sha256": "20866d0ba1d17cecde4112d10d8b1e91cbd961f5e5579d39702de4ef82ea68d4",
+      "bytes": 1898869
+    },
+    "history-registers/register-1740-024.json": {
+      "sha256": "9c0378db09d9d0e8918f769b7396e4c6d948533d36ef7b914606c597d288d642",
+      "bytes": 1899631
+    },
+    "history-registers/register-1740-025.json": {
+      "sha256": "c2b6d5e1961a113d842678f3ebc8a7dc94e195b0afd223ff4b4e8b690fd266f5",
+      "bytes": 1898910
+    },
+    "history-registers/register-1740-026.json": {
+      "sha256": "e032942d6b3192dcc05e222f55beaf8136ffedb44ac6334307abe18f075aab62",
+      "bytes": 1899197
+    },
+    "history-registers/register-1740-027.json": {
+      "sha256": "7398ed3a9bdb74c3a0d76257162915bf5070954c05ba3647bc82b179bc0e42fb",
+      "bytes": 1898360
+    },
+    "history-registers/register-1740-028.json": {
+      "sha256": "f06e2389e356c489effc9c012c744d6d0cb4b030ae6dc211ec5286fe54fc5c8f",
+      "bytes": 1899782
+    },
+    "history-registers/register-1740-029.json": {
+      "sha256": "da1b7dcfb85be7eb016ed218121d35afa474ade7631d22daee9036db360ce1ff",
+      "bytes": 1899047
+    },
+    "history-registers/register-1740-030.json": {
+      "sha256": "5d95f4bfe892736c23e3063253ba6d55f35576b75a74a2f8aaa29f82701b0650",
+      "bytes": 1898895
+    },
+    "history-registers/register-1740-031.json": {
+      "sha256": "1393ccf144a9137dd8ce608fc0631cf9191a9842445cb28030a576e98e68a523",
+      "bytes": 1265520
     },
     "history-registers/parcels-1808-000.json": {
       "sha256": "16f8f328d9694904871260414072cf0ca0bbdc5b136708b039a2a31065d50d16",
@@ -180,39 +308,204 @@
     "history-registers/people-1808-003.json": {
       "sha256": "23fb5e2dda0dc321da06729234c9c9ae60867102d6706d90499e8585434fd430",
       "bytes": 855257
+    },
+    "history-registers/commercial-1857-000.json": {
+      "sha256": "5d85954ccbab205899d9b94b49f06a4dbc52a192bf82808919ae0302489dc99a",
+      "bytes": 1899852
+    },
+    "history-registers/commercial-1857-001.json": {
+      "sha256": "e5dd3c3989298b535139ae705b094f03fad12befce4cac1e7204b303d3edf825",
+      "bytes": 1898985
+    },
+    "history-registers/commercial-1857-002.json": {
+      "sha256": "13a1bd1b21140f2e514ea598f350b96733e9e12bfc992e0f437ad677d845ac0d",
+      "bytes": 1899094
+    },
+    "history-registers/commercial-1857-003.json": {
+      "sha256": "9373ccdba514348453a4dab3380b7530a9614a775372932877a4b207c8fee12a",
+      "bytes": 1899991
+    },
+    "history-registers/commercial-1857-004.json": {
+      "sha256": "499c482b0b4636007956cdc884c3ce8b7188f24dcb00eebd3a1fdddcd24abfc8",
+      "bytes": 27557
     }
   },
   "historical_publication": {
-    "status": "partial_release",
-    "blocked_datasets": [
-      "register-1740",
-      "commercial-1857"
-    ],
+    "status": "published_on_operator_authorization_rights_unestablished",
     "public_release_allowed": true,
-    "published_record_count": 60369,
-    "withheld_record_count": 38244,
-    "policy": "All source populations remain in catalog; only explicitly licensed records are downloadable."
+    "published_record_count": 98613,
+    "datasets": {
+      "register-1740": {
+        "record_count": 32361,
+        "published_record_count": 32361,
+        "rights_status": "unknown",
+        "license": {
+          "id": null,
+          "redistribution_allowed": false,
+          "status": "blocked_pending_rights_confirmation",
+          "evidence": "Inspected local source README and repository archive: no LICENSE/COPYING or explicit redistribution grant found.",
+          "note": "Public access and the age of the manuscript do not license modern transcription/geolocation."
+        }
+      },
+      "parcels-1808": {
+        "record_count": 24430,
+        "published_record_count": 24430,
+        "rights_status": "unknown",
+        "license": {
+          "id": "CC-BY-4.0",
+          "url": "https://creativecommons.org/licenses/by/4.0/",
+          "redistribution_allowed": true,
+          "status": "confirmed",
+          "evidence": "1808/zenodo_record.json metadata.license.id = cc-by-4.0",
+          "source_doi": "10.5281/zenodo.20715172",
+          "version": "1.1",
+          "attribution": [
+            {
+              "name": "Di Lenardo, Isabella",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0002-1747-9164"
+            },
+            {
+              "name": "Viaccoz, Cédric",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0001-6825-1082"
+            },
+            {
+              "name": "Guhennec, Paul",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0002-5490-5249"
+            },
+            {
+              "name": "Musso, Carlo",
+              "affiliation": "École Polytechnique Fédérale de Lausanne"
+            },
+            {
+              "name": "Kaplan, Frédéric",
+              "affiliation": null,
+              "orcid": "0000-0002-6991-5730"
+            }
+          ]
+        }
+      },
+      "register-1808": {
+        "record_count": 23662,
+        "published_record_count": 23662,
+        "rights_status": "unknown",
+        "license": {
+          "id": "CC-BY-4.0",
+          "url": "https://creativecommons.org/licenses/by/4.0/",
+          "redistribution_allowed": true,
+          "status": "confirmed",
+          "evidence": "1808/zenodo_record.json metadata.license.id = cc-by-4.0",
+          "source_doi": "10.5281/zenodo.20715172",
+          "version": "1.1",
+          "attribution": [
+            {
+              "name": "Di Lenardo, Isabella",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0002-1747-9164"
+            },
+            {
+              "name": "Viaccoz, Cédric",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0001-6825-1082"
+            },
+            {
+              "name": "Guhennec, Paul",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0002-5490-5249"
+            },
+            {
+              "name": "Musso, Carlo",
+              "affiliation": "École Polytechnique Fédérale de Lausanne"
+            },
+            {
+              "name": "Kaplan, Frédéric",
+              "affiliation": null,
+              "orcid": "0000-0002-6991-5730"
+            }
+          ]
+        }
+      },
+      "people-1808": {
+        "record_count": 12277,
+        "published_record_count": 12277,
+        "rights_status": "unknown",
+        "license": {
+          "id": "CC-BY-4.0",
+          "url": "https://creativecommons.org/licenses/by/4.0/",
+          "redistribution_allowed": true,
+          "status": "confirmed",
+          "evidence": "1808/zenodo_record.json metadata.license.id = cc-by-4.0",
+          "source_doi": "10.5281/zenodo.20715172",
+          "version": "1.1",
+          "attribution": [
+            {
+              "name": "Di Lenardo, Isabella",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0002-1747-9164"
+            },
+            {
+              "name": "Viaccoz, Cédric",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0001-6825-1082"
+            },
+            {
+              "name": "Guhennec, Paul",
+              "affiliation": "École Polytechnique Fédérale de Lausanne",
+              "orcid": "0000-0002-5490-5249"
+            },
+            {
+              "name": "Musso, Carlo",
+              "affiliation": "École Polytechnique Fédérale de Lausanne"
+            },
+            {
+              "name": "Kaplan, Frédéric",
+              "affiliation": null,
+              "orcid": "0000-0002-6991-5730"
+            }
+          ]
+        }
+      },
+      "commercial-1857": {
+        "record_count": 5883,
+        "published_record_count": 5883,
+        "rights_status": "unknown",
+        "license": {
+          "id": null,
+          "redistribution_allowed": false,
+          "status": "blocked_pending_rights_confirmation",
+          "evidence": "Inspected local source README and repository archive: no LICENSE/COPYING or explicit redistribution grant found.",
+          "note": "Public access and the age of the manuscript do not license modern transcription/geolocation."
+        }
+      }
+    },
+    "policy": "Operator-authorized publication of every source population; no license grant is claimed."
   },
   "addresses": {
-    "status": "factual_projection",
+    "status": "published_on_operator_authorization_rights_unestablished",
     "rights_status": "unknown",
     "license": null,
-    "policy": "User-authorized address-number and coordinate facts; not a verified license grant."
+    "policy": "Operator-authorized address-number and coordinate facts; not a verified license grant."
   },
   "evidence": {
-    "status": "facts_links_and_withheld_text_metadata",
+    "status": "published_on_operator_authorization_rights_unestablished",
     "rights_status": "unknown",
-    "description_metadata_records": 929,
+    "description_records": 929,
+    "description_records_with_text": 929,
+    "description_characters": 266089,
+    "vprg_records": 5662,
+    "vprg_records_with_note_or_state": 640,
     "vprg_link_records": 5371,
-    "fulltext_published": false
+    "fulltext_published": true
   },
   "bridges": {
     "actual_geometry": "blocked_pending_municipal_license",
     "license": null,
     "reason": "Download availability is not verified redistribution permission; internal preparation only.",
-    "status": "factual_characteristics_only",
+    "status": "published_on_operator_authorization_rights_unestablished",
     "rights_status": "unknown",
-    "geometry_available": false,
-    "policy": "No municipal raw geometry is deployed. Dimensions are derived footprint envelopes, not surveyed measurements."
+    "geometry_available": true,
+    "policy": "Operator-authorized municipal material, purpose, type, dimensions and footprint geometry. Dimensions are derived footprint envelopes, not surveyed measurements."
   }
 }

@@ -5,6 +5,7 @@ import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
 import { installDataEnrichment, DATA_UI } from './data-enrichment.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
+import { installBridgeCharacteristics, BRIDGE_UI } from './bridge-characteristics-map.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
 
@@ -754,7 +755,6 @@ dock.querySelector('.dock-close').onclick = () => {
 function syncBar() {
   document.querySelector('.walks-open').setAttribute('aria-pressed', String(dockView === 'walks' || dockView === 'walk' || dockView === 'bridge-route' || dockView === 'church-route'));
   document.querySelector('.notes-open').setAttribute('aria-pressed', String(dockView === 'notes'));
-  document.querySelector('.data-open').setAttribute('aria-pressed', String(dockView === 'data'));
 }
 
 // ---------- A building: a label at the pointer, the dock on a click ----------
@@ -768,7 +768,13 @@ function showTip(gid, x, y) {
     if (uniforms.uMode.value === MODE.suburbs && s >= 0 && measure) {
       const a = subAt(measure, s, subYear());
       tip.innerHTML = `<b>${esc(SUBS[s].name)}</b><span>${a ? `${dot(subColor(subT(measure, a.v)))}${fmtM(measure, a.v)} ${esc(measure.unit)}` : `No figure for ${subYear()}`}</span>`;
-    } else tip.innerHTML = `${name ? `<b>${esc(name)}</b>` : ''}<span>${dot(p.color)}${whenOf(b)} · ${esc(ageParts(p).name)}</span>`;
+    } else {
+      // A bridge also carries the municipal record: material, purpose, type and footprint envelope.
+      const row = b.src === 1 ? bridgeCharacteristics.rows(gid) : null;
+      tip.innerHTML = `${name ? `<b>${esc(name)}</b>` : ''}<span>${dot(p.color)}${whenOf(b)} · ${esc(ageParts(p).name)}</span>`
+        + (row ? `<span>${dot(row.colour)}${esc([row.material, row.purpose, row.type].join(' · '))}</span>`
+          + `<span>${row.size.length === 2 ? esc(`${row.size[0].toFixed(1)} × ${row.size[1].toFixed(1)} m`) : esc(pickText(BRIDGE_UI.unknown))}</span>` : '');
+    }
   }
   tip.hidden = false;
   const r = tip.getBoundingClientRect();
@@ -969,20 +975,10 @@ const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLiv
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
   onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
-const dataEnrichment = installDataEnrichment({ openDock, dockLive,
+const dataEnrichment = installDataEnrichment({ dockLive,
   getDockView: () => dockView, aimFly, pickText, onLang });
-const dataNav = document.querySelector('.data-open');
-const paintDataNav = () => {
-  dataNav.textContent = pickText(DATA_UI.title);
-  if (dockView === 'data') dock.setAttribute('aria-label', pickText(DATA_UI.title));
-};
-paintDataNav();
-onLang(paintDataNav);
-dataNav.onclick = () => {
-  if (dockView === 'data') { closeDock(); return; }
-  if (dockView === 'building') unpin();
-  void dataEnrichment.showData();
-};
+// Municipal bridge characteristics: material, purpose, type and size, drawn where the city surveyed them.
+const bridgeCharacteristics = installBridgeCharacteristics({ THREE, scene, pickText, onLang });
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}
@@ -1442,6 +1438,7 @@ function renderKey() {
 function setMode(m) {
   uniforms.uMode.value = m;
   churchBuildingHighlight.setSourceVisible('bridges-tab', m === MODE.layers);
+  bridgeCharacteristics.setSourceVisible('bridges-tab', m === MODE.layers);
   hoverGid = -1;
   document.querySelectorAll('.lenses button').forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.mode === m)));
   const bits = Array(MAX_GROUPS).fill(-1);

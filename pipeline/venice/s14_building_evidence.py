@@ -3,6 +3,8 @@
 Run from the repository: python pipeline/venice/s14_building_evidence.py
 Unknown redistribution rights deliberately withhold full prose in web output.
 --local-fulltext requires --output outside web/ and is for private review only.
+--local-fulltext --authorized-publication writes the same prose into web output on the
+operator's explicit authorization; it is a policy switch, not a discovered license grant.
 """
 from __future__ import annotations
 
@@ -217,30 +219,30 @@ class Matcher:
                  'confidence': 'conservative_spatial_association_not_identity'}}], None
 
 
-def text_metadata(value, allowed, field):
+def text_metadata(value, allowed, field, status=None):
     text = value if present(value) else None
     return {field: text if allowed else None, field + '_withheld': bool(text and not allowed),
-            field + '_publication_status': ('private_review_only' if allowed else 'blocked_rights_unestablished') if text else 'no_source_value',
+            field + '_publication_status': (status or ('private_review_only' if allowed else 'blocked_rights_unestablished')) if text else 'no_source_value',
             field + '_sha256': hashlib.sha256(str(text).encode('utf8')).hexdigest() if text else None,
             field + '_characters': len(text) if isinstance(text, str) else 0}
 
 
-def edifici_record(p, allow_fulltext=False):
+def edifici_record(p, allow_fulltext=False, status=None):
     return {'source_id': str(p['EDIFI_ID']), 'language': 'it', 'source_url': EDIFICI_URL,
-            **text_metadata(p.get('description_piamonte'), allow_fulltext, 'text'),
+            **text_metadata(p.get('description_piamonte'), allow_fulltext, 'text', status),
             'style': p.get('style'), 'typology': p.get('typology')}
 
 
-def vprg_record(p, allow_fulltext=False):
+def vprg_record(p, allow_fulltext=False, status=None):
     return {'source_id': str(p['OBJECTID']), 'language': 'it', 'source_url': VPRG_URL,
-            **text_metadata(p.get('NOTE'), allow_fulltext, 'note'),
-            **text_metadata(p.get('STATO_ALT'), allow_fulltext, 'state'),
+            **text_metadata(p.get('NOTE'), allow_fulltext, 'note', status),
+            **text_metadata(p.get('STATO_ALT'), allow_fulltext, 'state', status),
             'sheet': p.get('SCHEDA') if present(p.get('SCHEDA')) else None,
             'url': safe_url(p.get('LINK_SCHEDA')), 'raw_url': p.get('LINK_SCHEDA'),
             'url_role': 'typology_sheet_not_individual_building_schematic'}
 
 
-def build_evidence(edifici, vprg, targets, edifici_crs='EPSG:32633', vprg_crs='EPSG:4326', allow_fulltext=False):
+def build_evidence(edifici, vprg, targets, edifici_crs='EPSG:32633', vprg_crs='EPSG:4326', allow_fulltext=False, status=None):
     matcher = Matcher(targets)
     by_gid, catalogs = {}, {'descriptions': [], 'vprg': [], 'styles': []}
     unmatched = {key: [] for key in catalogs}
@@ -251,10 +253,10 @@ def build_evidence(edifici, vprg, targets, edifici_crs='EPSG:32633', vprg_crs='E
             p = feature['properties']
             if family == 'edifici':
                 keys = (['descriptions'] if present(p.get('description_piamonte')) else []) + (['styles'] if present(p.get('style')) or present(p.get('typology')) else [])
-                record = edifici_record(p, allow_fulltext)
+                record = edifici_record(p, allow_fulltext, status)
             else:
                 keys = ['vprg'] if any(present(p.get(k)) for k in ['NOTE', 'STATO_ALT', 'SCHEDA', 'LINK_SCHEDA']) else []
-                record = vprg_record(p, allow_fulltext)
+                record = vprg_record(p, allow_fulltext, status)
             if not keys:
                 continue
             if record['source_id'] in seen:
@@ -288,19 +290,24 @@ def build_evidence(edifici, vprg, targets, edifici_crs='EPSG:32633', vprg_crs='E
                         'rights_evidence': 'Publisher repository has no root README or LICENSE; API license=null; 2024 directory has no README or LICENSE. Historical archive README warns rights not established.'},
                        'vprg': {'url': VPRG_URL, 'license': None, 'redistribution': 'unestablished_for_note_fulltext',
                         'rights_evidence': 'Root project README claims CC BY 4.0, but acquisition manifest supplies attribution only, not a license grant; publisher analysis page supplies study/non-prescriptive notice, no dataset license.'},
-                       'fulltext_published': False,
+                       'fulltext_published': bool(allow_fulltext and status == 'published_user_authorized'),
                        'fulltext_included': allow_fulltext,
-                       'fulltext_publication_status': 'private_review_only' if allow_fulltext else 'blocked_rights_unestablished',
-                       'limitations': ['Italian source prose preserved verbatim only in private fulltext review mode; no translations or year extraction.', 'Links are literal LINK_SCHEDA values; SCHEDA is not expanded into an invented URL.', 'VPRG sheets are shared typology documents, not unique building survey schematics.', '0.8 reciprocal polygon overlap is a spatial association, not verified building identity.', 'No boundary edits, no nearest-neighbor matches, no source-order GIDs.']}}
+                       'fulltext_publication_status': (status or ('private_review_only' if allow_fulltext else 'blocked_rights_unestablished')),
+                       'limitations': ['Italian source prose preserved verbatim; no translations or year extraction.', 'Links are literal LINK_SCHEDA values; SCHEDA is not expanded into an invented URL.', 'VPRG sheets are shared typology documents, not unique building survey schematics.', '0.8 reciprocal polygon overlap is a spatial association, not verified building identity.', 'No boundary edits, no nearest-neighbor matches, no source-order GIDs.', 'Publication of source prose is the operator\'s authorization, not a discovered license grant.']}}
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=ROOT / 'web/data/building-evidence.json')
     parser.add_argument('--local-fulltext', action='store_true')
+    parser.add_argument('--authorized-publication', action='store_true',
+                        help="Operator has authorized publishing the verbatim source prose into web output.")
     args = parser.parse_args()
-    if args.local_fulltext and args.output.resolve().is_relative_to((ROOT / 'web').resolve()):
+    if args.local_fulltext and not args.authorized_publication and args.output.resolve().is_relative_to((ROOT / 'web').resolve()):
         parser.error('Unknown source rights block fulltext in public web output; choose private --output')
+    if args.authorized_publication and not args.local_fulltext:
+        parser.error('--authorized-publication only changes the rights policy for --local-fulltext')
+    status = 'published_user_authorized' if (args.local_fulltext and args.authorized_publication) else None
     read = lambda path: json.loads(path.read_text(encoding='utf8'))
     cfg = read(ROOT / 'web/data/venezia.json')
     attrs = (ROOT / 'web/data/attrs.bin').read_bytes()
@@ -312,7 +319,7 @@ def main():
     render_audit['pack_validation'] = pack_audit
     edifici = read(ROOT / EDIFICI_REL)['features']
     vprg = read(ROOT / VPRG_REL)['features']
-    evidence = build_evidence(edifici, vprg, targets, allow_fulltext=args.local_fulltext)
+    evidence = build_evidence(edifici, vprg, targets, allow_fulltext=args.local_fulltext, status=status)
     evidence['audit']['render_mapping'] = render_audit
     evidence['source']['atlas_attrs_sha256'] = hashlib.sha256(attrs).hexdigest()
     evidence['source']['input_sha256'] = {rel: hashlib.sha256((ROOT / rel).read_bytes()).hexdigest() for rel in [EDIFICI_REL, VPRG_REL, 'data/processed/buildings_dated_centro.geojson', 'web/data/venezia.json']}
@@ -324,7 +331,10 @@ def main():
     evidence['audit']['vprg_state_source_records'] = sum(present(f['properties'].get('STATO_ALT')) for f in vprg)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(evidence, ensure_ascii=False, separators=(',', ':')) + '\n', encoding='utf8')
-    print(json.dumps({'output': str(args.output), 'audit': evidence['audit'], 'fulltext_published': False, 'fulltext_included': args.local_fulltext}, ensure_ascii=True))
+    print(json.dumps({'output': str(args.output), 'audit': evidence['audit'],
+                      'fulltext_published': bool(evidence['source']['fulltext_published']),
+                      'fulltext_included': args.local_fulltext,
+                      'fulltext_publication_status': evidence['source']['fulltext_publication_status']}, ensure_ascii=True))
 
 
 if __name__ == '__main__':

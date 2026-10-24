@@ -1,0 +1,3915 @@
+[
+  {
+    "group_id": "MPG:fID000226",
+    "municipal_ids": [
+      "PONTE2010:fID000226"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.325157620801164,
+    "lat": 45.44740238997991,
+    "area_m2": 26.7092,
+    "deduplication_confidence": "single source object",
+    "rank": 1,
+    "review_class": "probable_missing_bridge_tag_on_existing_reachable_osm_highway",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [
+      {
+        "osm_way_id": 240496222,
+        "url": "https://www.openstreetmap.org/way/240496222",
+        "identity": null,
+        "overlap_m": 2.1073,
+        "line_fraction": 0.022172,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "area": "yes",
+          "bicycle": "no",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Campiello della Fornasa Vecia",
+          "surface": "sett"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          1522409321,
+          1522409512,
+          13506165964,
+          13506165963,
+          13506165962,
+          1523609851,
+          1522409113,
+          1522408848,
+          4811192022,
+          1522407860,
+          2486015260,
+          4811192823,
+          4811192824,
+          4811192825,
+          183899499,
+          2482252843,
+          2482252842,
+          1522407531,
+          2482252849,
+          1522409116,
+          13506165967,
+          13506165968,
+          1522409321
+        ],
+        "reachable_original_nodes": [
+          1522409321,
+          1522409512,
+          13506165964,
+          13506165963,
+          13506165962,
+          1523609851,
+          1522409113,
+          1522408848,
+          4811192022,
+          1522407860,
+          2486015260,
+          4811192823,
+          4811192824,
+          4811192825,
+          183899499,
+          2482252843,
+          2482252842,
+          1522407531,
+          2482252849,
+          1522409116,
+          13506165967,
+          13506165968,
+          1522409321
+        ]
+      }
+    ],
+    "original_network_traversal_evidence": [
+      {
+        "osm_way_id": 240496222,
+        "tags": {
+          "area": "yes",
+          "bicycle": "no",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Campiello della Fornasa Vecia",
+          "surface": "sett"
+        },
+        "overlap_m": 2.1073,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            2482252842,
+            1522407531
+          ]
+        ],
+        "outside_original_node_ids": [
+          1522409321,
+          1522409512,
+          13506165964,
+          13506165963,
+          13506165962,
+          1523609851,
+          1522409113,
+          1522408848,
+          4811192022,
+          1522407860,
+          2486015260,
+          4811192823,
+          4811192824,
+          4811192825,
+          183899499,
+          2482252843,
+          2482252842,
+          1522407531,
+          2482252849,
+          1522409116,
+          13506165967,
+          13506165968,
+          1522409321
+        ],
+        "original_way_has_outside_endpoints": true,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      }
+    ],
+    "probable_missing": true,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 1
+  },
+  {
+    "group_id": "MPG:fID000428",
+    "municipal_ids": [
+      "PONTE2010:fID000428"
+    ],
+    "part_count": 1,
+    "status": "ambiguous_osm_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [
+      "d583724426",
+      "w161639264",
+      "w888348569",
+      "w898631459",
+      "w898914789"
+    ],
+    "lon": 12.316342286891015,
+    "lat": 45.43999185556492,
+    "area_m2": 5630.6691,
+    "deduplication_confidence": "single source object",
+    "rank": 2,
+    "review_class": "ambiguous_identity_or_multipart_review",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "02",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 583724426,
+        "url": "https://www.openstreetmap.org/way/583724426",
+        "identity": "d583724426",
+        "overlap_m2": 606.4312,
+        "municipal_fraction": 0.107701,
+        "deck_fraction": 0.956911,
+        "strong": true,
+        "tags": {
+          "bridge:structure": "arch",
+          "layer": "1",
+          "man_made": "bridge",
+          "name": "Ponte della Libertà"
+        }
+      }
+    ],
+    "osm_highway_evidence": [
+      {
+        "osm_way_id": 315662191,
+        "url": "https://www.openstreetmap.org/way/315662191",
+        "identity": null,
+        "overlap_m": 19.4421,
+        "line_fraction": 0.133652,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "maxheight": "4.4",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553518,
+          1331457820,
+          10827722726,
+          1838206211,
+          1242174166,
+          1838206193,
+          1838206217,
+          8354288233
+        ],
+        "reachable_original_nodes": [
+          8350553518,
+          1331457820,
+          10827722726,
+          1838206211,
+          1242174166,
+          1838206193,
+          1838206217,
+          8354288233
+        ]
+      },
+      {
+        "osm_way_id": 898631458,
+        "url": "https://www.openstreetmap.org/way/898631458",
+        "identity": null,
+        "overlap_m": 8.9094,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "dismount",
+          "footway": "crossing",
+          "highway": "footway",
+          "smoking": "g",
+          "surf": "as",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553519,
+          8350553518,
+          8350553517
+        ],
+        "reachable_original_nodes": [
+          8350553519,
+          8350553518,
+          8350553517
+        ]
+      },
+      {
+        "osm_way_id": 24995043,
+        "url": "https://www.openstreetmap.org/way/24995043",
+        "identity": null,
+        "overlap_m": 18.6199,
+        "line_fraction": 0.112258,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "bus": "yes",
+          "hgv": "no",
+          "highway": "primary",
+          "incline": "down",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "psv": "yes",
+          "shoulder": "no",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          1736130840,
+          1736130838,
+          11639085548,
+          11639085554,
+          1736130834,
+          11639085555,
+          3398708542,
+          11639085556,
+          11639085557,
+          11639085558,
+          11639085559,
+          11639085560,
+          11639085561,
+          11639085562,
+          1777153967,
+          672494655
+        ],
+        "reachable_original_nodes": [
+          1736130840,
+          1736130838,
+          11639085548,
+          11639085554,
+          1736130834,
+          11639085555,
+          3398708542,
+          11639085556,
+          11639085557,
+          11639085558,
+          11639085559,
+          11639085560,
+          11639085561,
+          11639085562,
+          1777153967,
+          672494655
+        ]
+      },
+      {
+        "osm_way_id": 442106318,
+        "url": "https://www.openstreetmap.org/way/442106318",
+        "identity": null,
+        "overlap_m": 20.0735,
+        "line_fraction": 0.201283,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "incline": "up",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          944188418,
+          1736130835,
+          1736130836,
+          1736130839,
+          11842448395,
+          1736130841
+        ],
+        "reachable_original_nodes": [
+          944188418,
+          1736130835,
+          1736130836,
+          1736130839,
+          11842448395,
+          1736130841
+        ]
+      },
+      {
+        "osm_way_id": 171901059,
+        "url": "https://www.openstreetmap.org/way/171901059",
+        "identity": null,
+        "overlap_m": 19.4678,
+        "line_fraction": 0.069547,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Fondamenta Santa Chiara",
+          "surface": "paving_stones"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          944188414,
+          233485940,
+          1828664310,
+          3586601850,
+          1828664312,
+          1828664308,
+          9315445914,
+          1828664306,
+          8012589982,
+          1828664301,
+          10827678158,
+          5822672763,
+          7819465268,
+          10827678162
+        ],
+        "reachable_original_nodes": [
+          944188414,
+          233485940,
+          1828664310,
+          3586601850,
+          1828664312,
+          1828664308,
+          9315445914,
+          1828664306,
+          8012589982,
+          1828664301,
+          10827678158,
+          5822672763,
+          7819465268,
+          10827678162
+        ]
+      },
+      {
+        "osm_way_id": 332735700,
+        "url": "https://www.openstreetmap.org/way/332735700",
+        "identity": null,
+        "overlap_m": 18.0427,
+        "line_fraction": 0.43586,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "dismount",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          3398708558,
+          3398708561,
+          3398708564,
+          3398708566,
+          8012589984,
+          3398708570
+        ],
+        "reachable_original_nodes": [
+          3398708558,
+          3398708561,
+          3398708564,
+          3398708566,
+          8012589984,
+          3398708570
+        ]
+      },
+      {
+        "osm_way_id": 860688120,
+        "url": "https://www.openstreetmap.org/way/860688120",
+        "identity": null,
+        "overlap_m": 1.4904,
+        "line_fraction": 0.214623,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "paving_stones",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8022139053,
+          8012589983,
+          8012589984
+        ],
+        "reachable_original_nodes": [
+          8022139053,
+          8012589983,
+          8012589984
+        ]
+      },
+      {
+        "osm_way_id": 898631464,
+        "url": "https://www.openstreetmap.org/way/898631464",
+        "identity": null,
+        "overlap_m": 20.6206,
+        "line_fraction": 0.351015,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "lit": "yes",
+          "segregated": "no",
+          "surface": "paving_stones"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553543,
+          8350553559,
+          8350553560,
+          8352640281,
+          8350553561,
+          3398708560
+        ],
+        "reachable_original_nodes": [
+          8350553543,
+          8350553559,
+          8350553560,
+          8352640281,
+          8350553561,
+          3398708560
+        ]
+      },
+      {
+        "osm_way_id": 898914813,
+        "url": "https://www.openstreetmap.org/way/898914813",
+        "identity": null,
+        "overlap_m": 5.7303,
+        "line_fraction": 0.135945,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "service",
+          "incline": "up",
+          "oneway": "yes",
+          "service": "parking_aisle",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8352640283,
+          8352640284,
+          11842448397,
+          8352640285,
+          8350553559,
+          11842448396,
+          11842448395
+        ],
+        "reachable_original_nodes": [
+          8352640283,
+          8352640284,
+          11842448397,
+          8352640285,
+          8350553559,
+          11842448396,
+          11842448395
+        ]
+      },
+      {
+        "osm_way_id": 332735660,
+        "url": "https://www.openstreetmap.org/way/332735660",
+        "identity": "d583724426",
+        "overlap_m": 32.0471,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "dismount",
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "lit": "yes",
+          "smoothness": "excellent",
+          "surface": "paving_stones"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          3398708570,
+          8350553545,
+          3398708574
+        ],
+        "reachable_original_nodes": [
+          3398708570,
+          8350553545,
+          3398708574
+        ]
+      },
+      {
+        "osm_way_id": 898631459,
+        "url": "https://www.openstreetmap.org/way/898631459",
+        "identity": "w898631459",
+        "overlap_m": 99.3334,
+        "line_fraction": 0.73956,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          10827722723,
+          10827722722,
+          10827722721,
+          8350544116,
+          8350553517,
+          8350544115,
+          10827722724
+        ],
+        "reachable_original_nodes": [
+          10827722723,
+          10827722722,
+          10827722721,
+          8350544116,
+          8350553517,
+          8350544115,
+          10827722724
+        ]
+      },
+      {
+        "osm_way_id": 898914789,
+        "url": "https://www.openstreetmap.org/way/898914789",
+        "identity": "w898914789",
+        "overlap_m": 103.243,
+        "line_fraction": 0.938442,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553523,
+          8350553522,
+          8350553521,
+          8350553520,
+          8350553519,
+          10827722725
+        ],
+        "reachable_original_nodes": [
+          8350553523,
+          8350553522,
+          8350553521,
+          8350553520,
+          8350553519,
+          10827722725
+        ]
+      },
+      {
+        "osm_way_id": 24995042,
+        "url": "https://www.openstreetmap.org/way/24995042",
+        "identity": "d583724426",
+        "overlap_m": 31.7631,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "yes",
+          "bridge": "yes",
+          "bus": "yes",
+          "hgv": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "layer": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "psv": "yes",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          1736130850,
+          8350553542,
+          1736130840
+        ],
+        "reachable_original_nodes": [
+          1736130850,
+          8350553542,
+          1736130840
+        ]
+      },
+      {
+        "osm_way_id": 24995040,
+        "url": "https://www.openstreetmap.org/way/24995040",
+        "identity": "d583724426",
+        "overlap_m": 31.314,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "yes",
+          "bridge": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "layer": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          1736130841,
+          8350553546,
+          1736130852
+        ],
+        "reachable_original_nodes": [
+          1736130841,
+          8350553546,
+          1736130852
+        ]
+      },
+      {
+        "osm_way_id": 1064859236,
+        "url": "https://www.openstreetmap.org/way/1064859236",
+        "identity": null,
+        "overlap_m": 10.1572,
+        "line_fraction": 0.065439,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "smoothness": "good",
+          "surface": "paved"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8259179367,
+          9779421572,
+          9779421546,
+          9779421575,
+          9779421552,
+          9779421557,
+          9779421580,
+          9779421574,
+          10218238354,
+          9779421579,
+          9779421571,
+          12887376100
+        ],
+        "reachable_original_nodes": [
+          8259179367,
+          9779421572,
+          9779421546,
+          9779421575,
+          9779421552,
+          9779421557,
+          9779421580,
+          9779421574,
+          10218238354,
+          9779421579,
+          9779421571,
+          12887376100
+        ]
+      },
+      {
+        "osm_way_id": 1077260666,
+        "url": "https://www.openstreetmap.org/way/1077260666",
+        "identity": null,
+        "overlap_m": 79.412,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "sidewalk": "separate",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8259179365,
+          1777123810,
+          8350553518
+        ],
+        "reachable_original_nodes": [
+          8259179365,
+          1777123810,
+          8350553518
+        ]
+      },
+      {
+        "osm_way_id": 898631462,
+        "url": "https://www.openstreetmap.org/way/898631462",
+        "identity": "d583724426",
+        "overlap_m": 31.0853,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "foot": "designated",
+          "highway": "cycleway",
+          "layer": "1",
+          "segregated": "no",
+          "surface": "paved"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553536,
+          8350553544,
+          8350553543
+        ],
+        "reachable_original_nodes": [
+          8350553536,
+          8350553544,
+          8350553543
+        ]
+      },
+      {
+        "osm_way_id": 24995041,
+        "url": "https://www.openstreetmap.org/way/24995041",
+        "identity": null,
+        "overlap_m": 15.1255,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          1736130852,
+          3398708577
+        ],
+        "reachable_original_nodes": [
+          1736130852,
+          3398708577
+        ]
+      },
+      {
+        "osm_way_id": 338969513,
+        "url": "https://www.openstreetmap.org/way/338969513",
+        "identity": null,
+        "overlap_m": 15.3292,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk": "right",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          3398708577,
+          664281611
+        ],
+        "reachable_original_nodes": [
+          3398708577,
+          664281611
+        ]
+      },
+      {
+        "osm_way_id": 52132097,
+        "url": "https://www.openstreetmap.org/way/52132097",
+        "identity": null,
+        "overlap_m": 2.5695,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "service"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          664281611,
+          8350553557
+        ],
+        "reachable_original_nodes": [
+          664281611,
+          8350553557
+        ]
+      },
+      {
+        "osm_way_id": 1486168439,
+        "url": "https://www.openstreetmap.org/way/1486168439",
+        "identity": null,
+        "overlap_m": 1.9474,
+        "line_fraction": 0.333746,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "service"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553557,
+          664281614
+        ],
+        "reachable_original_nodes": [
+          8350553557,
+          664281614
+        ]
+      },
+      {
+        "osm_way_id": 332735688,
+        "url": "https://www.openstreetmap.org/way/332735688",
+        "identity": null,
+        "overlap_m": 103.0053,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "sett"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          3398708574,
+          3398708585,
+          3398708586,
+          8350553531,
+          8350553530,
+          8350553529,
+          8350553528
+        ],
+        "reachable_original_nodes": [
+          3398708574,
+          3398708585,
+          3398708586,
+          8350553531,
+          8350553530,
+          8350553529,
+          8350553528
+        ]
+      },
+      {
+        "osm_way_id": 315662185,
+        "url": "https://www.openstreetmap.org/way/315662185",
+        "identity": null,
+        "overlap_m": 100.8877,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "bus": "yes",
+          "cycleway:right": "no",
+          "embedded_rails": "tram",
+          "hgv": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "psv": "yes",
+          "sidewalk": "right",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          3398708587,
+          3538534834,
+          1736130850
+        ],
+        "reachable_original_nodes": [
+          3398708587,
+          3538534834,
+          1736130850
+        ]
+      },
+      {
+        "osm_way_id": 1467891374,
+        "url": "https://www.openstreetmap.org/way/1467891374",
+        "identity": null,
+        "overlap_m": 10.1737,
+        "line_fraction": 0.229053,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "service",
+          "motor_vehicle": "private",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8259179358,
+          8259179359,
+          10214633513,
+          8259179362,
+          9845653421,
+          8259179361
+        ],
+        "reachable_original_nodes": [
+          8259179358,
+          8259179359,
+          10214633513,
+          8259179362,
+          9845653421,
+          8259179361
+        ]
+      },
+      {
+        "osm_way_id": 1164239370,
+        "url": "https://www.openstreetmap.org/way/1164239370",
+        "identity": "w898631459",
+        "overlap_m": 37.3104,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553528,
+          10827722723
+        ],
+        "reachable_original_nodes": [
+          8350553528,
+          10827722723
+        ]
+      },
+      {
+        "osm_way_id": 888348569,
+        "url": "https://www.openstreetmap.org/way/888348569",
+        "identity": "w888348569",
+        "overlap_m": 38.1817,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "bridge": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "layer": "1",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          4473947132,
+          8259179365
+        ],
+        "reachable_original_nodes": [
+          4473947132,
+          8259179365
+        ]
+      },
+      {
+        "osm_way_id": 898914790,
+        "url": "https://www.openstreetmap.org/way/898914790",
+        "identity": "w898914789",
+        "overlap_m": 34.3253,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "smoothness": "good",
+          "surface": "paved",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553524,
+          8350553523
+        ],
+        "reachable_original_nodes": [
+          8350553524,
+          8350553523
+        ]
+      },
+      {
+        "osm_way_id": 898631472,
+        "url": "https://www.openstreetmap.org/way/898631472",
+        "identity": null,
+        "overlap_m": 109.9555,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "segregated": "no",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350544114,
+          8350553556,
+          8350553557,
+          8350553536
+        ],
+        "reachable_original_nodes": [
+          8350544114,
+          8350553556,
+          8350553557,
+          8350553536
+        ]
+      },
+      {
+        "osm_way_id": 1486168438,
+        "url": "https://www.openstreetmap.org/way/1486168438",
+        "identity": null,
+        "overlap_m": 70.4971,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk": "right",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          664281611,
+          9315445913,
+          3538534839,
+          672474405
+        ],
+        "reachable_original_nodes": [
+          664281611,
+          9315445913,
+          3538534839,
+          672474405
+        ]
+      },
+      {
+        "osm_way_id": 898631461,
+        "url": "https://www.openstreetmap.org/way/898631461",
+        "identity": null,
+        "overlap_m": 9.1779,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "dismount",
+          "crossing": "uncontrolled",
+          "crossing:colour": "red",
+          "crossing:island": "no",
+          "crossing:markings": "zebra",
+          "footway": "crossing",
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "tactile_paving": "no"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553528,
+          4473947132,
+          8350553524
+        ],
+        "reachable_original_nodes": [
+          8350553528,
+          4473947132,
+          8350553524
+        ]
+      },
+      {
+        "osm_way_id": 888348568,
+        "url": "https://www.openstreetmap.org/way/888348568",
+        "identity": null,
+        "overlap_m": 23.7266,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "sidewalk:left": "yes",
+          "sidewalk:right": "separate",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          3398708587,
+          12296271648,
+          11182333508,
+          11182333506,
+          3217936537,
+          11182333507,
+          4473947132
+        ],
+        "reachable_original_nodes": [
+          3398708587,
+          12296271648,
+          11182333508,
+          11182333506,
+          3217936537,
+          11182333507,
+          4473947132
+        ]
+      },
+      {
+        "osm_way_id": 898631460,
+        "url": "https://www.openstreetmap.org/way/898631460",
+        "identity": null,
+        "overlap_m": 24.1559,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "sett",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          9845647099,
+          8352640275,
+          8350553526,
+          8350553525,
+          8350553524
+        ],
+        "reachable_original_nodes": [
+          9845647099,
+          8352640275,
+          8350553526,
+          8350553525,
+          8350553524
+        ]
+      },
+      {
+        "osm_way_id": 315662190,
+        "url": "https://www.openstreetmap.org/way/315662190",
+        "identity": null,
+        "overlap_m": 7.6595,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "cycleway:both": "no",
+          "highway": "unclassified",
+          "lanes": "2",
+          "motor_vehicle": "permit",
+          "name": "Ponte della Libertà",
+          "note": "n_n_vis",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          672474405,
+          3398708587
+        ],
+        "reachable_original_nodes": [
+          672474405,
+          3398708587
+        ]
+      },
+      {
+        "osm_way_id": 38482078,
+        "url": "https://www.openstreetmap.org/way/38482078",
+        "identity": null,
+        "overlap_m": 8.8999,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "surface": "concrete"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          27353131,
+          3398708587
+        ],
+        "reachable_original_nodes": [
+          27353131,
+          3398708587
+        ]
+      },
+      {
+        "osm_way_id": 1486168432,
+        "url": "https://www.openstreetmap.org/way/1486168432",
+        "identity": null,
+        "overlap_m": 12.2565,
+        "line_fraction": 1.0,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk": "right",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          672474405,
+          1736125875
+        ],
+        "reachable_original_nodes": [
+          672474405,
+          1736125875
+        ]
+      },
+      {
+        "osm_way_id": 1275420106,
+        "url": "https://www.openstreetmap.org/way/1275420106",
+        "identity": "w161639264",
+        "overlap_m": 38.0304,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "level": "1",
+          "lit": "yes",
+          "surface": "sett",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8352640287,
+          9845647099
+        ],
+        "reachable_original_nodes": [
+          8352640287,
+          9845647099
+        ]
+      },
+      {
+        "osm_way_id": 315662186,
+        "url": "https://www.openstreetmap.org/way/315662186",
+        "identity": "w161639264",
+        "overlap_m": 44.0735,
+        "line_fraction": 0.988003,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "yes",
+          "bridge": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "layer": "1",
+          "maxaxleload": "1.5",
+          "maxspeed": "70",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          27353130,
+          8352640288,
+          2420796628,
+          27353131
+        ],
+        "reachable_original_nodes": [
+          27353130,
+          8352640288,
+          2420796628,
+          27353131
+        ]
+      },
+      {
+        "osm_way_id": 898631457,
+        "url": "https://www.openstreetmap.org/way/898631457",
+        "identity": "w161639264",
+        "overlap_m": 35.5887,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "check_date:surface": "2022-12-20",
+          "foot": "designated",
+          "highway": "cycleway",
+          "layer": "1",
+          "segregated": "no",
+          "surface": "paved",
+          "surface:note": "Pavimentazione in porfido"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8352640290,
+          8350553555,
+          8350544114
+        ],
+        "reachable_original_nodes": [
+          8352640290,
+          8350553555,
+          8350544114
+        ]
+      },
+      {
+        "osm_way_id": 161639264,
+        "url": "https://www.openstreetmap.org/way/161639264",
+        "identity": "w161639264",
+        "overlap_m": 43.3228,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "yes",
+          "bridge": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "layer": "1",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          1736125875,
+          1736125877,
+          1736125879,
+          8352640289,
+          1736125881
+        ],
+        "reachable_original_nodes": [
+          1736125875,
+          1736125877,
+          1736125879,
+          8352640289,
+          1736125881
+        ]
+      },
+      {
+        "osm_way_id": 1275420105,
+        "url": "https://www.openstreetmap.org/way/1275420105",
+        "identity": "w161639264",
+        "overlap_m": 1.2196,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": false,
+        "tags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "check_date:surface": "2022-12-20",
+          "cycleway:surface": "asphalt",
+          "cycleway:width": "4",
+          "foot": "designated",
+          "footway:surface": "asphalt",
+          "highway": "cycleway",
+          "layer": "1",
+          "level": "1",
+          "path": "crossing",
+          "segregated": "no",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          11842448399,
+          8352640287
+        ],
+        "reachable_original_nodes": [
+          11842448399,
+          8352640287
+        ]
+      },
+      {
+        "osm_way_id": 1275420107,
+        "url": "https://www.openstreetmap.org/way/1275420107",
+        "identity": "w161639264",
+        "overlap_m": 3.9424,
+        "line_fraction": 0.897844,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "foot": "designated",
+          "highway": "cycleway",
+          "layer": "1",
+          "lit": "yes",
+          "segregated": "no",
+          "surface": "sett",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8352640287,
+          11842448400
+        ],
+        "reachable_original_nodes": [
+          8352640287,
+          11842448400
+        ]
+      },
+      {
+        "osm_way_id": 898914815,
+        "url": "https://www.openstreetmap.org/way/898914815",
+        "identity": "w161639264",
+        "overlap_m": 14.7514,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "check_date:surface": "2022-12-20",
+          "crossing": "uncontrolled",
+          "crossing:markings": "yes",
+          "cycleway": "crossing",
+          "cycleway:surface": "asphalt",
+          "cycleway:width": "4",
+          "foot": "designated",
+          "footway:surface": "asphalt",
+          "highway": "cycleway",
+          "layer": "1",
+          "level": "1",
+          "path": "crossing",
+          "segregated": "yes",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "tactile_paving": "yes"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          11842448398,
+          12296271639,
+          8352640289,
+          8352640288,
+          12296262465,
+          11842448399
+        ],
+        "reachable_original_nodes": [
+          11842448398,
+          12296271639,
+          8352640289,
+          8352640288,
+          12296262465,
+          11842448399
+        ]
+      },
+      {
+        "osm_way_id": 1275420104,
+        "url": "https://www.openstreetmap.org/way/1275420104",
+        "identity": "w161639264",
+        "overlap_m": 1.3926,
+        "line_fraction": 1.0,
+        "bridge_tagged": true,
+        "strong": false,
+        "tags": {
+          "bicycle": "designated",
+          "bridge": "yes",
+          "check_date:surface": "2022-12-20",
+          "cycleway:surface": "asphalt",
+          "cycleway:width": "4",
+          "foot": "designated",
+          "footway:surface": "asphalt",
+          "highway": "cycleway",
+          "layer": "1",
+          "level": "1",
+          "path": "crossing",
+          "segregated": "no",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8352640290,
+          11842448398
+        ],
+        "reachable_original_nodes": [
+          8352640290,
+          11842448398
+        ]
+      },
+      {
+        "osm_way_id": 898914814,
+        "url": "https://www.openstreetmap.org/way/898914814",
+        "identity": "w161639264",
+        "overlap_m": 12.2946,
+        "line_fraction": 0.833836,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bicycle": "dismount",
+          "bridge": "yes",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "layer": "1",
+          "surface": "paving_stones"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          8350553554,
+          8352640290
+        ],
+        "reachable_original_nodes": [
+          8350553554,
+          8352640290
+        ]
+      }
+    ],
+    "original_network_traversal_evidence": [
+      {
+        "osm_way_id": 315662191,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "maxheight": "4.4",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "overlap_m": 19.4421,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8350553518,
+            1331457820
+          ]
+        ],
+        "outside_original_node_ids": [
+          1331457820,
+          10827722726,
+          1838206211,
+          1242174166,
+          1838206193,
+          1838206217,
+          8354288233
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 898631458,
+        "tags": {
+          "bicycle": "dismount",
+          "footway": "crossing",
+          "highway": "footway",
+          "smoking": "g",
+          "surf": "as",
+          "surface": "asphalt",
+          "width": "2"
+        },
+        "overlap_m": 8.9094,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8350553519,
+            8350553518
+          ],
+          [
+            8350553518,
+            8350553517
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 24995043,
+        "tags": {
+          "bicycle": "yes",
+          "bus": "yes",
+          "hgv": "no",
+          "highway": "primary",
+          "incline": "down",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "psv": "yes",
+          "shoulder": "no",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt"
+        },
+        "overlap_m": 18.6199,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            1736130840,
+            1736130838
+          ]
+        ],
+        "outside_original_node_ids": [
+          1736130838,
+          11639085548,
+          11639085554,
+          1736130834,
+          11639085555,
+          3398708542,
+          11639085556,
+          11639085557,
+          11639085558,
+          11639085559,
+          11639085560,
+          11639085561,
+          11639085562,
+          1777153967,
+          672494655
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 442106318,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "incline": "up",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk:left": "no",
+          "sidewalk:right": "separate",
+          "surface": "asphalt"
+        },
+        "overlap_m": 20.0735,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            1736130839,
+            11842448395
+          ],
+          [
+            11842448395,
+            1736130841
+          ]
+        ],
+        "outside_original_node_ids": [
+          944188418,
+          1736130835,
+          1736130836,
+          1736130839
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 171901059,
+        "tags": {
+          "bicycle": "yes",
+          "highway": "pedestrian",
+          "lit": "yes",
+          "name": "Fondamenta Santa Chiara",
+          "surface": "paving_stones"
+        },
+        "overlap_m": 19.4678,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            1828664306,
+            8012589982
+          ]
+        ],
+        "outside_original_node_ids": [
+          944188414,
+          233485940,
+          1828664310,
+          3586601850,
+          1828664312,
+          1828664308,
+          9315445914,
+          1828664306,
+          8012589982,
+          1828664301,
+          10827678158,
+          5822672763,
+          7819465268,
+          10827678162
+        ],
+        "original_way_has_outside_endpoints": true,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 332735700,
+        "tags": {
+          "bicycle": "dismount",
+          "footway": "sidewalk",
+          "highway": "footway",
+          "surface": "paving_stones"
+        },
+        "overlap_m": 18.0427,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            3398708566,
+            8012589984
+          ],
+          [
+            8012589984,
+            3398708570
+          ]
+        ],
+        "outside_original_node_ids": [
+          3398708558,
+          3398708561,
+          3398708564,
+          3398708566
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 860688120,
+        "tags": {
+          "bicycle": "no",
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "paving_stones",
+          "width": "2"
+        },
+        "overlap_m": 1.4904,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8012589983,
+            8012589984
+          ]
+        ],
+        "outside_original_node_ids": [
+          8022139053,
+          8012589983
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 898631464,
+        "tags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "lit": "yes",
+          "segregated": "no",
+          "surface": "paving_stones"
+        },
+        "overlap_m": 20.6206,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8350553543,
+            8350553559
+          ],
+          [
+            8350553559,
+            8350553560
+          ]
+        ],
+        "outside_original_node_ids": [
+          8350553560,
+          8352640281,
+          8350553561,
+          3398708560
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 898914813,
+        "tags": {
+          "highway": "service",
+          "incline": "up",
+          "oneway": "yes",
+          "service": "parking_aisle",
+          "surface": "asphalt"
+        },
+        "overlap_m": 5.7303,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8352640285,
+            8350553559
+          ],
+          [
+            8350553559,
+            11842448396
+          ],
+          [
+            11842448396,
+            11842448395
+          ]
+        ],
+        "outside_original_node_ids": [
+          8352640283,
+          8352640284,
+          11842448397,
+          8352640285
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1064859236,
+        "tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "smoothness": "good",
+          "surface": "paved"
+        },
+        "overlap_m": 10.1572,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            9779421580,
+            9779421574
+          ]
+        ],
+        "outside_original_node_ids": [
+          8259179367,
+          9779421572,
+          9779421546,
+          9779421575,
+          9779421552,
+          9779421557,
+          9779421580,
+          9779421574,
+          10218238354,
+          9779421579,
+          9779421571,
+          12887376100
+        ],
+        "original_way_has_outside_endpoints": true,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1077260666,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "sidewalk": "separate",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "overlap_m": 79.412,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8259179365,
+            1777123810
+          ],
+          [
+            1777123810,
+            8350553518
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 24995041,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "surface": "asphalt"
+        },
+        "overlap_m": 15.1255,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            1736130852,
+            3398708577
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 338969513,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk": "right",
+          "surface": "asphalt"
+        },
+        "overlap_m": 15.3292,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            3398708577,
+            664281611
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 52132097,
+        "tags": {
+          "highway": "service"
+        },
+        "overlap_m": 2.5695,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            664281611,
+            8350553557
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1486168439,
+        "tags": {
+          "highway": "service"
+        },
+        "overlap_m": 1.9474,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8350553557,
+            664281614
+          ]
+        ],
+        "outside_original_node_ids": [
+          664281614
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 332735688,
+        "tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "sett"
+        },
+        "overlap_m": 103.0053,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            3398708574,
+            3398708585
+          ],
+          [
+            3398708585,
+            3398708586
+          ],
+          [
+            3398708586,
+            8350553531
+          ],
+          [
+            8350553531,
+            8350553530
+          ],
+          [
+            8350553530,
+            8350553529
+          ],
+          [
+            8350553529,
+            8350553528
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 315662185,
+        "tags": {
+          "bicycle": "yes",
+          "bus": "yes",
+          "cycleway:right": "no",
+          "embedded_rails": "tram",
+          "hgv": "no",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "psv": "yes",
+          "sidewalk": "right",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "overlap_m": 100.8877,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            3398708587,
+            3538534834
+          ],
+          [
+            3538534834,
+            1736130850
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1467891374,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "service",
+          "motor_vehicle": "private",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "overlap_m": 10.1737,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8259179358,
+            8259179359
+          ]
+        ],
+        "outside_original_node_ids": [
+          8259179358,
+          8259179359,
+          10214633513,
+          8259179362,
+          9845653421,
+          8259179361
+        ],
+        "original_way_has_outside_endpoints": true,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 898631472,
+        "tags": {
+          "bicycle": "designated",
+          "foot": "designated",
+          "highway": "cycleway",
+          "segregated": "no",
+          "surface": "asphalt"
+        },
+        "overlap_m": 109.9555,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8350544114,
+            8350553556
+          ],
+          [
+            8350553556,
+            8350553557
+          ],
+          [
+            8350553557,
+            8350553536
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1486168438,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk": "right",
+          "surface": "asphalt"
+        },
+        "overlap_m": 70.4971,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            664281611,
+            9315445913
+          ],
+          [
+            9315445913,
+            3538534839
+          ],
+          [
+            3538534839,
+            672474405
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 898631461,
+        "tags": {
+          "bicycle": "dismount",
+          "crossing": "uncontrolled",
+          "crossing:colour": "red",
+          "crossing:island": "no",
+          "crossing:markings": "zebra",
+          "footway": "crossing",
+          "highway": "footway",
+          "lit": "yes",
+          "smoothness": "good",
+          "surface": "asphalt",
+          "tactile_paving": "no"
+        },
+        "overlap_m": 9.1779,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            8350553528,
+            4473947132
+          ],
+          [
+            4473947132,
+            8350553524
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 888348568,
+        "tags": {
+          "access": "private",
+          "bicycle": "yes",
+          "foot": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "motor_vehicle": "private",
+          "note": "n_n_vis",
+          "sidewalk:left": "yes",
+          "sidewalk:right": "separate",
+          "source:motor_vehicle": "sign",
+          "surface": "asphalt"
+        },
+        "overlap_m": 23.7266,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            3398708587,
+            12296271648
+          ],
+          [
+            12296271648,
+            11182333508
+          ],
+          [
+            11182333508,
+            11182333506
+          ],
+          [
+            11182333506,
+            3217936537
+          ],
+          [
+            3217936537,
+            11182333507
+          ],
+          [
+            11182333507,
+            4473947132
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 898631460,
+        "tags": {
+          "footway": "sidewalk",
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "sett",
+          "width": "2"
+        },
+        "overlap_m": 24.1559,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            9845647099,
+            8352640275
+          ],
+          [
+            8352640275,
+            8350553526
+          ],
+          [
+            8350553526,
+            8350553525
+          ],
+          [
+            8350553525,
+            8350553524
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 315662190,
+        "tags": {
+          "cycleway:both": "no",
+          "highway": "unclassified",
+          "lanes": "2",
+          "motor_vehicle": "permit",
+          "name": "Ponte della Libertà",
+          "note": "n_n_vis",
+          "surface": "asphalt"
+        },
+        "overlap_m": 7.6595,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            672474405,
+            3398708587
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 38482078,
+        "tags": {
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "surface": "concrete"
+        },
+        "overlap_m": 8.8999,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            27353131,
+            3398708587
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1486168432,
+        "tags": {
+          "bicycle": "yes",
+          "embedded_rails": "tram",
+          "highway": "primary",
+          "lanes": "2",
+          "maxspeed": "50",
+          "name": "Ponte della Libertà",
+          "oneway": "yes",
+          "shoulder": "no",
+          "sidewalk": "right",
+          "surface": "asphalt"
+        },
+        "overlap_m": 12.2565,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            672474405,
+            1736125875
+          ]
+        ],
+        "outside_original_node_ids": [],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      }
+    ],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 2
+  },
+  {
+    "group_id": "MPG:fID000429",
+    "municipal_ids": [
+      "PONTE2010:fID000429"
+    ],
+    "part_count": 1,
+    "status": "ambiguous_osm_identity",
+    "scope_zones": [
+      "route_boundary_ambiguous"
+    ],
+    "strong_osm_identities": [
+      "d583725368",
+      "w277038769",
+      "w450261873",
+      "w450261875",
+      "w66331559"
+    ],
+    "lon": 12.311343072277774,
+    "lat": 45.4412694192449,
+    "area_m2": 3242.1678,
+    "deduplication_confidence": "single source object",
+    "rank": 2,
+    "review_class": "ambiguous_identity_or_multipart_review",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "02",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 583725368,
+        "url": "https://www.openstreetmap.org/way/583725368",
+        "identity": "d583725368",
+        "overlap_m2": 3181.522,
+        "municipal_fraction": 0.981295,
+        "deck_fraction": 0.707042,
+        "strong": true,
+        "tags": {
+          "alt_name": "Ponte del Tronchetto",
+          "bridge:structure": "humpback",
+          "layer": "1",
+          "man_made": "bridge",
+          "name": "Ponte Peppino Impastato",
+          "source": "http://www.comune.venezia.it/it/archivio/6109"
+        }
+      }
+    ],
+    "osm_highway_evidence": [
+      {
+        "osm_way_id": 450261874,
+        "url": "https://www.openstreetmap.org/way/450261874",
+        "identity": null,
+        "overlap_m": 2.9116,
+        "line_fraction": 0.01342,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "footway",
+          "surface": "concrete"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          4471839590,
+          4471839591,
+          4471565407,
+          4471839592,
+          4471839593,
+          4471839594,
+          4471839595,
+          5853655239,
+          5853655240,
+          5853655241,
+          5853655242,
+          5853655243,
+          5853655244,
+          5853655245,
+          5853655246,
+          5853655247,
+          5853655248,
+          3327486040,
+          5853655249,
+          5853655250,
+          5853655251,
+          5853655252,
+          5853655253,
+          5853655392,
+          5853655254,
+          5853655255,
+          10214664542
+        ],
+        "reachable_original_nodes": [
+          4471839590,
+          4471839591,
+          4471565407,
+          4471839592,
+          4471839593,
+          4471839594,
+          4471839595,
+          5853655239,
+          5853655240,
+          5853655241,
+          5853655242,
+          5853655243,
+          5853655244,
+          5853655245,
+          5853655246,
+          5853655247,
+          5853655248,
+          3327486040,
+          5853655249,
+          5853655250,
+          5853655251,
+          5853655252,
+          5853655253,
+          5853655392,
+          5853655254,
+          5853655255,
+          10214664542
+        ]
+      },
+      {
+        "osm_way_id": 277038768,
+        "url": "https://www.openstreetmap.org/way/277038768",
+        "identity": null,
+        "overlap_m": 2.9793,
+        "line_fraction": 0.085804,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "unclassified",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "noname": "yes",
+          "note": "Please add nam/ref.",
+          "oneway": "yes",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          2815908417,
+          3327476484,
+          3327476461,
+          3327476448,
+          3327476454,
+          3327476443,
+          3327476490,
+          3327476450
+        ],
+        "reachable_original_nodes": [
+          2815908417,
+          3327476484,
+          3327476461,
+          3327476448,
+          3327476454,
+          3327476443,
+          3327476490,
+          3327476450
+        ]
+      },
+      {
+        "osm_way_id": 450261873,
+        "url": "https://www.openstreetmap.org/way/450261873",
+        "identity": "w450261873",
+        "overlap_m": 153.1674,
+        "line_fraction": 0.81688,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "highway": "footway",
+          "layer": "1",
+          "surface": "concrete",
+          "width": "2"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": false,
+        "original_node_ids": [
+          4724368455,
+          4471839590
+        ],
+        "reachable_original_nodes": [
+          4471839590
+        ]
+      },
+      {
+        "osm_way_id": 640052836,
+        "url": "https://www.openstreetmap.org/way/640052836",
+        "identity": null,
+        "overlap_m": 2.8638,
+        "line_fraction": 0.113534,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "unclassified",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "IT:urban",
+          "noname": "yes",
+          "note": "Please add nam/ref.",
+          "oneway": "yes",
+          "smoothness": "good",
+          "source": "Yahoo",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          703598737,
+          4471565405,
+          3327497740,
+          2815908418
+        ],
+        "reachable_original_nodes": [
+          703598737,
+          4471565405,
+          3327497740,
+          2815908418
+        ]
+      },
+      {
+        "osm_way_id": 1288085257,
+        "url": "https://www.openstreetmap.org/way/1288085257",
+        "identity": null,
+        "overlap_m": 3.0341,
+        "line_fraction": 0.095164,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": true,
+        "original_node_ids": [
+          4471839606,
+          4471839607,
+          4471839608,
+          4471839609,
+          4471839610,
+          4471839598
+        ],
+        "reachable_original_nodes": [
+          4471839606,
+          4471839607,
+          4471839608,
+          4471839609,
+          4471839610,
+          4471839598
+        ]
+      },
+      {
+        "osm_way_id": 277038769,
+        "url": "https://www.openstreetmap.org/way/277038769",
+        "identity": "w277038769",
+        "overlap_m": 153.2857,
+        "line_fraction": 0.817533,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "alt_name": "Ponte del Tronchetto",
+          "bridge": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "layer": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte Peppino Impastato",
+          "oneway": "yes",
+          "smoothness": "good",
+          "source": "Yahoo",
+          "source:maxspeed": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": false,
+        "original_node_ids": [
+          1192734205,
+          2815908417
+        ],
+        "reachable_original_nodes": [
+          2815908417
+        ]
+      },
+      {
+        "osm_way_id": 66331559,
+        "url": "https://www.openstreetmap.org/way/66331559",
+        "identity": "w66331559",
+        "overlap_m": 153.4767,
+        "line_fraction": 0.818568,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "alt_name": "Ponte del Tronchetto",
+          "bridge": "yes",
+          "highway": "unclassified",
+          "lanes": "2",
+          "layer": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "name": "Ponte Peppino Impastato",
+          "oneway": "yes",
+          "smoothness": "good",
+          "source": "Yahoo",
+          "source:maxspeed": "sign",
+          "surface": "asphalt"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": false,
+        "original_node_ids": [
+          2815908418,
+          2815908419
+        ],
+        "reachable_original_nodes": [
+          2815908418
+        ]
+      },
+      {
+        "osm_way_id": 450261875,
+        "url": "https://www.openstreetmap.org/way/450261875",
+        "identity": "w450261875",
+        "overlap_m": 153.5752,
+        "line_fraction": 0.819056,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "highway": "footway",
+          "layer": "1",
+          "surface": "concrete"
+        },
+        "access_reason": null,
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": false,
+        "original_node_ids": [
+          4471839598,
+          4471839601
+        ],
+        "reachable_original_nodes": [
+          4471839598
+        ]
+      }
+    ],
+    "original_network_traversal_evidence": [
+      {
+        "osm_way_id": 450261874,
+        "tags": {
+          "highway": "footway",
+          "surface": "concrete"
+        },
+        "overlap_m": 2.9116,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            4471839590,
+            4471839591
+          ]
+        ],
+        "outside_original_node_ids": [
+          4471839591,
+          4471565407,
+          4471839592,
+          4471839593,
+          4471839594,
+          4471839595,
+          5853655239,
+          5853655240,
+          5853655241,
+          5853655242,
+          5853655243,
+          5853655244,
+          5853655245,
+          5853655246,
+          5853655247,
+          5853655248,
+          3327486040,
+          5853655249,
+          5853655250,
+          5853655251,
+          5853655252,
+          5853655253,
+          5853655392,
+          5853655254,
+          5853655255,
+          10214664542
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 277038768,
+        "tags": {
+          "highway": "unclassified",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "50",
+          "noname": "yes",
+          "note": "Please add nam/ref.",
+          "oneway": "yes",
+          "smoothness": "good",
+          "surface": "asphalt"
+        },
+        "overlap_m": 2.9793,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            2815908417,
+            3327476484
+          ]
+        ],
+        "outside_original_node_ids": [
+          3327476484,
+          3327476461,
+          3327476448,
+          3327476454,
+          3327476443,
+          3327476490,
+          3327476450
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 640052836,
+        "tags": {
+          "highway": "unclassified",
+          "lanes": "1",
+          "lit": "yes",
+          "maxspeed": "IT:urban",
+          "noname": "yes",
+          "note": "Please add nam/ref.",
+          "oneway": "yes",
+          "smoothness": "good",
+          "source": "Yahoo",
+          "surface": "asphalt"
+        },
+        "overlap_m": 2.8638,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            3327497740,
+            2815908418
+          ]
+        ],
+        "outside_original_node_ids": [
+          703598737,
+          4471565405,
+          3327497740
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      },
+      {
+        "osm_way_id": 1288085257,
+        "tags": {
+          "highway": "footway",
+          "lit": "yes",
+          "surface": "asphalt"
+        },
+        "overlap_m": 3.0341,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            4471839610,
+            4471839598
+          ]
+        ],
+        "outside_original_node_ids": [
+          4471839606,
+          4471839607,
+          4471839608,
+          4471839609,
+          4471839610
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": true,
+        "whole_way_in_route_scope": true,
+        "access_reason": null,
+        "restricted_nodes": []
+      }
+    ],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 3
+  },
+  {
+    "group_id": "MPG:fID000430",
+    "municipal_ids": [
+      "PONTE2010:fID000430"
+    ],
+    "part_count": 1,
+    "status": "ambiguous_osm_identity",
+    "scope_zones": [
+      "route_boundary_ambiguous"
+    ],
+    "strong_osm_identities": [
+      "d1057613903",
+      "w1288085260"
+    ],
+    "lon": 12.31205293382503,
+    "lat": 45.44132871458197,
+    "area_m2": 1319.4936,
+    "deduplication_confidence": "single source object",
+    "rank": 2,
+    "review_class": "ambiguous_identity_or_multipart_review",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "02",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 1057613903,
+        "url": "https://www.openstreetmap.org/way/1057613903",
+        "identity": "d1057613903",
+        "overlap_m2": 1203.9058,
+        "municipal_fraction": 0.9124,
+        "deck_fraction": 0.987396,
+        "strong": true,
+        "tags": {
+          "bridge:structure": "humpback",
+          "layer": "1",
+          "man_made": "bridge"
+        }
+      }
+    ],
+    "osm_highway_evidence": [
+      {
+        "osm_way_id": 1288085260,
+        "url": "https://www.openstreetmap.org/way/1288085260",
+        "identity": "w1288085260",
+        "overlap_m": 74.3516,
+        "line_fraction": 0.998159,
+        "bridge_tagged": true,
+        "strong": true,
+        "tags": {
+          "bridge": "yes",
+          "highway": "cycleway",
+          "layer": "1",
+          "surface": "concrete"
+        },
+        "access_reason": "cycleway_without_foot_permission",
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": false,
+        "original_node_ids": [
+          11945345624,
+          11945345623
+        ],
+        "reachable_original_nodes": []
+      },
+      {
+        "osm_way_id": 1288085258,
+        "url": "https://www.openstreetmap.org/way/1288085258",
+        "identity": null,
+        "overlap_m": 0.5623,
+        "line_fraction": 0.003746,
+        "bridge_tagged": false,
+        "strong": false,
+        "tags": {
+          "highway": "cycleway",
+          "surface": "concrete"
+        },
+        "access_reason": "cycleway_without_foot_permission",
+        "restricted_nodes": [],
+        "whole_way_in_route_scope": false,
+        "original_node_ids": [
+          11945345623,
+          11945345611,
+          11945345613,
+          11945345614,
+          11945345615,
+          11945345616,
+          11945345617,
+          11945345618,
+          11945345619,
+          11945345620,
+          11945345621,
+          11945345622,
+          4471839603
+        ],
+        "reachable_original_nodes": []
+      }
+    ],
+    "original_network_traversal_evidence": [
+      {
+        "osm_way_id": 1288085258,
+        "tags": {
+          "highway": "cycleway",
+          "surface": "concrete"
+        },
+        "overlap_m": 0.5623,
+        "original_overlapping_adjacent_node_pairs": [
+          [
+            11945345623,
+            11945345611
+          ]
+        ],
+        "outside_original_node_ids": [
+          11945345611,
+          11945345613,
+          11945345614,
+          11945345615,
+          11945345616,
+          11945345617,
+          11945345618,
+          11945345619,
+          11945345620,
+          11945345621,
+          11945345622,
+          4471839603
+        ],
+        "original_way_has_outside_endpoints": false,
+        "all_original_nodes_reachable": false,
+        "whole_way_in_route_scope": false,
+        "access_reason": "cycleway_without_foot_permission",
+        "restricted_nodes": []
+      }
+    ],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 4
+  },
+  {
+    "group_id": "MPG:fID001241",
+    "municipal_ids": [
+      "PONTE2010:fID001241"
+    ],
+    "part_count": 1,
+    "status": "osm_known_not_required",
+    "scope_zones": [
+      "route_boundary_ambiguous"
+    ],
+    "strong_osm_identities": [
+      "d583727060"
+    ],
+    "lon": 12.298726203412366,
+    "lat": 45.454031110129534,
+    "area_m2": 89902.8054,
+    "deduplication_confidence": "single source object",
+    "rank": 2,
+    "review_class": "known_osm_bridge_not_in_current_generator_inventory",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "02",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "03",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 0.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 583727060,
+        "url": "https://www.openstreetmap.org/way/583727060",
+        "identity": "d583727060",
+        "overlap_m2": 69865.7574,
+        "municipal_fraction": 0.777125,
+        "deck_fraction": 0.434977,
+        "strong": true,
+        "tags": {
+          "bridge": "viaduct",
+          "bridge:structure": "arch",
+          "layer": "1",
+          "man_made": "bridge",
+          "name": "Ponte della Libertà",
+          "wikidata": "Q1134699",
+          "wikimedia_commons": "Category:Ponte della Libertà (Venice)",
+          "wikipedia": "en:Ponte della Libertà"
+        }
+      }
+    ],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 5
+  },
+  {
+    "group_id": "MPG:fID000222",
+    "municipal_ids": [
+      "PONTE2010:fID000222"
+    ],
+    "part_count": 1,
+    "status": "osm_known_unresolved",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [
+      "d569427400"
+    ],
+    "lon": 12.314701243926017,
+    "lat": 45.43781169857295,
+    "area_m2": 404.4986,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "03",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 569427400,
+        "url": "https://www.openstreetmap.org/way/569427400",
+        "identity": "d569427400",
+        "overlap_m2": 325.8125,
+        "municipal_fraction": 0.805472,
+        "deck_fraction": 0.850576,
+        "strong": true,
+        "tags": {
+          "bridge:structure": "beam",
+          "layer": "1",
+          "man_made": "bridge"
+        }
+      }
+    ],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 6
+  },
+  {
+    "group_id": "MPG:fID000436",
+    "municipal_ids": [
+      "PONTE2010:fID000436"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.342237568234907,
+    "lat": 45.434237832394594,
+    "area_m2": 9.6013,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 7
+  },
+  {
+    "group_id": "MPG:fID000437",
+    "municipal_ids": [
+      "PONTE2010:fID000437"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.34225456822482,
+    "lat": 45.43406922739112,
+    "area_m2": 14.873,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 8
+  },
+  {
+    "group_id": "MPG:fID000806",
+    "municipal_ids": [
+      "PONTE2010:fID000806"
+    ],
+    "part_count": 1,
+    "status": "osm_known_unresolved",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [
+      "d1232707316"
+    ],
+    "lon": 12.31663968780442,
+    "lat": 45.4416737325663,
+    "area_m2": 647.1013,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "02",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "03",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 0.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 1232707316,
+        "url": "https://www.openstreetmap.org/way/1232707316",
+        "identity": "d1232707316",
+        "overlap_m2": 641.7599,
+        "municipal_fraction": 0.991746,
+        "deck_fraction": 0.928097,
+        "strong": true,
+        "tags": {
+          "bridge:structure": "beam",
+          "layer": "1",
+          "man_made": "bridge"
+        }
+      }
+    ],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 9
+  },
+  {
+    "group_id": "MPG:fID000887",
+    "municipal_ids": [
+      "PONTE2010:fID000887"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.318905676678119,
+    "lat": 45.44438283449295,
+    "area_m2": 10.5767,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 10
+  },
+  {
+    "group_id": "MPG:fID000950",
+    "municipal_ids": [
+      "PONTE2010:fID000950"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.341333531088734,
+    "lat": 45.43671785576013,
+    "area_m2": 9.0873,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 11
+  },
+  {
+    "group_id": "MPG:fID000988",
+    "municipal_ids": [
+      "PONTE2010:fID000988"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.352923165588996,
+    "lat": 45.436744854166236,
+    "area_m2": 29.0057,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 12
+  },
+  {
+    "group_id": "MPG:fID000989",
+    "municipal_ids": [
+      "PONTE2010:fID000989"
+    ],
+    "part_count": 1,
+    "status": "candidate_missing_osm_bridge_identity",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [],
+    "lon": 12.350861535685604,
+    "lat": 45.43659769484585,
+    "area_m2": 28.5541,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 13
+  },
+  {
+    "group_id": "MPG:fID000993",
+    "municipal_ids": [
+      "PONTE2010:fID000993"
+    ],
+    "part_count": 1,
+    "status": "osm_known_unresolved",
+    "scope_zones": [
+      "route_inside"
+    ],
+    "strong_osm_identities": [
+      "d555841273"
+    ],
+    "lon": 12.351756278747558,
+    "lat": 45.438485341518145,
+    "area_m2": 42.0038,
+    "deduplication_confidence": "single source object",
+    "rank": 3,
+    "review_class": "municipal_candidate_without_verified_public_osm_through_crossing",
+    "municipal_attributes": [
+      {
+        "TIPO_MOD": "01",
+        "ORIGINE": "01",
+        "SCALA": "01",
+        "CODICE": "020301",
+        "PONTE_MAT": "03",
+        "PONTE_USO": "04",
+        "PONTE_STRU": "08",
+        "PONTE_VIE": "92",
+        "PONTE_CP": "02",
+        "PONTE_LL": 92.0,
+        "PONTE_TY": "01",
+        "PONTE_LIV": "02",
+        "PONTE_CONT": "92",
+        "PONTE_SEQE": 92.0,
+        "PONTE_SEEX": "92",
+        "PONTE_SPQE": 92.0,
+        "PONTE_SPEX": "92",
+        "PONTE_SOQE": 92.0,
+        "PONTE_SOEX": "92",
+        "DATA_MOD": "20130325",
+        "DATA_CRE": "20130325"
+      }
+    ],
+    "osm_deck_evidence": [
+      {
+        "osm_way_id": 555841273,
+        "url": "https://www.openstreetmap.org/way/555841273",
+        "identity": "d555841273",
+        "overlap_m2": 40.5514,
+        "municipal_fraction": 0.965423,
+        "deck_fraction": 0.066929,
+        "strong": true,
+        "tags": {
+          "bridge:structure": "humpback",
+          "layer": "1",
+          "man_made": "bridge"
+        }
+      }
+    ],
+    "osm_highway_evidence": [],
+    "original_network_traversal_evidence": [],
+    "probable_missing": false,
+    "access_interpretation": "Untagged access follows existing generator default, not field-verified access. Geometry alone does not prove survival or a two-bank canal crossing.",
+    "decision": "review_only_no_autoadd",
+    "review_order": 14
+  }
+]

@@ -30,23 +30,28 @@ const sun = new THREE.DirectionalLight(0xfff8ee, 0.8);
 sun.position.set(-300, 500, -400);
 scene.add(sun);
 
-const WORLD = {
-  XMIN: -2500, XMAX: 17000,
-  ZMIN: -9000, ZMAX: 2200,
-};
+const WORLD = { XMIN: -2500, XMAX: 17000, ZMIN: -9000, ZMAX: 2200 };
 WORLD.W = WORLD.XMAX - WORLD.XMIN;
 WORLD.H = WORLD.ZMAX - WORLD.ZMIN;
 
-// ---------- Binary helpers ----------
 async function fetchBin(url) {
-  const buf = await (await fetch(url)).arrayBuffer();
+  console.log('fetchBin start', url);
+  const res = await fetch(url);
+  console.log('fetchBin response', url, res.status);
+  const buf = await res.arrayBuffer();
+  console.log('fetchBin arrayBuffer', url, buf.byteLength);
   const head = new Uint8Array(buf, 0, Math.min(2, buf.byteLength));
   if (head[0] !== 0x1f || head[1] !== 0x8b) return buf;
-  return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+  console.log('fetchBin decompressing', url);
+  const out = await new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+  console.log('fetchBin decompressed', url, out.byteLength);
+  return out;
 }
 
 async function loadPolygons(url) {
+  console.log('fetching', url);
   const buf = await fetchBin(url);
+  console.log('fetched', url, buf.byteLength);
   const [nPoly, nRing, nVert] = new Uint32Array(buf, 0, 3);
   const ringStart = new Uint32Array(buf, 12, nPoly + 1);
   const vertStartOff = 12 + 4 * (nPoly + 1);
@@ -66,46 +71,9 @@ async function loadPolygons(url) {
   }
   const g = new THREE.ShapeGeometry(shapes);
   g.rotateX(-Math.PI / 2);
+  g.computeVertexNormals();
   return g;
 }
-
-// ---------- Ground ----------
-const groundGroup = new THREE.Group();
-scene.add(groundGroup);
-
-Promise.all([
-  loadPolygons('data/water.bin'),
-  loadPolygons('data/land.bin'),
-  loadPolygons('data/context.bin'),
-]).then(([waterGeo, landGeo, contextGeo]) => {
-  const water = new THREE.Mesh(waterGeo, new THREE.MeshPhongMaterial({ color: WATER, shininess: 80 }));
-  water.position.y = -0.4;
-  groundGroup.add(water);
-  const context = new THREE.Mesh(contextGeo, new THREE.MeshLambertMaterial({ color: 0xe9e6df }));
-  context.position.y = -0.1;
-  groundGroup.add(context);
-  const land = new THREE.Mesh(landGeo, new THREE.MeshLambertMaterial({ color: LAND }));
-  land.position.y = -0.05;
-  groundGroup.add(land);
-}).catch(e => console.error('ground load failed', e));
-
-// ---------- Buildings from tiles ----------
-const config = await (await fetch('data/venezia.json')).json();
-const TILE = config.tileSize;
-const start = new THREE.Vector3(-354, 0, -340);
-const RADIUS = 2500;
-
-const tileQueue = config.tiles.filter(t => {
-  const cx = (t.tx + 0.5) * TILE;
-  const cz = (t.tz + 0.5) * TILE;
-  return Math.hypot(cx - start.x, cz - start.z) <= RADIUS;
-});
-console.log('config tiles', config.tiles.length, 'tileQueue', tileQueue.length);
-const packs = Object.fromEntries(config.packs.map(name => [name, fetchBin(`data/${name}`)]));
-const WORKERS = Math.min(4, navigator.hardwareConcurrency || 2);
-const pool = Array.from({ length: WORKERS }, () => new Worker('worker.js', { type: 'module' }));
-let loaded = 0;
-const buildingMeshes = [];
 
 function colorFor(a) {
   const pf = a[1];
@@ -116,12 +84,11 @@ function colorFor(a) {
   return c;
 }
 
-function addTile(m) {
+function addTile(scene, meshes, m) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(m.pos, 3));
   g.setAttribute('bld', new THREE.BufferAttribute(m.bld, 1));
   g.setIndex(new THREE.BufferAttribute(m.idx, 1));
-
   const nV = m.pos.length / 3;
   const colors = new Float32Array(nV * 3);
   for (let i = 0; i < nV; i++) {
@@ -131,48 +98,21 @@ function addTile(m) {
     colors[i * 3] = c.r; colors[i * 3 + 1] = c.g; colors[i * 3 + 2] = c.b;
   }
   g.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
+  g.computeVertexNormals();
   const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ vertexColors: true }));
   mesh.scale.setScalar(0.1);
   mesh.position.set(m.origin[0], 0, m.origin[1]);
   scene.add(mesh);
-  buildingMeshes.push(mesh);
+  meshes.push(mesh);
 }
 
-for (const w of pool) {
-  const next = async () => {
-    const task = tileQueue.shift();
-    if (!task) return;
-    const buf = (await packs[task.pack]).slice(task.offset, task.offset + task.length);
-    w.postMessage({ buf, id: task.file }, [buf]);
-  };
-  w.onmessage = ({ data }) => {
-    addTile(data);
-    loaded++;
-    progressEl.textContent = Math.round(100 * loaded / tileQueue.length);
-    if (loaded >= tileQueue.length) loading.hidden = true;
-    next();
-  };
-  next();
-}
+const buildingMeshes = [];
+let maskData = null;
+const lions = [];
+const LION_COUNT = 12;
 
-// ---------- Gondola ----------
-const boatGroup = new THREE.Group();
-scene.add(boatGroup);
-const hullGeo = new THREE.BoxGeometry(0.8, 0.35, 2.4);
-hullGeo.translate(0, 0.18, 0);
-const hull = new THREE.Mesh(hullGeo, new THREE.MeshLambertMaterial({ color: 0x2c2f2a }));
-boatGroup.add(hull);
-const cabin = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.45, 0.9), new THREE.MeshLambertMaterial({ color: 0x5f625c }));
-cabin.position.set(0, 0.55, -0.1);
-boatGroup.add(cabin);
-const fez = new THREE.Mesh(new THREE.SphereGeometry(0.22, 16, 16), new THREE.MeshLambertMaterial({ color: 0xb04f3e }));
-fez.position.set(0, 0.85, -0.1);
-boatGroup.add(fez);
-
-// ---------- Game state ----------
 const player = {
-  x: start.x, z: start.z,
+  x: -354, z: -340,
   angle: -Math.PI / 2,
   speed: 0,
   maxForward: 26,
@@ -203,50 +143,29 @@ function updateTouch(t) {
   keys.ArrowLeft = dx < -30; keys.ArrowRight = dx > 30;
 }
 
-// Water mask for collision (reuse 400x280)
-const MASK_W = 400, MASK_H = 280;
-let maskData = null;
-const maskImg = new Image();
-fetch('img/water-mask-400.b64.txt')
-  .then(r => r.text())
-  .then(dataUrl => { maskImg.src = dataUrl; });
-maskImg.onload = () => {
-  const c = document.createElement('canvas');
-  c.width = MASK_W; c.height = MASK_H;
-  const x = c.getContext('2d');
-  x.drawImage(maskImg, 0, 0);
-  maskData = x.getImageData(0, 0, MASK_W, MASK_H).data;
-  spawnLions();
-};
-
 function isWater(x, z) {
   if (!maskData) return true;
-  const mx = Math.floor((x - WORLD.XMIN) / WORLD.W * MASK_W);
-  const my = Math.floor((WORLD.ZMAX - z) / WORLD.H * MASK_H);
-  if (mx < 0 || mx >= MASK_W || my < 0 || my >= MASK_H) return false;
-  return maskData[(my * MASK_W + mx) * 4] > 128;
+  const mx = Math.floor((x - WORLD.XMIN) / WORLD.W * 400);
+  const my = Math.floor((WORLD.ZMAX - z) / WORLD.H * 280);
+  if (mx < 0 || mx >= 400 || my < 0 || my >= 280) return false;
+  return maskData[(my * 400 + mx) * 4] > 128;
 }
 
-// Lions
-const LION_COUNT = 12;
-let lions = [];
-const lionGeo = new THREE.SphereGeometry(0.35, 16, 16);
-const lionMat = new THREE.MeshBasicMaterial({ color: 0xd4af37 });
-function spawnLions() {
+function spawnLions(scene) {
   lions.forEach(l => scene.remove(l.mesh));
-  lions = [];
+  lions.length = 0;
   for (let i = 0; i < LION_COUNT; i++) {
     let p = null;
     for (let attempt = 0; attempt < 300; attempt++) {
-      const mx = Math.floor(Math.random() * MASK_W);
-      const my = Math.floor(Math.random() * MASK_H);
-      if (maskData[(my * MASK_W + mx) * 4] > 128) {
-        const x = WORLD.XMIN + (mx + 0.5) / MASK_W * WORLD.W;
-        const z = WORLD.ZMAX - (my + 0.5) / MASK_H * WORLD.H;
+      const mx = Math.floor(Math.random() * 400);
+      const my = Math.floor(Math.random() * 280);
+      if (maskData[(my * 400 + mx) * 4] > 128) {
+        const x = WORLD.XMIN + (mx + 0.5) / 400 * WORLD.W;
+        const z = WORLD.ZMAX - (my + 0.5) / 280 * WORLD.H;
         if (Math.hypot(x - player.x, z - player.z) > 200 + i * 60) { p = { x, z }; break; }
       }
     }
-    const mesh = new THREE.Mesh(lionGeo, lionMat);
+    const mesh = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 16), new THREE.MeshBasicMaterial({ color: 0xd4af37 }));
     mesh.position.set(p ? p.x : player.x, 0.5, p ? p.z : player.z);
     scene.add(mesh);
     lions.push({ x: mesh.position.x, z: mesh.position.z, mesh, collected: false });
@@ -255,14 +174,12 @@ function spawnLions() {
   scoreEl.textContent = 0;
 }
 
-function resetGame() {
-  player.x = start.x; player.z = start.z; player.angle = -Math.PI / 2; player.speed = 0;
+function resetGame(scene) {
+  player.x = -354; player.z = -340; player.angle = -Math.PI / 2; player.speed = 0;
   winEl.classList.remove('show');
-  spawnLions();
+  spawnLions(scene);
 }
-restartBtn.addEventListener('click', resetGame);
 
-// ---------- Loop ----------
 function resize() {
   const w = innerWidth, h = innerHeight;
   renderer.setSize(w, h);
@@ -272,60 +189,147 @@ function resize() {
 addEventListener('resize', resize);
 resize();
 
-let last = performance.now();
-function loop(now) {
-  const dt = Math.min(0.05, (now - last) / 1000);
-  last = now;
+async function init() { console.log("init start");
+  window.gameStatus = 'init0';
+  await new Promise(r => setTimeout(r, 100));
+  window.gameStatus = 'timeout-done';
+  try { const tr = await fetch('data/venezia.json'); window.gameStatus = 'fetch-status-' + tr.status; const tt = await tr.text(); window.gameStatus = 'fetch-len-' + tt.length; } catch(e){ window.gameStatus = 'fetch-err-' + e.message; }
+  // Ground
+  console.log("loading ground");
+  let waterGeo, landGeo, contextGeo;
+  try {
+    waterGeo = await loadPolygons('data/water.bin'); console.log('water loaded');
+    landGeo = await loadPolygons('data/land.bin'); console.log('land loaded');
+    contextGeo = await loadPolygons('data/context.bin'); console.log('context loaded');
+  } catch (e) { console.error('ground load error', e); throw e; }
+  window.gameStatus = 'ground-loaded';
+  const water = new THREE.Mesh(waterGeo, new THREE.MeshPhongMaterial({ color: WATER, shininess: 80 }));
+  water.position.y = -0.4;
+  scene.add(water);
+  const context = new THREE.Mesh(contextGeo, new THREE.MeshLambertMaterial({ color: 0xe9e6df }));
+  context.position.y = -0.1;
+  scene.add(context);
+  const land = new THREE.Mesh(landGeo, new THREE.MeshLambertMaterial({ color: LAND }));
+  land.position.y = -0.05;
+  scene.add(land);
 
-  const up = keys.ArrowUp || keys.w;
-  const down = keys.ArrowDown || keys.s;
-  const left = keys.ArrowLeft || keys.a;
-  const right = keys.ArrowRight || keys.d;
+  console.log("loading config");
+  // Buildings
+  const config = await (await fetch('data/venezia.json')).json();
+  const TILE = config.tileSize;
+  const RADIUS = 2500;
+  const start = new THREE.Vector3(-354, 0, -340);
+  const tileQueue = config.tiles.filter(t => {
+    const cx = (t.tx + 0.5) * TILE;
+    const cz = (t.tz + 0.5) * TILE;
+    return Math.hypot(cx - start.x, cz - start.z) <= RADIUS;
+  });
+  window.gameStatus = 'queue-' + tileQueue.length;
+  const packs = Object.fromEntries(config.packs.map(name => [name, fetchBin(`data/${name}`)]));
+  const WORKERS = Math.min(4, navigator.hardwareConcurrency || 2);
+  const pool = Array.from({ length: WORKERS }, () => new Worker('worker.js', { type: 'module' }));
+  let loaded = 0;
 
-  if (left) player.angle += player.turnSpeed * dt;
-  if (right) player.angle -= player.turnSpeed * dt;
-
-  if (up) player.speed += player.accel * dt;
-  else if (down) player.speed -= player.accel * dt;
-  else player.speed *= player.friction;
-  player.speed = Math.max(-player.maxBack, Math.min(player.maxForward, player.speed));
-  if (Math.abs(player.speed) < 0.3 && !up && !down) player.speed = 0;
-
-  const nx = player.x + Math.sin(player.angle) * player.speed * dt;
-  const nz = player.z + Math.cos(player.angle) * player.speed * dt;
-  if (isWater(nx, nz)) {
-    player.x = nx; player.z = nz;
-  } else {
-    player.speed *= -0.25;
+  console.log("workers ready", tileQueue.length);
+  for (const w of pool) {
+    const next = async () => {
+      const task = tileQueue.shift();
+      if (!task) return;
+      const buf = (await packs[task.pack]).slice(task.offset, task.offset + task.length);
+      w.postMessage({ buf, id: task.file }, [buf]);
+    };
+    w.onerror = e => console.error("worker error", e);
+    w.onmessage = ({ data }) => {
+      try {
+        addTile(scene, buildingMeshes, data);
+        console.log("tile added", data.id, data.pos.length/3, "verts");
+      } catch (e) { console.error('addTile error', e); }
+      loaded++;
+      progressEl.textContent = tileQueue.length ? Math.round(100 * loaded / (loaded + tileQueue.length)) : 100;
+      if (tileQueue.length === 0) {
+        loading.hidden = true; loading.style.display = "none";
+        window.gameStatus = 'tiles-done-' + loaded;
+        pool.forEach(wkr => wkr.terminate());
+      }
+      next();
+    };
+    next();
   }
 
-  lions.forEach(l => {
-    if (l.collected) return;
-    if (Math.hypot(l.x - player.x, l.z - player.z) < 1.2) {
-      l.collected = true;
-      scene.remove(l.mesh);
-    }
-  });
-  const collected = lions.filter(l => l.collected).length;
-  scoreEl.textContent = collected;
-  if (collected === LION_COUNT) winEl.classList.add('show');
+  // Collision mask
+  const maskUrl = await (await fetch('img/water-mask-400.b64.txt')).text();
+  const maskImg = new Image();
+  maskImg.onload = () => {
+    window.gameStatus = 'mask-loaded';
+    const c = document.createElement('canvas');
+    c.width = 400; c.height = 280;
+    const x = c.getContext('2d');
+    x.drawImage(maskImg, 0, 0);
+    maskData = x.getImageData(0, 0, 400, 280).data;
+    resetGame(scene);
+  };
+  maskImg.src = maskUrl;
 
-  // Boat transform
-  boatGroup.position.set(player.x, 0, player.z);
-  boatGroup.rotation.y = player.angle;
+  // Boat
+  const boatGroup = new THREE.Group();
+  scene.add(boatGroup);
+  const hull = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.35, 2.4), new THREE.MeshLambertMaterial({ color: 0x2c2f2a }));
+  hull.position.y = 0.18;
+  boatGroup.add(hull);
+  const cabin = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.45, 0.9), new THREE.MeshLambertMaterial({ color: 0x5f625c }));
+  cabin.position.set(0, 0.55, -0.1);
+  boatGroup.add(cabin);
+  const fez = new THREE.Mesh(new THREE.SphereGeometry(0.22, 16, 16), new THREE.MeshLambertMaterial({ color: 0xb04f3e }));
+  fez.position.set(0, 0.85, -0.1);
+  boatGroup.add(fez);
+  restartBtn.addEventListener('click', () => resetGame(scene));
 
-  // Camera: behind and slightly above boat, looking up at buildings
-  const camDist = 8;
-  const camHeight = 1.6;
-  const cx = player.x - Math.sin(player.angle) * camDist;
-  const cz = player.z - Math.cos(player.angle) * camDist;
-  camera.position.set(cx, camHeight, cz);
-  // look forward and upward
-  const lookX = player.x + Math.sin(player.angle) * 18;
-  const lookZ = player.z + Math.cos(player.angle) * 18;
-  camera.lookAt(lookX, 22, lookZ);
+  // Loop
+  window.gameStatus = 'loop-start';
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
 
-  renderer.render(scene, camera);
+    const up = keys.ArrowUp || keys.w;
+    const down = keys.ArrowDown || keys.s;
+    const left = keys.ArrowLeft || keys.a;
+    const right = keys.ArrowRight || keys.d;
+
+    if (left) player.angle += player.turnSpeed * dt;
+    if (right) player.angle -= player.turnSpeed * dt;
+    if (up) player.speed += player.accel * dt;
+    else if (down) player.speed -= player.accel * dt;
+    else player.speed *= player.friction;
+    player.speed = Math.max(-player.maxBack, Math.min(player.maxForward, player.speed));
+    if (Math.abs(player.speed) < 0.3 && !up && !down) player.speed = 0;
+
+    const nx = player.x + Math.sin(player.angle) * player.speed * dt;
+    const nz = player.z + Math.cos(player.angle) * player.speed * dt;
+    if (isWater(nx, nz)) { player.x = nx; player.z = nz; }
+    else player.speed *= -0.25;
+
+    lions.forEach(l => {
+      if (l.collected) return;
+      if (Math.hypot(l.x - player.x, l.z - player.z) < 1.2) { l.collected = true; scene.remove(l.mesh); }
+    });
+    const collected = lions.filter(l => l.collected).length;
+    scoreEl.textContent = collected;
+    if (collected === LION_COUNT) winEl.classList.add('show');
+
+    boatGroup.position.set(player.x, 0, player.z);
+    boatGroup.rotation.y = player.angle;
+
+    const camDist = 8, camHeight = 1.6;
+    const cx = player.x - Math.sin(player.angle) * camDist;
+    const cz = player.z - Math.cos(player.angle) * camDist;
+    camera.position.set(cx, camHeight, cz);
+    camera.lookAt(player.x + Math.sin(player.angle) * 18, 22, player.z + Math.cos(player.angle) * 18);
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(loop);
+  }
   requestAnimationFrame(loop);
 }
-requestAnimationFrame(loop);
+
+init().catch(e => { console.error('init failed', e); loading.innerHTML = '<b>Ошибка загрузки</b><br>' + String(e).slice(0, 200); });

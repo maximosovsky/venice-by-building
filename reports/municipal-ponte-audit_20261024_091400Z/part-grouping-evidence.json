@@ -1,0 +1,103 @@
+{
+  "merge_edges": [
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000203",
+        "PONTE2010:fID000209"
+      ],
+      "reason": "overlapping_compatible_parts",
+      "overlap_m2": 75.2054,
+      "shared_boundary_m": 0.0,
+      "common_osm_deck_ids": []
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000819",
+        "PONTE2010:fID000820"
+      ],
+      "reason": "same_single_osm_deck_compatible_municipal_parts",
+      "common_osm_deck_ids": [
+        556219205
+      ],
+      "geometry_gap_m": 0.2631
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID001047",
+        "PONTE2010:fID001048"
+      ],
+      "reason": "same_single_osm_deck_compatible_municipal_parts",
+      "common_osm_deck_ids": [
+        556252339
+      ],
+      "geometry_gap_m": 12.0514
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID001072",
+        "PONTE2010:fID001073"
+      ],
+      "reason": "same_single_osm_deck_compatible_municipal_parts",
+      "common_osm_deck_ids": [
+        556351904
+      ],
+      "geometry_gap_m": 5.945
+    }
+  ],
+  "unmerged_contacts": [
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000006",
+        "PONTE2010:fID000264"
+      ],
+      "overlap_m2": 0.0,
+      "shared_boundary_m": 9.1423,
+      "reason": "Not merged: landing-only or insufficient compatible single-deck evidence"
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000250",
+        "PONTE2010:fID000278"
+      ],
+      "overlap_m2": 0.0,
+      "shared_boundary_m": 20.1955,
+      "reason": "Not merged: landing-only or insufficient compatible single-deck evidence"
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000431",
+        "PONTE2010:fID000813"
+      ],
+      "overlap_m2": 0.0,
+      "shared_boundary_m": 20.2804,
+      "reason": "Not merged: landing-only or insufficient compatible single-deck evidence"
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000671",
+        "PONTE2010:fID000672"
+      ],
+      "overlap_m2": 0.0,
+      "shared_boundary_m": 10.0047,
+      "reason": "Not merged: landing-only or insufficient compatible single-deck evidence"
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000709",
+        "PONTE2010:fID001240"
+      ],
+      "overlap_m2": 435.2502,
+      "shared_boundary_m": 90.7331,
+      "reason": "Not merged: landing-only or insufficient compatible single-deck evidence"
+    },
+    {
+      "municipal_ids": [
+        "PONTE2010:fID000813",
+        "PONTE2010:fID001241"
+      ],
+      "overlap_m2": 0.0,
+      "shared_boundary_m": 2348.8501,
+      "reason": "Not merged: landing-only or insufficient compatible single-deck evidence"
+    }
+  ]
+}

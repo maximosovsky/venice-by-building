@@ -1,0 +1,508 @@
+{
+  "node_count": 346792,
+  "way_count": 12949,
+  "deck_count": 465,
+  "bridge_relations": [
+    {
+      "id": 2289364,
+      "tags": {
+        "alt_name:sr": "Мост Ријалто",
+        "alt_name:sr-Latn": "Most Rijalto",
+        "bridge:structure": "humpback",
+        "layer": "1",
+        "man_made": "bridge",
+        "name": "Ponte di Rialto",
+        "name:cs": "most Rialto",
+        "name:de": "Rialtobrücke",
+        "name:en": "Rialto Bridge",
+        "name:es": "Puente del Rialto",
+        "name:fr": "Pont du Rialto",
+        "name:it": "Ponte di Rialto",
+        "name:ja": "リアルト橋",
+        "name:ko": "리알토 다리",
+        "name:pl": "Most Rialto",
+        "name:pt": "Ponte de Rialto",
+        "name:ru": "Мост Риальто",
+        "name:sr": "Мост Риалто",
+        "name:sr-Latn": "Most Rialto",
+        "name:zh": "里亚尔托桥",
+        "start_date": "1591",
+        "tourism": "attraction",
+        "type": "building",
+        "wheelchair": "no",
+        "wikidata": "Q52505",
+        "wikimedia_commons": "Category:Ponte di Rialto",
+        "wikipedia": "it:Ponte di Rialto"
+      },
+      "members": [
+        [
+          "w",
+          1287188470,
+          "outline"
+        ],
+        [
+          "w",
+          815397720,
+          "part"
+        ],
+        [
+          "w",
+          815397724,
+          "part"
+        ],
+        [
+          "w",
+          815397722,
+          "part"
+        ],
+        [
+          "w",
+          815190445,
+          "part"
+        ],
+        [
+          "w",
+          815190444,
+          "part"
+        ],
+        [
+          "w",
+          815190443,
+          "part"
+        ],
+        [
+          "w",
+          815190436,
+          "part"
+        ],
+        [
+          "w",
+          815190442,
+          "part"
+        ],
+        [
+          "w",
+          815190441,
+          "part"
+        ],
+        [
+          "w",
+          815190440,
+          "part"
+        ],
+        [
+          "w",
+          815190435,
+          "part"
+        ],
+        [
+          "w",
+          815190434,
+          "part"
+        ],
+        [
+          "w",
+          815190432,
+          "part"
+        ],
+        [
+          "w",
+          815190433,
+          "part"
+        ],
+        [
+          "w",
+          815190431,
+          "part"
+        ],
+        [
+          "w",
+          815190430,
+          "part"
+        ],
+        [
+          "w",
+          815190428,
+          "part"
+        ],
+        [
+          "w",
+          199258374,
+          ""
+        ]
+      ]
+    }
+  ],
+  "island_relations": [
+    {
+      "id": 2675764,
+      "tags": {
+        "name": "Isola La Salina",
+        "place": "islet",
+        "short_name": "La Salina",
+        "type": "multipolygon",
+        "wikidata": "Q1587476",
+        "wikipedia": "it:La Salina"
+      },
+      "members": [
+        [
+          "w",
+          236185339,
+          "outer"
+        ],
+        [
+          "w",
+          62209187,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 2681475,
+      "tags": {
+        "name": "Isola del Lido",
+        "place": "island",
+        "type": "multipolygon",
+        "wikidata": "Q226221",
+        "wikipedia": "it:Lido di Venezia"
+      },
+      "members": [
+        [
+          "w",
+          793051863,
+          "outer"
+        ],
+        [
+          "w",
+          437667659,
+          "outer"
+        ],
+        [
+          "w",
+          793051865,
+          "outer"
+        ],
+        [
+          "w",
+          865910499,
+          "outer"
+        ],
+        [
+          "w",
+          23022656,
+          "outer"
+        ],
+        [
+          "w",
+          865910502,
+          "outer"
+        ],
+        [
+          "w",
+          199708573,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 2683672,
+      "tags": {
+        "name": "Giudecca",
+        "name:fr": "Ile de la Giudecca",
+        "place": "island",
+        "type": "multipolygon",
+        "wikidata": "Q52435",
+        "wikipedia": "it:Giudecca"
+      },
+      "members": [
+        [
+          "w",
+          175509448,
+          "outer"
+        ],
+        [
+          "w",
+          352877777,
+          "outer"
+        ],
+        [
+          "w",
+          355756373,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 3375271,
+      "tags": {
+        "name": "Isola Le Vignole",
+        "old_name": "Biniola,Isola delle sette vigne",
+        "place": "island",
+        "short_name": "Le Vignole",
+        "type": "multipolygon",
+        "wikidata": "Q1092680",
+        "wikipedia": "it:Vignole"
+      },
+      "members": [
+        [
+          "w",
+          140952294,
+          "outer"
+        ],
+        [
+          "w",
+          172688464,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 4817103,
+      "tags": {
+        "name": "Venezia",
+        "name:eu": "Venezia",
+        "name:fr": "Venise",
+        "place": "island",
+        "type": "multipolygon",
+        "wikidata": "Q106595369"
+      },
+      "members": [
+        [
+          "w",
+          339735723,
+          "outer"
+        ],
+        [
+          "w",
+          848380826,
+          "outer"
+        ],
+        [
+          "w",
+          173197057,
+          "outer"
+        ],
+        [
+          "w",
+          339735706,
+          "outer"
+        ],
+        [
+          "w",
+          352859843,
+          "outer"
+        ],
+        [
+          "w",
+          1526861504,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 5311604,
+      "tags": {
+        "alt_name": "Isola San Giorgio Maggiore",
+        "name": "Isola di San Giorgio Maggiore",
+        "name:en": "Island of San Giorgio Maggiore",
+        "name:fr": "Île de San Giorgio Maggiore",
+        "name:it": "Isola di San Giorgio Maggiore",
+        "place": "islet",
+        "type": "multipolygon",
+        "wikidata": "Q126327",
+        "wikipedia": "it:San Giorgio Maggiore (isola)"
+      },
+      "members": [
+        [
+          "w",
+          61299937,
+          "outer"
+        ],
+        [
+          "w",
+          355756374,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 14490388,
+      "tags": {
+        "name": "San Sebastiano",
+        "place": "island",
+        "type": "multipolygon"
+      },
+      "members": [
+        [
+          "w",
+          306984699,
+          "outer"
+        ],
+        [
+          "w",
+          1088547491,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 15795541,
+      "tags": {
+        "place": "islet",
+        "type": "multipolygon"
+      },
+      "members": [
+        [
+          "w",
+          142026454,
+          "outer"
+        ],
+        [
+          "w",
+          1167794123,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 15795542,
+      "tags": {
+        "name": "Sant'Erasmo",
+        "place": "island",
+        "type": "multipolygon",
+        "wikidata": "Q1072076",
+        "wikipedia": "it:Sant'Erasmo (Venezia)"
+      },
+      "members": [
+        [
+          "w",
+          1282213211,
+          "outer"
+        ],
+        [
+          "w",
+          23077448,
+          "outer"
+        ],
+        [
+          "w",
+          1167794124,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 19474065,
+      "tags": {
+        "name": "Burano",
+        "name:uk": "Бурано",
+        "place": "island",
+        "type": "multipolygon",
+        "wikidata": "Q52439",
+        "wikimedia_commons": "Category:Burano",
+        "wikipedia": "it:Burano"
+      },
+      "members": [
+        [
+          "w",
+          23086114,
+          "outer"
+        ],
+        [
+          "w",
+          1423006685,
+          "outer"
+        ],
+        [
+          "w",
+          1423006688,
+          "outer"
+        ],
+        [
+          "w",
+          1423006687,
+          "outer"
+        ],
+        [
+          "w",
+          1423006686,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 19474680,
+      "tags": {
+        "name": "Mazzorbo",
+        "name:uk": "Маццорбо",
+        "place": "islet",
+        "type": "multipolygon",
+        "wikidata": "Q519717",
+        "wikipedia": "it:Mazzorbo"
+      },
+      "members": [
+        [
+          "w",
+          175721342,
+          "outer"
+        ],
+        [
+          "w",
+          23086189,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 19817236,
+      "tags": {
+        "name": "Isola Madonna del Monte",
+        "place": "islet",
+        "short_name": "Madonna del Monte",
+        "source": "Bing",
+        "type": "multipolygon",
+        "wikidata": "Q1585325",
+        "wikipedia": "it:Madonna del Monte"
+      },
+      "members": [
+        [
+          "w",
+          4717880,
+          "outer"
+        ],
+        [
+          "w",
+          157811875,
+          "outer"
+        ]
+      ]
+    },
+    {
+      "id": 20020176,
+      "tags": {
+        "name": "San Donato",
+        "place": "island",
+        "type": "multipolygon"
+      },
+      "members": [
+        [
+          "w",
+          1088941395,
+          "outer"
+        ],
+        [
+          "w",
+          1462572549,
+          "outer"
+        ]
+      ]
+    }
+  ],
+  "broader_boundary_actual_relation_name": "Venezia-Murano-Burano",
+  "broader_boundary_actual_admin_level": "10",
+  "missing_geometry_way_ids": [],
+  "route_network_nodes": 24268,
+  "start_node": 9645230124,
+  "reachable_nodes": 23259,
+  "no_snapping": true
+}

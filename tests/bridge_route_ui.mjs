@@ -6,6 +6,7 @@ import { test } from 'node:test';
 import { createServer } from 'node:http';
 import * as THREE from '../web/vendor/three.module.js';
 import { pick, setLang } from '../web/i18n.js';
+import { sourcePresentationText } from '../web/source-presentation.js';
 
 const moduleURL = new URL('../web/bridge-route.js', import.meta.url);
 assert.ok(existsSync(moduleURL), 'the additive bridge route module must exist');
@@ -197,7 +198,7 @@ test('real emitted mandatory-ferry JSON supplies the default list, detail and ge
   h.controller.show(); assert.deepEqual(await h.controller.load(), ferry); await h.controller.loadVariants();
   assert.ok(h.controller.listHTML().includes(ferry.title.en)); assert.ok(h.html.includes(ferry.title.en));
   assert.equal((h.html.match(/data-crossing=/g) || []).length, ferry.crossings.length);
-  assert.ok(h.html.includes(ferry.gpx)); assert.ok(h.html.includes(ferry.source.url));
+  assert.ok(h.html.includes(ferry.gpx)); assert.ok(h.html.includes(sourcePresentationText(ferry.source.url,'en')));
   assert.doesNotMatch(h.html, /data-bridge-route-variant/); h.controller.dispose();
 });
 

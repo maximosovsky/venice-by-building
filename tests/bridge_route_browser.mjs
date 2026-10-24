@@ -4,6 +4,7 @@ import { createServer } from 'node:http';
 import { readFileSync } from 'node:fs';
 import { resolve, extname } from 'node:path';
 import assert from 'node:assert/strict';
+import { sourcePresentationText, sourcePresentationHref } from '../web/source-presentation.js';
 const root = resolve('web');
 const remote = process.argv[2];
 const original = JSON.parse(readFileSync(resolve(root, 'data/bridge-route.json'), 'utf8'));
@@ -45,8 +46,8 @@ try {
  const panel=page.locator('.bridge-route-page');
  assert.equal(await page.locator('[data-bridge-route-variant]').count(),0);
  assert.equal(await page.locator('a[download]').getAttribute('href'),data.gpx);
- assert.ok((await panel.innerText()).includes(data.source.url));
- assert.ok(await panel.locator(`a[href="${data.source.url}"]`).count() > 0);
+ assert.ok((await panel.innerText()).includes(sourcePresentationText(data.source.url,'ru')));
+ assert.ok(await panel.locator(`a[href="${sourcePresentationHref(data.source.url)}"]`).count() > 0);
  assert.ok(routeResponses.length > 0); assert.deepEqual(await routeResponses.at(-1).json(),visits,'actual UI-loaded variant source equals emitted JSON');
  const boat = data.legs.filter(l=>l.mode==='boat');
  assert.equal(boat.length,1); assert.equal(boat[0].traghetto_id,data.ferry_events[0].traghetto_id);
@@ -66,7 +67,7 @@ try {
  for (const lang of ['it','en','ru']) {
   await page.locator(`#langs [data-lang="${lang}"]`).click();
   const body=await panel.innerText();
-  assert.ok(body.includes(data.title[lang])); assert.ok(body.includes(data.audit.limitations[lang]));
+  assert.ok(body.includes(data.title[lang])); assert.ok(body.includes(sourcePresentationText(data.audit.limitations[lang],lang)));
   assert.ok(!body.includes(original.title[lang])); assert.ok(!body.includes(visits.variants[0].title[lang]));
   assert.ok(!body.includes(data.euler.explanation[lang]));
   await page.locator('[data-bridge-traghetti-toggle]').click();

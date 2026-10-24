@@ -1,0 +1,141 @@
+{
+  "node_count": 346792,
+  "way_count": 12949,
+  "deck_count": 465,
+  "bridge_relations": [
+    {
+      "id": 2289364,
+      "tags": {
+        "alt_name:sr": "Мост Ријалто",
+        "alt_name:sr-Latn": "Most Rijalto",
+        "bridge:structure": "humpback",
+        "layer": "1",
+        "man_made": "bridge",
+        "name": "Ponte di Rialto",
+        "name:cs": "most Rialto",
+        "name:de": "Rialtobrücke",
+        "name:en": "Rialto Bridge",
+        "name:es": "Puente del Rialto",
+        "name:fr": "Pont du Rialto",
+        "name:it": "Ponte di Rialto",
+        "name:ja": "リアルト橋",
+        "name:ko": "리알토 다리",
+        "name:pl": "Most Rialto",
+        "name:pt": "Ponte de Rialto",
+        "name:ru": "Мост Риальто",
+        "name:sr": "Мост Риалто",
+        "name:sr-Latn": "Most Rialto",
+        "name:zh": "里亚尔托桥",
+        "start_date": "1591",
+        "tourism": "attraction",
+        "type": "building",
+        "wheelchair": "no",
+        "wikidata": "Q52505",
+        "wikimedia_commons": "Category:Ponte di Rialto",
+        "wikipedia": "it:Ponte di Rialto"
+      },
+      "members": [
+        [
+          "w",
+          1287188470,
+          "outline"
+        ],
+        [
+          "w",
+          815397720,
+          "part"
+        ],
+        [
+          "w",
+          815397724,
+          "part"
+        ],
+        [
+          "w",
+          815397722,
+          "part"
+        ],
+        [
+          "w",
+          815190445,
+          "part"
+        ],
+        [
+          "w",
+          815190444,
+          "part"
+        ],
+        [
+          "w",
+          815190443,
+          "part"
+        ],
+        [
+          "w",
+          815190436,
+          "part"
+        ],
+        [
+          "w",
+          815190442,
+          "part"
+        ],
+        [
+          "w",
+          815190441,
+          "part"
+        ],
+        [
+          "w",
+          815190440,
+          "part"
+        ],
+        [
+          "w",
+          815190435,
+          "part"
+        ],
+        [
+          "w",
+          815190434,
+          "part"
+        ],
+        [
+          "w",
+          815190432,
+          "part"
+        ],
+        [
+          "w",
+          815190433,
+          "part"
+        ],
+        [
+          "w",
+          815190431,
+          "part"
+        ],
+        [
+          "w",
+          815190430,
+          "part"
+        ],
+        [
+          "w",
+          815190428,
+          "part"
+        ],
+        [
+          "w",
+          199258374,
+          ""
+        ]
+      ]
+    }
+  ],
+  "missing_geometry_way_ids": [],
+  "route_network_nodes": 24268,
+  "start_node": 9645230124,
+  "reachable_nodes": 23259,
+  "no_snapping": true
+}
