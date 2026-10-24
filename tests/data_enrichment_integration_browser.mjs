@@ -25,7 +25,8 @@ for (const dataset of history.datasets) assert.equal(dataset.publication.publish
 for (const id of ['register-1740','commercial-1857','parcels-1808']) {
   const dataset=history.datasets.find(d=>d.id===id);
   assert.ok(dataset.chunks.length>0,`${id} exposes chunks`);
-  const first=String(dataset.chunks[0].url).replace(/^data\/enrichment-public\//,'data/');
+  const first=String(dataset.chunks[0].url);
+  assert.ok(first.startsWith('data/enrichment-public/'),`${id} chunk URL stays inside the published projection`);
   assert.equal(await head(first),200,`${id} first chunk served`);
 }
 // Prepared local-only files must never be served by the deployed host.
