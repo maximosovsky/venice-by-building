@@ -19,7 +19,7 @@ THREE.ColorManagement.enabled = false;
 
 // The Third Script's palette (see styles.css): a white wall for the sky, warm stone for the land, the logo's cypress
 // teal for the harbour, its terracotta sun for the marks. Distant buildings fade into the white.
-const SKY = '#cfcac2';
+const SKY = '#ddd0bf';
 const LAND = '#f3f0ea';
 const CONTEXT = '#e9e6df';
 const WATER = '#b9d0d2';
