@@ -66,10 +66,10 @@ a:hover { text-decoration-color: currentColor; }
 .masthead { position: fixed; top: calc(env(safe-area-inset-top, 0px) + var(--gutter)); left: var(--gutter); z-index: 2; display: flex; align-items: center; gap: 14px; }
 .venice-arms { display: block; width: clamp(112px, 11.2vw, 162px); height: 218px; object-fit: contain; flex: 0 0 auto; }
 .masthead h1:has(.venice-wordmark) { padding-right: 0; }
-.venice-wordmark { display: block; width: clamp(180px, 20vw, 260px); height: auto; transform: translate(5cm, -50px); }
-/* A soft patch of the wall behind the name, so it always reads on white. */
+.venice-wordmark { display: block; width: clamp(140px, 16vw, 220px); height: auto; transform: none; }
+/* A soft patch of the wall behind the name, so it always reads on the paper background. */
 .masthead::before { content: ""; position: absolute; z-index: -1; left: calc(-1 * var(--gutter)); top: calc(-1 * var(--gutter));
-  width: 400px; height: 210px; pointer-events: none;
+  width: min(520px, 70vw); height: 240px; pointer-events: none;
   background: radial-gradient(ellipse 100% 100% at 0 0, var(--wall) 55%, rgba(237, 222, 198, 0) 100%); }
 h1 { position: relative; z-index: 0; display: block; width: max-content; margin: 0; padding-right: .3em;
   font: 400 clamp(44px, 4.2vw, 60px)/.86 var(--serif); letter-spacing: -0.005em; }
