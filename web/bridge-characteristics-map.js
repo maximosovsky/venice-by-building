@@ -46,7 +46,9 @@ export function installBridgeCharacteristics({ THREE, scene, pickText = value =>
   function build(data) {
     const built = new THREE.Group();
     built.name = 'bridge-characteristics';
-    for (const [gid, deckId] of Object.entries(data.by_gid || {})) {
+    for (const [gid, entry] of Object.entries(data.by_gid || {})) {
+      // by_gid holds either the deck id itself or a reference object that names it.
+      const deckId = typeof entry === 'string' ? entry : entry?.bridge_id ?? entry?.deck_id ?? entry?.id;
       const record = data.by_bridge_id?.[deckId];
       if (!record) continue;
       records.set(Number(gid), record);

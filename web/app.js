@@ -1746,4 +1746,4 @@ renderer.setAnimationLoop(now => {
   renderer.render(scene, camera);
 });
 
-window.__dbg = { churchBuildingHighlight, bridgeRoute, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };
+window.__dbg = { churchBuildingHighlight, bridgeRoute, bridgeCharacteristics, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };

@@ -4,14 +4,16 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 const app=readFileSync('web/app.js','utf8'),html=readFileSync('web/index.html','utf8');
 assert.match(app,/import\s*\{\s*installDataEnrichment,\s*DATA_UI\s*\}\s*from ['"]\.\/data-enrichment\.js['"]/,'real app imports enrichment installer');
-assert.match(html,/notes-open[^\n]*\n\s*<button[^>]*class="data-open"[^>]*data-no-i18n/,'catalog button next to Notes, source-language protected');
+assert.match(app,/import\s*\{\s*installBridgeCharacteristics,\s*BRIDGE_UI\s*\}\s*from ['"]\.\/bridge-characteristics-map\.js['"]/,'real app imports the municipal bridge overlay');
+assert.doesNotMatch(html,/data-open/,'no catalog section: the bucket button must be gone');
+assert.doesNotMatch(app,/showData|data-open/,'no catalog view survives in the host');
 assert.ok(app.indexOf('const dataEnrichment = installDataEnrichment')>app.indexOf('const churchRoute = installChurchRoute'),'installer after dock and route initialization');
 assert.match(app,/openDock\('building', buildingHtml\(gid\), back\);\s*void dataEnrichment\.enrichCard\(gid\);/,'enrichment follows every host building rendering');
 assert.match(app,/dockView === 'building' && pinnedGid >= 0\) openBuilding\(pinnedGid, buildingBack\)/,'language change reuses enriched building renderer');
-assert.match(app,/data-open'\)\.setAttribute\('aria-pressed', String\(dockView === 'data'\)\)/);
-assert.match(app,/pickText\(DATA_UI\.title\)/);
-assert.match(app,/onLang\(paintDataNav\)/);
-assert.match(app,/if \(dockView === 'building'\) unpin\(\);\s*void dataEnrichment\.showData\(\)/);
+assert.match(app,/const bridgeCharacteristics = installBridgeCharacteristics\(\{ THREE, scene, pickText/,'bridge overlay installed in the scene');
+assert.match(app,/bridgeCharacteristics\.setSourceVisible\('bridges-tab', m === MODE\.layers\)/,'bridge characteristics follow the Bridges lens');
+assert.match(app,/const row = b\.src === 1 \? bridgeCharacteristics\.rows\(gid\) : null/,'bridge tooltip reads the municipal record');
+assert.match(app,/bridgeCharacteristics,/,'bridge overlay exposed for browser verification');
 assert.match(app,/e\.kind === 'address'\) dataEnrichment\.focusAddress\(e\.address\)/,'addresses focus source point, never inferred entrance/building');
 assert.match(app,/findRequest\+\+/,'closing search cancels asynchronous result updates');
 // Execute the exact host Find functions with only DOM/network seams substituted.
@@ -34,4 +36,4 @@ assert.equal(ctx.testFind.getHits()[1].kind,'address');ctx.testFind.choose(ctx.t
 input.value='SM 100';ctx.testFind.renderFind();pending[2].reject(new Error('HTTP 503'));await new Promise(r=>setImmediate(r));
 assert.match(list.innerHTML,/record count unknown/);assert.doesNotMatch(list.innerHTML,/Ничего с таким названием/);
 ctx.testFind.renderFind();ctx.testFind.closeFind();pending[3].resolve([address]);await new Promise(r=>setImmediate(r));assert.equal(list.hidden,true,'late response cannot reopen dismissed search');
-console.log(JSON.stringify({integrationHooks:true,searchPreservesOSM:true,staleQueryIgnored:true,closedSearchIgnored:true,addressNotEntrance:true,addressFetchErrorHonest:true}));
+console.log(JSON.stringify({integrationHooks:true,catalogSectionRemoved:true,bridgeOverlayWired:true,searchPreservesOSM:true,staleQueryIgnored:true,closedSearchIgnored:true,addressNotEntrance:true,addressFetchErrorHonest:true}));
