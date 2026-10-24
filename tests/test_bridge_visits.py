@@ -231,6 +231,105 @@ def artifacts():
     return json.loads(p.read_text(encoding='utf-8'))
 
 
+def test_frozen_walking_midpoint_variant_remains_byte_equivalent(artifacts):
+    import hashlib
+    walking = json.dumps(artifacts['variants'][0], ensure_ascii=False, separators=(',', ':')).encode('utf8')
+    assert hashlib.sha256(walking).hexdigest() == '8c295882d3a4e69056b7368e7e5cf900eac6c9587cd1151b7d333c7326f64f00'
+
+
+def test_traghetto_export_requires_at_least_one_complete_ordered_boat_leg(artifacts):
+    r = artifacts['variants'][1]
+    boats = [leg for leg in r['legs'] if leg['mode'] == 'boat']
+    assert boats, 'traghetto_midpoints must not fall back to the zero-ferry walking tour'
+    assert r['boat_distance_m'] > 0
+    assert r['audit']['verified']['mandatory_ferry'] is True
+    assert len(r['ferry_events']) == len(boats)
+    sources = {f['id']: f for f in artifacts['traghetti']}
+    for event, leg in zip(r['ferry_events'], boats):
+        assert (event['traghetto_id'], event['start_index'], event['end_index'], event['distance_m']) == (
+            leg['traghetto_id'], leg['start_index'], leg['end_index'], leg['distance_m'])
+        path = r['proof']['route_node_ids'][event['start_index']:event['end_index'] + 1]
+        nodes = sources[event['traghetto_id']]['node_ids']
+        assert path in [nodes, nodes[::-1]]
+    assert [e['start_index'] for e in r['ferry_events']] == sorted(e['start_index'] for e in r['ferry_events'])
+    assert r['audit']['verified']['ferry_through_connection'] is True
+    assert r['audit']['verified']['no_void_immediate_return'] is True
+    for event in r['ferry_events']:
+        before = [c for c in r['crossings'] if c['route_index'] < event['start_index']]
+        after = [c for c in r['crossings'] if c['route_index'] > event['end_index']]
+        assert before and after
+        assert before[-1]['bridge_id'] != after[0]['bridge_id']
+    candidates = r['optimization']['candidate_costs_m']
+    assert len(candidates) == 8
+    assert r['optimization']['selected_cost_m'] == min(c['cost_m'] for c in candidates)
+    midpoint_nodes = {b['node'] for b in r['proof']['midpoints']}
+    for candidate in candidates:
+        connected = candidate['connected_bridge_target_node_ids']
+        assert len(set(connected)) == 2
+        assert set(connected) <= midpoint_nodes
+        assert candidate['connection_audit']['complete_boat_legs'] >= 1
+        assert candidate['connection_audit']['no_void_immediate_return'] is True
+
+
+def test_actual_ferry_returns_require_intervening_bridge_midpoint(artifacts):
+    r = artifacts['variants'][1]
+    route = r['proof']['route_node_ids']
+    midpoint_nodes = {b['node'] for b in r['proof']['midpoints']}
+    events = r['ferry_events']
+    for first, second in zip(events, events[1:] + events[:1]):
+        if first is second or first['traghetto_id'] != second['traghetto_id']:
+            continue
+        a = route[first['start_index']:first['end_index'] + 1]
+        b = route[second['start_index']:second['end_index'] + 1]
+        if a != b[::-1]:
+            continue
+        between = (route[first['end_index']:second['start_index'] + 1]
+                   if second['start_index'] >= first['end_index'] else
+                   route[first['end_index']:] + route[:second['start_index'] + 1])
+        assert midpoint_nodes.intersection(between), 'Void immediate ferry return: walking at a pier is not a bridge visit'
+
+
+def test_ferry_connection_audit_rejects_pier_walk_but_accepts_midpoint_return():
+    m = stage()
+    g = nx.Graph()
+    g.add_edge(3, 4, length=1., mode='traghetto', traghetto_id='test')
+    for u, v in [(0, 1), (1, 3), (4, 5), (5, 2)]:
+        g.add_edge(u, v, length=1., mode='walk')
+    ferries = [{'id': 'test', 'node_ids': [3, 4]}]
+    with pytest.raises(ValueError, match='intervening bridge midpoint'):
+        m.ferry_connection_audit(g, [0, 1, 3, 4, 5, 4, 3, 1, 0], {1, 2}, ferries)
+    audit = m.ferry_connection_audit(g, [0, 1, 3, 4, 5, 2, 5, 4, 3, 1, 0], {1, 2}, ferries)
+    assert audit['complete_boat_legs'] == 2
+    assert audit['opposite_returns_separated_by_midpoint_visits'] is True
+    with pytest.raises(ValueError, match='complete boat'):
+        m.ferry_connection_audit(g, [0, 1, 0], {1, 2}, ferries)
+
+
+def test_mandatory_ferry_solver_forces_complete_expensive_source_leg():
+    m = stage()
+    g = nx.Graph()
+    for u, v, length in [(0, 1, 2.), (1, 2, 2.), (2, 0, 2.), (1, 3, 1.), (2, 5, 1.)]:
+        g.add_edge(u, v, length=length, mode='walk')
+    for u, v in [(3, 4), (4, 5)]:
+        g.add_edge(u, v, length=10., mode='traghetto', traghetto_id='test')
+    ferries = [{'id': 'test', 'node_ids': [3, 4, 5], 'routing_eligible': True}]
+    route, evidence = m.mandatory_ferry_tour(g, [0, 1, 2], [0, 1, 2, 0], ferries)
+    assert route[0] == route[-1] == 0
+    assert {0, 1, 2} <= set(route)
+    assert any(route[i:i + 3] in [[3, 4, 5], [5, 4, 3]] for i in range(len(route) - 2))
+    assert all(g.has_edge(u, v) for u, v in zip(route, route[1:]))
+    assert evidence['selected_cost_m'] == sum(g[u][v]['length'] for u, v in zip(route, route[1:]))
+    assert evidence['selected_cost_m'] <= evidence['best_initial_cost_m']
+    assert evidence['directed_ferry_candidates'] == 2
+    for candidate in evidence['candidate_costs_m']:
+        assert set(candidate['connected_bridge_target_node_ids']) == {1, 2}
+    assert evidence['connection_audit']['complete_boat_legs'] >= 1
+    assert evidence['connection_audit']['opposite_returns_separated_by_midpoint_visits'] is True
+    assert evidence['global_optimum_claimed'] is False
+    with pytest.raises(ValueError, match='eligible ferry'):
+        m.mandatory_ferry_tour(g, [0, 1, 2], [0, 1, 2, 0], [])
+
+
 def test_named_both_bridge_inclusion_midpoint_variants(artifacts):
     expected = {'d555836229', 'd555835752'}
     for r in artifacts['variants']:
@@ -267,7 +366,8 @@ def test_export_variants_cover_exact_frozen346_and_event_semantics(artifacts):
     assert walk['id'] == 'walking_midpoints'
     assert walk['stats']['boat_distance_m'] == 0
     assert boat['id'] == 'traghetto_midpoints'
-    assert boat['distance_m'] <= walk['distance_m']
+    assert boat['distance_m'] <= boat['optimization']['best_initial_cost_m'] + .001
+    assert boat['optimization']['mandatory_ferry'] is True
     assert boat['status'] == 'ready'
     assert boat['availability'] == 'conditional_unverified_today'
     assert boat['schedule_feasible'] is False
@@ -399,7 +499,7 @@ def test_all_four_traghetti_mapped_with_official_schedule_and_conflicts(artifact
     route = artifacts['variants'][1]
     assert route['audit']['routing_assumption'] == 'user_authorized_ferry_connector_assumption'
     assert route['audit']['routing_eligible_ferry_ids'] == list(stage().FERRY_IDS)
-    assert route['distance_m'] <= route['optimization']['previous_seed_extended_cost_m']
+    assert route['distance_m'] <= route['optimization']['previous_seed_extended_cost_m'] + .001
     assert route['optimization']['previous_seed_preserved']
     overrides = {a['osm_way_id']: a for a in route['audit']['access_overrides']}
     assert set(overrides) == {216893107, 216893103}
