@@ -44,10 +44,12 @@
     const last = Math.max.apply(null, borns);
     if (!(last > first)) return false;                    // всё выросло разом — переигрывать нечего
 
-    // Спрятать подписи на время сборки: иначе они висят над ещё не выросшими домами.
-    const labels = window.__dbg && window.__dbg.labelGroup;
-    if (labels) labels.visible = false;
+  // Подписи появляются первыми, потом дома: дадим labels полсекунды на отрисовку,
+  // затем отматываем часы к самому раннему uBorn и запускаем медленное время.
+  const labels = window.__dbg && window.__dbg.labelGroup;
+  if (labels) labels.visible = true;
 
+  setTimeout(() => {
     base = (first - 0.05) * 1000;
     t0 = performance.now();
     // Ход часов такой, чтобы весь поток падений уложился в SIGHT_MS: обычно это замедление в несколько раз.
@@ -56,11 +58,13 @@
     mode = 'slow';
 
     // Конец сборки — когда последний дом достроился: дальше часы возвращаются к настоящему времени
-    // (прыжок вперёд, уже выросшие дома от него не меняются) и подписи возвращаются на место.
+    // (прыжок вперёд, уже выросшие дома от него не меняются).
     const endAt = ((last + 1.0) * 1000 - base) / speed;
-    const stop = () => { mode = 'run'; if (labels) labels.visible = true; };
     setTimeout(stop, endAt);
     setTimeout(() => { if (mode === 'slow') stop(); }, 30000);   // страховка
+  }, 520);
+
+  const stop = () => { mode = 'run'; };
 
     // Тронул карту — не заставляем ждать.
     for (const name of ['pointerdown', 'wheel', 'keydown', 'touchstart']) {

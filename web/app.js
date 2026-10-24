@@ -222,8 +222,8 @@ function textureFor(L) {
   c.height = LABEL_PX;
   ctx.font = font;
   ctx.textBaseline = 'middle';
-  ctx.lineWidth = LABEL_PX * 0.12;
-  ctx.strokeStyle = L.water ? 'rgba(185,208,210,0.85)' : 'rgba(243,240,234,0.85)';
+  ctx.lineWidth = LABEL_PX * 0.06;
+  ctx.strokeStyle = L.water ? 'rgba(185,208,210,0.6)' : 'rgba(243,240,234,0.6)';
   ctx.fillStyle = L.water ? '#2a535a' : MUTED;
   ctx.strokeText(L.name, LABEL_PX * 0.2, LABEL_PX / 2);
   ctx.fillText(L.name, LABEL_PX * 0.2, LABEL_PX / 2);
