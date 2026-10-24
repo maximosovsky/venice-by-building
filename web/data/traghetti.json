@@ -65,7 +65,7 @@
           "lat": 45.4403899,
           "x": -304.7215709477896,
           "z": -720.7600220516324,
-          "connected_walking_landing": false,
+          "connected_walking_landing": true,
           "source_approach_way_ids": [
             216893107
           ],
@@ -78,14 +78,37 @@
           ]
         }
       ],
-      "routing_eligible": false,
-      "routing_exclusion": "indoor_landing_excluded",
+      "routing_eligible": true,
+      "routing_exclusion": null,
+      "routing_assumption": "user_authorized_ferry_connector_assumption",
+      "access_overrides": {},
+      "landing_access_overrides": [
+        {
+          "osm_way_id": 216893107,
+          "node_ids": [
+            2262139796,
+            2262139795
+          ],
+          "source_tags": {
+            "highway": "footway",
+            "indoor": "yes",
+            "man_made": "pier"
+          },
+          "traghetto_id": "santa_sofia",
+          "routing_assumption": "user_authorized_ferry_connector_assumption",
+          "access_overrides": {
+            "indoor": "yes"
+          },
+          "assumed_availability": "conditional_unverified_today",
+          "scope": "exact original ferry landing pier; possible indoor landing building, access not verified"
+        }
+      ],
       "schedule": "Mo-Fr 08:30-19:00; Sa-Su, PH 09:00-18:00",
       "schedule_source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
         "effective_from": "2021-06-07",
         "page_updated_search_index": "2025-09-18",
-        "retrieved_at": "2026-10-23T20:19:16.210232+00:00",
+        "retrieved_at": "2026-10-23T18:55:34+00:00",
         "retrieval_method": "web_extract official page; direct HTTP returned Incapsula stub",
         "evidence": "TRAGHETTI ATTIVI E ORARI (in vigore dal 07.06.2021)\ntraghetto DOGANA ore 9.00 - 18.00\ntraghetto SANTA MARIA DEL GIGLIO ore 9.00 - 18.00\ntraghetto SAN TOMA’ ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.30 Sabato, domenica e festivi\ntraghetto SANTA SOFIA ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.00 sabato, domenica e festivi\nil servizio non viene effettuato nei giorni 15/8, 25/12, 26/12, 1/1\nil servizio termina alle ore 13.00 nei giorni 24/12, 31/12.",
         "live_operation_verified": false
@@ -103,9 +126,9 @@
         "12-31": "13:00"
       },
       "caveat": {
-        "ru": "Часы опубликованы муниципалитетом, действуют с 07.06.2021; работа сегодня не проверена. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Только условное планирование; не доказан однодневный маршрут. Santa Sofia исключён из маршрутизации из-за indoor-подхода, Giglio — foot=no; Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
-        "it": "Orari comunali in vigore dal 07.06.2021; servizio odierno non verificato. Nessun servizio il 15/8, 25/12, 26/12, 1/1; il 24/12 e 31/12 fino alle 13:00. Pianificazione condizionale, non itinerario giornaliero dimostrato. Santa Sofia escluso per accesso indoor; Giglio per foot=no; Dogana: OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
-        "en": "Published municipal hours effective 2021-06-07; operation today unverified. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Conditional planning only, not a proven one-day itinerary. Santa Sofia excluded for indoor approach; Giglio for foot=no; Dogana OSM starts 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
+        "ru": "Трагетто — лодки, не физические мосты и не 24/7. По разрешению пользователя все четыре доступны графу условно: только исходный пирс Santa Sofia indoor=yes и паром Giglio foot=no имеют явные исключения. Часы муниципалитета с 07.06.2021, работа и доступ сегодня не проверены; однодневность не доказана. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
+        "it": "Traghetti in barca, non ponti fisici né servizio 24/7. Ipotesi autorizzata: tutti e quattro disponibili nel grafo; deroghe solo al pontile originale Santa Sofia indoor=yes e al traghetto Giglio foot=no. Orari comunali dal 07.06.2021; servizio e accesso odierni non verificati, fattibilità giornaliera non dimostrata. Chiuso 15/8, 25/12, 26/12, 1/1; 24/12 e 31/12 fino alle 13:00. Dogana OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
+        "en": "Traghetti are boats, not physical bridges or 24/7 service. User-authorized what-if makes all four graph-eligible; overrides only original Santa Sofia pier indoor=yes and Giglio ferry foot=no. Municipal hours effective 2021-06-07; current operation/access unverified, no one-day feasibility proof. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Dogana OSM 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
       },
       "source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
@@ -192,12 +215,15 @@
       ],
       "routing_eligible": true,
       "routing_exclusion": null,
+      "routing_assumption": "user_authorized_ferry_connector_assumption",
+      "access_overrides": {},
+      "landing_access_overrides": [],
       "schedule": "Mo-Fr 08:30-19:00; Sa-Su, PH 09:00-18:30",
       "schedule_source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
         "effective_from": "2021-06-07",
         "page_updated_search_index": "2025-09-18",
-        "retrieved_at": "2026-10-23T20:19:16.210232+00:00",
+        "retrieved_at": "2026-10-23T18:55:34+00:00",
         "retrieval_method": "web_extract official page; direct HTTP returned Incapsula stub",
         "evidence": "TRAGHETTI ATTIVI E ORARI (in vigore dal 07.06.2021)\ntraghetto DOGANA ore 9.00 - 18.00\ntraghetto SANTA MARIA DEL GIGLIO ore 9.00 - 18.00\ntraghetto SAN TOMA’ ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.30 Sabato, domenica e festivi\ntraghetto SANTA SOFIA ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.00 sabato, domenica e festivi\nil servizio non viene effettuato nei giorni 15/8, 25/12, 26/12, 1/1\nil servizio termina alle ore 13.00 nei giorni 24/12, 31/12.",
         "live_operation_verified": false
@@ -215,9 +241,9 @@
         "12-31": "13:00"
       },
       "caveat": {
-        "ru": "Часы опубликованы муниципалитетом, действуют с 07.06.2021; работа сегодня не проверена. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Только условное планирование; не доказан однодневный маршрут. Santa Sofia исключён из маршрутизации из-за indoor-подхода, Giglio — foot=no; Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
-        "it": "Orari comunali in vigore dal 07.06.2021; servizio odierno non verificato. Nessun servizio il 15/8, 25/12, 26/12, 1/1; il 24/12 e 31/12 fino alle 13:00. Pianificazione condizionale, non itinerario giornaliero dimostrato. Santa Sofia escluso per accesso indoor; Giglio per foot=no; Dogana: OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
-        "en": "Published municipal hours effective 2021-06-07; operation today unverified. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Conditional planning only, not a proven one-day itinerary. Santa Sofia excluded for indoor approach; Giglio for foot=no; Dogana OSM starts 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
+        "ru": "Трагетто — лодки, не физические мосты и не 24/7. По разрешению пользователя все четыре доступны графу условно: только исходный пирс Santa Sofia indoor=yes и паром Giglio foot=no имеют явные исключения. Часы муниципалитета с 07.06.2021, работа и доступ сегодня не проверены; однодневность не доказана. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
+        "it": "Traghetti in barca, non ponti fisici né servizio 24/7. Ipotesi autorizzata: tutti e quattro disponibili nel grafo; deroghe solo al pontile originale Santa Sofia indoor=yes e al traghetto Giglio foot=no. Orari comunali dal 07.06.2021; servizio e accesso odierni non verificati, fattibilità giornaliera non dimostrata. Chiuso 15/8, 25/12, 26/12, 1/1; 24/12 e 31/12 fino alle 13:00. Dogana OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
+        "en": "Traghetti are boats, not physical bridges or 24/7 service. User-authorized what-if makes all four graph-eligible; overrides only original Santa Sofia pier indoor=yes and Giglio ferry foot=no. Municipal hours effective 2021-06-07; current operation/access unverified, no one-day feasibility proof. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Dogana OSM 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
       },
       "source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
@@ -308,14 +334,19 @@
           ]
         }
       ],
-      "routing_eligible": false,
-      "routing_exclusion": "source_foot_no",
+      "routing_eligible": true,
+      "routing_exclusion": null,
+      "routing_assumption": "user_authorized_ferry_connector_assumption",
+      "access_overrides": {
+        "foot": "no"
+      },
+      "landing_access_overrides": [],
       "schedule": "09:00-18:00",
       "schedule_source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
         "effective_from": "2021-06-07",
         "page_updated_search_index": "2025-09-18",
-        "retrieved_at": "2026-10-23T20:19:16.210232+00:00",
+        "retrieved_at": "2026-10-23T18:55:34+00:00",
         "retrieval_method": "web_extract official page; direct HTTP returned Incapsula stub",
         "evidence": "TRAGHETTI ATTIVI E ORARI (in vigore dal 07.06.2021)\ntraghetto DOGANA ore 9.00 - 18.00\ntraghetto SANTA MARIA DEL GIGLIO ore 9.00 - 18.00\ntraghetto SAN TOMA’ ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.30 Sabato, domenica e festivi\ntraghetto SANTA SOFIA ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.00 sabato, domenica e festivi\nil servizio non viene effettuato nei giorni 15/8, 25/12, 26/12, 1/1\nil servizio termina alle ore 13.00 nei giorni 24/12, 31/12.",
         "live_operation_verified": false
@@ -333,9 +364,9 @@
         "12-31": "13:00"
       },
       "caveat": {
-        "ru": "Часы опубликованы муниципалитетом, действуют с 07.06.2021; работа сегодня не проверена. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Только условное планирование; не доказан однодневный маршрут. Santa Sofia исключён из маршрутизации из-за indoor-подхода, Giglio — foot=no; Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
-        "it": "Orari comunali in vigore dal 07.06.2021; servizio odierno non verificato. Nessun servizio il 15/8, 25/12, 26/12, 1/1; il 24/12 e 31/12 fino alle 13:00. Pianificazione condizionale, non itinerario giornaliero dimostrato. Santa Sofia escluso per accesso indoor; Giglio per foot=no; Dogana: OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
-        "en": "Published municipal hours effective 2021-06-07; operation today unverified. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Conditional planning only, not a proven one-day itinerary. Santa Sofia excluded for indoor approach; Giglio for foot=no; Dogana OSM starts 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
+        "ru": "Трагетто — лодки, не физические мосты и не 24/7. По разрешению пользователя все четыре доступны графу условно: только исходный пирс Santa Sofia indoor=yes и паром Giglio foot=no имеют явные исключения. Часы муниципалитета с 07.06.2021, работа и доступ сегодня не проверены; однодневность не доказана. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
+        "it": "Traghetti in barca, non ponti fisici né servizio 24/7. Ipotesi autorizzata: tutti e quattro disponibili nel grafo; deroghe solo al pontile originale Santa Sofia indoor=yes e al traghetto Giglio foot=no. Orari comunali dal 07.06.2021; servizio e accesso odierni non verificati, fattibilità giornaliera non dimostrata. Chiuso 15/8, 25/12, 26/12, 1/1; 24/12 e 31/12 fino alle 13:00. Dogana OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
+        "en": "Traghetti are boats, not physical bridges or 24/7 service. User-authorized what-if makes all four graph-eligible; overrides only original Santa Sofia pier indoor=yes and Giglio ferry foot=no. Municipal hours effective 2021-06-07; current operation/access unverified, no one-day feasibility proof. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Dogana OSM 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
       },
       "source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
@@ -434,12 +465,15 @@
       ],
       "routing_eligible": true,
       "routing_exclusion": null,
+      "routing_assumption": "user_authorized_ferry_connector_assumption",
+      "access_overrides": {},
+      "landing_access_overrides": [],
       "schedule": "09:00-18:00",
       "schedule_source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",
         "effective_from": "2021-06-07",
         "page_updated_search_index": "2025-09-18",
-        "retrieved_at": "2026-10-23T20:19:16.210232+00:00",
+        "retrieved_at": "2026-10-23T18:55:34+00:00",
         "retrieval_method": "web_extract official page; direct HTTP returned Incapsula stub",
         "evidence": "TRAGHETTI ATTIVI E ORARI (in vigore dal 07.06.2021)\ntraghetto DOGANA ore 9.00 - 18.00\ntraghetto SANTA MARIA DEL GIGLIO ore 9.00 - 18.00\ntraghetto SAN TOMA’ ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.30 Sabato, domenica e festivi\ntraghetto SANTA SOFIA ore 8.30 – 19.00 da lunedì a venerdì\nore 9.00 – 18.00 sabato, domenica e festivi\nil servizio non viene effettuato nei giorni 15/8, 25/12, 26/12, 1/1\nil servizio termina alle ore 13.00 nei giorni 24/12, 31/12.",
         "live_operation_verified": false
@@ -457,9 +491,9 @@
         "12-31": "13:00"
       },
       "caveat": {
-        "ru": "Часы опубликованы муниципалитетом, действуют с 07.06.2021; работа сегодня не проверена. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Только условное планирование; не доказан однодневный маршрут. Santa Sofia исключён из маршрутизации из-за indoor-подхода, Giglio — foot=no; Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
-        "it": "Orari comunali in vigore dal 07.06.2021; servizio odierno non verificato. Nessun servizio il 15/8, 25/12, 26/12, 1/1; il 24/12 e 31/12 fino alle 13:00. Pianificazione condizionale, non itinerario giornaliero dimostrato. Santa Sofia escluso per accesso indoor; Giglio per foot=no; Dogana: OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
-        "en": "Published municipal hours effective 2021-06-07; operation today unverified. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Conditional planning only, not a proven one-day itinerary. Santa Sofia excluded for indoor approach; Giglio for foot=no; Dogana OSM starts 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
+        "ru": "Трагетто — лодки, не физические мосты и не 24/7. По разрешению пользователя все четыре доступны графу условно: только исходный пирс Santa Sofia indoor=yes и паром Giglio foot=no имеют явные исключения. Часы муниципалитета с 07.06.2021, работа и доступ сегодня не проверены; однодневность не доказана. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.",
+        "it": "Traghetti in barca, non ponti fisici né servizio 24/7. Ipotesi autorizzata: tutti e quattro disponibili nel grafo; deroghe solo al pontile originale Santa Sofia indoor=yes e al traghetto Giglio foot=no. Orari comunali dal 07.06.2021; servizio e accesso odierni non verificati, fattibilità giornaliera non dimostrata. Chiuso 15/8, 25/12, 26/12, 1/1; 24/12 e 31/12 fino alle 13:00. Dogana OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.",
+        "en": "Traghetti are boats, not physical bridges or 24/7 service. User-authorized what-if makes all four graph-eligible; overrides only original Santa Sofia pier indoor=yes and Giglio ferry foot=no. Municipal hours effective 2021-06-07; current operation/access unverified, no one-day feasibility proof. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Dogana OSM 10:00 versus municipality 09:00. Geometry and terminals are original OSM."
       },
       "source": {
         "url": "https://www.comune.venezia.it/it/content/traghetti-parada",

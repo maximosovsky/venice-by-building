@@ -100,6 +100,43 @@ def test_ferry_requires_original_geometry_connected_landings_and_public_tags():
         assert not m.add_ferry(nx.Graph([(1, 3), (2, 4)]), xy, rec)
 
 
+def test_user_authorized_ferry_override_is_exactly_scoped():
+    m = stage()
+    xy = {2262139781: (0., 0.), 2262139780: (10., 0.), 3: (0., 1.), 4: (10., 1.)}
+    ferry = {'id': 'giglio', 'osm_way_id': 216893103, 'node_ids': [2262139781, 2262139780],
+             'source_tags': {'route': 'ferry', 'foot': 'no'},
+             'routing_assumption': 'user_authorized_ferry_connector_assumption'}
+    g = nx.Graph([(2262139781, 3), (2262139780, 4)])
+    assert m.add_ferry(g, xy, ferry)
+    assert g[2262139781][2262139780]['mode'] == 'traghetto'
+    assert g[2262139781][2262139780]['routing_assumption'] == ferry['routing_assumption']
+    assert g[2262139781][2262139780]['access_overrides'] == {'foot': 'no'}
+    for wrong in [dict(ferry, id='unrelated'), dict(ferry, osm_way_id=999),
+                  dict(ferry, node_ids=[2262139781, 4]),
+                  dict(ferry, routing_assumption=None),
+                  dict(ferry, source_tags={'route': 'ferry', 'foot': 'no', 'access': 'private'})]:
+        assert not m.add_ferry(nx.Graph([(2262139781, 3), (2262139780, 4)]), xy, wrong)
+    assert m.s10.access_reason({'highway': 'footway', 'foot': 'no'}) == 'access:no'
+    assert m.s10.access_reason({'highway': 'footway', 'indoor': 'yes'}) == 'indoor'
+
+
+def test_assumed_indoor_landing_is_only_the_exact_original_pier_pair():
+    m = stage()
+    xy = {2262139796: (0., 0.), 2262139795: (0., 2.), 9: (1., 0.)}
+    approach = {'osm_way_id': 216893107, 'node_ids': [2262139796, 2262139795],
+                'source_tags': {'highway': 'footway', 'indoor': 'yes', 'man_made': 'pier'},
+                'routing_assumption': 'user_authorized_ferry_connector_assumption',
+                'access_overrides': {'indoor': 'yes'}}
+    g = nx.Graph([(2262139796, 9)])
+    assert m.add_landing_approach(g, xy, approach)
+    assert g[2262139796][2262139795]['access_overrides'] == {'indoor': 'yes'}
+    assert g[2262139796][2262139795]['mode'] == 'walk'
+    for wrong in [dict(approach, osm_way_id=999), dict(approach, node_ids=[2262139796, 9]),
+                  dict(approach, source_tags=dict(approach['source_tags'], foot='no')),
+                  dict(approach, routing_assumption=None)]:
+        assert not m.add_landing_approach(nx.Graph([(2262139796, 9)]), xy, wrong)
+
+
 def test_network_metric_closure_not_straight_line_and_disconnection_rejected():
     m = stage()
     g = nx.Graph()
@@ -194,9 +231,22 @@ def test_independent_real_graph_and_split_source_membership(artifacts):
     m = stage()
     base, nodes, _, proof, old, ferries, approaches = m.load_inputs()
     xy = {n: m.s10.PROJECT.transform(*ll) for n, ll in nodes.items()}
-    allowed_walk = {frozenset((u, v)) for u, v in base.edges()}
+    _, source_ways, _, _ = m.s10.read_pbf(m.config.EXTRACTS['island'])
+    source_by_id = {w['id']: w for w in source_ways}
     for a in approaches:
-        allowed_walk.update(frozenset(pair) for pair in zip(a['node_ids'], a['node_ids'][1:]))
+        source = source_by_id[a['osm_way_id']]
+        assert a['source_tags'] == source['tags']
+        assert a['node_ids'] == source['nodes'][:len(a['node_ids'])]
+    landing = base.copy()
+    for a in approaches:
+        assert m.add_landing_approach(landing, xy, a)
+    for f in ferries:
+        assert all(nx.has_path(landing, proof['start_node_id'], n)
+                   for n in (f['node_ids'][0], f['node_ids'][-1]))
+        assert m.add_ferry(landing.copy(), xy, f)
+    allowed_walk = {frozenset((u, v)) for u, v in base.edges()}
+    approach_pairs = {frozenset(pair) for a in approaches
+                      for pair in zip(a['node_ids'], a['node_ids'][1:])}
     inverse = Transformer.from_crs('EPSG:32633', 'EPSG:4326', always_xy=True)
     for r in artifacts['variants']:
         p = r['proof']
@@ -218,7 +268,7 @@ def test_independent_real_graph_and_split_source_membership(artifacts):
             split_pairs.update([frozenset((u, n)), frozenset((n, v))])
         eligible = {f['id']: f for f in ferries if f['routing_eligible']}
         ferry_pairs = {frozenset(pair) for f in eligible.values() for pair in zip(f['node_ids'], f['node_ids'][1:])}
-        all_allowed = allowed_walk | split_pairs | (ferry_pairs if r['id'] == 'traghetto_midpoints' else set())
+        all_allowed = allowed_walk | split_pairs | (ferry_pairs | approach_pairs if r['id'] == 'traghetto_midpoints' else set())
         assert all(frozenset(pair) in all_allowed for pair in zip(ids, ids[1:]))
         expected = [inverse.transform(*positions[n]) for n in ids]
         assert max(math.dist(ll, exp) for ll, exp in zip(r['coordinates'], expected)) < 1e-9
@@ -295,8 +345,26 @@ def test_all_four_traghetti_mapped_with_official_schedule_and_conflicts(artifact
         assert x['availability'] == 'conditional_unverified_today'
         assert set(x['caveat']) == {'ru', 'it', 'en'}
     d = {x['id']: x for x in f['traghetti']}
-    assert not d['giglio']['routing_eligible']
-    assert not d['santa_sofia']['routing_eligible']
+    assert all(x['routing_eligible'] for x in d.values())
+    assert all(x['routing_exclusion'] is None for x in d.values())
+    assert all(e['connected_walking_landing'] for x in d.values() for e in x['endpoints'])
+    assert d['santa_sofia']['routing_assumption'] == 'user_authorized_ferry_connector_assumption'
+    assert d['giglio']['access_overrides'] == {'foot': 'no'}
+    route = artifacts['variants'][1]
+    assert route['audit']['routing_assumption'] == 'user_authorized_ferry_connector_assumption'
+    assert route['audit']['routing_eligible_ferry_ids'] == list(stage().FERRY_IDS)
+    assert route['distance_m'] <= 44648.028
+    assert route['optimization']['best_known_previous_distance_m'] == 44648.028
+    overrides = {a['osm_way_id']: a for a in route['audit']['access_overrides']}
+    assert set(overrides) == {216893107, 216893103}
+    assert overrides[216893107]['access_overrides'] == {'indoor': 'yes'}
+    assert overrides[216893107]['node_ids'] == [2262139796, 2262139795]
+    assert overrides[216893103]['access_overrides'] == {'foot': 'no'}
+    assert overrides[216893103]['node_ids'] == [2262139781, 2262139780]
+    for leg in route['legs']:
+        if leg['mode'] == 'boat':
+            assert 'Traghetto' in leg['name']
+            assert leg['routing_assumption'] == route['audit']['routing_assumption']
     assert d['dogana']['schedule_conflict']
 
 

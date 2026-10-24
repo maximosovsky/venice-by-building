@@ -1,7 +1,7 @@
 """Additive metric-midpoint visit tours. Never writes the s10 route or inventory.
 
 Run: PYTHONPATH=pipeline python -m venice.s12_bridge_visits
-Dependencies: networkx, numpy, pyproj, osmium, shapely; pytest for verification.
+Dependencies: networkx, numpy, scipy, pyproj, osmium, shapely; pytest for verification.
 All optimization uses original pedestrian adjacency and explicitly audited ferries.
 """
 import argparse
@@ -74,10 +74,38 @@ def insert_midpoint(graph, xy, path, bridge_id):
     raise ValueError('Empty or invalid bridge midpoint path')
 
 
+ASSUMPTION = 'user_authorized_ferry_connector_assumption'
+LANDING_PAIRS = {292750093: [27178422, 8812616140],
+                 216893107: [2262139796, 2262139795]}
+
+
+def add_landing_approach(graph, xy, approach):
+    """Admit only verified original pier pairs, not geographic water shortcuts."""
+    wid, ids, tags = approach['osm_way_id'], approach['node_ids'], approach['source_tags']
+    reason = s10.access_reason(tags)
+    assumed = approach.get('routing_assumption') == ASSUMPTION
+    if (LANDING_PAIRS.get(wid) != ids or any(n not in xy for n in ids)
+            or not any(n in graph for n in ids)
+            or (wid == 216893107 and (not assumed or reason != 'indoor'
+                or s10.access_reason({k: v for k, v in tags.items() if k != 'indoor'}) is not None))
+            or (wid == 292750093 and reason is not None)):
+        return False
+    for u, v in zip(ids, ids[1:]):
+        graph.add_edge(u, v, length=math.dist(xy[u], xy[v]), mode='walk',
+                       bridge_id=None, way_id=wid, landing_approach=True,
+                       routing_assumption=approach.get('routing_assumption'),
+                       access_overrides={'indoor': tags['indoor']} if wid == 216893107 else {})
+    return True
+
+
 def add_ferry(graph, xy, ferry):
-    """Only complete original ferry ways with both real land attachments."""
+    """Actual OSM boats; only named municipal Giglio may override foot=no."""
     ids, tags = ferry['node_ids'], ferry['source_tags']
-    if (tags.get('route') != 'ferry' or tags.get('foot', 'yes') not in s10.PUBLIC
+    assumed = (ferry.get('routing_assumption') == ASSUMPTION
+               and FERRY_IDS.get(ferry['id']) == ferry.get('osm_way_id'))
+    override = (assumed and ferry['id'] == 'giglio' and tags.get('foot') == 'no'
+                and ids == [2262139781, 2262139780])
+    if (tags.get('route') != 'ferry' or (tags.get('foot', 'yes') not in s10.PUBLIC and not override)
             or len(ids) < 2 or any(n not in xy for n in ids)
             or ids[0] not in graph or ids[-1] not in graph
             or tags.get('access', 'yes') in s10.FORBIDDEN):
@@ -86,18 +114,26 @@ def add_ferry(graph, xy, ferry):
         return False
     for u, v in zip(ids, ids[1:]):
         graph.add_edge(u, v, length=math.dist(xy[u], xy[v]), mode='traghetto',
-                       bridge_id=None, traghetto_id=ferry['id'], way_id=ferry.get('osm_way_id'))
+                       bridge_id=None, traghetto_id=ferry['id'], way_id=ferry.get('osm_way_id'),
+                       routing_assumption=ASSUMPTION if assumed else None,
+                       access_overrides={'foot': tags['foot']} if override else {})
     return True
 
 
 def metric_closure(graph, targets):
-    """Network distance in metres, not geometric distance between markers."""
-    d = np.empty((len(targets), len(targets)), dtype=float)
-    for i, u in enumerate(targets):
-        distances = nx.single_source_dijkstra_path_length(graph, u, weight='length')
-        if any(v not in distances for v in targets):
-            raise ValueError('disconnected visit targets')
-        d[i] = [distances[v] for v in targets]
+    """Compiled sparse network Dijkstra, not straight lines or Python all-pairs."""
+    from scipy.sparse import csr_matrix
+    from scipy.sparse.csgraph import dijkstra
+    nodelist = list(graph)
+    index = {u: i for i, u in enumerate(nodelist)}
+    matrix = nx.to_scipy_sparse_array(graph, nodelist=nodelist, weight='length', format='csr')
+    # scipy csgraph expects C int indices, not networkx's platform int64.
+    matrix = csr_matrix((matrix.data, matrix.indices.astype(np.int32),
+                         matrix.indptr.astype(np.int32)), shape=matrix.shape)
+    columns = np.asarray([index[u] for u in targets], dtype=np.int32)
+    d = dijkstra(matrix, directed=False, indices=columns)[:, columns]
+    if not np.isfinite(d).all():
+        raise ValueError('disconnected visit targets')
     return d
 
 
@@ -237,9 +273,9 @@ def load_inputs():
     """Reuse frozen s10 proof/inventory; rebuild original source graph read-only.
 
     Dogana's public original pier is clipped by the strict entire-way boundary.
-    ONLY its two-node source prefix to the exact ferry terminal is admitted as
-    a ferry landing approach, never a nearest-point connector. Santa Sofia's
-    indoor pier stays excluded; Giglio's explicit foot=no stays excluded.
+    ONLY its two-node source prefix to the exact ferry terminal is admitted.
+    User-authorized what-if additionally admits Santa Sofia's original indoor
+    pier and Giglio's ferry foot=no. No unrelated access policy is relaxed.
     """
     old = json.loads((config.WEB_DATA / 'bridge-route.json').read_text(encoding='utf-8'))
     proof = json.loads((config.PROCESSED / 'bridge_route_proof.json').read_text(encoding='utf-8'))
@@ -268,12 +304,19 @@ def load_inputs():
     assert 27178422 in graph
     approaches.append({'osm_way_id': public_pier['id'], 'node_ids': public_pier['nodes'][:2],
                        'source_tags': public_pier['tags'], 'boundary_exception': 'original public ferry-landing pier prefix only'})
+    indoor_pier = next(w for w in ways if w['id'] == 216893107)
+    assert indoor_pier['nodes'] == LANDING_PAIRS[216893107]
+    assert indoor_pier['tags']['indoor'] == 'yes'
+    assert indoor_pier['nodes'][0] in graph
+    approaches.append({'osm_way_id': indoor_pier['id'], 'node_ids': indoor_pier['nodes'],
+                       'source_tags': indoor_pier['tags'], 'traghetto_id': 'santa_sofia',
+                       'routing_assumption': ASSUMPTION, 'access_overrides': {'indoor': 'yes'},
+                       'assumed_availability': 'conditional_unverified_today',
+                       'scope': 'exact original ferry landing pier; possible indoor landing building, access not verified'})
     xy = {n: s10.PROJECT.transform(*ll) for n, ll in nodes.items()}
     landing_graph = graph.copy()
     for a in approaches:
-        for u, v in zip(a['node_ids'], a['node_ids'][1:]):
-            landing_graph.add_edge(u, v, length=math.dist(xy[u], xy[v]), mode='walk',
-                                   bridge_id=None, way_id=a['osm_way_id'], landing_approach=True)
+        assert add_landing_approach(landing_graph, xy, a)
     # Actual successful official-page extraction in the interrupted worker log,
     # not the time of this local export/rebuild.
     retrieved = '2026-10-23T18:55:34+00:00'
@@ -287,13 +330,14 @@ def load_inputs():
         ids = raw['node_ids']
         coordinates = [list(nodes[n]) for n in ids]
         local = [[x - s10.ORIGIN[0], -(y - s10.ORIGIN[1])] for x, y in [xy[n] for n in ids]]
-        eligible = add_ferry(landing_graph.copy(), xy, dict(raw, id=fid, osm_way_id=wid))
-        reason = ('indoor_landing_excluded' if fid == 'santa_sofia' else
-                  'source_foot_no' if fid == 'giglio' else None)
+        eligible = add_ferry(landing_graph.copy(), xy, dict(raw, id=fid, osm_way_id=wid,
+                                                          routing_assumption=ASSUMPTION))
+        assert eligible, 'Municipal ferry not attached to verified original landings: ' + fid
+        reason = None
         caveat = s10.prose(
-            'Часы опубликованы муниципалитетом, действуют с 07.06.2021; работа сегодня не проверена. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Только условное планирование; не доказан однодневный маршрут. Santa Sofia исключён из маршрутизации из-за indoor-подхода, Giglio — foot=no; Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.',
-            'Orari comunali in vigore dal 07.06.2021; servizio odierno non verificato. Nessun servizio il 15/8, 25/12, 26/12, 1/1; il 24/12 e 31/12 fino alle 13:00. Pianificazione condizionale, non itinerario giornaliero dimostrato. Santa Sofia escluso per accesso indoor; Giglio per foot=no; Dogana: OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.',
-            'Published municipal hours effective 2021-06-07; operation today unverified. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Conditional planning only, not a proven one-day itinerary. Santa Sofia excluded for indoor approach; Giglio for foot=no; Dogana OSM starts 10:00 versus municipality 09:00. Geometry and terminals are original OSM.')
+            'Трагетто — лодки, не физические мосты и не 24/7. По разрешению пользователя все четыре доступны графу условно: только исходный пирс Santa Sofia indoor=yes и паром Giglio foot=no имеют явные исключения. Часы муниципалитета с 07.06.2021, работа и доступ сегодня не проверены; однодневность не доказана. Нет обслуживания 15/8, 25/12, 26/12, 1/1; 24/12 и 31/12 до 13:00. Dogana: OSM 10:00, муниципалитет 09:00. Геометрия и терминалы — исходные OSM.',
+            'Traghetti in barca, non ponti fisici né servizio 24/7. Ipotesi autorizzata: tutti e quattro disponibili nel grafo; deroghe solo al pontile originale Santa Sofia indoor=yes e al traghetto Giglio foot=no. Orari comunali dal 07.06.2021; servizio e accesso odierni non verificati, fattibilità giornaliera non dimostrata. Chiuso 15/8, 25/12, 26/12, 1/1; 24/12 e 31/12 fino alle 13:00. Dogana OSM 10:00, Comune 09:00. Geometria e terminali originali OSM.',
+            'Traghetti are boats, not physical bridges or 24/7 service. User-authorized what-if makes all four graph-eligible; overrides only original Santa Sofia pier indoor=yes and Giglio ferry foot=no. Municipal hours effective 2021-06-07; current operation/access unverified, no one-day feasibility proof. No service Aug 15, Dec 25/26, Jan 1; Dec 24/31 until 13:00. Dogana OSM 10:00 versus municipality 09:00. Geometry and terminals are original OSM.')
         endpoints = []
         for n in (ids[0], ids[-1]):
             x, y = xy[n]
@@ -306,6 +350,8 @@ def load_inputs():
         ferries.append(dict(raw, id=fid, osm_way_id=wid, name=raw['source_tags']['name'],
                             coordinates=coordinates, local=local, endpoints=endpoints,
                             routing_eligible=eligible, routing_exclusion=reason,
+                            routing_assumption=ASSUMPTION, access_overrides={'foot': 'no'} if fid == 'giglio' else {},
+                            landing_access_overrides=[a for a in approaches if a.get('traghetto_id') == fid],
                             schedule=SCHEDULES[fid], schedule_source=source,
                             schedule_conflict=fid == 'dogana', availability='conditional_unverified_today',
                             holidays_closed=['08-15', '12-25', '12-26', '01-01'],
@@ -357,6 +403,9 @@ def main():
     parser.add_argument('--kicks', type=int, default=120)
     parser.add_argument('--resume', type=Path, help='Trusted internal pickle checkpoint only')
     args = parser.parse_args()
+    existing = json.loads((config.WEB_DATA / 'bridge-visit-route.json').read_text(encoding='utf-8'))
+    preserved_walk = existing['variants'][0]
+    best_known_ferry = existing['variants'][1]
     graph, nodes, tags, proof, old, ferries, approaches = load_inputs()
     xy = {n: s10.PROJECT.transform(*ll) for n, ll in nodes.items()}
     land = nx.Graph()
@@ -388,14 +437,12 @@ def main():
         working = graph.copy()
         if assisted:
             for a in approaches:
-                for u, v in zip(a['node_ids'], a['node_ids'][1:]):
-                    working.add_edge(u, v, length=math.dist(xy[u], xy[v]), mode='walk',
-                                     bridge_id=None, way_id=a['osm_way_id'], landing_approach=True)
+                assert add_landing_approach(working, xy, a)
             for f in ferries:
                 if f['routing_eligible']:
                     assert add_ferry(working, xy, f)
-        if resumed and len(resumed['variants']) > int(assisted):
-            saved = resumed['variants'][int(assisted)]
+        if not assisted:
+            saved = preserved_walk
             assert saved['id'] == ('traghetto_midpoints' if assisted else 'walking_midpoints')
             assert saved['proof']['original_route_sha256'] == hashlib.sha256((config.WEB_DATA / 'bridge-route.json').read_bytes()).hexdigest()
             ids = saved['proof']['route_node_ids']
@@ -419,12 +466,31 @@ def main():
         with checkpoint.open('wb') as stream:
             pickle.dump({'midpoints': midpoints, 'distances': distances, 'variants': variants}, stream)
         seeds = [old_order] + ([previous_tour] if previous_tour else [])
+        if assisted:
+            seed = [0]
+            seen_seed = set()
+            for e in best_known_ferry['crossings']:
+                if e['bridge_id'] not in seen_seed:
+                    seen_seed.add(e['bridge_id'])
+                    seed.append(index[e['bridge_id']])
+            seeds.append(seed + [0])
         tour, optimization = optimize_tour(distances, args.starts, seeds, args.kicks)
         previous_tour = tour
         route = [start]
         for a, b in zip(tour, tour[1:]):
             route.extend(nx.shortest_path(working, targets[a], targets[b], weight='length')[1:])
         stats = route_stats(working, route, midpoints, banks)
+        if assisted:
+            previous_ids = best_known_ferry['proof']['route_node_ids']
+            assert all(working.has_edge(u, v) for u, v in zip(previous_ids, previous_ids[1:]))
+            previous_stats = route_stats(working, previous_ids, midpoints, banks)
+            assert abs(previous_stats['total_distance_m'] - best_known_ferry['distance_m']) < .001
+            optimization['candidate_distance_m'] = stats['total_distance_m']
+            optimization['best_known_previous_distance_m'] = best_known_ferry['distance_m']
+            optimization['kept_previous_route'] = previous_stats['total_distance_m'] < stats['total_distance_m']
+            if optimization['kept_previous_route']:
+                route, stats = previous_ids, previous_stats
+                optimization['selected_cost_m'] = stats['total_distance_m']
         assert route[0] == route[-1] == start
         assert all(working.has_edge(u, v) for u, v in zip(route, route[1:]))
         assert {b['node'] for b in midpoints.values()} <= set(route)
@@ -472,14 +538,16 @@ def main():
                    'distance_m': sum(working[u][v]['length'] for u, v in zip(route[i:j], route[i + 1:j + 1]))}
             if fid:
                 leg['traghetto_id'] = fid
+                leg['name'] = next(f['name'] for f in ferries if f['id'] == fid)
+                leg['routing_assumption'] = ASSUMPTION
                 ferry_events.append({'traghetto_id': fid, 'start_index': i, 'end_index': j,
                                      'distance_m': leg['distance_m'], 'conditional': True})
             legs.append(leg)
             i = j
         limitations = s10.prose(
-            'Эвристика сетевого TSP, не глобальный оптимум. Посещение точной середины принятого пути моста; полный переход необязателен. Повторная длина включает возврат по половине моста. Сохранён исходный набор 344 мостов: 19 непосредственных тупиков и портовая/транспортная инфраструктура исключены; Ponte della Costituzione сохранён. Ступени, доступ по политике OSM; закрытия на месте не проверены. Паромы условны: часы и работа сегодня требуют проверки, однодневная осуществимость не доказана. Dogana использует только исходный сегмент пирса за строгой границей острова; Santa Sofia и Giglio показаны, но не используются.',
-            'Euristica TSP di rete, non ottimo globale. Visita del punto medio esatto del percorso accettato; attraversamento completo facoltativo. Distanza ripetuta include ritorni su mezzo ponte. Inventario originale di 344 ponti: esclusi 19 vicoli ciechi immediati e infrastrutture portuali/di trasporto; Ponte della Costituzione mantenuto. Gradini, politica di accesso OSM; chiusure non verificate sul posto. Traghetti condizionali: verificare orari e servizio odierno; fattibilità giornaliera non dimostrata. Dogana usa solo il segmento originale del pontile oltre il confine stretto; Santa Sofia e Giglio visibili ma non usati.',
-            'Network TSP heuristic, not a global optimum. Exact midpoint of the accepted bridge path; full crossing optional. Repeat distance includes half-bridge retracing. Frozen 344-bridge inventory: 19 immediate cul-de-sacs and port/transport infrastructure excluded; Constitution retained. Steps and OSM access policy; current closures unverified on site. Ferries conditional on hours and operation today; no one-day feasibility proof. Dogana uses only the original pier segment outside strict island clipping; Santa Sofia and Giglio mapped but not routed.')
+            'Эвристика сетевого TSP, не глобальный оптимум; точные середины исходных 344 мостов, полный переход необязателен. Возвраты по половине моста учтены. Исходные исключения и ограничения сохранены. Пользователь разрешил считать четыре трагетто соединителями графа: это лодки, не мосты и не 24/7. Явные исключения только Santa Sofia: исходный пирс indoor=yes, Giglio: паром foot=no; Dogana: исходный сегмент пирса за строгой границей. Работа и доступ сегодня, ожидание и расписание не проверены, однодневность не доказана.',
+            'Euristica TSP di rete, non ottimo globale; punti medi esatti dei 344 ponti originali, attraversamento completo facoltativo. Ritorni su mezzo ponte conteggiati; esclusioni originali mantenute. Ipotesi autorizzata: quattro traghetti come connessioni, barche non ponti né servizio 24/7. Deroghe solo Santa Sofia pontile originale indoor=yes, Giglio traghetto foot=no; Dogana segmento originale oltre confine. Servizio/accesso odierni, attese e fattibilità giornaliera non verificati.',
+            'Network TSP heuristic, not global optimum; exact original 344 bridge midpoints, full crossing optional. Half-deck retrace counted; original exclusions/restrictions retained. User-authorized bridge-like graph assumption for all four traghetti: boats, not physical bridges or 24/7 service. Overrides only Santa Sofia original pier indoor=yes and Giglio ferry foot=no; Dogana original pier boundary exception. Current service/access, waiting times and one-day schedule feasibility unverified.')
         semantics = s10.prose(
             'crossings — события достижения середины, repeat_crossings — повторные посещения середины, НЕ полные переходы. Полные переходы и их повторы отдельно в stats; это проход между различными исходными береговыми компонентами по одному мосту.',
             'crossings indica arrivi al punto medio; repeat_crossings conta visite ripetute, NON attraversamenti completi. Attraversamenti completi e ripetizioni separati in stats: percorso su un ponte tra due componenti originali di riva diverse.',
@@ -510,6 +578,14 @@ def main():
             'audit': {'limitations': limitations, 'verified': {'closed': True, 'midpoints_344': True,
                       'original_or_split_adjacency': True, 'ferry_membership': True},
                       'scope': old['audit']['scope'], 'dead_end_exclusion_count': 19,
+                      'routing_assumption': ASSUMPTION if assisted else None,
+                      'routing_eligible_ferry_ids': [f['id'] for f in ferries if f['routing_eligible']] if assisted else [],
+                      'access_overrides': ([{'osm_way_id': a['osm_way_id'], 'node_ids': a['node_ids'],
+                                            'source_tags': a['source_tags'], 'access_overrides': a['access_overrides']}
+                                           for a in approaches if a.get('access_overrides')] +
+                                           [{'osm_way_id': f['osm_way_id'], 'node_ids': f['node_ids'],
+                                             'source_tags': f['source_tags'], 'access_overrides': f['access_overrides']}
+                                            for f in ferries if f['access_overrides']]) if assisted else [],
                       'landing_approach_exceptions': approaches if assisted else []},
             'proof': {'route_node_ids': route, 'start_node_id': start,
                       'midpoints': list(midpoints.values()), 'pbf_sha256': old['audit']['pbf_sha256'],
@@ -519,7 +595,7 @@ def main():
         with checkpoint.open('wb') as stream:
             pickle.dump({'midpoints': midpoints, 'distances': distances, 'variants': variants}, stream)
         print(json.dumps({'variant': name, 'stats': stats, 'optimization': optimization}, ensure_ascii=False), flush=True)
-    prepare_export(variants, ferries, old['euler'])
+    prepare_export(variants[1:], ferries, old['euler'])
     for r in variants:
         # Preserve literal original San Marco longitude/latitude; avoid inverse
         # projection roundoff changing the frozen start coordinate identifier.
