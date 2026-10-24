@@ -1,4 +1,5 @@
 // Additive all-bridges walk. No production fallback: only the audited JSON supplies geometry/counts.
+import { sourcePresentationText, sourcePresentationPicker, sourcePresentationHref } from './source-presentation.js';
 export const UI = {
   title: { ru: 'Середины мостов с Traghetto', it: 'Punti medi dei ponti con Traghetto', en: 'Bridge midpoints with Traghetto' },
   intro: { ru: 'Кольцевой маршрут по шести сестьери от Piazza San Marco и обратно.', it: 'Un percorso ad anello nei sei sestieri, da Piazza San Marco e ritorno.', en: 'A circuit through the six sestieri, starting and ending at Piazza San Marco.' },
@@ -136,6 +137,7 @@ const label = (key, pickText) => escapeHTML(pickText(UI[key]));
 const length = (route, pickText) => `${number(route.distance_m / 1000, pickText, 1)} ${label('km', pickText)}`;
 
 export function routeEntryHTML(state, pickText) {
+  pickText = sourcePresentationPicker(pickText);
   const route = state.route;
   return `<li class="route bridge-route-entry" data-no-i18n><h3>${escapeHTML(pickText(route?.title || UI.title))}</h3>
     <p>${escapeHTML(pickText(route?.summary || UI.intro))}</p>
@@ -146,7 +148,10 @@ export function routeEntryHTML(state, pickText) {
 }
 
 export function routePanelHTML(route, state = {}, pickText) {
-  const sourceURL = safeSource(route.source?.url), gpxURL = safeGPX(route.gpx);
+  const presentationLang = pickText({ru:'ru',it:'it',en:'en'});
+  pickText = sourcePresentationPicker(pickText);
+  const sourceURL = sourcePresentationHref(safeSource(route.source?.url)), gpxURL = safeGPX(route.gpx);
+  const sourceTarget = sourceURL === '#notes' ? '' : ' target="_blank" rel="noopener noreferrer"';
   const limitations = route.audit?.limitations ?? route.audit?.caveats;
   const notes = [...(limitations ? (Array.isArray(limitations) ? limitations : [limitations]) : []),
     route.audit?.scope, route.audit?.crossing_model_limitation, route.audit?.source_date_semantics].filter(Boolean);
@@ -165,12 +170,12 @@ export function routePanelHTML(route, state = {}, pickText) {
       ${gpxURL ? `<a class="pill" href="${escapeHTML(gpxURL)}" download>${label('gpx', pickText)}</a>` : ''}</div>
     ${route.visit_mode ? '' : `<h3>${label('euler', pickText)}</h3><p>${label(route.euler.possible ? 'possible' : 'impossible', pickText)}</p>
     <p>${escapeHTML(pickText(route.euler.explanation))}</p><p>${label('odd', pickText)}: ${number(route.euler.odd_count, pickText)}</p>`}
-    <h3>${label('source', pickText)}</h3><p class="src">${sourceURL ? `<a href="${escapeHTML(sourceURL)}" target="_blank" rel="noopener noreferrer">${escapeHTML(sourceURL)}</a>` : escapeHTML(route.source?.url)}
-      · ${escapeHTML(route.source?.license)} · ${escapeHTML(route.source?.date)}</p>
+    <h3>${label('source', pickText)}</h3><p class="src">${sourceURL ? `<a href="${escapeHTML(sourceURL)}"${sourceTarget}>${escapeHTML(sourcePresentationText(route.source?.url, presentationLang))}</a>` : escapeHTML(pickText(route.source?.url))}
+      · ${escapeHTML(pickText(route.source?.license))} · ${escapeHTML(pickText(route.source?.date))}</p>
     <p class="caveat">${label('caveat', pickText)}</p>${notes.map(n => `<p class="caveat">${escapeHTML(pickText(n))}</p>`).join('')}
     ${(state.traghetti?.length || route.legs?.some(l => l.mode === 'boat')) ? `<p class="caveat">${label('serviceCaveat', pickText)}</p><ul>${(state.traghetti || []).map(t => {
-      const url = safeSource(t.source?.url);
-      return `<li>Traghetto — ${escapeHTML(pickText(t.name || t.id))} · ${escapeHTML(pickText(t.schedule || ''))} ${url ? `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(url)}</a>` : ''} · ${escapeHTML(t.source?.date || '')}</li>`;
+      const url = sourcePresentationHref(safeSource(t.source?.url));
+      return `<li>Traghetto — ${escapeHTML(pickText(t.name || t.id))} · ${escapeHTML(pickText(t.schedule || ''))} ${url ? `<a href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">${escapeHTML(pickText(t.source?.url))}</a>` : ''} · ${escapeHTML(t.source?.date || '')}</li>`;
     }).join('')}</ul>` : ''}
     <details><summary>${label('excluded', pickText)} (${number(route.excluded.length, pickText)})</summary>
       ${route.excluded.length ? `<ul>${route.excluded.map(b => `<li><b>${escapeHTML(pickText(b.name || b.id))}</b> <small>${escapeHTML(b.id)}</small> — ${escapeHTML(pickText(b.reason))}</li>`).join('')}</ul>` : `<p>${label('none', pickText)}</p>`}</details>

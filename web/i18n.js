@@ -23,7 +23,10 @@ const DICT = {
     'Все Palazzo': 'Tutti i Palazzo',
     'Районы': 'Quartieri',
     'Маршруты': 'Percorsi',
-    'Заметки': 'Note',
+    'О проекте': 'Informazioni sul progetto',
+    'OpenStreetMap, ODbL 1.0, © участники OpenStreetMap.': 'OpenStreetMap, ODbL 1.0, © contributori di OpenStreetMap.',
+    'OpenStreetMap: авторские права и лицензия': 'OpenStreetMap: copyright e licenza',
+    '. Извлечение Венето —': '. Estrazione del Veneto —',
     'Найти здание, улицу или мост': 'Cerca un edificio, una via o un ponte',
     'Подробности': 'Dettagli',
     'Закрыть': 'Chiudi',
@@ -286,7 +289,10 @@ const DICT = {
     'Все Palazzo': 'All Palazzo',
     'Районы': 'Districts',
     'Маршруты': 'Walks',
-    'Заметки': 'Notes',
+    'О проекте': 'About the project',
+    'OpenStreetMap, ODbL 1.0, © участники OpenStreetMap.': 'OpenStreetMap, ODbL 1.0, © OpenStreetMap contributors.',
+    'OpenStreetMap: авторские права и лицензия': 'OpenStreetMap: copyright and license',
+    '. Извлечение Венето —': '. Veneto extract —',
     'Найти здание, улицу или мост': 'Find a building, a street or a bridge',
     'Подробности': 'Details',
     'Закрыть': 'Close',
@@ -562,17 +568,21 @@ export const norm = s => String(s).replace(/[\u00a0\u202f\u2009]/g, ' ').replace
 
 export const getLang = () => lang;
 
+import { sourcePresentationText } from './source-presentation.js';
+
 export function t(text, vars) {
   const key = norm(text);
   let out = DICT[lang]?.[key] ?? DICT[OTHER[lang]]?.[key] ?? key;
   if (vars) out = out.replace(/\{(\w+)\}/g, (m, k) => (vars[k] !== undefined ? String(vars[k]) : m));
-  return out;
+  return sourcePresentationText(out, lang);
 }
 
 // Значение может быть строкой, словарём по языкам или уже готовым объектом.
-export const pick = v => (v && typeof v === 'object'
-  ? (v[lang] ?? v.ru ?? v.en ?? Object.values(v)[0] ?? '')
-  : t(v ?? ''));
+export const pick = v => {
+  const selected = v && typeof v === 'object'
+    ? (v[lang] ?? v.ru ?? v.en ?? Object.values(v)[0] ?? '') : t(v ?? '');
+  return typeof selected === 'string' ? sourcePresentationText(selected, lang) : selected;
+};
 
 export function fmtNum(n) {
   return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
@@ -601,6 +611,7 @@ const known = key => key in DICT.it || key in DICT.en;
 export function translateTree(start) {
   if (!start) return start;
   const walk = node => {
+    const inAbout = node.nodeType === 1 ? !!node.closest?.('#notes') : !!node.parentElement?.closest?.('#notes');
     for (const child of node.childNodes) {
       if (child.nodeType === 3) {
         if (!ORIG_NODE.has(child)) {
@@ -612,7 +623,7 @@ export function translateTree(start) {
         const key = norm(raw);
         const out = lang === 'ru' ? key : (DICT[lang][key] ?? DICT[OTHER[lang]]?.[key] ?? key);
         const lead = raw.match(/^\s*/)[0], tail = raw.match(/\s*$/)[0];
-        child.nodeValue = lead + out + tail;
+        child.nodeValue = lead + (inAbout ? out : sourcePresentationText(out, lang)) + tail;
       } else if (child.nodeType === 1) {
         if (SKIP.has(child.tagName) || (child.hasAttribute && child.hasAttribute('data-no-i18n'))) continue;
         let store = ORIG_ATTR.get(child);

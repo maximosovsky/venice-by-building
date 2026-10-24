@@ -5,6 +5,7 @@ import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
+import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -622,8 +623,11 @@ const ready = Promise.all([
   palazzoTex.image.data.set(buildPalazzoMask(attrs, config, wiki, names));
   palazzoTex.needsUpdate = true;
 });
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const link = (href, text) => `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(text)}</a>`;
+const esc = s => sourcePresentationText(s, getLang()).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const link = (href, text) => {
+  const target = sourcePresentationHref(href);
+  return `<a href="${String(target).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}"${target === '#notes' ? ' data-about-source' : ' target="_blank" rel="noopener"'}>${esc(target === '#notes' ? sourceAboutLabel(getLang()) : text)}</a>`;
+};
 const phone = matchMedia('(max-width: 720px)');
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const dot = color => `<i class="dot" style="background:${color}"></i>`;
@@ -675,7 +679,7 @@ function buildingHtml(gid) {
           b.src === 1 && [t('Сооружение'), `${t('Мост')}<small class="src-note">${t('настил над каналом, OSM')}</small>`],
                 [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
                 shape && [t('Форма'), `${esc(pickText(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
-                !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? 'OpenStreetMap' : t('высота ÷ 3 м')}</small>`],
+                !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? t('OpenStreetMap') : t('высота ÷ 3 м')}</small>`],
           w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'),
         (w.architects_la ? pickText(w.architects_la) : w.architects).map(esc).join(', ')],
           w?.styles?.length && [t('Стиль'), (w.styles_la ? pickText(w.styles_la) : w.styles).map(esc).join(', ')],
@@ -708,6 +712,7 @@ function buildingHtml(gid) {
         <section><h3>${t('Как известен возраст')}</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
         <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
+
         ${stories ? `<section><h3>${t('Слои')}</h3><ul class="chips">${stories}</ul></section>` : ''}
         ${sources.length ? `<section class="sources"><h3>${t('Источники')}</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
     }
@@ -1622,6 +1627,13 @@ function stopPlay() {
 playBtn.onclick = () => playing ? stopPlay() : startPlay();
 
 // ---------- Notes ----------
+document.addEventListener('click', event => {
+  const source = event.target.closest?.('a[href="#notes"]');
+  if (!source) return;
+  event.preventDefault();
+  if (dockView === 'building') unpin();
+  openDock('notes');
+});
 document.querySelector('.notes-open').onclick = () => { if (dockView === 'notes') closeDock(); else { if (dockView === 'building') unpin(); openDock('notes'); } };
 {
   const f = config.stats.flags, set = (k, v) => notesEl.querySelectorAll(`[data-stat="${k}"]`).forEach(el => { el.textContent = fmt(v); });

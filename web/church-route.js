@@ -1,4 +1,5 @@
 // Additive lagoon church inventory. Production geometry/counts come only from the audited JSON.
+import { sourcePresentationPicker } from './source-presentation.js';
 export const UI = {
  title:{ru:'Храмы Венеции и лагуны',it:'Chiese di Venezia e della laguna',en:'Churches of Venice and the lagoon'},
  intro:{ru:'Единый нумерованный маршрут по включённым в реестр храмам.',it:'Un unico percorso numerato tra le chiese incluse nell’inventario.',en:'One numbered route through the churches included in the inventory.'},
@@ -41,12 +42,14 @@ export function validateRoute(route) {
 const label=(key,pickText)=>escapeHTML(pickText(UI[key]));
 const text=(value,pickText)=>escapeHTML(pickText(value));
 export function routeEntryHTML(state,pickText){
+ pickText=sourcePresentationPicker(pickText);
  const route=state.status==='ready'?state.route:null;
  return `<li class="route church-route-entry" data-no-i18n><h3>${text(route?.title||UI.title,pickText)}</h3><p>${text(route?.summary||UI.intro,pickText)}</p>
  ${!route?`<p role="status">${label(state.status==='error'?'error':'loading',pickText)}</p>`:''}
  <div class="route-meta">${route?`<span>${route.stops.length} · ${label('stops',pickText)}</span>`:''}<button class="pill primary" data-church-route-open>${label('open',pickText)}</button></div></li>`;
 }
 export function routePanelHTML(route,state={},pickText){
+ pickText=sourcePresentationPicker(pickText);
  const notes=route.audit?.limitations??route.audit?.caveats;
  return `<article class="dock-page church-route-page" data-no-i18n><h2 id="dock-title">${text(route.title,pickText)}</h2><p class="lede">${text(route.summary,pickText)}</p>
  <p>${route.stops.length} · ${label('stops',pickText)}</p><p class="caveat">${label('exterior',pickText)}</p>
