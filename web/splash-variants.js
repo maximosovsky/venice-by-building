@@ -127,7 +127,7 @@
     }, delay);
   }
 
-  // Вариант 3: карта синхронно с reveal.
+  // Вариант 3: карта синхронно с reveal, сразу видна под splash.
   function syncMapToReveal() {
     function tick() {
       if (!document.body.contains(mapLayer)) return;
