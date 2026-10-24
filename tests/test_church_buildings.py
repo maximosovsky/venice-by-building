@@ -37,11 +37,11 @@ def test_real_church_buildings_match_exact_atlas_identifiers():
         off = b['gid'] * config['attrStride']
         assert int(struct.unpack_from('<d', raw, off)[0]) == f['properties']['osm_id']
         assert f['geometry']['type'] in ['Polygon', 'MultiPolygon']
-    matched = {b['stop_id'] for b in data['buildings']}
+    matched = {i['stop_id'] for b in data['buildings'] for i in b.get('identities', [b])}
     assert {'Q172988', 'Q52531'} <= matched
     assert data['matched_stops'] == sum(s['id'] in matched for s in route['stops'])
     assert {s['id'] for s in data['unmatched']} == {s['id'] for s in route['stops'] if s['id'] not in matched}
-    assert data['matched_stops'] == 114
-    assert len(data['unmatched']) == 20
+    assert data['matched_stops'] == 117
+    assert len(data['unmatched']) == 17
     assert data['matched_stops'] + len(data['unmatched']) == 134
     assert data['geometry_source'] == 'existing_atlas_worker_mesh_including_all_parts_and_roofs'

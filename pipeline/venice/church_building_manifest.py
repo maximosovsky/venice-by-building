@@ -15,7 +15,7 @@ REVIEWED_HIGHLIGHT_HOSTS = {
     ('way', 138843453): {
         'stop_id': 'Q28035407', 'qid': 'Q28035407',
         'match_source': 'reviewed_named_poi_contained_in_exact_osm_host',
-        'highlight_color': '#000080',
+        'highlight_color': '#2f3f6b',
         'highlight_scope': 'entire_shared_osm_host_building',
         'match_evidence': 'Scuola Canton named Jewish place_of_worship OSM node 13966049130 '
             '(12.3268030, 45.4449784) lies strictly inside way 138843453; both the '
@@ -35,7 +35,7 @@ REVIEWED_HIGHLIGHT_HOSTS = {
     ('way', 345585193): {
         'stop_id': 'Q2897799', 'qid': 'Q2897799',
         'match_source': 'reviewed_named_poi_contained_in_exact_osm_host',
-        'highlight_color': '#000080',
+        'highlight_color': '#2f3f6b',
         'highlight_scope': 'entire_shared_osm_host_building',
         'match_evidence': 'Scuola Ponentina (Scuola Spagnola) named Jewish place_of_worship '
             'OSM node 250421433, explicitly tagged Q2897799, (12.3255604, 45.4446333) '
@@ -57,10 +57,45 @@ REVIEWED_HIGHLIGHT_HOSTS = {
 }
 
 
+# All five identities are reviewed independently; three share one atlas host.
+# Article coordinates for German and Levantine fall outside their real hosts;
+# never use those stale route coordinates to select geometry.
+SYNAGOGUE_IDENTITIES = {
+    138843453: [
+        ('Q28035407', 'Scuola Canton', 13966049130, [12.3268030, 45.4449784], [12.3267, 45.445], 'https://wikimili.com/en/Canton_Synagogue'),
+        ('Q65015', 'Scuola Italiana', 6045579408, [12.3266278, 45.4451422], [12.326621, 45.445149], 'https://it.wikipedia.org/wiki/Scola_Italiana'),
+        ('Q12051106', 'Scuola Grande Tedesca', 4819941851, [12.3271218, 45.4450594], [12.3270, 45.4450], 'https://koshertraveling.co/en/venice/attraction/german-synagogue'),
+    ],
+    345585193: [('Q2897799', 'Scuola Ponentina (Spagnola)', 250421433, [12.3255604, 45.4446333], [12.325563, 45.444618], 'https://it.wikipedia.org/wiki/Scola_Ponentina')],
+    138842957: [('Q62259167', 'Scuola Levantina', 250421434, [12.3258217, 45.4447594], [12.32579, 45.44474], 'https://aroundus.com/p/8221059-scola-levantina')],
+}
+REVIEWED_HIGHLIGHT_HOSTS[('way', 138842957)] = {
+    'stop_id': 'Q62259167', 'qid': 'Q62259167',
+    'match_source': 'reviewed_named_poi_contained_in_exact_osm_host',
+    'highlight_scope': 'entire_shared_osm_host_building',
+    'match_evidence': 'Named Jewish Scuola Levantina OSM node 250421434 tagged Q62259167 and independently published AroundUs coordinate (12.32579, 45.44474) are strictly inside exact 42-node host way 138842957. The stale route article coordinate lies outside; Spanish node 250421433 belongs to different way 345585193. Shared adjacent premises are included in the whole existing atlas host.',
+    'identity_sources': ['https://api.openstreetmap.org/api/0.6/node/250421434', 'https://api.openstreetmap.org/api/0.6/way/138842957/full', 'https://aroundus.com/p/8221059-scola-levantina'],
+}
+for (_, osm_id), host in REVIEWED_HIGHLIGHT_HOSTS.items():
+    host['identities'] = [dict(stop_id=qid, qid=qid, name=name, poi_node=node,
+        poi_coordinate=poi, independent_coordinate=coordinate,
+        identity_sources=[f'https://api.openstreetmap.org/api/0.6/node/{node}',
+            f'https://api.openstreetmap.org/api/0.6/way/{osm_id}/full', source])
+        for qid, name, node, poi, coordinate, source in SYNAGOGUE_IDENTITIES[osm_id]]
+    host['highlight_color'] = '#2f3f6b'
+    host['highlight_shading'] = 'atlas_age'
+    host['color_reference'] = dict(qid='Q756807', gid=5888, year=1710, flag=0,
+        period='pre', mode='Age', year_at_verification=2026, estimated_mix=0)
+    if osm_id == 138843453:
+        host['match_evidence'] += ' Separately named Italian node 6045579408 (Q65015) and German node 4819941851 (Q12051106) are strictly inside this same exact host. Italian article coordinate and independent German reference (12.3270, 45.4450) are also inside; German route coordinate is outside and was not used.'
+
+
 def building_match(properties, stops):
     reviewed = REVIEWED_HIGHLIGHT_HOSTS.get((properties['osm_type'], properties['osm_id']))
-    if reviewed and any(s['id'] == reviewed['stop_id'] for s in stops):
-        return dict(reviewed)
+    if reviewed:
+        identities = [i for i in reviewed['identities'] if any(s['id'] == i['stop_id'] for s in stops)]
+        if identities:
+            return {**reviewed, 'stop_id': identities[0]['stop_id'], 'qid': identities[0]['qid'], 'identities': identities}
     for stop in stops:
         for obj in stop.get('osm_buildings', []):
             if (properties['osm_type'], properties['osm_id']) == (obj['osm_type'], obj['osm_id']):
@@ -100,7 +135,7 @@ def main():
             continue
         buildings.append({'gid': gid, 'building_id': p['building_id'], 'osm_type': p['osm_type'],
                           'osm_id': osm, **match})
-    matched = {b['stop_id'] for b in buildings}
+    matched = {i['stop_id'] for b in buildings for i in b.get('identities', [b])}
     unmatched = [{'id': s['id'], 'qid': s.get('qid'), 'name': s['name'],
                   'reason': 'no_unique_exact_osm_wikidata_tag_in_current_atlas'}
                  for s in route['stops'] if s['id'] not in matched]

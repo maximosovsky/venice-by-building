@@ -1,7 +1,7 @@
 {
   "version": 1,
   "inventory_stops": 134,
-  "matched_stops": 114,
+  "matched_stops": 117,
   "buildings": [
     {
       "gid": 3704,
@@ -74,16 +74,135 @@
       "stop_id": "Q28035407",
       "qid": "Q28035407",
       "match_source": "reviewed_named_poi_contained_in_exact_osm_host",
-      "highlight_color": "#000080",
+      "highlight_color": "#2f3f6b",
       "highlight_scope": "entire_shared_osm_host_building",
-      "match_evidence": "Scuola Canton named Jewish place_of_worship OSM node 13966049130 (12.3268030, 45.4449784) lies strictly inside way 138843453; both the route Wikipedia coordinate (12.326835, 45.445029) and independently published Canton coordinate (12.3267, 45.445) are inside the same 41-node footprint. Canton occupies upper rooms, not the whole host. The atlas merges adjacent premises, including the Italian synagogue, into this GID; the entire shared host is highlighted.",
+      "match_evidence": "Scuola Canton named Jewish place_of_worship OSM node 13966049130 (12.3268030, 45.4449784) lies strictly inside way 138843453; both the route Wikipedia coordinate (12.326835, 45.445029) and independently published Canton coordinate (12.3267, 45.445) are inside the same 41-node footprint. Canton occupies upper rooms, not the whole host. The atlas merges adjacent premises, including the Italian synagogue, into this GID; the entire shared host is highlighted. Separately named Italian node 6045579408 (Q65015) and German node 4819941851 (Q12051106) are strictly inside this same exact host. Italian article coordinate and independent German reference (12.3270, 45.4450) are also inside; German route coordinate is outside and was not used.",
       "identity_sources": [
         "https://api.openstreetmap.org/api/0.6/node/13966049130",
         "https://api.openstreetmap.org/api/0.6/way/138843453/full",
         "https://en.wikipedia.org/wiki/Canton_Synagogue",
         "https://wikimili.com/en/Canton_Synagogue",
         "https://www.jewishvenice.org/history-culture/"
-      ]
+      ],
+      "identities": [
+        {
+          "stop_id": "Q28035407",
+          "qid": "Q28035407",
+          "name": "Scuola Canton",
+          "poi_node": 13966049130,
+          "poi_coordinate": [
+            12.326803,
+            45.4449784
+          ],
+          "independent_coordinate": [
+            12.3267,
+            45.445
+          ],
+          "identity_sources": [
+            "https://api.openstreetmap.org/api/0.6/node/13966049130",
+            "https://api.openstreetmap.org/api/0.6/way/138843453/full",
+            "https://wikimili.com/en/Canton_Synagogue"
+          ]
+        },
+        {
+          "stop_id": "Q65015",
+          "qid": "Q65015",
+          "name": "Scuola Italiana",
+          "poi_node": 6045579408,
+          "poi_coordinate": [
+            12.3266278,
+            45.4451422
+          ],
+          "independent_coordinate": [
+            12.326621,
+            45.445149
+          ],
+          "identity_sources": [
+            "https://api.openstreetmap.org/api/0.6/node/6045579408",
+            "https://api.openstreetmap.org/api/0.6/way/138843453/full",
+            "https://it.wikipedia.org/wiki/Scola_Italiana"
+          ]
+        },
+        {
+          "stop_id": "Q12051106",
+          "qid": "Q12051106",
+          "name": "Scuola Grande Tedesca",
+          "poi_node": 4819941851,
+          "poi_coordinate": [
+            12.3271218,
+            45.4450594
+          ],
+          "independent_coordinate": [
+            12.327,
+            45.445
+          ],
+          "identity_sources": [
+            "https://api.openstreetmap.org/api/0.6/node/4819941851",
+            "https://api.openstreetmap.org/api/0.6/way/138843453/full",
+            "https://koshertraveling.co/en/venice/attraction/german-synagogue"
+          ]
+        }
+      ],
+      "highlight_shading": "atlas_age",
+      "color_reference": {
+        "qid": "Q756807",
+        "gid": 5888,
+        "year": 1710,
+        "flag": 0,
+        "period": "pre",
+        "mode": "Age",
+        "year_at_verification": 2026,
+        "estimated_mix": 0
+      }
+    },
+    {
+      "gid": 4596,
+      "building_id": "w138842957",
+      "osm_type": "way",
+      "osm_id": 138842957,
+      "stop_id": "Q62259167",
+      "qid": "Q62259167",
+      "match_source": "reviewed_named_poi_contained_in_exact_osm_host",
+      "highlight_scope": "entire_shared_osm_host_building",
+      "match_evidence": "Named Jewish Scuola Levantina OSM node 250421434 tagged Q62259167 and independently published AroundUs coordinate (12.32579, 45.44474) are strictly inside exact 42-node host way 138842957. The stale route article coordinate lies outside; Spanish node 250421433 belongs to different way 345585193. Shared adjacent premises are included in the whole existing atlas host.",
+      "identity_sources": [
+        "https://api.openstreetmap.org/api/0.6/node/250421434",
+        "https://api.openstreetmap.org/api/0.6/way/138842957/full",
+        "https://aroundus.com/p/8221059-scola-levantina"
+      ],
+      "identities": [
+        {
+          "stop_id": "Q62259167",
+          "qid": "Q62259167",
+          "name": "Scuola Levantina",
+          "poi_node": 250421434,
+          "poi_coordinate": [
+            12.3258217,
+            45.4447594
+          ],
+          "independent_coordinate": [
+            12.32579,
+            45.44474
+          ],
+          "identity_sources": [
+            "https://api.openstreetmap.org/api/0.6/node/250421434",
+            "https://api.openstreetmap.org/api/0.6/way/138842957/full",
+            "https://aroundus.com/p/8221059-scola-levantina"
+          ]
+        }
+      ],
+      "highlight_color": "#2f3f6b",
+      "highlight_shading": "atlas_age",
+      "color_reference": {
+        "qid": "Q756807",
+        "gid": 5888,
+        "year": 1710,
+        "flag": 0,
+        "period": "pre",
+        "mode": "Age",
+        "year_at_verification": 2026,
+        "estimated_mix": 0
+      }
     },
     {
       "gid": 4756,
@@ -93,7 +212,7 @@
       "stop_id": "Q2897799",
       "qid": "Q2897799",
       "match_source": "reviewed_named_poi_contained_in_exact_osm_host",
-      "highlight_color": "#000080",
+      "highlight_color": "#2f3f6b",
       "highlight_scope": "entire_shared_osm_host_building",
       "match_evidence": "Scuola Ponentina (Scuola Spagnola) named Jewish place_of_worship OSM node 250421433, explicitly tagged Q2897799, (12.3255604, 45.4446333) lies strictly inside way 345585193. Independently published Italian article coordinate (12.325563, 45.444618) and English article coordinate (12.3256, 45.4448) also lie inside the exact 67-node footprint, verified against the OSM way/full response. The atlas host includes adjacent premises; the entire existing host, not a synagogue-only subvolume, is highlighted. The separately named Levantine POI node 250421434 (12.3258217, 45.4447594) is outside this footprint; this host is not identified as Levantine.",
       "identity_sources": [
@@ -102,7 +221,39 @@
         "https://it.wikipedia.org/wiki/Scola_Ponentina",
         "https://en.wikipedia.org/wiki/Spanish_Synagogue_(Venice)",
         "https://api.openstreetmap.org/api/0.6/node/250421434"
-      ]
+      ],
+      "identities": [
+        {
+          "stop_id": "Q2897799",
+          "qid": "Q2897799",
+          "name": "Scuola Ponentina (Spagnola)",
+          "poi_node": 250421433,
+          "poi_coordinate": [
+            12.3255604,
+            45.4446333
+          ],
+          "independent_coordinate": [
+            12.325563,
+            45.444618
+          ],
+          "identity_sources": [
+            "https://api.openstreetmap.org/api/0.6/node/250421433",
+            "https://api.openstreetmap.org/api/0.6/way/345585193/full",
+            "https://it.wikipedia.org/wiki/Scola_Ponentina"
+          ]
+        }
+      ],
+      "highlight_shading": "atlas_age",
+      "color_reference": {
+        "qid": "Q756807",
+        "gid": 5888,
+        "year": 1710,
+        "flag": 0,
+        "period": "pre",
+        "mode": "Age",
+        "year_at_verification": 2026,
+        "estimated_mix": 0
+      }
     },
     {
       "gid": 5033,
@@ -1072,36 +1223,6 @@
     }
   ],
   "unmatched": [
-    {
-      "id": "Q62259167",
-      "qid": "Q62259167",
-      "name": {
-        "ru": "Levantine Synagogue",
-        "it": "scola Luzzatto",
-        "en": "Scola Levantina"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q65015",
-      "qid": "Q65015",
-      "name": {
-        "ru": "Scola Italiana",
-        "it": "scola Italiana",
-        "en": "Italian Synagogue"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q12051106",
-      "qid": "Q12051106",
-      "name": {
-        "ru": "Great German Synagogue",
-        "it": "scola Grande Tedesca",
-        "en": "Scola Grande Tedesca"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
     {
       "id": "Q3585424-volto-santo",
       "qid": "Q3585424",

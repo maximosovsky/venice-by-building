@@ -13,7 +13,7 @@ def test_spanish_named_jewish_poi_and_independent_article_inside_exact_host():
     match = building_match(host['properties'], route['stops'])
     assert match is not None, 'Spanish reviewed exact host missing'
     assert match['qid'] == 'Q2897799'
-    assert match['highlight_color'] == '#000080'
+    assert match['highlight_color'] == '#2f3f6b'
     assert match['highlight_scope'] == 'entire_shared_osm_host_building'
     assert '250421433' in match['match_evidence']
     assert 'adjacent premises' in match['match_evidence']
@@ -34,8 +34,8 @@ def test_spanish_manifest_unique_navy_host_and_complete_totals():
     data = json.loads((ROOT / 'web/data/church-buildings.json').read_text(encoding='utf8'))
     spanish = [b for b in data['buildings'] if b['qid'] == 'Q2897799']
     assert len(spanish) == 1
-    assert (spanish[0]['gid'], spanish[0]['building_id'], spanish[0]['highlight_color']) == (4756, 'w345585193', '#000080')
-    assert len(data['buildings']) == 116
-    assert data['matched_stops'] == 114
-    assert len(data['unmatched']) == 20
+    assert (spanish[0]['gid'], spanish[0]['building_id'], spanish[0]['highlight_color']) == (4756, 'w345585193', '#2f3f6b')
+    assert len(data['buildings']) == 117
+    assert data['matched_stops'] == 117
+    assert len(data['unmatched']) == 17
     assert not any(b['id'] == 'Q2897799' for b in data['unmatched'])
