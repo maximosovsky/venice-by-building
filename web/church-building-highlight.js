@@ -24,21 +24,25 @@ export function extractChurchGeometry(THREE, tile, gids) {
 export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch(url) }) {
   const tiles = [], overlays = [], sources = new Set();
   let manifest = null, pending = null, disposed = false, picking = false, error = null;
-  const material = new THREE.MeshBasicMaterial({ color: '#436817', side: THREE.DoubleSide,
-    polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
-  const blueMaterial = new THREE.MeshBasicMaterial({ color: '#0000ff', side: THREE.DoubleSide,
-    polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
+  const materials = new Map([['#436817', new THREE.MeshBasicMaterial({ color: '#436817', side: THREE.DoubleSide,
+    polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 })]]);
+  function materialFor(color) {
+    if (!materials.has(color)) materials.set(color, new THREE.MeshBasicMaterial({ color, side: THREE.DoubleSide,
+      polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 }));
+    return materials.get(color);
+  }
   const sync = () => { for (const mesh of overlays) mesh.visible = !disposed && !picking && sources.size > 0; };
   function attach(entry) {
     if (!manifest || entry.attached || disposed) return;
     entry.attached = true;
-    // Disjoint GID sets: blue geometry is never also drawn in green.
-    for (const [color, overlayMaterial] of [['#436817', material], ['#0000ff', blueMaterial]]) {
-      const gids = new Set(manifest.buildings.filter(b => (b.highlight_color || '#436817') === color).map(b => b.gid));
+    // Disjoint GID sets: special-color geometry is never also drawn in green.
+    for (const color of new Set(manifest.buildings.map(b => (b.highlight_color || '#436817').toLowerCase()))) {
+      const overlayMaterial = materialFor(color);
+      const gids = new Set(manifest.buildings.filter(b => (b.highlight_color || '#436817').toLowerCase() === color).map(b => b.gid));
       const geometry = extractChurchGeometry(THREE, entry.tile, gids);
       if (!geometry) continue;
       const mesh = new THREE.Mesh(geometry, overlayMaterial);
-      mesh.name = color === '#0000ff' ? 'canton-building-highlight' : 'church-building-highlight';mesh.renderOrder = 30;
+      mesh.name = color === '#436817' ? 'church-building-highlight' : 'synagogue-building-highlight';mesh.renderOrder = 30;
       mesh.userData.geometry_source = manifest.geometry_source;
       mesh.userData.gids = [...gids];
       // Child transform preserves the atlas's decimetres and tile origin exactly.
@@ -54,7 +58,7 @@ export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch
         const response = await fetchData('data/church-buildings.json');
         if (!response.ok) throw new Error(`Church buildings HTTP ${response.status}`);
         const data = await response.json();
-        if (data.version !== 1 || !Array.isArray(data.buildings) || !data.buildings.every(b => Number.isInteger(b.gid) && b.gid >= 0 && /^Q\d+$/.test(b.qid))) throw new Error('Invalid church buildings manifest');
+        if (data.version !== 1 || !Array.isArray(data.buildings) || !data.buildings.every(b => Number.isInteger(b.gid) && b.gid >= 0 && /^Q\d+$/.test(b.qid) && (!Object.hasOwn(b, 'highlight_color') || (typeof b.highlight_color === 'string' && /^#[0-9a-f]{6}$/i.test(b.highlight_color))))) throw new Error('Invalid church buildings manifest');
         if (!disposed) { manifest = data;error = null;tiles.forEach(attach); }
       } catch (e) { error = e.message; }
       finally { pending = null; }
@@ -67,6 +71,6 @@ export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch
     setSourceVisible(source, visible) { if (disposed) return;if (visible) { sources.add(source);void load(); } else sources.delete(source);sync(); },
     setPicking(value) { picking = !!value;sync(); },
     get overlays() { return overlays; }, get manifest() { return manifest; }, get error() { return error; },
-    dispose() { if (disposed) return;disposed = true;sources.clear();for (const mesh of overlays) { mesh.removeFromParent();mesh.geometry.dispose(); }overlays.length = 0;tiles.length = 0;material.dispose();blueMaterial.dispose(); }
+    dispose() { if (disposed) return;disposed = true;sources.clear();for (const mesh of overlays) { mesh.removeFromParent();mesh.geometry.dispose(); }overlays.length = 0;tiles.length = 0;for (const material of materials.values()) material.dispose();materials.clear(); }
   };
 }

@@ -1,7 +1,7 @@
 {
   "version": 1,
   "inventory_stops": 134,
-  "matched_stops": 113,
+  "matched_stops": 114,
   "buildings": [
     {
       "gid": 3704,
@@ -74,7 +74,7 @@
       "stop_id": "Q28035407",
       "qid": "Q28035407",
       "match_source": "reviewed_named_poi_contained_in_exact_osm_host",
-      "highlight_color": "#0000ff",
+      "highlight_color": "#000080",
       "highlight_scope": "entire_shared_osm_host_building",
       "match_evidence": "Scuola Canton named Jewish place_of_worship OSM node 13966049130 (12.3268030, 45.4449784) lies strictly inside way 138843453; both the route Wikipedia coordinate (12.326835, 45.445029) and independently published Canton coordinate (12.3267, 45.445) are inside the same 41-node footprint. Canton occupies upper rooms, not the whole host. The atlas merges adjacent premises, including the Italian synagogue, into this GID; the entire shared host is highlighted.",
       "identity_sources": [
@@ -83,6 +83,25 @@
         "https://en.wikipedia.org/wiki/Canton_Synagogue",
         "https://wikimili.com/en/Canton_Synagogue",
         "https://www.jewishvenice.org/history-culture/"
+      ]
+    },
+    {
+      "gid": 4756,
+      "building_id": "w345585193",
+      "osm_type": "way",
+      "osm_id": 345585193,
+      "stop_id": "Q2897799",
+      "qid": "Q2897799",
+      "match_source": "reviewed_named_poi_contained_in_exact_osm_host",
+      "highlight_color": "#000080",
+      "highlight_scope": "entire_shared_osm_host_building",
+      "match_evidence": "Scuola Ponentina (Scuola Spagnola) named Jewish place_of_worship OSM node 250421433, explicitly tagged Q2897799, (12.3255604, 45.4446333) lies strictly inside way 345585193. Independently published Italian article coordinate (12.325563, 45.444618) and English article coordinate (12.3256, 45.4448) also lie inside the exact 67-node footprint, verified against the OSM way/full response. The atlas host includes adjacent premises; the entire existing host, not a synagogue-only subvolume, is highlighted. The separately named Levantine POI node 250421434 (12.3258217, 45.4447594) is outside this footprint; this host is not identified as Levantine.",
+      "identity_sources": [
+        "https://api.openstreetmap.org/api/0.6/node/250421433",
+        "https://api.openstreetmap.org/api/0.6/way/345585193/full",
+        "https://it.wikipedia.org/wiki/Scola_Ponentina",
+        "https://en.wikipedia.org/wiki/Spanish_Synagogue_(Venice)",
+        "https://api.openstreetmap.org/api/0.6/node/250421434"
       ]
     },
     {
@@ -1053,16 +1072,6 @@
     }
   ],
   "unmatched": [
-    {
-      "id": "Q2897799",
-      "qid": "Q2897799",
-      "name": {
-        "ru": "Scola Ponentina",
-        "it": "scola Spagnola",
-        "en": "Spanish Synagogue"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
     {
       "id": "Q62259167",
       "qid": "Q62259167",
