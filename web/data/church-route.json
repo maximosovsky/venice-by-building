@@ -6,12 +6,12 @@
     "en": "Churches and temples of Venice and the lagoon"
   },
   "summary": {
-    "ru": "138 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "138 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "138 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "129 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
+    "it": "129 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
+    "en": "129 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
   },
   "status": "ready",
-  "generated_at": "2026-10-24T05:40:13.918516+00:00",
+  "generated_at": "2026-10-24T05:48:24.289932+00:00",
   "stops": [
     {
       "id": "Q748689",
@@ -4591,318 +4591,6 @@
       "source_rows": 6,
       "network_distance_m": 26.65,
       "node": 7603498169
-    },
-    {
-      "id": "Q1449262",
-      "name": {
-        "ru": "Сан-Микеле-ин-Изола",
-        "it": "chiesa di San Michele in Isola",
-        "en": "San Michele in Isola"
-      },
-      "lon": 12.34703,
-      "lat": 45.44909,
-      "local": [
-        706.895,
-        -1654.869
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Michele_in_Isola",
-      "area": "San Michele",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q1449262",
-      "source_rows": 5,
-      "network_distance_m": 16.4,
-      "node": 9655520535
-    },
-    {
-      "id": "Q3585409",
-      "name": {
-        "ru": "Chiesa di Santa Chiara (Venezia, Murano)",
-        "it": "chiesa di Santa Chiara",
-        "en": "Santa Chiara"
-      },
-      "lon": 12.350786,
-      "lat": 45.452078,
-      "local": [
-        1011.545,
-        -1977.128
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Murano)",
-      "area": "Murano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585409",
-      "source_rows": 4,
-      "network_distance_m": 6.36,
-      "node": 11302101894
-    },
-    {
-      "id": "Q70112034",
-      "name": {
-        "ru": "Oratorio dei Santi Giuseppe e Teresa",
-        "it": "Oratorio dei Santi Giuseppe e Teresa",
-        "en": "Ospizio Briati and Oratorio"
-      },
-      "lon": 12.353611,
-      "lat": 45.453389,
-      "local": [
-        1237.235,
-        -2115.493
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Murano",
-      "area": "Murano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "Q70112034",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 12.6,
-      "node": 11304886052
-    },
-    {
-      "id": "Q3585377",
-      "name": {
-        "ru": "Сан-Пьетро Мартире",
-        "it": "chiesa di San Pietro martire",
-        "en": "San Pietro Martire"
-      },
-      "lon": 12.352611,
-      "lat": 45.455139,
-      "local": [
-        1165.451,
-        -2312.484
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_Martire_(Venezia)",
-      "area": "Murano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585377",
-      "source_rows": 5,
-      "network_distance_m": 14.79,
-      "node": 1831396776
-    },
-    {
-      "id": "Q3585448",
-      "name": {
-        "ru": "Oratorio di Santo Stefano (Murano)",
-        "it": "Oratorio di Santo Stefano (Murano)",
-        "en": "Oratorio di Santo Stefano (Murano)"
-      },
-      "lon": 12.353391,
-      "lat": 45.455536,
-      "local": [
-        1227.891,
-        -2354.579
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Murano)",
-      "area": "Murano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_chapel",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585448",
-      "source_rows": 3,
-      "survival_evidence": "The parent church was demolished; the Sacrament chapel survives as an oratory.",
-      "network_distance_m": 8.47,
-      "node": 6342973467
-    },
-    {
-      "id": "Q2545358",
-      "name": {
-        "ru": "Собор Санти-Мария э Донато",
-        "it": "Duomo di Murano",
-        "en": "Church of Santa Maria e San Donato"
-      },
-      "lon": 12.35718,
-      "lat": 45.4575,
-      "local": [
-        1531.319,
-        -2563.016
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Duomo_di_Murano",
-      "area": "Murano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q2545358",
-      "source_rows": 6,
-      "network_distance_m": 15.43,
-      "node": 1554301903
-    },
-    {
-      "id": "Q3585423",
-      "name": {
-        "ru": "Санта-Мария-дельи-Анджели (Венеция)",
-        "it": "chiesa di Santa Maria degli Angeli",
-        "en": "Santa Maria degli Angeli"
-      },
-      "lon": 12.34879,
-      "lat": 45.45856,
-      "local": [
-        879.24,
-        -2702.391
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_degli_Angeli_(Murano)",
-      "area": "Murano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585423",
-      "source_rows": 5,
-      "network_distance_m": 20.09,
-      "node": 13254005918
-    },
-    {
-      "id": "Q1791020",
-      "name": {
-        "ru": "Церковь Сан-Ладзаро-дельи-Армени",
-        "it": "Chiesa di San Lazzaro degli Armeni",
-        "en": "Church of San Lazzaro degli Armeni"
-      },
-      "lon": 12.36175,
-      "lat": 45.41244,
-      "local": [
-        1724.282,
-        2454.632
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/San_Lazzaro_degli_Armeni",
-      "area": "San Lazzaro degli Armeni",
-      "access_note": {
-        "ru": "Остров обслуживает линия ACTV 20; отдельно проверьте актуальное расписание и вход/экскурсию в монастырь.",
-        "it": "Isola servita dalla linea ACTV 20; verificare orario attuale e accesso/visita al monastero.",
-        "en": "ACTV line 20 serves this island; check current timetable and admission/monastery tour separately."
-      },
-      "access_class": "check_opening",
-      "confession": "Armenian Catholic",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata Q116056745 P625 (church, not island centre)",
-      "sources": [
-        "en_list",
-        "it_list"
-      ],
-      "qid": "Q1791020",
-      "source_rows": 2,
-      "network_distance_m": 26.69,
-      "node": 3336662375
-    },
-    {
-      "id": "Q98781254",
-      "name": {
-        "ru": "Chiesa di San Servolo",
-        "it": "chiesa di San Servolo",
-        "en": "San Servolo Church, Venice"
-      },
-      "lon": 12.356278,
-      "lat": 45.420028,
-      "local": [
-        1323.839,
-        1597.586
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
-      "area": "San Servolo",
-      "access_note": {
-        "ru": "Остров обслуживает линия ACTV 20; отдельно проверьте актуальное расписание и вход/экскурсию в монастырь.",
-        "it": "Isola servita dalla linea ACTV 20; verificare orario attuale e accesso/visita al monastero.",
-        "en": "ACTV line 20 serves this island; check current timetable and admission/monastery tour separately."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "Q98781254",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 17.37,
-      "node": 10757698768
     }
   ],
   "segments": [
@@ -29959,1447 +29647,13 @@
         "it": "Non navigabile; percorso e distanza non verificati.",
         "en": "Not navigation; no route or length verified."
       }
-    },
-    {
-      "from": "Q713558",
-      "to": "Q1449262",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.3431,
-          45.4293
-        ],
-        [
-          12.34703,
-          45.44909
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q1449262",
-      "to": "Q3585409",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.34703,
-          45.44909
-        ],
-        [
-          12.350786,
-          45.452078
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q3585409",
-      "to": "Q70112034",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.3507661,
-          45.4521335
-        ],
-        [
-          12.3507286,
-          45.4521572
-        ],
-        [
-          12.3506508,
-          45.4520813
-        ],
-        [
-          12.3506219,
-          45.4520526
-        ],
-        [
-          12.350501,
-          45.4521135
-        ],
-        [
-          12.3505297,
-          45.4521447
-        ],
-        [
-          12.350572,
-          45.4521894
-        ],
-        [
-          12.3506198,
-          45.4522314
-        ],
-        [
-          12.3506339,
-          45.4522441
-        ],
-        [
-          12.3506503,
-          45.4522593
-        ],
-        [
-          12.3510495,
-          45.452646
-        ],
-        [
-          12.3513223,
-          45.4529107
-        ],
-        [
-          12.3513687,
-          45.4529557
-        ],
-        [
-          12.3514698,
-          45.4530537
-        ],
-        [
-          12.3517575,
-          45.4533314
-        ],
-        [
-          12.3519099,
-          45.4534784
-        ],
-        [
-          12.3519275,
-          45.4534949
-        ],
-        [
-          12.3519453,
-          45.4535116
-        ],
-        [
-          12.3520178,
-          45.4535889
-        ],
-        [
-          12.3520616,
-          45.4536248
-        ],
-        [
-          12.3523398,
-          45.4538527
-        ],
-        [
-          12.3525062,
-          45.4537509
-        ],
-        [
-          12.3525606,
-          45.4537676
-        ],
-        [
-          12.3529435,
-          45.4535356
-        ],
-        [
-          12.3533026,
-          45.4533445
-        ],
-        [
-          12.3533384,
-          45.4533254
-        ],
-        [
-          12.3533878,
-          45.4533703
-        ],
-        [
-          12.3534039,
-          45.453362
-        ],
-        [
-          12.3534811,
-          45.4533202
-        ],
-        [
-          12.3534827,
-          45.4533153
-        ],
-        [
-          12.3535116,
-          45.4532998
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 390.05,
-      "osm_nodes": [
-        11302101894,
-        11302099965,
-        11302099962,
-        11302099963,
-        11302099964,
-        11302101890,
-        11302101893,
-        11302101887,
-        1830203507,
-        11304812488,
-        11302084972,
-        11302084974,
-        11302081503,
-        1854858012,
-        10875478613,
-        5591092516,
-        1830191192,
-        5591092517,
-        5525155134,
-        5525155131,
-        1906034625,
-        27176257,
-        1554289345,
-        1554288776,
-        11300348382,
-        1554287748,
-        1906034598,
-        1554287924,
-        1554287750,
-        1554287568,
-        11304886052
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        172205865,
-        172205870,
-        180173626,
-        1219736172,
-        1219736173,
-        1219738406,
-        1219738407,
-        1219738408,
-        1219738409,
-        1220049008,
-        1220049009,
-        1220345057
-      ]
-    },
-    {
-      "from": "Q70112034",
-      "to": "Q3585377",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.3535116,
-          45.4532998
-        ],
-        [
-          12.3534827,
-          45.4533153
-        ],
-        [
-          12.3534811,
-          45.4533202
-        ],
-        [
-          12.3534039,
-          45.453362
-        ],
-        [
-          12.3533878,
-          45.4533703
-        ],
-        [
-          12.3533384,
-          45.4533254
-        ],
-        [
-          12.3533026,
-          45.4533445
-        ],
-        [
-          12.3529435,
-          45.4535356
-        ],
-        [
-          12.3525606,
-          45.4537676
-        ],
-        [
-          12.3525062,
-          45.4537509
-        ],
-        [
-          12.3523398,
-          45.4538527
-        ],
-        [
-          12.3526595,
-          45.4541085
-        ],
-        [
-          12.3528241,
-          45.4542744
-        ],
-        [
-          12.3529285,
-          45.4544202
-        ],
-        [
-          12.352981,
-          45.4545653
-        ],
-        [
-          12.3529836,
-          45.454573
-        ],
-        [
-          12.3529844,
-          45.4545889
-        ],
-        [
-          12.3529856,
-          45.4546121
-        ],
-        [
-          12.3529942,
-          45.4547837
-        ],
-        [
-          12.3530035,
-          45.4549704
-        ],
-        [
-          12.3530014,
-          45.4551111
-        ],
-        [
-          12.3529405,
-          45.4551078
-        ],
-        [
-          12.3528756,
-          45.4551016
-        ],
-        [
-          12.3528417,
-          45.4550985
-        ],
-        [
-          12.3527885,
-          45.4550931
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 291.7,
-      "osm_nodes": [
-        11304886052,
-        1554287568,
-        1554287750,
-        1554287924,
-        1906034598,
-        1554287748,
-        11300348382,
-        1554288776,
-        1554289345,
-        27176257,
-        1906034625,
-        1854858043,
-        4805651731,
-        4805664835,
-        3624760354,
-        1831361259,
-        13270189697,
-        3624760355,
-        13277507282,
-        1831361233,
-        5525128517,
-        1831361197,
-        6342973475,
-        6342973474,
-        1831396776
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        172205865,
-        172205870,
-        172210497,
-        180173626,
-        357115411,
-        488237801,
-        488237802,
-        677420696,
-        677420697,
-        677420698,
-        1161325504
-      ]
-    },
-    {
-      "from": "Q3585377",
-      "to": "Q3585448",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.3527885,
-          45.4550931
-        ],
-        [
-          12.3528417,
-          45.4550985
-        ],
-        [
-          12.3528756,
-          45.4551016
-        ],
-        [
-          12.3529405,
-          45.4551078
-        ],
-        [
-          12.3530014,
-          45.4551111
-        ],
-        [
-          12.3530028,
-          45.4551445
-        ],
-        [
-          12.3531233,
-          45.4552395
-        ],
-        [
-          12.3533366,
-          45.4553345
-        ],
-        [
-          12.3533616,
-          45.455343
-        ],
-        [
-          12.3533553,
-          45.4553512
-        ],
-        [
-          12.3534767,
-          45.4553589
-        ],
-        [
-          12.3534771,
-          45.4554126
-        ],
-        [
-          12.3534799,
-          45.4554363
-        ],
-        [
-          12.3534883,
-          45.4554709
-        ],
-        [
-          12.3534947,
-          45.4554958
-        ],
-        [
-          12.3535034,
-          45.4555017
-        ],
-        [
-          12.3535029,
-          45.4555071
-        ],
-        [
-          12.353499,
-          45.4555092
-        ],
-        [
-          12.3534988,
-          45.4555188
-        ],
-        [
-          12.3535035,
-          45.4555211
-        ],
-        [
-          12.353504,
-          45.455536
-        ],
-        [
-          12.3534992,
-          45.4555392
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 88.09,
-      "osm_nodes": [
-        1831396776,
-        6342973474,
-        6342973475,
-        1831361197,
-        5525128517,
-        6342973476,
-        6342973452,
-        1831361286,
-        6342973991,
-        1554295114,
-        1554295116,
-        1554295458,
-        6342973465,
-        6342973464,
-        6342973463,
-        1554295877,
-        6342973472,
-        6342973468,
-        6342973469,
-        6342973471,
-        6342973470,
-        6342973467
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        172205864,
-        172210497,
-        575922784,
-        677420693,
-        677420696,
-        677420697,
-        677420698,
-        1161325504
-      ]
-    },
-    {
-      "from": "Q3585448",
-      "to": "Q2545358",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.3534992,
-          45.4555392
-        ],
-        [
-          12.353504,
-          45.455536
-        ],
-        [
-          12.3535035,
-          45.4555211
-        ],
-        [
-          12.3534988,
-          45.4555188
-        ],
-        [
-          12.353499,
-          45.4555092
-        ],
-        [
-          12.3535029,
-          45.4555071
-        ],
-        [
-          12.3535034,
-          45.4555017
-        ],
-        [
-          12.3534947,
-          45.4554958
-        ],
-        [
-          12.3534883,
-          45.4554709
-        ],
-        [
-          12.3534799,
-          45.4554363
-        ],
-        [
-          12.3534771,
-          45.4554126
-        ],
-        [
-          12.3534767,
-          45.4553589
-        ],
-        [
-          12.3533553,
-          45.4553512
-        ],
-        [
-          12.3533616,
-          45.455343
-        ],
-        [
-          12.3533366,
-          45.4553345
-        ],
-        [
-          12.3531233,
-          45.4552395
-        ],
-        [
-          12.3530028,
-          45.4551445
-        ],
-        [
-          12.3530014,
-          45.4551111
-        ],
-        [
-          12.3529405,
-          45.4551078
-        ],
-        [
-          12.3528756,
-          45.4551016
-        ],
-        [
-          12.3528417,
-          45.4550985
-        ],
-        [
-          12.3527885,
-          45.4550931
-        ],
-        [
-          12.3527757,
-          45.455255
-        ],
-        [
-          12.3527728,
-          45.455352
-        ],
-        [
-          12.3527412,
-          45.4555291
-        ],
-        [
-          12.3527284,
-          45.4555702
-        ],
-        [
-          12.3527232,
-          45.4555801
-        ],
-        [
-          12.3527141,
-          45.4555927
-        ],
-        [
-          12.3526645,
-          45.4556387
-        ],
-        [
-          12.3525999,
-          45.4556882
-        ],
-        [
-          12.3524811,
-          45.4557544
-        ],
-        [
-          12.3524899,
-          45.4557683
-        ],
-        [
-          12.3526953,
-          45.4561007
-        ],
-        [
-          12.3528296,
-          45.4560664
-        ],
-        [
-          12.3530874,
-          45.4560551
-        ],
-        [
-          12.3531609,
-          45.4560627
-        ],
-        [
-          12.353526,
-          45.4561003
-        ],
-        [
-          12.353707,
-          45.456119
-        ],
-        [
-          12.3543615,
-          45.456168
-        ],
-        [
-          12.3544166,
-          45.4561851
-        ],
-        [
-          12.3544368,
-          45.4561913
-        ],
-        [
-          12.35462,
-          45.4562479
-        ],
-        [
-          12.354795,
-          45.4562607
-        ],
-        [
-          12.3549917,
-          45.4562665
-        ],
-        [
-          12.3552271,
-          45.4562599
-        ],
-        [
-          12.3552479,
-          45.4562568
-        ],
-        [
-          12.3553985,
-          45.4562349
-        ],
-        [
-          12.355524,
-          45.4562158
-        ],
-        [
-          12.3557831,
-          45.4561567
-        ],
-        [
-          12.3559815,
-          45.4560542
-        ],
-        [
-          12.3561377,
-          45.4559735
-        ],
-        [
-          12.3561716,
-          45.4559666
-        ],
-        [
-          12.3561988,
-          45.4559805
-        ],
-        [
-          12.3563563,
-          45.4560932
-        ],
-        [
-          12.356459,
-          45.4561666
-        ],
-        [
-          12.3571012,
-          45.4566936
-        ],
-        [
-          12.3573311,
-          45.4569107
-        ],
-        [
-          12.3574176,
-          45.4571084
-        ],
-        [
-          12.3574559,
-          45.4571987
-        ],
-        [
-          12.3576705,
-          45.4576717
-        ],
-        [
-          12.3576059,
-          45.4576813
-        ],
-        [
-          12.3572558,
-          45.4576814
-        ],
-        [
-          12.3572551,
-          45.4576284
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 761.66,
-      "osm_nodes": [
-        6342973467,
-        6342973470,
-        6342973471,
-        6342973469,
-        6342973468,
-        6342973472,
-        1554295877,
-        6342973463,
-        6342973464,
-        6342973465,
-        1554295458,
-        1554295116,
-        1554295114,
-        6342973991,
-        1831361286,
-        6342973452,
-        6342973476,
-        5525128517,
-        1831361197,
-        6342973475,
-        6342973474,
-        1831396776,
-        1831396767,
-        1831396771,
-        1892078327,
-        1892078334,
-        9694462098,
-        1831396777,
-        1892078342,
-        1892078346,
-        1831396773,
-        9694462093,
-        3623876946,
-        1831361230,
-        1831361297,
-        4386264919,
-        1831389059,
-        1831361227,
-        1831361315,
-        9955709313,
-        9694462091,
-        1892078411,
-        1831361198,
-        1831361231,
-        1831361309,
-        2959994205,
-        13363411026,
-        1831361324,
-        1831361295,
-        9971678872,
-        9694462089,
-        1831361322,
-        9694462090,
-        9694462087,
-        9694462088,
-        1854858014,
-        1831389007,
-        13270278987,
-        13270278986,
-        1831389067,
-        1554302048,
-        1554302047,
-        1554301903
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        172205864,
-        172205869,
-        172209349,
-        172210497,
-        172210501,
-        172210505,
-        174830627,
-        292444643,
-        575922784,
-        677420693,
-        677420696,
-        677420697,
-        677420698,
-        1055006399,
-        1055006400,
-        1055006401,
-        1055006402,
-        1055006403,
-        1161325504,
-        1446279593
-      ]
-    },
-    {
-      "from": "Q2545358",
-      "to": "Q3585423",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.3572551,
-          45.4576284
-        ],
-        [
-          12.3573747,
-          45.4576303
-        ],
-        [
-          12.3573757,
-          45.4575728
-        ],
-        [
-          12.3573897,
-          45.4575733
-        ],
-        [
-          12.3573965,
-          45.4575228
-        ],
-        [
-          12.3574011,
-          45.4575212
-        ],
-        [
-          12.3574057,
-          45.4575197
-        ],
-        [
-          12.3574102,
-          45.4575177
-        ],
-        [
-          12.3574144,
-          45.4575155
-        ],
-        [
-          12.3574185,
-          45.4575134
-        ],
-        [
-          12.3574221,
-          45.4575108
-        ],
-        [
-          12.3574257,
-          45.4575082
-        ],
-        [
-          12.357429,
-          45.4575056
-        ],
-        [
-          12.3574321,
-          45.4575028
-        ],
-        [
-          12.3574351,
-          45.4574995
-        ],
-        [
-          12.3574375,
-          45.4574966
-        ],
-        [
-          12.3574398,
-          45.4574932
-        ],
-        [
-          12.3574419,
-          45.4574899
-        ],
-        [
-          12.3574433,
-          45.4574865
-        ],
-        [
-          12.3574447,
-          45.457483
-        ],
-        [
-          12.3574459,
-          45.4574794
-        ],
-        [
-          12.3574467,
-          45.4574758
-        ],
-        [
-          12.3574471,
-          45.4574722
-        ],
-        [
-          12.3574473,
-          45.4574686
-        ],
-        [
-          12.3574472,
-          45.457465
-        ],
-        [
-          12.3574465,
-          45.4574614
-        ],
-        [
-          12.3574456,
-          45.4574577
-        ],
-        [
-          12.3574445,
-          45.4574543
-        ],
-        [
-          12.357443,
-          45.4574508
-        ],
-        [
-          12.3574414,
-          45.4574473
-        ],
-        [
-          12.3574392,
-          45.4574442
-        ],
-        [
-          12.3574371,
-          45.4574409
-        ],
-        [
-          12.3574345,
-          45.4574377
-        ],
-        [
-          12.3574317,
-          45.4574347
-        ],
-        [
-          12.3574282,
-          45.4574319
-        ],
-        [
-          12.3574249,
-          45.4574291
-        ],
-        [
-          12.3574215,
-          45.4574266
-        ],
-        [
-          12.3574174,
-          45.4574241
-        ],
-        [
-          12.3574135,
-          45.457422
-        ],
-        [
-          12.3574094,
-          45.4574197
-        ],
-        [
-          12.3574049,
-          45.4574179
-        ],
-        [
-          12.3574002,
-          45.4574162
-        ],
-        [
-          12.3573955,
-          45.4574147
-        ],
-        [
-          12.3573903,
-          45.457414
-        ],
-        [
-          12.3573891,
-          45.457363
-        ],
-        [
-          12.356914,
-          45.4573614
-        ],
-        [
-          12.3569144,
-          45.4574668
-        ],
-        [
-          12.3569152,
-          45.4575736
-        ],
-        [
-          12.3569655,
-          45.4575734
-        ],
-        [
-          12.3569657,
-          45.457593
-        ],
-        [
-          12.3569651,
-          45.4576145
-        ],
-        [
-          12.3568925,
-          45.4576107
-        ],
-        [
-          12.3568911,
-          45.4575959
-        ],
-        [
-          12.3567192,
-          45.4575859
-        ],
-        [
-          12.3566553,
-          45.4575861
-        ],
-        [
-          12.3566156,
-          45.4575772
-        ],
-        [
-          12.3564673,
-          45.4575786
-        ],
-        [
-          12.3564091,
-          45.4576282
-        ],
-        [
-          12.3564011,
-          45.4576203
-        ],
-        [
-          12.3558864,
-          45.4580282
-        ],
-        [
-          12.355566,
-          45.4577973
-        ],
-        [
-          12.3554776,
-          45.4577336
-        ],
-        [
-          12.3552833,
-          45.4575755
-        ],
-        [
-          12.3550772,
-          45.4574912
-        ],
-        [
-          12.3549755,
-          45.4574784
-        ],
-        [
-          12.3548903,
-          45.457461
-        ],
-        [
-          12.354822,
-          45.4575306
-        ],
-        [
-          12.354129,
-          45.457537
-        ],
-        [
-          12.3541269,
-          45.4575615
-        ],
-        [
-          12.3541383,
-          45.457605
-        ],
-        [
-          12.3540915,
-          45.4576238
-        ],
-        [
-          12.3540587,
-          45.457626
-        ],
-        [
-          12.3538176,
-          45.4576537
-        ],
-        [
-          12.3537336,
-          45.4576639
-        ],
-        [
-          12.3536609,
-          45.4576751
-        ],
-        [
-          12.3536486,
-          45.4576281
-        ],
-        [
-          12.3535931,
-          45.4576034
-        ],
-        [
-          12.3533174,
-          45.4576531
-        ],
-        [
-          12.352823,
-          45.4577375
-        ],
-        [
-          12.3527963,
-          45.4577524
-        ],
-        [
-          12.3527558,
-          45.4577737
-        ],
-        [
-          12.3524919,
-          45.457821
-        ],
-        [
-          12.3524451,
-          45.4578293
-        ],
-        [
-          12.3524256,
-          45.4578327
-        ],
-        [
-          12.3521554,
-          45.4578815
-        ],
-        [
-          12.3521423,
-          45.4578566
-        ],
-        [
-          12.3521064,
-          45.4578589
-        ],
-        [
-          12.3514111,
-          45.4574304
-        ],
-        [
-          12.3513177,
-          45.4574936
-        ],
-        [
-          12.3512701,
-          45.4575258
-        ],
-        [
-          12.3511804,
-          45.4575866
-        ],
-        [
-          12.350829,
-          45.4578161
-        ],
-        [
-          12.3504857,
-          45.4580005
-        ],
-        [
-          12.350137,
-          45.4581115
-        ],
-        [
-          12.3497515,
-          45.4582079
-        ],
-        [
-          12.3494235,
-          45.4582958
-        ],
-        [
-          12.3491327,
-          45.4583078
-        ],
-        [
-          12.3488971,
-          45.4583772
-        ],
-        [
-          12.3487916,
-          45.4583793
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 877.45,
-      "osm_nodes": [
-        1554301903,
-        1554301904,
-        1554301791,
-        1554301790,
-        1554301677,
-        1554301680,
-        1554301681,
-        1554301682,
-        1554301684,
-        1554301620,
-        1554301618,
-        1554301619,
-        1554301621,
-        1554301623,
-        1554301624,
-        1554301628,
-        1554301625,
-        1554301622,
-        1554301627,
-        1554301566,
-        1554301569,
-        1554301565,
-        1554301567,
-        1554301564,
-        1554301570,
-        1554301571,
-        1554301366,
-        1554301360,
-        1554301364,
-        1554301377,
-        1554301362,
-        1554301379,
-        1554301358,
-        1554301359,
-        1554301357,
-        1554301260,
-        1554301258,
-        1554301259,
-        1554301257,
-        1554301263,
-        1554301262,
-        1554301254,
-        1554301255,
-        1554301256,
-        1554301059,
-        173909072,
-        2975859377,
-        1554301786,
-        1554301787,
-        2960007163,
-        1554301844,
-        1831389023,
-        1554301841,
-        1554301785,
-        2960007158,
-        2960007157,
-        2960007156,
-        2960007166,
-        2960007164,
-        2960007173,
-        9971678835,
-        3623700102,
-        3623700101,
-        3623700100,
-        3623700099,
-        1831389072,
-        1831389066,
-        1831388990,
-        1554301728,
-        1831389012,
-        1831389050,
-        1554301884,
-        1554301951,
-        1831388974,
-        1831389040,
-        27313064,
-        1831389070,
-        1554301950,
-        1554302148,
-        27313060,
-        1554302216,
-        1554302314,
-        1906034631,
-        1554302313,
-        1831388986,
-        1906034632,
-        27313045,
-        1831361276,
-        3586836031,
-        2247320634,
-        1831361194,
-        1831361237,
-        1831361278,
-        1831361289,
-        1831361239,
-        1907539039,
-        1831361241,
-        13254005917,
-        13254005918
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        172209339,
-        172209340,
-        172209349,
-        180173628,
-        292446181,
-        356971589,
-        356971590,
-        356992650,
-        1444485685
-      ]
-    },
-    {
-      "from": "Q3585423",
-      "to": "Q1791020",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.34879,
-          45.45856
-        ],
-        [
-          12.36175,
-          45.41244
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q1791020",
-      "to": "Q98781254",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.36175,
-          45.41244
-        ],
-        [
-          12.356278,
-          45.420028
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
     }
   ],
   "audit": {
     "candidate_count": 1196,
     "identity_group_count": 386,
-    "included_count": 138,
-    "excluded_count": 241,
+    "included_count": 129,
+    "excluded_count": 250,
     "duplicate_count": 810,
     "unresolved": [
       {
@@ -32028,6 +30282,21 @@
         ]
       },
       {
+        "identity": "Q1449262",
+        "title": "Chiesa di San Michele in Isola",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 5,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
         "identity": "('it', 'Monastero di San Cristoforo (Venezia, San Mcihele)')",
         "title": "Monastero di San Cristoforo (Venezia, San Mcihele)",
         "decision": "excluded",
@@ -32035,6 +30304,88 @@
         "evidence": "Explicit demolished-list, description or non-empty demolition field.",
         "source_rows": 1,
         "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q2545358",
+        "title": "Duomo di Murano",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 6,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585377",
+        "title": "Chiesa di San Pietro Martire (Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 5,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585423",
+        "title": "Chiesa di Santa Maria degli Angeli (Murano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 5,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585448",
+        "title": "Chiesa di Santo Stefano (Venezia, Murano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 3,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q70112034",
+        "title": "Oratorio dei Santi Giuseppe e Teresa",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585409",
+        "title": "Chiesa di Santa Chiara (Venezia, Murano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 4,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "it_category",
           "it_list"
         ]
       },
@@ -32445,6 +30796,29 @@
         "evidence": "https://it.wikipedia.org/wiki/San_Secondo_(isola) — Island church demolished by 1824; saint article is not the building.",
         "source_rows": 1,
         "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q98781254",
+        "title": "Chiesa di San Servolo",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q1791020",
+        "title": "San Lazzaro degli Armeni",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 2,
+        "sources": [
+          "en_list",
           "it_list"
         ]
       },
@@ -36661,9 +35035,9 @@
       {
         "identity": "Q1449262",
         "title": "Chiesa di San Michele in Isola",
-        "stop_id": "Q1449262",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Michele_in_Isola",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 5,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -36687,9 +35061,9 @@
       {
         "identity": "Q2545358",
         "title": "Duomo di Murano",
-        "stop_id": "Q2545358",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Duomo_di_Murano",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 6,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -36702,9 +35076,9 @@
       {
         "identity": "Q3585377",
         "title": "Chiesa di San Pietro Martire (Venezia)",
-        "stop_id": "Q3585377",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_Martire_(Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 5,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -36717,9 +35091,9 @@
       {
         "identity": "Q3585423",
         "title": "Chiesa di Santa Maria degli Angeli (Murano)",
-        "stop_id": "Q3585423",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_degli_Angeli_(Murano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 5,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -36732,9 +35106,9 @@
       {
         "identity": "Q3585448",
         "title": "Chiesa di Santo Stefano (Venezia, Murano)",
-        "stop_id": "Q3585448",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Murano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 3,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -36745,9 +35119,9 @@
       {
         "identity": "Q70112034",
         "title": "Oratorio dei Santi Giuseppe e Teresa",
-        "stop_id": "Q70112034",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Murano",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -36756,9 +35130,9 @@
       {
         "identity": "Q3585409",
         "title": "Chiesa di Santa Chiara (Venezia, Murano)",
-        "stop_id": "Q3585409",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Murano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 4,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -37206,9 +35580,9 @@
       {
         "identity": "Q98781254",
         "title": "Chiesa di San Servolo",
-        "stop_id": "Q98781254",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -37217,9 +35591,9 @@
       {
         "identity": "Q1791020",
         "title": "San Lazzaro degli Armeni",
-        "stop_id": "Q1791020",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/San_Lazzaro_degli_Armeni",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 2,
         "sources": [
           "en_list",

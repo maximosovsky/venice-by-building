@@ -301,6 +301,8 @@ USER_EXCLUDED_NO_ATLAS_GEOMETRY = {
     'Q3585324', 'mention-chiesa-sacca-sessola',
     'Q27116950', 'mention-grazie-burano', 'mention-santa-barbara-burano',
     'Q3585364', 'Q281139', 'Q121598793', 'Q122152492',
+    'Q1449262', 'Q3585409', 'Q70112034', 'Q3585377', 'Q3585448',
+    'Q2545358', 'Q3585423', 'Q1791020', 'Q98781254',
 }
 
 

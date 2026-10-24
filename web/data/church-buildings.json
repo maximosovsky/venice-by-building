@@ -1,64 +1,8 @@
 {
   "version": 1,
-  "inventory_stops": 138,
-  "matched_stops": 118,
+  "inventory_stops": 129,
+  "matched_stops": 110,
   "buildings": [
-    {
-      "gid": 2351,
-      "building_id": "w142023283",
-      "osm_type": "way",
-      "osm_id": 142023283,
-      "qid": "Q3585423",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 2573,
-      "building_id": "w142023249",
-      "osm_type": "way",
-      "osm_id": 142023249,
-      "qid": "Q2545358",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 2922,
-      "building_id": "w142022332",
-      "osm_type": "way",
-      "osm_id": 142022332,
-      "qid": "Q3585448",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 2994,
-      "building_id": "w142022351",
-      "osm_type": "way",
-      "osm_id": 142022351,
-      "qid": "Q3585377",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 3283,
-      "building_id": "w1220054619",
-      "osm_type": "way",
-      "osm_id": 1220054619,
-      "qid": "Q70112034",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 3401,
-      "building_id": "w1219737892",
-      "osm_type": "way",
-      "osm_id": 1219737892,
-      "qid": "Q3585409",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 3563,
-      "building_id": "w142022168",
-      "osm_type": "way",
-      "osm_id": 142022168,
-      "qid": "Q1449262",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
     {
       "gid": 3704,
       "building_id": "w138841141",
@@ -938,14 +882,6 @@
       "osm_id": 138804279,
       "qid": "Q3673008",
       "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 11041,
-      "building_id": "w141988629",
-      "osm_type": "way",
-      "osm_id": 141988629,
-      "qid": "Q98781254",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
     }
   ],
   "unmatched": [
@@ -1136,16 +1072,6 @@
         "ru": "Церковь делле Цителле",
         "it": "chiesa delle Zitelle",
         "en": "Le Zitelle"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q1791020",
-      "qid": "Q1791020",
-      "name": {
-        "ru": "Церковь Сан-Ладзаро-дельи-Армени",
-        "it": "Chiesa di San Lazzaro degli Armeni",
-        "en": "Church of San Lazzaro degli Armeni"
       },
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     }
