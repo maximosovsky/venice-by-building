@@ -1,38 +1,14 @@
 {
   "version": 1,
-  "inventory_stops": 145,
-  "matched_stops": 122,
+  "inventory_stops": 138,
+  "matched_stops": 118,
   "buildings": [
-    {
-      "gid": 1409,
-      "building_id": "w176654997",
-      "osm_type": "way",
-      "osm_id": 176654997,
-      "qid": "Q27116950",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 1431,
-      "building_id": "w176657474",
-      "osm_type": "way",
-      "osm_id": 176657474,
-      "qid": "Q3585364",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
     {
       "gid": 2351,
       "building_id": "w142023283",
       "osm_type": "way",
       "osm_id": 142023283,
       "qid": "Q3585423",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 2521,
-      "building_id": "w141996824",
-      "osm_type": "way",
-      "osm_id": 141996824,
-      "qid": "Q121598793",
       "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
     },
     {
@@ -241,14 +217,6 @@
       "osm_type": "way",
       "osm_id": 138843762,
       "qid": "Q2220127",
-      "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
-    },
-    {
-      "gid": 5757,
-      "building_id": "w140952439",
-      "osm_type": "way",
-      "osm_id": 140952439,
-      "qid": "Q122152492",
       "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
     },
     {
@@ -1168,36 +1136,6 @@
         "ru": "Церковь делле Цителле",
         "it": "chiesa delle Zitelle",
         "en": "Le Zitelle"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "mention-grazie-burano",
-      "qid": "mention-grazie-burano",
-      "name": {
-        "ru": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "it": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "en": "Chiesa di Santa Maria delle Grazie (Burano)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "mention-santa-barbara-burano",
-      "qid": "mention-santa-barbara-burano",
-      "name": {
-        "ru": "Oratorio di Santa Barbara (Burano)",
-        "it": "Oratorio di Santa Barbara (Burano)",
-        "en": "Oratorio di Santa Barbara (Burano)"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
-      "id": "Q281139",
-      "qid": "Q281139",
-      "name": {
-        "ru": "Церковь Сан-Франческо-дель-Дезерто",
-        "it": "Chiesa di San Francesco del Deserto",
-        "en": "Church of San Francesco del Deserto"
       },
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     },

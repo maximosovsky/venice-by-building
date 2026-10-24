@@ -6,12 +6,12 @@
     "en": "Churches and temples of Venice and the lagoon"
   },
   "summary": {
-    "ru": "145 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "145 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "145 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "138 подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
+    "it": "138 tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
+    "en": "138 verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete."
   },
   "status": "ready",
-  "generated_at": "2026-10-23T20:36:30.086392+00:00",
+  "generated_at": "2026-10-24T05:40:13.918516+00:00",
   "stops": [
     {
       "id": "Q748689",
@@ -4837,243 +4837,6 @@
       "source_rows": 5,
       "network_distance_m": 20.09,
       "node": 13254005918
-    },
-    {
-      "id": "Q27116950",
-      "name": {
-        "ru": "Chiesa dei Santi Pietro e Caterina (Venezia)",
-        "it": "chiesa dei Santi Pietro e Caterina",
-        "en": "Chiesa dei Santi Pietro e Caterina"
-      },
-      "lon": 12.40583,
-      "lat": 45.483979,
-      "local": [
-        5430.003,
-        -5380.712
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Pietro_e_Caterina_(Venezia)",
-      "area": "Mazzorbo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q27116950",
-      "source_rows": 5,
-      "network_distance_m": 22.47,
-      "node": 1871360377
-    },
-    {
-      "id": "mention-grazie-burano",
-      "name": {
-        "ru": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "it": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "en": "Chiesa di Santa Maria delle Grazie (Burano)"
-      },
-      "lon": 12.4172199,
-      "lat": 45.4838241,
-      "local": [
-        6319.544,
-        -5334.81
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Burano",
-      "area": "Burano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "adapted_building",
-      "coordinate_source": "OSM way/176657496 exact named building centroid; not entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "mention-grazie-burano",
-      "source_rows": 1,
-      "survival_evidence": "https://it.wikipedia.org/wiki/Burano — Santa Maria delle Grazie/Cappuccine, closed in 1806, restored and reopened as an exhibition space in 2006; exact named OSM way/176657496.",
-      "mention_only": true,
-      "network_distance_m": 9.55,
-      "node": 9383629745
-    },
-    {
-      "id": "mention-santa-barbara-burano",
-      "name": {
-        "ru": "Oratorio di Santa Barbara (Burano)",
-        "it": "Oratorio di Santa Barbara (Burano)",
-        "en": "Oratorio di Santa Barbara (Burano)"
-      },
-      "lon": 12.4183111,
-      "lat": 45.484232,
-      "local": [
-        6406.276,
-        -5377.383
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Burano",
-      "area": "Burano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "OSM way/176657686 exact named building centroid; not entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "mention-santa-barbara-burano",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 10.71,
-      "node": 9953008476
-    },
-    {
-      "id": "Q3585364",
-      "name": {
-        "ru": "Chiesa di San Martino (Venezia, Burano)",
-        "it": "chiesa di San Martino",
-        "en": "San Martino"
-      },
-      "lon": 12.41878,
-      "lat": 45.484177,
-      "local": [
-        6442.723,
-        -5370.095
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Burano)",
-      "area": "Burano",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikipedia article coordinate",
-      "sources": [
-        "cached_wikidata_crosscheck",
-        "en_category",
-        "en_list",
-        "it_category",
-        "it_list"
-      ],
-      "qid": "Q3585364",
-      "source_rows": 5,
-      "network_distance_m": 14.75,
-      "node": 10082281557
-    },
-    {
-      "id": "Q281139",
-      "name": {
-        "ru": "Церковь Сан-Франческо-дель-Дезерто",
-        "it": "Chiesa di San Francesco del Deserto",
-        "en": "Church of San Francesco del Deserto"
-      },
-      "lon": 12.4171872,
-      "lat": 45.4735768,
-      "local": [
-        6280.374,
-        -4196.469
-      ],
-      "wikipedia": "https://en.wikipedia.org/wiki/San_Francesco_del_Deserto",
-      "area": "San Francesco del Deserto",
-      "access_note": {
-        "ru": "Согласуйте посещение монастыря и частную лодку/высадку; регулярная линия ACTV не заявляется.",
-        "it": "Concordare visita al convento e barca/approdo privati; nessuna linea ACTV regolare dichiarata.",
-        "en": "Monastery visit and private boat/landing must be arranged; no regular ACTV service is asserted."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "OSM way/75935317 church building; not island centroid or entrance",
-      "sources": [
-        "en_list",
-        "it_list"
-      ],
-      "qid": "Q281139",
-      "source_rows": 2,
-      "network_distance_m": 12.67,
-      "node": 896519737
-    },
-    {
-      "id": "Q121598793",
-      "name": {
-        "ru": "Chiesa di Cristo Re (Sant'Erasmo)",
-        "it": "chiesa di Cristo Re",
-        "en": "Chiesa di Cristo Re (Sant'Erasmo)"
-      },
-      "lon": 12.410306,
-      "lat": 45.459083,
-      "local": [
-        5690.61,
-        -2603.605
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Sant'Erasmo_(Venezia)",
-      "area": "Sant'Erasmo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "Q121598793",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 18.78,
-      "node": 1883726223
-    },
-    {
-      "id": "Q122152492",
-      "name": {
-        "ru": "Chiesa di Sant'Eurosia (Vignole)",
-        "it": "chiesa di Sant'Eurosia Vergine",
-        "en": "Sant'Eurosia"
-      },
-      "lon": 12.377389,
-      "lat": 45.442306,
-      "local": [
-        3056.247,
-        -823.265
-      ],
-      "wikipedia": "https://it.wikipedia.org/wiki/Vignole",
-      "area": "Vignole",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
-      "access_class": "check_opening",
-      "confession": "Christian",
-      "survival_status": "surviving_building",
-      "coordinate_source": "Wikidata P625; not a verified entrance",
-      "sources": [
-        "it_list"
-      ],
-      "qid": "Q122152492",
-      "source_rows": 1,
-      "mention_only": true,
-      "network_distance_m": 3.72,
-      "node": 9891101874
     },
     {
       "id": "Q1791020",
@@ -31581,667 +31344,12 @@
     },
     {
       "from": "Q3585423",
-      "to": "Q27116950",
+      "to": "Q1791020",
       "mode": "schematic",
       "geometry": [
         [
           12.34879,
           45.45856
-        ],
-        [
-          12.40583,
-          45.483979
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q27116950",
-      "to": "mention-grazie-burano",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.4057278,
-          45.4841679
-        ],
-        [
-          12.4058935,
-          45.4842632
-        ],
-        [
-          12.4062479,
-          45.4843919
-        ],
-        [
-          12.4062533,
-          45.4847124
-        ],
-        [
-          12.4062779,
-          45.4851843
-        ],
-        [
-          12.4063971,
-          45.4851843
-        ],
-        [
-          12.407002,
-          45.4852047
-        ],
-        [
-          12.4076918,
-          45.4852301
-        ],
-        [
-          12.4081143,
-          45.4848703
-        ],
-        [
-          12.4086312,
-          45.4851576
-        ],
-        [
-          12.4086543,
-          45.4851703
-        ],
-        [
-          12.410578,
-          45.4862319
-        ],
-        [
-          12.4107803,
-          45.4863426
-        ],
-        [
-          12.4113699,
-          45.4866684
-        ],
-        [
-          12.4116486,
-          45.4868321
-        ],
-        [
-          12.4121375,
-          45.4871193
-        ],
-        [
-          12.4122166,
-          45.4871618
-        ],
-        [
-          12.4125688,
-          45.4873508
-        ],
-        [
-          12.4127647,
-          45.4874671
-        ],
-        [
-          12.4128235,
-          45.4875128
-        ],
-        [
-          12.4129286,
-          45.4875944
-        ],
-        [
-          12.4129432,
-          45.4876027
-        ],
-        [
-          12.4131878,
-          45.4877302
-        ],
-        [
-          12.4134045,
-          45.4878389
-        ],
-        [
-          12.4134809,
-          45.4878774
-        ],
-        [
-          12.4135833,
-          45.4879289
-        ],
-        [
-          12.4139935,
-          45.4881236
-        ],
-        [
-          12.4140418,
-          45.4880788
-        ],
-        [
-          12.4144208,
-          45.4876293
-        ],
-        [
-          12.4144821,
-          45.4876043
-        ],
-        [
-          12.4145262,
-          45.4875393
-        ],
-        [
-          12.4147452,
-          45.487262
-        ],
-        [
-          12.414456,
-          45.486958
-        ],
-        [
-          12.4143054,
-          45.4867855
-        ],
-        [
-          12.4147159,
-          45.4866306
-        ],
-        [
-          12.4150093,
-          45.4865463
-        ],
-        [
-          12.4152134,
-          45.4864812
-        ],
-        [
-          12.4149903,
-          45.4861279
-        ],
-        [
-          12.4149362,
-          45.4860357
-        ],
-        [
-          12.4148012,
-          45.4858785
-        ],
-        [
-          12.4148228,
-          45.4858736
-        ],
-        [
-          12.4152472,
-          45.4856374
-        ],
-        [
-          12.4151748,
-          45.4855518
-        ],
-        [
-          12.4152975,
-          45.4854882
-        ],
-        [
-          12.4153309,
-          45.48547
-        ],
-        [
-          12.4154158,
-          45.4854261
-        ],
-        [
-          12.4154539,
-          45.4854014
-        ],
-        [
-          12.4154691,
-          45.4853914
-        ],
-        [
-          12.4157649,
-          45.4852053
-        ],
-        [
-          12.4159684,
-          45.4850773
-        ],
-        [
-          12.4159805,
-          45.4850697
-        ],
-        [
-          12.416016,
-          45.4850472
-        ],
-        [
-          12.4161205,
-          45.4849811
-        ],
-        [
-          12.4162823,
-          45.4848647
-        ],
-        [
-          12.4163269,
-          45.4848356
-        ],
-        [
-          12.4163711,
-          45.4848067
-        ],
-        [
-          12.4164525,
-          45.4847313
-        ],
-        [
-          12.4164797,
-          45.4846972
-        ],
-        [
-          12.4165608,
-          45.4846169
-        ],
-        [
-          12.4167155,
-          45.4844636
-        ],
-        [
-          12.4168374,
-          45.4843428
-        ],
-        [
-          12.4169267,
-          45.4842543
-        ],
-        [
-          12.4169655,
-          45.48421
-        ],
-        [
-          12.417058,
-          45.4841051
-        ],
-        [
-          12.4172368,
-          45.4839409
-        ],
-        [
-          12.4171476,
-          45.4838933
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 1520.13,
-      "osm_nodes": [
-        1871360377,
-        1871360379,
-        1593919589,
-        13867329510,
-        1593919601,
-        2611219455,
-        1862894681,
-        1593919603,
-        1593919591,
-        671702683,
-        5603418542,
-        1593919625,
-        1593919629,
-        1593919633,
-        13347968506,
-        1862824616,
-        13347968525,
-        1862824617,
-        1862824619,
-        13347954787,
-        295093418,
-        244400830,
-        244400829,
-        13347954786,
-        13347954782,
-        1862824623,
-        27469706,
-        1862824625,
-        1862824622,
-        1862895042,
-        3089652932,
-        13299093270,
-        2247305364,
-        11397713168,
-        13296618885,
-        12269076036,
-        12269076034,
-        13040991644,
-        4805651728,
-        2247305352,
-        1871365005,
-        2247305347,
-        2247305348,
-        5597446240,
-        9383520109,
-        1906034750,
-        9383520108,
-        9383520113,
-        9383697603,
-        9383697609,
-        9383583521,
-        13100459779,
-        1906034703,
-        9383583522,
-        13040991661,
-        1906034691,
-        9383583523,
-        2247305361,
-        5057180675,
-        13040991659,
-        13040991653,
-        1906034685,
-        9383629743,
-        9383629744,
-        1906034678,
-        9383629745
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        146112318,
-        146112357,
-        175721338,
-        175721339,
-        175721340,
-        175721341,
-        180173701,
-        180173703,
-        180173725,
-        206443773,
-        215326322,
-        215326324,
-        215326325,
-        255435712,
-        1017334327,
-        1017334328,
-        1419126969,
-        1419126970,
-        1419126971,
-        1449972948
-      ]
-    },
-    {
-      "from": "mention-grazie-burano",
-      "to": "mention-santa-barbara-burano",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.4171476,
-          45.4838933
-        ],
-        [
-          12.4172368,
-          45.4839409
-        ],
-        [
-          12.417058,
-          45.4841051
-        ],
-        [
-          12.4169655,
-          45.48421
-        ],
-        [
-          12.4169857,
-          45.4842143
-        ],
-        [
-          12.4170325,
-          45.4842202
-        ],
-        [
-          12.4170687,
-          45.4842247
-        ],
-        [
-          12.4170936,
-          45.4842278
-        ],
-        [
-          12.417149,
-          45.4842347
-        ],
-        [
-          12.4171624,
-          45.4842366
-        ],
-        [
-          12.4173667,
-          45.4843103
-        ],
-        [
-          12.4176307,
-          45.484387
-        ],
-        [
-          12.4176423,
-          45.4843856
-        ],
-        [
-          12.4176553,
-          45.4843835
-        ],
-        [
-          12.4176672,
-          45.4843821
-        ],
-        [
-          12.4177663,
-          45.4843457
-        ],
-        [
-          12.4181311,
-          45.4846026
-        ],
-        [
-          12.4181665,
-          45.4845767
-        ],
-        [
-          12.4183067,
-          45.4844747
-        ],
-        [
-          12.4183803,
-          45.4844052
-        ],
-        [
-          12.4183955,
-          45.4843672
-        ],
-        [
-          12.4184134,
-          45.4843223
-        ],
-        [
-          12.4184036,
-          45.4843176
-        ],
-        [
-          12.4184258,
-          45.4842846
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 197.4,
-      "osm_nodes": [
-        9383629745,
-        1906034678,
-        9383629744,
-        9383629743,
-        4470425902,
-        9233339910,
-        9346749784,
-        9233339911,
-        4470425914,
-        1840686311,
-        3799442159,
-        4470430601,
-        4470430599,
-        4470430604,
-        4470430602,
-        1840681513,
-        1840692842,
-        1871408427,
-        1871408326,
-        1840692838,
-        9953008470,
-        1871408199,
-        1871408196,
-        9953008476
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        173218875,
-        173220343,
-        180173684,
-        180173701,
-        376533730,
-        376533738,
-        450121807,
-        450121808,
-        450122157,
-        450122159,
-        1000309564,
-        1000309565,
-        1013104620
-      ]
-    },
-    {
-      "from": "mention-santa-barbara-burano",
-      "to": "Q3585364",
-      "mode": "walk",
-      "geometry": [
-        [
-          12.4184258,
-          45.4842846
-        ],
-        [
-          12.4184502,
-          45.4842484
-        ],
-        [
-          12.4184982,
-          45.4842215
-        ],
-        [
-          12.4185229,
-          45.4842266
-        ],
-        [
-          12.4188618,
-          45.4842966
-        ]
-      ],
-      "geometry_semantics": "verified_osm_adjacent_node_shortest_path",
-      "length_m": 38.88,
-      "osm_nodes": [
-        9953008476,
-        1871408141,
-        1840692847,
-        9953008478,
-        10082281557
-      ],
-      "endpoint_semantics": "nearby_network_nodes_not_verified_entrances",
-      "osm_way_ids": [
-        173220343
-      ]
-    },
-    {
-      "from": "Q3585364",
-      "to": "Q281139",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.41878,
-          45.484177
-        ],
-        [
-          12.4171872,
-          45.4735768
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q281139",
-      "to": "Q121598793",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.4171872,
-          45.4735768
-        ],
-        [
-          12.410306,
-          45.459083
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q121598793",
-      "to": "Q122152492",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.410306,
-          45.459083
-        ],
-        [
-          12.377389,
-          45.442306
-        ]
-      ],
-      "geometry_semantics": "schematic_non_navigational_connector",
-      "suggested_transport": {
-        "ru": "Переезд: проверьте перевозчика, причал и доступ.",
-        "it": "Trasferimento: verificare operatore, approdo e accesso.",
-        "en": "Transfer: check operator, landing and access."
-      },
-      "note": {
-        "ru": "Не для навигации; путь и расстояние не подтверждены.",
-        "it": "Non navigabile; percorso e distanza non verificati.",
-        "en": "Not navigation; no route or length verified."
-      }
-    },
-    {
-      "from": "Q122152492",
-      "to": "Q1791020",
-      "mode": "schematic",
-      "geometry": [
-        [
-          12.377389,
-          45.442306
         ],
         [
           12.36175,
@@ -32290,8 +31398,8 @@
   "audit": {
     "candidate_count": 1196,
     "identity_group_count": 386,
-    "included_count": 145,
-    "excluded_count": 234,
+    "included_count": 138,
+    "excluded_count": 241,
     "duplicate_count": 810,
     "unresolved": [
       {
@@ -33078,6 +32186,20 @@
         ]
       },
       {
+        "identity": "Q27116950",
+        "title": "Chiesa dei Santi Pietro e Caterina (Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 5,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
         "identity": "Q105043894",
         "title": "Chiesa di San Michele Arcangelo (Venezia, Mazzorbo)",
         "decision": "excluded",
@@ -33106,6 +32228,43 @@
         "decision": "excluded",
         "reason": "demolished",
         "evidence": "Explicit demolished-list, description or non-empty demolition field.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q3585364",
+        "title": "Chiesa di San Martino (Venezia, Burano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 5,
+        "sources": [
+          "cached_wikidata_crosscheck",
+          "en_category",
+          "en_list",
+          "it_category",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "mention-santa-barbara-burano",
+        "title": "Oratorio di Santa Barbara (Burano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "mention-grazie-burano",
+        "title": "Chiesa di Santa Maria delle Grazie (Burano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -33234,11 +32393,45 @@
         ]
       },
       {
+        "identity": "Q281139",
+        "title": "San Francesco del Deserto",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 2,
+        "sources": [
+          "en_list",
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q122152492",
+        "title": "Chiesa di Sant'Eurosia (Vignole)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
         "identity": "('it', \"Sant'Andrea della Certosa\")",
         "title": "Sant'Andrea della Certosa",
         "decision": "excluded",
         "reason": "demolished",
         "evidence": "Explicit demolished-list, description or non-empty demolition field.",
+        "source_rows": 1,
+        "sources": [
+          "it_list"
+        ]
+      },
+      {
+        "identity": "Q121598793",
+        "title": "Chiesa di Cristo Re (Sant'Erasmo)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -37723,9 +36916,9 @@
       {
         "identity": "Q27116950",
         "title": "Chiesa dei Santi Pietro e Caterina (Venezia)",
-        "stop_id": "Q27116950",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Pietro_e_Caterina_(Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 5,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -37771,9 +36964,9 @@
       {
         "identity": "Q3585364",
         "title": "Chiesa di San Martino (Venezia, Burano)",
-        "stop_id": "Q3585364",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Burano)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 5,
         "sources": [
           "cached_wikidata_crosscheck",
@@ -37786,9 +36979,9 @@
       {
         "identity": "mention-santa-barbara-burano",
         "title": "Oratorio di Santa Barbara (Burano)",
-        "stop_id": "mention-santa-barbara-burano",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Burano",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -37797,9 +36990,9 @@
       {
         "identity": "mention-grazie-burano",
         "title": "Chiesa di Santa Maria delle Grazie (Burano)",
-        "stop_id": "mention-grazie-burano",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Burano",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -37930,9 +37123,9 @@
       {
         "identity": "Q281139",
         "title": "San Francesco del Deserto",
-        "stop_id": "Q281139",
-        "decision": "included",
-        "evidence": "https://en.wikipedia.org/wiki/San_Francesco_del_Deserto",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 2,
         "sources": [
           "en_list",
@@ -37942,9 +37135,9 @@
       {
         "identity": "Q122152492",
         "title": "Chiesa di Sant'Eurosia (Vignole)",
-        "stop_id": "Q122152492",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Vignole",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
@@ -37976,9 +37169,9 @@
       {
         "identity": "Q121598793",
         "title": "Chiesa di Cristo Re (Sant'Erasmo)",
-        "stop_id": "Q121598793",
-        "decision": "included",
-        "evidence": "https://it.wikipedia.org/wiki/Sant'Erasmo_(Venezia)",
+        "decision": "excluded",
+        "reason": "user_excluded_no_atlas_geometry",
+        "evidence": "User-approved route exclusion: Lido/Pellestrina temple lacks a verified building footprint in the current atlas; source geometry is unchanged.",
         "source_rows": 1,
         "sources": [
           "it_list"
