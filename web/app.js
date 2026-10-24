@@ -962,9 +962,6 @@ function showWalks() {
         <button class="pill${complete ? '' : ' primary'}" data-q="${q.id}">${complete ? 'Walk again' : done ? 'Carry on' : 'Start'}</button></div></li>`;
   };
   openDock('walks', `<article class="dock-page"><h2 id="dock-title">Walks</h2>
-    <p class="lede">Five short routes through the city, told as riddles. Find each stop on the map, guess a building’s age
-      with the colours off, or pick the right answer. Each stop earns up to three suns; a hint or a wrong guess costs one.</p>
-    <p class="walk-score">Your suns: <b>${total}</b> of ${max}</p>
     <ul class="routes">${bridgeRoute.listHTML()}${churchRoute.listHTML()}${quests.map(route).join('')}</ul></article>`);
   bridgeRoute.wireList();
   churchRoute.wireList();
