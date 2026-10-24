@@ -1,7 +1,7 @@
 {
   "version": 1,
   "inventory_stops": 134,
-  "matched_stops": 112,
+  "matched_stops": 113,
   "buildings": [
     {
       "gid": 3704,
@@ -65,6 +65,25 @@
       "stop_id": "Q2717507",
       "qid": "Q2717507",
       "match_source": "exact_osm_wikidata_tag_and_atlas_osm_id"
+    },
+    {
+      "gid": 4521,
+      "building_id": "w138843453",
+      "osm_type": "way",
+      "osm_id": 138843453,
+      "stop_id": "Q28035407",
+      "qid": "Q28035407",
+      "match_source": "reviewed_named_poi_contained_in_exact_osm_host",
+      "highlight_color": "#0000ff",
+      "highlight_scope": "entire_shared_osm_host_building",
+      "match_evidence": "Scuola Canton named Jewish place_of_worship OSM node 13966049130 (12.3268030, 45.4449784) lies strictly inside way 138843453; both the route Wikipedia coordinate (12.326835, 45.445029) and independently published Canton coordinate (12.3267, 45.445) are inside the same 41-node footprint. Canton occupies upper rooms, not the whole host. The atlas merges adjacent premises, including the Italian synagogue, into this GID; the entire shared host is highlighted.",
+      "identity_sources": [
+        "https://api.openstreetmap.org/api/0.6/node/13966049130",
+        "https://api.openstreetmap.org/api/0.6/way/138843453/full",
+        "https://en.wikipedia.org/wiki/Canton_Synagogue",
+        "https://wikimili.com/en/Canton_Synagogue",
+        "https://www.jewishvenice.org/history-culture/"
+      ]
     },
     {
       "gid": 5033,
@@ -1065,16 +1084,6 @@
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     },
     {
-      "id": "Q28035407",
-      "qid": "Q28035407",
-      "name": {
-        "ru": "Кантонская синагога",
-        "it": "scola Canton",
-        "en": "Canton Synagogue"
-      },
-      "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
-    },
-    {
       "id": "Q12051106",
       "qid": "Q12051106",
       "name": {
@@ -1258,5 +1267,5 @@
   "atlas_attrs_sha256": "2ad58841d957045834c13ae65c6b4247b7cc8f1fb81699a1e9ee532e0da00143",
   "geometry_source": "existing_atlas_worker_mesh_including_all_parts_and_roofs",
   "source": "data/processed/buildings_centro.geojson",
-  "limitations": "Only unique exact OSM Wikidata tags or reviewed exact named OSM building identities are used. Grouped monasteries retain separate building GIDs. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged."
+  "limitations": "Only unique exact OSM Wikidata tags, reviewed exact named OSM building identities or reviewed named POIs strictly contained in a verified host footprint are used. Special colors apply to the whole existing atlas host; shared premises are disclosed in highlight_scope and match_evidence. Grouped monasteries retain separate building GIDs. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged."
 }

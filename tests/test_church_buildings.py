@@ -26,6 +26,10 @@ def test_real_church_buildings_match_exact_atlas_identifiers():
         if b['match_source'] == 'exact_osm_wikidata_tag_and_atlas_osm_id':
             assert f['properties']['wikidata'] == b['qid']
             assert b['qid'] in [stop.get('qid'), *stop.get('monastery_qids', [])]
+        elif b['match_source'] == 'reviewed_named_poi_contained_in_exact_osm_host':
+            from pipeline.venice.church_building_manifest import building_match
+            assert building_match(f['properties'], route['stops'])['qid'] == b['qid']
+            assert b['match_evidence'] and b['identity_sources']
         else:
             assert b['match_source'] == 'reviewed_exact_osm_building_identity'
             assert b['match_evidence']
@@ -37,7 +41,7 @@ def test_real_church_buildings_match_exact_atlas_identifiers():
     assert {'Q172988', 'Q52531'} <= matched
     assert data['matched_stops'] == sum(s['id'] in matched for s in route['stops'])
     assert {s['id'] for s in data['unmatched']} == {s['id'] for s in route['stops'] if s['id'] not in matched}
-    assert data['matched_stops'] == 112
-    assert len(data['unmatched']) == 22
+    assert data['matched_stops'] == 113
+    assert len(data['unmatched']) == 21
     assert data['matched_stops'] + len(data['unmatched']) == 134
     assert data['geometry_source'] == 'existing_atlas_worker_mesh_including_all_parts_and_roofs'

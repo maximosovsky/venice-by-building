@@ -8,7 +8,37 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 
+# Reviewed named POI, not nearest-building inference. OSM maps several physical
+# premises into this single host footprint; tint the existing whole host, not a
+# fabricated synagogue-only subvolume. Key includes type to reject ID collisions.
+REVIEWED_HIGHLIGHT_HOSTS = {
+    ('way', 138843453): {
+        'stop_id': 'Q28035407', 'qid': 'Q28035407',
+        'match_source': 'reviewed_named_poi_contained_in_exact_osm_host',
+        'highlight_color': '#0000ff',
+        'highlight_scope': 'entire_shared_osm_host_building',
+        'match_evidence': 'Scuola Canton named Jewish place_of_worship OSM node 13966049130 '
+            '(12.3268030, 45.4449784) lies strictly inside way 138843453; both the '
+            'route Wikipedia coordinate (12.326835, 45.445029) and independently '
+            'published Canton coordinate (12.3267, 45.445) are inside the same '
+            '41-node footprint. Canton occupies upper rooms, not the whole host. '
+            'The atlas merges adjacent premises, including the Italian synagogue, '
+            'into this GID; the entire shared host is highlighted.',
+        'identity_sources': [
+            'https://api.openstreetmap.org/api/0.6/node/13966049130',
+            'https://api.openstreetmap.org/api/0.6/way/138843453/full',
+            'https://en.wikipedia.org/wiki/Canton_Synagogue',
+            'https://wikimili.com/en/Canton_Synagogue',
+            'https://www.jewishvenice.org/history-culture/',
+        ],
+    },
+}
+
+
 def building_match(properties, stops):
+    reviewed = REVIEWED_HIGHLIGHT_HOSTS.get((properties['osm_type'], properties['osm_id']))
+    if reviewed and any(s['id'] == reviewed['stop_id'] for s in stops):
+        return dict(reviewed)
     for stop in stops:
         for obj in stop.get('osm_buildings', []):
             if (properties['osm_type'], properties['osm_id']) == (obj['osm_type'], obj['osm_id']):
@@ -57,7 +87,7 @@ def main():
             'unmatched': unmatched, 'atlas_attrs_sha256': digest,
             'geometry_source': 'existing_atlas_worker_mesh_including_all_parts_and_roofs',
             'source': 'data/processed/buildings_centro.geojson',
-            'limitations': 'Only unique exact OSM Wikidata tags or reviewed exact named OSM building identities are used. Grouped monasteries retain separate building GIDs. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged.'}
+            'limitations': 'Only unique exact OSM Wikidata tags, reviewed exact named OSM building identities or reviewed named POIs strictly contained in a verified host footprint are used. Special colors apply to the whole existing atlas host; shared premises are disclosed in highlight_scope and match_evidence. Grouped monasteries retain separate building GIDs. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged.'}
     out = ROOT / 'web/data/church-buildings.json'
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
     print(json.dumps({'output': str(out), 'buildings': len(buildings), 'matched_stops': data['matched_stops'], 'unmatched_stops': len(unmatched)}))

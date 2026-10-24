@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import * as THREE from '../web/vendor/three.module.js';
+import {installChurchBuildingHighlight} from '../web/church-building-highlight.js';
+const tile={pos:new Int16Array([0,0,0,30,0,0,0,90,0,0,100,0,30,100,0,0,120,30,80,0,0,90,0,0,80,80,0]),bld:new Uint16Array([0,0,0,32768,32768,32768,1,1,1]),idx:new Uint32Array([0,1,2,3,4,5,6,7,8]),attr:new Float32Array([0,0,0,4521,0,0,0,0,0,0,0,8,0,0,0,0]),nB:2};
+const parent=new THREE.Mesh();parent.scale.setScalar(.1);parent.position.set(70,0,80);
+const manifest={version:1,geometry_source:'existing_atlas_worker_mesh_including_all_parts_and_roofs',buildings:[{gid:4521,qid:'Q28035407',highlight_color:'#0000ff'},{gid:8,qid:'Q172988'}]};
+const h=installChurchBuildingHighlight({THREE,fetchData:async()=>({ok:true,json:async()=>manifest})});
+h.registerTile(tile,parent);await h.load();h.setSourceVisible('bridges-tab',true);
+assert.equal(h.overlays.length,2,'blue Canton must be separate from the green geometry');
+const blue=h.overlays.find(m=>m.material.color.getHexString()==='0000ff'),green=h.overlays.find(m=>m.material.color.getHexString()==='436817');
+assert.ok(blue);assert.ok(green);assert.equal(blue.geometry.index.count,6,'Canton includes walls and high-bit roof');assert.deepEqual([...blue.geometry.attributes.position.array],[...tile.pos.slice(0,18)]);assert.equal(green.geometry.index.count,3,'no green override on Canton');assert.deepEqual(blue.userData.gids,[4521]);
+blue.updateWorldMatrix(true,false);assert.deepEqual(new THREE.Vector3(30,100,0).applyMatrix4(blue.matrixWorld).toArray(),[73,10,80]);
+h.setPicking(true);assert.ok(h.overlays.every(m=>!m.visible));h.setPicking(false);assert.ok(h.overlays.every(m=>m.visible));h.setSourceVisible('church',true);h.setSourceVisible('bridges-tab',false);assert.ok(h.overlays.every(m=>m.visible));h.setSourceVisible('church',false);assert.ok(h.overlays.every(m=>!m.visible));
+h.registerTile(tile,new THREE.Mesh());assert.equal(h.overlays.length,4,'late tiles receive both materials');h.dispose();h.dispose();assert.equal(parent.children.length,0);
+console.log('Canton exclusive blue full volume, other green, original transform, late tiles, picking, visibility and disposal PASS');

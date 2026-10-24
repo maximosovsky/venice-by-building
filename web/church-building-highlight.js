@@ -26,16 +26,25 @@ export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch
   let manifest = null, pending = null, disposed = false, picking = false, error = null;
   const material = new THREE.MeshBasicMaterial({ color: '#436817', side: THREE.DoubleSide,
     polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
+  const blueMaterial = new THREE.MeshBasicMaterial({ color: '#0000ff', side: THREE.DoubleSide,
+    polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
   const sync = () => { for (const mesh of overlays) mesh.visible = !disposed && !picking && sources.size > 0; };
   function attach(entry) {
-    if (!manifest || entry.overlay || disposed) return;
-    const geometry = extractChurchGeometry(THREE, entry.tile, new Set(manifest.buildings.map(b => b.gid)));
-    if (!geometry) return;
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.name = 'church-building-highlight';mesh.renderOrder = 30;
-    mesh.userData.geometry_source = manifest.geometry_source;
-    // Child transform preserves the atlas's decimetres and tile origin exactly.
-    entry.parent.add(mesh);entry.overlay = mesh;overlays.push(mesh);sync();
+    if (!manifest || entry.attached || disposed) return;
+    entry.attached = true;
+    // Disjoint GID sets: blue geometry is never also drawn in green.
+    for (const [color, overlayMaterial] of [['#436817', material], ['#0000ff', blueMaterial]]) {
+      const gids = new Set(manifest.buildings.filter(b => (b.highlight_color || '#436817') === color).map(b => b.gid));
+      const geometry = extractChurchGeometry(THREE, entry.tile, gids);
+      if (!geometry) continue;
+      const mesh = new THREE.Mesh(geometry, overlayMaterial);
+      mesh.name = color === '#0000ff' ? 'canton-building-highlight' : 'church-building-highlight';mesh.renderOrder = 30;
+      mesh.userData.geometry_source = manifest.geometry_source;
+      mesh.userData.gids = [...gids];
+      // Child transform preserves the atlas's decimetres and tile origin exactly.
+      entry.parent.add(mesh);overlays.push(mesh);
+    }
+    sync();
   }
   async function load() {
     if (disposed || manifest) return manifest;
@@ -58,6 +67,6 @@ export function installChurchBuildingHighlight({ THREE, fetchData = url => fetch
     setSourceVisible(source, visible) { if (disposed) return;if (visible) { sources.add(source);void load(); } else sources.delete(source);sync(); },
     setPicking(value) { picking = !!value;sync(); },
     get overlays() { return overlays; }, get manifest() { return manifest; }, get error() { return error; },
-    dispose() { if (disposed) return;disposed = true;sources.clear();for (const mesh of overlays) { mesh.removeFromParent();mesh.geometry.dispose(); }overlays.length = 0;tiles.length = 0;material.dispose(); }
+    dispose() { if (disposed) return;disposed = true;sources.clear();for (const mesh of overlays) { mesh.removeFromParent();mesh.geometry.dispose(); }overlays.length = 0;tiles.length = 0;material.dispose();blueMaterial.dispose(); }
   };
 }
