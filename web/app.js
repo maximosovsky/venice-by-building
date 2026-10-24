@@ -51,12 +51,13 @@ async function fetchBin(url) {
   return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
 }
 
-const [config, layers, attrBuf, subData, subOf] = await Promise.all([
+const [config, layers, attrBuf, subData, subOf, churchBuildings] = await Promise.all([
   fetch('data/venezia.json').then(r => r.json()),
   fetch('data/layers.json').then(r => r.json()),
   fetchBin('data/attrs.bin'),
   fetch('data/suburbs.json').then(r => r.json()).catch(() => null),
   fetchBin('data/suburbs.bin').then(b => new Uint8Array(b)).catch(() => null),
+  fetch('data/church-buildings.json').then(r => r.json()).catch(() => null),
 ]);
 const attrs = new DataView(attrBuf);
 const HERITAGE_COLORS = config.heritage.colors;
@@ -315,6 +316,19 @@ subValTex.needsUpdate = true;
 // Independent GID mask: preserve heritage records and all other rendering modes.
 const palazzoTex = new THREE.DataTexture(new Uint8Array(SUB_W * Math.ceil(nB / SUB_W)), SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.UnsignedByteType);
 palazzoTex.needsUpdate = true;
+// Building kind texture: 0 = old terracotta, 1 = church/synagogue (#659592), 2 = 20th century (Palazzo blue).
+const churchGids = new Set((churchBuildings?.buildings || []).map(b => b.gid));
+const kindData = new Uint8Array(SUB_W * Math.ceil(nB / SUB_W));
+for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
+  if (churchGids.has(gid)) kindData[gid] = 1;
+  else {
+    const sp = attrs.getUint32(o + config.attrFields.sp[0], true);
+    const period = sp % 16;
+    if (period === 2) kindData[gid] = 2; // novecentesche / 20th century
+  }
+}
+const kindTex = new THREE.DataTexture(kindData, SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.UnsignedByteType);
+kindTex.needsUpdate = true;
 const uniforms = {
   uYear: { value: config.yearMax },
   uYearFrom: { value: config.yearMin - 1 },
@@ -336,6 +350,7 @@ const uniforms = {
   uBlind: { value: 0 },
   uSubOf: { value: subOfTex },                     // each building's suburb (s10_suburbs), 255 none
   uSubVal: { value: subValTex },                   // each suburb's measure in the year, 0–1 along the ramp, -1 none
+  uKind: { value: kindTex },
   uFogColor: { value: col(SKY) },
   uFog: { value: new THREE.Vector2(9000, 26000) },
 };
@@ -386,7 +401,7 @@ if (subOk) {
 
 const VERT = /* glsl */`
   in float bld;
-  uniform sampler2D uAttr, uSubOf, uSubVal, uPalazzo;
+  uniform sampler2D uAttr, uSubOf, uSubVal, uPalazzo, uKind;
   uniform float uYear, uYearFrom, uMode, uHover, uSelected, uBlind, uNow, uBorn, uPlaying, uRise, uLayerAt, uDocOnly;
   uniform vec3 uPalette[${periods.length}];
   uniform float uMask[${periods.length}];
@@ -448,7 +463,12 @@ const VERT = /* glsl */`
     }
     vec3 c;
     if (uMode < 0.5) {
-      c = uPalette[period];
+      // New age-of-city palette: churches/teal, old buildings/terracotta, 20th century/Palazzo blue.
+      int gi = int(a.w + 0.5);
+      float k = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
+      if (k > 1.5) c = vec3(0.184, 0.243, 0.420);      // 20th century: Palazzo delle prigioni blue #2f3f6b
+      else if (k > 0.5) c = vec3(0.397, 0.584, 0.573); // churches, temples, monasteries, synagogues #659592
+      else c = vec3(0.557, 0.212, 0.204);              // old buildings: terracotta roofs #8e3634
       // Estimated years are paler; with "documented only" they leave the colour altogether.
       if (flag >= 1) c = mix(c, uMaquette, uDocOnly > 0.5 && flag >= 2 ? 1.0 : 0.32);
     } else if (uMode < 1.5) {
