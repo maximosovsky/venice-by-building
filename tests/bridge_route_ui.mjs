@@ -36,8 +36,8 @@ const traghettiFixture = () => Array.from({ length: 4 }, (_, i) => ({
 }));
 const visitFixture = (boat = false) => {
   const r = fixture();
-  r.id = boat ? 'traghetto-midpoints' : 'walking-midpoints'; r.visit_mode = true;
-  r.title = text('Посещения середин', 'Visite ai punti medi', 'Midpoint visits');
+  r.id = boat ? 'traghetto_midpoints' : 'walking_midpoints'; r.visit_mode = true;
+  r.title = boat ? text('Середины с Traghetto', 'Punti medi con Traghetto', 'Midpoints with Traghetto') : text('Посещения пешком', 'Visite a piedi', 'Walking visits');
   r.distance_m = 300; r.stats = { walk_distance_m: boat ? 200 : 300, boat_distance_m: boat ? 100 : 0, repeat_distance_m: 40 };
   r.legs = boat ? [
     { mode: 'walk', local: r.local.slice(0, 2), coordinates: r.coordinates.slice(0, 2) },
@@ -72,14 +72,14 @@ test('midpoint panel is honest about visit events, walking/boat/retrace distance
   for (const lang of ['ru', 'it', 'en']) {
     setLang(lang);
     const panel = routePanelHTML(visitFixture(true), { variants: [fixture(), ...wrapperFixture().variants], variantStatus: 'ready', traghetti: traghettiFixture() }, pick);
-    for (const key of ['variant', 'midpoint', 'walkDistance', 'boatDistance', 'retraceDistance', 'visits', 'visitDirections', 'serviceCaveat', 'showTraghetti']) {
+    for (const key of ['midpoint', 'walkDistance', 'boatDistance', 'retraceDistance', 'visits', 'visitDirections', 'serviceCaveat', 'showTraghetti']) {
       assert.ok(UI[key]?.[lang], key); assert.ok(panel.includes(UI[key][lang]), key);
     }
     assert.ok(!panel.includes(UI.euler[lang])); assert.ok(!panel.includes(UI.repeats[lang]));
     assert.ok(!panel.includes(visitFixture().euler.explanation[lang]));
-    assert.match(panel, /data-bridge-route-variant/); assert.match(panel, /value="all-bridges"/);
+    assert.doesNotMatch(panel, /data-bridge-route-variant|value="all-bridges"|value="walking_midpoints"/);
     assert.match(panel, /data-bridge-traghetti-toggle/);
-    assert.match(panel, /href="data\/traghetto-midpoints.gpx" download/);
+    assert.match(panel, /href="data\/traghetto_midpoints.gpx" download/);
     assert.ok(panel.includes('https://example.org/schedule')); assert.ok(panel.includes('Service days and times vary'));
   }
   setLang('en');
@@ -120,41 +120,85 @@ test('four independent Traghetto station groups render both labelled endpoints a
   release(overlay);
 }));
 
-test('variant controls fetch no-store, select actual geometry and GPX while original card stays unchanged', async () => {
+test('mandatory ferry is the default and sole exposed bridge route for both card and detail', async () => {
   const calls = [], h = harness(async () => ({ ok: true, json: async () => fixture() }),
     async (url, options) => { calls.push([url, options]); return { ok: true, json: async () => wrapperFixture() }; });
   h.controller.show(); await h.controller.load(); await h.controller.loadVariants();
   assert.deepEqual(calls, [['data/bridge-visit-route.json', { cache: 'no-store' }]]);
-  const originalCard = h.controller.listHTML();
+  const ferryCard = h.controller.listHTML();
+  assert.ok(ferryCard.includes(visitFixture(true).title.en));
+  assert.ok(!ferryCard.includes(fixture().title.en));
+  assert.ok(!ferryCard.includes(visitFixture().title.en));
+  assert.doesNotMatch(h.html, /data-bridge-route-variant/);
   h.handlers.get('[data-bridge-route-toggle]')();
-  h.handlers.get('[data-bridge-route-variant]')({ target: { value: 'traghetto-midpoints' } });
-  assert.match(h.html, /href="data\/traghetto-midpoints.gpx"/);
+  assert.match(h.html, /href="data\/traghetto_midpoints.gpx"/);
   assert.equal(h.scene.children[0].children.filter(o => o.userData.route_leg !== undefined).length, 2);
-  assert.equal(h.controller.listHTML(), originalCard, 'route cards unchanged by variant selection');
+  assert.equal(h.controller.listHTML(), ferryCard);
   h.handlers.get('[data-bridge-traghetti-toggle]')();
   assert.equal(h.scene.children.length, 2);
   h.controller.setVisible(false);
   assert.equal(h.scene.children.find(o => o.name === 'traghetti-stations').visible, true);
-  h.handlers.get('[data-bridge-route-variant]')({ target: { value: 'all-bridges' } });
-  assert.match(h.html, /href="data\/bridge-route.gpx"/);
-  assert.ok(h.html.includes(UI.euler.en));
+  h.controller.selectVariant('all-bridges'); h.controller.selectVariant('walking_midpoints');
+  assert.match(h.html, /href="data\/traghetto_midpoints.gpx"/);
+  assert.ok(!h.html.includes(UI.euler.en));
   assert.equal(h.scene.children.find(o => o.name === 'all-bridges-route').visible, false);
-  h.controller.selectVariant('missing'); assert.match(h.html, /href="data\/bridge-route.gpx"/);
+  h.controller.selectVariant('missing'); assert.match(h.html, /href="data\/traghetto_midpoints.gpx"/);
   h.controller.dispose(); h.controller.dispose(); assert.equal(h.scene.children.length, 0);
 });
 
-test('missing variant data leaves original usable and retries without replacing another card', async () => {
+test('missing ferry data fails closed and retries without replacing another card', async () => {
   let attempt = 0;
   const h = harness(async () => ({ ok: true, json: async () => fixture() }), async () => ++attempt === 1 ? { ok: false, status: 404 } : { ok: true, json: async () => wrapperFixture() });
   h.controller.show(); await h.controller.load(); await h.controller.loadVariants();
-  assert.ok(UI.variantUnavailable?.en); assert.ok(h.html.includes(UI.variantUnavailable.en));
-  assert.match(h.html, /data-bridge-route-variants-retry/);
-  h.controller.setVisible(true); assert.equal(h.scene.children.length, 1);
-  assert.match(h.html, /href="data\/bridge-route.gpx"/);
+  assert.ok(h.html.includes(UI.error.en));
+  assert.match(h.html, /data-bridge-route-retry/);
+  h.controller.setVisible(true); assert.equal(h.scene.children.length, 0);
+  assert.doesNotMatch(h.html + h.controller.listHTML(), /data-crossing|download|All bridges|Walking visits|original route remains/i);
   h.setView('building'); await h.controller.retryVariants();
   assert.equal(h.view, 'building');
-  h.controller.show(); assert.match(h.html, /value="walking-midpoints"/);
+  h.controller.show(); assert.match(h.html, /href="data\/traghetto_midpoints.gpx"/);
   h.controller.dispose();
+});
+
+test('bootstrap inventory stays internal while mandatory ferry data is still loading', async () => {
+  let releaseFetch, started;
+  const waiting = new Promise(resolve => { started = resolve; });
+  const h = harness(async () => ({ ok: true, json: async () => fixture() }), () => {
+    started(); return new Promise(resolve => { releaseFetch = resolve; });
+  });
+  h.controller.show(); const loading = h.controller.load(); await waiting;
+  assert.ok(h.html.includes(UI.loading.en));
+  assert.doesNotMatch(h.html + h.controller.listHTML(), /All bridges|Walking visits|download|data-crossing/);
+  h.controller.setVisible(true); h.controller.selectVariant('all-bridges');
+  assert.equal(h.scene.children.length, 0);
+  releaseFetch({ ok: true, json: async () => wrapperFixture() }); await loading; await h.controller.loadVariants();
+  assert.ok(h.html.includes(visitFixture(true).title.en)); h.controller.dispose();
+});
+
+test('absent, pedestrian-only, malformed or mismatched ferry cannot become a fallback route', async () => {
+  for (const mutate of [d => { d.variants.pop(); }, d => { d.variants[1] = { ...visitFixture(), id: 'traghetto_midpoints' }; },
+    d => { d.variants[1].status = 'pending'; }, d => { d.variants[1].bridges[0].id = 'unknown'; d.variants[1].crossings.forEach(c => { c.bridge_id = 'unknown'; }); }]) {
+    const data = wrapperFixture(); mutate(data);
+    const h = harness(async () => ({ ok: true, json: async () => fixture() }), async () => ({ ok: true, json: async () => data }));
+    h.controller.show(); await h.controller.load(); await h.controller.loadVariants();
+    assert.ok(h.html.includes(UI.error.en)); assert.match(h.html, /data-bridge-route-retry/);
+    assert.doesNotMatch(h.html + h.controller.listHTML(), /download|data-crossing|All bridges|Walking visits/);
+    h.controller.setVisible(true); assert.equal(h.scene.children.length, 0); h.controller.dispose();
+  }
+});
+
+test('real emitted mandatory-ferry JSON supplies the default list, detail and geometry inventory', async () => {
+  const original = JSON.parse(readFileSync(new URL('../web/data/bridge-route.json', import.meta.url)));
+  const data = JSON.parse(readFileSync(new URL('../web/data/bridge-visit-route.json', import.meta.url)));
+  const ferry = data.variants.find(r => r.id === 'traghetto_midpoints');
+  assert.equal(ferry.distance_m, 44575.796); assert.equal(ferry.bridge_count, 346);
+  assert.equal(ferry.ferry_events.length, 1); assert.equal(ferry.ferry_events[0].traghetto_id, 'santa_sofia');
+  const h = harness(async () => ({ ok: true, json: async () => original }), async () => ({ ok: true, json: async () => data }));
+  h.controller.show(); assert.deepEqual(await h.controller.load(), ferry); await h.controller.loadVariants();
+  assert.ok(h.controller.listHTML().includes(ferry.title.en)); assert.ok(h.html.includes(ferry.title.en));
+  assert.equal((h.html.match(/data-crossing=/g) || []).length, ferry.crossings.length);
+  assert.ok(h.html.includes(ferry.gpx)); assert.ok(h.html.includes(ferry.source.url));
+  assert.doesNotMatch(h.html, /data-bridge-route-variant/); h.controller.dispose();
 });
 
 test('escapes all HTML contexts and rejects malformed/unready route contracts', () => {
@@ -436,7 +480,8 @@ test('real WebGL rasterizes a 3 CSS px stroke across angles, zoom, DPR and resiz
     const server = createServer((req, res) => {
       const url = new URL(req.url, 'http://localhost');
       const files = { '/three.js': new URL('../web/vendor/three.module.js', import.meta.url),
-        '/three.core.js': new URL('../web/vendor/three.core.js', import.meta.url), '/route.js': moduleURL };
+        '/three.core.js': new URL('../web/vendor/three.core.js', import.meta.url), '/route.js': moduleURL,
+        '/source-presentation.js': new URL('../web/source-presentation.js', import.meta.url) };
       if (files[url.pathname]) { res.setHeader('Content-Type', 'text/javascript'); res.end(readFileSync(files[url.pathname])); }
       else res.end('<!doctype html><body></body>');
     });
@@ -530,7 +575,14 @@ test('real WebGL rasterizes a 3 CSS px stroke across angles, zoom, DPR and resiz
   });
 
 // Minimal injected dock boundary; real HTML and THREE geometry remain under test.
-function harness(fetchRoute, visitFetch = async () => ({ ok: false, status: 404 })) {
+function harness(fetchRoute, visitFetch) {
+  let bootstrap;
+  const defaultVisits = () => {
+    const data = wrapperFixture(), ferry = data.variants[1];
+    for (const key of ['bridges', 'crossings', 'bridge_count', 'repeat_crossings']) ferry[key] = bootstrap[key];
+    data.variants = [ferry];
+    return { ok: true, json: async () => data };
+  };
   const scene = new THREE.Scene();
   let view = null, html = '', back = null, languageCallback, listRefreshes = 0;
   const handlers = new Map(), flights = [];
@@ -540,7 +592,11 @@ function harness(fetchRoute, visitFetch = async () => ({ ok: false, status: 404 
     openDock: (v, body, b) => { view = v; html = body; back = b; }, dockLive,
     getDockView: () => view, showWalks: () => { listRefreshes++; view = 'walks'; },
     pickText: pick, onLang: fn => { languageCallback = fn; return () => {}; },
-    fetchRoute: (url, options) => url === 'data/bridge-visit-route.json' ? visitFetch(url, options) : fetchRoute(url, options) });
+    fetchRoute: async (url, options) => {
+      if (url === 'data/bridge-visit-route.json') return visitFetch ? visitFetch(url, options) : defaultVisits();
+      const response = await fetchRoute(url, options);
+      return { ...response, json: async () => { bootstrap = await response.json(); return bootstrap; } };
+    } });
   return { controller, scene, flights, handlers, setView: v => { view = v; }, lang: () => languageCallback(),
     get html() { return html; }, get view() { return view; }, get back() { return back; }, get listRefreshes() { return listRefreshes; } };
 }

@@ -1,6 +1,6 @@
 // Additive all-bridges walk. No production fallback: only the audited JSON supplies geometry/counts.
 export const UI = {
-  title: { ru: 'Все пешеходные мосты', it: 'Tutti i ponti pedonali', en: 'All pedestrian bridges' },
+  title: { ru: 'Середины мостов с Traghetto', it: 'Punti medi dei ponti con Traghetto', en: 'Bridge midpoints with Traghetto' },
   intro: { ru: 'Кольцевой маршрут по шести сестьери от Piazza San Marco и обратно.', it: 'Un percorso ad anello nei sei sestieri, da Piazza San Marco e ritorno.', en: 'A circuit through the six sestieri, starting and ending at Piazza San Marco.' },
   open: { ru: 'Открыть маршрут', it: 'Apri il percorso', en: 'Open route' },
   back: { ru: 'Все маршруты', it: 'Tutti i percorsi', en: 'All routes' },
@@ -37,9 +37,9 @@ export const UI = {
   visitDirections: { ru: 'Все включённые мосты выделены красным и пронумерованы при первом посещении. Пешие участки — сплошная линия 3 px; водные — синий пунктир. Повтор в списке означает повторное посещение, не физический переход.', it: 'Tutti i ponti inclusi sono rossi e numerati alla prima visita. Tratti a piedi: linea continua di 3 px; tratti in barca: blu tratteggiato. Una ripetizione indica una visita ripetuta, non un attraversamento fisico.', en: 'All included bridges are red and numbered at their first visit. Walking legs use a solid 3 px line; boat legs use blue dashes. A repeat in the list means a repeat visit, not a physical crossing.' },
   showTraghetti: { ru: 'Показать Traghetto', it: 'Mostra Traghetto', en: 'Show Traghetto' },
   hideTraghetti: { ru: 'Скрыть Traghetto', it: 'Nascondi Traghetto', en: 'Hide Traghetto' },
-  serviceCaveat: { ru: 'Traghetto — необязательный условный вариант. Работа зависит от расписания, дня, времени, погоды и оператора; наличие переправы не гарантируется. Проверьте источники расписаний перед выходом. Синие подписи отмечают оба берега; линия показана только при наличии геометрии в данных.', it: 'Traghetto è un’opzione condizionata e facoltativa. Il servizio dipende da orari, giorno, meteo e operatore; la disponibilità non è garantita. Verificare le fonti degli orari prima di partire. Le etichette blu indicano entrambe le rive; la linea appare solo se i dati forniscono geometria.', en: 'Traghetto is an optional, conditional service. Operation depends on schedule, day, time, weather and operator; availability is not guaranteed. Check schedule sources before setting out. Blue labels mark both banks; a ferry line is shown only where the data supplies geometry.' },
-  variantLoading: { ru: 'Загрузка вариантов и Traghetto… Исходный маршрут остаётся доступен.', it: 'Caricamento varianti e Traghetto… Il percorso originale resta disponibile.', en: 'Loading variants and Traghetto… The original route remains usable.' },
-  variantUnavailable: { ru: 'Варианты или Traghetto недоступны либо не прошли проверку. Исходный маршрут остаётся доступен; замены не создаются.', it: 'Varianti o Traghetto non disponibili o non validati. Il percorso originale resta disponibile; nessun dato sostitutivo.', en: 'Variants or Traghetto are unavailable or failed validation. The original route remains usable; no substitute data is generated.' },
+  serviceCaveat: { ru: 'Переправа Traghetto обязательна для этого маршрута, но её работа не гарантируется. Работа зависит от расписания, дня, времени, погоды и оператора. Проверьте источники расписаний перед выходом. Синие подписи отмечают оба берега; линия показана только при наличии геометрии в данных.', it: 'La traversata Traghetto è obbligatoria per questo percorso, ma il servizio non è garantito. Dipende da orari, giorno, meteo e operatore. Verificare le fonti degli orari prima di partire. Le etichette blu indicano entrambe le rive; la linea appare solo se i dati forniscono geometria.', en: 'A Traghetto crossing is mandatory for this route, but service is not guaranteed. Operation depends on schedule, day, time, weather and operator. Check schedule sources before setting out. Blue labels mark both banks; a ferry line is shown only where the data supplies geometry.' },
+  variantLoading: { ru: 'Загрузка маршрута с обязательным Traghetto…', it: 'Caricamento del percorso con Traghetto obbligatorio…', en: 'Loading the mandatory-Traghetto route…' },
+  variantUnavailable: { ru: 'Маршрут с Traghetto недоступен или не прошёл проверку. Пешая замена не предлагается.', it: 'Percorso con Traghetto non disponibile o non validato. Nessuna alternativa pedonale.', en: 'The Traghetto route is unavailable or failed validation. No pedestrian fallback is offered.' },
   none: { ru: 'В файле нет исключённых объектов.', it: 'Il file non elenca elementi esclusi.', en: 'No excluded objects are listed in the file.' }
 };
 
@@ -153,8 +153,7 @@ export function routePanelHTML(route, state = {}, pickText) {
   const unresolved = [...(route.audit?.ambiguous_portals || []), ...(route.audit?.unresolved_decks || [])];
   return `<article class="dock-page bridge-route-page" data-no-i18n>
     <h2 id="dock-title">${escapeHTML(pickText(route.title))}</h2><p class="lede">${escapeHTML(pickText(route.summary))}</p>
-    <label>${label('variant', pickText)} <select data-bridge-route-variant>${(state.variants || [route]).map(r => `<option value="${escapeHTML(r.id)}"${r.id === route.id ? ' selected' : ''}>${r.visit_mode ? escapeHTML(pickText(r.title)) : label('original', pickText)}</option>`).join('')}</select></label>
-    ${state.variantStatus !== 'ready' ? `<p role="status">${label(state.variantStatus === 'error' ? 'variantUnavailable' : 'variantLoading', pickText)}</p>${state.variantStatus === 'error' ? `<button class="pill" data-bridge-route-variants-retry>${label('retry', pickText)}</button>` : ''}` : ''}
+
     ${route.visit_mode ? `<p class="caveat">${label('midpoint', pickText)}</p>` : ''}
     <dl class="bridge-route-stats"><dt>${label('start', pickText)}</dt><dd>${escapeHTML(pickText(route.start.name))}</dd>
       <dt>${label('length', pickText)}</dt><dd>${length(route, pickText)}</dd>
@@ -420,9 +419,10 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
         const response = await fetchRoute('data/bridge-route.json', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const route = await response.json(); validateRoute(route);
-        if (!disposed) { state.route = route; state.original = route; state.variants = [route]; state.status = 'ready'; }
+        // Bootstrap is only an internal audited inventory; never publish its pedestrian route.
+        if (!disposed) { state.original = route; await loadVariants(); }
       } catch { if (!disposed) { state.route = null; state.status = 'error'; } }
-      finally { pending = null; refresh(); if (state.status === 'ready') void loadVariants(); }
+      finally { pending = null; refresh(); }
       return state.route;
     })();
     return pending;
@@ -430,8 +430,8 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   function show() { if (disposed) return; render(); void load(); }
   function loadVariants() {
     if (variantPending) return variantPending;
-    if (disposed || state.status !== 'ready' || state.variantStatus === 'ready' || state.variantStatus === 'error') return Promise.resolve(state.variants);
-    state.variantStatus = 'loading';
+    if (disposed || !state.original || state.variantStatus === 'ready' || state.variantStatus === 'error') return Promise.resolve(state.variants);
+    state.variantStatus = 'loading'; state.status = 'loading';
     variantPending = (async () => {
       try {
         const response = await fetchRoute('data/bridge-visit-route.json', { cache: 'no-store' });
@@ -440,8 +440,13 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
         const inventory = new Set(state.original.bridges.map(b => b.id));
         if (data.variants.some(r => r.id === state.original.id || r.bridge_count !== state.original.bridge_count ||
             r.bridges.some(b => !inventory.has(b.id)))) throw new Error('Mismatched bridge inventory');
-        if (!disposed) { state.variants = [state.original, ...data.variants]; state.traghetti = data.traghetti; state.variantStatus = 'ready'; }
-      } catch { if (!disposed) state.variantStatus = 'error'; }
+        const ferry = data.variants.find(r => r.id === 'traghetto_midpoints');
+        if (!ferry || !ferry.visit_mode || !ferry.legs.some(l => l.mode === 'boat') || !ferry.ferry_events.length ||
+            ferry.stats.boat_distance_m <= 0) throw new Error('Mandatory ferry route unavailable');
+        if (!disposed) { state.route = ferry; state.variants = [ferry]; state.traghetti = data.traghetti;
+          state.variantStatus = 'ready'; state.status = 'ready'; }
+      } catch { if (!disposed) { state.route = null; state.variants = []; state.traghetti = [];
+        state.variantStatus = 'error'; state.status = 'error'; } }
       finally { variantPending = null; refresh(); }
       return state.variants;
     })();
@@ -449,6 +454,7 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   }
   function retryVariants() {
     if (disposed || variantPending) return variantPending;
+    if (!state.original) return retry();
     state.variantStatus = 'idle'; const result = loadVariants(); refresh(); return result;
   }
   function selectVariant(id) {
@@ -467,7 +473,8 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     if (ferryOverlay) ferryOverlay.visible = state.traghettiVisible;
     if (getDockView() === 'bridge-route') render(true);
   }
-  function retry() { if (pending || disposed) return pending; state.status = 'idle'; const result = load(); refresh(); return result; }
+  function retry() { if (pending || variantPending || disposed) return pending || variantPending;
+    state.status = 'idle'; state.variantStatus = 'idle'; const result = load(); refresh(); return result; }
   function ensureOverlay() { if (!overlay && state.route && !disposed) { overlay = buildRouteOverlay(THREE, state.route); scene.add(overlay); } return overlay; }
   function setVisible(visible) {
     if (state.status !== 'ready' || disposed) return;
@@ -489,7 +496,7 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   const unsubscribe = onLang(() => { if (getDockView() === 'bridge-route') render(true); });
   return {
     show, load, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing,
-    listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML({ ...state, route: state.original }, pickText); },
+    listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML(state, pickText); },
     wireList() { dockLive.querySelector('[data-bridge-route-open]')?.addEventListener('click', show); },
     dispose() { if (disposed) return; disposed = true; onVisibilityChange(false); unsubscribe?.();
       for (const object of [overlay, ferryOverlay]) if (object) { scene.remove(object); disposeObject(object); }
