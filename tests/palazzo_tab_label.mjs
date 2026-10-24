@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const html = fs.readFileSync('web/index.html','utf8');
+assert.match(html, /<button data-mode="2"[^>]*>Все Palazzo<\/button>/);
+const {t,setLang}=await import('../web/i18n.js');
+for (const [lang,label] of [['ru','Все Palazzo'],['it','Tutti i Palazzo'],['en','All Palazzo']]) {
+ setLang(lang);assert.equal(t('Все Palazzo'),label);
+}
+setLang('ru');assert.equal(t('Наследие'),'Наследие');
+console.log('PASS: renamed tab RU/IT/EN; heritage card field preserved');
