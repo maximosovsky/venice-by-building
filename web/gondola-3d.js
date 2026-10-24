@@ -24,6 +24,10 @@ const ATTR_W = 256;
 // Collision mask: 1667 x 1667 cells at 3 m over X -2854..2147, Z -2840..2161.
 const MASK = { url: 'img/water-fine.png', x0: -2854, z0: -2840, cell: 3, w: 1667, h: 1667 };
 const START = { x: -354, z: -340, angle: -1.101 };  // Canal Grande, bow down the canal
+// Facades: an atlas of the buildings' own Wikidata/Wikipedia photos, 128 px a tile, built by
+// pipeline/venice/game_facades.py. facade.bin carries the grid, so nothing is duplicated here.
+const FACADE_LOOKUP_W = 128;                         // width of the building -> tile lookup texture
+let facadeGrid = new THREE.Vector2(1, 1);            // cols, rows of the atlas
 const LOAD_RADIUS = 2400;
 const FOG = { near: 1300, far: 2500 };
 const LION_COUNT = 12;
@@ -43,6 +47,7 @@ const turboEl = document.getElementById('turbo');
 const nearestEl = document.getElementById('nearest');
 const winEl = document.getElementById('win');
 const minimap = document.getElementById('minimap');
+const creditEl = document.getElementById('credit');
 
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;   // as app.js: the palette is authored for it
@@ -60,6 +65,8 @@ scene.add(sunLight);
 
 const col = c => new THREE.Color(c);
 const palette = [];
+let facadeAtlas = null;                              // the photographs, in one texture
+let facadeOf = null;                                 // building id -> atlas slice, or -1
 
 async function fetchBin(url) {
   const buf = await (await fetch(url)).arrayBuffer();
@@ -101,12 +108,17 @@ const groundMaterial = hex => new THREE.MeshBasicMaterial({ color: col(hex).mult
 // ---------- Buildings: app.js's shader, cut down to the period palette ----------
 const CITY_VERT = /* glsl */`
   in float bld;
-  uniform sampler2D uAttr;
+  in vec2 facadeUv;                          // arc length along the wall, 0 at the sill, 1 at the eaves
+  in float facadeSide;                       // 1 on a wall whose outboard side is water
+  uniform sampler2D uAttr, uFacadeOf;
   uniform vec3 uPalette[4];
   uniform vec3 uMaquette;
   out vec3 vColor;
   out vec3 vWorld;
+  out vec2 vUv;
   out float vShaped;
+  flat out float vCanal;
+  flat out float vSlice;
   void main() {
     int i = int(bld + 0.5);
     bool shaped = i >= 32768;             // a pale surface, as pipeline/s03_tiles.py marks it
@@ -121,6 +133,11 @@ const CITY_VERT = /* glsl */`
     if (flag >= 1) c = mix(c, uMaquette, 0.32);       // an estimated year is paler
     if (shaped) c = mix(c, vec3(1.0), 0.3);
     vColor = c;
+    // Which picture, if any, belongs to this building: -1 when it has none.
+    int gid = int(a.w + 0.5);
+    vSlice = texelFetch(uFacadeOf, ivec2(gid % ${FACADE_LOOKUP_W}, gid / ${FACADE_LOOKUP_W}), 0).r;
+    vUv = facadeUv;
+    vCanal = facadeSide;
     vec4 w = modelMatrix * vec4(position, 1.0);
     vWorld = w.xyz;
     gl_Position = projectionMatrix * viewMatrix * w;
@@ -129,20 +146,35 @@ const CITY_VERT = /* glsl */`
 
 const CITY_FRAG = /* glsl */`
   precision highp float;
+  uniform sampler2D uAtlas;
+  uniform vec2 uAtlasGrid;
   uniform vec3 uFogColor;
   uniform vec2 uFog;
   in vec3 vColor;
   in vec3 vWorld;
+  in vec2 vUv;
   in float vShaped;
+  flat in float vCanal;
+  flat in float vSlice;
   out vec4 outColor;
   void main() {
     vec3 n = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
+    vec3 base = vColor;
+    // The building's own photograph, laid on the wall that faces the canal. The atlas rows run
+    // from the top of the image, the wall's v from its sill, hence the flip.
+    if (vCanal > 0.5 && vSlice >= 0.0 && abs(n.y) < 0.6) {
+      float col = mod(vSlice, uAtlasGrid.x);
+      float row = floor(vSlice / uAtlasGrid.x);
+      vec2 au = vec2((col + clamp(vUv.x, 0.0, 1.0)) / uAtlasGrid.x,
+                     (row + 1.0 - clamp(vUv.y, 0.0, 1.0)) / uAtlasGrid.y);
+      base = texture(uAtlas, au).rgb;
+    }
     // A low afternoon sun from the north-west, a soft sky from above (app.js).
     float sun = max(dot(n, normalize(vec3(-0.55, 0.55, -0.62))), 0.0);
     float light = mix(0.66 + 0.34 * sun, 1.04, smoothstep(0.86, 0.94, n.y));
     if (vShaped > 0.5) light = 0.6 + 0.3 * sun + 0.2 * max(dot(n, normalize(vec3(0.6, 0.45, 0.66))), 0.0);
     float foot = mix(0.82, 1.0, clamp(vWorld.y / 12.0, 0.0, 1.0));
-    vec3 c = vColor * light * foot;
+    vec3 c = base * light * foot;
     float d = length(vWorld - cameraPosition);
     c = mix(c, uFogColor, smoothstep(uFog.x, uFog.y, d));
     outColor = vec4(c, 1.0);
@@ -154,13 +186,68 @@ const cityLook = () => ({
   uMaquette: { value: col(MAQUETTE) },
   uFogColor: { value: col(SKY) },
   uFog: { value: new THREE.Vector2(FOG.near, FOG.far) },
+  uAtlasGrid: { value: facadeGrid },
+  uAtlas: { value: facadeAtlas },
+  uFacadeOf: { value: facadeOf },
 });
+
+// Which wall gets the picture: the one the water is on the far side of. Walls arrive from the tile
+// worker as runs of four-vertex quads, each carrying the arc length around its ring (uv.x) and its
+// height (uv.y = 0 at the sill, 1 at the eaves); every quad is asked whether water lies on its
+// outboard side, and the canal-facing run of a building has its photograph laid across it.
+function facadeUv(m) {
+  const nV = m.pos.length / 3;
+  const uv = new Float32Array(nV * 2);
+  const canal = new Float32Array(nV);
+  if (!m.wall || !mask) return { uv, canal };
+  const pos = m.pos, wall = m.wall, bld = m.bld, arc = m.uv;
+  const ox = m.origin[0], oz = m.origin[1];
+  const faces = q => {
+    const x0 = pos[q * 3], z0 = pos[q * 3 + 2], x1 = pos[(q + 1) * 3], z1 = pos[(q + 1) * 3 + 2];
+    const mx = ox + (x0 + x1) * 0.05, mz = oz + (z0 + z1) * 0.05;   // the worker's decimetres
+    let nx = z1 - z0, nz = x0 - x1;                                 // the edge turned to its side
+    const len = Math.hypot(nx, nz) || 1;
+    nx = nx / len * 0.1; nz = nz / len * 0.1;
+    for (const d of [2.5, 5, 8]) {
+      const plus = isWater(mx + nx * d, mz + nz * d);
+      const minus = isWater(mx - nx * d, mz - nz * d);
+      if (plus !== minus) return plus;
+      if (plus && minus) return true;                    // a wall with water on both sides
+    }
+    return false;
+  };
+  let i = 0;
+  while (i + 3 < nV) {
+    if (wall[i] !== 1) { i++; continue; }
+    if (!faces(i)) { i += 4; continue; }
+    const building = bld[i];
+    let end = i + 4;
+    // one run = one ring of one building while the water stays outboard (the arc length restarts
+    // at every ring, which is what keeps the runs from spanning two rings)
+    while (end + 3 < nV && wall[end] === 1 && bld[end] === building
+      && arc[end * 2] >= arc[(end - 1) * 2] && faces(end)) end += 4;
+    let lo = arc[i * 2], hi = arc[i * 2];
+    for (let v = i; v < end; v++) { lo = Math.min(lo, arc[v * 2]); hi = Math.max(hi, arc[v * 2]); }
+    const span = hi - lo || 1;
+    for (let v = i; v < end; v++) {
+      uv[v * 2] = (arc[v * 2] - lo) / span;
+      uv[v * 2 + 1] = arc[v * 2 + 1];
+      canal[v] = 1;
+    }
+    i = end;
+  }
+  return { uv, canal };
+}
 
 function addTile(m) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(m.pos, 3));
   g.setAttribute('bld', new THREE.BufferAttribute(m.bld, 1));
   g.setIndex(new THREE.BufferAttribute(m.idx, 1));
+  const facade = facadeUv(m);
+  // 'uv' is three's own attribute name, so the wall coordinates travel as facadeUv.
+  g.setAttribute('facadeUv', new THREE.BufferAttribute(facade.uv, 2));
+  g.setAttribute('facadeSide', new THREE.BufferAttribute(facade.canal, 1));
   const rows = Math.ceil(m.nB / ATTR_W);
   const data = new Float32Array(ATTR_W * 2 * rows * 4);
   data.set(m.attr);
@@ -229,6 +316,40 @@ async function loadMask() {
     if (r0 > 0 && !reach[i - MASK.w] && open[i - MASK.w]) { reach[i - MASK.w] = 1; queue[tail++] = i - MASK.w; }
     if (r0 < MASK.h - 1 && !reach[i + MASK.w] && open[i + MASK.w]) { reach[i + MASK.w] = 1; queue[tail++] = i + MASK.w; }
   }
+}
+
+// ---------- The photographs ----------
+async function loadFacades() {
+  const buf = await fetchBin('data/facades.bin');
+  const view = new DataView(buf);
+  if (String.fromCharCode(...new Uint8Array(buf, 0, 4)) !== 'FAC1') throw new Error('facades.bin is not an atlas index');
+  const cols = view.getUint16(6, true), rows = view.getUint16(8, true);
+  const count = view.getUint32(10, true);
+  const index = new Int16Array(buf, 14, count);
+  facadeGrid.set(cols, rows);
+
+  const height = Math.ceil(count / FACADE_LOOKUP_W);
+  const data = new Float32Array(FACADE_LOOKUP_W * height).fill(-1);
+  let withPhoto = 0;
+  for (let i = 0; i < count; i++) {
+    data[i] = index[i];
+    if (index[i] >= 0) withPhoto++;
+  }
+  facadeOf = new THREE.DataTexture(data, FACADE_LOOKUP_W, height, THREE.RedFormat, THREE.FloatType);
+  facadeOf.needsUpdate = true;
+
+  const img = new Image();
+  img.src = 'img/facades.webp';
+  await img.decode();
+  const tex = new THREE.Texture(img);
+  tex.flipY = false;                          // rows are read from the top, as they are stored
+  tex.minFilter = THREE.LinearFilter;         // no mipmaps: a mip level would blend one photo into its neighbour
+  tex.magFilter = THREE.LinearFilter;
+  tex.generateMipmaps = false;
+  tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+  tex.needsUpdate = true;
+  facadeAtlas = tex;
+  creditEl.textContent = `Фотографии фасадов: Wikimedia Commons, ${withPhoto} зданий, CC BY-SA`;
 }
 
 // ---------- The gondola ----------
@@ -541,9 +662,11 @@ function frame(now) {
 async function init() {
   try {
     resize();
+    noteEl.textContent = 'Вода и каналы…';
+    await loadMask();                      // the walls have to know where the water is before they load
+    await loadFacades();
+    noteEl.textContent = 'Здания Венеции…';
     await loadCity();
-    noteEl.textContent = 'Вода, каналы и львы…';
-    await loadMask();
     placeLions();
     resetGame();
     renderer.render(scene, camera);

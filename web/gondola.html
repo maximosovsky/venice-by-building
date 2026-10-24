@@ -18,6 +18,7 @@ html, body { margin: 0; height: 100%; background: #fff; overflow: hidden; font-f
 #hud .dial b { font-size: 17px; color: #2c2f2a; }
 #turbo { color: #b04f3e; opacity: .25; transition: opacity .15s; }
 #hud .keys { font-size: 11px; line-height: 1.5; color: #5f625c; max-width: 260px; }
+#hud .credit { font-size: 10px; line-height: 1.4; color: #8a8d86; max-width: 260px; }
 #minimap { position: fixed; right: 18px; bottom: 18px; z-index: 2; width: 156px; height: 156px; border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
 #loading { position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; background: #fff; color: #2c2f2a; }
 #loading span { font-size: 18px; }
@@ -49,6 +50,7 @@ html, body { margin: 0; height: 100%; background: #fff; overflow: hidden; font-f
     ↑ ↓ — ход и реверс · ← → — поворот · A / D — борт<br>
     Q / E — взгляд вверх и вниз · Shift — турбо · мышь — обзор
   </div>
+  <div class="panel credit"><span id="credit">Фотографии фасадов: Wikimedia Commons</span></div>
 </div>
 <canvas id="minimap" width="156" height="156"></canvas>
 <button id="back" onclick="location.href='index.html'">← На карту</button>

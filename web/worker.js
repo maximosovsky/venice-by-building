@@ -31,6 +31,10 @@ function build(t) {
   }
   nVert += t.meshBld.length; nIdx += t.meshTri.length;
   const pos = new Int16Array(nVert * 3), bld = new Uint16Array(nVert), idx = new Uint32Array(nIdx);
+  // Wall facades also carry the arc length along their ring and their height, so a viewer that has
+  // a picture of the building can lay it on the wall facing the water (see web/gondola-3d.js).
+  // Plain viewers ignore both.
+  const uv = new Float32Array(nVert * 2), wall = new Uint8Array(nVert);
   let v = 0, k = 0;
   for (let b = 0; b < t.nB; b++) {
     for (let p = t.partStart[b]; p < t.partStart[b + 1]; p++) {
@@ -41,13 +45,17 @@ function build(t) {
       for (let r = r0; r < r1; r++) {
         const s = t.vertStart[r], e = t.vertStart[r + 1], n = e - s;
         const ring = [];
+        let arc = 0;
         for (let i = 0; i < n; i++) {
           const a = s + i, c = s + ((i + 1) % n);
           const ax = t.xz[2 * a], az = t.xz[2 * a + 1], cx = t.xz[2 * c], cz = t.xz[2 * c + 1];
           pos.set([ax, bottom, az, cx, bottom, cz, cx, top, cz, ax, top, az], v * 3);
           bld.fill(b, v, v + 4);
+          const seg = Math.hypot(cx - ax, cz - az);
+          uv.set([arc, 0, arc + seg, 0, arc + seg, 1, arc, 1], v * 2);
+          wall.fill(1, v, v + 4);
           idx.set([v, v + 1, v + 2, v, v + 2, v + 3], k);
-          v += 4; k += 6;
+          v += 4; k += 6; arc += seg;
           ring.push(new Vector2(ax, az));
         }
         if (!t.hole[r] && !contour.length) contour.push(...ring);
@@ -75,10 +83,11 @@ function build(t) {
     attr.set([t.year[b], t.period[b] + 16 * t.flag[b], Math.min(t.floors[b], 127) + 128 * t.heritage[b], t.gid[b],
       t.lay0[b] & 0xffff, t.lay0[b] >>> 16, t.lay1[b] & 0xffff, t.lay1[b] >>> 16], b * 8);
   }
-  return { pos: pos.subarray(0, v * 3), bld: bld.subarray(0, v), idx: idx.subarray(0, k), attr, origin: t.origin, nB: t.nB };
+  return { pos: pos.subarray(0, v * 3), bld: bld.subarray(0, v), idx: idx.subarray(0, k), attr, origin: t.origin, nB: t.nB,
+    uv: uv.subarray(0, v * 2), wall: wall.subarray(0, v) };
 }
 
 self.onmessage = ({ data: { buf, id } }) => {
   const m = build(parse(buf));
-  self.postMessage({ id, ...m }, [m.pos.buffer, m.bld.buffer, m.idx.buffer, m.attr.buffer]);
+  self.postMessage({ id, ...m }, [m.pos.buffer, m.bld.buffer, m.idx.buffer, m.attr.buffer, m.uv.buffer, m.wall.buffer]);
 };
