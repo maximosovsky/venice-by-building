@@ -576,8 +576,10 @@ function pick(x, y) {
   const w = renderer.domElement.clientWidth, h = renderer.domElement.clientHeight;
   camera.setViewOffset(w, h, x, y, 1, 1);
   for (const m of meshes) m.material = m.userData.pick;
-  flat.visible = false;
-  labelGroup.visible = false;
+  // Only atlas meshes encode building IDs. Route colours are not IDs.
+  const atlasMeshes = new Set(meshes);
+  const hidden = scene.children.filter(object => !atlasMeshes.has(object)).map(object => [object, object.visible]);
+  for (const [object] of hidden) object.visible = false;
   churchBuildingHighlight.setPicking(true);
   renderer.setRenderTarget(pickTarget);
   renderer.setClearColor(0x000000, 0);
@@ -586,12 +588,12 @@ function pick(x, y) {
   renderer.readRenderTargetPixels(pickTarget, 0, 0, 1, 1, pickPixel);
   renderer.setRenderTarget(null);
   renderer.setClearColor(SKY, 1);
-  flat.visible = true;
-  labelGroup.visible = true;
+  for (const [object, visible] of hidden) object.visible = visible;
   churchBuildingHighlight.setPicking(false);
   for (const m of meshes) m.material = m.userData.draw;
   camera.clearViewOffset();
-  return pickPixel[0] + pickPixel[1] * 256 + pickPixel[2] * 65536 - 1;
+  const gid = pickPixel[0] + pickPixel[1] * 256 + pickPixel[2] * 65536 - 1;
+  return gid >= 0 && gid < nB ? gid : -1;
 }
 
 // ---------- Building lookup ----------
@@ -600,6 +602,7 @@ const READ = { '<f8': 'getFloat64', '<f4': 'getFloat32', '<i4': 'getInt32', '<u4
 const FIELDS = Object.entries(config.attrFields).map(([name, [off, type]]) => [name, off, READ[type]]);
 const groupsByBit = layers.flatMap(L => L.groups.map(g => ({ ...g, layer: L })));
 function building(gid) {
+  if (!Number.isInteger(gid) || gid < 0 || gid >= nB) throw new RangeError(`Invalid building ID: ${gid}`);
   const o = gid * config.attrStride, b = { gid };
   for (const [name, off, fn] of FIELDS) b[name] = attrs[fn](o + off, true);
   b.height = b.h / 10;
