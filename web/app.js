@@ -1003,7 +1003,10 @@ const dataEnrichment = installDataEnrichment({ dockLive,
   getDockView: () => dockView, aimFly, pickText, onLang });
 // Municipal bridge characteristics: material, purpose, type and size, drawn where the city surveyed them.
 const bridgeCharacteristics = installBridgeCharacteristics({ THREE, scene, pickText, onLang });
-installShip(scene, camera, renderer, controls).catch(e => console.warn('ship failed to load', e));
+installShip(scene, camera, renderer, controls).then(() => { window.__veniceShipLoaded = true; }).catch(e => {
+  window.__veniceShipLoaded = false;
+  console.warn('ship failed to load', e);
+});
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}
