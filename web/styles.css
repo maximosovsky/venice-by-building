@@ -150,6 +150,7 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 
 /* A building. Photo, then its name and year, then how the year is known, its stories, the facts and sources. */
 .b-photo { margin: 0; }
+.b-photo-credit { margin: 14px 24px 0; }
 .b-photo img { display: block; width: 100%; height: 200px; object-fit: cover; border-radius: 10px 10px 0 0; background: var(--stone); }
 .b-photo figcaption { padding: 6px 24px 0; font-size: 11px; color: var(--faint); }
 .dock-page.b-card { padding: 0 0 32px; }
@@ -429,6 +430,7 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
   @keyframes sheet-in { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
   .dock-page { padding: 18px 18px 22px; }
   .dock-page h2 { font-size: 28px; }
+  .b-photo-credit { margin: 12px 18px 0; }
   .b-photo img { height: 170px; border-radius: 16px 16px 0 0; }
   .b-photo figcaption { padding: 6px 18px 0; } .b-head { padding: 54px 18px 0; } .b-photo + .b-head { padding-top: 8px; } .b-card section { margin: 12px 18px 0; }
   .tip { display: none; }
