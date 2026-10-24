@@ -64,7 +64,7 @@ a:hover { text-decoration-color: currentColor; }
 
 /* ---------- Top: the name, then what to look at ---------- */
 .masthead { position: fixed; top: calc(env(safe-area-inset-top, 0px) + var(--gutter)); left: var(--gutter); z-index: 2; display: flex; align-items: center; gap: 14px; }
-.venice-arms { display: block; width: clamp(80px, 8vw, 116px); height: 156px; object-fit: contain; flex: 0 0 auto; }
+.venice-arms { display: block; width: clamp(112px, 11.2vw, 162px); height: 218px; object-fit: contain; flex: 0 0 auto; }
 .masthead h1:has(.venice-wordmark) { padding-right: 0; }
 .venice-wordmark { display: block; width: clamp(180px, 20vw, 260px); height: auto; transform: translate(5cm, -50px); }
 /* A soft patch of the wall behind the name, so it always reads on white. */
