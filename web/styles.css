@@ -89,8 +89,6 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 .lenses button:hover { color: var(--ink); }
 .lenses button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
 .walks-open { display: inline-flex; align-items: center; gap: 8px; }
-.gondola-open { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--ink); font-weight: 450; padding: 8px 0; }
-.gondola-open:hover { color: var(--sun); }
 .walks-open[aria-pressed="true"], .notes-open[aria-pressed="true"] { text-decoration: underline 2px; text-underline-offset: 9px; }
 .find { position: relative; }
 .find-field { display: flex; align-items: center; gap: 9px; width: 260px; height: 40px; padding: 0 14px; border-radius: 999px;
