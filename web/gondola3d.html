@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гондола Венеции — 3D</title>
+<link rel="icon" href="favicon.ico">
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #fff; overflow: hidden; font-family: Inter, system-ui, sans-serif; }
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+#hud { position: fixed; top: 18px; left: 18px; z-index: 2; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+#hud .panel { background: rgba(255,255,255,.94); padding: 12px 16px; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+#hud h1 { margin: 0 0 4px; font: 400 22px/1.1 "Cormorant Garamond", Georgia, serif; }
+#hud p { margin: 0; font-size: 12px; color: #5f625c; }
+#hud .score { font-size: 20px; font-weight: 600; color: #b04f3e; }
+#loading { position: fixed; inset: 0; z-index: 5; display: grid; place-items: center; background: #fff; color: #2c2f2a; }
+#loading span { font-size: 18px; }
+#back { position: fixed; top: 18px; right: 18px; z-index: 3; padding: 10px 16px; border-radius: 999px; border: 0; background: #fff; cursor: pointer; font-size: 13px; box-shadow: 0 4px 14px rgba(0,0,0,.18); pointer-events: auto; }
+#back:hover { color: #b04f3e; }
+#win { position: fixed; inset: 0; z-index: 4; display: none; place-items: center; background: rgba(255,255,255,.88); backdrop-filter: blur(4px); }
+#win.show { display: grid; }
+#win h2 { margin: 0 0 8px; font: 400 42px/1 "Cormorant Garamond", Georgia, serif; color: #b04f3e; }
+#win p { margin: 0 0 20px; font-size: 16px; }
+#win button { padding: 12px 24px; border: 0; border-radius: 999px; background: #b04f3e; color: #fff; font-size: 15px; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+<div id="hud">
+  <div class="panel">
+    <h1>Гондола с турбодвигателем</h1>
+    <p>Вид с воды. Соберите золотых львов в каналах.</p>
+  </div>
+  <div class="panel">
+    <span class="score">Львы: <b id="score">0</b> / <b id="total">0</b></span>
+  </div>
+</div>
+<button id="back" onclick="location.href='index.html'">← На карту</button>
+<div id="loading"><span>Загрузка Венеции… <b id="progress">0</b>%</span></div>
+<div id="win"><div>
+  <h2>Все львы собраны!</h2>
+  <p>Вы прошли каналы Венеции на турбогондоле.</p>
+  <button id="restart">Ещё раз</button>
+</div></div>
+<script type="module" src="gondola-3d.js"></script>
+</body>
+</html>
