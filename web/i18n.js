@@ -122,6 +122,7 @@ const DICT = {
     // --- данные конвейера: сюжеты, эпохи, слои ---
     'Сооружения': 'Strutture',
     'Мосты': 'Ponti',
+    'Мосты, храмы, монастыри': 'Ponti, templi, monasteri',
     '465 мостовых сооружений, нанесённых в OpenStreetMap отдельными площадками: настил показан плитой над каналом. У 375 мостов есть имя — от Понте-деи-Соспири до Понте-делла-Коституцьоне; имена видны на карте и находятся через поиск.':
       '465 manufatti da ponte, tracciati in OpenStreetMap come superfici proprie: l\'impalcato è mostrato come una lastra sopra il canale. 375 ponti hanno un nome — dal Ponte dei Sospiri al Ponte della Costituzione; i nomi si vedono sulla mappa e si trovano con la ricerca.',
     'В OSM у венецианских мостов нет ни высот, ни дат постройки: высота настила принята за 3 метра, год не указан. Это сооружение, а не здание.':
@@ -384,6 +385,7 @@ const DICT = {
     // --- pipeline data: stories, eras, layers ---
     'Сооружения': 'Structures',
     'Мосты': 'Bridges',
+    'Мосты, храмы, монастыри': 'Bridges, temples, monasteries',
     '465 мостовых сооружений, нанесённых в OpenStreetMap отдельными площадками: настил показан плитой над каналом. У 375 мостов есть имя — от Понте-деи-Соспири до Понте-делла-Коституцьоне; имена видны на карте и находятся через поиск.':
       '465 bridge structures mapped in OpenStreetMap as areas of their own: each deck is drawn as a slab over the canal. 375 bridges have a name — from the Ponte dei Sospiri to the Ponte della Costituzione; the names show on the map and the search finds them.',
     'В OSM у венецианских мостов нет ни высот, ни дат постройки: высота настила принята за 3 метра, год не указан. Это сооружение, а не здание.':
