@@ -261,12 +261,15 @@ function updateLabels(dist) {
     let show = d < (big || wide ? far * (wide ? 1.6 : 1) : near) && dist < (wide ? 9000 : big ? 3200 : 1300);
     const sep = (big || wide ? h1 : h2) * 5;
     if (show && !clear(l, sep)) show = false;
-    if (show) {
+    // Hysteresis: a label needs a few consecutive frames to appear and a few to disappear — stops flicker.
+    l._vis = Math.max(0, Math.min(4, (l._vis || 0) + (show ? 1 : -1)));
+    const wants = l._vis > 1;
+    if (wants) {
       const key = cellOf(l.x, l.z);
       if (!taken.has(key)) taken.set(key, []);
       taken.get(key).push(l);
     }
-    if (show && !l.mesh) {
+    if (wants && !l.mesh) {
       const tex = textureFor(l.L);
       l.mesh = new THREE.Mesh(labelPlane, new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
       // Turn about the vertical first, then lay the plane flat.
@@ -280,9 +283,9 @@ function updateLabels(dist) {
       const h = Math.min(big || wide ? h1 * (wide ? 1.5 : 1) : h2, l.wid * 0.55);
       const w = h * l.mesh.material.map.userData.aspect;
       // A name much longer than its stretch of street would spill over the buildings.
-      if (show && (w > l.len * 1.1 || h < 2.5)) show = false;
-      l.mesh.visible = show;
-      if (show) l.mesh.scale.set(w, h, 1);
+      const fits = !(w > l.len * 1.1 || h < 2.5);
+      l.mesh.visible = wants && fits;
+      if (wants && fits) l.mesh.scale.set(w, h, 1);
     }
   }
 }
