@@ -674,7 +674,8 @@ function buildingHtml(gid) {
   const period = periods[b.sp] || periodOf(b.year);
     const shape = config.shapes?.[gid];
     const im = w?.image;
-    const photo = im?.thumb ? `<figure class="b-photo"><img src="${esc(im.thumb)}" alt=""><figcaption>${t('Фото')}: ${link(im.page || im.thumb, im.artist || 'Wikimedia Commons')}${im.license ? `, ${im.licenseUrl ? link(im.licenseUrl, im.license) : esc(im.license)}` : ''}</figcaption></figure>` : '';
+    const photo = im?.thumb ? `<figure class="b-photo"><img src="${esc(im.thumb)}" alt=""></figure>` : '';
+    const photoCredit = im?.thumb ? `<footer class="b-photo-credit"><small>${t('Фото')}: ${link(im.page || im.thumb, im.artist || 'Wikimedia Commons')}${im.license ? `, ${im.licenseUrl ? link(im.licenseUrl, im.license) : esc(im.license)}` : ''}</small></footer>` : '';
         const facts = [
           b.src === 1 && [t('Сооружение'), `${t('Мост')}<small class="src-note">${t('настил над каналом, OSM')}</small>`],
                 [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
@@ -714,7 +715,7 @@ function buildingHtml(gid) {
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
 
         ${stories ? `<section><h3>${t('Слои')}</h3><ul class="chips">${stories}</ul></section>` : ''}
-        ${sources.length ? `<section class="sources"><h3>${t('Источники')}</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
+        ${photoCredit}</article>`;
     }
 
 // ---------- The dock ----------
@@ -1221,8 +1222,8 @@ function showStory(L) {
     <p class="story-text">${esc(pickText(L.text))}</p>
     ${named.length ? `<h3>${t('Места и их истории')}</h3><ul class="places">${named.map(([gid, n]) => `
       <li><button class="place" data-gid="${gid}"><b>${esc(n.name)}</b><span>${esc(n.story || '')}</span></button></li>`).join('')}</ul>` : ''}
-    ${L.caveat ? `<p class="caveat">${esc(pickText(L.caveat))}</p>` : ''}
-    <p class="src">${link(L.source.url, pickText(L.source.label))}</p></article>`,
+    ${L.id !== 'works' && L.caveat ? `<p class="caveat">${esc(pickText(L.caveat))}</p>` : ''}
+    ${L.id !== 'works' ? `<p class="src">${link(L.source.url, pickText(L.source.label))}</p>` : ''}</article>`,
   LAYERS_SHOWN.length > 1 ? { label: t('Все слои'), go: () => { setLayer(null); showStories(); } } : null);
   dockLive.querySelectorAll('.place').forEach(b => b.onclick = () => {
     const n = L.notes[b.dataset.gid], back = { label: L.title, go: () => { unpin(); showStory(L); } };
