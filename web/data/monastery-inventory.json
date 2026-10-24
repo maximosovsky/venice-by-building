@@ -1,0 +1,1677 @@
+{
+  "version": 1,
+  "scope": "Six historic sestieri, Giudecca/Sacca Fisola and San Giorgio Maggiore. Preserve all user-approved island exclusions. Surviving or adapted buildings/complexes, not demolished institutions.",
+  "method": "Independent recursive Italian and English religious-building category inventory plus six paginated full-text searches; article-level manual survival review. Church/monastery complex grouping is explicit, never proximity.",
+  "discovery": {
+    "category_counts": {
+      "it": 307,
+      "en": 275
+    },
+    "search_counts": {
+      "Venezia monastero": 5096,
+      "Venezia convento": 4480,
+      "Venezia abbazia": 3446,
+      "Venice monastery": 3768,
+      "Venice convent": 1610,
+      "Venice abbey": 2578
+    },
+    "fetched_articles": 733,
+    "reviewed_geographic_articles": 109
+  },
+  "limitations": "Not an exhaustive inventory claim. Generic search includes institutions elsewhere; unverified surviving premises are not promoted to stops. Existing seven unresolved church identities remain. Separate buildings in a grouped complex retain separate exact OSM objects.",
+  "candidates": [
+    {
+      "id": "monastery-Q1028202",
+      "qid": "Q1028202",
+      "church_stop_id": "Q1028202",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Canonici di San Salvador",
+        "it": "Convento dei Canonici di San Salvador",
+        "en": "Convento dei Canonici di San Salvador"
+      },
+      "area": "San Marco",
+      "lon": 12.3365,
+      "lat": 45.4366,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Salvador",
+      "survival_status": "adapted_building",
+      "survival_evidence": "large convent still exists, adapted as administrative offices",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q1093909",
+      "qid": "Q1093909",
+      "church_stop_id": "Q1093909",
+      "decision": "include",
+      "name": {
+        "ru": "Convento domenicano dei Gesuati",
+        "it": "Convento domenicano dei Gesuati",
+        "en": "Convento domenicano dei Gesuati"
+      },
+      "area": "Dorsoduro",
+      "lon": 12.32663,
+      "lat": 45.42956,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Visitazione_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "two surviving convent buildings and internal cloisters described in Visitazione article",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q114790449",
+      "qid": "Q114790449",
+      "church_stop_id": "Q114790449",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Sant’Apollonia",
+        "it": "Convento di Sant’Apollonia",
+        "en": "Convento di Sant’Apollonia"
+      },
+      "area": "Castello",
+      "lon": 12.340924,
+      "lat": 45.434521,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Filippo_e_Giacomo_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving medieval cloister; restored convent became diocesan museum",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q1400201",
+      "qid": "Q1400201",
+      "church_stop_id": "Q1400201",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Sant’Alvise",
+        "it": "Convento di Sant’Alvise",
+        "en": "Convento di Sant’Alvise"
+      },
+      "area": "Cannaregio",
+      "lon": 12.32916,
+      "lat": 45.44739,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Alvise",
+      "survival_status": "adapted_building",
+      "survival_evidence": "one surviving Gothic cloister; convent occupied by Canossian sisters",
+      "osm_buildings": [
+        {
+          "osm_type": "relation",
+          "osm_id": 2097772,
+          "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Alvise — one surviving Gothic cloister; convent occupied by Canossian sisters; exact named OSM object: Convento Suore Canossiane"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q155225",
+      "qid": "Q155225",
+      "church_stop_id": "Q155225",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Santi Giovanni e Paolo",
+        "it": "Convento dei Santi Giovanni e Paolo",
+        "en": "Convento dei Santi Giovanni e Paolo"
+      },
+      "area": "Castello",
+      "lon": 12.3422,
+      "lat": 45.4393,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Basilica_dei_Santi_Giovanni_e_Paolo_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q2219891",
+      "qid": "Q2219891",
+      "church_stop_id": "Q2219891",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Tolentini",
+        "it": "Convento dei Tolentini",
+        "en": "Convento dei Tolentini"
+      },
+      "area": "Santa Croce",
+      "lon": 12.32185,
+      "lat": 45.4376,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicola_da_Tolentino_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving adjoining Theatine convent now IUAV university headquarters",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q2223139",
+      "qid": "Q2223139",
+      "church_stop_id": "Q2223139",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Gesuati",
+        "it": "Convento dei Gesuati",
+        "en": "Convento dei Gesuati"
+      },
+      "area": "Dorsoduro",
+      "lon": 12.32663,
+      "lat": 45.42956,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Visitazione_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving fifteenth-century monastery with cloister",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q224961",
+      "qid": "Q224961",
+      "church_stop_id": "Q224961",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Frari",
+        "it": "Convento dei Frari",
+        "en": "Convento dei Frari"
+      },
+      "area": "San Polo",
+      "lon": 12.326446,
+      "lat": 45.436805,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Gloriosa_dei_Frari",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving convent and two cloisters adapted as Archivio di Stato",
+      "osm_buildings": [
+        {
+          "osm_type": "relation",
+          "osm_id": 2382772,
+          "evidence": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Gloriosa_dei_Frari — surviving convent and two cloisters adapted as Archivio di Stato; exact named OSM object: Ex Convento dei Frari"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q2929873",
+      "qid": "Q2929873",
+      "church_stop_id": "Q2929873",
+      "decision": "include",
+      "name": {
+        "ru": "Convento della Carità",
+        "it": "Convento della Carità",
+        "en": "Convento della Carità"
+      },
+      "area": "Dorsoduro",
+      "lon": 12.3285,
+      "lat": 45.4313,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Carit%C3%A0_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving convent complex incorporated into Gallerie dell’Accademia",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3580188",
+      "qid": "Q3580188",
+      "church_stop_id": "Q3580188",
+      "decision": "include",
+      "name": {
+        "ru": "Monastero del Nome di Gesù",
+        "it": "Monastero del Nome di Gesù",
+        "en": "Monastero del Nome di Gesù"
+      },
+      "area": "Santa Croce",
+      "lon": 12.316733,
+      "lat": 45.439096,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_del_Nome_di_Ges%C3%B9",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving house behind church formerly occupied by Clarisse",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585321",
+      "qid": "Q3585321",
+      "church_stop_id": "Q3585321",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di San Bonaventura",
+        "it": "Convento di San Bonaventura",
+        "en": "Convento di San Bonaventura"
+      },
+      "area": "Cannaregio",
+      "lon": 12.3267,
+      "lat": 45.4478,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Bonaventura_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "later surviving Carmelite convent and former infant hospital",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585350",
+      "qid": "Q3585350",
+      "church_stop_id": "Q3585350",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di San Girolamo",
+        "it": "Convento di San Girolamo",
+        "en": "Convento di San Girolamo"
+      },
+      "area": "Cannaregio",
+      "lon": 12.32529,
+      "lat": 45.44605,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Girolamo_(Venezia%2C_Cannaregio)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "church and convent adapted to other uses after 1807",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585368",
+      "qid": "Q3585368",
+      "church_stop_id": "Q224961",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di San Nicolò della Lattuga",
+        "it": "Convento di San Nicolò della Lattuga",
+        "en": "Convento di San Nicolò della Lattuga"
+      },
+      "area": "San Polo",
+      "lon": 12.32516,
+      "lat": 45.437438,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_della_Lattuga",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585391",
+      "qid": "Q3585391",
+      "church_stop_id": "Q3585391",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Sant’Anna",
+        "it": "Convento di Sant’Anna",
+        "en": "Convento di Sant’Anna"
+      },
+      "area": "Castello",
+      "lon": 12.3582,
+      "lat": 45.4325,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Anna_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving convent converted to naval college and hospital",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585397",
+      "qid": "Q3585397",
+      "church_stop_id": "Q3585397",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Sant’Elena",
+        "it": "Convento di Sant’Elena",
+        "en": "Convento di Sant’Elena"
+      },
+      "area": "Castello",
+      "lon": 12.365644,
+      "lat": 45.427331,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Elena_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving fifteenth-century cloister wings plus later convent",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585408",
+      "qid": "Q3585408",
+      "church_stop_id": "Q3585408",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Santa Caterina",
+        "it": "Convento di Santa Caterina",
+        "en": "Convento di Santa Caterina"
+      },
+      "area": "Cannaregio",
+      "lon": 12.336317,
+      "lat": 45.443291,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Caterina_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving convent converted to Liceo Marco Foscarini",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3585917",
+      "qid": "Q3585917",
+      "church_stop_id": "Q3585917",
+      "decision": "include",
+      "name": {
+        "ru": "Convento delle Eremite",
+        "it": "Convento delle Eremite",
+        "en": "Convento delle Eremite"
+      },
+      "area": "Dorsoduro",
+      "lon": 12.3245,
+      "lat": 45.4319,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Eremite",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving Canossian convent and university residence",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q3669279",
+      "qid": "Q3669279",
+      "church_stop_id": "Q3669279",
+      "decision": "include",
+      "name": {
+        "ru": "Convento delle Terese",
+        "it": "Convento delle Terese",
+        "en": "Convento delle Terese"
+      },
+      "area": "Dorsoduro",
+      "lon": 12.3162,
+      "lat": 45.4331,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Terese_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving convent with cloister now IUAV teaching premises",
+      "osm_buildings": [
+        {
+          "osm_type": "way",
+          "osm_id": 138843632,
+          "evidence": "https://it.wikipedia.org/wiki/Chiesa_delle_Terese_(Venezia) — surviving convent with cloister now IUAV teaching premises; exact named OSM object: Convento delle Terese"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q3670710",
+      "qid": "Q3670710",
+      "church_stop_id": "Q3670710",
+      "decision": "include",
+      "name": {
+        "ru": "Abbazia di San Gregorio",
+        "it": "Abbazia di San Gregorio",
+        "en": "Abbazia di San Gregorio"
+      },
+      "area": "Dorsoduro",
+      "lon": 12.333784,
+      "lat": 45.430653,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Gregorio_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "monastery buildings adapted as residences",
+      "osm_buildings": [
+        {
+          "osm_type": "relation",
+          "osm_id": 2317793,
+          "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Gregorio_(Venezia) — monastery buildings adapted as residences; exact named OSM object: Abbazia di San Gregorio"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q3672972",
+      "qid": "Q3672972",
+      "church_stop_id": null,
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Santa Chiara / Questura",
+        "it": "Convento di Santa Chiara / Questura",
+        "en": "Convento di Santa Chiara / Questura"
+      },
+      "area": "Santa Croce",
+      "lon": 12.3172579,
+      "lat": 45.4403385,
+      "coordinate_source": "Exact named OSM relation/2284203 building label point; not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Santa_Croce)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "article explicitly says only the convent survives, police headquarters since 1960",
+      "osm_buildings": [
+        {
+          "osm_type": "relation",
+          "osm_id": 2284203,
+          "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Santa_Croce) — article explicitly says only the convent survives, police headquarters since 1960; exact named OSM object: Questura di Venezia"
+        }
+      ],
+      "access_class": "restricted"
+    },
+    {
+      "id": "monastery-Q3673008",
+      "qid": "Q3673008",
+      "church_stop_id": "Q3673008",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Santa Croce alla Giudecca",
+        "it": "Convento di Santa Croce alla Giudecca",
+        "en": "Convento di Santa Croce alla Giudecca"
+      },
+      "area": "Giudecca",
+      "lon": 12.335124,
+      "lat": 45.424888,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_(Venezia%2C_Giudecca)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "convent buildings survive as prison; only church facade survives",
+      "osm_buildings": [],
+      "access_class": "restricted"
+    },
+    {
+      "id": "monastery-Q3673752",
+      "qid": "Q3673752",
+      "church_stop_id": "Q3673752",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Santa Maria del Pianto",
+        "it": "Convento di Santa Maria del Pianto",
+        "en": "Convento di Santa Maria del Pianto"
+      },
+      "area": "Castello",
+      "lon": 12.345401,
+      "lat": 45.439905,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Pianto_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving church and convent complex; closed to worship",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q385975",
+      "qid": "Q385975",
+      "church_stop_id": null,
+      "decision": "include",
+      "name": {
+        "ru": "Chiostro del convento della Celestia",
+        "it": "Chiostro del convento della Celestia",
+        "en": "Chiostro del convento della Celestia"
+      },
+      "area": "Castello",
+      "lon": 12.3498,
+      "lat": 45.4375,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Celestia",
+      "survival_status": "adapted_building",
+      "survival_evidence": "article explicitly identifies surviving convent cloister of 1571, not demolished church",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q428317",
+      "qid": "Q428317",
+      "church_stop_id": null,
+      "decision": "include",
+      "name": {
+        "ru": "San Lorenzo e chiostro del monastero",
+        "it": "San Lorenzo e chiostro del monastero",
+        "en": "San Lorenzo e chiostro del monastero"
+      },
+      "area": "Castello",
+      "lon": 12.3455375,
+      "lat": 45.4372706,
+      "coordinate_source": "Exact named OSM way/286784078 building label point; not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Lorenzo_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing",
+      "osm_buildings": [
+        {
+          "osm_type": "way",
+          "osm_id": 286784078,
+          "evidence": "https://it.wikipedia.org/wiki/Chiesa_di_San_Lorenzo_(Venezia) — church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing; exact named OSM object: Chiesa di San Lorenzo"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q46592",
+      "qid": "Q46592",
+      "church_stop_id": "Q46592",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Crociferi / Gesuiti",
+        "it": "Convento dei Crociferi / Gesuiti",
+        "en": "Convento dei Crociferi / Gesuiti"
+      },
+      "area": "Cannaregio",
+      "lon": 12.33887,
+      "lat": 45.44334,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Gesuiti_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "convent reused as school and barracks after suppression",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q57906878",
+      "qid": "Q57906878",
+      "church_stop_id": null,
+      "decision": "include",
+      "name": {
+        "ru": "Convento del Santo Sepolcro / Caserma Cornoldi",
+        "it": "Convento del Santo Sepolcro / Caserma Cornoldi",
+        "en": "Convento del Santo Sepolcro / Caserma Cornoldi"
+      },
+      "area": "Castello",
+      "lon": 12.345711,
+      "lat": 45.4342948,
+      "coordinate_source": "Exact named OSM relation/2291108 building label point; not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Convento_del_Santo_Sepolcro",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving adapted convent and partial north cloister; church demolished",
+      "osm_buildings": [
+        {
+          "osm_type": "relation",
+          "osm_id": 2291108,
+          "evidence": "https://it.wikipedia.org/wiki/Convento_del_Santo_Sepolcro — surviving adapted convent and partial north cloister; church demolished; exact named OSM object: Caserma Aristide Cornoldi"
+        }
+      ],
+      "access_class": "restricted"
+    },
+    {
+      "id": "monastery-Q57981283",
+      "qid": "Q57981283",
+      "church_stop_id": "Q57981283",
+      "decision": "include",
+      "name": {
+        "ru": "Convento delle Convertite",
+        "it": "Convento delle Convertite",
+        "en": "Convento delle Convertite"
+      },
+      "area": "Giudecca",
+      "lon": 12.321677,
+      "lat": 45.426076,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Convento_delle_Convertite",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving secularized complex, now women’s prison",
+      "osm_buildings": [],
+      "access_class": "restricted"
+    },
+    {
+      "id": "monastery-Q61954738",
+      "qid": "Q61954738",
+      "church_stop_id": null,
+      "decision": "include",
+      "name": {
+        "ru": "Ex convento di San Giovanni Laterano",
+        "it": "Ex convento di San Giovanni Laterano",
+        "en": "Ex convento di San Giovanni Laterano"
+      },
+      "area": "Castello",
+      "lon": 12.343427,
+      "lat": 45.438075,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Laterano",
+      "survival_status": "adapted_building",
+      "survival_evidence": "former monastery reused as notarial archive and school; only oratory explicitly completely demolished",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q713558",
+      "qid": "Q3320338",
+      "church_stop_id": "Q713558",
+      "decision": "include",
+      "name": {
+        "ru": "Monastero di San Giorgio Maggiore",
+        "it": "Monastero di San Giorgio Maggiore",
+        "en": "Monastero di San Giorgio Maggiore"
+      },
+      "area": "San Giorgio Maggiore",
+      "lon": 12.342969,
+      "lat": 45.428719,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Monastero_di_San_Giorgio_Maggiore",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving Benedictine complex, restored and used by Fondazione Giorgio Cini",
+      "osm_buildings": [
+        {
+          "osm_type": "way",
+          "osm_id": 138800498,
+          "evidence": "https://it.wikipedia.org/wiki/Monastero_di_San_Giorgio_Maggiore — surviving Benedictine complex, restored and used by Fondazione Giorgio Cini; exact named OSM object: Monastero di San Giorgio Maggiore"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q861436",
+      "qid": "Q861436",
+      "church_stop_id": "Q861436",
+      "decision": "include",
+      "name": {
+        "ru": "Chiostro della Madonna dell’Orto",
+        "it": "Chiostro della Madonna dell’Orto",
+        "en": "Chiostro della Madonna dell’Orto"
+      },
+      "area": "Cannaregio",
+      "lon": 12.332467,
+      "lat": 45.446284,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_della_Madonna_dell'Orto",
+      "survival_status": "adapted_building",
+      "survival_evidence": "fifteenth-century cloister is explicitly the surviving part of the convent",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q938556",
+      "qid": "Q938556",
+      "church_stop_id": "Q938556",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di San Giuseppe di Castello",
+        "it": "Convento di San Giuseppe di Castello",
+        "en": "Convento di San Giuseppe di Castello"
+      },
+      "area": "Castello",
+      "lon": 12.35742,
+      "lat": 45.43058,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giuseppe_di_Castello",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving adjoining convent donated to Comune and adapted as school",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q946542",
+      "qid": "Q946542",
+      "church_stop_id": "Q946542",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di San Francesco della Vigna",
+        "it": "Convento di San Francesco della Vigna",
+        "en": "Convento di San Francesco della Vigna"
+      },
+      "area": "Castello",
+      "lon": 12.348638,
+      "lat": 45.438153,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_della_Vigna",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving Franciscan convent and cloisters",
+      "osm_buildings": []
+    },
+    {
+      "id": "monastery-Q95451292",
+      "qid": "Q95451292",
+      "church_stop_id": "Q95451292",
+      "decision": "include",
+      "name": {
+        "ru": "Convento dei Santi Cosma e Damiano",
+        "it": "Convento dei Santi Cosma e Damiano",
+        "en": "Convento dei Santi Cosma e Damiano"
+      },
+      "area": "Giudecca",
+      "lon": 12.32307,
+      "lat": 45.42573,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Cosma_e_Damiano_(Venezia)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "restored surviving convent, workshops, public housing, cloister and garden",
+      "osm_buildings": [
+        {
+          "osm_type": "relation",
+          "osm_id": 2382806,
+          "evidence": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Cosma_e_Damiano_(Venezia) — restored surviving convent, workshops, public housing, cloister and garden; exact named OSM object: ex Convento dei Santi Cosma e Damiano"
+        }
+      ]
+    },
+    {
+      "id": "monastery-Q974832",
+      "qid": "Q974832",
+      "church_stop_id": "Q974832",
+      "decision": "include",
+      "name": {
+        "ru": "Convento di Santo Stefano",
+        "it": "Convento di Santo Stefano",
+        "en": "Convento di Santo Stefano"
+      },
+      "area": "San Marco",
+      "lon": 12.33087,
+      "lat": 45.433726,
+      "coordinate_source": "Wikipedia article coordinate; building reference, not entrance",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_San_Marco)",
+      "survival_status": "adapted_building",
+      "survival_evidence": "surviving cloister of 1529 accessible from church",
+      "osm_buildings": []
+    },
+    {
+      "id": "review-Q945981",
+      "qid": "Q945981",
+      "name": {
+        "ru": "Basilica di San Pietro di Castello",
+        "it": "Basilica di San Pietro di Castello",
+        "en": "Basilica di San Pietro di Castello"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_San_Pietro_di_Castello",
+      "survival_evidence": "Con la traslazione della sede, il [[monastero]] attiguo alla basilica di San Pietro venne trasformato in [[polveriera]] per ordine di [[Eugenio di Beauharnais]], [[Re d'Italia|viceré d'Italia]]."
+    },
+    {
+      "id": "review-Q52531",
+      "qid": "Q52531",
+      "name": {
+        "ru": "Basilica di Santa Maria della Salute",
+        "it": "Basilica di Santa Maria della Salute",
+        "en": "Basilica di Santa Maria della Salute"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_della_Salute",
+      "survival_evidence": "Per fare spazio alla nuova chiesa si scelse di demolire un soppresso complesso religioso (la [[Chiesa della Trinità (Venezia)|Chiesa della Santissima Trinità]] con convento e scuola) adiacente alla ''[[Punta della Dogana|Punta da Màr]]'', la [[dogana]] di [[Venezia]]. Per poter erigere in quel posto la Basilica fu necessario un gran numero<ref>Una fonte (citata in Norbert Huse, ''Venedig. Von der Kunst eine Stadt im Wasser zu bauen'', Verlag C.H. Beck, ISBN 3-406-52746-9) afferma che ne occorsero ben 1.156.650. La quantità dei pali indicata è assolutamente esagerata; viene espressa da Giustiniano Martinioni nel 1663 nelle sue aggiunte alle pubblicazioni del Sansovino, senza indicarne la fonte. Infatti nal 1631 il Longhena per il consolidamento del terreno previde la superficie di 522 passi quadri cioè di 1576&nbsp; con indicata la lunghezza il diametro e l'essenza dei tolpi (pali). Dunqu"
+    },
+    {
+      "id": "review-Q3585952",
+      "qid": "Q3585952",
+      "name": {
+        "ru": "Chiesa del Corpus Domini (Venezia)",
+        "it": "Chiesa del Corpus Domini (Venezia)",
+        "en": "Chiesa del Corpus Domini (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_del_Corpus_Domini_(Venezia)",
+      "survival_evidence": "La '''chiesa ed il convento del Corpus Domini''' erano un complesso sacro di [[Venezia]], demolito nei primi dell'[[XIX secolo|Ottocento]] assieme alla vicina sede della confraternita del Corpus Domini, nota anche come [[Scuola dei Nobili]]. Sorgeva sull'estrema punta sud-occidentale del [[Sestiere (Venezia)|sestiere]] di [[Cannaregio]] (un tempo detto ''Cao de Zirada'') vicino alla [[Chiesa di Santa Lucia (Venezia)|chiesa di Santa Lucia]] demolita più tardi anch'essa per lasciare spazio alla stazione ferroviaria."
+    },
+    {
+      "id": "review-Q87746412",
+      "qid": "Q87746412",
+      "name": {
+        "ru": "Chiesa dell'Anconetta",
+        "it": "Chiesa dell'Anconetta",
+        "en": "Chiesa dell'Anconetta"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dell'Anconetta",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q3585897",
+      "qid": "Q3585897",
+      "name": {
+        "ru": "Chiesa delle Cappuccine",
+        "it": "Chiesa delle Cappuccine",
+        "en": "Chiesa delle Cappuccine"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Cappuccine",
+      "survival_evidence": "La '''chiesa delle Cappuccine''' è un [[chiesa (architettura)|edificio]] religioso della città di [[Venezia]], situato nel [[sestiere (Venezia)|sestiere]] di [[Cannaregio]]. La chiesa è dedicata a Maria e a san Francesco, ma prende il nome dal convento che, realizzato all'inizio del [[XVII secolo]], fu demolito in seguito alle soppressioni napoleoniche."
+    },
+    {
+      "id": "review-Q2717507",
+      "qid": "Q2717507",
+      "name": {
+        "ru": "Chiesa di San Giobbe",
+        "it": "Chiesa di San Giobbe",
+        "en": "Chiesa di San Giobbe"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giobbe",
+      "survival_evidence": "La chiesa è ciò che resta del convento francescano di San Giobbe e [[San Bernardino da Siena]], che cessò di esistere il 31 maggio 1810 quando i frati furono obbligati a concentrarsi nel complesso claustrale di [[San Francesco della Vigna]]."
+    },
+    {
+      "id": "review-Q2545358",
+      "qid": "Q2545358",
+      "name": {
+        "ru": "Duomo di Murano",
+        "it": "Duomo di Murano",
+        "en": "Duomo di Murano"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Duomo_di_Murano",
+      "survival_evidence": "Nel 1995 in questa cappella è stato posto il corpo del beato [[Daniele d'Ungrispach]] che prima si conservava in una cappella dell'Istituto delle Suore Dorotee che aveva fatto parte del soppresso convento di San Mattia. Il beato Daniele d'Ungrispach era un ricco mercante di pellicce, nato a Cormons nel 1344 e morto a Murano nel 1411, che, passando per Venezia nel rientro dai suoi viaggi di affari, si ritirava in preghiera nel convento di San Mattia dove faceva vita religiosa con i monaci. Fu sepolto nel chiostro del convento e quando dopo molti anni il sepolcro venne riaperto, si trovò che il suo corpo era ancora intatto. Si gridò al miracolo e da quel momento Daniele d'Ungrispach venne venerato come beato dai muranesi."
+    },
+    {
+      "id": "review-Q1059409",
+      "qid": "Q1059409",
+      "name": {
+        "ru": "Chiesa dell'Abbazia della Misericordia",
+        "it": "Chiesa dell'Abbazia della Misericordia",
+        "en": "Chiesa dell'Abbazia della Misericordia"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dell'Abbazia_della_Misericordia",
+      "survival_evidence": "Nel [[1806]], durante l'epoca napoleonica, venne soppressa la [[Scuola nuova di Santa Maria della Misericordia|Scuola della Misericordia]] e la chiesa fu completamente spogliata e trasformata in magazzino militare, mentre il monastero, che già si trovava in stato di abbandono e mezzo crollato, fu definitivamente demolito."
+    },
+    {
+      "id": "review-Q3585327",
+      "qid": "Q3585327",
+      "name": {
+        "ru": "Chiesa di San Daniele (Venezia)",
+        "it": "Chiesa di San Daniele (Venezia)",
+        "en": "Chiesa di San Daniele (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Daniele_(Venezia)",
+      "survival_evidence": "Nel [[1138]] il [[vescovo di Castello]] [[Giovanni Polani]] donò la chiesa a Manfredo, [[abbazia di Fruttuaria|abate di Fruttuaria]], il quale la ingrandì e le aggiunse un monastero<ref name=tassini/><ref name=archivio/>."
+    },
+    {
+      "id": "review-Q2370299",
+      "qid": "Q2370299",
+      "name": {
+        "ru": "Chiesa di San Domenico (Venezia)",
+        "it": "Chiesa di San Domenico (Venezia)",
+        "en": "Chiesa di San Domenico (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Domenico_(Venezia)",
+      "survival_evidence": "La '''chiesa di San Domenico''' era un luogo di culto di [[Venezia]]. Come suggerisce l'intitolazione, le era annesso un convento di [[frati predicatori]]. Sorgeva nel [[Sestiere (Venezia)|sestiere]] di [[Castello (sestiere di Venezia)|Castello]], all'angolo tra gli attuali [[via Garibaldi (Venezia)|via Garibaldi]] e [[Viale Garibaldi (Venezia)|viale Garibaldi]]."
+    },
+    {
+      "id": "review-Q3585337",
+      "qid": "Q3585337",
+      "name": {
+        "ru": "Chiesa di San Francesco di Paola (Venezia)",
+        "it": "Chiesa di San Francesco di Paola (Venezia)",
+        "en": "Chiesa di San Francesco di Paola (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_di_Paola_(Venezia)",
+      "survival_evidence": "Nel [[1588]] sia l'ospizio che la chiesa erano ormai instabili nella struttura, per cui vennero affidati all'[[Ordine dei Minimi]] di [[San Francesco di Paola]], che ristrutturarono interamente la chiesa, reintitolandolo a [[San Francesco di Paola]]. E vicino ad esso un [[monastero]], che venne soppresso poi nel [[1806]] e demolito nel [[1885]]. Al suo posto ora sorge una [[Scuola primaria|scuola elementare]]."
+    },
+    {
+      "id": "review-Q1585514",
+      "qid": "Q1585514",
+      "name": {
+        "ru": "Chiesa di San Marcuola",
+        "it": "Chiesa di San Marcuola",
+        "en": "Chiesa di San Marcuola"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Marcuola",
+      "survival_evidence": "La chiesa originale, della quale non si hanno molte notizie, era posta in asse longitudinale e parallelo al Canal Grande e aveva di fronte un [[Campo (Venezia)|campo]]. Si ritiene che fino all'[[XI secolo]] fosse gestita da [[monaca|monache]], che poi si trasferirono vicino al [[campo San Trovaso]], creando lì il [[Chiesa delle Eremite|convento delle Eremitane]]."
+    },
+    {
+      "id": "review-Q3672615",
+      "qid": "Q3672615",
+      "name": {
+        "ru": "Chiesa di Sant'Antonio di Castello",
+        "it": "Chiesa di Sant'Antonio di Castello",
+        "en": "Chiesa di Sant'Antonio di Castello"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonio_di_Castello",
+      "survival_evidence": "Venne fondata, con il monastero annesso, nel [[1346]] da fra Giotto degli [[Abati (famiglia)|Abati]], [[priore]] dei [[Canonici regolari di Sant'Antonio di Vienne]]. La fondazione del monastero e della chiesa faceva parte di uno sforzo più ampio, che vide lo stesso frate fondare anche il [[Collegio San Marco#Il monastero di S. Antonio di Vienna|Monastero di Sant'Antonio di Vienne]] a [[Padova]], nel [[1349]]. Nel [[1471]] per decisione del [[Consiglio dei Pregadi|senato veneziano]] fu affidata ai [[Canonici regolari lateranensi]] di [[Chiesa di San Salvador|San Salvador]].<ref>{{Cita|Foscari - Tafuri}}, pp. 100-102</ref> Nel [[1581]], il monastero ospitava 35 religiosi.<ref>[[Biblioteca apostolica vaticana|Biblioteca Apostolica Vaticana]] [https://digi.vatlib.it/view/MSS_Urb.lat.817.pt.3 Urb. Lat. 817, p. 3, ff. 491r-492v];</ref>"
+    },
+    {
+      "id": "review-Q1572438",
+      "qid": "Q1572438",
+      "name": {
+        "ru": "Chiesa di Santa Lucia (Venezia)",
+        "it": "Chiesa di Santa Lucia (Venezia)",
+        "en": "Chiesa di Santa Lucia (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Lucia_(Venezia)",
+      "survival_evidence": "Nel [[1444]] la chiesa passò alla giurisdizione del [[Chiesa del Corpus Domini (Venezia)|convento del Corpus Domini]], situato nelle vicinanze. Fu concessa nel [[1574]] alle [[Servi di Maria|Serve di Maria]] sotto la [[regola di sant'Agostino]]."
+    },
+    {
+      "id": "review-Q3585424",
+      "qid": "Q3585424",
+      "name": {
+        "ru": "Chiesa di Santa Maria dei Servi (Venezia)",
+        "it": "Chiesa di Santa Maria dei Servi (Venezia)",
+        "en": "Chiesa di Santa Maria dei Servi (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dei_Servi_(Venezia)",
+      "survival_evidence": "[[File:Santa Maria dei Servi de Barbari.jpg|miniatura|sinistra|La chiesa ed il convento di Santa Maria dei Servi nella ''[[Veduta di Venezia]]'' di [[Jacopo de' Barbari]], 1500<ref>{{Cita libro|curatore=E. Baseggio|curatore2=T. Franco|curatore3=L. Molà|titolo=Chiesa di Santa Maria dei Servi e la comunità veneziana dei Servi di Maria (secoli XIV-XIX)|collana=Chiese di Venezia 8|anno=Maggio 2023|p=6|capitolo=Introduzione|ISBN=979-12-5469-355-1}}</ref>]]"
+    },
+    {
+      "id": "review-Q61935070",
+      "qid": "Q61935070",
+      "name": {
+        "ru": "Chiesa di Santa Maria delle Vergini (Venezia)",
+        "it": "Chiesa di Santa Maria delle Vergini (Venezia)",
+        "en": "Chiesa di Santa Maria delle Vergini (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_delle_Vergini_(Venezia)",
+      "survival_evidence": "Dalla rappresentazione presente nella ''[[Veduta di Venezia]]'' di [[Jacopo de' Barbari]], la chiesa aveva una struttura di tipo romanico-bizantino a tre navate, con le absidi rivolte verso il canale, ma senza alcun accesso diretto: la facciata infatti era rivolta verso l'interno del convento e la chiesa completamente racchiusa entro le sue mura e quindi non accessibile al pubblico. La chiesa era affiancata da un basso campanile romanico con cuspide piramidale."
+    },
+    {
+      "id": "review-Q21856008",
+      "qid": "Q21856008",
+      "name": {
+        "ru": "Chiesa dei Catecumeni",
+        "it": "Chiesa dei Catecumeni",
+        "en": "Chiesa dei Catecumeni"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Catecumeni",
+      "survival_evidence": "Durante il [[XIX secolo]] la chiesa venne annessa come oratorio privato all'adiacente convento delle suore [[salesie]] di cui tuttora fa parte."
+    },
+    {
+      "id": "review-Q90571178",
+      "qid": "Q90571178",
+      "name": {
+        "ru": "Chiesa dell'Ospedale degli Incurabili",
+        "it": "Chiesa dell'Ospedale degli Incurabili",
+        "en": "Chiesa dell'Ospedale degli Incurabili"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dell'Ospedale_degli_Incurabili",
+      "survival_evidence": "La '''chiesa dell'Ospedale degli Incurabili''' o '''del Santissimo Salvatore degli Incurabili''' era un edificio religioso di Venezia demolito nel 1831. Si trovava all'interno del grande chiostro dell'[[Ex Ospedale degli Incurabili (Venezia)|Ospedale]] posto lungo le [[Fondamenta delle Zattere|Zattere]], in quel tratto dette appunto ''agli Incurabili,'' vicino alla ora dismessa [[Chiesa dello Spirito Santo (Venezia)|chiesa dello Spirito Santo]]."
+    },
+    {
+      "id": "review-Q1559661",
+      "qid": "Q1559661",
+      "name": {
+        "ru": "Chiesa della Pietà (Venezia)",
+        "it": "Chiesa della Pietà (Venezia)",
+        "en": "Chiesa della Pietà (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_della_Piet%C3%A0_(Venezia)",
+      "survival_evidence": "Sopra la porta d'ingresso del coro è presente una tela del [[Il Moretto|Moretto]], ''[[Cena in casa di Simone il fariseo]]'', del [[1544]], che originariamente si trovava nel convento di San [[Fermo e Rustico]] di [[Monselice]]. Il soffitto del coro è decorato da un altro affresco del Tiepolo, il ''Trionfo della Fede''."
+    },
+    {
+      "id": "review-Q16539982",
+      "qid": "Q16539982",
+      "name": {
+        "ru": "Chiesa della Trinità (Venezia)",
+        "it": "Chiesa della Trinità (Venezia)",
+        "en": "Chiesa della Trinità (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_della_Trinit%C3%A0_(Venezia)",
+      "survival_evidence": "La '''chiesa e convento della Trinità''' è stato un [[monastero|complesso religioso]] di [[Venezia]], appartenente all'[[Ordine teutonico]] e situato nel sestiere di [[Dorsoduro]]."
+    },
+    {
+      "id": "review-Q2931177",
+      "qid": "Q2931177",
+      "name": {
+        "ru": "Chiesa dello Spirito Santo (Venezia)",
+        "it": "Chiesa dello Spirito Santo (Venezia)",
+        "en": "Chiesa dello Spirito Santo (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dello_Spirito_Santo_(Venezia)",
+      "survival_evidence": "Sull'area della chiesa attuale venne fondato nel [[1483]] il monastero delle monache agostiniane dello Spirito Santo, con annessa una chiesa interna non prospiciente il [[canale della Giudecca]]."
+    },
+    {
+      "id": "review-Q3669447",
+      "qid": "Q3669447",
+      "name": {
+        "ru": "Chiesa di Ognissanti (Venezia, Dorsoduro)",
+        "it": "Chiesa di Ognissanti (Venezia, Dorsoduro)",
+        "en": "Chiesa di Ognissanti (Venezia, Dorsoduro)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Ognissanti_(Venezia%2C_Dorsoduro)",
+      "survival_evidence": "Nel [[XV secolo|1400]], sull'area attualmente occupata dalla chiesa sorgeva un monastero di monache [[cistercensi]] che si erano trasferite qui dopo l'abbandono forzato di [[Torcello]], diventata insalubre."
+    },
+    {
+      "id": "review-Q3585318",
+      "qid": "Q3585318",
+      "name": {
+        "ru": "Chiesa di San Beneto",
+        "it": "Chiesa di San Beneto",
+        "en": "Chiesa di San Beneto"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Beneto",
+      "survival_evidence": "L'edificio risulta già esistente dal 1013, quando viene incluso nella giurisdizione del monastero dei benedettini di San Michele di Brondolo. Nel 1435 viene promossa al rango di collegiata dal vescovo di Castello. L'attuale conformazione risale alla riedificazione del 1619, voluta dal patriarca [[Giovanni Tiepolo]], a causa del degrado e del pericolo di crollo in cui versava l'edificio, e terminata nel 1685. La riconsacrazione è avvenuta nel 1695."
+    },
+    {
+      "id": "review-Q64830876",
+      "qid": "Q64830876",
+      "name": {
+        "ru": "Chiesa di San Nicolò di Castello",
+        "it": "Chiesa di San Nicolò di Castello",
+        "en": "Chiesa di San Nicolò di Castello"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_di_Castello",
+      "survival_evidence": "Nel 1668 vene concessa ad un gruppo di [[Cappuccine]] la porzione terminale ad oriente dell'ospedale per istituirvi un proprio convento. Per quanto riguarda la parte residenziale gli ambienti erano già ben predisposti ristrutturazione un po' più complesso fu ricavare una loro piccola [[Chiesa delle Cappuccine di Castello|chiesa]] all'interno dello stabile esistente che poterono farla consacrare nel 1675<ref>{{Cita|Gaggiato 2019|pp. 160, 197.}}</ref>."
+    },
+    {
+      "id": "review-Q3585378",
+      "qid": "Q3585378",
+      "name": {
+        "ru": "Chiesa di San Provolo",
+        "it": "Chiesa di San Provolo",
+        "en": "Chiesa di San Provolo"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Provolo",
+      "survival_evidence": "La fondazione della chiesa secondo la tradizione risalirebbe al [[doge (Venezia)|dogado]] di [[Angelo Partecipazio]], ossia nell'arco temporale compreso tra gli anni [[809]] e [[827]], congiuntamente alla fondazione del monastero benedettino femminile di [[Chiesa di San Zaccaria|San Zaccaria]], adiacente alla chiesa. Per tale contiguità, le monache ottennero l'elevazione a chiesa parrocchiale nell'anno [[850]], al posto della [[chiesa di San Zaccaria]], anche se è solo dal [[1107]] che è documentata l'esclusiva titolarità dei diritti parrocchiali, susseguente alla ricostruzione della chiesa dopo l'incendio del 1106 che distrusse la fabbrica originaria<ref name=\"siusa\" />. La stessa comunità monastica deputava e stipendiava due cappellani incaricati della cura pastorale dei fedeli e dell'amministrazione dei sacramenti."
+    },
+    {
+      "id": "review-Q3672175",
+      "qid": "Q3672175",
+      "name": {
+        "ru": "Chiesa di San Vio",
+        "it": "Chiesa di San Vio",
+        "en": "Chiesa di San Vio"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Vio",
+      "survival_evidence": "La chiesa era ornata internamente da pitture di [[Matteo Ingoli]], [[Alvise dal Friso]], [[Girolamo Brusaferro]] ed [[Antonio Zanchi]]. Vi erano sepolte la beata [[Contessa Tagliapietra]] e la pittrice [[Rosalba Carriera]], che abitava poco lontano<ref>Cesare Zangirolami. ''Storia delle chiese dei monasteri delle scuole di Venezia rapinate e distrutte da [[Napoleone Bonaparte]].'' Venezia, Filippi Ed., 1962.</ref>."
+    },
+    {
+      "id": "review-Q794876",
+      "qid": "Q794876",
+      "name": {
+        "ru": "Chiesa di San Zaccaria",
+        "it": "Chiesa di San Zaccaria",
+        "en": "Chiesa di San Zaccaria"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Zaccaria",
+      "survival_evidence": "I dogi [[Agnello Partecipazio|Agnello]] e [[Giustiniano Partecipazio]] fecero aggiungere un monastero di [[Benedettini|Benedettine]], che fu riedificato sotto il doge [[Orso I Partecipazio]] dalla badessa Giovanna, la quale ne era la figlia. Nell'anno [[1105]] un terribile incendio lo distrusse, insieme con la chiesa, e si racconta che morirono asfissiate più di cento monache, che si erano rifugiate nel sotterraneo, ancor oggi esistente, sotto l'altare maggiore."
+    },
+    {
+      "id": "review-Q2929832",
+      "qid": "Q2929832",
+      "name": {
+        "ru": "Chiesa di Sant'Agnese (Venezia)",
+        "it": "Chiesa di Sant'Agnese (Venezia)",
+        "en": "Chiesa di Sant'Agnese (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Agnese_(Venezia)",
+      "survival_evidence": "La chiesa si trova a pochissimi metri di distanza dalla [[chiesa dei Gesuati]], in una zona che in passato ospitava diversi [[monastero|monasteri]] facenti capo a ordini diversi."
+    },
+    {
+      "id": "review-Q2780025",
+      "qid": "Q2780025",
+      "name": {
+        "ru": "Chiesa di Santa Maria dei Carmini",
+        "it": "Chiesa di Santa Maria dei Carmini",
+        "en": "Chiesa di Santa Maria dei Carmini"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dei_Carmini",
+      "survival_evidence": "L'edificio si erge a fianco della [[Scuola Grande dei Carmini|Scuola Grande di Santa Maria del Carmelo]], anche conosciuta con il nome di ''Scuola dei Carmini''. Questa confraternita caritatevole fu ufficialmente fondata nel 1597 e sorse da un'associazione caritatevole di donne [[laico|laiche]], le ''Pinzòcchere dei Carmini''. I membri di questo gruppo laico erano associati come [[terziari]] al vicino monastero dei [[Ordine della Beata Vergine del Monte Carmelo|Carmelitani]]."
+    },
+    {
+      "id": "review-Q89427334",
+      "qid": "Q89427334",
+      "name": {
+        "ru": "Chiesa di Santa Maria dell'Umiltà (Venezia)",
+        "it": "Chiesa di Santa Maria dell'Umiltà (Venezia)",
+        "en": "Chiesa di Santa Maria dell'Umiltà (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dell'Umilt%C3%A0_(Venezia)",
+      "survival_evidence": "La '''chiesa di Santa Maria dell'Umiltà''' era, con il convento annesso, un complesso religioso di [[Venezia]] il cui ricordo permane solo nel toponimo utilizzato per il ponte che vi dava allora immediato accesso, essendo stata demolita nel 1821."
+    },
+    {
+      "id": "review-Q3674171",
+      "qid": "Q3674171",
+      "name": {
+        "ru": "Chiesa di Santa Marta (Venezia)",
+        "it": "Chiesa di Santa Marta (Venezia)",
+        "en": "Chiesa di Santa Marta (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Marta_(Venezia)",
+      "survival_evidence": "Stando alle fonti<ref>{{Cita libro|autore=Casimiro Freschot|wkautore=Casimir Freschot|titolo=La nobiltà veneta, o' sia tutte le famiglie patrizie con le figure de suoi scudi et arme|anno=1707|città=Venezia|pp=408-409}}</ref><ref>{{Cita libro|autore=Giuseppe Tassini|wkautore=Giuseppe Tassini|titolo=Curiosità veneziane. Ovvero origini delle denominazioni stradali di Venezia|dataoriginale=1872|città=Venezia|posizione=s.v. \"Salamon\"}}</ref><ref>{{Cita libro|autore=John Temple-Leader|wkautore=John Temple Leader|titolo=Libro dei nobili veneti ora per la prima volta messo in luce|annooriginale=1866|città=Firenze|p=77}}</ref>, la fondazione della chiesa e dell'annesso monastero femminile si deve alla pietà e alla generosità della nobile famiglia patrizia dei [[Salamon (famiglia)|Salamon]], il cui membro più anziano aveva il privilegio d'insediare la madre badessa dopo l'elezione: essa, nel giorn"
+    },
+    {
+      "id": "review-Q88979370",
+      "qid": "Q88979370",
+      "name": {
+        "ru": "Chiesa delle Muneghette",
+        "it": "Chiesa delle Muneghette",
+        "en": "Chiesa delle Muneghette"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Muneghette",
+      "survival_evidence": "La '''chiesa delle Muneghette''' – in realtà intitolata a '''Gesù e Maria''' – era, assieme al suo convento, un piccolo complesso religioso di [[Venezia]], sito in campo della Lana nel [[Santa Croce (sestiere di Venezia)|sestiere di Santa Croce]], non lontano dalle chiese di [[Chiesa di San Simeon Piccolo|San Simeon piccolo]] e quella demolita di [[Chiesa di Santa Croce (Venezia, Santa Croce)|Santa Croce]]."
+    },
+    {
+      "id": "review-Q3669711",
+      "qid": "Q3669711",
+      "name": {
+        "ru": "Chiesa di San Boldo",
+        "it": "Chiesa di San Boldo",
+        "en": "Chiesa di San Boldo"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Boldo",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q1150698",
+      "qid": "Q1150698",
+      "name": {
+        "ru": "Chiesa di San Giacomo da l'Orio",
+        "it": "Chiesa di San Giacomo da l'Orio",
+        "en": "Chiesa di San Giacomo da l'Orio"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giacomo_da_l'Orio",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q3671321",
+      "qid": "Q3671321",
+      "name": {
+        "ru": "Chiesa di San Michele Arcangelo (Venezia, San Marco)",
+        "it": "Chiesa di San Michele Arcangelo (Venezia, San Marco)",
+        "en": "Chiesa di San Michele Arcangelo (Venezia, San Marco)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Michele_Arcangelo_(Venezia%2C_San_Marco)",
+      "survival_evidence": "La chiesa di Sant'Angelo s'innalzava davanti al convento della [[Chiesa di Santo Stefano (Venezia, San Marco)|chiesa di Santo Stefano]], lungo il rio attiguo, con la [[facciata]] sul campo: essa, molto disadorna, era aperta da un grande [[Portale (architettura)|portale]] e da tre grandi finestre a mezzaluna. Sulla destra si ergeva un alto [[campanile]] [[cuspide (architettura)|cuspidato]], che crollò nel dicembre del 1455 in seguito a dei lavori di ristrutturazione eseguiti da [[Aristotele Fioravanti]].<ref>{{cita libro|autore= Pietro Paoletti |titolo= L'architettura e la scultura del Rinascimento in Venezia |editore= Ongania-Naya |anno= 1893 |volume= I |città= Venezia |p= 59 }}</ref>"
+    },
+    {
+      "id": "review-Q3672094",
+      "qid": "Q3672094",
+      "name": {
+        "ru": "Chiesa di San Stin",
+        "it": "Chiesa di San Stin",
+        "en": "Chiesa di San Stin"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Stin",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q3585387",
+      "qid": "Q3585387",
+      "name": {
+        "ru": "Chiesa di San Tomà",
+        "it": "Chiesa di San Tomà",
+        "en": "Chiesa di San Tomà"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Tom%C3%A0",
+      "survival_evidence": "La chiesa di San Tomà, fu all'inizio eretta sotto il titolo dei Santi Sergio e Bacco nel 973 con un annesso convento di suore probabilmente Benedettine.<ref name=\":0\">{{Cita|Bortolan}}, p. 110</ref> Subì una prima ristrutturazione nel [[1395]]. Nel 1538 fu ricostruita a tre navate, dedicata a San Tommaso e affidata al clero secolare divenendo parrocchiale.<ref name=\":0\" /> Nel [[1652]], sulla base di un progetto iniziale forse di [[Baldassare Longhena]] ma realizzato da [[Giuseppe Sardi (1624-1699)|Giuseppe Sardi]], fu costruita una nuova [[facciata]].<ref name=\":1\">{{Cita|Lorenzetti}}.</ref> Tra fine del [[XVII secolo|Seicento]] e l'inizio del [[XVIII secolo|Settecento]] fu ornata sulla sommità con cinque statue. A partire dal 1742 si dovette demolire l'edificio pericolante che fu rifatto con una facciata stile classicheggiante dall'[[architetto]] [[Francesco Bognolo]]<ref name=\":1\" />,"
+    },
+    {
+      "id": "review-Q3672485",
+      "qid": "Q3672485",
+      "name": {
+        "ru": "Chiesa di Sant'Andrea della Zirada",
+        "it": "Chiesa di Sant'Andrea della Zirada",
+        "en": "Chiesa di Sant'Andrea della Zirada"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Andrea_della_Zirada",
+      "survival_evidence": "La '''chiesa di Sant'Andrea della Zirada''' è un edificio religioso della città di [[Venezia]], situato nel [[sestiere (Venezia)|sestiere]] di [[Santa Croce (sestiere di Venezia)|Santa Croce]] e già sede di un monastero."
+    },
+    {
+      "id": "review-Q3673032",
+      "qid": "Q3673032",
+      "name": {
+        "ru": "Chiesa di Santa Croce (Venezia, Santa Croce)",
+        "it": "Chiesa di Santa Croce (Venezia, Santa Croce)",
+        "en": "Chiesa di Santa Croce (Venezia, Santa Croce)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_(Venezia%2C_Santa_Croce)",
+      "survival_evidence": "Nel [[1109]] i Badoer, che ne conservavano il [[giuspatronato]], la cedettero ai [[cluniacensi]] che vi costruirono a fianco un convento.<ref>{{cita|Tassini 1885|p. 93}}.</ref> Verso la metà del [[XIV secolo]] i monaci, invisi per la loro condotta scandalosa, abbandonarono il convento e la chiesa passò quindi in gestione al [[Capitolo (cristianesimo)#Capitolo di canonici|capitolo di canonici]] che la rifabbricarono (fu consacrata il 28 settembre [[1342]]). Il [[priorato]] si ridusse nel frattempo in [[commenda]]."
+    },
+    {
+      "id": "review-Q3673484",
+      "qid": "Q3673484",
+      "name": {
+        "ru": "Chiesa di Santa Maria Maggiore (Venezia)",
+        "it": "Chiesa di Santa Maria Maggiore (Venezia)",
+        "en": "Chiesa di Santa Maria Maggiore (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Maggiore_(Venezia)",
+      "survival_evidence": "Al principio dell'[[XIX secolo|Ottocento]] la chiesa fu soppressa assieme all'annesso convento e fu spogliata di importanti dipinti che vi erano custoditi."
+    },
+    {
+      "id": "review-Q520477",
+      "qid": "Q520477",
+      "name": {
+        "ru": "Chiesa di Santa Maria Mater Domini",
+        "it": "Chiesa di Santa Maria Mater Domini",
+        "en": "Chiesa di Santa Maria Mater Domini"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Mater_Domini",
+      "survival_evidence": "Secondo le cronache, fu costruita dalle famiglie [[Zane]] e [[Cappello (famiglia)|Cappello]] nel [[960]] e sin dall'inizio assegnata all'attiguo monastero di Santa Cristina. In origine anche la chiesa avrebbe avuto questa intitolazione, tuttavia nessun documento suffraga la tradizione; la dedicazione alla [[Maria Santissima Madre di Dio|Madre di Dio]], invece, è attestata sin dal [[1128]]."
+    },
+    {
+      "id": "review-Q89588543",
+      "qid": "Q89588543",
+      "name": {
+        "ru": "Chiesa di Santa Maria in Broglio",
+        "it": "Chiesa di Santa Maria in Broglio",
+        "en": "Chiesa di Santa Maria in Broglio"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_in_Broglio",
+      "survival_evidence": "La chiesa fu costruita a spese della Repubblica fu concessa in possesso all'ordine dei [[Cavalieri templari]] fino al 1311, anno della loro sanguinosa soppressione. Nel 1312 dopo l'espulsione di un ultimo templare fu consegnata ai [[Cavalieri Ospitalieri|Cavalieri di Malta]] trasferendovi l'obbligo di ospitare nel convento gli ambasciatori stranieri di passaggio. I gerosolimitani trovarono più adatto e sufficiente come sede veneziana l'altro convento venuto in loro possesso, quello di [[Chiesa di San Giovanni di Malta (Venezia)|San Giovanni Battista del Tempio]], e questo lo vendettero nel 1324 ai [[procuratori di San Marco]]. Di nuovo nel 1336 vi furono introdotti in affitto alcuni frati (di un ordine rimasto ignoto) con l'obbligo di mantenere due sacerdoti e sempre quello dell'ospitalità ai diplomatici. Ormai sostituiti i religiosi dal clero secolare, il mantenimento del complesso venn"
+    },
+    {
+      "id": "review-Q19913926",
+      "qid": "Q19913926",
+      "name": {
+        "ru": "Chiesa dei Santi Biagio e Cataldo",
+        "it": "Chiesa dei Santi Biagio e Cataldo",
+        "en": "Chiesa dei Santi Biagio e Cataldo"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Biagio_e_Cataldo",
+      "survival_evidence": "L'edificio originario risaliva alla fine del [[X secolo]] e fu consacrato nel [[1188]] e solo in seguito nel 1222 fu affiancato da un monastero di monache benedettine."
+    },
+    {
+      "id": "review-Q58005983",
+      "qid": "Q58005983",
+      "name": {
+        "ru": "Chiesa di San Cipriano (Venezia, Murano)",
+        "it": "Chiesa di San Cipriano (Venezia, Murano)",
+        "en": "Chiesa di San Cipriano (Venezia, Murano)"
+      },
+      "decision": "exclude",
+      "reason": "outside_monastery_scope",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Cipriano_(Venezia%2C_Murano)",
+      "survival_evidence": "Una prima chiesa dedicata ai santi Cipriano e Cornelio papa martiri fu fondata dal doge [[Giovanni II Partecipazio]] già nell'881 a [[Malamocco]]. Oltre due secoli dopo fu concessa da un altro doge [[Vitale I Michiel]] all'abate benedettino Vetulo, [[provincia di Padova|padovano]] che governava l'[[Abbazia di San Benedetto in Polirone]], affinché vi costituisse accanto un nuovo monastero. Poco prima anche il [[Patriarcato di Grado|patriarca gradense]] Pietro Badoer aveva donato un terreno attiguo in cambio dell'obbligo annuale di fornire una [[libbra]] d'olio. A queste donazioni se ne aggiunsero altre dalla devozione privata che accrebbero il patrimonio dell'abbazia con possedimenti vicino a Chioggia, a [[Carpenedo]] e alcune case a Venezia. La chiesa rimaneva contemporaneamente soggetta alla [[Basilica di San Marco|cappella ducale marciana]]<ref>{{Cita|Corner 1758|}}, p. 630; {{Cita|Pao"
+    },
+    {
+      "id": "review-Q3585324",
+      "qid": "Q3585324",
+      "name": {
+        "ru": "Chiesa di San Clemente (Venezia)",
+        "it": "Chiesa di San Clemente (Venezia)",
+        "en": "Chiesa di San Clemente (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Clemente_(Venezia)",
+      "survival_evidence": "Nel [[1432]] il [[papa Eugenio IV]] — il veneziano Gabriele Condulmer — insedia sull'isola l’ordine dei [[Canonici regolari della Congregazione del Santissimo Salvatore lateranense|canonici Lateranensi]] detti della Carità. Grazie ai lasciati ricevuti, i canonici avviano lavori di ampliamento del convento e di restauro della chiesa. La facciata della chiesa viene completamente ricostruita secondo lo stile del [[rinascimento lombardo]] e suddivisa da [[Lesena|lesene]] e cornici."
+    },
+    {
+      "id": "review-Q23691663",
+      "qid": "Q23691663",
+      "name": {
+        "ru": "Chiesa di San Giacomo (Venezia, Giudecca)",
+        "it": "Chiesa di San Giacomo (Venezia, Giudecca)",
+        "en": "Chiesa di San Giacomo (Venezia, Giudecca)"
+      },
+      "decision": "exclude",
+      "reason": "demolished_monastery_or_no_verified_surviving_premises",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giacomo_(Venezia%2C_Giudecca)",
+      "survival_evidence": "}}La '''chiesa di San Giacomo''' con l'annesso convento era un complesso di edifici religiosi situati a [[Venezia]], nell'isola della [[Giudecca]] alla destra della [[basilica del Redentore]]."
+    },
+    {
+      "id": "review-Q88419426",
+      "qid": "Q88419426",
+      "name": {
+        "ru": "Chiesa di San Giovanni Battista (Venezia, Giudecca)",
+        "it": "Chiesa di San Giovanni Battista (Venezia, Giudecca)",
+        "en": "Chiesa di San Giovanni Battista (Venezia, Giudecca)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Battista_(Venezia%2C_Giudecca)",
+      "survival_evidence": "La '''chiesa di San Giovanni Battista''' assieme al convento e all'annesso ospedale di San Francesco era un complesso di edifici religiosi di [[Venezia]], situato all'estremità orientale dell'isola della [[Giudecca]]."
+    },
+    {
+      "id": "review-Q25396110",
+      "qid": "Q25396110",
+      "name": {
+        "ru": "Chiesa di San Maffio",
+        "it": "Chiesa di San Maffio",
+        "en": "Chiesa di San Maffio"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Maffio",
+      "survival_evidence": "La '''Chiesa e il convento di San Maffio''' ([[Matteo (apostolo)|San Matteo evangelista]]) era un complesso monastico di religiose [[benedettine]] situato al margine settentrionale dell'isola Navagero di [[Murano]], sottoposto alla giurisdizione della [[diocesi di Torcello]]."
+    },
+    {
+      "id": "review-Q1449262",
+      "qid": "Q1449262",
+      "name": {
+        "ru": "Chiesa di San Michele in Isola",
+        "it": "Chiesa di San Michele in Isola",
+        "en": "Chiesa di San Michele in Isola"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Michele_in_Isola",
+      "survival_evidence": "Fu sede di un monastero [[camaldolesi|camaldolese]]."
+    },
+    {
+      "id": "review-Q379102",
+      "qid": "Q379102",
+      "name": {
+        "ru": "Chiesa di San Nicolò (Venezia, Lido)",
+        "it": "Chiesa di San Nicolò (Venezia, Lido)",
+        "en": "Chiesa di San Nicolò (Venezia, Lido)"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_(Venezia%2C_Lido)",
+      "survival_evidence": "Prima di questa chiesa, rifatta nel [[XVII secolo]], c'era un'altra chiesa, arretrata di circa 100-150 metri, di origine bizantina, oggi parzialmente sepolta. Una piccola parte è visibile dal chiostro."
+    },
+    {
+      "id": "review-Q3585377",
+      "qid": "Q3585377",
+      "name": {
+        "ru": "Chiesa di San Pietro Martire (Venezia)",
+        "it": "Chiesa di San Pietro Martire (Venezia)",
+        "en": "Chiesa di San Pietro Martire (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Pietro_Martire_(Venezia)",
+      "survival_evidence": "Fu edificata nel [[1348]] assieme ad un [[convento]] di padri [[Ordine dei Frati Predicatori|domenicani]] ed era dedicata a [[san Giovanni Battista]]. Fu eretta per volontà di Marco Michiel e consacrata il 17 settembre del [[1417]]."
+    },
+    {
+      "id": "review-Q3585409",
+      "qid": "Q3585409",
+      "name": {
+        "ru": "Chiesa di Santa Chiara (Venezia, Murano)",
+        "it": "Chiesa di Santa Chiara (Venezia, Murano)",
+        "en": "Chiesa di Santa Chiara (Venezia, Murano)"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Chiara_(Venezia%2C_Murano)",
+      "survival_evidence": "La '''chiesa di Santa Chiara''' era un luogo di [[culto cattolico]] della città di [[Venezia]]  con annesso convento abitato dal 1231 da monaci agostiniani a cui a metà del XIV secolo successero le monache benedettine. Dopo la soppressione dell'ordine, a seguito dei decreti napoleonici, la chiesa ed il convento vennero utilizzati a scopo industriale e commerciale."
+    },
+    {
+      "id": "review-Q107301282",
+      "qid": "Q107301282",
+      "name": {
+        "ru": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
+        "it": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)",
+        "en": "Chiesa di Santa Maria Elisabetta (Venezia, Lido)"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Elisabetta_(Venezia%2C_Lido)",
+      "survival_evidence": "I fedeli sollecitarono a più riprese l'istituzione di una parrocchia perché raggiungere [[San Pietro di Castello (isola)|San Pietro]] in barca risultava disagevole e la [[Chiesa di San Nicolò (Venezia, Lido)|chiesa di San Nicolò del Lido]], parte integrante del convento [[Ordine di San Benedetto|benedettino]], era situata all'interno di un'area fortificata e quindi non sempre accessibile. In seguito a ripetute suppliche<ref>{{cita libro|url= https://books.google.it/books?id=RmPUOLy10_QC&printsec=frontcover&hl=it&source=gbs_ge_summary_r&cad=0#v=onepage&q=Lido%20s.%20Elisabetta&f=false |autore= Ermolao Paoletti |titolo= Il fiore di Venezia ossia i quadri, i monumenti, le vedute ed i costumi veneziani |volume= 1 |editore= Tommaso Fontana |anno= 1837 |p= 40 }}</ref>, il 21 gennaio 1626 il [[Patriarcato di Venezia|patriarca]] [[Giovanni Tiepolo]], istituì la [[Chiesa parrocchiale|parrocchiale"
+    },
+    {
+      "id": "review-Q20493155",
+      "qid": "Q20493155",
+      "name": {
+        "ru": "Chiesa di Santa Maria Nova (Venezia)",
+        "it": "Chiesa di Santa Maria Nova (Venezia)",
+        "en": "Chiesa di Santa Maria Nova (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Nova_(Venezia)",
+      "survival_evidence": "La fondazione di una prima chiesa, dedicata a [[Assunzione di Maria|Santa Maria Assunta]], risale secondo la tradizione al 971<ref>{{Cita|Corner 1758|p. 272.}}</ref> per volontà della famiglia [[Aquileia|aquileiese]] Borselli e vi era annesso un piccolo convento di monache benedettine<ref>{{Cita|Gaggiato 2019}}, pp. 162-163.</ref>. Attorno al 1250 la chiesa risulta citata come ''Santa Maria Nova'' e alla fine del [[XIII secolo]] la chiesa venne elevata a parrocchiale e completamente ricostruita<ref>{{Cita|Gaggiato 2019|p. 163}}.</ref>. I lavori del campanile iniziarono solo nel 1498 col finanziamento di Nicolò [[Morosini (famiglia)|Morosini]]; infatti nella ''[[Veduta di Venezia]]'' di [[Jacopo de' Barbari]] del 1500 il campanile appare ancora troncato e privo della cella campanaria."
+    },
+    {
+      "id": "review-Q3585423",
+      "qid": "Q3585423",
+      "name": {
+        "ru": "Chiesa di Santa Maria degli Angeli (Murano)",
+        "it": "Chiesa di Santa Maria degli Angeli (Murano)",
+        "en": "Chiesa di Santa Maria degli Angeli (Murano)"
+      },
+      "decision": "exclude",
+      "reason": "user_excluded_no_atlas_geometry",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_degli_Angeli_(Murano)",
+      "survival_evidence": "Le sue origini risalgono al [[1188]] quando la pia donna Ginevra Gradenigo, figlia del [[Patriziato (Venezia)|nobile]] Marino Gradenigo, costretta monaca da quest'ultimo, fece dono all'abadessa Giacomina Boncio di un terreno con \"''adiacenti acque''\" affinché ne edificasse una chiesa e un monastero. Successivamente demolita e poi riedificata, fu riconsacrata nel [[1529]], grazie ad una Bolla Papale che ne sancì l'unione con la succursale di [[monastero di Santa Maria del Piave|Santa Maria di Piave]] di [[Lovadina]], in [[provincia di Treviso]]; questa unione arricchì la chiesa e il monastero, tanto da renderla famosa anche in [[Europa]]. Fu così che, nel [[1574]], [[Enrico III di Francia|Enrico III]], [[re di Polonia]] e da poco [[re di Francia]], già ospite del [[Doge di Venezia]], decise di visitarla, meravigliato e incuriosito dalla fama della Chiesa. L'accoglienza dei muranesi e l'or"
+    },
+    {
+      "id": "review-Q3585448",
+      "qid": "Q3585448",
+      "name": {
+        "ru": "Chiesa di Santo Stefano (Venezia, Murano)",
+        "it": "Chiesa di Santo Stefano (Venezia, Murano)",
+        "en": "Chiesa di Santo Stefano (Venezia, Murano)"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_Murano)",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q3585398",
+      "qid": "Q3585398",
+      "name": {
+        "ru": "Chiesa di Sant'Eufemia (Venezia)",
+        "it": "Chiesa di Sant'Eufemia (Venezia)",
+        "en": "Chiesa di Sant'Eufemia (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Eufemia_(Venezia)",
+      "survival_evidence": "Nella cappella di Sant'Anna è venerato il corpo della beata [[Giuliana di Collalto]], che nel [[XIII secolo]] fu badessa del vicino monastero dei Santi Biagio e Cataldo."
+    },
+    {
+      "id": "review-Q3676942",
+      "qid": "Q3676942",
+      "name": {
+        "ru": "Cimitero di San Michele (Venezia)",
+        "it": "Cimitero di San Michele (Venezia)",
+        "en": "Cimitero di San Michele (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "outside_monastery_scope",
+      "wikipedia": "https://it.wikipedia.org/wiki/Cimitero_di_San_Michele_(Venezia)",
+      "survival_evidence": "{{senza fonte|A partire dal febbraio 1806, la necessità di un unico luogo di inumazione posto al di fuori della città lagunare diventa urgente: occorre individuare una soluzione, da fissare in una delle isole della laguna o in terraferma, così da allontanare dalla città possibili cause di contagio. In un primo momento, si individua l'area occupata dal monastero delle Clarisse di Santa Maria Maggiore, nel sestiere di Santa Croce. L'architetto Giuseppe Picotti immagina una necropoli cinta da portici, in grado di ospitare 660 tombe, destinate alla vendita ma il progetto è troppo costoso e non viene realizzato. I progetti seguenti prendono in considerazione l'isola di Sant'Andrea della Certosa, senza però arrivare ad una concretizzazione. È Napoleone nel 1807, al termine di un soggiorno in città, a individuare la soluzione al problema, indicando l'isola di San Cristoforo, posta fra Venezia e"
+    },
+    {
+      "id": "review-Q126327",
+      "qid": "Q126327",
+      "name": {
+        "ru": "San Giorgio Maggiore (isola)",
+        "it": "San Giorgio Maggiore (isola)",
+        "en": "San Giorgio Maggiore (isola)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/San_Giorgio_Maggiore_(isola)",
+      "survival_evidence": "Dalla fondazione della città l'isola era di proprietà della [[patrizio (titolo)|famiglia patrizia]] dei [[Memmo]]; da ciò, il nome di ''Isola Memmia''. Essendovi stata fondata, nell'VIII-IX sec., una chiesetta in legno intitolata a [[San Giorgio]], l'isola prese il nome di \"Maggiore\" per distinguerla dall'isola di [[San Giorgio in Alga]]. Venne donata nel [[982]] dal [[doge (Venezia)|doge]] [[Tribuno Memmo]] ad un monaco [[benedettino]], [[Giovanni Morosini]]. Questi decise di bonificare l'area adiacente alla chiesa per costruire un [[monastero]] (il [[monastero di San Giorgio Maggiore]]), di cui fu il primo [[abate]]."
+    },
+    {
+      "id": "review-Q2118904",
+      "qid": "Q2118904",
+      "name": {
+        "ru": "Sant'Elena (Venezia)",
+        "it": "Sant'Elena (Venezia)",
+        "en": "Sant'Elena (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Sant'Elena_(Venezia)",
+      "survival_evidence": "Il toponimo un tempo si limitava all'isolotto dove sorge la [[Chiesa di Sant'Elena (Venezia)|chiesa di Sant'Elena]], che da secoli custodirebbe le reliquie dell'[[Flavia Giulia Elena|omonima santa]], madre di [[Costantino I|Costantino]]. Il luogo sacro, con l'annesso monastero degli [[Ordine di Sant'Agostino|agostiniani]] prima, e dal 1407 degli Olivetani, fiorì sino alle [[soppressioni napoleoniche]] e divenne in seguito un magazzino ([[1810]])."
+    },
+    {
+      "id": "review-Q1072076",
+      "qid": "Q1072076",
+      "name": {
+        "ru": "Sant'Erasmo (Venezia)",
+        "it": "Sant'Erasmo (Venezia)",
+        "en": "Sant'Erasmo (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Sant'Erasmo_(Venezia)",
+      "survival_evidence": "L'intitolazione a due santi protettori dei naviganti non è casuale. Prima che il [[litorale del Cavallino]] raggiungesse le dimensioni attuali, con la formazione di [[punta Sabbioni]], l'isola rappresentava a sua volta uno dei litorali che dividevano la laguna dal [[mare Adriatico]]. Posta tra le imboccature di [[Porto di Lido-San Nicolò|San Nicolò]] e [[Treporti]], nel medioevo ebbe una certa importanza quale località portuale a servizio di [[Torcello]] e [[Murano]]. Nello stesso periodo ha inizio la sua vocazione agricola, con l'assegnazione di appezzamenti a monasteri ([[Basilica di San Giorgio Maggiore|San Giorgio Maggiore]], [[Chiesa di San Zaccaria|San Zaccaria]]) e a famiglie patrizie<ref name=crovato>{{cita libro | nome= Giorgio | cognome= Crovato | titolo= Sant'Erasmo | anno= 2009 | editore= Il Poligrafo | città= Padova | ISBN= 978-88-7115-642-2 | pp= 16-23 }}</ref>."
+    },
+    {
+      "id": "review-Q641",
+      "qid": "Q641",
+      "name": {
+        "ru": "Venezia",
+        "it": "Venezia",
+        "en": "Venezia"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Venezia",
+      "survival_evidence": "Presso l'ex-convento dei [[Basilica di Santa Maria Gloriosa dei Frari|Frari]] è presente l'[[Archivio di Stato di Venezia]] che, con i suoi 70&nbsp;km di scaffali, ospita la documentazione prodotta in mille anni dalla [[Repubblica di Venezia]], dalla nascita al XX secolo. Il suo patrimonio è composto da una ricchissima collezione di [[pergamena|pergamene]], carte e disegni, conservati nelle centinaia di stanze (le antiche celle dei frati) poste attorno ai [[chiostro|chiostri]], che testimoniano non solo la storia della Serenissima, ma anche di tutto il mondo che intratteneva con essa relazioni diplomatiche e commerciali. Istituito nel 1815, dal 1866 vi affluiscono anche gli archivi prodotti dagli uffici dello [[Italia|Stato italiano]] situati a Venezia.<ref>{{cita web|url = http://www.archiviodistatovenezia.it/ |titolo= Archivio di Stato di Venezia |accesso= 1º maggio 2015}}</ref>[[File:"
+    },
+    {
+      "id": "review-Q52425",
+      "qid": "Q52425",
+      "name": {
+        "ru": "Castello (sestiere di Venezia)",
+        "it": "Castello (sestiere di Venezia)",
+        "en": "Castello (sestiere di Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Castello_(sestiere_di_Venezia)",
+      "survival_evidence": "In questo sestiere sono da citare, fra le numerose altre, due importanti ''[[Scuola (Venezia)|scuole]]'': la [[Scuola di San Giorgio degli Schiavoni]] e la [[Scuola Grande di San Marco]]. Quest'ultima fu riadattata da Napoleone in [[ospedale militare]] e costituisce oggi l'ingresso principale dell'[[ospedale]] civile cittadino dei \"Santi Giovanni e Paolo\", così chiamato perché include l'antico monastero che dipendeva dalla basilica omonima."
+    },
+    {
+      "id": "review-Q18288139",
+      "qid": "Q18288139",
+      "name": {
+        "ru": "Cimitero ebraico di Venezia",
+        "it": "Cimitero ebraico di Venezia",
+        "en": "Cimitero ebraico di Venezia"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Cimitero_ebraico_di_Venezia",
+      "survival_evidence": "Dopo la costosa [[guerra di Chioggia]] (1378-1381), per dare nuova spinta all'economia della Repubblica fu permesso il rientro degli ebrei in città e la liberalizzazione delle loro attività commerciali e finanziarie. Tra le prime necessità che si presentarono, vi fu quella di trovare un terreno disponibile da destinare alla sepoltura; sotto il [[dogado]] di [[Antonio Venier]], si autorizzò nel 1386 la [[Giudici del Piovego|Magistratura del Piovego]] a concedere alla “Universitas Judaeorum” un'area isolata di \"70 per 30 passi\" chiamata \"''petiam terreni vigri et vacui''\", lontano dal centro abitato delle isole di [[Venezia]], e precisamente nella parte settentrionale dell’isola lunga e stretta del [[Lido di Venezia|Lido]], che all’epoca presentava un piccolissimo centro abitato nell’estremità opposta ([[Malamocco]]) e una comunità di monaci benedettini nel [[Chiesa di San Nicolò (Venezia,"
+    },
+    {
+      "id": "review-Q24969536",
+      "qid": "Q24969536",
+      "name": {
+        "ru": "Palazzo Genovese (Venezia)",
+        "it": "Palazzo Genovese (Venezia)",
+        "en": "Palazzo Genovese (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Palazzo_Genovese_(Venezia)",
+      "survival_evidence": "Durante quest'ultimo restauro sono stati rinvenuti alcuni elementi di valore [[archeologico]]: oltre ai resti del monastero di San Gregorio, sono stati trovati quelli di strutture abitative in [[legno]] risalenti al [[IX secolo]] e di un edificio in pietra del [[VII secolo]]<ref>Fonte: [http://www.agendavenezia.org/it/evento-15115.htm agendavenezia.org]</ref>."
+    },
+    {
+      "id": "review-Q966625",
+      "qid": "Q966625",
+      "name": {
+        "ru": "Torre dell'orologio (Venezia)",
+        "it": "Torre dell'orologio (Venezia)",
+        "en": "Torre dell'orologio (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Torre_dell'orologio_(Venezia)",
+      "survival_evidence": "L'invenzione dello [[scappamento|scappamento a verga]] avvenuto in Europa del XIII secolo, portò allo sviluppo dei primi orologi completamente meccanici.<ref>{{britannica|id=technology/escapement|nome=escapement}}</ref> A partire dal XIII secolo furono costruiti grandi orologi da torre nelle piazze, nelle cattedrali e nei monasteri europei. Questi orologi erano costosi, ingombranti e piuttosto imprecisi tanto che richiedevano una costante regolazione. Inoltre il meccanismo era attivato da dei sistemi di contrappesi che dovevano essere riposizionati con una certa frequenza. Quindi le organizzazioni, tipicamente pubbliche, che si dotavano di un orologio dovettero anche preoccuparsi della sua gestione e manutenzione affinché tali dispositivi potessero sempre indicare l'ora esatta. Divenne quindi pratica corrente associare a questi orologi una figura di custode e manutentore, che veniva chia"
+    },
+    {
+      "id": "review-Q56640227",
+      "qid": "Q56640227",
+      "name": {
+        "ru": "Via Garibaldi (Venezia)",
+        "it": "Via Garibaldi (Venezia)",
+        "en": "Via Garibaldi (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Via_Garibaldi_(Venezia)",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q635865",
+      "qid": "Q635865",
+      "name": {
+        "ru": "Archivio storico del Patriarcato di Venezia",
+        "it": "Archivio storico del Patriarcato di Venezia",
+        "en": "Archivio storico del Patriarcato di Venezia"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Archivio_storico_del_Patriarcato_di_Venezia",
+      "survival_evidence": "L<nowiki>'</nowiki>'''Archivio storico del Patriarcato di Venezia''' è ospitato nel [[Seminario Patriarcale di Venezia]]. Fino alla primavera del [[2015]] era situato in un'ala del terzo piano dell'ex monastero benedettino dei ''Santi Felice e Fortunato di Ammiana'' dentro la [[Basilica di San Marco]] e il [[Palazzo Ducale (Venezia)|Palazzo Ducale]] attraverso il Rio di Palazzo.<ref>Una mappa può essere trovata {{cita testo|url=http://www.archiviostoricodelpatriarcatodivenezia.it/istituto/sede/posizione.html|titolo=qui|urlarchivio=https://web.archive.org/web/20150923173252/http://www.archiviostoricodelpatriarcatodivenezia.it/istituto/sede/posizione.html }}</ref> Fa parte degli ''Archivi storici della chiesa di Venezia''."
+    },
+    {
+      "id": "review-Q3735802",
+      "qid": "Q3735802",
+      "name": {
+        "ru": "Ospedale degli Incurabili (Venezia)",
+        "it": "Ospedale degli Incurabili (Venezia)",
+        "en": "Ospedale degli Incurabili (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Ospedale_degli_Incurabili_(Venezia)",
+      "survival_evidence": "L'assistenza spirituale fu dapprima curata da Gaetano Thiene che aveva già organizzato o fondato altri grandi ospedali. Era affiancato dal suo gruppo del ''Divino Amore'', nucleo originario dei [[Chierici regolari teatini]]<ref name=\":1\" />. È da ricordare che nel 1524 prestò i propri servizi all'ospedale anche [[Angela Merici]]. La religiosa era già nota per le capacità organizzative ed educative e i governatori con le governatrici tentarono invano di trattenerla offrendole l'incarico di priora per quanto riguardava le presenze femminili<ref>{{Cita|Aikema-Meijers 1989}}, p. 145.</ref>. Nel 1531 i governatori chiamarono [[Girolamo Emiliani|Giorolamo Emiliani]], altro collaudato organizzatore di istituzioni assistenziali e già attivo a Venezia anche presso l'Ospedale dei Derelitti<ref>{{Cita|Pullan 1982-V1}}, pp. 281-282, .</ref>. La sua ''Compagnia dei servi dei poveri,'' elevata a ordin"
+    },
+    {
+      "id": "review-Q52427",
+      "qid": "Q52427",
+      "name": {
+        "ru": "San Marco (sestiere di Venezia)",
+        "it": "San Marco (sestiere di Venezia)",
+        "en": "San Marco (sestiere di Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/San_Marco_(sestiere_di_Venezia)",
+      "survival_evidence": "La [[Piazza San Marco|Piazza]] sorse e si sviluppò sull'area occupata dagli antichi orti (''Brolo'') curati dalle suore del vicino convento di [[Zaccaria (Nuovo Testamento)|San Zaccaria]], attorno alle due chiese originariamente presenti in questa area, la chiesa di [[Teodoro di Amasea|San Teodoro]] (primo patrono di Venezia), poi demolita per far posto alla [[Basilica di San Marco]] e la prima [[Chiesa di San Geminiano (Venezia)|chiesa di San Geminiano]], originariamente posta all'incirca a metà lunghezza della piazza attuale, di fronte alla Basilica. Con l'allargamento della Piazza, la Chiesa di San Geminiano venne poi riedificata all'altezza dell'attuale Ala Napoleonica, ora parte del [[Museo Correr]], per costruire la quale la chiesa venne demolita nel [[1807]] su ordine di [[Napoleone Bonaparte|Napoleone]]."
+    },
+    {
+      "id": "review-Q801567",
+      "qid": "Q801567",
+      "name": {
+        "ru": "Stazione di Venezia Santa Lucia",
+        "it": "Stazione di Venezia Santa Lucia",
+        "en": "Stazione di Venezia Santa Lucia"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Stazione_di_Venezia_Santa_Lucia",
+      "survival_evidence": "I lavori per la costruzione della ferrovia ebbero inizio nel 1860. Per fare posto alla stazione, nel 1861 furono demoliti il convento e la [[Chiesa di Santa Lucia (Venezia)|chiesa di Santa Lucia]], che sorgevano nell'area dell'attuale piazzale della stazione e alla quale la stazione deve il proprio nome."
+    },
+    {
+      "id": "review-Q106517050",
+      "qid": "Q106517050",
+      "name": {
+        "ru": "Rocca Bianca (Venezia)",
+        "it": "Rocca Bianca (Venezia)",
+        "en": "Rocca Bianca (Venezia)"
+      },
+      "decision": "exclude",
+      "reason": "bibliography_only_or_non_building_mention",
+      "wikipedia": "https://it.wikipedia.org/wiki/Rocca_Bianca_(Venezia)",
+      "survival_evidence": "Monastery term occurs only in bibliography or unrelated linked matter."
+    },
+    {
+      "id": "review-Q3962211",
+      "qid": "Q3962211",
+      "name": {
+        "ru": "Sistema difensivo della laguna di Venezia",
+        "it": "Sistema difensivo della laguna di Venezia",
+        "en": "Sistema difensivo della laguna di Venezia"
+      },
+      "decision": "exclude",
+      "reason": "not_verified_as_surviving_monastery_building",
+      "wikipedia": "https://it.wikipedia.org/wiki/Sistema_difensivo_della_laguna_di_Venezia",
+      "survival_evidence": "Inoltre nella città, collegato al convento di Santa Chiara e prospiciente da sud la testa del ponte ferroviario, vi era il [[Forte Santa Lucia (Venezia)|Forte Santa Lucia]] (costruzione austriaca), oggi inglobato nel ponte stradale che gli passa sopra."
+    }
+  ]
+}

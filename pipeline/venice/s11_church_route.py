@@ -495,6 +495,50 @@ def load_pedestrian_network(cache=CACHE):
     return graph, nodes, {'source':'cached Veneto OSM PBF network','nodes':len(graph),'edges':graph.number_of_edges(),'rejected_ways':dict(rejected),'blocked_nodes':len(blocked)}
 
 
+def expand_monasteries(stops, candidates):
+    """Add reviewed premises or group an explicitly identified church complex."""
+    stops = [dict(s) for s in stops]
+    by_id = {s['id']:s for s in stops}
+    allowed = set(AREA_ORDER[:10])
+    audit = {'candidate_count':len(candidates), 'new_stop_count':0,
+             'merged_complex_count':0, 'merged_member_count':0, 'excluded':[], 'included':[]}
+    for original in sorted(candidates, key=lambda r:r['id']):
+        row = dict(original)
+        church = row.get('church_stop_id')
+        reason = row.get('reason') if row.get('decision') != 'include' else None
+        if row.get('qid') in USER_EXCLUDED_NO_ATLAS_GEOMETRY or church in USER_EXCLUDED_NO_ATLAS_GEOMETRY:
+            reason = 'user_excluded_no_atlas_geometry'
+        elif row.get('decision') == 'include' and row.get('area') not in allowed:
+            reason = 'outside_monastery_scope'
+        if reason:
+            audit['excluded'].append({**row,'reason':reason}); continue
+        if not row.get('survival_evidence'):
+            raise ValueError('monastery survival evidence required')
+        if church:
+            if church not in by_id:
+                raise ValueError(f'Monastery complex references missing church: {church}')
+            stop = by_id[church]
+            stop.setdefault('monasteries',[]).append(row)
+            stop['monastery_qids'] = sorted({r['qid'] for r in stop['monasteries'] if r.get('qid')})
+            stop.setdefault('osm_buildings',[]).extend(row.get('osm_buildings',[]))
+            stop['kind'] = 'church_and_monastery_complex'
+            audit['merged_member_count'] += 1
+        else:
+            stop = {**row,'local':local_coordinates(row['lon'],row['lat']),
+                    'kind':'monastery','confession':'Christian','sources':['reviewed_wikipedia_monastery_inventory'],
+                    'source_rows':1,'access_class':row.get('access_class','check_opening'),
+                    'access_note':translated('Exterior reference; opening and access require local verification.','Riferimento esterno; verificare apertura e accesso.','Внешняя точка; уточните часы работы и доступ.')}
+            if stop['access_class']=='restricted':
+                stop['access_note'] = translated('Restricted/private premises; exterior only, no public admission asserted.','Sede privata o limitata; solo esterno, accesso pubblico non garantito.','Ограниченный или частный объект; только внешняя точка, публичный вход не гарантируется.')
+            stops.append(stop); by_id[stop['id']] = stop
+            audit['new_stop_count'] += 1
+        for lang in ('en','it','ru'):
+            stop['access_note'][lang] += ' ' + row['name'][lang] + ': ' + row['survival_evidence']
+        audit['included'].append({'id':row['id'],'stop_id':stop['id'],'wikipedia':row['wikipedia']})
+    audit['merged_complex_count'] = len({r['church_stop_id'] for r in candidates if r.get('church_stop_id') in by_id and r.get('decision') == 'include'})
+    return stops, audit
+
+
 def main():
     import argparse
     import math
@@ -508,6 +552,22 @@ def main():
     entities = json.loads((args.cache/'entities.json').read_text(encoding='utf-8'))
     osm = {(el['type'],el['id']):el for name in ('overpass_worship.json','overpass_buildings.json','overpass_chapels.json') for el in json.loads((args.cache/name).read_text(encoding='utf-8'))['elements']}
     stops,audit = build_inventory(records, entities, list(osm.values()))
+    monastery_inventory = json.loads((ROOT/'web/data/monastery-inventory.json').read_text(encoding='utf-8'))
+    stops, monastery_audit = expand_monasteries(stops, monastery_inventory['candidates'])
+    monastery_audit['discovery'] = monastery_inventory['discovery']
+    audit['church_inventory_included_count'] = audit['included_count']
+    audit['monasteries'] = monastery_audit
+    # Separate source observations remain explicit in the unified accounting.
+    audit['candidate_count'] += monastery_audit['candidate_count']
+    audit['included_count'] = len(stops)
+    audit['excluded_count'] += len(monastery_audit['excluded'])
+    audit['duplicate_count'] += monastery_audit['merged_member_count']
+    for r in monastery_audit['included']:
+        audit['reconciliation'].append({'identity':r['id'],'title':r['id'],'stop_id':r['stop_id'],'decision':'included_complex_member','source_rows':1,'sources':['reviewed_wikipedia_monastery_inventory'],'evidence':r['wikipedia']})
+    for r in monastery_audit['excluded']:
+        rec={'identity':r['id'],'title':r['name']['it'],'decision':'excluded','reason':r['reason'],'evidence':r['wikipedia']+' — '+r['survival_evidence'],'source_rows':1,'sources':['reviewed_wikipedia_monastery_inventory']}
+        audit['reconciliation'].append(rec); audit['excluded'].append(rec)
+    assert audit['candidate_count'] == len(stops)+audit['excluded_count']+audit['duplicate_count']+len(audit['unresolved'])
     graph,nodes,network_audit = load_pedestrian_network(args.cache)
     metric_nodes = {n:PROJECT.transform(*nodes[n]) for n in graph}
     for stop in stops:
@@ -527,11 +587,12 @@ def main():
     generated = datetime.now(timezone.utc).isoformat()
     audit['network'] = network_audit
     audit['limitations'] = [
+        translated('Monasteries include surviving/adapted premises in the historic sestieri, Giudecca and San Giorgio Maggiore. Explicit prior island exclusions remain. Reviewed unverified monastery mentions are not added; exhaustive coverage is not claimed.', 'I monasteri comprendono edifici conservati o riutilizzati nei sestieri storici, alla Giudecca e a San Giorgio Maggiore. Restano le precedenti esclusioni delle isole. Menzioni non verificate non sono aggiunte; la completezza non è dichiarata.', 'Монастыри включают сохранившиеся или переоборудованные здания исторических сестьере, Джудекки и Сан-Джорджо-Маджоре. Прежние исключения островов сохранены. Неподтверждённые упоминания не добавлены; исчерпывающая полнота не заявляется.'),
         translated('Inventory is reconciled against cached Italian/English Wikipedia lists, categories and Wikidata. Unresolved mentions remain below; this is not a claim of exhaustive coverage.', 'Inventario riconciliato con liste e categorie Wikipedia italiana/inglese e Wikidata in cache. Le menzioni irrisolte sono riportate; non si dichiara una copertura esaustiva.', 'Инвентарь сверён с сохранёнными итальянскими/английскими списками и категориями Википедии и Wikidata. Неразрешённые упоминания перечислены; исчерпывающая полнота не заявляется.'),
         translated(f"{len(audit['unresolved'])} unresolved candidate identities; see the published audit/report before treating the inventory as complete.", f"{len(audit['unresolved'])} identità candidate irrisolte; consultare audit e rapporto prima di considerare completo l'inventario.", f"Неразрешённых кандидатов: {len(audit['unresolved'])}. Перед использованием как полного списка изучите аудит и отчёт."),
         translated('Walking geometry is a shortest path between nearby mapped OSM nodes, not verified church entrances. Off-network approaches and ferry transfers are not navigable geometry.', 'La geometria pedonale segue percorsi minimi tra nodi OSM vicini, non ingressi verificati. Accessi fuori rete e traghetti non sono geometrie navigabili.', 'Пешеходная геометрия — кратчайшие пути между ближайшими узлами OSM, не проверенные входы. Подходы вне сети и паромные переезды не являются навигационными путями.'),
     ]
-    route = {'id':'churches-lagoon','title':translated('Churches and temples of Venice and the lagoon','Chiese e templi di Venezia e della laguna','Церкви и храмы Венеции и лагуны'), 'summary':translated(f"{len(stops)} verified located stops, all confessions; one ordering, no day splits. Inventory review incomplete.",f"{len(stops)} tappe localizzate, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",f"{len(stops)} подтверждённых точек разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
+    route = {'id':'churches-lagoon','title':translated('Churches, temples and monasteries of Venice','Chiese, templi e monasteri di Venezia','Церкви, храмы и монастыри Венеции'), 'summary':translated(f"{len(stops)} located church/temple and monastery stops, all confessions; one ordering, no day splits. Inventory review incomplete.",f"{len(stops)} tappe di chiese, templi e monasteri, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",f"{len(stops)} точек церквей, храмов и монастырей разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
     validate_route(route,allow_incomplete=True)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(route,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

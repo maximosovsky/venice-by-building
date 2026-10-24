@@ -18,21 +18,26 @@ def test_real_church_buildings_match_exact_atlas_identifiers():
     if raw[:2] == b'\x1f\x8b':
         raw = gzip.decompress(raw)
     qids = {s['qid'] for s in route['stops'] if s.get('qid')}
-    assert data['inventory_stops'] == len(route['stops']) == 150
+    assert data['inventory_stops'] == len(route['stops']) == 134
     assert len(data['buildings']) == len({b['gid'] for b in data['buildings']})
     for b in data['buildings']:
         f = source[b['building_id']]
-        assert f['properties']['wikidata'] == b['qid']
-        assert b['qid'] in qids
-        assert b['match_source'] == 'exact_osm_wikidata_tag_and_atlas_osm_id'
+        stop = next(s for s in route['stops'] if s['id'] == b['stop_id'])
+        if b['match_source'] == 'exact_osm_wikidata_tag_and_atlas_osm_id':
+            assert f['properties']['wikidata'] == b['qid']
+            assert b['qid'] in [stop.get('qid'), *stop.get('monastery_qids', [])]
+        else:
+            assert b['match_source'] == 'reviewed_exact_osm_building_identity'
+            assert b['match_evidence']
+            assert any((o['osm_type'],o['osm_id']) == (b['osm_type'],b['osm_id']) for o in stop['osm_buildings'])
         off = b['gid'] * config['attrStride']
         assert int(struct.unpack_from('<d', raw, off)[0]) == f['properties']['osm_id']
         assert f['geometry']['type'] in ['Polygon', 'MultiPolygon']
-    matched = {b['qid'] for b in data['buildings']}
+    matched = {b['stop_id'] for b in data['buildings']}
     assert {'Q172988', 'Q52531'} <= matched
-    assert data['matched_stops'] == sum(s.get('qid') in matched for s in route['stops'])
-    assert {s['id'] for s in data['unmatched']} == {s['id'] for s in route['stops'] if s.get('qid') not in matched}
-    assert data['matched_stops'] == 125
-    assert len(data['unmatched']) == 25
-    assert data['matched_stops'] + len(data['unmatched']) == 150
+    assert data['matched_stops'] == sum(s['id'] in matched for s in route['stops'])
+    assert {s['id'] for s in data['unmatched']} == {s['id'] for s in route['stops'] if s['id'] not in matched}
+    assert data['matched_stops'] == 112
+    assert len(data['unmatched']) == 22
+    assert data['matched_stops'] + len(data['unmatched']) == 134
     assert data['geometry_source'] == 'existing_atlas_worker_mesh_including_all_parts_and_roofs'

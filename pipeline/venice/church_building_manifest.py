@@ -8,6 +8,16 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def building_match(properties, stops):
+    for stop in stops:
+        for obj in stop.get('osm_buildings', []):
+            if (properties['osm_type'], properties['osm_id']) == (obj['osm_type'], obj['osm_id']):
+                return {'stop_id':stop['id'], 'qid':stop.get('qid'), 'match_source':'reviewed_exact_osm_building_identity', 'match_evidence':obj['evidence']}
+        if properties.get('wikidata') and properties['wikidata'] in [stop.get('qid'), *stop.get('monastery_qids', [])]:
+            return {'stop_id':stop['id'], 'qid':properties['wikidata'], 'match_source':'exact_osm_wikidata_tag_and_atlas_osm_id'}
+    return None
+
+
 def main():
     route = json.loads((ROOT / 'web/data/church-route.json').read_text(encoding='utf8'))
     config = json.loads((ROOT / 'web/data/venezia.json').read_text(encoding='utf8'))
@@ -33,21 +43,21 @@ def main():
         if len(bids) != 1:
             continue
         p = candidates[0]
-        if p.get('wikidata') not in qids:
+        match = building_match(p, route['stops'])
+        if not match:
             continue
         buildings.append({'gid': gid, 'building_id': p['building_id'], 'osm_type': p['osm_type'],
-                          'osm_id': osm, 'qid': p['wikidata'],
-                          'match_source': 'exact_osm_wikidata_tag_and_atlas_osm_id'})
-    matched = {b['qid'] for b in buildings}
+                          'osm_id': osm, **match})
+    matched = {b['stop_id'] for b in buildings}
     unmatched = [{'id': s['id'], 'qid': s.get('qid'), 'name': s['name'],
                   'reason': 'no_unique_exact_osm_wikidata_tag_in_current_atlas'}
-                 for s in route['stops'] if s.get('qid') not in matched]
+                 for s in route['stops'] if s['id'] not in matched]
     data = {'version': 1, 'inventory_stops': len(route['stops']),
             'matched_stops': len(route['stops']) - len(unmatched), 'buildings': buildings,
             'unmatched': unmatched, 'atlas_attrs_sha256': digest,
             'geometry_source': 'existing_atlas_worker_mesh_including_all_parts_and_roofs',
             'source': 'data/processed/buildings_centro.geojson',
-            'limitations': 'Only unique exact OSM Wikidata tags are used. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged.'}
+            'limitations': 'Only unique exact OSM Wikidata tags or reviewed exact named OSM building identities are used. Grouped monasteries retain separate building GIDs. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged.'}
     out = ROOT / 'web/data/church-buildings.json'
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
     print(json.dumps({'output': str(out), 'buildings': len(buildings), 'matched_stops': data['matched_stops'], 'unmatched_stops': len(unmatched)}))

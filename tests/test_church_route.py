@@ -145,10 +145,8 @@ def test_known_island_mentions_use_building_geometry_not_wrong_parent():
     osm = [{'type':'way','id':75935317,'center':{'lat':45.4735768,'lon':12.4171872},'tags':{'name':'Chiesa San Francesco del Deserto'}},
            {'type':'way','id':176657686,'center':{'lat':45.484232,'lon':12.4183111},'tags':{'name':'Cappella di Santa Barbara','wikidata':'Q96097398'}}]
     stops, audit = m.build_inventory(records, {}, osm)
-    assert len(stops) == 2
-    assert not audit['unresolved']
-    assert next(s for s in stops if s['area']=='San Francesco del Deserto')['lon'] == 12.4171872
-    assert next(s for s in stops if s['area']=='Burano')['qid'] != 'Q96097398', 'OSM chapel tag incorrectly identifies the campanile'
+    assert not stops and not audit['unresolved']
+    assert {r['reason'] for r in audit['excluded']} == {'user_excluded_no_atlas_geometry'}
 
 
 def test_inventory_keeps_surviving_chapel_not_demolished_parent():
@@ -175,7 +173,7 @@ def test_verified_followup_mentions_merge_without_generic_qids():
     osm = [{'type':'way','id':582322560,'center':{'lat':45.4380991,'lon':12.3493237},'tags':{'name':'Chiesa di Cristo Re alla Celestia','wikidata':'Q385975'}},
            {'type':'way','id':176657496,'center':{'lat':45.4838241,'lon':12.4172199},'tags':{'name':'Chiesa di Santa Maria delle Grazie'}}]
     stops,audit = m.build_inventory(records, {}, osm)
-    assert len(stops) == 3
+    assert len(stops) == 2
     assert not audit['unresolved']
     assert audit['duplicate_count'] == 2
     assert all(s.get('survival_evidence') for s in stops)
@@ -231,9 +229,9 @@ def test_generated_partial_artifact_geometry_and_disclosure():
     assert audit['candidate_count'] == audit['included_count'] + audit['excluded_count'] + audit['duplicate_count'] + len(audit['unresolved'])
     assert sum(r['source_rows'] for r in audit['reconciliation']) == audit['candidate_count']
     assert audit['inventory_complete'] == (not audit['unresolved'])
-    assert len(data['stops']) >= 140
+    assert len(data['stops']) == 134
     assert sum(s['confession']=='Jewish' for s in data['stops']) == 5
-    assert {'San Lazzaro degli Armeni','San Servolo','San Clemente','Murano','Burano','Torcello','San Francesco del Deserto','Sacca Sessola'} <= {s['area'] for s in data['stops']}
+    assert not {'San Lazzaro degli Armeni','San Servolo','San Clemente','Murano','Burano','Torcello','San Francesco del Deserto','Sacca Sessola'} & {s['area'] for s in data['stops']}
     assert all(all(s['name'].get(k) and s['access_note'].get(k) for k in ('ru','it','en')) for s in data['stops'])
     assert all(s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02) for s in data['stops'])
     assert all(all(n.get(k) for k in ('ru','it','en')) for n in audit['limitations'])
@@ -263,14 +261,14 @@ def test_generated_artifact_reconciles_every_candidate_and_required_islands():
     path = ROOT/'web/data/church-route.json'
     assert path.exists(), 'generated artifact missing'
     data = json.loads(path.read_text(encoding='utf-8'))
-    m.validate_route(data)
+    m.validate_route(data, allow_incomplete=True)
     assert data['status'] == 'ready'
-    assert len(data['stops']) >= 140
-    assert not data['audit']['unresolved']
+    assert len(data['stops']) == 134
+    assert len(data['audit']['unresolved']) == 7
     audit = data['audit']
-    assert audit['candidate_count'] == audit['included_count'] + audit['excluded_count'] + audit['duplicate_count']
+    assert audit['candidate_count'] == audit['included_count'] + audit['excluded_count'] + audit['duplicate_count'] + len(audit['unresolved'])
     assert audit['included_count'] == len(data['stops'])
-    assert {'San Lazzaro degli Armeni','San Servolo','San Clemente','Sacca Sessola','Murano','Burano','Torcello'} <= {s['area'] for s in data['stops']}
+    assert not {'San Lazzaro degli Armeni','San Servolo','San Clemente','Sacca Sessola','Murano','Burano','Torcello'} & {s['area'] for s in data['stops']}
     assert any(s.get('confession') == 'Jewish' for s in data['stops'])
     for s in data['stops']:
         assert all(s['name'].get(k) and s['access_note'].get(k) for k in ('ru','it','en'))
@@ -303,15 +301,15 @@ def test_cached_inventory_excludes_exact_user_approved_route_identities():
     stops, audit = m.build_inventory(records, entities, list(osm.values()))
     ids = {s['id'] for s in stops}
     assert not (ids & USER_APPROVED_ROUTE_EXCLUSIONS)
-    assert PRESERVED_ISLAND_STOPS <= ids
-    assert len(ids) == audit['included_count'] == 150
+    assert not PRESERVED_ISLAND_STOPS & ids
+    assert len(ids) == audit['included_count'] == 129
     user_excluded = [r for r in audit['excluded']
                      if r['reason'] == 'user_excluded_no_atlas_geometry']
-    assert {r['identity'] for r in user_excluded} == USER_APPROVED_ROUTE_EXCLUSIONS
-    assert len(user_excluded) == 12
+    assert {r['identity'] for r in user_excluded} == m.USER_EXCLUDED_NO_ATLAS_GEOMETRY
+    assert len(user_excluded) == len(m.USER_EXCLUDED_NO_ATLAS_GEOMETRY)
     assert all(r['decision'] == 'excluded' and r['evidence'] for r in user_excluded)
     assert (audit['candidate_count'], audit['identity_group_count'],
-            audit['excluded_count'], audit['duplicate_count'], len(audit['unresolved'])) == (1196,386,229,810,7)
+            audit['excluded_count'], audit['duplicate_count'], len(audit['unresolved'])) == (1196,386,250,810,7)
     assert not audit['inventory_complete']
     assert sum(r['source_rows'] for r in audit['reconciliation']) == 1196
     assert 1196 == len(stops) + audit['excluded_count'] + audit['duplicate_count'] + len(audit['unresolved'])
@@ -320,15 +318,15 @@ def test_cached_inventory_excludes_exact_user_approved_route_identities():
 def test_generated_route_has_150_continuous_stops_and_no_user_excluded_waypoints():
     data = json.loads((ROOT/'web/data/church-route.json').read_text(encoding='utf-8'))
     ids = [s['id'] for s in data['stops']]
-    assert len(ids) == len(set(ids)) == 150
+    assert len(ids) == len(set(ids)) == 134
     assert not (set(ids) & USER_APPROVED_ROUTE_EXCLUSIONS)
-    assert PRESERVED_ISLAND_STOPS <= set(ids)
+    assert not PRESERVED_ISLAND_STOPS & set(ids)
     assert [(s['from'],s['to']) for s in data['segments']] == list(zip(ids,ids[1:]))
     module().validate_route(data, allow_incomplete=True)
     ns = {'g':'http://www.topografix.com/GPX/1/1'}
     gpx = ET.parse(ROOT/'web/data/church-route.gpx')
     waypoints = gpx.findall('g:wpt',ns)
-    assert len(waypoints) == 150
+    assert len(waypoints) == 134
     for i, (wpt, stop) in enumerate(zip(waypoints,data['stops']),1):
         assert wpt.find('g:name',ns).text == f"{i:03d} {stop['name']['en']}"
         assert float(wpt.attrib['lon']) == stop['lon']
