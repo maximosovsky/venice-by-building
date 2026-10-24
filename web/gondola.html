@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гондола Венеции — турбо по каналам</title>
+<link rel="icon" href="favicon.ico">
+<style>
+:root { --water: #b9d0d2; --land: #f3f0ea; --ink: #2c2f2a; --sun: #b04f3e; --gold: #d4af37; }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--land); color: var(--ink); overflow: hidden; font-family: Inter, system-ui, sans-serif; }
+#game { position: fixed; inset: 0; }
+#hud { position: fixed; top: 18px; left: 18px; z-index: 2; display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+#hud .panel { background: rgba(255,255,255,.92); padding: 12px 16px; border-radius: 10px; box-shadow: 0 8px 24px rgba(44,47,42,.14); }
+#hud h1 { margin: 0 0 4px; font: 400 22px/1.1 "Cormorant Garamond", Georgia, serif; }
+#hud p { margin: 0; font-size: 13px; color: #5f625c; }
+#hud .score { font-size: 20px; font-weight: 600; color: var(--sun); }
+#back { position: fixed; top: 18px; right: 18px; z-index: 3; padding: 10px 16px; border-radius: 999px; border: 0; background: #fff; cursor: pointer; font-size: 13px; box-shadow: 0 4px 14px rgba(44,47,42,.12); }
+#back:hover { color: var(--sun); }
+#keys { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); z-index: 2; display: grid; grid-template-columns: repeat(3, 44px); gap: 6px; pointer-events: none; }
+#keys i { display: grid; place-items: center; width: 44px; height: 44px; background: rgba(255,255,255,.9); border-radius: 8px; font-style: normal; font-size: 18px; box-shadow: 0 4px 12px rgba(44,47,42,.12); }
+#keys i:nth-child(2) { grid-column: 2; }
+#keys i:nth-child(3) { grid-column: 2; }
+#keys i:nth-child(4) { grid-column: 3; }
+#keys i:nth-child(1) { grid-column: 1; grid-row: 2; }
+#keys i.pressed { background: var(--sun); color: #fff; }
+#win { position: fixed; inset: 0; z-index: 5; display: none; place-items: center; background: rgba(255,255,255,.86); backdrop-filter: blur(4px); }
+#win.show { display: grid; }
+#win div { text-align: center; }
+#win h2 { margin: 0 0 8px; font: 400 42px/1 "Cormorant Garamond", Georgia, serif; color: var(--sun); }
+#win p { margin: 0 0 20px; font-size: 16px; }
+#win button { padding: 12px 24px; border: 0; border-radius: 999px; background: var(--sun); color: #fff; font-size: 15px; cursor: pointer; }
+</style>
+</head>
+<body>
+<canvas id="game"></canvas>
+<div id="hud">
+  <div class="panel">
+    <h1>Гондола с турбодвигателем</h1>
+    <p>Соберите всех золотых львов в каналах.</p>
+  </div>
+  <div class="panel">
+    <span class="score">Львы: <b id="score">0</b> / <b id="total">0</b></span>
+  </div>
+</div>
+<button id="back" onclick="location.href='index.html'">← На карту</button>
+<div id="keys">
+  <i data-key="ArrowLeft">←</i>
+  <i data-key="ArrowUp">↑</i>
+  <i data-key="ArrowDown">↓</i>
+  <i data-key="ArrowRight">→</i>
+</div>
+<div id="win"><div>
+  <h2>Все львы собраны!</h2>
+  <p>Вы мчались по каналам Венеции как настоящий турбогондольер.</p>
+  <button id="restart">Ещё раз</button>
+</div></div>
+<script type="module" src="gondola-game.js"></script>
+</body>
+</html>
