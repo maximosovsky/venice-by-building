@@ -708,7 +708,6 @@ function buildingHtml(gid) {
         <section><h3>${t('Как известен возраст')}</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
         <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
-        ${w?.wiki?.url ? `<section class="sources"><p>${link(pickText(w.wiki.url), t('Статья в Википедии'))}${w.qid ? ` · ${link('https://www.wikidata.org/wiki/' + w.qid, 'Wikidata')}` : ''}</p></section>` : ''}
         ${stories ? `<section><h3>${t('Слои')}</h3><ul class="chips">${stories}</ul></section>` : ''}
         ${sources.length ? `<section class="sources"><h3>${t('Источники')}</h3><p>${sources.join(' · ')}</p></section>` : ''}</article>`;
     }
