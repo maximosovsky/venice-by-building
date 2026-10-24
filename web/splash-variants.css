@@ -27,7 +27,7 @@
   color: var(--faint);
   font-size: 11px;
   letter-spacing: .04em;
-  text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  text-shadow: 0 1px 0 rgba(207,202,194,.7);
   opacity: .9;
 }
 
@@ -41,7 +41,7 @@ body.splash-variant-1 #splash::before {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(circle at 50% 40%, rgba(255,255,255,0) 0%, rgba(255,255,255,.55) 70%, rgba(255,255,255,.82) 100%),
+    radial-gradient(circle at 50% 40%, rgba(207,202,194,0) 0%, rgba(207,202,194,.55) 70%, rgba(207,202,194,.82) 100%),
     url("img/venice-merian-1642-2560.jpg");
   background-size: cover;
   background-position: center 42%;
@@ -52,7 +52,7 @@ body.splash-variant-1 #splash .place,
 body.splash-variant-1 #splash .count,
 body.splash-variant-1 #splash .src,
 body.splash-variant-1 #splash .slow {
-  text-shadow: 0 1px 0 rgba(255,255,255,.85);
+  text-shadow: 0 1px 0 rgba(207,202,194,.85);
 }
 body.splash-variant-1 #map-layer { display: none; }
 
