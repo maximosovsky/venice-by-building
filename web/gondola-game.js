@@ -103,7 +103,7 @@ function spawnLions() {
   scoreEl.textContent = 0;
 }
 function resetGame() {
-  player.x = 4010; player.z = -1540; player.angle = -Math.PI / 2; player.speed = 0;
+  player.x = -354; player.z = -340; player.angle = -Math.PI / 2; player.speed = 0;
   winEl.classList.remove('show');
   spawnLions();
 }
