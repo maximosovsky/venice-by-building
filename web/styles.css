@@ -13,7 +13,7 @@
   src: url("fonts/cormorant-garamond-italic-latin.woff2") format("woff2"); }
 
 :root {
-  --wall: #cfcac2;           /* the sky: old paper behind the model */
+  --wall: #cfcac2;           /* the sky: old cream paper behind the model */
   --paper: #cfcac2;          /* the dock, flaps, fields */
   --stone: #f3f0ea;          /* the land, and quiet fills */
   --ink: #2c2f2a;            /* charcoal, from the logo */
