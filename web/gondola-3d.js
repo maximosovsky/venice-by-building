@@ -100,6 +100,7 @@ const tileQueue = config.tiles.filter(t => {
   const cz = (t.tz + 0.5) * TILE;
   return Math.hypot(cx - start.x, cz - start.z) <= RADIUS;
 });
+console.log('config tiles', config.tiles.length, 'tileQueue', tileQueue.length);
 const packs = Object.fromEntries(config.packs.map(name => [name, fetchBin(`data/${name}`)]));
 const WORKERS = Math.min(4, navigator.hardwareConcurrency || 2);
 const pool = Array.from({ length: WORKERS }, () => new Worker('worker.js', { type: 'module' }));
