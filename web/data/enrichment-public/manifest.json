@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "deployment_excludes": [
+    "data/addresses.json",
+    "data/building-evidence.json",
+    "data/bridge-characteristics.json",
+    "data/history-registers.json",
+    "data/history-registers/**"
+  ],
+  "deployment_warning": "Local uploads must exclude prepared files above; UI URL redirection alone is not a release gate. Parent owns Vercel ignore configuration.",
+  "files": {
+    "addresses.json": {
+      "sha256": "fb718d7adf9648ef435dfff1ee34aee1419073183b2d8a3308da02a5c155a740",
+      "bytes": 12598350
+    },
+    "building-evidence.json": {
+      "sha256": "749a0eac0bc7e4054a4f5055183555a7109e4fc7d03a771ebf69f81a5dc62ede",
+      "bytes": 5622842
+    },
+    "bridge-characteristics.json": {
+      "sha256": "935f99e72d0704a2b60090c195e6857c7bf2d1c064da5b6cdca9e81f8739a9d2",
+      "bytes": 759903
+    },
+    "history-registers.json": {
+      "sha256": "851d9e8833ba671ae724e5ca64912b736b0ab0bf2431c57738e252293ab7d9a9",
+      "bytes": 319490
+    },
+    "history-registers/parcels-1808-000.json": {
+      "sha256": "16f8f328d9694904871260414072cf0ca0bbdc5b136708b039a2a31065d50d16",
+      "bytes": 1899979
+    },
+    "history-registers/parcels-1808-001.json": {
+      "sha256": "38fc5d0d40017c1e3c5b9ddb887409f021b639863df569319be9261522699aa7",
+      "bytes": 1899731
+    },
+    "history-registers/parcels-1808-002.json": {
+      "sha256": "87f731ed2958046a02ac1180f59e5cdfc4711020f7e2770c4f3d7156eec063e4",
+      "bytes": 1899411
+    },
+    "history-registers/parcels-1808-003.json": {
+      "sha256": "e385a32dec211437413716e4b18c1f24c22d057d23ec8091e21083201cae9b86",
+      "bytes": 1899958
+    },
+    "history-registers/parcels-1808-004.json": {
+      "sha256": "6165dc4de864d051939952ebcc19679c05e10d95f72ccd52f8985eb018cb43c5",
+      "bytes": 1899394
+    },
+    "history-registers/parcels-1808-005.json": {
+      "sha256": "4bfcd6c7ca0a4bad463c1390c137cc318be8dfcbbe98339478ffc5e2427e1823",
+      "bytes": 1899973
+    },
+    "history-registers/parcels-1808-006.json": {
+      "sha256": "0566cab74fae5498d1ed3fbc2e3e90a2c5b354bf5ea8c6d6857d8405bd6a0930",
+      "bytes": 1899542
+    },
+    "history-registers/parcels-1808-007.json": {
+      "sha256": "66ef6a7a9478bc60bd051cd5a4c88a653b8c9a2b4f722da25df70ae88183ea0e",
+      "bytes": 1899349
+    },
+    "history-registers/parcels-1808-008.json": {
+      "sha256": "c73f220e22b71859011a42ddf90986230e6a90ff65ad2866408df28caf7160f9",
+      "bytes": 1899764
+    },
+    "history-registers/parcels-1808-009.json": {
+      "sha256": "47b39411c95e1b70589301c786429473f00356c97f3c26e8399e0731b43db970",
+      "bytes": 1475891
+    },
+    "history-registers/register-1808-000.json": {
+      "sha256": "3d4f9c326b1a6e1858b81c7dd832a5818efce90accaed09004023bccf6190c4c",
+      "bytes": 1899363
+    },
+    "history-registers/register-1808-001.json": {
+      "sha256": "a8eb4825188cf5931b01f5477cac66978cb1f68ab479bb666fbe3f5100cd32fe",
+      "bytes": 1899705
+    },
+    "history-registers/register-1808-002.json": {
+      "sha256": "0cef4c10feebc18ef01be875f05bbc95cb3297e6a45b21dcb8bb4db2a4112170",
+      "bytes": 1898762
+    },
+    "history-registers/register-1808-003.json": {
+      "sha256": "c568b0cc8f8db00fec6af1a26d43b24ff3220997ba7d18eb156417d99c45851f",
+      "bytes": 1899278
+    },
+    "history-registers/register-1808-004.json": {
+      "sha256": "c0e062ca2ed6f13cce0aa3d6e61af29dfedf0e9aa2015bd219d47a72fdda6466",
+      "bytes": 1899849
+    },
+    "history-registers/register-1808-005.json": {
+      "sha256": "9bf66e33ea89bce2bd09d3c9c61e7b590f5b0e4142eee8029de885d09af2b80d",
+      "bytes": 1899064
+    },
+    "history-registers/register-1808-006.json": {
+      "sha256": "03cec44cc60b808ff396956f942bad447737dbc28d700dac2e8ff092a20582b3",
+      "bytes": 1898895
+    },
+    "history-registers/register-1808-007.json": {
+      "sha256": "f39699ae510dbddd5659de90252cdad75104b6db741fc10d66dd9401410c632f",
+      "bytes": 1899667
+    },
+    "history-registers/register-1808-008.json": {
+      "sha256": "442c447ba6c46466893d08c2eb44cf74af108459ca734e7c1cd4d9cf2f46927f",
+      "bytes": 1899569
+    },
+    "history-registers/register-1808-009.json": {
+      "sha256": "9f5346a823c1e07fc242cdc4122f6698afb4e83474c5021777127ff118b4eb8d",
+      "bytes": 1899996
+    },
+    "history-registers/register-1808-010.json": {
+      "sha256": "8fb6a1ac4c6f98f6b54bd8842556c17c4b3e7bc6416306cebac66885e3db57ad",
+      "bytes": 1899102
+    },
+    "history-registers/register-1808-011.json": {
+      "sha256": "d0e27a36f742828e111265a85b6f84caaaa00d6eb21505139cbd22e0df03b72c",
+      "bytes": 1898530
+    },
+    "history-registers/register-1808-012.json": {
+      "sha256": "b292f73af4b70d0080da6d5d4206e1c454a20de67cf571a30e236e7b451641d1",
+      "bytes": 1898865
+    },
+    "history-registers/register-1808-013.json": {
+      "sha256": "d2d1493670340498c2572a8ff557e86555a7165f4e66596d170098bbba70e0af",
+      "bytes": 1898456
+    },
+    "history-registers/register-1808-014.json": {
+      "sha256": "b4eac3c36ade409caf8215a9020545e92189a819c76758248b02f3728e6f22cb",
+      "bytes": 1899568
+    },
+    "history-registers/register-1808-015.json": {
+      "sha256": "866e05df3ea81bcd9f98f556e701c31af1d97d4b0a70a978f7928af30cbe092c",
+      "bytes": 1899797
+    },
+    "history-registers/register-1808-016.json": {
+      "sha256": "01482a7dc8d7d0bc2e5d9b76e6d8905b8359075a9e0ff22e8404499314065833",
+      "bytes": 1899771
+    },
+    "history-registers/register-1808-017.json": {
+      "sha256": "7b69590a926d299cb834f7bed3f56131550e2f5c1482b22a36d22bb149f181fc",
+      "bytes": 1899409
+    },
+    "history-registers/register-1808-018.json": {
+      "sha256": "1250994ae67c895a3a2d84cd64399a086148b4b3a1423f8c1593fbf2f1aa1255",
+      "bytes": 1899646
+    },
+    "history-registers/register-1808-019.json": {
+      "sha256": "f8d527dae1e768878e6562779b952c45ad72cb92d8cec18adf16aacc129e8519",
+      "bytes": 1899651
+    },
+    "history-registers/register-1808-020.json": {
+      "sha256": "a2171d5e2ae8dfeb9ffac6f34d16051b1fe5150ad719f4118009aa7b914c98cd",
+      "bytes": 1898836
+    },
+    "history-registers/register-1808-021.json": {
+      "sha256": "e361bf99650077ec982b4658499de1ab7c69ae8c1fe588d156858f65c82ea792",
+      "bytes": 1898559
+    },
+    "history-registers/register-1808-022.json": {
+      "sha256": "7e390efcba5ded3a983554bda0d2250dd1a2c7028fc7bda766832b29c26b8d23",
+      "bytes": 1898562
+    },
+    "history-registers/register-1808-023.json": {
+      "sha256": "f0612940625027a07ed03e2db82eefbed963f58bbd36a7671fb6f9a565a10580",
+      "bytes": 1899328
+    },
+    "history-registers/register-1808-024.json": {
+      "sha256": "7679b8892e048176bebfcb59df5f38231c093c193768de8c7dc2ab91ff167a8a",
+      "bytes": 495853
+    },
+    "history-registers/people-1808-000.json": {
+      "sha256": "4b9609fcf8961e342771d611efca480aa2237e4736e78afd71becfb1aa20bb19",
+      "bytes": 1899765
+    },
+    "history-registers/people-1808-001.json": {
+      "sha256": "a0b2829144208c50e165d2c97f8c6752ac1b6b831f475a12f5e0c5a680770e5f",
+      "bytes": 1899522
+    },
+    "history-registers/people-1808-002.json": {
+      "sha256": "cc8655440b0255341eb01e1ab4ca5e51097cf1066c47d5b48c00f91f17f67fad",
+      "bytes": 1899703
+    },
+    "history-registers/people-1808-003.json": {
+      "sha256": "23fb5e2dda0dc321da06729234c9c9ae60867102d6706d90499e8585434fd430",
+      "bytes": 855257
+    }
+  },
+  "historical_publication": {
+    "status": "partial_release",
+    "blocked_datasets": [
+      "register-1740",
+      "commercial-1857"
+    ],
+    "public_release_allowed": true,
+    "published_record_count": 60369,
+    "withheld_record_count": 38244,
+    "policy": "All source populations remain in catalog; only explicitly licensed records are downloadable."
+  },
+  "addresses": {
+    "status": "factual_projection",
+    "rights_status": "unknown",
+    "license": null,
+    "policy": "User-authorized address-number and coordinate facts; not a verified license grant."
+  },
+  "evidence": {
+    "status": "facts_links_and_withheld_text_metadata",
+    "rights_status": "unknown",
+    "description_metadata_records": 929,
+    "vprg_link_records": 5371,
+    "fulltext_published": false
+  },
+  "bridges": {
+    "actual_geometry": "blocked_pending_municipal_license",
+    "license": null,
+    "reason": "Download availability is not verified redistribution permission; internal preparation only.",
+    "status": "factual_characteristics_only",
+    "rights_status": "unknown",
+    "geometry_available": false,
+    "policy": "No municipal raw geometry is deployed. Dimensions are derived footprint envelopes, not surveyed measurements."
+  }
+}

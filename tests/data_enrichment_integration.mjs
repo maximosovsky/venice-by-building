@@ -1,0 +1,37 @@
+// Host integration contract + executable search lifecycle tests (no data fixtures).
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import vm from 'node:vm';
+const app=readFileSync('web/app.js','utf8'),html=readFileSync('web/index.html','utf8');
+assert.match(app,/import\s*\{\s*installDataEnrichment,\s*DATA_UI\s*\}\s*from ['"]\.\/data-enrichment\.js['"]/,'real app imports enrichment installer');
+assert.match(html,/notes-open[^\n]*\n\s*<button[^>]*class="data-open"[^>]*data-no-i18n/,'catalog button next to Notes, source-language protected');
+assert.ok(app.indexOf('const dataEnrichment = installDataEnrichment')>app.indexOf('const churchRoute = installChurchRoute'),'installer after dock and route initialization');
+assert.match(app,/openDock\('building', buildingHtml\(gid\), back\);\s*void dataEnrichment\.enrichCard\(gid\);/,'enrichment follows every host building rendering');
+assert.match(app,/dockView === 'building' && pinnedGid >= 0\) openBuilding\(pinnedGid, buildingBack\)/,'language change reuses enriched building renderer');
+assert.match(app,/data-open'\)\.setAttribute\('aria-pressed', String\(dockView === 'data'\)\)/);
+assert.match(app,/pickText\(DATA_UI\.title\)/);
+assert.match(app,/onLang\(paintDataNav\)/);
+assert.match(app,/if \(dockView === 'building'\) unpin\(\);\s*void dataEnrichment\.showData\(\)/);
+assert.match(app,/e\.kind === 'address'\) dataEnrichment\.focusAddress\(e\.address\)/,'addresses focus source point, never inferred entrance/building');
+assert.match(app,/findRequest\+\+/,'closing search cancels asynchronous result updates');
+// Execute the exact host Find functions with only DOM/network seams substituted.
+const start=app.indexOf('let findHits ='),end=app.indexOf("findInput.addEventListener('input'",start);
+const input={value:'CN 10',setAttribute(k,v){this[k]=v;},blur(){}},list={innerHTML:'',hidden:true};
+const pending=[],fly=[],existing={label:'Existing OSM building',kind:'building',gid:123,known:true,year:1700};
+const ctx=vm.createContext({findInput:input,findList:list,search:()=>[existing],esc:String,t:s=>s,pickText:o=>o.en,DATA_UI:{addresses:{en:'Addresses'},loading:{en:'Loading'},error:{en:'Data unavailable; record count unknown.'}},dataEnrichment:{queryAddresses(q){return new Promise((resolve,reject)=>pending.push({q,resolve,reject}));},focusAddress(a){fly.push(a);}},document:{body:{classList:{remove(){}}}},aimFly(){},flySuburb(){},uniforms:{uMode:{value:0}},MODE:{suburbs:4},showSuburb(){}});
+ctx.existing=existing;
+vm.runInContext(app.slice(start,end)+'\nsearch=()=>[existing]; globalThis.testFind={renderFind,closeFind,choose,moveFind,getHits:()=>findHits};',ctx);
+ctx.testFind.renderFind();
+assert.match(list.innerHTML,/Existing OSM building/,'OSM results visible before address fetch');
+input.value='SM 100';ctx.testFind.renderFind();
+pending[0].resolve([{label:'CN 10',number:10,sestiere:'CN',gid:6362,x:1,z:2}]);await new Promise(r=>setImmediate(r));
+assert.doesNotMatch(list.innerHTML,/CN 10/,'old query cannot overwrite new results');
+const address={label:'SM 100',number:100,sestiere:'SM',gid:456,x:3,z:4};
+pending[1].resolve([address]);await new Promise(r=>setImmediate(r));
+assert.match(list.innerHTML,/Existing OSM building/);assert.match(list.innerHTML,/SM 100/);assert.match(list.innerHTML,/Addresses/);
+assert.equal(ctx.testFind.getHits()[0],existing,'retain existing building result');
+assert.equal(ctx.testFind.getHits()[1].kind,'address');ctx.testFind.choose(ctx.testFind.getHits()[1]);assert.equal(fly[0],address,'focus exact address record despite matched GID');
+input.value='SM 100';ctx.testFind.renderFind();pending[2].reject(new Error('HTTP 503'));await new Promise(r=>setImmediate(r));
+assert.match(list.innerHTML,/record count unknown/);assert.doesNotMatch(list.innerHTML,/Ничего с таким названием/);
+ctx.testFind.renderFind();ctx.testFind.closeFind();pending[3].resolve([address]);await new Promise(r=>setImmediate(r));assert.equal(list.hidden,true,'late response cannot reopen dismissed search');
+console.log(JSON.stringify({integrationHooks:true,searchPreservesOSM:true,staleQueryIgnored:true,closedSearchIgnored:true,addressNotEntrance:true,addressFetchErrorHonest:true}));

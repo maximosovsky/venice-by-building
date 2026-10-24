@@ -3,6 +3,7 @@ import { MapControls } from './vendor/MapControls.js';
 import { t, pick as pickText, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
 import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
+import { installDataEnrichment, DATA_UI } from './data-enrichment.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
@@ -753,6 +754,7 @@ dock.querySelector('.dock-close').onclick = () => {
 function syncBar() {
   document.querySelector('.walks-open').setAttribute('aria-pressed', String(dockView === 'walks' || dockView === 'walk' || dockView === 'bridge-route' || dockView === 'church-route'));
   document.querySelector('.notes-open').setAttribute('aria-pressed', String(dockView === 'notes'));
+  document.querySelector('.data-open').setAttribute('aria-pressed', String(dockView === 'data'));
 }
 
 // ---------- A building: a label at the pointer, the dock on a click ----------
@@ -786,6 +788,7 @@ function openBuilding(gid, back = backFromHere()) {
   tip.hidden = true;
   buildingBack = back;
   openDock('building', buildingHtml(gid), back);
+  void dataEnrichment.enrichCard(gid);
   dockLive.querySelector('.b-photo img')?.addEventListener('error', e => e.target.closest('.b-photo')?.remove());
   const extract = dockLive.querySelector('.extract'), more = dockLive.querySelector('.read-on');
   if (extract && extract.scrollHeight > extract.clientHeight + 4) { more.hidden = false; more.onclick = () => { extract.classList.add('open'); more.remove(); }; }
@@ -881,7 +884,7 @@ ready.then(() => {
   SUBS.forEach((S, s) => findIndex.push({ label: S.name, kind: 'suburb', s, x: S.x, z: S.z }));
   for (const e of findIndex) e.key = fold(e.label);
 });
-let findHits = [], findAt = -1;
+let findHits = [], findAt = -1, findRequest = 0;
 function search(q) {
   const k = fold(q.trim());
   if (k.length < 2) return [];
@@ -893,15 +896,31 @@ function search(q) {
     .slice(0, 8).map(([, e]) => e);
 }
 function renderFind() {
-  findHits = search(findInput.value);
+  const request = ++findRequest, q = findInput.value.trim();
+  const mapHits = search(q);
+  let addressHits = [], addressStatus = q.length >= 2 ? 'loading' : null;
+  findHits = mapHits;
   findAt = findHits.length ? 0 : -1;
-  const q = findInput.value.trim();
-  findList.innerHTML = findHits.length ? findHits.map((e, i) => `<li role="option" id="find-${i}" data-i="${i}" aria-selected="${i === findAt}">
-        <b>${esc(e.label)}</b><small>${e.bridge ? t('Мост') : e.kind === 'building' ? (e.known ? t('Здание, {year} г.', { year: e.year }) : t('Здание, год неизвестен')) : e.kind === 'water' ? t('Канал, лагуна') : e.kind === 'suburb' ? t('Район') : e.kind === 'poi' ? esc(pickText(e.poi || 'Место')) : t('Улица, набережная')}</small></li>`).join('')
-      : q.length >= 2 ? `<li class="empty">${t('Ничего с таким названием на карте нет.')}</li>` : '';
-  findList.hidden = !findList.innerHTML;
-  findInput.setAttribute('aria-expanded', String(!findList.hidden));
-  findInput.setAttribute('aria-activedescendant', findAt >= 0 ? `find-${findAt}` : '');
+  const paint = () => {
+    if (request !== findRequest || q !== findInput.value.trim()) return;
+    const selected = findHits[findAt];
+    findHits = [...mapHits, ...addressHits];
+    findAt = selected && findHits.includes(selected) ? findHits.indexOf(selected) : findHits.length ? 0 : -1;
+    findList.innerHTML = findHits.map((e, i) => `<li role="option" id="find-${i}" data-i="${i}" aria-selected="${i === findAt}">
+        <b>${esc(e.label)}</b><small>${e.kind === 'address' ? esc(pickText(DATA_UI.addresses)) : e.bridge ? t('Мост') : e.kind === 'building' ? (e.known ? t('Здание, {year} г.', { year: e.year }) : t('Здание, год неизвестен')) : e.kind === 'water' ? t('Канал, лагуна') : e.kind === 'suburb' ? t('Район') : e.kind === 'poi' ? esc(pickText(e.poi || 'Место')) : t('Улица, набережная')}</small></li>`).join('')
+      + (addressStatus ? `<li class="empty" role="status" data-find-address-status="${addressStatus}">${esc(pickText(DATA_UI.addresses))}: ${esc(pickText(DATA_UI[addressStatus]))}</li>` : !findHits.length && q.length >= 2 ? `<li class="empty">${t('Ничего с таким названием на карте нет.')}</li>` : '');
+    findList.hidden = !findList.innerHTML;
+    findInput.setAttribute('aria-expanded', String(!findList.hidden));
+    findInput.setAttribute('aria-activedescendant', findAt >= 0 ? `find-${findAt}` : '');
+  };
+  paint();
+  if (q.length < 2) return;
+  void dataEnrichment.queryAddresses(q, { limit: 8 }).then(records => {
+    addressHits = records.map(address => ({ kind: 'address', address,
+      label: address.label || [address.sestiere, address.number, address.letter].filter(v => v != null && v !== '').join(' ') }));
+    addressStatus = null;
+    paint();
+  }, () => { addressStatus = 'error'; paint(); });
 }
 function moveFind(d) {
   if (!findHits.length) return;
@@ -913,13 +932,15 @@ function choose(e) {
   closeFind();
   findInput.value = '';
   findInput.blur();
-  if (e.kind === 'building' && e.bridge) aimFly(e.x, e.z, 260, () => openBuilding(e.gid));
+  if (e.kind === 'address') dataEnrichment.focusAddress(e.address);
+    else if (e.kind === 'building' && e.bridge) aimFly(e.x, e.z, 260, () => openBuilding(e.gid));
     else if (e.kind === 'building') aimFly(e.x, e.z, 420, () => openBuilding(e.gid));
     else if (e.kind === 'suburb') flySuburb(e.s, () => { if (uniforms.uMode.value === MODE.suburbs) showSuburb(e.s, -1, { label: 'All suburbs', go: showSuburbs }); });
     else if (e.kind === 'bridge') aimFly(e.x, e.z, 260);
     else aimFly(e.x, e.z, e.kind === 'water' ? 1800 : 900);
 }
 function closeFind() {
+  findRequest++;
   findList.hidden = true;
   findInput.setAttribute('aria-expanded', 'false');
   document.body.classList.remove('finding');
@@ -948,6 +969,20 @@ const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLiv
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
   onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
+const dataEnrichment = installDataEnrichment({ openDock, dockLive,
+  getDockView: () => dockView, aimFly, pickText, onLang });
+const dataNav = document.querySelector('.data-open');
+const paintDataNav = () => {
+  dataNav.textContent = pickText(DATA_UI.title);
+  if (dockView === 'data') dock.setAttribute('aria-label', pickText(DATA_UI.title));
+};
+paintDataNav();
+onLang(paintDataNav);
+dataNav.onclick = () => {
+  if (dockView === 'data') { closeDock(); return; }
+  if (dockView === 'building') unpin();
+  void dataEnrichment.showData();
+};
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}
@@ -1664,6 +1699,8 @@ function relayoutTexts() {
   else if (dockView === 'walk') renderQuest();
   else if (dockView === 'walks') showWalks();
   else if (dockView === 'suburbs') showSuburbs();
+  paintDataNav();
+  if (!findList.hidden) renderFind();
 }
 {
   const bar = document.getElementById('langs');
