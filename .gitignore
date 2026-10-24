@@ -4,6 +4,15 @@ data/processed/
 data/ready/
 !data/raw/.gitkeep
 
+# prepared enrichment sidecars: the deployment serves only web/data/enrichment-public/.
+# The prepared originals stay on disk; tracking them makes the static host serve a second,
+# unprojected copy and doubles the upload (see web/data/enrichment-public/manifest.json).
+web/data/addresses.json
+web/data/building-evidence.json
+web/data/bridge-characteristics.json
+web/data/history-registers.json
+web/data/history-registers/
+
 # a reference copy of the engine we vendor from (its sample data is 11 MB and not ours)
 research/engines/sydmap-full/
 # heavyweight read-only snapshots taken while auditing other engines
