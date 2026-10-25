@@ -316,13 +316,15 @@ subValTex.needsUpdate = true;
 // Independent GID mask: preserve heritage records and all other rendering modes.
 const palazzoTex = new THREE.DataTexture(new Uint8Array(SUB_W * Math.ceil(nB / SUB_W)), SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.UnsignedByteType);
 palazzoTex.needsUpdate = true;
-// Building kind texture: 0 = old terracotta, 1 = church/synagogue (#619394), 2 = 20th century (Palazzo blue).
+// Building kind texture: 0 = old terracotta, 1 = church/synagogue (#619394), 2 = 20th century (Palazzo
+// blue), 3 = bridge deck (#9aa0a6).
 // Float, not byte: texelFetch on a byte texture returns the value normalised to 0–1, so the shader's
 // thresholds (0.5 / 1.5) would never match and every building would take the terracotta branch.
 const churchGids = new Set((churchBuildings?.buildings || []).map(b => b.gid));
 const kindData = new Float32Array(SUB_W * Math.ceil(nB / SUB_W));
 for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
   if (churchGids.has(gid)) kindData[gid] = 1;
+  else if (attrs.getUint8(o + config.attrFields.src[0]) === 1) kindData[gid] = 3; // a bridge deck, not a house
   else {
     const sp = attrs.getUint32(o + config.attrFields.sp[0], true);
     const period = sp % 16;
@@ -468,7 +470,8 @@ const VERT = /* glsl */`
       // New age-of-city palette: churches/teal, old buildings/terracotta, 20th century/Palazzo blue.
       int gi = int(a.w + 0.5);
       float k = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
-      if (k > 1.5) c = vec3(0.184, 0.243, 0.420);      // 20th century: Palazzo delle prigioni blue #2f3f6b
+      if (k > 2.5) c = vec3(0.604, 0.627, 0.651);      // bridges: the decks over the canals #9aa0a6
+      else if (k > 1.5) c = vec3(0.184, 0.243, 0.420); // 20th century: Palazzo delle prigioni blue #2f3f6b
       else if (k > 0.5) c = vec3(0.380, 0.576, 0.580);       // churches, temples, monasteries, synagogues #619394
       else c = vec3(0.557, 0.212, 0.204);                    // old buildings: terracotta roofs #8e3634
       // Estimated years are paler; with "documented only" they leave the colour altogether.
