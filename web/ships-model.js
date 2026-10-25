@@ -10,7 +10,7 @@ const SHIPS = [
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.4;
-const SHIP_Y_OFFSET = -0.6; // sink hull slightly below water line
+const SHIP_Y_OFFSET = 0.0; // ships sit exactly on water surface
 
 const loader = new GLTFLoader();
 loader.setMeshoptDecoder(MeshoptDecoder);
