@@ -960,6 +960,7 @@ function renderFind() {
     } catch {}
   })();
   findStatus.textContent = t('searching');
+}
 function moveFind(d) {
   if (!findHits.length) return;
   findAt = (findAt + d + findHits.length) % findHits.length;
