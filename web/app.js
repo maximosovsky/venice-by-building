@@ -323,8 +323,9 @@ palazzoTex.needsUpdate = true;
 const churchGids = new Set((churchBuildings?.buildings || []).map(b => b.gid));
 const kindData = new Float32Array(SUB_W * Math.ceil(nB / SUB_W));
 for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
+  const src = attrs.getUint8(o + config.attrFields.src[0]);
   if (churchGids.has(gid)) kindData[gid] = 1;
-  else if (attrs.getUint8(o + config.attrFields.src[0]) === 1) kindData[gid] = 3; // a bridge deck, not a house
+  else if (src === 1 || src === 2) kindData[gid] = 3; // a bridge: a deck, or a bridge with buildings on it
   else {
     const sp = attrs.getUint32(o + config.attrFields.sp[0], true);
     const period = sp % 16;
@@ -699,6 +700,8 @@ function groupColor(g) {
 // A building in the dock: photo, name and year, how the year is known, the stories it is in, facts, sources.
 function buildingHtml(gid) {
   const b = building(gid);
+  // src 1 — настил (года нет), src 2 — мост, размеченный в OSM как дом (Rialto): год у него остаётся.
+  const bridgeStructure = b.src === 1 || b.src === 2;
   const w = b.wk >= 0 ? wiki[b.wk] : null;
   const hItem = b.hi >= 0 ? heritageItems[b.hi] : null;
   const name = nameOf(b, w);
@@ -709,6 +712,7 @@ function buildingHtml(gid) {
     const photoCredit = im?.thumb ? `<footer class="b-photo-credit"><small>${t('Фото')}: ${link(im.page || im.thumb, im.artist || 'Wikimedia Commons')}${im.license ? `, ${im.licenseUrl ? link(im.licenseUrl, im.license) : esc(im.license)}` : ''}</small></footer>` : '';
         const facts = [
           b.src === 1 && [t('Сооружение'), `${t('Мост')}<small class="src-note">${t('настил над каналом, OSM')}</small>`],
+          b.src === 2 && [t('Сооружение'), `${t('Мост')}<small class="src-note">${t('мост с застройкой, OSM')}</small>`],
                 [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
                 shape && [t('Форма'), `${esc(pickText(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
                 !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? t('OpenStreetMap') : t('высота ÷ 3 м')}</small>`],
@@ -738,7 +742,7 @@ function buildingHtml(gid) {
     }).join('');
     const extract = b.wk >= 0 ? (wiki[b.wk]?.ex?.[getLang()] || wiki[b.wk]?.extract) : null;
     return `<article class="dock-page b-card${photo ? ' has-photo' : ''}">${photo}
-        <header class="b-head"><h2 id="dock-title">${name ? esc(name) : t(b.src === 1 ? 'Мост' : 'Здание')}</h2>
+        <header class="b-head"><h2 id="dock-title">${name ? esc(name) : t(bridgeStructure ? 'Мост' : 'Здание')}</h2>
                 <div class="b-when"><span class="y">${b.src === 1 ? t('мост, год неизвестен') : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(pickText(period.label))}</span></div></header>
         <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
@@ -906,7 +910,7 @@ ready.then(() => {
       if (!label) continue;
       const h = attrs.getUint16(o + oh, true), prev = seen.get(label);
       if (prev && prev.h >= h) continue;
-      seen.set(label, { label, kind: 'building', gid, h, known: wk >= 0, bridge: attrs.getUint8(o + osc, true) === 1,
+      seen.set(label, { label, kind: 'building', gid, h, known: wk >= 0, bridge: attrs.getUint8(o + osc, true) >= 1,
                         year: attrs.getInt16(o + oy, true), x: attrs.getFloat32(o + ox, true), z: attrs.getFloat32(o + oz, true) });
     }
     findIndex.push(...seen.values());

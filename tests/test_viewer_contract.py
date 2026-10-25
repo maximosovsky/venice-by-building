@@ -225,7 +225,9 @@ def main():
         muni_records += 1
         h = struct.unpack_from("<H", raw, off + field_offset["h"])[0] / 10
         check(2.0 <= h <= 80.0, f"запись {rec}: измеренная съёмкой высота {h} м вне правдоподобных границ")
-        check(struct.unpack_from("<B", raw, off + field_offset["src"])[0] == 0,
+        # src 1 — настил, у него принятая плита вместо измерения; src 2 — мост, размеченный в OSM
+        # как дом (Rialto), он измеряется съёмкой как дом и записан в зданиях.
+        check(struct.unpack_from("<B", raw, off + field_offset["src"])[0] != 1,
               f"запись {rec}: у мостового настила не может стоять высота из съёмки зданий")
     wiki_heritage_expected = range(heritage_wikidata)
     all_heights = sorted(struct.unpack_from("<H", raw, r * stride + field_offset["h"])[0] / 10

@@ -406,6 +406,9 @@ def main(area="centro"):
         pr = r["pr"]
         bid = pr["building_id"]
         is_bridge = bool(pr.get("is_bridge"))
+        # Мост, размеченный в OSM как дом (Rialto: building=bridge), — тоже мостовое сооружение:
+        # серый цвет и подпись «мост с застройкой», год постройки за ним сохраняется.
+        is_bridge_building = (pr.get("building") or "").strip().lower() == "bridge"
         w = wikimedia.get(bid)
         wd = wd_objects.get(bid) or {}
         # Связь по тегу wikidata в OSM — или, если тега нет, по геометрии из Викиданных.
@@ -449,11 +452,17 @@ def main(area="centro"):
                                          "title": article.get("title")}
         # Пустые поля не пишем: карточек теперь много, и каждая должна быть лёгкой.
         rich = {k: v for k, v in rich.items() if v not in (None, [], {}, "")}
+        # Предмет-мост, стоящий на футпринте, — это тот самый мост, а не чужое место рядом: без этой
+        # оговорки фильтр «место-подобных» отбрасывает «ponte …» и карточка теряет имя и фотографию.
+        item_label = (labels_la.get("it") or labels_la.get("en") or "").strip().lower()
+        item_is_bridge = item_label.startswith("ponte") or any(
+            re.search(r"bridge|ponte", ((c.get("la") or {}).get("it") or "") + " " + ((c.get("la") or {}).get("en") or ""), re.I)
+            for c in (wd.get("classes") or []))
         named = bool(rich.get("la") or rich.get("label"))
         if covered and named:
             wk_of[bid] = len(wiki)
             wiki.append(rich)
-        elif wd and named and not place_like(wd, labels_la.get("it") or "", is_bridge):
+        elif wd and named and not place_like(wd, labels_la.get("it") or "", is_bridge or is_bridge_building or item_is_bridge):
             # Новое: имя, фотография или статья, найденные сопоставлением по координатам.
             wk_of[bid] = len(wiki)
             wiki.append(rich)
@@ -605,7 +614,7 @@ def main(area="centro"):
                           "lay0": lay0, "lay1": 0,
                           "wk": wk_of.get(pr["building_id"], -1), "nm": nm_of.get(pr["building_id"], -1),
                           "hi": hi_of.get(pr["building_id"], -1), "sp": period,
-                          "src": 1 if is_bridge else 0, "floors": floors,
+                          "src": 1 if is_bridge else 2 if (pr.get("building") or "").strip().lower() == "bridge" else 0, "floors": floors,
                           "dsrc": dsrc_code,
                           "x": r["cx"] - ox, "z": r["cz"]})
 
