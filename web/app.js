@@ -3,9 +3,7 @@ import { MapControls } from './vendor/MapControls.js';
 import { t, pick as pickText, getLang, setLang, LANGS, applyStatic, onLang, fmtNum } from './i18n.js';
 import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
-import { installDataEnrichment, DATA_UI } from './data-enrichment.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
-import { installBridgeCharacteristics, BRIDGE_UI } from './bridge-characteristics-map.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
 import { installShips } from './ships-model.js';
@@ -794,7 +792,7 @@ function showTip(gid, x, y) {
       tip.innerHTML = `<b>${esc(SUBS[s].name)}</b><span>${a ? `${dot(subColor(subT(measure, a.v)))}${fmtM(measure, a.v)} ${esc(measure.unit)}` : `No figure for ${subYear()}`}</span>`;
     } else {
       // A bridge also carries the municipal record: material, purpose, type and footprint envelope.
-      const row = b.src === 1 ? bridgeCharacteristics.rows(gid) : null;
+      const row = null;
       tip.innerHTML = `${name ? `<b>${esc(name)}</b>` : ''}<span>${dot(p.color)}${whenOf(b)} · ${esc(ageParts(p).name)}</span>`
         + (row ? `<span>${dot(row.colour)}${esc([row.material, row.purpose, row.type].join(' · '))}</span>`
           + `<span>${row.size.length === 2 ? esc(`${row.size[0].toFixed(1)} × ${row.size[1].toFixed(1)} m`) : esc(pickText(BRIDGE_UI.unknown))}</span>` : '');
@@ -818,7 +816,8 @@ function openBuilding(gid, back = backFromHere()) {
   tip.hidden = true;
   buildingBack = back;
   openDock('building', buildingHtml(gid), back);
-  void dataEnrichment.enrichCard(gid);
+  // Data-and-registers section removed per user request.
+  // void dataEnrichment.enrichCard(gid);
   dockLive.querySelector('.b-photo img')?.addEventListener('error', e => e.target.closest('.b-photo')?.remove());
   const extract = dockLive.querySelector('.extract'), more = dockLive.querySelector('.read-on');
   if (extract && extract.scrollHeight > extract.clientHeight + 4) { more.hidden = false; more.onclick = () => { extract.classList.add('open'); more.remove(); }; }
@@ -945,13 +944,22 @@ function renderFind() {
   };
   paint();
   if (q.length < 2) return;
-  void dataEnrichment.queryAddresses(q, { limit: 8 }).then(records => {
-    addressHits = records.map(address => ({ kind: 'address', address,
-      label: address.label || [address.sestiere, address.number, address.letter].filter(v => v != null && v !== '').join(' ') }));
-    addressStatus = null;
-    paint();
-  }, () => { addressStatus = 'error'; paint(); });
-}
+  void (async () => {
+    try {
+      const response = await fetch('data/enrichment-public/addresses.json');
+      if (!response.ok) return;
+      const data = await response.json();
+      const records = (Array.isArray(data) ? data : data.records || []).filter(r => {
+        const text = [r.label, r.number, r.letter, r.sestiere].join(' ').toLowerCase();
+        return q.split(/\s+/).every(t => text.includes(t.toLowerCase()));
+      }).slice(0, 8);
+      addressHits = records.map(address => ({ kind: 'address', address,
+        label: address.label || [address.sestiere, address.number, address.letter].filter(v => v != null && v !== '').join(' ') }));
+      addressStatus = null;
+      paint();
+    } catch {}
+  })();
+  findStatus.textContent = t('searching');
 function moveFind(d) {
   if (!findHits.length) return;
   findAt = (findAt + d + findHits.length) % findHits.length;
@@ -962,8 +970,9 @@ function choose(e) {
   closeFind();
   findInput.value = '';
   findInput.blur();
-  if (e.kind === 'address') dataEnrichment.focusAddress(e.address);
-    else if (e.kind === 'building' && e.bridge) aimFly(e.x, e.z, 260, () => openBuilding(e.gid));
+  if (e.kind === 'address') {
+    if (typeof e.address?.x === 'number' && Number.isFinite(e.address.x) && typeof e.address?.z === 'number' && Number.isFinite(e.address.z)) aimFly(e.address.x, e.address.z, 420);
+  } else if (e.kind === 'building' && e.bridge) aimFly(e.x, e.z, 260, () => openBuilding(e.gid));
     else if (e.kind === 'building') aimFly(e.x, e.z, 420, () => openBuilding(e.gid));
     else if (e.kind === 'suburb') flySuburb(e.s, () => { if (uniforms.uMode.value === MODE.suburbs) showSuburb(e.s, -1, { label: 'All suburbs', go: showSuburbs }); });
     else if (e.kind === 'bridge') aimFly(e.x, e.z, 260);
@@ -999,10 +1008,7 @@ const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLiv
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
   onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
-const dataEnrichment = installDataEnrichment({ dockLive,
-  getDockView: () => dockView, aimFly, pickText, onLang });
-// Municipal bridge characteristics: material, purpose, type and size, drawn where the city surveyed them.
-const bridgeCharacteristics = installBridgeCharacteristics({ THREE, scene, pickText, onLang });
+// Data enrichment module kept imported but not attached to building cards.
 installShips(scene, camera, renderer, controls).catch(e => console.warn('ships failed to load', e));
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
@@ -1462,8 +1468,8 @@ function renderKey() {
 
 function setMode(m) {
   uniforms.uMode.value = m;
+  bridgeRoute.setSourceVisible('bridges-tab', m === MODE.layers);
   churchBuildingHighlight.setSourceVisible('bridges-tab', m === MODE.layers);
-  bridgeCharacteristics.setSourceVisible('bridges-tab', m === MODE.layers);
   hoverGid = -1;
   document.querySelectorAll('.lenses button').forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.mode === m)));
   const bits = Array(MAX_GROUPS).fill(-1);
@@ -1771,4 +1777,4 @@ renderer.setAnimationLoop(now => {
   renderer.render(scene, camera);
 });
 
-window.__dbg = { churchBuildingHighlight, bridgeRoute, bridgeCharacteristics, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };
+window.__dbg = { churchBuildingHighlight, bridgeRoute, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };
