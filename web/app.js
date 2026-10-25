@@ -8,6 +8,7 @@ import { installChurchBuildingHighlight } from './church-building-highlight.js';
 import { installBridgeCharacteristics, BRIDGE_UI } from './bridge-characteristics-map.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
+import { installShips } from './ships-model.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -1002,6 +1003,7 @@ const dataEnrichment = installDataEnrichment({ dockLive,
   getDockView: () => dockView, aimFly, pickText, onLang });
 // Municipal bridge characteristics: material, purpose, type and size, drawn where the city surveyed them.
 const bridgeCharacteristics = installBridgeCharacteristics({ THREE, scene, pickText, onLang });
+installShips(scene, camera, renderer, controls).catch(e => console.warn('ships failed to load', e));
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}
