@@ -1,5 +1,8 @@
 // Name-based colouring only: this does not assign a legal heritage status.
-export const hasPalazzoName = value => typeof value === 'string' && /\bPalazzo\b/i.test(value);
+// Владелец атласа просил включить и венецианские Ca' (Ca' d'Oro, Ca' Rezzonico) и Casa: это те же
+// палаццо, только названные по-венециански. Тест пересчитывает набор по этому же правилу.
+export const PALAZZO_NAME = /\bPalazzo\b|\bCa['’]|\bCasa\b/i;
+export const hasPalazzoName = value => typeof value === 'string' && PALAZZO_NAME.test(value);
 
 export function buildPalazzoMask(attrs, config, wiki, names) {
   const count = attrs.byteLength / config.attrStride;

@@ -7,6 +7,11 @@ assert.equal(hasPalazzoName('Palazzo Grimani'), true);
 assert.equal(hasPalazzoName('Museo di palazzo Mocenigo'), true);
 assert.equal(hasPalazzoName('PALAZZO CINI'), true);
 assert.equal(hasPalazzoName('Palazzolo'), false);
+assert.equal(hasPalazzoName("Ca' d'Oro"), true);
+assert.equal(hasPalazzoName("Ca' Rezzonico"), true);
+assert.equal(hasPalazzoName('Casa Sicher'), true);
+assert.equal(hasPalazzoName('Calle Lunga'), false);
+assert.equal(hasPalazzoName('Casanova'), false);
 assert.equal(hasPalazzoName(null), false);
 const cfg = JSON.parse(fs.readFileSync('web/data/venezia.json'));
 const raw = zlib.gunzipSync(fs.readFileSync('web/data/attrs.bin'));
@@ -20,7 +25,7 @@ for (let gid = 0, o = 0; o < raw.length; gid++, o += cfg.attrStride) {
   const ni = view.getInt32(o + cfg.attrFields.nm[0], true);
   const w = wiki[wi];
   const labels = [names[ni], w?.label, ...Object.values(w?.la || {}).flat()];
-  if (labels.some(s => typeof s === 'string' && /\bPalazzo\b/i.test(s))) expected.push(gid);
+  if (labels.some(s => typeof s === 'string' && /\bPalazzo\b|\bCa['’]|\bCasa\b/i.test(s))) expected.push(gid);
 }
 assert.ok(expected.length > 0);
 assert.deepEqual([...mask].flatMap((v, gid) => v ? [gid] : []), expected);
