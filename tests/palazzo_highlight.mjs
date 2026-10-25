@@ -2,16 +2,22 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 assert.ok(fs.existsSync('web/palazzo-highlight.js'), 'Palazzo highlight module is missing');
-const { hasPalazzoName, buildPalazzoMask } = await import('../web/palazzo-highlight.js');
+const { hasPalazzoName, isPalazzo, buildPalazzoMask } = await import('../web/palazzo-highlight.js');
 assert.equal(hasPalazzoName('Palazzo Grimani'), true);
 assert.equal(hasPalazzoName('Museo di palazzo Mocenigo'), true);
 assert.equal(hasPalazzoName('PALAZZO CINI'), true);
 assert.equal(hasPalazzoName('Palazzolo'), false);
 assert.equal(hasPalazzoName("Ca' d'Oro"), true);
 assert.equal(hasPalazzoName("Ca' Rezzonico"), true);
-assert.equal(hasPalazzoName('Casa Sicher'), true);
 assert.equal(hasPalazzoName('Calle Lunga'), false);
 assert.equal(hasPalazzoName('Casanova'), false);
+// Набор для цвета: Ca' идёт в палаццо только с Викиданными и без служебного слова.
+assert.equal(isPalazzo(["Ca' d'Oro"], { qid: 'Q1052171' }), true);
+assert.equal(isPalazzo(["Ca' Risorta"], undefined), false);
+assert.equal(isPalazzo(["Hotel Ca' Alvise"], { qid: 'Q1' }), false);
+assert.equal(isPalazzo(["ponte de Ca' Pesaro"], { qid: 'Q2' }), false);
+assert.equal(isPalazzo(['Casa Sicher'], { qid: 'Q3' }), false);
+assert.equal(isPalazzo(['Palazzo Grimani'], undefined), true);
 assert.equal(hasPalazzoName(null), false);
 const cfg = JSON.parse(fs.readFileSync('web/data/venezia.json'));
 const raw = zlib.gunzipSync(fs.readFileSync('web/data/attrs.bin'));
@@ -25,7 +31,7 @@ for (let gid = 0, o = 0; o < raw.length; gid++, o += cfg.attrStride) {
   const ni = view.getInt32(o + cfg.attrFields.nm[0], true);
   const w = wiki[wi];
   const labels = [names[ni], w?.label, ...Object.values(w?.la || {}).flat()];
-  if (labels.some(s => typeof s === 'string' && /\bPalazzo\b|\bCa['’]|\bCasa\b/i.test(s))) expected.push(gid);
+  if (isPalazzo(labels, w)) expected.push(gid);
 }
 assert.ok(expected.length > 0);
 assert.deepEqual([...mask].flatMap((v, gid) => v ? [gid] : []), expected);
