@@ -494,13 +494,15 @@ const VERT = /* glsl */`
       // New age-of-city palette: churches/teal, old buildings/terracotta, 20th century/Palazzo blue.
       int gi = int(a.w + 0.5);
       float k = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
-      if (k > 5.5) c = vec3(0.435, 0.447, 0.463);       // no date at all: neutral #6f7276
-      else if (k > 4.5) c = vec3(0.478, 0.404, 0.369);  // before 1800, century unknown #7a675e
-      else if (k > 3.5) c = vec3(0.184, 0.243, 0.420);  // after 1945: the owner's deep blue #2f3f6b
-      else if (k > 2.5) c = vec3(0.604, 0.627, 0.651);  // bridges: the decks over the canals #9aa0a6
-      else if (k > 1.5) c = vec3(0.290, 0.361, 0.561);  // 20th century up to 1945, lighter blue #4a5c8f
-      else if (k > 0.5) c = vec3(0.380, 0.576, 0.580);  // churches, temples, monasteries, synagogues #619394
-      else c = uPalette[period];                        // the building's own century on the timeline
+      // Порядок ветвей задан владельцем атласа: храм и мост старше всего, палаццо — старше возраста.
+      if (k > 0.5 && k < 1.5) c = vec3(0.380, 0.576, 0.580);    // churches, monasteries, synagogues #619394
+      else if (k > 2.5 && k < 3.5) c = vec3(0.604, 0.627, 0.651); // bridges: the decks over the canals #9aa0a6
+      else if (k > 6.5) c = vec3(0.478, 0.404, 0.369);          // every building named Palazzo, on the main map #7a675e
+      else if (k > 5.5) c = vec3(0.435, 0.447, 0.463);          // no date at all: neutral #6f7276
+      else if (k > 4.5) c = vec3(0.557, 0.212, 0.204);          // before 1800, century unknown #8e3634
+      else if (k > 3.5) c = vec3(0.184, 0.243, 0.420);          // after 1945: the owner's deep blue #2f3f6b
+      else if (k > 1.5) c = vec3(0.290, 0.361, 0.561);          // 20th century up to 1945, lighter blue #4a5c8f
+      else c = uPalette[period];                                // the building's own century on the timeline
       // Estimated years are paler; with "documented only" they leave the colour altogether.
       // Places of worship keep their colour: their volume comes from the shading, not from a flat fill.
       if (flag >= 1 && k <= 0.5) c = mix(c, uMaquette, uDocOnly > 0.5 && flag >= 2 ? 1.0 : 0.32);
@@ -678,8 +680,20 @@ const ready = Promise.all([
   fetch('data/names.json').then(r => r.json()).then(n => { names = n; }),
   fetch('data/heritage.json').then(r => r.json()).then(h => { heritageItems = h; }),
 ]).then(() => {
-  palazzoTex.image.data.set(buildPalazzoMask(attrs, config, wiki, names));
+  const palazzoMask = buildPalazzoMask(attrs, config, wiki, names);
+  palazzoTex.image.data.set(palazzoMask);
   palazzoTex.needsUpdate = true;
+  // Владелец атласа: на главной карте палаццо носит свой цвет #7a675e, жёстко, без оглядки на возраст.
+  // Храм и мост старше любой другой ветви: им этот цвет не навязывается.
+  for (let gid = 0; gid < palazzoMask.length; gid++) {
+    if (palazzoMask[gid] && kindData[gid] !== 1 && kindData[gid] !== 3) {
+      kindData[gid] = 7;
+      kindCount[7] = (kindCount[7] || 0) + 1;
+    }
+  }
+  kindTex.needsUpdate = true;
+  // Легенда рисуется раньше, чем приходят файлы: после палаццо её счёт нужно переписать.
+  renderKey();
 });
 const esc = s => sourcePresentationText(s, getLang()).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const link = (href, text) => {
@@ -1477,6 +1491,7 @@ function renderKey() {
     keyEl.innerHTML = (solo ? `<button class="chip k-all">${dot(solo.color)}${t('Только {name}', { name: ageParts(solo).name })} <span class="n">${fmt(totals[on[0]])}</span>${CLOSE}</button>`
       : `<span class="key-label">Each station on the line is an age: choose one to see its buildings</span>`) +
       // Две синие ступени и два ярлыка вне времени: без подписи синий читается как один цвет.
+      `<span class="key-label">${dot('#7a675e')}${t('Palazzo')} <span class="n">${fmt(kindCount[7] || 0)}</span></span>` +
       `<span class="key-label">${dot('#4a5c8f')}${esc(pickText(periods[14].name))} <span class="n">${fmt(kindCount[2] || 0)}</span></span>` +
       `<span class="key-label">${dot(POSTWAR_COLOR)}${t('после 1945 года')} <span class="n">${fmt(kindCount[4] || 0)}</span></span>` +
       [16, 17].map(i => `<button class="chip b-bucket" data-b="${i}" aria-pressed="${!!maskTarget[i]}">${dot(periods[i].color)}${esc(pickText(periods[i].label))} <span class="n">${fmt(totals[i])}</span></button>`).join('') +

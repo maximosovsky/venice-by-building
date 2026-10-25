@@ -13,8 +13,9 @@ const STORE_KEY = 'venice-lang';
 
 const DICT = {
   it: {
-    // --- шкала: послевоенный тон XX века ---
-    'после 1945 года': 'dopo il 1945',
+    // --- шкала: послевоенный тон XX века и палаццо ---
+        'Palazzo': 'Palazzi',
+        'после 1945 года': 'dopo il 1945',
     // --- шапка, поиск, заметки ---
     'Венеция': 'Venezia',
     'Здание за зданием': 'Edificio per edificio',
@@ -282,8 +283,9 @@ const DICT = {
   },
 
   en: {
-    // --- the timeline: the post-war shade of the 20th century ---
-    'после 1945 года': 'after 1945',
+    // --- the timeline: the post-war shade of the 20th century, and palazzi ---
+        'Palazzo': 'Palaces',
+        'после 1945 года': 'after 1945',
     // --- masthead, search, notes ---
     'Венеция': 'Venice',
     'Здание за зданием': 'Building by building',
