@@ -4,6 +4,8 @@ import { GLTFLoader } from './vendor/GLTFLoader.js';
 
 const SHIPS = [
   { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 } },
+  { path: 'models/ship_r_optimized.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 } },
+  { path: 'models/aleksandr_optimized.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 } },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.35;
