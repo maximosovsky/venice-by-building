@@ -5,6 +5,7 @@ import { installBridgeRoute } from './bridge-route.js';
 import { installChurchRoute } from './church-route.js';
 import { installChurchBuildingHighlight } from './church-building-highlight.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
+import { DATA_UI } from './data-enrichment.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
 import { installShips } from './ships-model.js';
 
