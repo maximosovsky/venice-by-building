@@ -795,7 +795,7 @@ function showTip(gid, x, y) {
       const row = null;
       tip.innerHTML = `${name ? `<b>${esc(name)}</b>` : ''}<span>${dot(p.color)}${whenOf(b)} · ${esc(ageParts(p).name)}</span>`
         + (row ? `<span>${dot(row.colour)}${esc([row.material, row.purpose, row.type].join(' · '))}</span>`
-          + `<span>${row.size.length === 2 ? esc(`${row.size[0].toFixed(1)} × ${row.size[1].toFixed(1)} m`) : esc(pickText(BRIDGE_UI.unknown))}</span>` : '');
+          + `<span>${row.size.length === 2 ? esc(`${row.size[0].toFixed(1)} × ${row.size[1].toFixed(1)} m`) : ''}</span>` : '');
     }
   }
   tip.hidden = false;

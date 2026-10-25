@@ -3,8 +3,7 @@ import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 
 const SHIPS = [
-  { path: 'models/aleksandr_ship.glb', name: 'aleksandr', targetLength: 55, start: { x: -350, z: 500, rotY: -Math.PI * 0.35 } },
-  { path: 'models/ship_r.glb', name: 'ship_r', targetLength: 40, start: { x: -150, z: 420, rotY: -Math.PI * 0.25 } },
+  { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 18, start: { x: -350, z: 480, rotY: -Math.PI * 0.35 } },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.35;
