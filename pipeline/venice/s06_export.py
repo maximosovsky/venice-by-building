@@ -423,16 +423,16 @@ def main(area="centro"):
             if cards.get(lang):
                 url = f"https://{lang}.wikipedia.org/wiki/" + cards[lang].replace(" ", "_")
                 break
-        image = ({"thumb": photo.get("thumb"), "page": photo.get("page") or photo.get("thumb"),
+        # Карточка показывает только локальную уменьшенную копию (ступень s11_media): с Викисклада ничего
+        # не подтягиваем — исходная миниатюра тяжелее в разы, а карточка должна открываться сразу.
+        # Пока копии нет, в данных остаются источник и атрибуция, а фотографии в карточке просто нет.
+        image = ({"remote": photo.get("thumb"), "page": photo.get("page") or photo.get("thumb"),
                   "artist": photo.get("artist"), "license": photo.get("license"),
                   "licenseUrl": photo.get("license_url")} if photo.get("thumb") else None)
-        if image:
-            # Локальная уменьшенная копия: карточка берёт её, а страница файла и автор остаются для атрибуции.
-            local = local_photo(qid)
-            if local:
-                image["remote"] = image["thumb"]
-                image["thumb"] = local
-                image["local"] = True
+        local = local_photo(qid) if image else None
+        if local:
+            image["thumb"] = local
+            image["local"] = True
         rich = {"qid": qid, "label": labels_la.get("it") or pr.get("name"), "la": labels_la,
                 "architects": wd_lang(wd.get("architects"), "it"), "styles": wd_lang(wd.get("styles"), "it"),
                 "architects_la": {k: wd_lang(wd.get("architects"), k) for k in ("ru", "it", "en")},

@@ -70,8 +70,9 @@ def main(area: str = "centro") -> None:
     cards = cards["cards"] if isinstance(cards, dict) else cards
     have = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
 
-    todo = [(c["qid"], c["image"]["thumb"], c["image"]) for c in cards
-            if c.get("qid") and (c.get("image") or {}).get("thumb")]
+    # Источник берём из remote: карточка хранит адрес Викисклада, а показывать может только локальную копию.
+    todo = [(c["qid"], (c["image"] or {}).get("remote") or (c["image"] or {}).get("thumb"), c["image"]) for c in cards
+            if c.get("qid") and ((c.get("image") or {}).get("remote") or (c.get("image") or {}).get("thumb"))]
     print(f"карточек с фотографией: {len(todo)} | уже скачано: {len(have)}")
 
     done = skipped = failed = 0

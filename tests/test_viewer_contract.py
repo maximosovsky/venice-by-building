@@ -14,6 +14,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 DATA = ROOT / "web" / "data"
+MEDIA = ROOT / "web" / "media"
 failures, checks = [], 0
 
 
@@ -161,11 +162,18 @@ def main():
     # ---- cards, and the ground polygons the app parses itself ----
     wiki = json.loads((DATA / "wiki.json").read_text(encoding="utf-8"))
     photos = [c for c in wiki if c.get("image")]
-    for card in photos[:50]:
+    for card in photos:
         image = card["image"]
         check(bool(image.get("thumb")), "a card photo has no thumbnail")
         check(bool(image.get("license")), f"card {card.get('label')!r}: photo without a licence")
         check(bool(image.get("page")), f"card {card.get('label')!r}: photo without a source page")
+        # С Викисклада в карточку ничего не подтягивается: там миниатюры в разы тяжелее, а карточка
+        # должна открываться сразу. Показ — только локальная копия из web/media (ступень s11_media).
+        thumb = image.get("thumb") or ""
+        check(not thumb.startswith(("http://", "https://")),
+              f"card {card.get('label')!r}: the photo is pulled from the network ({thumb[:60]})")
+        check((MEDIA / thumb.split("/")[-1]).exists(),
+              f"card {card.get('label')!r}: the local photo {thumb} is missing from web/media")
     for name in ("land.bin", "water.bin", "context.bin"):
         buf = fetch_bin(DATA / name)
         n_poly, n_ring, n_vert = struct.unpack_from("<3I", buf, 0)
