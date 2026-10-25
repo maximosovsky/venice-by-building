@@ -2,7 +2,7 @@
 import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 
-const SHIP_PATH = 'models/Sailing_Ship.gltf';
+const SHIP_PATH = 'models/sailing_ship.glb';
 const STORAGE_KEY = 'venice-ship-pos';
 const TARGET_LENGTH = 35; // metres in the local Venetian frame
 const WATER_Y = -0.35;    // just above the water mesh at y = -0.4
@@ -43,7 +43,10 @@ export async function installShip(scene, camera, renderer, controls) {
   const start = loadStoredPosition({ x: -354, z: -340, rotY: Math.PI * 0.15 });
   shipGroup.position.set(start.x, 0, start.z);
   shipGroup.rotation.y = start.rotY || 0;
+  // Expose for debugging and mark as loaded.
+  shipGroup.name = 'sailing-ship';
   scene.add(shipGroup);
+  if (typeof window !== 'undefined') window.__veniceShipLoaded = true;
 
   // Drag interaction: raycast against an invisible water plane.
   const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -WATER_Y);
