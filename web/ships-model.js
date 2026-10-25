@@ -7,6 +7,7 @@ const SHIPS = [
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.35;
+const SHIP_Y_OFFSET = -2.5; // lower the ship deeper into the water
 
 const loader = new GLTFLoader();
 
@@ -118,7 +119,7 @@ export async function installShips(scene, camera, renderer, controls) {
     group.userData.shipName = cfg.name;
     const centre = box.getCenter(new THREE.Vector3()).multiplyScalar(scale);
     model.position.sub(centre);
-    model.position.y += WATER_Y - box.min.y * scale;
+    model.position.y += WATER_Y - box.min.y * scale + SHIP_Y_OFFSET;
     group.add(model);
 
     const pos = stored[cfg.name] || cfg.start;
