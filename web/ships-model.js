@@ -109,27 +109,31 @@ export async function installShips(scene, camera, renderer, controls) {
   }
 
   for (const cfg of SHIPS) {
-    const gltf = await new Promise((resolve, reject) => loader.load(cfg.path, resolve, undefined, reject));
-    const model = gltf.scene;
-    const box = new THREE.Box3().setFromObject(model);
-    const size = box.getSize(new THREE.Vector3());
-    const scale = cfg.targetLength / Math.max(size.x, size.y, size.z);
-    model.scale.setScalar(scale);
+    try {
+      const gltf = await new Promise((resolve, reject) => loader.load(cfg.path, resolve, undefined, reject));
+      const model = gltf.scene;
+      const box = new THREE.Box3().setFromObject(model);
+      const size = box.getSize(new THREE.Vector3());
+      const scale = cfg.targetLength / Math.max(size.x, size.y, size.z);
+      model.scale.setScalar(scale);
 
-    const group = new THREE.Group();
-    group.userData.isVeniceShip = true;
-    group.userData.shipName = cfg.name;
-    const centre = box.getCenter(new THREE.Vector3()).multiplyScalar(scale);
-    model.position.sub(centre);
-    model.position.y += WATER_Y - box.min.y * scale + SHIP_Y_OFFSET;
-    group.add(model);
+      const group = new THREE.Group();
+      group.userData.isVeniceShip = true;
+      group.userData.shipName = cfg.name;
+      const centre = box.getCenter(new THREE.Vector3()).multiplyScalar(scale);
+      model.position.sub(centre);
+      model.position.y += WATER_Y - box.min.y * scale + SHIP_Y_OFFSET;
+      group.add(model);
 
-    const pos = stored[cfg.name] || cfg.start;
-    group.position.set(pos.x, 0, pos.z);
-    group.rotation.y = pos.rotY || cfg.start.rotY;
-    scene.add(group);
-    shipGroups.push(group);
-    console.log('ship loaded', cfg.name, 'size', size.x.toFixed(2), size.y.toFixed(2), size.z.toFixed(2), 'scale', scale.toFixed(2), 'pos', group.position.x, group.position.z);
+      const pos = stored[cfg.name] || cfg.start;
+      group.position.set(pos.x, 0, pos.z);
+      group.rotation.y = pos.rotY || cfg.start.rotY;
+      scene.add(group);
+      shipGroups.push(group);
+      console.log('ship loaded', cfg.name, 'size', size.x.toFixed(2), size.y.toFixed(2), size.z.toFixed(2), 'scale', scale.toFixed(2), 'pos', group.position.x, group.position.z);
+    } catch (err) {
+      console.warn('ship failed', cfg.name, err);
+    }
   }
 
   dom.addEventListener('mousedown', onDown, { passive: false });
