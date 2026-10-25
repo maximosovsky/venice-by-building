@@ -316,9 +316,11 @@ subValTex.needsUpdate = true;
 // Independent GID mask: preserve heritage records and all other rendering modes.
 const palazzoTex = new THREE.DataTexture(new Uint8Array(SUB_W * Math.ceil(nB / SUB_W)), SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.UnsignedByteType);
 palazzoTex.needsUpdate = true;
-// Building kind texture: 0 = old terracotta, 1 = church/synagogue (#659592), 2 = 20th century (Palazzo blue).
+// Building kind texture: 0 = old terracotta, 1 = church/synagogue (#619394), 2 = 20th century (Palazzo blue).
+// Float, not byte: texelFetch on a byte texture returns the value normalised to 0–1, so the shader's
+// thresholds (0.5 / 1.5) would never match and every building would take the terracotta branch.
 const churchGids = new Set((churchBuildings?.buildings || []).map(b => b.gid));
-const kindData = new Uint8Array(SUB_W * Math.ceil(nB / SUB_W));
+const kindData = new Float32Array(SUB_W * Math.ceil(nB / SUB_W));
 for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
   if (churchGids.has(gid)) kindData[gid] = 1;
   else {
@@ -327,7 +329,7 @@ for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) 
     if (period === 2) kindData[gid] = 2; // novecentesche / 20th century
   }
 }
-const kindTex = new THREE.DataTexture(kindData, SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.UnsignedByteType);
+const kindTex = new THREE.DataTexture(kindData, SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.FloatType);
 kindTex.needsUpdate = true;
 const uniforms = {
   uYear: { value: config.yearMax },
@@ -467,10 +469,11 @@ const VERT = /* glsl */`
       int gi = int(a.w + 0.5);
       float k = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
       if (k > 1.5) c = vec3(0.184, 0.243, 0.420);      // 20th century: Palazzo delle prigioni blue #2f3f6b
-      else if (k > 0.5) c = vec3(0.397, 0.584, 0.573); // churches, temples, monasteries, synagogues #659592
-      else c = vec3(0.557, 0.212, 0.204);              // old buildings: terracotta roofs #8e3634
+      else if (k > 0.5) c = vec3(0.380, 0.576, 0.580);       // churches, temples, monasteries, synagogues #619394
+      else c = vec3(0.557, 0.212, 0.204);                    // old buildings: terracotta roofs #8e3634
       // Estimated years are paler; with "documented only" they leave the colour altogether.
-      if (flag >= 1) c = mix(c, uMaquette, uDocOnly > 0.5 && flag >= 2 ? 1.0 : 0.32);
+      // Places of worship keep their colour: their volume comes from the shading, not from a flat fill.
+      if (flag >= 1 && k <= 0.5) c = mix(c, uMaquette, uDocOnly > 0.5 && flag >= 2 ? 1.0 : 0.32);
     } else if (uMode < 1.5) {
       c = floorsRamp(mod(a.z, 128.0));
     } else if (uMode < 2.5) {
