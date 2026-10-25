@@ -51,13 +51,15 @@ async function fetchBin(url) {
   return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
 }
 
-const [config, layers, attrBuf, subData, subOf, churchBuildings] = await Promise.all([
+const [config, layers, attrBuf, subData, subOf, churchBuildings, churchTurquoise] = await Promise.all([
   fetch('data/venezia.json').then(r => r.json()),
   fetch('data/layers.json').then(r => r.json()),
   fetchBin('data/attrs.bin'),
   fetch('data/suburbs.json').then(r => r.json()).catch(() => null),
   fetchBin('data/suburbs.bin').then(b => new Uint8Array(b)).catch(() => null),
   fetch('data/church-buildings.json').then(r => r.json()).catch(() => null),
+  // Бирюзовый набор по тегам: маршрутный манифест идёт по центру и островные церкви не покрывает.
+  fetch('data/church-turquoise.json').then(r => r.json()).catch(() => null),
 ]);
 const attrs = new DataView(attrBuf);
 const HERITAGE_COLORS = config.heritage.colors;
@@ -323,7 +325,12 @@ palazzoTex.needsUpdate = true;
 // blue), 3 = bridge deck (#9aa0a6).
 // Float, not byte: texelFetch on a byte texture returns the value normalised to 0–1, so the shader's
 // thresholds (0.5 / 1.5) would never match and every building would take the terracotta branch.
-const churchGids = new Set((churchBuildings?.buildings || []).map(b => b.gid));
+// Бирюза: проверенный маршрутный набор плюс все религиозные здания, найденные по тегам OSM
+// (церкви, часовни, монастыри, синагоги — включая островные: Сан-Микеле ин Изола, Торчелло, Мурано).
+const churchGids = new Set([
+  ...(churchBuildings?.buildings || []).map(b => b.gid),
+  ...(churchTurquoise?.gids || []),
+]);
 const kindData = new Float32Array(SUB_W * Math.ceil(nB / SUB_W));
 for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
   const src = attrs.getUint8(o + config.attrFields.src[0]);
