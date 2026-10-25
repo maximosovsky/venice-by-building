@@ -492,6 +492,13 @@ def main(area="centro"):
     # 16 веков на оси плюс два ярлыка вне времени: «до 1800 года» (класс без века) и «неизвестен».
     periods = [{**p, "color": SLOT_COLORS[i], "index": i} for i, p in enumerate(slot_table())]
     rows, attr_list = [], []
+    year_conflicts = 0   # сколько раз год карточки расходился с годом, стоявшим до него
+    # Даты Викиданных по идентификатору: карточка знает свой qid, а обогащение — точность утверждения,
+    # поэтому век оттуда приходит интервалом, а не выдуманным годом.
+    wd_dates_by_qid = {}
+    for _o in wd_objects.values():
+        if _o.get("qid") and _o.get("date"):
+            wd_dates_by_qid.setdefault(_o["qid"], _o["date"])
     hist = defaultdict(lambda: [0] * len(periods))
     layer_counts = Counter()
     layer_years = defaultdict(Counter)
@@ -528,6 +535,29 @@ def main(area="centro"):
             yto = min(2026, int(wd_date.get("to") or wy))
             year, period, flag = yfrom, (0 if yto < 1800 else 1 if yfrom < 1900 else 2), 1
             dsrc_code = D_SRC["wikidata"]
+        # Карточка и карта обязаны показывать одну дату, но век нельзя выдавать за год. Поэтому дата
+        # берётся по идентификатору карточки из того же обогащения, которое знает точность: у Ка'
+        # Реццонико это точный 1667 год, у Сан-Сильвестро — век 800–899. В OSM start_date нередко
+        # стоит дата события (у Ка' Реццонико 2023 — год открытия музея), и она не должна красить
+        # палаццо 1667 года как постройку после войны.
+        card_record = wikimedia.get(pr["building_id"]) or {}
+        card_date = wd_dates_by_qid.get(card_record.get("qid") or "")
+        if card_date and wd_date.get("kind") != "year":
+            if card_date.get("kind") == "year":
+                cy = int(card_date["year"])
+                if YEAR_MIN <= cy <= 2026:
+                    if flag == 0 and year != cy:
+                        year_conflicts += 1
+                    year, yfrom, yto, flag = cy, cy, cy, 0
+                    dsrc_code = D_SRC["wikidata"]
+            elif card_date.get("kind") == "interval":
+                iy = max(YEAR_MIN, int(card_date.get("from") or card_date.get("year") or 0))
+                it = min(2026, int(card_date.get("to") or card_date.get("year") or 0))
+                if iy and it >= iy and it - iy <= 99:      # век или десятилетие, не открытый класс
+                    if flag == 0 and year != iy:
+                        year_conflicts += 1
+                    year, yfrom, yto, flag = iy, iy, it, 1
+                    dsrc_code = D_SRC["wikidata"]
         # Год из статьи итальянской Википедии — только там, где Викиданные молчат.
         article = article_dates.get(wd.get("qid")) if not wd_date else None
         if article and flag != 0:
@@ -725,6 +755,7 @@ def main(area="centro"):
     }
     (out_dir / "venezia.json").write_text(json.dumps(cfg, ensure_ascii=False, separators=(",", ":")),
                                           encoding="utf-8")
+    print(f"год из канала карточек перекрыл другой год: {year_conflicts} записей")
     print(f"tiles={len(tile_index)} packs={len(packs)} attrs={attrs.nbytes} bytes")
     print("layers:", {g["label"]: g["count"] for L in layers_out for g in L["groups"]})
     print("date kinds:", cfg["dateKind"])
