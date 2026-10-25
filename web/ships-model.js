@@ -123,17 +123,21 @@ export async function installShips(scene, camera, renderer, controls) {
     try {
       const gltf = await new Promise((resolve, reject) => loader.load(cfg.path, resolve, undefined, reject));
       const model = gltf.scene;
+      const origBox = new THREE.Box3().setFromObject(model);
+      const origSize = origBox.getSize(new THREE.Vector3());
+      const scale = cfg.targetLength / Math.max(origSize.x, origSize.y, origSize.z);
+      model.scale.setScalar(scale);
+
+      // Recompute bbox after scaling so the hull sits exactly on the water.
       const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
-      const scale = cfg.targetLength / Math.max(size.x, size.y, size.z);
-      model.scale.setScalar(scale);
 
       const group = new THREE.Group();
       group.userData.isVeniceShip = true;
       group.userData.shipName = cfg.name;
-      const centre = box.getCenter(new THREE.Vector3()).multiplyScalar(scale);
+      const centre = box.getCenter(new THREE.Vector3());
       model.position.sub(centre);
-      model.position.y += WATER_Y - box.min.y * scale + SHIP_Y_OFFSET;
+      model.position.y += WATER_Y - box.min.y + SHIP_Y_OFFSET;
       group.add(model);
 
       const pos = stored[cfg.name] || cfg.start;
