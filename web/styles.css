@@ -56,11 +56,13 @@ a:hover { text-decoration-color: currentColor; }
 .veil-top { top: 0; height: 160px; background: linear-gradient(var(--wall) 38%, rgba(237, 222, 198, 0)); }
 .veil-bottom { bottom: 0; height: 280px; background: linear-gradient(rgba(237, 222, 198, 0), var(--wall) 62%); }
 
-/* The sun: the logo's own textured disc (img/sun.webp keeps its grain), coloured terracotta. */
-.sun-disc { position: relative; display: inline-block; border-radius: 50%; background-color: var(--sun);
-  -webkit-mask: url("img/sun.webp") 0 0 / 100% 100% no-repeat; mask: url("img/sun.webp") 0 0 / 100% 100% no-repeat; }
-.sun-disc::before { content: ""; position: absolute; inset: 0; background: url("img/sun.webp") 0 0 / 100% 100% no-repeat;
-  mix-blend-mode: overlay; }
+/* Год на шкале — терракотовый диск. Раньше он маскировался файлом img/sun.webp, которого в репозитории
+   никогда не было: маска по отсутствующей картинке не рисует элемент вовсе, и солнце не показывалось. */
+.sun-disc { position: relative; display: inline-block; border-radius: 50%; background: var(--sun);
+  background: radial-gradient(circle at 38% 32%, color-mix(in srgb, var(--sun) 72%, #fff6e4) 0 32%, var(--sun) 64%,
+    color-mix(in srgb, var(--sun) 86%, #5f2412) 100%); }
+.sun-disc::before { content: ""; position: absolute; inset: 14%; border-radius: 50%;
+  background: radial-gradient(circle at 42% 36%, rgba(255, 250, 238, 0.34), rgba(255, 250, 238, 0) 72%); }
 
 /* ---------- Top: the name, then what to look at ---------- */
 .masthead { position: fixed; top: calc(env(safe-area-inset-top, 0px) + var(--gutter)); left: var(--gutter); z-index: 2; display: flex; align-items: center; gap: 14px; }
@@ -260,7 +262,8 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 /* Walks: the routes, then the walk you are on. */
 .suns { display: inline-flex; align-items: center; gap: .24em; font-size: 15px; line-height: 1; }
 .suns i { width: .5em; height: .5em; border-radius: 50%; background: #e2ded6; }
-.suns i.on { background: var(--sun); -webkit-mask: url("img/sun.webp") 0 0 / 100% 100%; mask: url("img/sun.webp") 0 0 / 100% 100%; }
+/* Солнышки в счёте прогулок: та же пропавшая маска делала их невидимыми. */
+.suns i.on { background: var(--sun); background: radial-gradient(circle at 40% 34%, color-mix(in srgb, var(--sun) 72%, #fff6e4) 0 40%, var(--sun) 100%); }
 .walk-score { margin: 12px 0 0; color: var(--muted); }
 .walk-score b { font: 400 30px/1 var(--serif); color: var(--sun); font-variant-numeric: lining-nums; }
 .routes { list-style: none; margin: 14px 0 0; padding: 0; }

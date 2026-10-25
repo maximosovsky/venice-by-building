@@ -1508,7 +1508,9 @@ function renderKey() {
 
 function setMode(m) {
   uniforms.uMode.value = m;
-  bridgeRoute.setSourceVisible('bridges-tab', m === MODE.layers);
+  // У маршрутного модуля есть setVisible, а setSourceVisible нет ни у него, ни в bridge-route.js:
+  // из-за этой строки setMode падал первой же строкой и вкладки не переключались вовсе.
+  bridgeRoute.setVisible(m === MODE.layers);
   churchBuildingHighlight.setSourceVisible('bridges-tab', m === MODE.layers);
   hoverGid = -1;
   document.querySelectorAll('.lenses button').forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.mode === m)));
