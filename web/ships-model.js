@@ -9,8 +9,8 @@ const SHIPS = [
   { path: 'models/aleksandr_optimized.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 } },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
-const WATER_Y = -0.35;
-const SHIP_Y_OFFSET = -0.3; // lower the ship deeper into the water
+const WATER_Y = -0.05;
+const SHIP_Y_OFFSET = -0.05; // slight sink so hull sits in water
 
 const loader = new GLTFLoader();
 loader.setMeshoptDecoder(MeshoptDecoder);
