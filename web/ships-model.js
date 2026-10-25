@@ -3,7 +3,7 @@ import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 
 const SHIPS = [
-  { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 18, start: { x: -350, z: 480, rotY: -Math.PI * 0.35 } },
+  { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 25, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 } },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.35;
@@ -126,6 +126,7 @@ export async function installShips(scene, camera, renderer, controls) {
     group.rotation.y = pos.rotY || cfg.start.rotY;
     scene.add(group);
     shipGroups.push(group);
+    console.log('ship loaded', cfg.name, 'size', size.x.toFixed(2), size.y.toFixed(2), size.z.toFixed(2), 'scale', scale.toFixed(2), 'pos', group.position.x, group.position.z);
   }
 
   dom.addEventListener('mousedown', onDown, { passive: false });
