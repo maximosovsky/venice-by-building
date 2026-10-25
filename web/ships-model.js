@@ -4,9 +4,9 @@ import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
 
 const SHIPS = [
-  { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 } },
-  { path: 'models/ship_r_optimized.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 } },
-  { path: 'models/aleksandr_optimized.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 } },
+  { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/ship_r_optimized.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/aleksandr_optimized.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.4;
@@ -128,6 +128,11 @@ export async function installShips(scene, camera, renderer, controls) {
       const scale = cfg.targetLength / Math.max(origSize.x, origSize.y, origSize.z);
       model.scale.setScalar(scale);
 
+      // Apply per-model orientation fix before computing final bbox.
+      model.rotation.x = (cfg.rotFix?.x || 0);
+      model.rotation.y = (cfg.rotFix?.y || 0);
+      model.rotation.z = (cfg.rotFix?.z || 0);
+
       // Recompute bbox after scaling so the hull sits exactly on the water.
       const box = new THREE.Box3().setFromObject(model);
       const size = box.getSize(new THREE.Vector3());
@@ -137,7 +142,7 @@ export async function installShips(scene, camera, renderer, controls) {
       group.userData.shipName = cfg.name;
       const centre = box.getCenter(new THREE.Vector3());
       model.position.sub(centre);
-      model.position.y += WATER_Y - box.min.y + SHIP_Y_OFFSET;
+      model.position.y += WATER_Y - box.min.y + (cfg.waterOffset || 0);
       group.add(model);
 
       const pos = stored[cfg.name] || cfg.start;
