@@ -13,7 +13,8 @@ The binary contract is the one the SydMap viewer reads (MIT, see research/engine
   web/data/land.bin, water.bin, context.bin   ground polygons in the local frame
 
 Age semantics for Venice, kept honest:
-  * an OSM/Wikidata year is drawn as a documented year (flag 0);
+  * a stated year — from Wikidata or from an OSM tag, Wikidata first — is drawn as a documented year (flag 0),
+    and the oldest such year sets the floor of the timeline;
   * a VPRG epoch is an interval: the building is drawn when the epoch starts and the
     card says the exact year is unknown (flag 1);
   * a building the municipal classification does not cover keeps a grey unknown period (flag 2).
@@ -470,6 +471,14 @@ def main(area="centro"):
     print(f"wiki cards={len(wiki)} names={len(names)} heritage={len(heritage)}")
 
     # ---- per-building records ----
+    # The floor of the atlas's own scale. Neither VPRG nor an OSM tag states a year before 1000, so the oldest
+    # year any building can claim comes from Wikidata; it sets where the timeline starts, rounded down to the
+    # quarter-century step the viewer's scale uses. Everything a source leaves undated keeps the floor as its
+    # place on the line, so the city is never drawn as if it began with the oldest dated house.
+    wd_exact_years = [int(v["date"]["year"]) for v in wd_objects.values()
+                      if v.get("date") and v["date"].get("kind") == "year" and v["date"].get("year")]
+    YEAR_MIN = min([1000, *(y for y in wd_exact_years if 400 <= y <= 2026)]) // 25 * 25
+    periods = [{**p, "from": YEAR_MIN} if p["from"] == 1000 else p for p in PERIODS]
     rows, attr_list = [], []
     hist = defaultdict(lambda: [0, 0, 0, 0])
     layer_counts = Counter()
@@ -482,36 +491,36 @@ def main(area="centro"):
         wd = wd_objects.get(pr["building_id"]) or {}
         if is_bridge:
             # a bridge is a structure as the city stands today; no age is claimed for it
-            year, yfrom, yto, period, flag, dsrc_code = 1000, 0, 0, 3, 2, D_SRC["none"]
+            year, yfrom, yto, period, flag, dsrc_code = YEAR_MIN, 0, 0, 3, 2, D_SRC["none"]
         elif date_kind == "year":
             year = int(pr["osm_year"]); yfrom = yto = year; period, flag = 2, 0
             dsrc_code = D_SRC["osm"]
         elif epoch == "preottocentesche":
-            year, yfrom, yto, period, flag, dsrc_code = 1000, 0, 1800, 0, 1, D_SRC["vprg"]
+            year, yfrom, yto, period, flag, dsrc_code = YEAR_MIN, 0, 1800, 0, 1, D_SRC["vprg"]
         elif epoch == "ottocentesche":
             year, yfrom, yto, period, flag, dsrc_code = 1800, 1800, 1899, 1, 1, D_SRC["vprg"]
         elif epoch == "novecentesche":
             year, yfrom, yto, period, flag, dsrc_code = 1900, 1900, 2026, 2, 1, D_SRC["vprg"]
         else:
-            year, yfrom, yto, period, flag, dsrc_code = 1000, 0, 0, 3, 2, D_SRC["none"]
-        # Викиданные: год постройки, найденный по координатам. День, месяц и год — точная дата;
-        # десятилетие и век — интервал, и он показывается как эпоха, а не как год.
+            year, yfrom, yto, period, flag, dsrc_code = YEAR_MIN, 0, 0, 3, 2, D_SRC["none"]
+        # Викиданные: год постройки, найденный по координатам. Точный год старше и тега OSM, и классификации
+        # VPRG: если Викиданные называют год, он и становится основной датой здания. Десятилетие и век —
+        # интервал: он показывается как эпоха, а не как год, и только там, где точного года нет.
         wd_date = wd.get("date") or {}
-        if wd_date and flag != 0:
-            wy = int(wd_date.get("year") or 0)
-            if wd_date.get("kind") == "year" and 1000 <= wy <= 2026:
-                year, yfrom, yto, period, flag = wy, wy, wy, (0 if wy < 1800 else 1 if wy < 1900 else 2), 0
-                dsrc_code = D_SRC["wikidata"]
-            elif wd_date.get("kind") == "interval":
-                yfrom = max(1000, int(wd_date.get("from") or wy))
-                yto = min(2026, int(wd_date.get("to") or wy))
-                year, period, flag = yfrom, (0 if yto < 1800 else 1 if yfrom < 1900 else 2), 1
-                dsrc_code = D_SRC["wikidata"]
+        wy = int(wd_date.get("year") or 0) if wd_date else 0
+        if wd_date.get("kind") == "year" and YEAR_MIN <= wy <= 2026:
+            year, yfrom, yto, period, flag = wy, wy, wy, (0 if wy < 1800 else 1 if wy < 1900 else 2), 0
+            dsrc_code = D_SRC["wikidata"]
+        elif wd_date.get("kind") == "interval" and flag != 0:
+            yfrom = max(YEAR_MIN, int(wd_date.get("from") or wy))
+            yto = min(2026, int(wd_date.get("to") or wy))
+            year, period, flag = yfrom, (0 if yto < 1800 else 1 if yfrom < 1900 else 2), 1
+            dsrc_code = D_SRC["wikidata"]
         # Год из статьи итальянской Википедии — только там, где Викиданные молчат.
         article = article_dates.get(wd.get("qid")) if not wd_date else None
         if article and flag != 0:
             ay = int(article.get("year") or 0)
-            if 1000 <= ay <= 2026:
+            if YEAR_MIN <= ay <= 2026:
                 year, yfrom, yto, period, flag = ay, ay, ay, (0 if ay < 1800 else 1 if ay < 1900 else 2), 0
                 dsrc_code = D_SRC["itwiki"]
         hist[year][period] += 1 if not is_bridge else 0
@@ -674,7 +683,7 @@ def main(area="centro"):
         "city": "venezia", "label": "Венеция", "tileSize": TILE,
         "origin": [round(ox, 3), round(oy, 3)], "crs": config.CRS_METRIC,
         "home": {"x": -260, "z": -180, "azimuth": 20, "elevation": 30, "span": 3000},
-        "periods": PERIODS, "yearMin": 1000, "yearMax": 2026,
+        "periods": periods, "yearMin": YEAR_MIN, "yearMax": 2026,
         "histogram": {str(k): v for k, v in sorted(hist.items())},
         "attrStride": ATTR_DTYPE.itemsize,
         "attrFields": {n: [ATTR_DTYPE.fields[n][1], ATTR_DTYPE.fields[n][0].str] for n in ATTR_DTYPE.names if n != "pad"},

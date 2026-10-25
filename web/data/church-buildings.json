@@ -1394,7 +1394,7 @@
       "reason": "no_unique_exact_osm_wikidata_tag_in_current_atlas"
     }
   ],
-  "atlas_attrs_sha256": "2ad58841d957045834c13ae65c6b4247b7cc8f1fb81699a1e9ee532e0da00143",
+  "atlas_attrs_sha256": "312a3960f6091ff43300129479d6bbc4fd4182f1888194000de4cb0517070c53",
   "geometry_source": "existing_atlas_worker_mesh_including_all_parts_and_roofs",
   "source": "data/processed/buildings_centro.geojson",
   "limitations": "Only unique exact OSM Wikidata tags, reviewed exact named OSM building identities or reviewed named POIs strictly contained in a verified host footprint are used. Special colors apply to the whole existing atlas host; shared premises are disclosed in highlight_scope and match_evidence. Grouped monasteries retain separate building GIDs. Unmatched stops receive no invented geometry. Existing atlas heights and multipart/roof detail are retained unchanged."
