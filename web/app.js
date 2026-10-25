@@ -734,7 +734,6 @@ function buildingHtml(gid) {
     return `<article class="dock-page b-card${photo ? ' has-photo' : ''}">${photo}
         <header class="b-head"><h2 id="dock-title">${name ? esc(name) : t(b.src === 1 ? 'Мост' : 'Здание')}</h2>
                 <div class="b-when"><span class="y">${b.src === 1 ? t('мост, год неизвестен') : whenOf(b)}</span><span class="age">${dot(period.color)}${b.flag === 0 ? esc(ageParts(period).name) : esc(pickText(period.label))}</span></div></header>
-        <section><h3>${t('Как известен возраст')}</h3><p class="how">${datingNote(b, w, hItem)}</p></section>
         <section><dl>${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></section>
         ${extract ? `<section><h3>${t('Из Википедии')}</h3><p class="extract">${esc(extract)}</p><button class="read-on" hidden>${t('Читать далее')}</button></section>` : ''}
 
