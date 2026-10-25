@@ -1,6 +1,7 @@
 // Two GLB ships on Canale della Giudecca: draggable, with localStorage positions.
 import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
 
 const SHIPS = [
   { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 } },
@@ -9,9 +10,10 @@ const SHIPS = [
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.35;
-const SHIP_Y_OFFSET = -2.5; // lower the ship deeper into the water
+const SHIP_Y_OFFSET = -0.3; // lower the ship deeper into the water
 
 const loader = new GLTFLoader();
+loader.setMeshoptDecoder(MeshoptDecoder);
 
 function loadPositions() {
   try {
@@ -26,6 +28,15 @@ function savePositions(all) {
 }
 
 export async function installShips(scene, camera, renderer, controls) {
+  // The ships use PBR materials, the city shades itself; add lights for the ships only.
+  if (!scene.userData.veniceShipLights) {
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x9fb6b8, 0.85));
+    const sunLight = new THREE.DirectionalLight(0xfff8ee, 0.7);
+    sunLight.position.set(-0.55, 0.55, -0.62).multiplyScalar(400);
+    scene.add(sunLight);
+    scene.userData.veniceShipLights = true;
+  }
+
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -WATER_Y);
