@@ -36,6 +36,8 @@ from shapely.ops import unary_union, transform as shp_transform
 from shapely.strtree import STRtree
 
 from venice import config
+from venice.periods import (POSTWAR_COLOR, POSTWAR_FROM, SLOT_COLORS, YEAR_FLOOR,
+                           slot_of, slot_table)
 
 TILE = 600.0
 PACK_BYTES = 800_000
@@ -484,12 +486,13 @@ def main(area="centro"):
     # year any building can claim comes from Wikidata; it sets where the timeline starts, rounded down to the
     # quarter-century step the viewer's scale uses. Everything a source leaves undated keeps the floor as its
     # place on the line, so the city is never drawn as if it began with the oldest dated house.
-    wd_exact_years = [int(v["date"]["year"]) for v in wd_objects.values()
-                      if v.get("date") and v["date"].get("kind") == "year" and v["date"].get("year")]
-    YEAR_MIN = min([1000, *(y for y in wd_exact_years if 400 <= y <= 2026)]) // 25 * 25
-    periods = [{**p, "from": YEAR_MIN} if p["from"] == 1000 else p for p in PERIODS]
+    # Начало шкалы задано владельцем атласа: 500 год. Всё, что источники относят к более раннему
+    # времени, прижимается к первому слоту — выдумывать этим зданиям век нечем.
+    YEAR_MIN = YEAR_FLOOR
+    # 16 веков на оси плюс два ярлыка вне времени: «до 1800 года» (класс без века) и «неизвестен».
+    periods = [{**p, "color": SLOT_COLORS[i], "index": i} for i, p in enumerate(slot_table())]
     rows, attr_list = [], []
-    hist = defaultdict(lambda: [0, 0, 0, 0])
+    hist = defaultdict(lambda: [0] * len(periods))
     layer_counts = Counter()
     layer_years = defaultdict(Counter)
     for gid, r in enumerate(recs + bridges):
@@ -532,6 +535,9 @@ def main(area="centro"):
             if YEAR_MIN <= ay <= 2026:
                 year, yfrom, yto, period, flag = ay, ay, ay, (0 if ay < 1800 else 1 if ay < 1900 else 2), 0
                 dsrc_code = D_SRC["itwiki"]
+        # Слот по доказательству: год и узкий интервал дают свой век, широкий до-1800-й класс и
+        # отсутствие даты — два ярлыка вне оси. Грубые индексы в ветвях выше больше не используются.
+        period = slot_of(flag, yfrom, yto, year)
         hist[year][period] += 1 if not is_bridge else 0
 
         h, hsrc = pr.get("height_used"), pr.get("height_source")
@@ -693,6 +699,9 @@ def main(area="centro"):
         "origin": [round(ox, 3), round(oy, 3)], "crs": config.CRS_METRIC,
         "home": {"x": -260, "z": -180, "azimuth": 20, "elevation": 30, "span": 3000},
         "periods": periods, "yearMin": YEAR_MIN, "yearMax": 2026,
+        # Владелец атласа: весь XX век синий, но после 1945 года тон темнее. Граница лежит в данных,
+        # чтобы вьюер и легенда читали одну и ту же.
+        "postwar": {"from": POSTWAR_FROM, "color": POSTWAR_COLOR},
         "histogram": {str(k): v for k, v in sorted(hist.items())},
         "attrStride": ATTR_DTYPE.itemsize,
         "attrFields": {n: [ATTR_DTYPE.fields[n][1], ATTR_DTYPE.fields[n][0].str] for n in ATTR_DTYPE.names if n != "pad"},

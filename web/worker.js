@@ -77,10 +77,10 @@ function build(t) {
   bld.set(t.meshBld, v);
   for (let i = 0; i < t.meshTri.length; i++) idx[k + i] = v + t.meshTri[i];
   v += t.meshBld.length; k += t.meshTri.length;
-  // Per-building lookup, two texels: [year, period + 16*flag, floors + 128*heritage, global id], [layer bits in four 16-bit words].
+  // Per-building lookup, two texels: [year, age slot + 32*flag, floors + 128*heritage, global id], [layer bits in four 16-bit words].
   const attr = new Float32Array(t.nB * 8);
   for (let b = 0; b < t.nB; b++) {
-    attr.set([t.year[b], t.period[b] + 16 * t.flag[b], Math.min(t.floors[b], 127) + 128 * t.heritage[b], t.gid[b],
+    attr.set([t.year[b], t.period[b] + 32 * t.flag[b], Math.min(t.floors[b], 127) + 128 * t.heritage[b], t.gid[b],
       t.lay0[b] & 0xffff, t.lay0[b] >>> 16, t.lay1[b] & 0xffff, t.lay1[b] >>> 16], b * 8);
   }
   return { pos: pos.subarray(0, v * 3), bld: bld.subarray(0, v), idx: idx.subarray(0, k), attr, origin: t.origin, nB: t.nB,

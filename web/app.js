@@ -62,6 +62,9 @@ const [config, layers, attrBuf, subData, subOf, churchBuildings] = await Promise
 const attrs = new DataView(attrBuf);
 const HERITAGE_COLORS = config.heritage.colors;
 const periods = config.periods;
+// Владелец атласа: после 1945 года тон темнее. Граница приходит из данных.
+const POSTWAR = config.postwar?.from ?? 1946;
+const POSTWAR_COLOR = config.postwar?.color ?? '#2f3f6b';
 const fmt = n => n.toLocaleString('en-AU');
 
 // ---------- Scene ----------
@@ -327,11 +330,23 @@ for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) 
   if (churchGids.has(gid)) kindData[gid] = 1;
   else if (src === 1 || src === 2) kindData[gid] = 3; // a bridge: a deck, or a bridge with buildings on it
   else {
-    const sp = attrs.getUint32(o + config.attrFields.sp[0], true);
-    const period = sp % 16;
-    if (period === 2) kindData[gid] = 2; // novecentesche / 20th century
+    // The kind picks the colour the shader cannot read from the year: the 20th century in two blues
+    // (lighter up to 1945, the owner's deep blue after), «before 1800 without a century» and «no date».
+    // Every other building is painted by its own age slot through uPalette.
+    const flag = attrs.getUint8(o + config.attrFields.flag[0]);
+    const sp = attrs.getUint32(o + config.attrFields.sp[0], true) % 32;
+    const year = attrs.getInt16(o + config.attrFields.year[0], true);
+    const yfrom = attrs.getInt16(o + config.attrFields.yfrom[0], true);
+    const yto = attrs.getInt16(o + config.attrFields.yto[0], true);
+    if (flag === 2) kindData[gid] = 6;                                                       // no date at all
+    else if (flag === 1 && yto - yfrom > 99 && yfrom <= 1799 && yto >= 1800) kindData[gid] = 5; // before 1800, no century
+    else if ((flag === 0 && year >= POSTWAR) || (flag === 1 && yfrom >= POSTWAR)) kindData[gid] = 4; // after 1945
+    else if (sp === 14 || sp === 15) kindData[gid] = 2;                                      // 20th–21st century
   }
 }
+// Сколько зданий в каждой ветви-цвете: нужно легенде.
+const kindCount = {};
+for (const v of kindData) if (v > 0.5) kindCount[v] = (kindCount[v] || 0) + 1;
 const kindTex = new THREE.DataTexture(kindData, SUB_W, Math.ceil(nB / SUB_W), THREE.RedFormat, THREE.FloatType);
 kindTex.needsUpdate = true;
 const uniforms = {
@@ -443,8 +458,9 @@ const VERT = /* glsl */`
     vec4 lay = texelFetch(uAttr, tc + ivec2(1, 0), 0);
     float year = a.x;
     int pf = int(a.y + 0.5);
-    int period = pf % 16;
-    int flag = pf / 16;
+    // Слот шкалы: 16 веков и два ярлыка вне времени — 32 значения на слот, флаг в старших битах.
+    int period = pf % 32;
+    int flag = pf / 32;
     vGid = a.w;
     vShaped = shaped ? 1.0 : 0.0;
     float vis = uMode < 0.5 ? uMask[period] : 1.0;
@@ -471,10 +487,13 @@ const VERT = /* glsl */`
       // New age-of-city palette: churches/teal, old buildings/terracotta, 20th century/Palazzo blue.
       int gi = int(a.w + 0.5);
       float k = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
-      if (k > 2.5) c = vec3(0.604, 0.627, 0.651);      // bridges: the decks over the canals #9aa0a6
-      else if (k > 1.5) c = vec3(0.184, 0.243, 0.420); // 20th century: Palazzo delle prigioni blue #2f3f6b
-      else if (k > 0.5) c = vec3(0.380, 0.576, 0.580);       // churches, temples, monasteries, synagogues #619394
-      else c = vec3(0.557, 0.212, 0.204);                    // old buildings: terracotta roofs #8e3634
+      if (k > 5.5) c = vec3(0.435, 0.447, 0.463);       // no date at all: neutral #6f7276
+      else if (k > 4.5) c = vec3(0.478, 0.404, 0.369);  // before 1800, century unknown #7a675e
+      else if (k > 3.5) c = vec3(0.184, 0.243, 0.420);  // after 1945: the owner's deep blue #2f3f6b
+      else if (k > 2.5) c = vec3(0.604, 0.627, 0.651);  // bridges: the decks over the canals #9aa0a6
+      else if (k > 1.5) c = vec3(0.290, 0.361, 0.561);  // 20th century up to 1945, lighter blue #4a5c8f
+      else if (k > 0.5) c = vec3(0.380, 0.576, 0.580);  // churches, temples, monasteries, synagogues #619394
+      else c = uPalette[period];                        // the building's own century on the timeline
       // Estimated years are paler; with "documented only" they leave the colour altogether.
       // Places of worship keep their colour: their volume comes from the shading, not from a flat fill.
       if (flag >= 1 && k <= 0.5) c = mix(c, uMaquette, uDocOnly > 0.5 && flag >= 2 ? 1.0 : 0.32);
@@ -677,8 +696,8 @@ const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу эт
 const heightNote = i => t(HEIGHT_NOTE[i] || 'оценка');
 const range = b => b.yfrom !== b.yto ? `${b.yfrom}–${b.yto}` : `${b.yfrom}`;
 // The age of a Venice building is rarely a year: an interval is shown as the epoch it belongs to.
-const EPOCH_NAME = ['до 1800 года', 'XIX век', 'XX век', 'неизвестен'];
-const epochName = i => t(EPOCH_NAME[i] || 'неизвестен');
+// Имя возраста берётся из таблицы шкалы: век, либо один из двух ярлыков вне времени.
+const epochName = i => { const p = periods[i]; return p ? pickText(p.name || p.label) : t('неизвестен'); };
 const whenOf = b => b.flag === 0 ? `${b.year}` : (b.flag === 2 ? t('год неизвестен') : epochName(b.sp));
 // How the year is known, in a sentence.
 function datingNote(b, w, h) {
@@ -1450,8 +1469,18 @@ function renderKey() {
     const solo = on.length === 1 ? periods[on[0]] : null;
     keyEl.innerHTML = (solo ? `<button class="chip k-all">${dot(solo.color)}${t('Только {name}', { name: ageParts(solo).name })} <span class="n">${fmt(totals[on[0]])}</span>${CLOSE}</button>`
       : `<span class="key-label">Each station on the line is an age: choose one to see its buildings</span>`) +
+      // Две синие ступени и два ярлыка вне времени: без подписи синий читается как один цвет.
+      `<span class="key-label">${dot('#4a5c8f')}${esc(pickText(periods[14].name))} <span class="n">${fmt(kindCount[2] || 0)}</span></span>` +
+      `<span class="key-label">${dot(POSTWAR_COLOR)}${t('после 1945 года')} <span class="n">${fmt(kindCount[4] || 0)}</span></span>` +
+      [16, 17].map(i => `<button class="chip b-bucket" data-b="${i}" aria-pressed="${!!maskTarget[i]}">${dot(periods[i].color)}${esc(pickText(periods[i].label))} <span class="n">${fmt(totals[i])}</span></button>`).join('') +
       `<button class="chip k-est" aria-pressed="${!uniforms.uDocOnly.value}" title="Estimated years are paler; switch them off to see the documented and strata years alone">${dot('#d9b2a8')}Estimated years</button>`;
     keyEl.querySelector('.k-all')?.addEventListener('click', () => { maskTarget = periods.map(() => 1); updateRail(); renderKey(); drawHist(); });
+    keyEl.querySelectorAll('.b-bucket').forEach(b => b.onclick = () => {
+      const i = +b.dataset.b;
+      maskTarget[i] = maskTarget[i] ? 0 : 1;
+      uniforms.uMask.value = maskTarget;
+      updateRail(); renderKey(); drawHist();
+    });
     keyEl.querySelector('.k-est').onclick = () => { uniforms.uDocOnly.value = uniforms.uDocOnly.value ? 0 : 1; renderKey(); };
   } else if (mode === MODE.floors) {
     const stops = ['1', '3', '8', '20', '40+'];
@@ -1516,8 +1545,12 @@ const xOf = y => (y - T0) / (T1 - T0) * hist.clientWidth;
 const yearOf = x => Math.round(T0 + x / hist.clientWidth * (T1 - T0));
 const pct = y => `${((y - T0) / (T1 - T0) * 100).toFixed(3)}%`;
 const NEUTRAL = '#a9a59c';
-rail.innerHTML = periods.map((p, i) => {
-  const { dates, name } = ageParts(p), end = i < periods.length - 1 ? periods[i + 1].from : T1;
+// На рельсе только то, что лежит во времени: 16 веков. Два ярлыка («до 1800 года» и «неизвестен»)
+// стоят вне оси и живут кнопками в легенде.
+const axisPeriods = periods.filter(p => p.axis !== false);
+rail.innerHTML = axisPeriods.map((p, j) => {
+  const i = periods.indexOf(p);
+  const { dates, name } = ageParts(p), end = j < axisPeriods.length - 1 ? axisPeriods[j + 1].from : T1;
   return `<i style="left:${pct(p.from)};width:calc(${pct(end)} - ${pct(p.from)})"></i>
     <button class="station" data-i="${i}" style="left:${pct(p.from)}" aria-label="${esc(dates)} ${esc(name)}: ${fmt(totals[i])} buildings" title="${esc(name)}"><span>${p.from}</span></button>`;
 }).join('');
@@ -1530,18 +1563,21 @@ stations.forEach(b => b.onclick = () => {
     renderKey();
   } else {
     stopPlay();
-    uniforms.uYear.value = Math.min(config.yearMax, i < periods.length - 1 ? periods[i + 1].from - 1 : config.yearMax);
+    // Клик по веку ставит шкалу на его последний год: на рельсе только века, ярлыки вне её.
+    const next = axisPeriods[axisPeriods.indexOf(periods[i]) + 1];
+    uniforms.uYear.value = Math.min(config.yearMax, next ? next.from - 1 : config.yearMax);
   }
   updateRail(); drawHist();
 });
 function updateRail() {
   const Y = uniforms.uYear.value, ages = uniforms.uMode.value === MODE.period, now = periods.indexOf(periodOf(Math.round(Y)));
-  periods.forEach((p, i) => {
-    const end = i < periods.length - 1 ? periods[i + 1].from : T1, f = Math.max(0, Math.min(1, (Y - p.from + 1) / (end - p.from)));
+  axisPeriods.forEach((p, j) => {
+    const i = periods.indexOf(p);
+    const end = j < axisPeriods.length - 1 ? axisPeriods[j + 1].from : T1, f = Math.max(0, Math.min(1, (Y - p.from + 1) / (end - p.from)));
     const c = ages ? p.color : NEUTRAL, off = ages && !maskTarget[i];
-    segs[i].style.background = `linear-gradient(90deg, ${c} ${(f * 100).toFixed(1)}%, ${c}38 ${(f * 100).toFixed(1)}%)`;
-    segs[i].style.opacity = off ? 0.25 : 1;
-    const s = stations[i];
+    segs[j].style.background = `linear-gradient(90deg, ${c} ${(f * 100).toFixed(1)}%, ${c}38 ${(f * 100).toFixed(1)}%)`;
+    segs[j].style.opacity = off ? 0.25 : 1;
+    const s = stations[j];
     s.style.setProperty('--c', c);
     s.classList.toggle('past', p.from <= Y);
     s.classList.toggle('now', i === now && Y < config.yearMax);
@@ -1634,6 +1670,8 @@ function drawHist() {
   }
   hctx.globalAlpha = 1;
   if (Yf >= config.yearMin) { hctx.fillStyle = MUTED; hctx.fillRect(xOf(Yf) - 0.5, 0, 1, plotH); }
+  // Граница послевоенного тона: в XX веке она проходит по 1945 году, и легенда объясняет её здесь же.
+  if (ages && config.postwar) { hctx.fillStyle = '#6f7276'; hctx.fillRect(xOf(config.postwar.from) - 0.5, 0, 1, plotH); }
   hctx.fillStyle = INK;
   hctx.fillRect(xOf(Y) - 0.75, 0, 1.5, plotH + (phone.matches ? 4 : 6));
   updateRail();
