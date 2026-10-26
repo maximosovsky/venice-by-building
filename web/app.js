@@ -1614,6 +1614,13 @@ function setMode(m) {
 // геометрия и числа — только из проверенного data/bridge-route.json) и показывает линию на карте.
 document.querySelectorAll('.lenses button').forEach(b => b.onclick = () => {
   const m = +b.dataset.mode;
+  // «Мосты» работают так же, как «Сакральное»: нажал — на карте линия маршрута и номера мостов,
+  // отжал — линия и номера скрыты, как прежняя кнопка «Скрыть линию». Ничего больше не меняется.
+  if (m === MODE.layers && uniforms.uMode.value === MODE.layers && bridgeRoute.visible) {
+    bridgeRoute.setVisible(false);
+    b.setAttribute('aria-pressed', 'false');
+    return;
+  }
   // «Сакральное» — переключатель линии и номеров: первое нажатие открывает список и показывает линию
   // с чёрными номерами зданий, повторное скрывает линию и номера, как прежняя кнопка «Скрыть линию».
   if (m === MODE.floors && uniforms.uMode.value === MODE.floors && churchRoute.overlay?.visible) {

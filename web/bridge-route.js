@@ -499,6 +499,8 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   const unsubscribe = onLang(() => { if (getDockView() === 'bridge-route') render(true); });
   return {
     show, load, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing, spriteAt,
+    // Вкладке нужно знать, показана ли линия: она работает переключателем, как «Сакральное».
+    get visible() { return !!overlay?.visible; },
     listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML(state, pickText); },
     wireList() { dockLive.querySelector('[data-bridge-route-open]')?.addEventListener('click', show); },
     dispose() { if (disposed) return; disposed = true; onVisibilityChange(false); unsubscribe?.();
