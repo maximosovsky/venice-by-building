@@ -61,6 +61,14 @@ try {
  await page.locator('[data-bridge-route-toggle]').click();
  assert.equal(await page.locator('[data-bridge-route-toggle]').getAttribute('aria-pressed'),'true');
  await page.locator('[data-crossing="2"]').click();
+ // Владелец атласа: нажатие на номер выводит карточку самого моста, а панель маршрута возвращается
+ // кнопкой «Мосты» на месте.
+ await page.locator('.b-card').waitFor({timeout:15000});
+ const bridgeCard = (await page.locator('#dock-live h2').innerText()).trim();
+ assert.ok(bridgeCard.length > 1, 'переход открывает карточку моста');
+ assert.equal((await page.locator('.dock-back').innerText()).trim().length > 0, true, 'из карточки моста видно возвращение к маршруту');
+ await page.locator('.dock-back').click();
+ await panel.waitFor({timeout:15000});
  assert.equal(await page.locator('[data-crossing="2"]').getAttribute('aria-current'),'step');
  await page.locator('[data-bridge-route-toggle]').click();
  assert.equal(await page.locator('[data-bridge-route-toggle]').getAttribute('aria-pressed'),'false');

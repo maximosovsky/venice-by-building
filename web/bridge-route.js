@@ -23,7 +23,7 @@ export const UI = {
   focus: { ru: 'К началу маршрута', it: 'Vai alla partenza', en: 'Go to start' },
   gpx: { ru: 'Скачать GPX', it: 'Scarica GPX', en: 'Download GPX' },
   crossings: { ru: 'Переходы по порядку', it: 'Attraversamenti in ordine', en: 'Crossings in order' },
-  directions: { ru: 'Стрелки показывают направление. Красным выделены все включённые мосты; у каждого — номер первого перехода. Выбранный переход отмечается отдельно. Полный порядок, включая повторы, — в списке ниже.', it: 'Le frecce indicano la direzione. Tutti i ponti inclusi sono evidenziati in rosso e numerati al primo attraversamento. L’attraversamento scelto è segnato separatamente. L’elenco seguente riporta l’ordine completo, comprese le ripetizioni.', en: 'Arrows show direction. All included bridges are highlighted red and numbered at their first crossing. The selected crossing is marked separately. The full order, including repeats, is listed below.' },
+  directions: { ru: 'Полоса идёт по земле от начала к концу маршрута; сами мосты подсвечены красным, номера на карте и в списке — порядок первого перехода. Выбранный переход отмечается отдельно. Полный порядок, включая повторы, — в списке ниже.', it: 'La fascia corre a terra dalla partenza all’arrivo; i ponti stessi sono evidenziati in rosso e i numeri sulla mappa e in elenco indicano l’ordine del primo attraversamento. L’attraversamento scelto è segnato separatamente. L’elenco seguente riporta l’ordine completo, comprese le ripetizioni.', en: 'The band runs on the ground from start to finish. The bridges themselves are highlighted red, and the numbers on the map and in the list give the order of the first crossing. The selected crossing is marked separately. The full order, including repeats, is listed below.' },
   source: { ru: 'Источник и ограничения', it: 'Fonte e limiti', en: 'Source and limitations' },
   caveat: { ru: 'Маршрут рассчитан по опубликованному пешеходному графу, а не по обследованию на месте. Доступность, закрытия, ступени и условия прохода могут измениться. Полнота относится к включённым в набор данным мостам, а не к гарантированно полному городскому реестру. Минимальность общей длины не гарантируется.', it: 'Il percorso è calcolato sul grafo pedonale pubblicato, non su un sopralluogo. Accessibilità, chiusure, gradini e condizioni di passaggio possono cambiare. La copertura riguarda i ponti inclusi nei dati, non un registro cittadino garantito completo. La lunghezza totale minima non è garantita.', en: 'The route is calculated from the published pedestrian graph, not a field survey. Access, closures, steps and passage conditions may change. Coverage refers to bridges included in the dataset, not a guaranteed complete city register. Minimum total walking distance is not guaranteed.' },
   excluded: { ru: 'Исключённые объекты', it: 'Elementi esclusi', en: 'Excluded objects' },
@@ -186,24 +186,22 @@ export function routePanelHTML(route, state = {}, pickText) {
   </article>`;
 }
 
-// The dataset already uses the atlas's metric x/z frame. y is deliberately a visual overlay, not a surveyed height.
-export function routeGeometry(route, elevation = 24) {
-  const points = route.local.map(([x, z]) => [x, elevation, z]), arrows = [];
-  let since = 220;
-  for (let i = 1; i < points.length; i++) {
-    const a = points[i - 1], b = points[i], dx = b[0] - a[0], dz = b[2] - a[2], d = Math.hypot(dx, dz);
-    if (d < 0.01) continue;
-    since += d;
-    if (since < 220) continue;
-    since = 0;
-    const ux = dx / d, uz = dz / d, x = (a[0] + b[0]) / 2, z = (a[2] + b[2]) / 2, size = Math.min(14, d / 3);
-    const tip = [x + ux * size, elevation + 1, z + uz * size];
-    arrows.push([x - ux * size - uz * size * .65, elevation + 1, z - uz * size + ux * size * .65], tip,
-      [x - ux * size + uz * size * .65, elevation + 1, z - uz * size - ux * size * .65], tip);
-  }
-  return { points, arrows };
+// Полоса маршрута лежит на земле: тонкая линия на высоте 24 м читалась как второй город над городом.
+// Малиновый, толстый, полупрозрачный; мосты подсвечивает сама карта, поэтому копий мостов в оверлее нет.
+export const GROUND_HEIGHT = 1.2;
+export const MARKER_HEIGHT = 3;
+export const BAND_COLOR = '#a3125c';
+export const BAND_WIDTH = 14;
+export const BAND_OPACITY = .5;
+
+// The dataset already uses the atlas's metric x/z frame. y here is the band's own small lift off the
+// ground, not a surveyed height: the route is drawn where the walker walks.
+export function routeGeometry(route, elevation = GROUND_HEIGHT) {
+  const points = route.local.map(([x, z]) => [x, elevation, z]);
+  return { points };
 }
 
+// Номер перехода лежит у самой земли рядом с мостом: он подписывает место, а не висит над городом.
 function numberedMarker(THREE, n, x, z, selected = false) {
   if (typeof document === 'undefined') return null;
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 64;
@@ -215,7 +213,7 @@ function numberedMarker(THREE, n, x, z, selected = false) {
   ctx.fillStyle = '#ff0000'; ctx.fillText(String(n), 32, 33);
   const texture = new THREE.CanvasTexture(canvas);
   const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, depthWrite: false }));
-  marker.position.set(x, 38, z); marker.scale.set(48, 48, 1); marker.renderOrder = selected ? 33 : 32;
+  marker.position.set(x, MARKER_HEIGHT, z); marker.scale.set(18, 18, 1); marker.renderOrder = selected ? 33 : 32;
   return marker;
 }
 
@@ -239,9 +237,9 @@ export function buildThickRouteLine(THREE, points) {
   geometry.setAttribute('segmentEnd', new THREE.Float32BufferAttribute(ends, 3));
   geometry.setAttribute('corner', new THREE.Float32BufferAttribute(corners, 2));
   const material = new THREE.ShaderMaterial({
-    uniforms: { resolution: { value: new THREE.Vector2(1, 1) }, strokeWidth: { value: 3 },
-      color: { value: new THREE.Color('#b04f3e') }, opacity: { value: .95 }, dashLength: { value: 0 } },
-    depthTest: false, depthWrite: false, transparent: true, side: THREE.DoubleSide,
+    uniforms: { resolution: { value: new THREE.Vector2(1, 1) }, strokeWidth: { value: BAND_WIDTH },
+      color: { value: new THREE.Color(BAND_COLOR) }, opacity: { value: BAND_OPACITY }, dashLength: { value: 0 } },
+    depthTest: true, depthWrite: false, transparent: true, side: THREE.DoubleSide,
     vertexShader: `
       uniform vec2 resolution;
       uniform float strokeWidth;
@@ -299,51 +297,28 @@ export function buildThickRouteLine(THREE, points) {
   return mesh;
 }
 
-// One group and one mesh per included physical bridge; never synthesize deck bounds.
-function bridgeHighlight(THREE, bridge) {
-  const group = new THREE.Group();
-  group.name = `bridge-highlight:${bridge.id}`; group.userData.bridge_id = bridge.id;
-  let mesh;
-  if (bridge.deck_local?.length) {
-    const shapes = bridge.deck_local.map(polygon => {
-      const shape = new THREE.Shape(polygon[0].map(([x, z]) => new THREE.Vector2(x, -z)));
-      shape.holes = polygon.slice(1).map(ring => new THREE.Path(ring.map(([x, z]) => new THREE.Vector2(x, -z))));
-      return shape;
-    });
-    const geometry = new THREE.ShapeGeometry(shapes);
-    geometry.rotateX(-Math.PI / 2); geometry.translate(0, 26, 0);
-    mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({ color: '#ff0000',
-      side: THREE.DoubleSide, depthTest: false, depthWrite: false }));
-    group.userData.geometry_source = 'deck_local';
-  } else {
-    mesh = buildThickRouteLine(THREE, bridge.path_local.map(([x, z]) => [x, 26, z]));
-    mesh.material.uniforms.color.value.set('#ff0000');
-    mesh.material.uniforms.strokeWidth.value = 7; mesh.material.uniforms.opacity.value = 1;
-    group.userData.geometry_source = 'path_local';
-  }
-  mesh.name = `bridge-highlight-mesh:${bridge.id}`; mesh.renderOrder = 31;
-  group.add(mesh);
-  return group;
-}
-
-export function buildRouteOverlay(THREE, route) {
+// Владелец атласа: не дублировать мосты выше. Копий настилов в 26 м над городом здесь больше нет —
+// сами мосты подсвечивает карта (вкладка «Мосты»), а оверлей рисует только полосу по земле и номера.
+export function buildRouteOverlay(THREE, route, resolveBridgeGid = () => -1) {
   validateRoute(route);
   const group = new THREE.Group(); group.name = 'all-bridges-route';
-  const vectors = values => values.map(p => new THREE.Vector3(...p));
   const legs = route.visit_mode ? route.legs : [{ mode: 'walk', local: route.local }];
   legs.forEach((leg, i) => {
     const data = routeGeometry(leg), line = buildThickRouteLine(THREE, data.points);
+    // Вся полоса одного малинового цвета, независимо от того, идёт человек или трагетто.
     if (route.visit_mode) { line.userData.route_leg = i; line.userData.mode = leg.mode; }
-    if (leg.mode === 'boat') styleFerryLine(line);
     group.add(line);
-    const arrows = new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vectors(data.arrows)),
-      new THREE.LineBasicMaterial({ color: leg.mode === 'boat' ? '#168bd2' : '#345a60', depthTest: false, depthWrite: false }));
-    arrows.renderOrder = 31; group.add(arrows);
   });
-  route.bridges.forEach(bridge => group.add(bridgeHighlight(THREE, bridge)));
   // Every unique bridge keeps its first-crossing number; repeats remain in the full list.
   route.crossings.forEach((c, index) => {
-    if (!c.repeat) { const marker = numberedMarker(THREE, index + 1, c.x, c.z); if (marker) group.add(marker); }
+    if (c.repeat) return;
+    const marker = numberedMarker(THREE, index + 1, c.x, c.z);
+    if (!marker) return;
+    // Номер помнит свой переход и мост: по нему открывается карточка моста.
+    marker.userData.crossing = index;
+    marker.userData.bridge_id = c.bridge_id || null;
+    marker.userData.gid = resolveBridgeGid(c.bridge_id);
+    group.add(marker);
   });
   return group;
 }
@@ -386,7 +361,7 @@ function disposeObject(object) {
 }
 
 // The installer owns only its dock view and scene group; it does not change quests, picking, cards or renderer.
-export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, onVisibilityChange = () => {}, fetchRoute = (url, options) => fetch(url, options) }) {
+export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, getDockView, showWalks, pickText, onLang, resolveBridgeGid = () => -1, openBuildingCard = () => {}, onVisibilityChange = () => {}, fetchRoute = (url, options) => fetch(url, options) }) {
   const state = { status: 'idle', route: null, original: null, visible: false, selected: -1,
     variants: [], variantStatus: 'idle', traghetti: [], traghettiVisible: false };
   let pending = null, variantPending = null, overlay = null, ferryOverlay = null, selectedMarker = null, disposed = false;
@@ -480,7 +455,7 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   }
   function retry() { if (pending || variantPending || disposed) return pending || variantPending;
     state.status = 'idle'; state.variantStatus = 'idle'; const result = load(); refresh(); return result; }
-  function ensureOverlay() { if (!overlay && state.route && !disposed) { overlay = buildRouteOverlay(THREE, state.route); scene.add(overlay); } return overlay; }
+  function ensureOverlay() { if (!overlay && state.route && !disposed) { overlay = buildRouteOverlay(THREE, state.route, resolveBridgeGid); scene.add(overlay); } return overlay; }
   function setVisible(visible) {
     if (state.status !== 'ready' || disposed) return;
     state.visible = !!visible;
@@ -496,11 +471,25 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     if (selectedMarker) { overlay.remove(selectedMarker); disposeObject(selectedMarker); }
     selectedMarker = numberedMarker(THREE, index + 1, c.x, c.z, true); if (selectedMarker) overlay.add(selectedMarker);
     aimFly(c.x, c.z, 260);
+    // Владелец атласа: нажатие на цифру выводит карточку самого моста, а не только летит к нему.
+    const gid = resolveBridgeGid(c.bridge_id);
+    if (gid >= 0) openBuildingCard(gid);
     if (getDockView() === 'bridge-route') render(true);
+  }
+  // Клик по номеру на карте: спрайты лежат в группе маршрута и помнят свой мост.
+  function spriteAt(clientX, clientY, camera, size = [globalThis.innerWidth || 1, globalThis.innerHeight || 1]) {
+    if (disposed || !overlay?.visible) return null;
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera({ x: (clientX / size[0]) * 2 - 1, y: -(clientY / size[1]) * 2 + 1 }, camera);
+    for (const hit of raycaster.intersectObjects(overlay.children, false)) {
+      const gid = hit.object?.userData?.gid;
+      if (Number.isInteger(gid) && gid >= 0) return { gid, crossing: hit.object.userData.crossing, bridge_id: hit.object.userData.bridge_id };
+    }
+    return null;
   }
   const unsubscribe = onLang(() => { if (getDockView() === 'bridge-route') render(true); });
   return {
-    show, load, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing,
+    show, load, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing, spriteAt,
     listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML(state, pickText); },
     wireList() { dockLive.querySelector('[data-bridge-route-open]')?.addEventListener('click', show); },
     dispose() { if (disposed) return; disposed = true; onVisibilityChange(false); unsubscribe?.();

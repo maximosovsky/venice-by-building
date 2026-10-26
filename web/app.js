@@ -28,7 +28,8 @@ const INK = '#2c2f2a';
 const MUTED = '#5f625c';
 const ACCENT = '#b04f3e';
 // Layer groups, in a fixed order checked for colour-blind separation between neighbours (design/README.md).
-const GROUP_COLORS = ['#c0594e', '#2a7f93', '#d9a22c', '#5e8f4a', '#6b4a8c', '#c4687f', '#8a5a32', '#34548a'];
+// Вкладка «Мосты»: первый цвет палитры — цвет группы мостов. Владелец просил подсветить их красным.
+const GROUP_COLORS = ['#c62828', '#2a7f93', '#d9a22c', '#5e8f4a', '#6b4a8c', '#c4687f', '#8a5a32', '#34548a'];
 const MAX_GROUPS = GROUP_COLORS.length;
 const ATTR_W = 256;
 const WORKERS = Math.min(4, navigator.hardwareConcurrency || 2);
@@ -511,7 +512,14 @@ const VERT = /* glsl */`
     } else if (uMode < 2.5) {
       c = uHeritage[int(a.z / 128.0)];
     } else if (uMode < 3.5) {
+      // Вкладка «Мосты»: город — макет, мосты красные (цвет своей группы), а храмы, монастыри и
+      // синагоги сохраняют бирюзу главной вкладки: этот цвет владелец просил не менять.
       c = uMaquette;
+      {
+        int gi = int(a.w + 0.5);
+        float kk = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
+        if (kk > 0.5 && kk < 1.5) c = vec3(0.380, 0.576, 0.580);  // churches #619394, as on the main map
+      }
       for (int g = 0; g < ${MAX_GROUPS}; g++) {
         if (uGroupBit[g] >= 0 && hasBit(lay, uGroupBit[g])) {
           c = uGroupColor[g];
@@ -695,6 +703,17 @@ const ready = Promise.all([
   // Легенда рисуется раньше, чем приходят файлы: после палаццо её счёт нужно переписать.
   renderKey();
 });
+
+// Мосты мостового маршрута приходят как «d<osm way id>». Атлас знает тот же osm-id, поэтому карточку
+// моста можно открыть прямо по номеру перехода.
+const gidByOsmId = new Map();
+for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
+  gidByOsmId.set(Math.round(attrs.getFloat64(o + config.attrFields.osm[0], true)), gid);
+}
+function resolveBridgeGid(bridgeId) {
+  const digits = String(bridgeId ?? '').replace(/\D/g, '');
+  return digits ? (gidByOsmId.get(Number(digits)) ?? -1) : -1;
+}
 const esc = s => sourcePresentationText(s, getLang()).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const link = (href, text) => {
   const target = sourcePresentationHref(href);
@@ -899,6 +918,9 @@ canvas.addEventListener('pointerup', e => {
   dragging = false;
   if (!downAt) return;
   if (Math.hypot(e.clientX - downAt[0], e.clientY - downAt[1]) > 5) return;
+  // Номер маршрута важнее здания под ним: нажатие на цифру открывает карточку самого моста.
+  const routeMarker = bridgeRoute.spriteAt(e.clientX, e.clientY, camera, [innerWidth, innerHeight]);
+  if (routeMarker) { openBuilding(routeMarker.gid, { label: t('Мосты'), go: () => bridgeRoute.show() }); return; }
   const gid = pick(e.clientX, e.clientY);
   if (quest && !solved && qStep().kind === 'find') { questClick(gid); return; }
   if (cardsLocked()) return;
@@ -1055,7 +1077,9 @@ fetch('data/quests.json').then(r => r.ok ? r.json() : []).then(q => { quests = q
 const LEVEL = ['', 'Easy', 'Medium', 'Hard'];
 const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
-  onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('bridge', visible) });
+  // Мост маршрута → gid атласа: по цифре открывается карточка самого моста.
+  resolveBridgeGid,
+  openBuildingCard: gid => openBuilding(gid, { label: t('Мосты'), go: () => bridgeRoute.show() }) });
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
   onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
@@ -1533,7 +1557,8 @@ function setMode(m) {
   // У маршрутного модуля есть setVisible, а setSourceVisible нет ни у него, ни в bridge-route.js:
   // из-за этой строки setMode падал первой же строкой и вкладки не переключались вовсе.
   bridgeRoute.setVisible(m === MODE.layers);
-  churchBuildingHighlight.setSourceVisible('bridges-tab', m === MODE.layers);
+  // Раньше здесь включался зелёный оверлей храмовых зданий для вкладки «Мосты»: храмы теряли свою
+  // бирюзу. Владелец атласа потребовал оставить им цвет главной вкладки — источник убран.
   hoverGid = -1;
   document.querySelectorAll('.lenses button').forEach(x => x.setAttribute('aria-pressed', String(+x.dataset.mode === m)));
   const bits = Array(MAX_GROUPS).fill(-1);
