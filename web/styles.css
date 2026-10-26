@@ -167,10 +167,10 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 .b-photo + .b-head { padding-top: 8px; }
 .b-head h2 { margin: 0 0 2px; font: 400 27px/1.08 var(--fell); }
 .b-when { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.b-when .y { font: 400 44px/1 var(--serif); font-variant-numeric: lining-nums tabular-nums; }
-.b-when .age { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); }
+.b-when .y { font: 400 44px/1 var(--fell); font-variant-numeric: lining-nums tabular-nums; }
+.b-when .age { display: inline-flex; align-items: center; gap: 7px; font-family: var(--fell); color: var(--muted); }
 .b-card section { margin: 14px 24px 0; padding-top: 12px; border-top: 1px solid var(--rule); }
-.b-card h3 { margin: 0 0 6px; font: 500 12px/1.3 var(--sans); color: var(--muted); letter-spacing: .02em; }
+.b-card h3 { margin: 0 0 6px; font: 400 13px/1.3 var(--fell); color: var(--muted); letter-spacing: .03em; }
 .b-card .extract { margin: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; line-clamp: 5; overflow: hidden; }
 .b-card .extract.open { display: block; -webkit-line-clamp: unset; line-clamp: none; }
 .read-on { margin-top: 6px; padding: 0; border: 0; background: none; color: var(--ink); cursor: pointer; font-size: 12.5px; font-weight: 500;
