@@ -495,7 +495,8 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 .church-stops button[aria-current="step"] { background: var(--stone); box-shadow: inset 3px 0 var(--teal); }
 .church-stop-number { min-width: 2.5em; color: var(--teal); font-variant-numeric: tabular-nums; }
 .church-stop-detail { margin-left: calc(2.5em + 18px); padding-right: 8px; overflow-wrap: anywhere; }
-.church-stop-detail small { color: var(--muted); }
+/* Название сестьере и ссылка «Википедия» стоят в одной строке: без отступа они слипались. */
+.church-stop-detail small { color: var(--muted); margin-right: .4em; }
 .church-stop-detail p { margin: 4px 0 8px; }
 .church-route-legend { border-left: 2px dashed var(--teal); padding-left: 10px; }
 .church-transfers { margin-top: 18px; overflow-wrap: anywhere; }

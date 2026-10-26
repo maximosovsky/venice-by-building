@@ -21,7 +21,7 @@ try {
  const mask=await page.evaluate(()=>[...window.__dbg.uniforms.uPalazzo.value.image.data]);
  assert.deepEqual(mask.slice(0,expected.length),[...expected]);
  assert.ok(mask.slice(expected.length).every(v=>v===0));
- await page.locator('[data-mode="2"]').click();
+ await page.evaluate(()=>window.__dbg.setMode(2));   // вкладки «Все Palazzo» в панели больше нет
  assert.equal(await page.evaluate(()=>window.__dbg.uniforms.uMode.value),2);
  await page.waitForTimeout(1800);
  const gid=[...expected].findIndex(v=>v===1);
@@ -34,7 +34,7 @@ try {
  await page.locator('[data-mode="0"]').click();
  assert.equal(await page.evaluate(()=>window.__dbg.uniforms.uMode.value),0);
  await page.waitForTimeout(200);
- await page.locator('[data-mode="2"]').click();
+ await page.evaluate(()=>window.__dbg.setMode(2));   // вкладки «Все Palazzo» в панели больше нет
  await page.waitForTimeout(200);
  await page.evaluate(()=>window.__dbg.pick(720,500));
  assert.deepEqual(errors,[]);assert.deepEqual(shaderErrors,[]);

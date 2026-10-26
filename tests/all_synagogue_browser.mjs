@@ -14,7 +14,7 @@ try{
  await page.goto(base+'?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});
  await page.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});
  // Ни одна вкладка не включает зелёный оверлей храмов: он доступен только по своему источнику.
- for(const mode of ['0','1','2','3']){await page.locator(`.lenses [data-mode="${mode}"]`).click();assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,`вкладка ${mode} не должна красить храмы`);}
+ for(const mode of ['0','1','3']){   // вкладка «Все Palazzo» убрана владельцемawait page.locator(`.lenses [data-mode="${mode}"]`).click();assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,`вкладка ${mode} не должна красить храмы`);}
  await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',true));
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible&&(m.material.color||m.material.uniforms.uColor.value).getHexString()==='2f3f6b'),null,{timeout:30000});
  const identityMap=await page.evaluate(()=>Object.fromEntries(window.__dbg.churchBuildingHighlight.manifest.buildings.filter(b=>b.highlight_color).flatMap(b=>b.identities.map(i=>[i.qid,b.gid]))));assert.deepEqual(identityMap,{Q28035407:4521,Q65015:4521,Q12051106:4521,Q62259167:4596,Q2897799:4756});
