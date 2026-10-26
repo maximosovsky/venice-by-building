@@ -756,6 +756,14 @@ const ageParts = p => {
   return rest.length ? { dates, name: rest.join(' — ') } : { dates: '', name: full };
 };
 const nameOf = (b, w = b.wk >= 0 ? wiki[b.wk] : null) => (b.wk >= 0 ? pickText(w?.la) || wiki[b.wk]?.label : null) || (b.nm >= 0 ? names[b.nm] : null);
+// Имена архитекторов со ссылками на Википедию. Ссылки лежат в самой записи wiki.json (поле
+// architects_links, выровненное по индексу с architects_la); его собирает pipeline/venice/s13_architects.py
+// из Викиданных. Если статьи нет, имя остаётся обычным текстом — совпадение по названию не выдумывается.
+const architectList = w => {
+  const names = (w.architects_la ? pickText(w.architects_la) : w.architects) || [];
+  const links = (w.architects_links ? pickText(w.architects_links) : []) || [];
+  return names.map((name, i) => (links[i] ? link(links[i], name) : esc(name))).join(', ');
+};
 const HEIGHT_NOTE = ['измерено по тегу OSM', 'по числу этажей OSM',
   'измерено съёмкой города 2010 года', '', 'принята для моста: в OSM высот нет',
   'измерено по Викиданным'];
@@ -801,8 +809,7 @@ function buildingHtml(gid) {
                 [t('Высота'), `${b.height.toFixed(1)} м<small class="src-note">${heightNote(b.hsrc)}</small>`],
                 shape && [t('Форма'), `${esc(pickText(shape[0]))}<small class="src-note">${link(shape[2], shape[1])}</small>`],
                 !(b.src === 1) && !(shape && b.fsrc !== 0) && [t('Этажи'), `${b.floors ?? Math.max(1, Math.round(b.height / 3.2))}<small class="src-note">${b.fsrc === 0 ? t('OpenStreetMap') : t('высота ÷ 3 м')}</small>`],
-          w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'),
-        (w.architects_la ? pickText(w.architects_la) : w.architects).map(esc).join(', ')],
+          w?.architects?.length && [t(w.architects.length > 1 ? 'Архитекторы' : 'Архитектор'), architectList(w)],
           w?.styles?.length && [t('Стиль'), (w.styles_la ? pickText(w.styles_la) : w.styles).map(esc).join(', ')],
           hItem?.name && hItem.kind === 'shr' && [t('Охрана'),
         esc(pickText(hItem.name))],

@@ -1,0 +1,1735 @@
+{
+  "generated_at": "2026-10-26T21:52:41.694739+00:00",
+  "source": "Wikidata P84 (architect) and entity sitelinks ru/it/en Wikipedia",
+  "buildings_with_architects": 110,
+  "architects": [
+    {
+      "qid": "Q125211640",
+      "name": {
+        "ru": null,
+        "it": null,
+        "en": "Giuseppe Camporini"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q141466444",
+          "label": "IACP - Wohnungsbau auf der Insel Giudecca"
+        }
+      ]
+    },
+    {
+      "qid": "Q125266595",
+      "name": {
+        "ru": null,
+        "it": null,
+        "en": "Alfredo Carnelutti"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q141466444",
+          "label": "IACP - Wohnungsbau auf der Insel Giudecca"
+        }
+      ]
+    },
+    {
+      "qid": "Q125274999",
+      "name": {
+        "ru": null,
+        "it": null,
+        "en": "Giorgio Macola"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q141466444",
+          "label": "IACP - Wohnungsbau auf der Insel Giudecca"
+        }
+      ]
+    },
+    {
+      "qid": "Q1306518",
+      "name": {
+        "ru": null,
+        "it": "Ignazio Gardella",
+        "en": "Ignazio Gardella"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Ignazio_Gardella",
+        "en": "https://en.wikipedia.org/wiki/Ignazio_Gardella"
+      },
+      "buildings": [
+        {
+          "qid": "Q55292053",
+          "label": "casa alle Zattere"
+        }
+      ]
+    },
+    {
+      "qid": "Q1347426",
+      "name": {
+        "ru": "Алессандро Витториа",
+        "it": "Alessandro Vittoria",
+        "en": "Alessandro Vittoria"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D1%82%D1%82%D0%BE%D1%80%D0%B8%D0%B0%2C_%D0%90%D0%BB%D0%B5%D1%81%D1%81%D0%B0%D0%BD%D0%B4%D1%80%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Alessandro_Vittoria",
+        "en": "https://en.wikipedia.org/wiki/Alessandro_Vittoria"
+      },
+      "buildings": [
+        {
+          "qid": "Q1251035",
+          "label": "chiesa di San Zulian"
+        },
+        {
+          "qid": "Q2717786",
+          "label": "chiesa dei Santi Apostoli"
+        },
+        {
+          "qid": "Q3889580",
+          "label": "Palazzo Balbi"
+        }
+      ]
+    },
+    {
+      "qid": "Q1350301",
+      "name": {
+        "ru": "Туллио Ломбардо",
+        "it": "Tullio Lombardo",
+        "en": "Tullio Lombardo"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9B%D0%BE%D0%BC%D0%B1%D0%B0%D1%80%D0%B4%D0%BE%2C_%D0%A2%D1%83%D0%BB%D0%BB%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Tullio_Lombardo",
+        "en": "https://en.wikipedia.org/wiki/Tullio_Lombardo"
+      },
+      "buildings": [
+        {
+          "qid": "Q1028202",
+          "label": "chiesa di San Salvador"
+        },
+        {
+          "qid": "Q3673484",
+          "label": "chiesa di Santa Maria Maggiore"
+        }
+      ]
+    },
+    {
+      "qid": "Q1373325",
+      "name": {
+        "ru": null,
+        "it": "Eugenio Miozzi",
+        "en": "Eugenio Miozzi"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Eugenio_Miozzi"
+      },
+      "buildings": [
+        {
+          "qid": "Q1134699",
+          "label": "ponte della Libertà"
+        }
+      ]
+    },
+    {
+      "qid": "Q1411187",
+      "name": {
+        "ru": "Томмазо Теманца",
+        "it": "Tommaso Temanza",
+        "en": "Tommaso Temanza"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A2%D0%B5%D0%BC%D0%B0%D0%BD%D1%86%D0%B0%2C_%D0%A2%D0%BE%D0%BC%D0%BC%D0%B0%D0%B7%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Tommaso_Temanza",
+        "en": "https://en.wikipedia.org/wiki/Tommaso_Temanza"
+      },
+      "buildings": [
+        {
+          "qid": "Q2268642",
+          "label": "chiesa della Maddalena"
+        },
+        {
+          "qid": "Q3360811",
+          "label": "Palazzo Algarotti-Corniani"
+        }
+      ]
+    },
+    {
+      "qid": "Q141466437",
+      "name": {
+        "ru": null,
+        "it": null,
+        "en": "Marica Redini"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q141466444",
+          "label": "IACP - Wohnungsbau auf der Insel Giudecca"
+        }
+      ]
+    },
+    {
+      "qid": "Q1606308",
+      "name": {
+        "ru": "Санте Ломбардо",
+        "it": "Sante Lombardo",
+        "en": "Sante Lombardo"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9B%D0%BE%D0%BC%D0%B1%D0%B0%D1%80%D0%B4%D0%BE%2C_%D0%A1%D0%B0%D0%BD%D1%82%D0%B5",
+        "it": "https://it.wikipedia.org/wiki/Sante_Lombardo",
+        "en": "https://en.wikipedia.org/wiki/Sante_Lombardo"
+      },
+      "buildings": [
+        {
+          "qid": "Q1784082",
+          "label": "chiesa di San Giorgio dei Greci"
+        }
+      ]
+    },
+    {
+      "qid": "Q16853725",
+      "name": {
+        "ru": null,
+        "it": "Matteo Lucchesi",
+        "en": "Matteo Lucchesi"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Matteo_Lucchesi",
+        "en": "https://en.wikipedia.org/wiki/Matteo_Lucchesi"
+      },
+      "buildings": [
+        {
+          "qid": "Q3585345",
+          "label": "chiesa di San Giovanni Nuovo"
+        }
+      ]
+    },
+    {
+      "qid": "Q17327972",
+      "name": {
+        "ru": "Марио де Мария",
+        "it": "Mario de Maria",
+        "en": "Mario de Maria"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Mario_de_Maria",
+        "en": "https://en.wikipedia.org/wiki/Mario_de_Maria"
+      },
+      "buildings": [
+        {
+          "qid": "Q3661206",
+          "label": "Casa dei Tre Oci"
+        }
+      ]
+    },
+    {
+      "qid": "Q17661157",
+      "name": {
+        "ru": null,
+        "it": "Bartolomeo Manopola",
+        "en": "Bartolomeo Manopola"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Bartolomeo_Manopola"
+      },
+      "buildings": [
+        {
+          "qid": "Q16586358",
+          "label": "Palazzo Treves de Bonfili"
+        },
+        {
+          "qid": "Q3890719",
+          "label": "Palazzo Priuli Ruzzini"
+        }
+      ]
+    },
+    {
+      "qid": "Q177692",
+      "name": {
+        "ru": "Андреа Палладио",
+        "it": "Andrea Palladio",
+        "en": "Andrea Palladio"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9F%D0%B0%D0%BB%D0%BB%D0%B0%D0%B4%D0%B8%D0%BE%2C_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B0",
+        "it": "https://it.wikipedia.org/wiki/Andrea_Palladio",
+        "en": "https://en.wikipedia.org/wiki/Andrea_Palladio"
+      },
+      "buildings": [
+        {
+          "qid": "Q3668820",
+          "label": "chiesa dell'Ospedaletto"
+        },
+        {
+          "qid": "Q713558",
+          "label": "basilica di San Giorgio Maggiore"
+        },
+        {
+          "qid": "Q753370",
+          "label": "chiesa delle Zitelle"
+        },
+        {
+          "qid": "Q830807",
+          "label": "basilica del Redentore"
+        },
+        {
+          "qid": "Q945981",
+          "label": "basilica di San Pietro di Castello"
+        }
+      ]
+    },
+    {
+      "qid": "Q19635198",
+      "name": {
+        "ru": null,
+        "it": "Carlo Corbellini",
+        "en": "Carlo Corbellini"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Carlo_Corbellini"
+      },
+      "buildings": [
+        {
+          "qid": "Q1040043",
+          "label": "chiesa di San Geremia"
+        }
+      ]
+    },
+    {
+      "qid": "Q202267",
+      "name": {
+        "ru": "Якопо Сансовино",
+        "it": "Jacopo Sansovino",
+        "en": "Jacopo Sansovino"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B8%D0%BD%D0%BE%2C_%D0%AF%D0%BA%D0%BE%D0%BF%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Jacopo_Sansovino",
+        "en": "https://en.wikipedia.org/wiki/Jacopo_Sansovino"
+      },
+      "buildings": [
+        {
+          "qid": "Q104760787",
+          "label": "Fabbriche Nuove"
+        },
+        {
+          "qid": "Q1251035",
+          "label": "chiesa di San Zulian"
+        },
+        {
+          "qid": "Q2932205",
+          "label": "Palazzo Corner"
+        },
+        {
+          "qid": "Q980366",
+          "label": "chiesa di San Martino"
+        }
+      ]
+    },
+    {
+      "qid": "Q2327193",
+      "name": {
+        "ru": null,
+        "it": "Sebastiano Mazzoni",
+        "en": "Sebastiano Mazzoni"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Sebastiano_Mazzoni",
+        "en": "https://en.wikipedia.org/wiki/Sebastiano_Mazzoni"
+      },
+      "buildings": [
+        {
+          "qid": "Q3890523",
+          "label": "Palazzo Moro Lin"
+        }
+      ]
+    },
+    {
+      "qid": "Q2857296",
+      "name": {
+        "ru": "Антонио Гамбелло",
+        "it": "Antonio Gambello",
+        "en": "Antonio Gambello"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Antonio_Gambello"
+      },
+      "buildings": [
+        {
+          "qid": "Q794876",
+          "label": "chiesa di San Zaccaria"
+        }
+      ]
+    },
+    {
+      "qid": "Q2898904",
+      "name": {
+        "ru": null,
+        "it": "Bernardino Maccaruzzi",
+        "en": "Bernardino Maccarucci"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Bernardino_Maccaruzzi",
+        "en": "https://en.wikipedia.org/wiki/Bernardino_Maccarucci"
+      },
+      "buildings": [
+        {
+          "qid": "Q52083605",
+          "label": "Scuola Grande di San Giovanni Evangelista"
+        },
+        {
+          "qid": "Q5418235",
+          "label": "chiesa di San Rocco"
+        }
+      ]
+    },
+    {
+      "qid": "Q2977923",
+      "name": {
+        "ru": "Клод Парент",
+        "it": "Claude Parent",
+        "en": "Claude Parent"
+      },
+      "wikipedia": {
+        "en": "https://en.wikipedia.org/wiki/Claude_Parent"
+      },
+      "buildings": [
+        {
+          "qid": "Q63502874",
+          "label": "French pavilion"
+        }
+      ]
+    },
+    {
+      "qid": "Q3034767",
+      "name": {
+        "ru": "Доменико Росси",
+        "it": "Domenico Rossi",
+        "en": "Domenico Rossi"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A0%D0%BE%D1%81%D1%81%D0%B8%2C_%D0%94%D0%BE%D0%BC%D0%B5%D0%BD%D0%B8%D0%BA%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Domenico_Rossi_%28architetto%29",
+        "en": "https://en.wikipedia.org/wiki/Domenico_Rossi_%28architect%29"
+      },
+      "buildings": [
+        {
+          "qid": "Q17637992",
+          "label": "Palazzo Da Riva Valier"
+        },
+        {
+          "qid": "Q2220127",
+          "label": "chiesa di San Stae"
+        },
+        {
+          "qid": "Q3585350",
+          "label": "chiesa di San Girolamo"
+        },
+        {
+          "qid": "Q3585412",
+          "label": "chiesa di Santa Fosca"
+        },
+        {
+          "qid": "Q46592",
+          "label": "chiesa di Santa Maria Assunta detta I Gesuiti"
+        }
+      ]
+    },
+    {
+      "qid": "Q309733",
+      "name": {
+        "ru": "Винченцо Скамоцци",
+        "it": "Vincenzo Scamozzi",
+        "en": "Vincenzo Scamozzi"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BC%D0%BE%D1%86%D1%86%D0%B8%2C_%D0%92%D0%B8%D0%BD%D1%87%D0%B5%D0%BD%D1%86%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Vincenzo_Scamozzi",
+        "en": "https://en.wikipedia.org/wiki/Vincenzo_Scamozzi"
+      },
+      "buildings": [
+        {
+          "qid": "Q2219891",
+          "label": "chiesa di San Nicola da Tolentino"
+        },
+        {
+          "qid": "Q3585357",
+          "label": "chiesa di San Lazzaro dei Mendicanti"
+        },
+        {
+          "qid": "Q713558",
+          "label": "basilica di San Giorgio Maggiore"
+        }
+      ]
+    },
+    {
+      "qid": "Q313528",
+      "name": {
+        "ru": "Пьер Луиджи Нерви",
+        "it": "Pier Luigi Nervi",
+        "en": "Pier Luigi Nervi"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9D%D0%B5%D1%80%D0%B2%D0%B8%2C_%D0%9F%D1%8C%D0%B5%D1%80_%D0%9B%D1%83%D0%B8%D0%B4%D0%B6%D0%B8",
+        "it": "https://it.wikipedia.org/wiki/Pier_Luigi_Nervi",
+        "en": "https://en.wikipedia.org/wiki/Pier_Luigi_Nervi"
+      },
+      "buildings": [
+        {
+          "qid": "Q3890552",
+          "label": "Palazzo Nervi-Scattolin"
+        }
+      ]
+    },
+    {
+      "qid": "Q316297",
+      "name": {
+        "ru": "Бальдассаре Лонгена",
+        "it": "Baldassare Longhena",
+        "en": "Baldassarre Longhena"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9B%D0%BE%D0%BD%D0%B3%D0%B5%D0%BD%D0%B0%2C_%D0%91%D0%B0%D0%BB%D1%8C%D0%B4%D0%B0%D1%81%D1%81%D0%B0%D1%80%D0%B5",
+        "it": "https://it.wikipedia.org/wiki/Baldassare_Longhena",
+        "en": "https://en.wikipedia.org/wiki/Baldassare_Longhena"
+      },
+      "buildings": [
+        {
+          "qid": "Q1052171",
+          "label": "Ca' Rezzonico"
+        },
+        {
+          "qid": "Q24969339",
+          "label": "Palazzo Giustinian Lolin"
+        },
+        {
+          "qid": "Q2897799",
+          "label": "scola Spagnola"
+        },
+        {
+          "qid": "Q30914627",
+          "label": "Scuola Grande di San Teodoro"
+        },
+        {
+          "qid": "Q3585413",
+          "label": "chiesa di Santa Giustina"
+        },
+        {
+          "qid": "Q3668820",
+          "label": "chiesa dell'Ospedaletto"
+        },
+        {
+          "qid": "Q3669580",
+          "label": "chiesa di San Basso"
+        },
+        {
+          "qid": "Q3953249",
+          "label": "Scuola dei Laneri"
+        },
+        {
+          "qid": "Q52531",
+          "label": "basilica di Santa Maria della Salute"
+        },
+        {
+          "qid": "Q748689",
+          "label": "chiesa di Santa Maria di Nazareth"
+        },
+        {
+          "qid": "Q756807",
+          "label": "Ca' Pesaro"
+        }
+      ]
+    },
+    {
+      "qid": "Q327026",
+      "name": {
+        "ru": "Джузеппе Сарди",
+        "it": "Giuseppe Sardi",
+        "en": "Giuseppe Sardi"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D1%80%D0%B4%D0%B8%2C_%D0%94%D0%B6%D1%83%D0%B7%D0%B5%D0%BF%D0%BF%D0%B5",
+        "it": "https://it.wikipedia.org/wiki/Giuseppe_Sardi_%28architetto_1688%29",
+        "en": "https://en.wikipedia.org/wiki/Giuseppe_Sardi"
+      },
+      "buildings": [
+        {
+          "qid": "Q748689",
+          "label": "chiesa di Santa Maria di Nazareth"
+        }
+      ]
+    },
+    {
+      "qid": "Q3594364",
+      "name": {
+        "ru": "Зеэв Рехтер",
+        "it": "Zeev Rechter",
+        "en": "Zeev Rechter"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D1%85%D1%82%D0%B5%D1%80%2C_%D0%97%D0%B5%D1%8D%D0%B2",
+        "en": "https://en.wikipedia.org/wiki/Zeev_Rechter"
+      },
+      "buildings": [
+        {
+          "qid": "Q63769437",
+          "label": "Israeli pavilion at the Venice Biennale"
+        }
+      ]
+    },
+    {
+      "qid": "Q3619452",
+      "name": {
+        "ru": "Антонио Контин",
+        "it": "Antonio Contin",
+        "en": "Antonio Contin"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%BD%D1%82%D0%B8%D0%BD%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_Contin"
+      },
+      "buildings": [
+        {
+          "qid": "Q2261765",
+          "label": "Scuola Grande di San Fantin"
+        },
+        {
+          "qid": "Q52517",
+          "label": "ponte dei Sospiri"
+        }
+      ]
+    },
+    {
+      "qid": "Q3619635",
+      "name": {
+        "ru": "Антонио Гаспари",
+        "it": "Antonio Gaspari",
+        "en": "Antonio Gaspari"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%93%D0%B0%D1%81%D0%BF%D0%B0%D1%80%D0%B8%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_Gaspari",
+        "en": "https://en.wikipedia.org/wiki/Antonio_Gaspari"
+      },
+      "buildings": [
+        {
+          "qid": "Q1400212",
+          "label": "chiesa di San Canciano"
+        },
+        {
+          "qid": "Q2047571",
+          "label": "Palazzo Michiel dalle Colonne"
+        },
+        {
+          "qid": "Q2603961",
+          "label": "Palazzo Barbaro a San Vidal"
+        },
+        {
+          "qid": "Q2945371",
+          "label": "Palazzetto Bru Zane"
+        },
+        {
+          "qid": "Q3585434",
+          "label": "chiesa di Santa Maria della Fava"
+        },
+        {
+          "qid": "Q3649097",
+          "label": "Ca' Zenobio degli Armeni"
+        },
+        {
+          "qid": "Q756807",
+          "label": "Ca' Pesaro"
+        }
+      ]
+    },
+    {
+      "qid": "Q3635335",
+      "name": {
+        "ru": null,
+        "it": "Bartolomeo Bon il Giovane",
+        "en": "Bartolomeo Bon il Giovane"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Bartolomeo_Bon_il_Giovane"
+      },
+      "buildings": [
+        {
+          "qid": "Q16586361",
+          "label": "Palazzo Trevisan Cappello"
+        }
+      ]
+    },
+    {
+      "qid": "Q363741",
+      "name": {
+        "ru": "Джанантонио Сельва",
+        "it": "Giannantonio Selva",
+        "en": "Gian Antonio Selva"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D0%BB%D1%8C%D0%B2%D0%B0%2C_%D0%94%D0%B6%D0%B0%D0%BD%D0%B0%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Giannantonio_Selva",
+        "en": "https://en.wikipedia.org/wiki/Gian_Antonio_Selva"
+      },
+      "buildings": [
+        {
+          "qid": "Q223942",
+          "label": "Gran Teatro La Fenice"
+        },
+        {
+          "qid": "Q2268642",
+          "label": "chiesa della Maddalena"
+        },
+        {
+          "qid": "Q3580188",
+          "label": "chiesa del Nome di Gesù"
+        },
+        {
+          "qid": "Q724170",
+          "label": "Giardini della Biennale"
+        }
+      ]
+    },
+    {
+      "qid": "Q3644258",
+      "name": {
+        "ru": null,
+        "it": "Brenno Del Giudice",
+        "en": "Brenno Del Giudice"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Brenno_Del_Giudice",
+        "en": "https://en.wikipedia.org/wiki/Brenno_Del_Giudice"
+      },
+      "buildings": [
+        {
+          "qid": "Q121598793",
+          "label": "chiesa di Cristo Re"
+        },
+        {
+          "qid": "Q63769635",
+          "label": "Padiglione Romania"
+        }
+      ]
+    },
+    {
+      "qid": "Q369279",
+      "name": {
+        "ru": "Пьетро Ломбардо",
+        "it": "Pietro Lombardo",
+        "en": "Pietro Lombardo"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9B%D0%BE%D0%BC%D0%B1%D0%B0%D1%80%D0%B4%D0%BE%2C_%D0%9F%D1%8C%D0%B5%D1%82%D1%80%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Pietro_Lombardo_%28scultore%29",
+        "en": "https://en.wikipedia.org/wiki/Pietro_Lombardo"
+      },
+      "buildings": [
+        {
+          "qid": "Q52083605",
+          "label": "Scuola Grande di San Giovanni Evangelista"
+        },
+        {
+          "qid": "Q52629",
+          "label": "Ca' Dario"
+        },
+        {
+          "qid": "Q533680",
+          "label": "chiesa di Santa Maria dei Miracoli"
+        }
+      ]
+    },
+    {
+      "qid": "Q3749812",
+      "name": {
+        "ru": "Франческо Комино",
+        "it": "Francesco Comin",
+        "en": "Francesco Comin"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Francesco_Comin"
+      },
+      "buildings": [
+        {
+          "qid": "Q1093901",
+          "label": "chiesa di San Pantalon"
+        }
+      ]
+    },
+    {
+      "qid": "Q3766471",
+      "name": {
+        "ru": "Джованни Скальфаротто",
+        "it": "Giovanni Scalfarotto",
+        "en": "Giovanni Antonio Scalfurotto"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D0%BB%D1%8C%D1%84%D0%B0%D1%80%D0%BE%D1%82%D1%82%D0%BE%2C_%D0%94%D0%B6%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B8",
+        "it": "https://it.wikipedia.org/wiki/Giovanni_Scalfarotto",
+        "en": "https://en.wikipedia.org/wiki/Giovanni_Antonio_Scalfarotto"
+      },
+      "buildings": [
+        {
+          "qid": "Q5418235",
+          "label": "chiesa di San Rocco"
+        }
+      ]
+    },
+    {
+      "qid": "Q3766707",
+      "name": {
+        "ru": null,
+        "it": "Giovanni Battista Meduna",
+        "en": "Giovanni Battista Meduna"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Giovanni_Battista_Meduna",
+        "en": "https://en.wikipedia.org/wiki/Giovanni_Battista_Meduna"
+      },
+      "buildings": [
+        {
+          "qid": "Q223942",
+          "label": "Gran Teatro La Fenice"
+        },
+        {
+          "qid": "Q3585383",
+          "label": "chiesa di San Silvestro"
+        }
+      ]
+    },
+    {
+      "qid": "Q3766906",
+      "name": {
+        "ru": null,
+        "it": "Giovanni Buora",
+        "en": "Giovanni Buora"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Giovanni_Buora"
+      },
+      "buildings": [
+        {
+          "qid": "Q16586192",
+          "label": "Palazzo Grimani Marcello"
+        }
+      ]
+    },
+    {
+      "qid": "Q3767745",
+      "name": {
+        "ru": null,
+        "it": "Giovanni Milani",
+        "en": "Giovanni Milani"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Giovanni_Milani"
+      },
+      "buildings": [
+        {
+          "qid": "Q1134699",
+          "label": "ponte della Libertà"
+        }
+      ]
+    },
+    {
+      "qid": "Q3771392",
+      "name": {
+        "ru": null,
+        "it": "Giuseppe Samonà",
+        "en": "Giuseppe Samonà"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Giuseppe_Samon%C3%A0",
+        "en": "https://en.wikipedia.org/wiki/Giuseppe_Samon%C3%A0"
+      },
+      "buildings": [
+        {
+          "qid": "Q87809994",
+          "label": "Palazzo INAIL"
+        }
+      ]
+    },
+    {
+      "qid": "Q3771406",
+      "name": {
+        "ru": "Джузеппе Сарди",
+        "it": "Giuseppe Sardi",
+        "en": "Giuseppe Sardi"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Giuseppe_Sardi_%28architetto_1624%29"
+      },
+      "buildings": [
+        {
+          "qid": "Q1028202",
+          "label": "chiesa di San Salvador"
+        },
+        {
+          "qid": "Q220811",
+          "label": "chiesa di Santa Maria del Giglio"
+        },
+        {
+          "qid": "Q30914627",
+          "label": "Scuola Grande di San Teodoro"
+        },
+        {
+          "qid": "Q3585357",
+          "label": "chiesa di San Lazzaro dei Mendicanti"
+        },
+        {
+          "qid": "Q3890865",
+          "label": "Palazzo Savorgnan"
+        },
+        {
+          "qid": "Q3890965",
+          "label": "Palazzo Surian Bellotto"
+        }
+      ]
+    },
+    {
+      "qid": "Q3779061",
+      "name": {
+        "ru": "Гульельмо Бергамаско",
+        "it": "Guglielmo dei Grigi",
+        "en": "Guglielmo Bergamasco"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Guglielmo_dei_Grigi",
+        "en": "https://en.wikipedia.org/wiki/Guglielmo_Bergamasco"
+      },
+      "buildings": [
+        {
+          "qid": "Q963326",
+          "label": "Palazzo dei Camerlenghi"
+        }
+      ]
+    },
+    {
+      "qid": "Q3876542",
+      "name": {
+        "ru": "Николо Бараттьеро",
+        "it": "Nicolò Barattiero",
+        "en": "Nicolò Barattieri"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%91%D0%B0%D1%80%D0%B0%D1%82%D1%82%D1%8C%D0%B5%D1%80%D0%BE%2C_%D0%9D%D0%B8%D0%BA%D0%BE%D0%BB%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Nicol%C3%B2_Barattiero",
+        "en": "https://en.wikipedia.org/wiki/Nicol%C3%B2_Barattieri"
+      },
+      "buildings": [
+        {
+          "qid": "Q189883",
+          "label": "Palazzo Ducale"
+        }
+      ]
+    },
+    {
+      "qid": "Q3903780",
+      "name": {
+        "ru": null,
+        "it": "Pietro Checchia",
+        "en": "Pietro Checchia"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Pietro_Checchia"
+      },
+      "buildings": [
+        {
+          "qid": "Q523565",
+          "label": "Teatro San Benedetto"
+        }
+      ]
+    },
+    {
+      "qid": "Q3930142",
+      "name": {
+        "ru": "Антонио Диедо",
+        "it": "Antonio Diedo",
+        "en": "Antonio Diedo"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%94%D0%B8%D0%B5%D0%B4%D0%BE%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_Diedo",
+        "en": "https://en.wikipedia.org/wiki/Antonio_Diedo"
+      },
+      "buildings": [
+        {
+          "qid": "Q3580188",
+          "label": "chiesa del Nome di Gesù"
+        }
+      ]
+    },
+    {
+      "qid": "Q3953792",
+      "name": {
+        "ru": null,
+        "it": "Sebastiano Santi",
+        "en": "Sebastiano Santi"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Sebastiano_Santi",
+        "en": "https://en.wikipedia.org/wiki/Sebastiano_Santi"
+      },
+      "buildings": [
+        {
+          "qid": "Q3585383",
+          "label": "chiesa di San Silvestro"
+        }
+      ]
+    },
+    {
+      "qid": "Q459937",
+      "name": {
+        "ru": "Микеле Санмикели",
+        "it": "Michele Sanmicheli",
+        "en": "Michele Sanmicheli"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%B0%D0%BD%D0%BC%D0%B8%D0%BA%D0%B5%D0%BB%D0%B8%2C_%D0%9C%D0%B8%D0%BA%D0%B5%D0%BB%D0%B5",
+        "it": "https://it.wikipedia.org/wiki/Michele_Sanmicheli",
+        "en": "https://en.wikipedia.org/wiki/Michele_Sanmicheli"
+      },
+      "buildings": [
+        {
+          "qid": "Q17024669",
+          "label": "Palazzo Gussoni Grimani Della Vida"
+        },
+        {
+          "qid": "Q3889934",
+          "label": "Palazzo Corner Mocenigo"
+        }
+      ]
+    },
+    {
+      "qid": "Q48898835",
+      "name": {
+        "ru": null,
+        "it": "Giuseppe Sicher",
+        "en": "Giuseppe Sicher"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q3585383",
+          "label": "chiesa di San Silvestro"
+        }
+      ]
+    },
+    {
+      "qid": "Q495190",
+      "name": {
+        "ru": "Андреа Тирали",
+        "it": "Andrea Tirali",
+        "en": "Andrea Tirali"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A2%D0%B8%D1%80%D0%B0%D0%BB%D0%B8%2C_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B0",
+        "it": "https://it.wikipedia.org/wiki/Andrea_Tirali",
+        "en": "https://en.wikipedia.org/wiki/Andrea_Tirali"
+      },
+      "buildings": [
+        {
+          "qid": "Q2219891",
+          "label": "chiesa di San Nicola da Tolentino"
+        },
+        {
+          "qid": "Q3585364",
+          "label": "chiesa di San Martino"
+        },
+        {
+          "qid": "Q3890069",
+          "label": "Palazzo Emo Diedo"
+        },
+        {
+          "qid": "Q515232",
+          "label": "Palazzo Manfrin Venier"
+        },
+        {
+          "qid": "Q55599854",
+          "label": "Scuola dell'Angelo custode"
+        },
+        {
+          "qid": "Q56526770",
+          "label": "palazzo Diedo"
+        },
+        {
+          "qid": "Q769514",
+          "label": "chiesa di San Vidal"
+        },
+        {
+          "qid": "Q96097398",
+          "label": "Campanile della Chiesa di San Martino"
+        }
+      ]
+    },
+    {
+      "qid": "Q50375822",
+      "name": {
+        "ru": null,
+        "it": "Egle Renata Trincanato",
+        "en": "Egle Renata Trincanato"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Egle_Renata_Trincanato"
+      },
+      "buildings": [
+        {
+          "qid": "Q87809994",
+          "label": "Palazzo INAIL"
+        }
+      ]
+    },
+    {
+      "qid": "Q51137",
+      "name": {
+        "ru": "Карло Скарпа",
+        "it": "Carlo Scarpa",
+        "en": "Carlo Scarpa"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D1%80%D0%BF%D0%B0%2C_%D0%9A%D0%B0%D1%80%D0%BB%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Carlo_Scarpa",
+        "en": "https://en.wikipedia.org/wiki/Carlo_Scarpa"
+      },
+      "buildings": [
+        {
+          "qid": "Q56703395",
+          "label": {
+            "en": "Private bridge of Palazzo Querini Stampalia"
+          }
+        }
+      ]
+    },
+    {
+      "qid": "Q5479307",
+      "name": {
+        "ru": null,
+        "it": "Francesco Contin",
+        "en": "Francesco Contin"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Francesco_Contin",
+        "en": "https://en.wikipedia.org/wiki/Francesco_Contin"
+      },
+      "buildings": [
+        {
+          "qid": "Q3673752",
+          "label": "chiesa di Santa Maria del Pianto"
+        }
+      ]
+    },
+    {
+      "qid": "Q56007238",
+      "name": {
+        "ru": null,
+        "it": "Tommaso Meduna",
+        "en": "Tommaso Meduna"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Tommaso_Meduna",
+        "en": "https://en.wikipedia.org/wiki/Tommaso_Meduna"
+      },
+      "buildings": [
+        {
+          "qid": "Q1134699",
+          "label": "ponte della Libertà"
+        },
+        {
+          "qid": "Q223942",
+          "label": "Gran Teatro La Fenice"
+        }
+      ]
+    },
+    {
+      "qid": "Q56009790",
+      "name": {
+        "ru": null,
+        "it": "Enrico Capuzzo",
+        "en": "Enrico Capuzzo"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q56458823",
+          "label": "Palazzetto dello sport Giobatta Gianquinto"
+        }
+      ]
+    },
+    {
+      "qid": "Q56009795",
+      "name": {
+        "ru": null,
+        "it": "Giandomenico Cocco",
+        "en": "Giandomenico Cocco"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q56458823",
+          "label": "Palazzetto dello sport Giobatta Gianquinto"
+        }
+      ]
+    },
+    {
+      "qid": "Q57911983",
+      "name": {
+        "ru": null,
+        "it": "Antonio Sardi",
+        "en": "Antonio Sardi"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q30914627",
+          "label": "Scuola Grande di San Teodoro"
+        }
+      ]
+    },
+    {
+      "qid": "Q595765",
+      "name": {
+        "ru": null,
+        "it": "Sebastiano Ghezzi",
+        "en": "Sebastiano Ghezzi"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Sebastiano_Ghezzi",
+        "en": "https://en.wikipedia.org/wiki/Sebastiano_Ghezzi"
+      },
+      "buildings": [
+        {
+          "qid": "Q769514",
+          "label": "chiesa di San Vidal"
+        }
+      ]
+    },
+    {
+      "qid": "Q599457",
+      "name": {
+        "ru": "Скарпаньино",
+        "it": "Antonio Abbondi",
+        "en": "Antonio Abbondi"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BA%D0%B0%D1%80%D0%BF%D0%B0%D0%BD%D1%8C%D0%B8%D0%BD%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_Abbondi",
+        "en": "https://en.wikipedia.org/wiki/Antonio_Abbondi"
+      },
+      "buildings": [
+        {
+          "qid": "Q1407670",
+          "label": "chiesa di San Fantin"
+        },
+        {
+          "qid": "Q1543347",
+          "label": "chiesa di San Giovanni Elemosinario"
+        },
+        {
+          "qid": "Q2931177",
+          "label": "chiesa dello Spirito Santo"
+        },
+        {
+          "qid": "Q588559",
+          "label": "chiesa di San Sebastiano"
+        }
+      ]
+    },
+    {
+      "qid": "Q604631",
+      "name": {
+        "ru": "Антонио Риццо",
+        "it": "Antonio Rizzo",
+        "en": "Antonio Rizzo"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A0%D0%B8%D1%86%D1%86%D0%BE%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_Rizzo_%28scultore%29",
+        "en": "https://en.wikipedia.org/wiki/Antonio_Rizzo_%28architect%29"
+      },
+      "buildings": [
+        {
+          "qid": "Q189883",
+          "label": "Palazzo Ducale"
+        }
+      ]
+    },
+    {
+      "qid": "Q605690",
+      "name": {
+        "ru": "Антонио Визентини",
+        "it": "Antonio Visentini",
+        "en": "Antonio Visentini"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%92%D0%B8%D0%B7%D0%B5%D0%BD%D1%82%D0%B8%D0%BD%D0%B8%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_Visentini",
+        "en": "https://en.wikipedia.org/wiki/Antonio_Visentini"
+      },
+      "buildings": [
+        {
+          "qid": "Q3360894",
+          "label": "Palazzo Miani Coletti Giusti"
+        }
+      ]
+    },
+    {
+      "qid": "Q605926",
+      "name": {
+        "ru": "Да Понте, Антонио",
+        "it": "Antonio da Ponte",
+        "en": "Antonio da Ponte"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%94%D0%B0_%D0%9F%D0%BE%D0%BD%D1%82%D0%B5%2C_%D0%90%D0%BD%D1%82%D0%BE%D0%BD%D0%B8%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Antonio_da_Ponte_%28architetto%29",
+        "en": "https://en.wikipedia.org/wiki/Antonio_da_Ponte"
+      },
+      "buildings": [
+        {
+          "qid": "Q3735802",
+          "label": "Ospedale degli Incurabili"
+        },
+        {
+          "qid": "Q52505",
+          "label": "ponte di Rialto"
+        }
+      ]
+    },
+    {
+      "qid": "Q66439763",
+      "name": {
+        "ru": null,
+        "it": "Ernst Wullekopf",
+        "en": "Ernst Wullekopf"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Ernst_Wullekopf"
+      },
+      "buildings": [
+        {
+          "qid": "Q19913992",
+          "label": "Molino Stucky"
+        }
+      ]
+    },
+    {
+      "qid": "Q7001942",
+      "name": {
+        "ru": null,
+        "it": "Lorenzo Boschetti",
+        "en": "Lorenzo Boschetti"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Lorenzo_Boschetti"
+      },
+      "buildings": [
+        {
+          "qid": "Q2047620",
+          "label": "Palazzo Venier dei Leoni"
+        }
+      ]
+    },
+    {
+      "qid": "Q734053",
+      "name": {
+        "ru": "Мауро Кодуччи",
+        "it": "Mauro Codussi",
+        "en": "Mauro Codussi"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9A%D0%BE%D0%B4%D1%83%D1%87%D1%87%D0%B8%2C_%D0%9C%D0%B0%D1%83%D1%80%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Mauro_Codussi",
+        "en": "https://en.wikipedia.org/wiki/Mauro_Codussi"
+      },
+      "buildings": [
+        {
+          "qid": "Q1813687",
+          "label": "chiesa di Santa Maria Formosa"
+        },
+        {
+          "qid": "Q520477",
+          "label": "chiesa di Santa Maria Mater Domini"
+        },
+        {
+          "qid": "Q52083605",
+          "label": "Scuola Grande di San Giovanni Evangelista"
+        },
+        {
+          "qid": "Q538610",
+          "label": "Palazzo Corner Spinelli"
+        },
+        {
+          "qid": "Q794876",
+          "label": "chiesa di San Zaccaria"
+        },
+        {
+          "qid": "Q915746",
+          "label": "chiesa di San Giovanni Grisostomo"
+        },
+        {
+          "qid": "Q966625",
+          "label": "torre dell'orologio"
+        }
+      ]
+    },
+    {
+      "qid": "Q739267",
+      "name": {
+        "ru": "Бартоломео Бон",
+        "it": "Bartolomeo Bono",
+        "en": "Bartolomeo Bon"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%91%D0%BE%D0%BD%2C_%D0%91%D0%B0%D1%80%D1%82%D0%BE%D0%BB%D0%BE%D0%BC%D0%B5%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Bartolomeo_Bono",
+        "en": "https://en.wikipedia.org/wiki/Bartolomeo_Bon"
+      },
+      "buildings": [
+        {
+          "qid": "Q17333001",
+          "label": "Palazzo D'Anna Viaro Martinengo Volpi di Misurata"
+        },
+        {
+          "qid": "Q2929873",
+          "label": "chiesa di Santa Maria della Carità"
+        }
+      ]
+    },
+    {
+      "qid": "Q784907",
+      "name": {
+        "ru": "Джорджо Спавенто",
+        "it": "Giorgio Spavento",
+        "en": "Giorgio Spavento"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B0%D0%B2%D0%B5%D0%BD%D1%82%D0%BE%2C_%D0%94%D0%B6%D0%BE%D1%80%D0%B4%D0%B6%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Giorgio_Spavento",
+        "en": "https://en.wikipedia.org/wiki/Giorgio_Spavento"
+      },
+      "buildings": [
+        {
+          "qid": "Q1028202",
+          "label": "chiesa di San Salvador"
+        }
+      ]
+    },
+    {
+      "qid": "Q82840",
+      "name": {
+        "ru": "Алвар Аалто",
+        "it": "Alvar Aalto",
+        "en": "Alvar Aalto"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%90%D0%B0%D0%BB%D1%82%D0%BE%2C_%D0%90%D0%BB%D0%B2%D0%B0%D1%80",
+        "it": "https://it.wikipedia.org/wiki/Alvar_Aalto",
+        "en": "https://en.wikipedia.org/wiki/Alvar_Aalto"
+      },
+      "buildings": [
+        {
+          "qid": "Q9294763",
+          "label": "Finnish pavilion"
+        }
+      ]
+    },
+    {
+      "qid": "Q84562125",
+      "name": {
+        "ru": null,
+        "it": null,
+        "en": "Thomas Bezzi"
+      },
+      "wikipedia": {},
+      "buildings": [
+        {
+          "qid": "Q3982047",
+          "label": "Teatro Malibran"
+        }
+      ]
+    },
+    {
+      "qid": "Q937875",
+      "name": {
+        "ru": "Лука Бельтрами",
+        "it": "Luca Beltrami",
+        "en": "Luca Beltrami"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%91%D0%B5%D0%BB%D1%8C%D1%82%D1%80%D0%B0%D0%BC%D0%B8%2C_%D0%9B%D1%83%D0%BA%D0%B0",
+        "it": "https://it.wikipedia.org/wiki/Luca_Beltrami",
+        "en": "https://en.wikipedia.org/wiki/Luca_Beltrami"
+      },
+      "buildings": [
+        {
+          "qid": "Q754194",
+          "label": "Campanile di San Marco"
+        }
+      ]
+    },
+    {
+      "qid": "Q971789",
+      "name": {
+        "ru": null,
+        "it": "Pietro Bon",
+        "en": "Pietro Bon"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Pietro_Bon"
+      },
+      "buildings": [
+        {
+          "qid": "Q1270723",
+          "label": "Scuola Grande di San Rocco"
+        },
+        {
+          "qid": "Q5418235",
+          "label": "chiesa di San Rocco"
+        }
+      ]
+    },
+    {
+      "qid": "Q976141",
+      "name": {
+        "ru": "Джорджо Массари",
+        "it": "Giorgio Massari",
+        "en": "Giorgio Massari"
+      },
+      "wikipedia": {
+        "ru": "https://ru.wikipedia.org/wiki/%D0%9C%D0%B0%D1%81%D1%81%D0%B0%D1%80%D0%B8%2C_%D0%94%D0%B6%D0%BE%D1%80%D0%B4%D0%B6%D0%BE",
+        "it": "https://it.wikipedia.org/wiki/Giorgio_Massari",
+        "en": "https://en.wikipedia.org/wiki/Giorgio_Massari"
+      },
+      "buildings": [
+        {
+          "qid": "Q1093909",
+          "label": "chiesa dei Gesuati"
+        },
+        {
+          "qid": "Q1400212",
+          "label": "chiesa di San Canciano"
+        },
+        {
+          "qid": "Q1559661",
+          "label": "chiesa della Pietà"
+        },
+        {
+          "qid": "Q1585514",
+          "label": "chiesa di San Marcuola"
+        },
+        {
+          "qid": "Q3585434",
+          "label": "chiesa di Santa Maria della Fava"
+        },
+        {
+          "qid": "Q52083605",
+          "label": "Scuola Grande di San Giovanni Evangelista"
+        },
+        {
+          "qid": "Q907964",
+          "label": "Palazzo Grassi"
+        }
+      ]
+    },
+    {
+      "qid": "Q976404",
+      "name": {
+        "ru": null,
+        "it": "Gino Valle",
+        "en": "Gino Valle"
+      },
+      "wikipedia": {
+        "it": "https://it.wikipedia.org/wiki/Gino_Valle",
+        "en": "https://en.wikipedia.org/wiki/Gino_Valle"
+      },
+      "buildings": [
+        {
+          "qid": "Q141466444",
+          "label": "IACP - Wohnungsbau auf der Insel Giudecca"
+        }
+      ]
+    }
+  ],
+  "by_name": {
+    "ru": {
+      "Алессандро Витториа": "Q1347426",
+      "Туллио Ломбардо": "Q1350301",
+      "Томмазо Теманца": "Q1411187",
+      "Санте Ломбардо": "Q1606308",
+      "Марио де Мария": "Q17327972",
+      "Андреа Палладио": "Q177692",
+      "Якопо Сансовино": "Q202267",
+      "Антонио Гамбелло": "Q2857296",
+      "Клод Парент": "Q2977923",
+      "Доменико Росси": "Q3034767",
+      "Винченцо Скамоцци": "Q309733",
+      "Пьер Луиджи Нерви": "Q313528",
+      "Бальдассаре Лонгена": "Q316297",
+      "Джузеппе Сарди": "Q3771406",
+      "Зеэв Рехтер": "Q3594364",
+      "Антонио Контин": "Q3619452",
+      "Антонио Гаспари": "Q3619635",
+      "Джанантонио Сельва": "Q363741",
+      "Пьетро Ломбардо": "Q369279",
+      "Франческо Комино": "Q3749812",
+      "Джованни Скальфаротто": "Q3766471",
+      "Гульельмо Бергамаско": "Q3779061",
+      "Николо Бараттьеро": "Q3876542",
+      "Антонио Диедо": "Q3930142",
+      "Микеле Санмикели": "Q459937",
+      "Андреа Тирали": "Q495190",
+      "Карло Скарпа": "Q51137",
+      "Скарпаньино": "Q599457",
+      "Антонио Риццо": "Q604631",
+      "Антонио Визентини": "Q605690",
+      "Да Понте, Антонио": "Q605926",
+      "Мауро Кодуччи": "Q734053",
+      "Бартоломео Бон": "Q739267",
+      "Джорджо Спавенто": "Q784907",
+      "Алвар Аалто": "Q82840",
+      "Лука Бельтрами": "Q937875",
+      "Джорджо Массари": "Q976141"
+    },
+    "it": {
+      "Ignazio Gardella": "Q1306518",
+      "Alessandro Vittoria": "Q1347426",
+      "Tullio Lombardo": "Q1350301",
+      "Eugenio Miozzi": "Q1373325",
+      "Tommaso Temanza": "Q1411187",
+      "Sante Lombardo": "Q1606308",
+      "Matteo Lucchesi": "Q16853725",
+      "Mario de Maria": "Q17327972",
+      "Bartolomeo Manopola": "Q17661157",
+      "Andrea Palladio": "Q177692",
+      "Carlo Corbellini": "Q19635198",
+      "Jacopo Sansovino": "Q202267",
+      "Sebastiano Mazzoni": "Q2327193",
+      "Antonio Gambello": "Q2857296",
+      "Bernardino Maccaruzzi": "Q2898904",
+      "Claude Parent": "Q2977923",
+      "Domenico Rossi": "Q3034767",
+      "Vincenzo Scamozzi": "Q309733",
+      "Pier Luigi Nervi": "Q313528",
+      "Baldassare Longhena": "Q316297",
+      "Giuseppe Sardi": "Q3771406",
+      "Zeev Rechter": "Q3594364",
+      "Antonio Contin": "Q3619452",
+      "Antonio Gaspari": "Q3619635",
+      "Bartolomeo Bon il Giovane": "Q3635335",
+      "Giannantonio Selva": "Q363741",
+      "Brenno Del Giudice": "Q3644258",
+      "Pietro Lombardo": "Q369279",
+      "Francesco Comin": "Q3749812",
+      "Giovanni Scalfarotto": "Q3766471",
+      "Giovanni Battista Meduna": "Q3766707",
+      "Giovanni Buora": "Q3766906",
+      "Giovanni Milani": "Q3767745",
+      "Giuseppe Samonà": "Q3771392",
+      "Guglielmo dei Grigi": "Q3779061",
+      "Nicolò Barattiero": "Q3876542",
+      "Pietro Checchia": "Q3903780",
+      "Antonio Diedo": "Q3930142",
+      "Sebastiano Santi": "Q3953792",
+      "Michele Sanmicheli": "Q459937",
+      "Giuseppe Sicher": "Q48898835",
+      "Andrea Tirali": "Q495190",
+      "Egle Renata Trincanato": "Q50375822",
+      "Carlo Scarpa": "Q51137",
+      "Francesco Contin": "Q5479307",
+      "Tommaso Meduna": "Q56007238",
+      "Enrico Capuzzo": "Q56009790",
+      "Giandomenico Cocco": "Q56009795",
+      "Antonio Sardi": "Q57911983",
+      "Sebastiano Ghezzi": "Q595765",
+      "Antonio Abbondi": "Q599457",
+      "Antonio Rizzo": "Q604631",
+      "Antonio Visentini": "Q605690",
+      "Antonio da Ponte": "Q605926",
+      "Ernst Wullekopf": "Q66439763",
+      "Lorenzo Boschetti": "Q7001942",
+      "Mauro Codussi": "Q734053",
+      "Bartolomeo Bono": "Q739267",
+      "Giorgio Spavento": "Q784907",
+      "Alvar Aalto": "Q82840",
+      "Luca Beltrami": "Q937875",
+      "Pietro Bon": "Q971789",
+      "Giorgio Massari": "Q976141",
+      "Gino Valle": "Q976404"
+    },
+    "en": {
+      "Giuseppe Camporini": "Q125211640",
+      "Alfredo Carnelutti": "Q125266595",
+      "Giorgio Macola": "Q125274999",
+      "Ignazio Gardella": "Q1306518",
+      "Alessandro Vittoria": "Q1347426",
+      "Tullio Lombardo": "Q1350301",
+      "Eugenio Miozzi": "Q1373325",
+      "Tommaso Temanza": "Q1411187",
+      "Marica Redini": "Q141466437",
+      "Sante Lombardo": "Q1606308",
+      "Matteo Lucchesi": "Q16853725",
+      "Mario de Maria": "Q17327972",
+      "Bartolomeo Manopola": "Q17661157",
+      "Andrea Palladio": "Q177692",
+      "Carlo Corbellini": "Q19635198",
+      "Jacopo Sansovino": "Q202267",
+      "Sebastiano Mazzoni": "Q2327193",
+      "Antonio Gambello": "Q2857296",
+      "Bernardino Maccarucci": "Q2898904",
+      "Claude Parent": "Q2977923",
+      "Domenico Rossi": "Q3034767",
+      "Vincenzo Scamozzi": "Q309733",
+      "Pier Luigi Nervi": "Q313528",
+      "Baldassarre Longhena": "Q316297",
+      "Giuseppe Sardi": "Q3771406",
+      "Zeev Rechter": "Q3594364",
+      "Antonio Contin": "Q3619452",
+      "Antonio Gaspari": "Q3619635",
+      "Bartolomeo Bon il Giovane": "Q3635335",
+      "Gian Antonio Selva": "Q363741",
+      "Brenno Del Giudice": "Q3644258",
+      "Pietro Lombardo": "Q369279",
+      "Francesco Comin": "Q3749812",
+      "Giovanni Antonio Scalfurotto": "Q3766471",
+      "Giovanni Battista Meduna": "Q3766707",
+      "Giovanni Buora": "Q3766906",
+      "Giovanni Milani": "Q3767745",
+      "Giuseppe Samonà": "Q3771392",
+      "Guglielmo Bergamasco": "Q3779061",
+      "Nicolò Barattieri": "Q3876542",
+      "Pietro Checchia": "Q3903780",
+      "Antonio Diedo": "Q3930142",
+      "Sebastiano Santi": "Q3953792",
+      "Michele Sanmicheli": "Q459937",
+      "Giuseppe Sicher": "Q48898835",
+      "Andrea Tirali": "Q495190",
+      "Egle Renata Trincanato": "Q50375822",
+      "Carlo Scarpa": "Q51137",
+      "Francesco Contin": "Q5479307",
+      "Tommaso Meduna": "Q56007238",
+      "Enrico Capuzzo": "Q56009790",
+      "Giandomenico Cocco": "Q56009795",
+      "Antonio Sardi": "Q57911983",
+      "Sebastiano Ghezzi": "Q595765",
+      "Antonio Abbondi": "Q599457",
+      "Antonio Rizzo": "Q604631",
+      "Antonio Visentini": "Q605690",
+      "Antonio da Ponte": "Q605926",
+      "Ernst Wullekopf": "Q66439763",
+      "Lorenzo Boschetti": "Q7001942",
+      "Mauro Codussi": "Q734053",
+      "Bartolomeo Bon": "Q739267",
+      "Giorgio Spavento": "Q784907",
+      "Alvar Aalto": "Q82840",
+      "Thomas Bezzi": "Q84562125",
+      "Luca Beltrami": "Q937875",
+      "Pietro Bon": "Q971789",
+      "Giorgio Massari": "Q976141",
+      "Gino Valle": "Q976404"
+    }
+  }
+}

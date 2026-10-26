@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Архитекторы в карточках · Venice, building by building</title>
+<!-- Отдельная страница владельца: только имена архитекторов и их статьи.
+     Данные берутся из data/architects.json, который собирает pipeline/venice/s13_architects.py
+     из Викиданных: свойство P84 у здания и сайтлинки самого человека. -->
+<style>
+  @font-face { font-family: 'IM Fell English SC'; font-style: normal; font-weight: 400;
+    src: url("fonts/im-fell-english-sc-latin.woff2") format("woff2"); font-display: swap; }
+  @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500;
+    src: url("fonts/cormorant-garamond-latin.woff2") format("woff2"); font-display: swap; }
+  :root { --wall: #f4f1ea; --ink: #22201d; --muted: #6d6862; --sun: #b04f3e; --teal: #619394; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--wall); color: var(--ink);
+    font: 16px/1.5 'Cormorant Garamond', 'Times New Roman', serif; }
+  .sun-disc { display: inline-block; width: .8em; height: .8em; border-radius: 50%; vertical-align: -.06em;
+    background: radial-gradient(circle at 38% 32%, color-mix(in srgb, var(--sun) 72%, #fff6e4) 0 32%, var(--sun) 64%,
+      color-mix(in srgb, var(--sun) 86%, #5f2412) 100%); }
+  header { padding: 40px 28px 8px; max-width: 900px; margin: 0 auto; }
+  h1 { font-family: 'IM Fell English SC', 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: 34px; margin: 0 0 6px; letter-spacing: .01em; }
+  .lede { color: var(--muted); margin: 0 0 4px; }
+  .counts { color: var(--muted); font-size: 15px; margin: 0; }
+  main { max-width: 900px; margin: 0 auto; padding: 12px 28px 64px; }
+  ol { list-style: none; margin: 0; padding: 0; }
+  li { padding: 14px 0 12px; border-top: 1px solid #ded8cd; display: grid; gap: 4px; }
+  .name { font-family: 'IM Fell English SC', 'Cormorant Garamond', serif; font-size: 22px; }
+  .name a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--teal); }
+  .name a:hover { color: var(--teal); }
+  .name .plain { border-bottom: 1px dotted #b9b2a6; }
+  .alt { color: var(--muted); font-size: 15px; }
+  .langs { color: var(--muted); font-size: 14px; }
+  .langs a { color: var(--teal); text-decoration: none; margin-right: 8px; }
+  .buildings { color: var(--muted); font-size: 15px; }
+  .buildings a { color: var(--muted); }
+  .state { color: var(--muted); }
+  footer { max-width: 900px; margin: 0 auto; padding: 0 28px 48px; color: var(--muted); font-size: 14px; }
+  a { color: var(--teal); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Архитекторы в карточках <span class="sun-disc" aria-hidden="true"></span></h1>
+  <p class="lede">Имена, которые встречаются в карточках зданий атласа, и их статьи в Википедии.</p>
+  <p class="counts" id="counts">Читаю данные…</p>
+</header>
+<main><ol id="list"></ol></main>
+<footer>
+  Источник имён — Викиданные: свойство P84 «архитектор» у здания, подписи и ссылки берутся у самого человека.
+  Имена без статьи остаются без ссылки: совпадение по названию не выдумывается.
+  Данные собирает <code>pipeline/venice/s13_architects.py</code> в <code>data/architects.json</code>.
+</footer>
+<script>
+const esc = value => String(value ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const LANGS = ['ru', 'it', 'en'];
+const LABELS = { ru: 'рус', it: 'it', en: 'en' };
+const collator = new Intl.Collator('ru');
+fetch('data/architects.json', { cache: 'no-cache' })
+  .then(response => { if (!response.ok) throw new Error('HTTP ' + response.status); return response.json(); })
+  .then(data => {
+    const architects = [...data.architects].sort((a, b) =>
+      collator.compare(a.name.ru || a.name.it || a.name.en || '', b.name.ru || b.name.it || b.name.en || ''));
+    const withWiki = architects.filter(a => a.wikipedia && Object.keys(a.wikipedia).length).length;
+    document.getElementById('counts').textContent =
+      `Всего имён: ${architects.length} · со статьёй: ${withWiki} · без статьи: ${architects.length - withWiki} · зданий с архитекторами: ${data.buildings_with_architects}`;
+    document.getElementById('list').innerHTML = architects.map(a => {
+      const primary = a.name.ru || a.name.it || a.name.en || a.qid;
+      const url = a.wikipedia.ru || a.wikipedia.it || a.wikipedia.en;
+      const head = url ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(primary)}</a>`
+                       : `<span class="plain">${esc(primary)}</span>`;
+      const others = LANGS.filter(l => a.name[l] && a.name[l] !== primary)
+        .map(l => `${LABELS[l]}: ${esc(a.name[l])}`).join(' · ');
+      const links = LANGS.filter(l => a.wikipedia[l])
+        .map(l => `<a href="${esc(a.wikipedia[l])}" target="_blank" rel="noopener noreferrer">${LABELS[l]}</a>`).join('');
+      const buildings = a.buildings.map(b => esc(b.label)).join(' · ');
+      const languageLinks = links
+        ? `<span class="langs">Википедия: ${links}</span>`
+        : `<span class="langs state">статьи в Википедии нет</span>`;
+      return `<li><span class="name">${head}</span>
+        ${others ? `<span class="alt">${others}</span>` : ''}
+        ${languageLinks}
+        <span class="buildings">${buildings}</span></li>`;
+    }).join('');
+  })
+  .catch(error => { document.getElementById('counts').textContent = 'Не удалось прочитать данные: ' + error.message; });
+</script>
+</body>
+</html>

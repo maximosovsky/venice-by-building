@@ -395,7 +395,8 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 /* Ползунок года — солнце владельца атласа: рисунок sun-icon.png вместо css-диска.
    Прежний диск остаётся у солнца в шапке (.sun-disc), здесь он не нужен: у значка прозрачная
    середина, и подложка просвечивала бы сквозь неё. */
-.year-sun { position: absolute; top: 68px; width: 34px; height: 38px; margin: -19px 0 0 -17px; pointer-events: none;
+/* Лучи выходят за окружность года: значок крупнее кольца (.year-ring, 26px), и рисунок ничем не обрезан. */
+.year-sun { position: absolute; top: 68px; width: 54px; height: 60px; margin: -30px 0 0 -27px; pointer-events: none; z-index: 2;
   background: transparent url("img/sun-icon.png") center / contain no-repeat; }
 .year-ring { position: absolute; top: 68px; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--paper);
   box-shadow: 0 2px 8px rgba(44, 47, 42, .22); pointer-events: none; }
@@ -460,7 +461,7 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
   .play { width: 40px; height: 40px; margin-top: 24px; }
   .track, .track canvas { height: 64px; }
   .rail { top: 46px; } .year-sun, .year-ring, .from-mark { top: 48px; }
-  .year-sun { width: 28px; height: 31px; margin: -15px 0 0 -14px; } .year-ring { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
+  .year-sun { width: 40px; height: 44px; margin: -22px 0 0 -20px; } .year-ring { width: 26px; height: 26px; margin: -13px 0 0 -13px; }
   .station span { display: none; }
   .station { width: 20px; height: 20px; margin: -10px 0 0 -10px; } .station::before { width: 9px; height: 9px; box-shadow: inset 0 0 0 2px var(--c); }
   /* During a walk the phone shows the map and the walk only. */
