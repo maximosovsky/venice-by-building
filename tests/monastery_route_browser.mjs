@@ -18,12 +18,16 @@ try{
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible),null,{timeout:30000});
  const report=await page.evaluate(()=>{
   const h=window.__dbg.churchBuildingHighlight,entry=h.manifest.buildings.find(b=>b.osm_id===138800498);let expected=0,actual=0,monasteryTriangles=0;
-  const target=new Set(h.manifest.buildings.map(b=>b.gid));
-  for(const mesh of h.overlays){actual+=mesh.geometry.index.count;const t=mesh.parent.geometry,bld=t.attributes.bld.array,attr=mesh.parent.userData.draw.uniforms.uAttr.value.image.data,idx=t.index.array;
+  // Каждый цвет — свой оверлей и свой набор gid: ожидание считается по классу цвета, а не по всему манифесту.
+   const byClass={};for(const b of h.manifest.buildings){const c=(b.highlight_color||'#436817').toLowerCase();(byClass[c]=byClass[c]||new Set()).add(b.gid);}
+   for(const mesh of h.overlays){actual+=mesh.geometry.index.count;const target=byClass['#'+(mesh.material.color||mesh.material.uniforms.uColor.value).getHexString()]||new Set();const t=mesh.parent.geometry,bld=t.attributes.bld.array,attr=mesh.parent.userData.draw.uniforms.uAttr.value.image.data,idx=t.index.array;
    for(let i=0;i<idx.length;i+=3){const gids=[idx[i],idx[i+1],idx[i+2]].map(v=>attr[(bld[v]&32767)*8+3]);if(gids.every(g=>target.has(g)))expected+=3;if(gids.every(g=>g===entry.gid))monasteryTriangles++;}}
-  return {matched:h.manifest.matched_stops,expected,actual,monasteryTriangles,monasteryGid:entry.gid,colors:[...new Set(h.overlays.filter(m=>m.visible).map(m=>m.material.color.getHexString()))]};
+  return {matched:h.manifest.matched_stops,expected,actual,monasteryTriangles,monasteryGid:entry.gid,colors:[...new Set(h.overlays.filter(m=>m.visible).map(m=>(m.material.color||m.material.uniforms.uColor.value).getHexString()))]};
  });
- assert.deepEqual(report.colors,['436817']);assert.equal(report.actual,report.expected);assert.ok(report.monasteryTriangles>20);
+ // Манифест храмовых зданий содержит и глубокий синий #2f3f6b для послевоенных построек, поэтому
+// проверяем, что зелёный класс виден и что других цветов, кроме объявленных в манифесте, нет.
+ assert.ok(report.colors.includes('436817'),'зелёный оверлей храмов виден');
+ assert.ok(report.colors.every(c=>['436817','2f3f6b'].includes(c)),'только цвета из манифеста: '+report.colors.join(','));assert.equal(report.actual,report.expected);assert.ok(report.monasteryTriangles>20);
  await page.locator('.walks-open').click();await page.locator('[data-church-route-open]').click();
  const data=await (await page.request.get(`${remote || `http://127.0.0.1:${server.address().port}/`}data/church-route.json`)).json();
  const index=data.stops.findIndex(s=>s.id==='monastery-Q61954738');await page.locator(`[data-church-stop="${index}"]`).click();

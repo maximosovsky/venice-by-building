@@ -236,7 +236,10 @@ def test_generated_partial_artifact_geometry_and_disclosure():
     assert all(s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02) for s in data['stops'])
     assert all(all(n.get(k) for k in ('ru','it','en')) for n in audit['limitations'])
     if audit['unresolved']:
-        assert 'incomplete' in data['summary']['en'].lower()
+        # Владелец атласа убрал оговорку о неполноте из карточки маршрута: она осталась в аудите,
+        # в отчёте и в описании GPX, а неполный артефакт по-прежнему не проходит строгую проверку.
+        assert len(audit['unresolved']) > 0
+        assert 'incomplete' in (ROOT/'web/data/church-route.gpx').read_text(encoding='utf-8').lower()
         with pytest.raises(ValueError, match='unresolved'):
             m.validate_route(data)
     graph, nodes, _ = m.load_pedestrian_network()
@@ -245,6 +248,11 @@ def test_generated_partial_artifact_geometry_and_disclosure():
             assert s['geometry'] == [list(nodes[n]) for n in s['osm_nodes']]
             assert all(graph.has_edge(u,v) for u,v in zip(s['osm_nodes'],s['osm_nodes'][1:]))
             assert s['length_m'] == pytest.approx(sum(graph[u][v]['weight'] for u,v in zip(s['osm_nodes'],s['osm_nodes'][1:])),abs=.011)
+        elif s['mode']=='boat':
+            # Водный переход — проверенное ребро трагетто из аудированных данных мостового маршрута.
+            assert s['geometry_semantics'] == 'verified_traghetto_service_crossing'
+            assert s['traghetto_ids'] and all(fid for fid in s['traghetto_ids'])
+            assert len(s['geometry']) >= 2 and all(len(point)==2 for point in s['geometry'])
         else:
             assert s['mode']=='schematic' and 'schematic' in s['geometry_semantics']
             assert 'length_m' not in s
@@ -253,7 +261,8 @@ def test_generated_partial_artifact_geometry_and_disclosure():
     assert len(gpx.findall('g:wpt',ns)) == len(data['stops'])
     assert 'incomplete' in gpx.find('g:metadata/g:desc',ns).text.lower()
     assert len(gpx.findall('g:trk',ns)) == sum(s['mode']=='walk' for s in data['segments'])
-    assert len(gpx.findall('g:rte',ns)) == sum(s['mode']=='schematic' for s in data['segments'])
+    # Схемные переходы и водный переход трагетто пишутся маршрутами (rte); треки (trk) — только пешие участки.
+    assert len(gpx.findall('g:rte',ns)) == sum(s['mode'] in ('schematic','boat') for s in data['segments'])
 
 
 def test_generated_artifact_reconciles_every_candidate_and_required_islands():
@@ -277,7 +286,15 @@ def test_generated_artifact_reconciles_every_candidate_and_required_islands():
         assert s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02)
     assert len(data['segments']) == len(data['stops'])-1
     assert not any(s.get('day') for s in data['stops'])
-    assert not any(s['mode']=='boat' for s in data['segments']), 'boat geometry needs independent proof'
+    # Обход считает владелец атласа: старт и финиш на площади Сан-Марко, переход через канал — трагетто.
+    # Водный переход допустим только как проверенное ребро трагетто, не как выдуманная линия по воде.
+    boats = [s for s in data['segments'] if s['mode']=='boat']
+    assert all(s['geometry_semantics']=='verified_traghetto_service_crossing' and s.get('traghetto_ids')
+               for s in boats), 'boat geometry needs an audited traghetto crossing'
+    assert data['audit']['tour']['start'] == 'piazza_san_marco'
+    assert data['stops'][0]['id'] == data['audit']['tour']['start_stop']
+    assert data['audit']['tour']['walkable_circuit_m'] > 30000, 'обход всей пешеходной Венеции измеряется в десятках километров'
+    assert data['audit']['tour']['island_stops'] == sum(1 for g in data['audit']['tour']['island_groups'] for _ in g['stops'])
 
 
 USER_APPROVED_ROUTE_EXCLUSIONS = {

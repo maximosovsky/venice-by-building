@@ -10,6 +10,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 import re
 import time
@@ -19,6 +20,10 @@ import xml.etree.ElementTree as ET
 import networkx as nx
 from pyproj import Transformer
 import requests
+# Владелец атласа: обход сакральных мест считается по настоящей пешеходной сети, а переходы через
+# канал разрешены трагетто. Их рёбра и проверку заимствуем у мостового маршрута, чтобы правила
+# доступа были ровно те же.
+from venice.s12_bridge_visits import add_ferry, load_inputs as s12_load_inputs
 
 ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / 'data/processed/church_research'
@@ -87,6 +92,117 @@ def local_coordinates(lon, lat):
     return [round(x-ORIGIN[0],3),round(-(y-ORIGIN[1]),3)]
 
 
+STREET_START = (12.3397, 45.4341)   # площадь Сан-Марко: начало и конец обхода
+
+
+def add_traghetto_edges(graph, nodes, ferries):
+    """Настоящие рёбра трагетто в пешеходной сети, по правилам мостового маршрута."""
+    xy = {n: PROJECT.transform(*ll) for n, ll in nodes.items()}
+    added = []
+    for ferry in ferries:
+        if add_ferry(graph, xy, ferry):
+            for u, v in zip(ferry['node_ids'], ferry['node_ids'][1:]):
+                if graph.has_edge(u, v) and graph[u][v].get('mode') == 'traghetto':
+                    graph[u][v]['weight'] = graph[u][v]['length']
+            added.append(ferry['id'])
+    return added
+
+
+def walk_distance_matrix(graph, targets):
+    """Матрица кратчайших расстояний по пешеходной сети (scipy Dijkstra), метры."""
+    from scipy.sparse import csr_matrix
+    from scipy.sparse.csgraph import dijkstra
+    import numpy as np
+    nodelist = list(graph)
+    index = {u: i for i, u in enumerate(nodelist)}
+    matrix = nx.to_scipy_sparse_array(graph, nodelist=nodelist, weight='weight', format='csr')
+    matrix = csr_matrix((matrix.data, matrix.indices.astype(np.int32), matrix.indptr.astype(np.int32)), shape=matrix.shape)
+    columns = np.asarray([index[u] for u in targets], dtype=np.int32)
+    distances = dijkstra(matrix, directed=False, indices=columns)[:, columns]
+    if not np.isfinite(distances).all():
+        raise ValueError('sacred stops are not connected by the pedestrian network')
+    return distances
+
+
+def order_stops_by_walk(stops, graph, nodes, ferries=(), start=STREET_START):
+    """Кратчайший обход всех сакральных мест: старт и финиш на площади Сан-Марко.
+
+    Расстояния берём из самой сети, а не по прямой; сначала ближайший сосед, затем 2-opt.
+    Глобальный оптимум не гарантируется: это эвристика, и в аудите так и написано.
+    """
+    stops = [dict(s) for s in stops]
+    used = add_traghetto_edges(graph, nodes, ferries)
+    xy = {n: PROJECT.transform(*ll) for n, ll in nodes.items()}
+    # Старт — узел самой сети: в nodes есть и точки вне проходимых путей, они в графе отсутствуют.
+    routed_metric = {n: xy[n] for n in graph if n in xy}
+    start_node = min(routed_metric, key=lambda n: math.dist(routed_metric[n], PROJECT.transform(*start)))
+    routed = [s for s in stops if s.get('node') in graph]
+    if len(routed) < 3:
+        return order_stops(stops), {'start': 'piazza_san_marco', 'optimization': 'inventory_order_fallback', 'traghetti_in_graph': used}
+    # Компонента Сан-Марко — проходимая пешком Венеция. Лагунные острова в неё не входят:
+    # между ними и городом нет пешеходного пути, только вапоретто, и это не пешеходная геометрия.
+    mainland = next(component for component in nx.connected_components(graph) if start_node in component)
+    walkable = [s for s in routed if s['node'] in mainland]
+    islands = [s for s in routed if s['node'] not in mainland]
+
+    def tour_of(subset, goal):
+        """Ближайший сосед плюс 2-opt по настоящим сетевым расстояниям; goal — узел старта или None."""
+        node_list = ([goal] if goal is not None else []) + [s['node'] for s in subset]
+        distances = walk_distance_matrix(graph, node_list)
+        size = len(node_list)
+
+        def cost(tour):
+            ring = float(distances[tour[-1], tour[0]]) if goal is not None else 0.0
+            return ring + float(sum(distances[a, b] for a, b in zip(tour, tour[1:])))
+
+        tour = [0]
+        left = set(range(1, size))
+        while left:
+            current = tour[-1]
+            nxt = min(left, key=lambda j: (distances[current, j], j))
+            left.discard(nxt)
+            tour.append(nxt)
+        improved = True
+        while improved and size > 3:
+            improved = False
+            for i in range(1 if goal is not None else 0, size - 1):
+                for j in range(i + 1, size):
+                    candidate = tour[:i] + tour[i:j + 1][::-1] + tour[j + 1:]
+                    if cost(candidate) + 1e-6 < cost(tour):
+                        tour = candidate
+                        improved = True
+        order = [subset[i - 1] for i in tour[1:]] if goal is not None else [subset[i] for i in tour]
+        return order, cost(tour)
+
+    ordered, walk_cost = tour_of(walkable, start_node)
+    island_tour, island_groups = [], []
+    for component in sorted(nx.connected_components(graph), key=len, reverse=True):
+        if component is mainland or start_node in component:
+            continue
+        group = [s for s in islands if s['node'] in component]
+        if not group:
+            continue
+        group, _ = tour_of(group, None)
+        island_groups.append({'component_nodes': len(component), 'stops': [s['id'] for s in group]})
+        island_tour.extend(group)
+    for stop in stops:                    # остановки без узла в сети ставим рядом с ближайшей посчитанной
+        if stop.get('node') in graph:
+            continue
+        if not ordered:
+            ordered.append(stop)
+            continue
+        point = PROJECT.transform(stop['lon'], stop['lat'])
+        at = min(range(len(ordered)), key=lambda i: math.dist(point, PROJECT.transform(ordered[i]['lon'], ordered[i]['lat'])))
+        ordered.insert(at + 1, stop)
+    ordered = ordered + island_tour
+    return ordered, {'start': 'piazza_san_marco', 'start_stop': ordered[0]['id'],
+                     'optimization': 'network_nearest_neighbour_with_2opt', 'walkable_circuit_m': round(walk_cost, 1),
+                     'stops': len(ordered), 'walkable_stops': len(walkable), 'island_stops': len(island_tour),
+                     'island_groups': island_groups, 'traghetti_in_graph': used, 'global_optimum': False,
+                     'geometry': 'verified walking network plus traghetto crossings; island hops are not walkable geometry',
+                     'unrouted_stops': len(stops) - len(routed)}
+
+
 def order_stops(rows):
     groups = defaultdict(list)
     for row in rows:
@@ -115,11 +231,17 @@ def make_segments(stops, graph, nodes):
             except nx.NetworkXNoPath:
                 pass
         if path and len(path)>1:
-            segment.update(mode='walk',geometry=[list(nodes[n]) for n in path],
-                           geometry_semantics='verified_osm_adjacent_node_shortest_path',
+            crossings=[graph[u][v]['traghetto_id'] for u,v in zip(path,path[1:]) if graph[u][v].get('mode')=='traghetto']
+            segment.update(mode='boat' if crossings else 'walk',geometry=[list(nodes[n]) for n in path],
+                           geometry_semantics='verified_traghetto_service_crossing' if crossings else 'verified_osm_adjacent_node_shortest_path',
                            length_m=round(sum(graph[u][v]['weight'] for u,v in zip(path,path[1:])),2),
                            osm_nodes=path,
                            endpoint_semantics='nearby_network_nodes_not_verified_entrances')
+            if crossings:
+                segment['traghetto_ids']=sorted(set(crossings))
+                segment['note']=translated('Verified walking network on both banks; the canal crossing is a traghetto, not a bridge. Working hours are not verified.',
+                                          'Rete pedonale verificata su entrambe le rive; l\'attraversamento del canale è un traghetto, non un ponte. Orari non verificati.',
+                                          'Проверенная пешеходная сеть на обоих берегах; переход через канал — трагетто, не мост. Часы работы не проверены.')
         else:
             segment.update(mode='schematic',geometry=[[a['lon'],a['lat']],[b['lon'],b['lat']]],
                            geometry_semantics='schematic_non_navigational_connector',
@@ -576,8 +698,15 @@ def main():
         distance = math.dist(point,metric_nodes[nearest])
         stop['network_distance_m'] = round(float(distance),2)
         if distance <= 120 and stop['access_class']!='restricted': stop['node'] = nearest
-    stops = order_stops(stops)
-    segments = make_segments(stops,graph,nodes)
+    # Обход считаем по самой сети: старт и финиш на площади Сан-Марко, переход через канал — трагетто.
+    ferries = []
+    if not getattr(args, 'inventory_order', False):
+        try:
+            ferries = s12_load_inputs()[5]
+        except Exception as error:      # правила доступа недоступны — остаётся прежний реестровый порядок
+            print(f'traghetti unavailable, inventory order kept: {error}')
+    stops, tour = order_stops_by_walk(stops, graph, nodes, ferries=ferries)
+    segments = make_segments(stops, graph, nodes)
     for segment in segments:
         if segment['mode']=='walk':
             path = segment['osm_nodes']
@@ -586,13 +715,14 @@ def main():
             assert math.isclose(segment['length_m'],sum(graph[u][v]['weight'] for u,v in zip(path,path[1:])),abs_tol=.011)
     generated = datetime.now(timezone.utc).isoformat()
     audit['network'] = network_audit
+    audit['tour'] = tour
     audit['limitations'] = [
         translated('Monasteries include surviving/adapted premises in the historic sestieri, Giudecca and San Giorgio Maggiore. Explicit prior island exclusions remain. Reviewed unverified monastery mentions are not added; exhaustive coverage is not claimed.', 'I monasteri comprendono edifici conservati o riutilizzati nei sestieri storici, alla Giudecca e a San Giorgio Maggiore. Restano le precedenti esclusioni delle isole. Menzioni non verificate non sono aggiunte; la completezza non è dichiarata.', 'Монастыри включают сохранившиеся или переоборудованные здания исторических сестьере, Джудекки и Сан-Джорджо-Маджоре. Прежние исключения островов сохранены. Неподтверждённые упоминания не добавлены; исчерпывающая полнота не заявляется.'),
         translated('Inventory is reconciled against cached Italian/English Wikipedia lists, categories and Wikidata. Unresolved mentions remain below; this is not a claim of exhaustive coverage.', 'Inventario riconciliato con liste e categorie Wikipedia italiana/inglese e Wikidata in cache. Le menzioni irrisolte sono riportate; non si dichiara una copertura esaustiva.', 'Инвентарь сверён с сохранёнными итальянскими/английскими списками и категориями Википедии и Wikidata. Неразрешённые упоминания перечислены; исчерпывающая полнота не заявляется.'),
         translated(f"{len(audit['unresolved'])} unresolved candidate identities; see the published audit/report before treating the inventory as complete.", f"{len(audit['unresolved'])} identità candidate irrisolte; consultare audit e rapporto prima di considerare completo l'inventario.", f"Неразрешённых кандидатов: {len(audit['unresolved'])}. Перед использованием как полного списка изучите аудит и отчёт."),
         translated('Walking geometry is a shortest path between nearby mapped OSM nodes, not verified church entrances. Off-network approaches and ferry transfers are not navigable geometry.', 'La geometria pedonale segue percorsi minimi tra nodi OSM vicini, non ingressi verificati. Accessi fuori rete e traghetti non sono geometrie navigabili.', 'Пешеходная геометрия — кратчайшие пути между ближайшими узлами OSM, не проверенные входы. Подходы вне сети и паромные переезды не являются навигационными путями.'),
     ]
-    route = {'id':'churches-lagoon','title':translated('Churches, temples and monasteries, synagogues of Venice','Chiese, templi e monasteri, sinagoghe di Venezia','Церкви, храмы, монастыри и синагоги Венеции'), 'summary':translated(f"{len(stops)} located church/temple and monastery stops, all confessions; one ordering, no day splits.",f"{len(stops)} tappe di chiese, templi e monasteri, tutti i culti; un solo ordine, senza giornate.",f"{len(stops)} точек церквей, храмов и монастырей разных конфессий; единая последовательность без разбивки по дням."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
+    route = {'id':'churches-lagoon','title':translated('Churches, temples and monasteries, synagogues of Venice','Chiese, templi e monasteri, sinagoghe di Venezia','Церкви, храмы, монастыри и синагоги Венеции'), 'summary':translated(f"{len(stops)} located church/temple and monastery stops, all confessions. The walk starts and finishes at Piazza San Marco; canal crossings use the traghetto.",f"{len(stops)} tappe di chiese, templi e monasteri, tutti i culti. Il percorso inizia e finisce a Piazza San Marco; gli attraversamenti del canale usano il traghetto.",f"{len(stops)} точек церквей, храмов и монастырей разных конфессий. Обход начинается и заканчивается на площади Сан-Марко; через канал — трагетто."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
     validate_route(route,allow_incomplete=True)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(route,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
