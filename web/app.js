@@ -1551,7 +1551,13 @@ function setMode(m) {
   } else if (dockView === 'suburbs' || dockView === 'suburb') closeDock();
   renderKey(); updateRail(); drawHist();
 }
-document.querySelectorAll('.lenses button').forEach(b => b.onclick = () => setMode(+b.dataset.mode));
+// Вкладка «Мосты» не только красит мосты: она открывает пешеходный маршрут по ним (модуль bridge-route.js,
+// геометрия и числа — только из проверенного data/bridge-route.json) и показывает линию на карте.
+document.querySelectorAll('.lenses button').forEach(b => b.onclick = () => {
+  const m = +b.dataset.mode;
+  setMode(m);
+  if (m === MODE.layers) { bridgeRoute.show(); void bridgeRoute.load().then(() => bridgeRoute.setVisible(true)); }
+});
 document.querySelector(`.lenses [data-mode="${MODE.suburbs}"]`).hidden = !measure;
 
 // ---------- The line through time ----------
@@ -1800,7 +1806,8 @@ function relayoutTexts() {
   else if (dockView === 'walk') renderQuest();
   else if (dockView === 'walks') showWalks();
   else if (dockView === 'suburbs') showSuburbs();
-  paintDataNav();
+  // Здесь стоял вызов paintDataNav(), которой нет ни в этом файле, ни где-либо в репозитории: на каждой
+  // смене языка в консоль падал ReferenceError, а он обрывал остальных подписчиков onLang (Set.forEach).
   if (!findList.hidden) renderFind();
 }
 {
