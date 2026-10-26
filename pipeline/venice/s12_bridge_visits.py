@@ -717,9 +717,10 @@ def main():
             f'346 punti medi; {total / 1000:.3f} km, {stats["midpoint_repeat_visits"]} visite ripetute; ritorni: {stats["bridge_visit_reversals"]}. San Marco — San Marco. ' + ('Traghetti condizionali; non orario giornaliero.' if assisted else 'Solo a piedi.'),
             f'346 bridge midpoints; {total / 1000:.3f} km, {stats["midpoint_repeat_visits"]} repeated midpoint arrivals; returns: {stats["bridge_visit_reversals"]}. San Marco — San Marco. ' + ('Conditional traghetti, not a one-day timetable.' if assisted else 'Walking only.'))
         variant = {'id': name, 'visit_mode': True, 'title': s10.prose(
-            'Середины 346 мостов' + (' + трагетто (условно)' if assisted else ' — пешком'),
-            'Punti medi di 346 ponti' + (' + traghetti (condizionale)' if assisted else ' — a piedi'),
-            '346 bridge midpoints' + (' + traghetti (conditional)' if assisted else ' — walking')),
+            # Владелец атласа переименовал маршрут с переправой: он открывается прямо с вкладки «Мосты».
+            'Все мосты Венеции и одна переправа на гондоле (трагетто)' if assisted else 'Середины 346 мостов — пешком',
+            'Tutti i ponti di Venezia e una traversata in gondola (traghetto)' if assisted else 'Punti medi di 346 ponti — a piedi',
+            'Every bridge in Venice and one gondola crossing (traghetto)' if assisted else '346 bridge midpoints — walking'),
             'summary': summary, 'limitations': limitations, 'event_semantics': semantics,
             'status': 'conditional' if assisted else 'ready', 'start': dict(old['start']),
             'distance_m': total, 'walk_distance_m': stats['walk_distance_m'],

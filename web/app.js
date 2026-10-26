@@ -1083,6 +1083,9 @@ const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLiv
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
   onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
+// Номера переходов рисуются на canvas шрифтом заголовков: просим его заранее, чтобы цифры не остались
+// подменными, и дорисовка повторится, когда файл придёт.
+document.fonts?.load?.('28px "IM Fell English SC"').catch(() => {});
 // Data enrichment module kept imported but not attached to building cards.
 installShips(scene, camera, renderer, controls).catch(e => console.warn('ships failed to load', e));
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };

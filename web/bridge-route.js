@@ -1,7 +1,7 @@
 // Additive all-bridges walk. No production fallback: only the audited JSON supplies geometry/counts.
 import { sourcePresentationText, sourcePresentationPicker, sourcePresentationHref } from './source-presentation.js';
 export const UI = {
-  title: { ru: 'Середины мостов с Traghetto', it: 'Punti medi dei ponti con Traghetto', en: 'Bridge midpoints with Traghetto' },
+  title: { ru: 'Все мосты Венеции и одна переправа на гондоле (трагетто)', it: 'Tutti i ponti di Venezia e una traversata in gondola (traghetto)', en: 'Every bridge in Venice and one gondola crossing (traghetto)' },
   intro: { ru: 'Кольцевой маршрут по шести сестьери от Piazza San Marco и обратно.', it: 'Un percorso ad anello nei sei sestieri, da Piazza San Marco e ritorno.', en: 'A circuit through the six sestieri, starting and ending at Piazza San Marco.' },
   open: { ru: 'Открыть маршрут', it: 'Apri il percorso', en: 'Open route' },
   back: { ru: 'Все маршруты', it: 'Tutti i percorsi', en: 'All routes' },
@@ -201,17 +201,26 @@ export function routeGeometry(route, elevation = GROUND_HEIGHT) {
   return { points };
 }
 
-// Номер перехода лежит у самой земли рядом с мостом: он подписывает место, а не висит над городом.
+// Номера переходов: только цифры, чёрные, шрифтом заголовков и без обводки, которая читалась кружком.
+// Шрифт может догрузиться позже — тогда цифра перерисовывается, а не остаётся подменным.
+const MARKER_FONT = 'IM Fell English SC';
 function numberedMarker(THREE, n, x, z, selected = false) {
   if (typeof document === 'undefined') return null;
   const canvas = document.createElement('canvas'); canvas.width = canvas.height = 64;
   const ctx = canvas.getContext('2d'); if (!ctx) return null;
-  ctx.clearRect(0, 0, 64, 64);
-  ctx.font = `bold ${String(n).length > 3 ? 18 : 24}px sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  // Only glyphs: the canvas stays transparent around digits, even when selected.
-  ctx.strokeStyle = '#ffffff'; ctx.lineWidth = selected ? 4 : 3; ctx.strokeText(String(n), 32, 33);
-  ctx.fillStyle = '#ff0000'; ctx.fillText(String(n), 32, 33);
   const texture = new THREE.CanvasTexture(canvas);
+  const paint = () => {
+    ctx.clearRect(0, 0, 64, 64);
+    ctx.font = `${String(n).length > 3 ? 20 : selected ? 30 : 28}px "${MARKER_FONT}", Georgia, serif`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#000000';
+    ctx.fillText(String(n), 32, 32);
+    texture.needsUpdate = true;
+  };
+  paint();
+  try {
+    if (document.fonts?.load && !document.fonts.check(`28px "${MARKER_FONT}"`)) void document.fonts.load(`28px "${MARKER_FONT}"`).then(paint, () => {});
+  } catch {}
   const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, depthWrite: false }));
   marker.position.set(x, MARKER_HEIGHT, z); marker.scale.set(18, 18, 1); marker.renderOrder = selected ? 33 : 32;
   return marker;
