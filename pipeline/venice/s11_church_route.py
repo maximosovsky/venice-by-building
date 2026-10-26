@@ -142,18 +142,25 @@ def order_stops_by_walk(stops, graph, nodes, ferries=(), start=STREET_START):
     # Компонента Сан-Марко — проходимая пешком Венеция. Лагунные острова в неё не входят:
     # между ними и городом нет пешеходного пути, только вапоретто, и это не пешеходная геометрия.
     mainland = next(component for component in nx.connected_components(graph) if start_node in component)
+    # Владелец атласа: сначала обойти весь остров и только потом переправиться на Джудекку и там закончить.
+    # Остановки Джудекки (вместе с примыкающей Сакка Физола, если сеть их связывает) идут последними.
+    giudecca_seed = next((s for s in routed if (s.get('area') or '') == 'Giudecca'), None)
+    giudecca_component = (next(component for component in nx.connected_components(graph)
+                               if giudecca_seed['node'] in component) if giudecca_seed is not None else set())
     walkable = [s for s in routed if s['node'] in mainland]
-    islands = [s for s in routed if s['node'] not in mainland]
+    giudecca = [s for s in routed if s['node'] not in mainland and s['node'] in giudecca_component]
+    islands = [s for s in routed if s['node'] not in mainland and s['node'] not in giudecca_component]
 
-    def tour_of(subset, goal):
-        """Ближайший сосед плюс 2-opt по настоящим сетевым расстояниям; goal — узел старта или None."""
+    def tour_of(subset, goal, ring=True):
+        """Ближайший сосед плюс 2-opt по настоящим сетевым расстояниям; goal — узел старта или None.
+        ring=False — открытый путь: в начало не возвращаемся, финал свободен."""
         node_list = ([goal] if goal is not None else []) + [s['node'] for s in subset]
         distances = walk_distance_matrix(graph, node_list)
         size = len(node_list)
 
         def cost(tour):
-            ring = float(distances[tour[-1], tour[0]]) if goal is not None else 0.0
-            return ring + float(sum(distances[a, b] for a, b in zip(tour, tour[1:])))
+            back = float(distances[tour[-1], tour[0]]) if (ring and goal is not None) else 0.0
+            return back + float(sum(distances[a, b] for a, b in zip(tour, tour[1:])))
 
         tour = [0]
         left = set(range(1, size))
@@ -174,7 +181,7 @@ def order_stops_by_walk(stops, graph, nodes, ferries=(), start=STREET_START):
         order = [subset[i - 1] for i in tour[1:]] if goal is not None else [subset[i] for i in tour]
         return order, cost(tour)
 
-    ordered, walk_cost = tour_of(walkable, start_node)
+    ordered, walk_cost = tour_of(walkable, start_node, ring=False)
     island_tour, island_groups = [], []
     for component in sorted(nx.connected_components(graph), key=len, reverse=True):
         if component is mainland or start_node in component:
@@ -185,6 +192,14 @@ def order_stops_by_walk(stops, graph, nodes, ferries=(), start=STREET_START):
         group, _ = tour_of(group, None)
         island_groups.append({'component_nodes': len(component), 'stops': [s['id'] for s in group]})
         island_tour.extend(group)
+    # Джудекка — финал: заходим с ближайшей к последнему месту остановки и заканчиваем на острове.
+    giudecca_tour = []
+    if giudecca:
+        last = ordered[-1] if ordered else None
+        seed = min(giudecca, key=lambda s: math.dist(PROJECT.transform(s['lon'], s['lat']),
+                                                     PROJECT.transform(last['lon'], last['lat'])) if last else 0.0)
+        rest, _ = tour_of([s for s in giudecca if s is not seed], seed['node'], ring=False)
+        giudecca_tour = [seed] + rest
     for stop in stops:                    # остановки без узла в сети ставим рядом с ближайшей посчитанной
         if stop.get('node') in graph:
             continue
@@ -194,12 +209,15 @@ def order_stops_by_walk(stops, graph, nodes, ferries=(), start=STREET_START):
         point = PROJECT.transform(stop['lon'], stop['lat'])
         at = min(range(len(ordered)), key=lambda i: math.dist(point, PROJECT.transform(ordered[i]['lon'], ordered[i]['lat'])))
         ordered.insert(at + 1, stop)
-    ordered = ordered + island_tour
+    ordered = ordered + island_tour + giudecca_tour
     return ordered, {'start': 'piazza_san_marco', 'start_stop': ordered[0]['id'],
+                     'end': 'giudecca', 'end_stop': ordered[-1]['id'],
+                     'order': 'walk the island first, then cross to Giudecca and finish there',
                      'optimization': 'network_nearest_neighbour_with_2opt', 'walkable_circuit_m': round(walk_cost, 1),
                      'stops': len(ordered), 'walkable_stops': len(walkable), 'island_stops': len(island_tour),
-                     'island_groups': island_groups, 'traghetti_in_graph': used, 'global_optimum': False,
-                     'geometry': 'verified walking network plus traghetto crossings; island hops are not walkable geometry',
+                     'giudecca_stops': len(giudecca_tour), 'island_groups': island_groups,
+                     'traghetti_in_graph': used, 'global_optimum': False,
+                     'geometry': 'verified walking network plus traghetto crossings; island and Giudecca hops are not walkable geometry',
                      'unrouted_stops': len(stops) - len(routed)}
 
 
@@ -759,7 +777,7 @@ def main():
         translated(f"{len(audit['unresolved'])} unresolved candidate identities; see the published audit/report before treating the inventory as complete.", f"{len(audit['unresolved'])} identità candidate irrisolte; consultare audit e rapporto prima di considerare completo l'inventario.", f"Неразрешённых кандидатов: {len(audit['unresolved'])}. Перед использованием как полного списка изучите аудит и отчёт."),
         translated('Walking geometry is a shortest path between nearby mapped OSM nodes, not verified church entrances. Off-network approaches and ferry transfers are not navigable geometry.', 'La geometria pedonale segue percorsi minimi tra nodi OSM vicini, non ingressi verificati. Accessi fuori rete e traghetti non sono geometrie navigabili.', 'Пешеходная геометрия — кратчайшие пути между ближайшими узлами OSM, не проверенные входы. Подходы вне сети и паромные переезды не являются навигационными путями.'),
     ]
-    route = {'id':'churches-lagoon','title':translated('Churches, temples and monasteries, synagogues of Venice','Chiese, templi e monasteri, sinagoghe di Venezia','Церкви, храмы, монастыри и синагоги Венеции'), 'summary':translated(f"{len(stops)} located church/temple and monastery stops, all confessions. The walk starts and finishes at Piazza San Marco; canal crossings use the traghetto.",f"{len(stops)} tappe di chiese, templi e monasteri, tutti i culti. Il percorso inizia e finisce a Piazza San Marco; gli attraversamenti del canale usano il traghetto.",f"{len(stops)} точек церквей, храмов и монастырей разных конфессий. Обход начинается и заканчивается на площади Сан-Марко; через канал — трагетто."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
+    route = {'id':'churches-lagoon','title':translated('Churches, temples and monasteries, synagogues of Venice','Chiese, templi e monasteri, sinagoghe di Venezia','Церкви, храмы, монастыри и синагоги Венеции'), 'summary':translated(f"{len(stops)} located church/temple and monastery stops, all confessions. The walk starts at Piazza San Marco, covers the island on foot and finishes on Giudecca; canal crossings use the traghetto.",f"{len(stops)} tappe di chiese, templi e monasteri, tutti i culti. Il percorso parte da Piazza San Marco, gira l'isola a piedi e termina alla Giudecca; gli attraversamenti del canale usano il traghetto.",f"{len(stops)} точек церквей, храмов и монастырей разных конфессий. Обход начинается на площади Сан-Марко, идёт по острову пешком и заканчивается на Джудекке; через канал — трагетто."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
     strip_access_boilerplate(route)
     validate_route(route,allow_incomplete=True)
     args.output.parent.mkdir(parents=True,exist_ok=True)
