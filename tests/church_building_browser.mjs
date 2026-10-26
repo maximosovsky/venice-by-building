@@ -21,17 +21,21 @@ try{
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible),null,{timeout:30000});
  const report=await page.evaluate(()=>{
   const {churchBuildingHighlight:h,scene}=window.__dbg;
-  let expected=0,actual=0,roofs=0;const target=new Set(h.manifest.buildings.map(b=>b.gid)),refs=[];
-  for(const mesh of h.overlays){actual+=mesh.geometry.index.count;const t=mesh.parent.geometry,bld=t.attributes.bld.array,attr=mesh.parent.userData.draw.uniforms.uAttr.value.image.data,idx=t.index.array;
+  let expected=0,actual=0,roofs=0;const refs=[];
+  // Каждый цвет манифеста — свой оверлей и свой набор gid: ожидание считаем по классу цвета.
+  const byClass={};for(const b of h.manifest.buildings){const c=(b.highlight_color||'#436817').toLowerCase();(byClass[c]=byClass[c]||new Set()).add(b.gid);}
+  const colourOf=m=>{const u=m.material.uniforms||{};return (m.material.color||u.uColor?.value||u.color?.value).getHexString();};
+  for(const mesh of h.overlays){actual+=mesh.geometry.index.count;const target=byClass['#'+colourOf(mesh)]||new Set();const t=mesh.parent.geometry,bld=t.attributes.bld.array,attr=mesh.parent.userData.draw.uniforms.uAttr.value.image.data,idx=t.index.array;
    for(let i=0;i<idx.length;i+=3)if([idx[i],idx[i+1],idx[i+2]].every(v=>target.has(attr[(bld[v]&32767)*8+3]))){expected+=3;if([idx[i],idx[i+1],idx[i+2]].some(v=>bld[v]>=32768))roofs++;}
    const p=mesh.geometry.attributes.position;for(let i=0;i<p.count;i++)assertFinite(p.getX(i),p.getY(i),p.getZ(i));
    for(const qid of ['Q172988','Q52531']){const entry=h.manifest.buildings.find(b=>b.qid===qid);if(Array.from(attr).some((v,i)=>i%8===3&&v===entry.gid)){const positions=[];for(let i=0;i<bld.length;i++)if(attr[(bld[i]&32767)*8+3]===entry.gid)positions.push([t.attributes.position.getX(i),t.attributes.position.getY(i),t.attributes.position.getZ(i)]);refs.push({qid,gid:entry.gid,vertices:positions.length,minY:Math.min(...positions.map(p=>p[1]))*.1,maxY:Math.max(...positions.map(p=>p[1]))*.1,distinctXZ:new Set(positions.map(p=>p[0]+','+p[2])).size});}}
   }
   const bridgeColors=[];scene.traverse(m=>{if(m.name.startsWith('bridge-highlight-mesh:'))bridgeColors.push((m.material.color||m.material.uniforms.color.value).getHexString());});
-  return {expected,actual,roofs,refs,bridgeColors,overlays:h.overlays.length,allGray:h.overlays.every(m=>m.visible&&(m.material.color||m.material.uniforms.color.value).getHexString()==='808080'),matched:h.manifest.matched_stops,unmatched:h.manifest.unmatched.length};
+  return {expected,actual,roofs,refs,bridgeColors,overlays:h.overlays.length,colors:[...new Set(h.overlays.filter(m=>m.visible).map(m=>'#'+colourOf(m)))],matched:h.manifest.matched_stops,unmatched:h.manifest.unmatched.length};
   function assertFinite(...v){if(!v.every(Number.isFinite))throw Error('nonfinite mesh');}
  });
- assert.equal(report.actual,report.expected,'every church triangle including wall/part/roof must be gray');assert.ok(report.actual>1000);assert.equal(report.allGray,true);assert.equal(report.refs.length,2);for(const r of report.refs){assert.ok(r.vertices>100);assert.ok(r.distinctXZ>20);assert.ok(r.maxY>r.minY);}assert.notEqual(report.refs[0].gid,report.refs[1].gid);assert.ok(report.bridgeColors.length>100);assert.ok(report.bridgeColors.every(c=>c==='ff0000'));
+ assert.equal(report.actual,report.expected,'счёт треугольников совпадает с манифестом по каждому классу цвета');assert.ok(report.actual>1000);assert.ok(report.colors.every(c=>['#436817','#2f3f6b'].includes(c)),'только цвета манифеста: '+report.colors.join(','));assert.equal(report.refs.length,2);for(const r of report.refs){assert.ok(r.vertices>100);assert.ok(r.distinctXZ>20);assert.ok(r.maxY>r.minY);}assert.notEqual(report.refs[0].gid,report.refs[1].gid);// Зелёная заливка доступна только по своему источнику: прямого включения вкладками не осталось.
+ await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',false));
  await page.locator('[data-bridge-route-toggle]').click();
  // Владелец атласа: мостовой маршрут больше НЕ включает зелёную заливку храмов, храмы остаются бирюзовыми.
  assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'мостовой маршрут не включает зелёный оверлей храмов');
@@ -49,5 +53,5 @@ try{
   await page.waitForTimeout(1200);const path=`C:/Users/1/AppData/Local/hermes/cache/scratch/venice-church-building-${name}.png`;await page.screenshot({path});screenshots.push(path);
  }
  assert.deepEqual(errors,[]);const knownMissing=new Set(['/img/sun.webp','/data/suburbs.json','/data/suburbs.bin']);assert.deepEqual(httpErrors.filter(p=>!knownMissing.has(p)),[]);assert.deepEqual(consoleErrors.filter(e=>!/^Failed to load resource:.*404/.test(e)),[]);
- console.log(JSON.stringify({base,...report,bridgeColors:[...new Set(report.bridgeColors)],pageErrors:errors,knownMissing:httpErrors,screenshots}));
+ console.log(JSON.stringify({base,...report,pageErrors:errors,knownMissing:httpErrors,screenshots,noTabPaintsChurches:true}));
 }finally{await browser.close();await new Promise(r=>server.close(r));}
