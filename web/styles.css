@@ -92,7 +92,8 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
   display: flex; align-items: center; gap: 26px; }
 .bar-sep { width: 1px; height: 22px; background: var(--rule); }
 .lenses { display: flex; gap: 24px; }
-.bar button { border: 0; background: none; padding: 8px 0; cursor: pointer; font-weight: 450; }
+/* Вкладки верхней панели — тот же IM Fell English SC, что и заголовки; кириллица падает на Cormorant. */
+.bar button { border: 0; background: none; padding: 8px 0; cursor: pointer; font-weight: 400; font-family: var(--fell); font-size: 14px; letter-spacing: .015em; }
 .lenses button { color: var(--muted); border-bottom: 2px solid transparent; transition: color .3s var(--ease), border-color .3s var(--ease); }
 .lenses button:hover { color: var(--ink); }
 .lenses button[aria-pressed="true"] { color: var(--ink); border-color: var(--ink); }
