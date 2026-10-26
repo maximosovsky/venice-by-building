@@ -6,7 +6,7 @@
 import { sourcePresentationPicker } from './source-presentation.js';
 import { buildThickRouteLine } from './bridge-route.js';
 export const UI = {
- title:{ru:'Церкви, храмы и монастыри, синагоги Венеции',it:'Chiese, templi e monasteri, sinagoghe di Venezia',en:'Churches, temples and monasteries, synagogues of Venice'},
+ title:{ru:'Церкви, храмы, монастыри и синагоги Венеции',it:'Chiese, templi e monasteri, sinagoghe di Venezia',en:'Churches, temples and monasteries, synagogues of Venice'},
  intro:{ru:'Единый нумерованный маршрут по включённым в реестр сакральным местам.',it:'Un unico percorso numerato tra i luoghi sacri inclusi nell’inventario.',en:'One numbered route through the sacred places included in the inventory.'},
  open:{ru:'Открыть маршрут',it:'Apri il percorso',en:'Open route'},
  back:{ru:'Все маршруты',it:'Tutti i percorsi',en:'All routes'},

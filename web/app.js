@@ -1615,7 +1615,7 @@ document.querySelectorAll('.lenses button').forEach(b => b.onclick = () => {
   const m = +b.dataset.mode;
   setMode(m);
   if (m === MODE.layers) { bridgeRoute.show(); void bridgeRoute.load().then(() => bridgeRoute.setVisible(true)); }
-  // Вкладка «Сакральное» открывает маршрут «Церкви, храмы и монастыри, синагоги Венеции».
+  // Вкладка «Сакральное» открывает маршрут «Церкви, храмы, монастыри и синагоги Венеции».
   if (m === MODE.floors) { churchRoute.show(); void churchRoute.load().then(() => churchRoute.setVisible(true)); }
 });
 document.querySelector(`.lenses [data-mode="${MODE.suburbs}"]`).hidden = !measure;
