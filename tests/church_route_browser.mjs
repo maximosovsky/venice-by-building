@@ -35,21 +35,25 @@ try{
   console.log(JSON.stringify({base,bridgeEntryPreserved:true,churchEntry:true,failClosed:true,stops:0,pageErrors:errors,consoleErrors,httpErrors,screenshot}));
  }else{
  const response=await page.request.get(base+'data/church-route.json');assert.equal(response.status(),200);const data=await response.json();assert.equal(data.status,'ready');
- await page.locator('[data-church-route-open]').click();await page.locator('[data-church-route-toggle]').waitFor({timeout:30000});
+ await page.locator('[data-church-route-open]').click();await page.locator('.church-stops').waitFor({timeout:30000});
  const panel=page.locator('.church-route-page');assert.equal(await page.locator('[data-church-stop]').count(),data.stops.length);
  const names=await page.locator('.church-stops .church-stop-number').allTextContents();assert.deepEqual(names,data.stops.map((_,i)=>String(i+1)));
  assert.equal(await panel.locator('a[href*="wikipedia.org/wiki/"]').count(),data.stops.length);
- await page.locator('[data-church-route-toggle]').click();assert.equal(await page.locator('[data-church-route-toggle]').getAttribute('aria-pressed'),'true');
+ assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),true,'полоса видна сразу после открытия маршрута');
  const markerCount=await page.evaluate(()=>window.__dbg.churchRoute.overlay.children.filter(o=>o.userData.stop_id).length);assert.equal(markerCount,data.stops.length);
  const laz=Math.max(0,data.stops.findIndex(s=>/lazzaro/i.test(s.id+' '+JSON.stringify(s.name))));
  for(const i of [...new Set([0,laz])]){
-  await page.locator(`[data-church-stop="${i}"]`).click();assert.equal(await page.locator(`[data-church-stop="${i}"]`).getAttribute('aria-current'),'step');
+  await page.locator(`[data-church-stop="${i}"]`).click();
+  // Нажатие на номер выводит карточку самого места; панель маршрута возвращается кнопкой «Сакральное».
+  await page.locator('.b-card').waitFor({timeout:20000});assert.equal((await page.locator('.dock-back').innerText()).trim().length>0,true);
   await page.waitForFunction(([x,z])=>Math.abs(window.__dbg.controls.target.x-x)<1&&Math.abs(window.__dbg.controls.target.z-z)<1,data.stops[i].local,{timeout:20000});
   const pos=await page.evaluate(id=>{const p=window.__dbg.churchRoute.overlay.children.find(o=>o.userData.stop_id===id);return[p.position.x,p.position.z];},data.stops[i].id);assert.deepEqual(pos,data.stops[i].local);
+  await page.locator('.dock-back').click();await page.locator('.church-stops').waitFor({timeout:20000});
+  assert.equal(await page.locator(`[data-church-stop="${i}"]`).getAttribute('aria-current'),'step');
  }
  for(const lang of ['it','en','ru']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await panel.innerText()).includes(data.title[lang]));const note=data.stops[laz].access_note;assert.ok((await panel.innerText()).includes(typeof note==='string'?note:note[lang]));assert.equal(await page.locator(`[data-church-stop="${laz}"]`).getAttribute('aria-current'),'step');}
- await page.locator('[data-church-route-toggle]').click();assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),false);
- await page.locator('[data-church-route-toggle]').click();assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),true);
+ await page.evaluate(()=>window.__dbg.churchRoute.setVisible(false));assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),false);
+ await page.evaluate(()=>window.__dbg.churchRoute.setVisible(true));assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),true);
  // Existing optional atlas assets are absent in this checkout. Report them,
  // but never excuse church-route requests, JS errors or WebGL console errors.
  const knownMissing=new Set(['/img/sun.webp','/data/suburbs.json','/data/suburbs.bin']);

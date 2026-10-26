@@ -508,7 +508,13 @@ const VERT = /* glsl */`
       // Places of worship keep their colour: their volume comes from the shading, not from a flat fill.
       if (flag >= 1 && k <= 0.5) c = mix(c, uMaquette, uDocOnly > 0.5 && flag >= 2 ? 1.0 : 0.32);
     } else if (uMode < 1.5) {
-      c = floorsRamp(mod(a.z, 128.0));
+      // Вкладка «Сакральное»: город — макет, сакральные здания несут бирюзу главной вкладки.
+      c = uMaquette;
+      {
+        int gi = int(a.w + 0.5);
+        float kk = texelFetch(uKind, ivec2(gi % ${SUB_W}, gi / ${SUB_W}), 0).r;
+        if (kk > 0.5 && kk < 1.5) c = vec3(0.380, 0.576, 0.580);
+      }
     } else if (uMode < 2.5) {
       c = uHeritage[int(a.z / 128.0)];
     } else if (uMode < 3.5) {
@@ -703,6 +709,26 @@ const ready = Promise.all([
   // Легенда рисуется раньше, чем приходят файлы: после палаццо её счёт нужно переписать.
   renderKey();
 });
+
+// Сакральное место маршрута → gid атласа: сперва по Викиданным, иначе по ближайшему сакральному зданию.
+const gidByQid = new Map(), sacredPoints = [];
+for (let gid = 0, o = 0; o < attrBuf.byteLength; gid++, o += config.attrStride) {
+  const wik = attrs.getInt32(o + config.attrFields.wk[0], true);
+  if (wik >= 0 && wiki[wik]?.qid) gidByQid.set(wiki[wik].qid, gid);
+  if (churchGids.has(gid)) sacredPoints.push([gid, attrs.getFloat32(o + config.attrFields.x[0], true), attrs.getFloat32(o + config.attrFields.z[0], true)]);
+}
+function resolveStopGid(stop) {
+  const byQid = gidByQid.get(stop?.id);
+  if (byQid !== undefined) return byQid;
+  const [x, z] = stop?.local || [];
+  if (!Number.isFinite(x) || !Number.isFinite(z)) return -1;
+  let best = -1, bestD = 120;   // дальше 120 м это уже не то здание
+  for (const [gid, bx, bz] of sacredPoints) {
+    const d = Math.hypot(bx - x, bz - z);
+    if (d < bestD) { bestD = d; best = gid; }
+  }
+  return best;
+}
 
 // Мосты мостового маршрута приходят как «d<osm way id>». Атлас знает тот же osm-id, поэтому карточку
 // моста можно открыть прямо по номеру перехода.
@@ -921,6 +947,8 @@ canvas.addEventListener('pointerup', e => {
   // Номер маршрута важнее здания под ним: нажатие на цифру открывает карточку самого моста.
   const routeMarker = bridgeRoute.spriteAt(e.clientX, e.clientY, camera, [innerWidth, innerHeight]);
   if (routeMarker) { openBuilding(routeMarker.gid, { label: t('Мосты'), go: () => bridgeRoute.show() }); return; }
+  const sacredMarker = churchRoute.spriteAt(e.clientX, e.clientY, camera, [innerWidth, innerHeight]);
+  if (sacredMarker) { openBuilding(sacredMarker.gid, { label: t('Сакральное'), go: () => churchRoute.show() }); return; }
   const gid = pick(e.clientX, e.clientY);
   if (quest && !solved && qStep().kind === 'find') { questClick(gid); return; }
   if (cardsLocked()) return;
@@ -1082,6 +1110,9 @@ const bridgeRoute = installBridgeRoute({ THREE, scene, aimFly, openDock, dockLiv
   openBuildingCard: gid => openBuilding(gid, { label: t('Мосты'), go: () => bridgeRoute.show() }) });
 const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLive,
   getDockView: () => dockView, showWalks, pickText, onLang,
+  // Место маршрута → gid атласа: по цифре открывается карточка самого места.
+  resolveStopGid,
+  openBuildingCard: gid => openBuilding(gid, { label: t('Сакральное'), go: () => churchRoute.show() }),
   onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
 // Номера переходов рисуются на canvas шрифтом заголовков: просим его заранее, чтобы цифры не остались
 // подменными, и дорисовка повторится, когда файл придёт.
@@ -1532,9 +1563,8 @@ function renderKey() {
     });
     keyEl.querySelector('.k-est').onclick = () => { uniforms.uDocOnly.value = uniforms.uDocOnly.value ? 0 : 1; renderKey(); };
   } else if (mode === MODE.floors) {
-    const stops = ['1', '3', '8', '20', '40+'];
-    keyEl.innerHTML = `<span class="key-label">Storeys</span><span class="ramp">${stops.map((s, i) =>
-      `<div><span>${s}</span><i style="background:linear-gradient(90deg,${RAMP[i]},${RAMP[Math.min(i + 1, 4)]})"></i></div>`).join('')}</span>`;
+    // Вкладка переименована в «Сакральное»: ключ говорит о сакральных зданиях, а не о высотах.
+    keyEl.innerHTML = `<span class="key-label">${dot('#619394')}${t('Сакральное')} <span class="n">${fmt(churchGids.size)}</span></span>`;
   } else if (mode === MODE.heritage) {
     keyEl.innerHTML = '';
   } else if (mode === MODE.suburbs) {
@@ -1585,6 +1615,8 @@ document.querySelectorAll('.lenses button').forEach(b => b.onclick = () => {
   const m = +b.dataset.mode;
   setMode(m);
   if (m === MODE.layers) { bridgeRoute.show(); void bridgeRoute.load().then(() => bridgeRoute.setVisible(true)); }
+  // Вкладка «Сакральное» открывает маршрут «Церкви, храмы и монастыри, синагоги Венеции».
+  if (m === MODE.floors) { churchRoute.show(); void churchRoute.load().then(() => churchRoute.setVisible(true)); }
 });
 document.querySelector(`.lenses [data-mode="${MODE.suburbs}"]`).hidden = !measure;
 

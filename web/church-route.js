@@ -1,24 +1,25 @@
 // Additive lagoon church inventory. Production geometry/counts come only from the audited JSON.
+//
+// Владелец атласа задал вид этого маршрута: полоса лежит по земле толстой прозрачной фиолетовой линией,
+// здания не дублируются над городом, номера — чёрные цифры шрифтом заголовков, а нажатие на номер
+// выводит карточку места. Прежние шары на 38 м, пунктир-схема и тексты аудита убраны.
 import { sourcePresentationPicker } from './source-presentation.js';
+import { buildThickRouteLine } from './bridge-route.js';
 export const UI = {
- title:{ru:'Храмы Венеции и лагуны',it:'Chiese di Venezia e della laguna',en:'Churches of Venice and the lagoon'},
- intro:{ru:'Единый нумерованный маршрут по включённым в реестр храмам.',it:'Un unico percorso numerato tra le chiese incluse nell’inventario.',en:'One numbered route through the churches included in the inventory.'},
+ title:{ru:'Церкви, храмы и монастыри, синагоги Венеции',it:'Chiese, templi e monasteri, sinagoghe di Venezia',en:'Churches, temples and monasteries, synagogues of Venice'},
+ intro:{ru:'Единый нумерованный маршрут по включённым в реестр сакральным местам.',it:'Un unico percorso numerato tra i luoghi sacri inclusi nell’inventario.',en:'One numbered route through the sacred places included in the inventory.'},
  open:{ru:'Открыть маршрут',it:'Apri il percorso',en:'Open route'},
  back:{ru:'Все маршруты',it:'Tutti i percorsi',en:'All routes'},
- loading:{ru:'Загрузка реестра храмов…',it:'Caricamento dell’inventario delle chiese…',en:'Loading church inventory…'},
+ loading:{ru:'Загрузка реестра сакральных мест…',it:'Caricamento dell’inventario dei luoghi sacri…',en:'Loading the sacred inventory…'},
  error:{ru:'Маршрут недоступен: файл не загружен или не прошёл проверку. Подставных остановок и линий нет.',it:'Percorso non disponibile: caricamento o verifica falliti. Nessuna tappa o linea sostitutiva.',en:'Route unavailable: loading or validation failed. No substitute stops or lines are shown.'},
  retry:{ru:'Повторить загрузку',it:'Riprova',en:'Retry loading'},
  stops:{ru:'Остановки в реестре',it:'Tappe nell’inventario',en:'Inventory stops'},
  order:{ru:'Остановки по порядку',it:'Tappe in ordine',en:'Stops in order'},
- show:{ru:'Показать на карте',it:'Mostra sulla mappa',en:'Show on map'},
- hide:{ru:'Скрыть маршрут',it:'Nascondi il percorso',en:'Hide route'},
  source:{ru:'Википедия',it:'Wikipedia',en:'Wikipedia'},
- exterior:{ru:'Осмотр снаружи; пешком и вапоретто между доступными островами. Перед поездкой уточняйте расписание, ограничения и доступ; частные острова не означают регулярный рейс.',it:'Visite esterne; a piedi e in vaporetto tra le isole accessibili. Verificare orari, restrizioni e accesso prima del viaggio; le isole private non implicano un servizio regolare.',en:'Exterior visits; walking and vaporetto between accessible islands. Check timetables, restrictions and access before travel; private islands do not imply a regular service.'},
- schematic:{ru:'Пунктир — только схема порядка посещения, не пешеходный путь и не маршрут судна. Проверенные пути показаны сплошными линиями. Номера совпадают со списком.',it:'Il tratteggio indica solo l’ordine delle visite, non un percorso pedonale o una rotta navale. I percorsi verificati sono linee continue. I numeri corrispondono all’elenco.',en:'Dashed connectors show visit order only, not walking paths or boat routes. Verified paths use solid lines. Numbers match the list.'},
- scope:{ru:'Охват ограничен включённым проверенным реестром; это не гарантия полного городского списка.',it:'La copertura riguarda l’inventario verificato incluso, non un elenco cittadino garantito completo.',en:'Coverage is limited to the included audited inventory, not a guaranteed complete city register.'},
  transfers:{ru:'Переходы и переезды',it:'Spostamenti e trasferimenti',en:'Walks and transfers'},
  walk:{ru:'Пешком',it:'A piedi',en:'Walking'},boat:{ru:'Судно',it:'Navigazione',en:'Boat'},
- connector:{ru:'Схема',it:'Schema',en:'Schematic'}
+ connector:{ru:'Схема',it:'Schema',en:'Schematic'},
+ directions:{ru:'Полоса идёт по земле от первой остановки к последней; номера на карте и в списке совпадают. Нажатие на номер открывает карточку места.',it:'La fascia corre a terra dalla prima all’ultima tappa; i numeri sulla mappa e in elenco coincidono. Un clic sul numero apre la scheda del luogo.',en:'The band runs on the ground from the first stop to the last. The numbers on the map and in the list agree; clicking a number opens the place card.'}
 };
 const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const finite = n => typeof n === 'number' && Number.isFinite(n);
@@ -48,15 +49,13 @@ export function routeEntryHTML(state,pickText){
  ${!route?`<p role="status">${label(state.status==='error'?'error':'loading',pickText)}</p>`:''}
  <div class="route-meta">${route?`<span>${route.stops.length} · ${label('stops',pickText)}</span>`:''}<button class="pill primary" data-church-route-open>${label('open',pickText)}</button></div></li>`;
 }
+// Карточка маршрута: заголовок, список мест и переходы. Тексты аудита, счётчик остановок и кнопка
+// «Показать на карте» убраны по просьбе владельца атласа: полоса видна сразу.
 export function routePanelHTML(route,state={},pickText){
  pickText=sourcePresentationPicker(pickText);
- const notes=route.audit?.limitations??route.audit?.caveats;
  return `<article class="dock-page church-route-page" data-no-i18n><h2 id="dock-title">${text(route.title,pickText)}</h2><p class="lede">${text(route.summary,pickText)}</p>
- <p>${route.stops.length} · ${label('stops',pickText)}</p><p class="caveat">${label('exterior',pickText)}</p>
- <div class="walk-actions"><button class="pill primary" data-church-route-toggle aria-pressed="${!!state.visible}">${label(state.visible?'hide':'show',pickText)}</button></div>
- <p class="caveat church-route-legend">${label('schematic',pickText)}</p><p class="caveat">${label('scope',pickText)}</p>
- ${route.audit?.scope?`<p class="caveat">${text(route.audit.scope,pickText)}</p>`:''}${(notes?(Array.isArray(notes)?notes:[notes]):[]).map(n=>`<p class="caveat">${text(n,pickText)}</p>`).join('')}
- <h3>${label('order',pickText)}</h3><ol class="church-stops">${route.stops.map((s,i)=>`<li><button data-church-stop="${i}"${state.selected===i?' aria-current="step"':''}><span class="church-stop-number">${i+1}</span><span>${text(s.name,pickText)}</span></button>
+ <h3>${label('order',pickText)}</h3><p class="caveat">${label('directions',pickText)}</p>
+ <ol class="church-stops">${route.stops.map((s,i)=>`<li><button data-church-stop="${i}"${state.selected===i?' aria-current="step"':''}><span class="church-stop-number">${i+1}</span><span>${text(s.name,pickText)}</span></button>
  <div class="church-stop-detail">${s.area?`<small>${text(s.area,pickText)}</small>`:''}<p>${text(s.access_note,pickText)}</p><a href="${escapeHTML(s.wikipedia)}" target="_blank" rel="noopener noreferrer">${label('source',pickText)}</a></div></li>`).join('')}</ol>
  ${route.segments.length?`<details class="church-transfers"><summary>${label('transfers',pickText)}</summary><ol>${route.segments.map(s=>`<li>${route.stops.findIndex(p=>p.id===s.from)+1} → ${route.stops.findIndex(p=>p.id===s.to)+1} · ${label(s.mode==='schematic'?'connector':s.mode,pickText)}${s.suggested_transport?` · ${text(s.suggested_transport,pickText)}`:''}${s.access_note?`<p>${text(s.access_note,pickText)}</p>`:''}</li>`).join('')}</ol></details>`:''}</article>`;
 }
@@ -69,29 +68,67 @@ function utm(lon,lat){
 }
 const origin=utm(12.3387,45.4340);
 export function localPoint(lon,lat){const [e,n]=utm(lon,lat);return[e-origin[0],-(n-origin[1])];}
-function stopMarker(THREE,stop,index){
- const group=new THREE.Group();group.name=`church-stop:${stop.id}`;group.position.set(stop.local[0],38,stop.local[1]);group.userData={stop_id:stop.id,number:index+1};
- const dot=new THREE.Mesh(new THREE.SphereGeometry(7,8,6),new THREE.MeshBasicMaterial({color:'#345a60',depthTest:false,depthWrite:false}));dot.renderOrder=40;group.add(dot);
- if(typeof document!=='undefined') {const canvas=document.createElement('canvas');canvas.width=canvas.height=96;const ctx=canvas.getContext('2d');if(ctx){ctx.font='bold 36px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.strokeStyle='#ffffff';ctx.lineWidth=5;ctx.strokeText(String(index+1),48,48);ctx.fillStyle='#345a60';ctx.fillText(String(index+1),48,48);
- const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(canvas),depthTest:false,depthWrite:false}));sprite.position.y=22;sprite.scale.set(68,68,1);sprite.renderOrder=41;group.add(sprite);}}
- return group;
+export const GROUND_HEIGHT = 1.2;
+export const MARKER_HEIGHT = 3;
+export const BAND_COLOR = '#7b1fa2';
+export const BAND_WIDTH = 14;
+export const BAND_OPACITY = .5;
+// Номер места: чёрная цифра шрифтом заголовков, без шара и без обводки; шрифт догружается и перерисовывается.
+const MARKER_FONT = 'IM Fell English SC';
+function numberedMarker(THREE, n, x, z, selected = false) {
+ if (typeof document === 'undefined') return null;
+ const canvas = document.createElement('canvas'); canvas.width = canvas.height = 64;
+ const ctx = canvas.getContext('2d'); if (!ctx) return null;
+ const texture = new THREE.CanvasTexture(canvas);
+ const paint = () => {
+  ctx.clearRect(0, 0, 64, 64);
+  ctx.font = `${String(n).length > 3 ? 20 : selected ? 30 : 28}px "${MARKER_FONT}", Georgia, serif`;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#000000';
+  ctx.fillText(String(n), 32, 32);
+  texture.needsUpdate = true;
+ };
+ paint();
+ try {
+  if (document.fonts?.load && !document.fonts.check(`28px "${MARKER_FONT}"`)) void document.fonts.load(`28px "${MARKER_FONT}"`).then(paint, () => {});
+ } catch {}
+ const marker = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, depthTest: false, depthWrite: false }));
+ marker.position.set(x, MARKER_HEIGHT, z); marker.scale.set(18, 18, 1); marker.renderOrder = selected ? 41 : 40;
+ return marker;
 }
-export function buildRouteOverlay(THREE,route){
- validateRoute(route);const group=new THREE.Group();group.name='churches-lagoon-route';
- route.stops.forEach((s,i)=>group.add(stopMarker(THREE,s,i)));
- for(const s of route.segments){const points=s.geometry.map(([lon,lat])=>{const [x,z]=localPoint(lon,lat);return new THREE.Vector3(x,24,z);});
- const options={color:s.mode==='boat'?'#3b7999':'#345a60',depthTest:false,depthWrite:false,transparent:true,opacity:.8};
- const material=s.mode==='schematic'?new THREE.LineDashedMaterial({...options,dashSize:28,gapSize:22}):new THREE.LineBasicMaterial(options);
- const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),material);if(s.mode==='schematic')line.computeLineDistances();line.renderOrder=39;line.userData={mode:s.mode,geometry_semantics:s.geometry_semantics};group.add(line);
+// Полоса по земле из проверенной геометрии каждого перехода: и пешего, и паромного. Здания подсвечивает
+// сама карта, поэтому копий построек в оверлее нет — только полоса и номера.
+export function buildRouteOverlay(THREE, route, resolveStopGid = () => -1) {
+ validateRoute(route);
+ const group = new THREE.Group(); group.name = 'churches-lagoon-route';
+ for (const s of route.segments) {
+  const points = s.geometry.map(([lon, lat]) => { const [x, z] = localPoint(lon, lat); return [x, GROUND_HEIGHT, z]; });
+  if (points.length < 2) continue;
+  const line = buildThickRouteLine(THREE, points);
+  line.material.uniforms.color.value.set(BAND_COLOR);
+  line.material.uniforms.opacity.value = BAND_OPACITY;
+  line.material.uniforms.strokeWidth.value = BAND_WIDTH;
+  line.material.uniforms.dashLength.value = 0;
+  line.material.depthTest = true;
+  line.userData = { mode: s.mode, geometry_semantics: s.geometry_semantics };
+  group.add(line);
  }
+ route.stops.forEach((s, i) => {
+  const marker = numberedMarker(THREE, i + 1, s.local[0], s.local[1]);
+  if (!marker) return;
+  marker.userData.stop_id = s.id;
+  marker.userData.crossing = i;
+  marker.userData.gid = resolveStopGid(s);
+  group.add(marker);
+ });
  return group;
 }
 function disposeObject(object){object.traverse(o=>{o.geometry?.dispose();const materials=Array.isArray(o.material)?o.material:[o.material];materials.forEach(m=>{m?.map?.dispose();m?.dispose();});});}
-export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDockView,showWalks,pickText,onLang,onVisibilityChange=()=>{},fetchRoute=url=>fetch(url,{cache:'no-store'})}){
+export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDockView,showWalks,pickText,onLang,resolveStopGid=()=>-1,openBuildingCard=()=>{},onVisibilityChange=()=>{},fetchRoute=url=>fetch(url,{cache:'no-store'})}){
  const state={status:'idle',route:null,visible:false,selected:-1};let overlay=null,pending=null,disposed=false;
  const back=()=>({label:pickText(UI.back),go:showWalks});
  function render(preserveScroll=false){if(disposed)return;const dock=dockLive.closest?.('.dock'),scroll=dock?.scrollTop||0;
-  if(state.status==='ready'){openDock('church-route',routePanelHTML(state.route,state,pickText),back());dockLive.querySelector('[data-church-route-toggle]')?.addEventListener('click',()=>setVisible(!state.visible));dockLive.querySelectorAll('[data-church-stop]').forEach(b=>b.addEventListener('click',()=>focusStop(Number(b.dataset.churchStop))));}
+  if(state.status==='ready'){openDock('church-route',routePanelHTML(state.route,state,pickText),back());dockLive.querySelectorAll('[data-church-stop]').forEach(b=>b.addEventListener('click',()=>focusStop(Number(b.dataset.churchStop))));}
   else{openDock('church-route',`<article class="dock-page church-route-page" data-no-i18n><h2 id="dock-title">${label('title',pickText)}</h2><p role="status">${label(state.status==='error'?'error':'loading',pickText)}</p>${state.status==='error'?`<button class="pill" data-church-route-retry>${label('retry',pickText)}</button>`:''}</article>`,back());dockLive.querySelector('[data-church-route-retry]')?.addEventListener('click',retry);}
   if(preserveScroll&&dock)dock.scrollTop=scroll;
  }
@@ -99,14 +136,31 @@ export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDock
  function load(){if(pending)return pending;if(disposed||state.status==='ready'||state.status==='error')return Promise.resolve(state.route);state.status='loading';
   pending=(async()=>{try{const response=await fetchRoute('data/church-route.json');if(!response.ok)throw new Error(`HTTP ${response.status}`);const route=await response.json();validateRoute(route);if(!disposed){state.route=route;state.status='ready';}}catch{if(!disposed){state.route=null;state.status='error';}}finally{pending=null;refresh();}return state.route;})();return pending;
  }
- function show(){if(disposed)return;render();void load();}
+ // Кнопки «Показать на карте» больше нет: полоса появляется сразу, как только открылась карточка.
+ function show(){if(disposed)return;render();void load().then(()=>setVisible(true));}
  function retry(){if(pending||disposed)return pending;state.status='idle';const result=load();refresh();return result;}
- function ensureOverlay(){if(!overlay&&state.route&&!disposed){overlay=buildRouteOverlay(THREE,state.route);scene.add(overlay);}return overlay;}
+ function ensureOverlay(){if(!overlay&&state.route&&!disposed){overlay=buildRouteOverlay(THREE,state.route,resolveStopGid);scene.add(overlay);}return overlay;}
  function setVisible(visible){if(disposed||state.status!=='ready')return;state.visible=!!visible;if(state.visible)ensureOverlay();if(overlay)overlay.visible=state.visible;onVisibilityChange(state.visible);if(getDockView()==='church-route')render(true);}
  function focusStop(index){if(disposed||!Number.isInteger(index)||!state.route?.stops[index])return;state.selected=index;state.visible=true;ensureOverlay().visible=true;
   onVisibilityChange(true);
-  overlay.children.filter(o=>o.userData.stop_id).forEach(o=>{const selected=o.userData.number===index+1;o.scale.setScalar(selected?1.5:1);o.userData.selected=selected;});const [x,z]=state.route.stops[index].local;aimFly(x,z,420);if(getDockView()==='church-route')render(true);
+  overlay.children.filter(o=>o.userData.stop_id).forEach(o=>{const selected=o.userData.crossing===index;o.scale.setScalar(selected?1.5:1);o.userData.selected=selected;});
+  const stop=state.route.stops[index];aimFly(stop.local[0],stop.local[1],420);
+  // Нажатие на номер выводит карточку самого места.
+  const gid=resolveStopGid(stop);
+  if(gid>=0)openBuildingCard(gid);
+  if(getDockView()==='church-route')render(true);
+ }
+ // Клик по номеру на карте: спрайты лежат в группе маршрута и помнят своё место.
+ function spriteAt(clientX,clientY,camera,size=[globalThis.innerWidth||1,globalThis.innerHeight||1]){
+  if(disposed||!overlay?.visible)return null;
+  const raycaster=new THREE.Raycaster();
+  raycaster.setFromCamera({x:(clientX/size[0])*2-1,y:-(clientY/size[1])*2+1},camera);
+  for(const hit of raycaster.intersectObjects(overlay.children,false)){
+   const gid=hit.object?.userData?.gid;
+   if(Number.isInteger(gid)&&gid>=0)return {gid,index:hit.object.userData.crossing,stop_id:hit.object.userData.stop_id};
+  }
+  return null;
  }
  const unsubscribe=onLang(()=>{if(getDockView()==='church-route')render(true);});
- return {show,load,retry,setVisible,focusStop,get overlay(){return overlay;},listHTML(){if(state.status==='idle')void load();return routeEntryHTML(state,pickText);},wireList(){dockLive.querySelector('[data-church-route-open]')?.addEventListener('click',show);},dispose(){if(disposed)return;disposed=true;onVisibilityChange(false);unsubscribe?.();if(overlay){scene.remove(overlay);disposeObject(overlay);overlay=null;}}};
+ return {show,load,retry,setVisible,focusStop,spriteAt,get overlay(){return overlay;},listHTML(){if(state.status==='idle')void load();return routeEntryHTML(state,pickText);},wireList(){dockLive.querySelector('[data-church-route-open]')?.addEventListener('click',show);},dispose(){if(disposed)return;disposed=true;onVisibilityChange(false);unsubscribe?.();if(overlay){scene.remove(overlay);disposeObject(overlay);overlay=null;}}};
 }

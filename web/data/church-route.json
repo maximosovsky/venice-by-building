@@ -6,9 +6,9 @@
         "en": "Churches, temples and monasteries, synagogues of Venice"
   },
   "summary": {
-    "ru": "134 точек церквей, храмов и монастырей разных конфессий; единая последовательность без разбивки по дням. Проверка полноты не завершена.",
-    "it": "134 tappe di chiese, templi e monasteri, tutti i culti; un solo ordine, senza giornate. Revisione inventario incompleta.",
-    "en": "134 located church/temple and monastery stops, all confessions; one ordering, no day splits. Inventory review incomplete."
+    "ru": "134 точек церквей, храмов и монастырей разных конфессий; единая последовательность без разбивки по дням.",
+    "it": "134 tappe di chiese, templi e monasteri, tutti i culti; un solo ordine, senza giornate.",
+    "en": "134 located church/temple and monastery stops, all confessions; one ordering, no day splits."
   },
   "status": "ready",
   "generated_at": "2026-10-24T06:33:42.373993+00:00",

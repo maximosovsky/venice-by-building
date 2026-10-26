@@ -13,7 +13,8 @@ try{
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto(`${remote || `http://127.0.0.1:${server.address().port}/`}?lang=ru&shot`,{waitUntil:'networkidle',timeout:120000});
  await page.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});
- await page.locator('.lenses [data-mode="3"]').click();
+ // Вкладка «Сакральное» (mode 1) включает зелёный оверлей храмовых зданий; вкладка «Мосты» его больше не включает.
+ await page.locator('.lenses [data-mode="1"]').click();
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible),null,{timeout:30000});
  const report=await page.evaluate(()=>{
   const h=window.__dbg.churchBuildingHighlight,entry=h.manifest.buildings.find(b=>b.osm_id===138800498);let expected=0,actual=0,monasteryTriangles=0;
@@ -26,6 +27,8 @@ try{
  await page.locator('.walks-open').click();await page.locator('[data-church-route-open]').click();
  const data=await (await page.request.get(`${remote || `http://127.0.0.1:${server.address().port}/`}data/church-route.json`)).json();
  const index=data.stops.findIndex(s=>s.id==='monastery-Q61954738');await page.locator(`[data-church-stop="${index}"]`).click();
+ // Нажатие на номер выводит карточку места; возвращаемся к панели маршрута кнопкой «Сакральное».
+ await page.locator('.b-card').waitFor({timeout:20000});await page.locator('.dock-back').click();await page.locator('.church-stops').waitFor({timeout:20000});
  for(const lang of ['ru','it','en']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await page.locator('.church-route-page').innerText()).includes(data.title[lang]));}
  assert.deepEqual(errors,[]);const screenshot='C:/Users/1/AppData/Local/hermes/cache/scratch/venice-monastery-green.png';await page.screenshot({path:screenshot});
  console.log(JSON.stringify({...report,stops:data.stops.length,newStopFocus:true,languages:['ru','it','en'],pageErrors:errors,screenshot}));
