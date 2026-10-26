@@ -170,6 +170,9 @@ export function routePanelHTML(route, state = {}, pickText) {
       ${gpxURL ? `<a class="pill" href="${escapeHTML(gpxURL)}" download>${label('gpx', pickText)}</a>` : ''}</div>
     ${route.visit_mode ? '' : `<h3>${label('euler', pickText)}</h3><p>${label(route.euler.possible ? 'possible' : 'impossible', pickText)}</p>
     <p>${escapeHTML(pickText(route.euler.explanation))}</p><p>${label('odd', pickText)}: ${number(route.euler.odd_count, pickText)}</p>`}
+    <h3>${label(route.visit_mode ? 'visits' : 'crossings', pickText)} (${number(route.crossings.length, pickText)})</h3><p class="caveat">${label(route.visit_mode ? 'visitDirections' : 'directions', pickText)}</p>
+    <ol class="bridge-crossings">${route.crossings.map((c, i) => `<li><button data-crossing="${i}"${state.selected === i ? ' aria-current="step"' : ''}>
+      <span class="bridge-crossing-number">${i + 1}</span><span>${escapeHTML(pickText(c.name || c.bridge_id))}${c.repeat ? ` <small class="bridge-repeat">${label('repeat', pickText)}</small>` : ''}</span></button></li>`).join('')}</ol>
     <h3>${label('source', pickText)}</h3><p class="src">${sourceURL ? `<a href="${escapeHTML(sourceURL)}"${sourceTarget}>${escapeHTML(sourcePresentationText(route.source?.url, presentationLang))}</a>` : escapeHTML(pickText(route.source?.url))}
       · ${escapeHTML(pickText(route.source?.license))} · ${escapeHTML(pickText(route.source?.date))}</p>
     <p class="caveat">${label('caveat', pickText)}</p>${notes.map(n => `<p class="caveat">${escapeHTML(pickText(n))}</p>`).join('')}
@@ -180,9 +183,6 @@ export function routePanelHTML(route, state = {}, pickText) {
     <details><summary>${label('excluded', pickText)} (${number(route.excluded.length, pickText)})</summary>
       ${route.excluded.length ? `<ul>${route.excluded.map(b => `<li><b>${escapeHTML(pickText(b.name || b.id))}</b> <small>${escapeHTML(b.id)}</small> — ${escapeHTML(pickText(b.reason))}</li>`).join('')}</ul>` : `<p>${label('none', pickText)}</p>`}</details>
     ${unresolved.length ? `<details><summary>${label('unresolved', pickText)} (${number(unresolved.length, pickText)})</summary><ul>${unresolved.map(b => `<li>${escapeHTML(pickText(b.name || b.id))} <small>${escapeHTML(b.id)}</small></li>`).join('')}</ul></details>` : ''}
-    <h3>${label(route.visit_mode ? 'visits' : 'crossings', pickText)} (${number(route.crossings.length, pickText)})</h3><p class="caveat">${label(route.visit_mode ? 'visitDirections' : 'directions', pickText)}</p>
-    <ol class="bridge-crossings">${route.crossings.map((c, i) => `<li><button data-crossing="${i}"${state.selected === i ? ' aria-current="step"' : ''}>
-      <span class="bridge-crossing-number">${i + 1}</span><span>${escapeHTML(pickText(c.name || c.bridge_id))}${c.repeat ? ` <small class="bridge-repeat">${label('repeat', pickText)}</small>` : ''}</span></button></li>`).join('')}</ol>
   </article>`;
 }
 
