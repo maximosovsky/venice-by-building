@@ -31,7 +31,9 @@ export function validateRoute(route) {
  const fail=()=>{throw new Error('Invalid church route data');};
  if(!route || route.status!=='ready' || typeof route.id!=='string' || !route.id || !translated(route.title) || !translated(route.summary) || !Array.isArray(route.stops) || !route.stops.length || !Array.isArray(route.segments))fail();
  const ids=new Set();
- for(const s of route.stops){if(!s || typeof s.id!=='string' || !s.id || ids.has(s.id) || !translated(s.name) || !translated(s.access_note) || !validWGS([s.lon,s.lat]) || !pair(s.local) || !wikiURL(s.wikipedia))fail();
+ // Примечания к остановке может не быть: владелец убрал служебную фразу про внешнюю точку,
+// а содержательные примечания остаются. Если примечание есть, оно должно быть переведено.
+ for(const s of route.stops){if(!s || typeof s.id!=='string' || !s.id || ids.has(s.id) || !translated(s.name) || (s.access_note!==undefined && !translated(s.access_note)) || !validWGS([s.lon,s.lat]) || !pair(s.local) || !wikiURL(s.wikipedia))fail();
   const projected=localPoint(s.lon,s.lat);if(Math.hypot(projected[0]-s.local[0],projected[1]-s.local[1])>3)fail();ids.add(s.id);}
  for(const s of route.segments){if(!s || !ids.has(s.from) || !ids.has(s.to) || !['walk','boat','schematic'].includes(s.mode) || typeof s.geometry_semantics!=='string' || !s.geometry_semantics.trim() || !Array.isArray(s.geometry) || s.geometry.length<2 || !s.geometry.every(validWGS))fail();
   // Straight connectors are not upgraded to routable geometry by changing a mode.
@@ -56,7 +58,7 @@ export function routePanelHTML(route,state={},pickText){
  return `<article class="dock-page church-route-page" data-no-i18n><h2 id="dock-title">${text(route.title,pickText)}</h2><p class="lede">${text(route.summary,pickText)}</p>
  <h3>${label('order',pickText)}</h3><p class="caveat">${label('directions',pickText)}</p>
  <ol class="church-stops">${route.stops.map((s,i)=>`<li><button data-church-stop="${i}"${state.selected===i?' aria-current="step"':''}><span class="church-stop-number">${i+1}</span><span>${text(s.name,pickText)}</span></button>
- <div class="church-stop-detail">${s.area?`<small>${text(s.area,pickText)}</small>`:''}<p>${text(s.access_note,pickText)}</p><a href="${escapeHTML(s.wikipedia)}" target="_blank" rel="noopener noreferrer">${label('source',pickText)}</a></div></li>`).join('')}</ol>
+ <div class="church-stop-detail">${s.area?`<small>${text(s.area,pickText)}</small>`:''}${translated(s.access_note)?`<p>${text(s.access_note,pickText)}</p>`:''}<a href="${escapeHTML(s.wikipedia)}" target="_blank" rel="noopener noreferrer">${label('source',pickText)}</a></div></li>`).join('')}</ol>
  ${route.segments.length?`<details class="church-transfers"><summary>${label('transfers',pickText)}</summary><ol>${route.segments.map(s=>`<li>${route.stops.findIndex(p=>p.id===s.from)+1} → ${route.stops.findIndex(p=>p.id===s.to)+1} · ${label(s.mode==='schematic'?'connector':s.mode,pickText)}${s.suggested_transport?` · ${text(s.suggested_transport,pickText)}`:''}${s.access_note?`<p>${text(s.access_note,pickText)}</p>`:''}</li>`).join('')}</ol></details>`:''}</article>`;
 }
 // WGS84 -> EPSG:32633, same signed metric frame as the building atlas.

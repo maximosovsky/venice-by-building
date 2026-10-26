@@ -28,11 +28,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_San_Marco",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -64,11 +59,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Basso_(Venezia)",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -100,11 +90,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Zulian",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -136,11 +121,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_degli_Armeni",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Armenian Catholic",
       "survival_status": "surviving_building",
@@ -172,11 +152,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Gallo_(Venezia)",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -207,11 +182,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Fantin",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -243,11 +213,6 @@
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Oratorio_di_Sant'Angelo_degli_Zoppi",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -277,11 +242,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Beneto",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -313,11 +273,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Luca_(Venezia)",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -350,9 +305,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Salvador",
       "area": "San Marco",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Canonici di San Salvador: large convent still exists, adapted as administrative offices",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Canonici di San Salvador: large convent still exists, adapted as administrative offices",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Canonici di San Salvador: large convent still exists, adapted as administrative offices"
+        "ru": "Convento dei Canonici di San Salvador: large convent still exists, adapted as administrative offices",
+        "it": "Convento dei Canonici di San Salvador: large convent still exists, adapted as administrative offices",
+        "en": "Convento dei Canonici di San Salvador: large convent still exists, adapted as administrative offices"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -411,11 +366,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Bartolomeo_(Venezia)",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -447,11 +397,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Silvestro_(Venezia)",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -483,11 +428,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Aponal",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -519,11 +459,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Polo_(Venezia)",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -555,11 +490,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Evangelista_(Venezia)",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -592,9 +522,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_Gloriosa_dei_Frari",
       "area": "San Polo",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Frari: surviving convent and two cloisters adapted as Archivio di Stato Convento di San Nicolò della Lattuga: surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Frari: surviving convent and two cloisters adapted as Archivio di Stato Convento di San Nicolò della Lattuga: surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Frari: surviving convent and two cloisters adapted as Archivio di Stato Convento di San Nicolò della Lattuga: surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished"
+        "ru": "Convento dei Frari: surviving convent and two cloisters adapted as Archivio di Stato Convento di San Nicolò della Lattuga: surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished",
+        "it": "Convento dei Frari: surviving convent and two cloisters adapted as Archivio di Stato Convento di San Nicolò della Lattuga: surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished",
+        "en": "Convento dei Frari: surviving convent and two cloisters adapted as Archivio di Stato Convento di San Nicolò della Lattuga: surviving convent connected to Frari complex, partly returned to Franciscan convent use; church demolished"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -685,11 +615,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Tom%C3%A0",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -721,11 +646,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Rocco_(Venezia%2C_San_Polo)",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -757,11 +677,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Pantalon",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -793,11 +708,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Margherita_(Venezia)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -829,11 +739,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dei_Carmini",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -865,11 +770,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Barnaba_(Venezia)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -902,9 +802,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Eremite",
       "area": "Dorsoduro",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento delle Eremite: surviving Canossian convent and university residence",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento delle Eremite: surviving Canossian convent and university residence",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento delle Eremite: surviving Canossian convent and university residence"
+        "ru": "Convento delle Eremite: surviving Canossian convent and university residence",
+        "it": "Convento delle Eremite: surviving Canossian convent and university residence",
+        "en": "Convento delle Eremite: surviving Canossian convent and university residence"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -964,9 +864,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Carit%C3%A0_(Venezia)",
       "area": "Dorsoduro",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento della Carità: surviving convent complex incorporated into Gallerie dell’Accademia",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento della Carità: surviving convent complex incorporated into Gallerie dell’Accademia",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento della Carità: surviving convent complex incorporated into Gallerie dell’Accademia"
+        "ru": "Convento della Carità: surviving convent complex incorporated into Gallerie dell’Accademia",
+        "it": "Convento della Carità: surviving convent complex incorporated into Gallerie dell’Accademia",
+        "en": "Convento della Carità: surviving convent complex incorporated into Gallerie dell’Accademia"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -1024,11 +924,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Vidal",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -1060,11 +955,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Samuele",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1096,11 +986,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1130,9 +1015,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santo_Stefano_(Venezia%2C_San_Marco)",
       "area": "San Marco",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Santo Stefano: surviving cloister of 1529 accessible from church",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Santo Stefano: surviving cloister of 1529 accessible from church",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Santo Stefano: surviving cloister of 1529 accessible from church"
+        "ru": "Convento di Santo Stefano: surviving cloister of 1529 accessible from church",
+        "it": "Convento di Santo Stefano: surviving cloister of 1529 accessible from church",
+        "en": "Convento di Santo Stefano: surviving cloister of 1529 accessible from church"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -1191,11 +1076,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Maurizio_(Venezia)",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1227,11 +1107,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Giglio_(Venezia)",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1263,11 +1138,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Mois%C3%A8",
       "area": "San Marco",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1299,11 +1169,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_Santa_Maria_della_Salute",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1335,11 +1200,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Catecumeni",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1370,11 +1230,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dello_Spirito_Santo_(Venezia)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1405,11 +1260,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Saint_George",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Anglican",
       "survival_status": "surviving_building",
@@ -1441,11 +1291,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Agnese_(Venezia)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1477,9 +1322,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Gesuati",
       "area": "Dorsoduro",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento domenicano dei Gesuati: two surviving convent buildings and internal cloisters described in Visitazione article",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento domenicano dei Gesuati: two surviving convent buildings and internal cloisters described in Visitazione article",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento domenicano dei Gesuati: two surviving convent buildings and internal cloisters described in Visitazione article"
+        "ru": "Convento domenicano dei Gesuati: two surviving convent buildings and internal cloisters described in Visitazione article",
+        "it": "Convento domenicano dei Gesuati: two surviving convent buildings and internal cloisters described in Visitazione article",
+        "en": "Convento domenicano dei Gesuati: two surviving convent buildings and internal cloisters described in Visitazione article"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -1539,9 +1384,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Visitazione_(Venezia)",
       "area": "Dorsoduro",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Gesuati: surviving fifteenth-century monastery with cloister",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Gesuati: surviving fifteenth-century monastery with cloister",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Gesuati: surviving fifteenth-century monastery with cloister"
+        "ru": "Convento dei Gesuati: surviving fifteenth-century monastery with cloister",
+        "it": "Convento dei Gesuati: surviving fifteenth-century monastery with cloister",
+        "en": "Convento dei Gesuati: surviving fifteenth-century monastery with cloister"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -1658,11 +1503,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Trovaso",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1694,11 +1534,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Ognissanti_(Venezia%2C_Dorsoduro)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1730,11 +1565,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Sebastiano_(Venezia)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1766,11 +1596,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dell'Angelo_Raffaele",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1802,11 +1627,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -1837,11 +1657,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicol%C3%B2_dei_Mendicoli",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -1874,9 +1689,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Terese_(Venezia)",
       "area": "Dorsoduro",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento delle Terese: surviving convent with cloister now IUAV teaching premises",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento delle Terese: surviving convent with cloister now IUAV teaching premises",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento delle Terese: surviving convent with cloister now IUAV teaching premises"
+        "ru": "Convento delle Terese: surviving convent with cloister now IUAV teaching premises",
+        "it": "Convento delle Terese: surviving convent with cloister now IUAV teaching premises",
+        "en": "Convento delle Terese: surviving convent with cloister now IUAV teaching premises"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -1946,11 +1761,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Maggiore_(Venezia)",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -1982,11 +1792,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Andrea_della_Zirada",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2019,9 +1824,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_del_Nome_di_Ges%C3%B9",
       "area": "Santa Croce",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Monastero del Nome di Gesù: surviving house behind church formerly occupied by Clarisse",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Monastero del Nome di Gesù: surviving house behind church formerly occupied by Clarisse",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Monastero del Nome di Gesù: surviving house behind church formerly occupied by Clarisse"
+        "ru": "Monastero del Nome di Gesù: surviving house behind church formerly occupied by Clarisse",
+        "it": "Monastero del Nome di Gesù: surviving house behind church formerly occupied by Clarisse",
+        "en": "Monastero del Nome di Gesù: surviving house behind church formerly occupied by Clarisse"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -2122,9 +1927,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Nicola_da_Tolentino_(Venezia)",
       "area": "Santa Croce",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Tolentini: surviving adjoining Theatine convent now IUAV university headquarters",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Tolentini: surviving adjoining Theatine convent now IUAV university headquarters",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Tolentini: surviving adjoining Theatine convent now IUAV university headquarters"
+        "ru": "Convento dei Tolentini: surviving adjoining Theatine convent now IUAV university headquarters",
+        "it": "Convento dei Tolentini: surviving adjoining Theatine convent now IUAV university headquarters",
+        "en": "Convento dei Tolentini: surviving adjoining Theatine convent now IUAV university headquarters"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -2183,11 +1988,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Simeon_Piccolo",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2219,11 +2019,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_di_Nazareth_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2255,11 +2050,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giobbe",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2291,11 +2081,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_delle_Penitenti",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2327,11 +2112,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Simeone_Profeta_(Venezia)",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2363,11 +2143,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Zan_Degol%C3%A0",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Russian Orthodox",
       "survival_status": "surviving_building",
@@ -2399,11 +2174,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giacomo_da_l'Orio",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2435,11 +2205,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Mater_Domini",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2471,11 +2236,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Stae",
       "area": "Santa Croce",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2507,11 +2267,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Cassiano_(Venezia)",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2543,11 +2298,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Elemosinario",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2579,11 +2329,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giacomo_di_Rialto",
       "area": "San Polo",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2615,11 +2360,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Grisostomo",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2651,11 +2391,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_della_Fava",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2687,11 +2422,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Lio",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2723,11 +2453,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_Formosa",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2774,9 +2499,9 @@
       "source_rows": 1,
       "access_class": "check_opening",
       "access_note": {
-        "ru": "Внешняя точка; уточните часы работы и доступ. Ex convento di San Giovanni Laterano: former monastery reused as notarial archive and school; only oratory explicitly completely demolished",
-        "it": "Riferimento esterno; verificare apertura e accesso. Ex convento di San Giovanni Laterano: former monastery reused as notarial archive and school; only oratory explicitly completely demolished",
-        "en": "Exterior reference; opening and access require local verification. Ex convento di San Giovanni Laterano: former monastery reused as notarial archive and school; only oratory explicitly completely demolished"
+        "ru": "Ex convento di San Giovanni Laterano: former monastery reused as notarial archive and school; only oratory explicitly completely demolished",
+        "it": "Ex convento di San Giovanni Laterano: former monastery reused as notarial archive and school; only oratory explicitly completely demolished",
+        "en": "Ex convento di San Giovanni Laterano: former monastery reused as notarial archive and school; only oratory explicitly completely demolished"
       },
       "network_distance_m": 7.8,
       "node": 4441294601
@@ -2796,11 +2521,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dell'Ospedaletto",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2833,9 +2553,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_dei_Santi_Giovanni_e_Paolo_(Venezia)",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Santi Giovanni e Paolo: two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Santi Giovanni e Paolo: two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Santi Giovanni e Paolo: two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola"
+        "ru": "Convento dei Santi Giovanni e Paolo: two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola",
+        "it": "Convento dei Santi Giovanni e Paolo: two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola",
+        "en": "Convento dei Santi Giovanni e Paolo: two surviving cloisters; former convent hospital and current convent in Scuola di Sant’Orsola"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -2894,11 +2614,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dei_Miracoli_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2930,11 +2645,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Canciano_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -2966,11 +2676,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Apostoli_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3002,11 +2707,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Lutheran",
       "survival_status": "surviving_building",
@@ -3036,11 +2736,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Sofia_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3072,11 +2767,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Felice_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3108,11 +2798,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Fosca_(Venezia%2C_Cannaregio)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3144,11 +2829,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_della_Maddalena_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3180,11 +2860,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_dei_Servi_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_chapel",
@@ -3216,11 +2891,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Marcuola",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3252,11 +2922,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Leonardo_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -3287,11 +2952,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Geremia",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3323,11 +2983,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Scola_Ponentina",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Jewish",
       "survival_status": "surviving_building",
@@ -3356,11 +3011,6 @@
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Levantine_Synagogue",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Jewish",
       "survival_status": "surviving_building",
@@ -3388,11 +3038,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Scola_Italiana",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Jewish",
       "survival_status": "surviving_building",
@@ -3421,11 +3066,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Scuola_Canton",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Jewish",
       "survival_status": "surviving_building",
@@ -3454,11 +3094,6 @@
       ],
       "wikipedia": "https://en.wikipedia.org/wiki/Great_German_Synagogue",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Jewish",
       "survival_status": "surviving_building",
@@ -3487,9 +3122,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Girolamo_(Venezia%2C_Cannaregio)",
       "area": "Cannaregio",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di San Girolamo: church and convent adapted to other uses after 1807",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di San Girolamo: church and convent adapted to other uses after 1807",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di San Girolamo: church and convent adapted to other uses after 1807"
+        "ru": "Convento di San Girolamo: church and convent adapted to other uses after 1807",
+        "it": "Convento di San Girolamo: church and convent adapted to other uses after 1807",
+        "en": "Convento di San Girolamo: church and convent adapted to other uses after 1807"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -3547,11 +3182,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Cappuccine",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3583,9 +3213,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Bonaventura_(Venezia)",
       "area": "Cannaregio",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di San Bonaventura: later surviving Carmelite convent and former infant hospital",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di San Bonaventura: later surviving Carmelite convent and former infant hospital",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di San Bonaventura: later surviving Carmelite convent and former infant hospital"
+        "ru": "Convento di San Bonaventura: later surviving Carmelite convent and former infant hospital",
+        "it": "Convento di San Bonaventura: later surviving Carmelite convent and former infant hospital",
+        "en": "Convento di San Bonaventura: later surviving Carmelite convent and former infant hospital"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -3644,9 +3274,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Alvise",
       "area": "Cannaregio",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Sant’Alvise: one surviving Gothic cloister; convent occupied by Canossian sisters",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Sant’Alvise: one surviving Gothic cloister; convent occupied by Canossian sisters",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Sant’Alvise: one surviving Gothic cloister; convent occupied by Canossian sisters"
+        "ru": "Convento di Sant’Alvise: one surviving Gothic cloister; convent occupied by Canossian sisters",
+        "it": "Convento di Sant’Alvise: one surviving Gothic cloister; convent occupied by Canossian sisters",
+        "en": "Convento di Sant’Alvise: one surviving Gothic cloister; convent occupied by Canossian sisters"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -3718,9 +3348,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_della_Madonna_dell'Orto",
       "area": "Cannaregio",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Chiostro della Madonna dell’Orto: fifteenth-century cloister is explicitly the surviving part of the convent",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Chiostro della Madonna dell’Orto: fifteenth-century cloister is explicitly the surviving part of the convent",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Chiostro della Madonna dell’Orto: fifteenth-century cloister is explicitly the surviving part of the convent"
+        "ru": "Chiostro della Madonna dell’Orto: fifteenth-century cloister is explicitly the surviving part of the convent",
+        "it": "Chiostro della Madonna dell’Orto: fifteenth-century cloister is explicitly the surviving part of the convent",
+        "en": "Chiostro della Madonna dell’Orto: fifteenth-century cloister is explicitly the surviving part of the convent"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -3779,11 +3409,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Marziale_(Venezia)",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3815,11 +3440,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dell'Abbazia_della_Misericordia",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -3852,9 +3472,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Caterina_(Venezia)",
       "area": "Cannaregio",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Santa Caterina: surviving convent converted to Liceo Marco Foscarini",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Santa Caterina: surviving convent converted to Liceo Marco Foscarini",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Santa Caterina: surviving convent converted to Liceo Marco Foscarini"
+        "ru": "Convento di Santa Caterina: surviving convent converted to Liceo Marco Foscarini",
+        "it": "Convento di Santa Caterina: surviving convent converted to Liceo Marco Foscarini",
+        "en": "Convento di Santa Caterina: surviving convent converted to Liceo Marco Foscarini"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -3913,11 +3533,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Oratorio_dei_Crociferi",
       "area": "Cannaregio",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -3949,9 +3564,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Gesuiti_(Venezia)",
       "area": "Cannaregio",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Crociferi / Gesuiti: convent reused as school and barracks after suppression",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Crociferi / Gesuiti: convent reused as school and barracks after suppression",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Crociferi / Gesuiti: convent reused as school and barracks after suppression"
+        "ru": "Convento dei Crociferi / Gesuiti: convent reused as school and barracks after suppression",
+        "it": "Convento dei Crociferi / Gesuiti: convent reused as school and barracks after suppression",
+        "en": "Convento dei Crociferi / Gesuiti: convent reused as school and barracks after suppression"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -4010,11 +3625,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Lazzaro_dei_Mendicanti",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4047,9 +3657,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Maria_del_Pianto_(Venezia)",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Santa Maria del Pianto: surviving church and convent complex; closed to worship",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Santa Maria del Pianto: surviving church and convent complex; closed to worship",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Santa Maria del Pianto: surviving church and convent complex; closed to worship"
+        "ru": "Convento di Santa Maria del Pianto: surviving church and convent complex; closed to worship",
+        "it": "Convento di Santa Maria del Pianto: surviving church and convent complex; closed to worship",
+        "en": "Convento di Santa Maria del Pianto: surviving church and convent complex; closed to worship"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -4108,11 +3718,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Giustina_(Venezia)",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",
@@ -4145,11 +3750,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4179,9 +3779,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_della_Vigna",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di San Francesco della Vigna: surviving Franciscan convent and cloisters",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di San Francesco della Vigna: surviving Franciscan convent and cloisters",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di San Francesco della Vigna: surviving Franciscan convent and cloisters"
+        "ru": "Convento di San Francesco della Vigna: surviving Franciscan convent and cloisters",
+        "it": "Convento di San Francesco della Vigna: surviving Franciscan convent and cloisters",
+        "en": "Convento di San Francesco della Vigna: surviving Franciscan convent and cloisters"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -4240,11 +3840,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4296,9 +3891,9 @@
       "source_rows": 1,
       "access_class": "check_opening",
       "access_note": {
-        "ru": "Внешняя точка; уточните часы работы и доступ. San Lorenzo e chiostro del monastero: church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing",
-        "it": "Riferimento esterno; verificare apertura e accesso. San Lorenzo e chiostro del monastero: church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing",
-        "en": "Exterior reference; opening and access require local verification. San Lorenzo e chiostro del monastero: church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing"
+        "ru": "San Lorenzo e chiostro del monastero: church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing",
+        "it": "San Lorenzo e chiostro del monastero: church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing",
+        "en": "San Lorenzo e chiostro del monastero: church survives with ancient convent cloister; demolition assertions refer to San Sebastiano chapel and one convent wing"
       },
       "network_distance_m": 21.17,
       "node": 4441294483
@@ -4318,11 +3913,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_di_Malta_(Venezia)",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4354,11 +3944,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Scuola_di_San_Giorgio_degli_Schiavoni",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4386,11 +3971,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Antonin",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4422,11 +4002,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Martino_(Venezia%2C_Castello)",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4458,11 +4033,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Oratorio_della_Ca'_di_Dio",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4492,11 +4062,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Biagio_(Venezia)",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4528,11 +4093,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Francesco_di_Paola_(Venezia)",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4564,11 +4124,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiese_di_Venezia",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4598,11 +4153,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_San_Pietro_di_Castello",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4635,9 +4185,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Anna_(Venezia)",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Sant’Anna: surviving convent converted to naval college and hospital",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Sant’Anna: surviving convent converted to naval college and hospital",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Sant’Anna: surviving convent converted to naval college and hospital"
+        "ru": "Convento di Sant’Anna: surviving convent converted to naval college and hospital",
+        "it": "Convento di Sant’Anna: surviving convent converted to naval college and hospital",
+        "en": "Convento di Sant’Anna: surviving convent converted to naval college and hospital"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -4696,9 +4246,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giuseppe_di_Castello",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di San Giuseppe di Castello: surviving adjoining convent donated to Comune and adapted as school",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di San Giuseppe di Castello: surviving adjoining convent donated to Comune and adapted as school",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di San Giuseppe di Castello: surviving adjoining convent donated to Comune and adapted as school"
+        "ru": "Convento di San Giuseppe di Castello: surviving adjoining convent donated to Comune and adapted as school",
+        "it": "Convento di San Giuseppe di Castello: surviving adjoining convent donated to Comune and adapted as school",
+        "en": "Convento di San Giuseppe di Castello: surviving adjoining convent donated to Comune and adapted as school"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -4757,9 +4307,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Elena_(Venezia)",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Sant’Elena: surviving fifteenth-century cloister wings plus later convent",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Sant’Elena: surviving fifteenth-century cloister wings plus later convent",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Sant’Elena: surviving fifteenth-century cloister wings plus later convent"
+        "ru": "Convento di Sant’Elena: surviving fifteenth-century cloister wings plus later convent",
+        "it": "Convento di Sant’Elena: surviving fifteenth-century cloister wings plus later convent",
+        "en": "Convento di Sant’Elena: surviving fifteenth-century cloister wings plus later convent"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -4818,11 +4368,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_in_Bragora",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4854,11 +4399,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_della_Piet%C3%A0_(Venezia)",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -4932,11 +4472,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giorgio_dei_Greci",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Greek Orthodox",
       "survival_status": "surviving_building",
@@ -4968,11 +4503,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Zaccaria",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -5004,11 +4534,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Giovanni_Nuovo",
       "area": "Castello",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -5041,9 +4566,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Filippo_e_Giacomo_(Venezia)",
       "area": "Castello",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Sant’Apollonia: surviving medieval cloister; restored convent became diocesan museum",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Sant’Apollonia: surviving medieval cloister; restored convent became diocesan museum",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Sant’Apollonia: surviving medieval cloister; restored convent became diocesan museum"
+        "ru": "Convento di Sant’Apollonia: surviving medieval cloister; restored convent became diocesan museum",
+        "it": "Convento di Sant’Apollonia: surviving medieval cloister; restored convent became diocesan museum",
+        "en": "Convento di Sant’Apollonia: surviving medieval cloister; restored convent became diocesan museum"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -5100,9 +4625,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Teodoro_(Venezia)",
       "area": "San Marco",
       "access_note": {
-        "ru": "Частный объект или ограниченный доступ. Возможны разрешение и отдельно согласованный причал/вход; публичное посещение и регулярный паром не гарантируются.",
-        "it": "Sito privato o limitato. Possono servire autorizzazione e approdo/accesso concordati; nessuna visita pubblica o linea regolare è garantita.",
-        "en": "Restricted/private site. Permission and a separately arranged landing/access may be required; no routine public visit or ferry is asserted."
+        "ru": "Частный объект или ограниченный доступ. Возможны разрешение и отдельно согласованный причал/вход; публичное посещение и регулярный паром не гарантируются",
+        "it": "Sito privato o limitato. Possono servire autorizzazione e approdo/accesso concordati; nessuna visita pubblica o linea regolare è garantita",
+        "en": "Restricted/private site. Permission and a separately arranged landing/access may be required; no routine public visit or ferry is asserted"
       },
       "access_class": "restricted",
       "confession": "Christian",
@@ -5133,11 +4658,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Sacca_Fisola",
       "area": "Sacca Fisola",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -5168,9 +4688,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_dei_Santi_Cosma_e_Damiano_(Venezia)",
       "area": "Giudecca",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento dei Santi Cosma e Damiano: restored surviving convent, workshops, public housing, cloister and garden",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento dei Santi Cosma e Damiano: restored surviving convent, workshops, public housing, cloister and garden",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento dei Santi Cosma e Damiano: restored surviving convent, workshops, public housing, cloister and garden"
+        "ru": "Convento dei Santi Cosma e Damiano: restored surviving convent, workshops, public housing, cloister and garden",
+        "it": "Convento dei Santi Cosma e Damiano: restored surviving convent, workshops, public housing, cloister and garden",
+        "en": "Convento dei Santi Cosma e Damiano: restored surviving convent, workshops, public housing, cloister and garden"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -5240,11 +4760,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Sant'Eufemia_(Venezia)",
       "area": "Giudecca",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -5276,11 +4791,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_del_Redentore",
       "area": "Giudecca",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -5313,9 +4823,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Croce_(Venezia%2C_Giudecca)",
       "area": "Giudecca",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Convento di Santa Croce alla Giudecca: convent buildings survive as prison; only church facade survives",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Convento di Santa Croce alla Giudecca: convent buildings survive as prison; only church facade survives",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Convento di Santa Croce alla Giudecca: convent buildings survive as prison; only church facade survives"
+        "ru": "Convento di Santa Croce alla Giudecca: convent buildings survive as prison; only church facade survives",
+        "it": "Convento di Santa Croce alla Giudecca: convent buildings survive as prison; only church facade survives",
+        "en": "Convento di Santa Croce alla Giudecca: convent buildings survive as prison; only church facade survives"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -5374,11 +4884,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_delle_Zitelle",
       "area": "Giudecca",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "surviving_building",
@@ -5411,9 +4916,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Basilica_di_San_Giorgio_Maggiore",
       "area": "San Giorgio Maggiore",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Monastero di San Giorgio Maggiore: surviving Benedictine complex, restored and used by Fondazione Giorgio Cini",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Monastero di San Giorgio Maggiore: surviving Benedictine complex, restored and used by Fondazione Giorgio Cini",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Monastero di San Giorgio Maggiore: surviving Benedictine complex, restored and used by Fondazione Giorgio Cini"
+        "ru": "Monastero di San Giorgio Maggiore: surviving Benedictine complex, restored and used by Fondazione Giorgio Cini",
+        "it": "Monastero di San Giorgio Maggiore: surviving Benedictine complex, restored and used by Fondazione Giorgio Cini",
+        "en": "Monastero di San Giorgio Maggiore: surviving Benedictine complex, restored and used by Fondazione Giorgio Cini"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -5485,9 +4990,9 @@
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_San_Gregorio_(Venezia)",
       "area": "Dorsoduro",
       "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте. Abbazia di San Gregorio: monastery buildings adapted as residences",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità. Abbazia di San Gregorio: monastery buildings adapted as residences",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally. Abbazia di San Gregorio: monastery buildings adapted as residences"
+        "ru": "Abbazia di San Gregorio: monastery buildings adapted as residences",
+        "it": "Abbazia di San Gregorio: monastery buildings adapted as residences",
+        "en": "Abbazia di San Gregorio: monastery buildings adapted as residences"
       },
       "access_class": "check_opening",
       "confession": "Christian",
@@ -5573,9 +5078,9 @@
       "source_rows": 1,
       "access_class": "check_opening",
       "access_note": {
-        "ru": "Внешняя точка; уточните часы работы и доступ. Chiostro del convento della Celestia: article explicitly identifies surviving convent cloister of 1571, not demolished church",
-        "it": "Riferimento esterno; verificare apertura e accesso. Chiostro del convento della Celestia: article explicitly identifies surviving convent cloister of 1571, not demolished church",
-        "en": "Exterior reference; opening and access require local verification. Chiostro del convento della Celestia: article explicitly identifies surviving convent cloister of 1571, not demolished church"
+        "ru": "Chiostro del convento della Celestia: article explicitly identifies surviving convent cloister of 1571, not demolished church",
+        "it": "Chiostro del convento della Celestia: article explicitly identifies surviving convent cloister of 1571, not demolished church",
+        "en": "Chiostro del convento della Celestia: article explicitly identifies surviving convent cloister of 1571, not demolished church"
       },
       "network_distance_m": 22.23,
       "node": 11300054866
@@ -5595,11 +5100,6 @@
       ],
       "wikipedia": "https://it.wikipedia.org/wiki/Chiesa_di_Santa_Marta_(Venezia)",
       "area": "Dorsoduro",
-      "access_note": {
-        "ru": "Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.",
-        "it": "Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.",
-        "en": "Exterior reference only. Opening, worship, entrance and step-free access must be checked locally."
-      },
       "access_class": "check_opening",
       "confession": "Christian",
       "survival_status": "adapted_building",

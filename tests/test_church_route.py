@@ -232,7 +232,11 @@ def test_generated_partial_artifact_geometry_and_disclosure():
     assert len(data['stops']) == 134
     assert sum(s['confession']=='Jewish' for s in data['stops']) == 5
     assert not {'San Lazzaro degli Armeni','San Servolo','San Clemente','Murano','Burano','Torcello','San Francesco del Deserto','Sacca Sessola'} & {s['area'] for s in data['stops']}
-    assert all(all(s['name'].get(k) and s['access_note'].get(k) for k in ('ru','it','en')) for s in data['stops'])
+    # Владелец убрал служебную фразу про внешнюю точку: примечание необязательно,
+    # но где оно есть — переведено, и самой фразы не осталось ни в одной остановке.
+    assert all(all(s['name'].get(k) for k in ('ru','it','en')) for s in data['stops'])
+    assert all(all(s['access_note'].get(k) for k in ('ru','it','en')) for s in data['stops'] if s.get('access_note'))
+    assert not any('Внешняя точка' in str(s) or 'Exterior reference' in str(s) for s in data['stops'])
     assert all(s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02) for s in data['stops'])
     assert all(all(n.get(k) for k in ('ru','it','en')) for n in audit['limitations'])
     if audit['unresolved']:
@@ -280,7 +284,9 @@ def test_generated_artifact_reconciles_every_candidate_and_required_islands():
     assert not {'San Lazzaro degli Armeni','San Servolo','San Clemente','Sacca Sessola','Murano','Burano','Torcello'} & {s['area'] for s in data['stops']}
     assert any(s.get('confession') == 'Jewish' for s in data['stops'])
     for s in data['stops']:
-        assert all(s['name'].get(k) and s['access_note'].get(k) for k in ('ru','it','en'))
+        assert all(s['name'].get(k) for k in ('ru','it','en'))
+        # Служебная фраза про внешнюю точку убрана владельцем; содержательное примечание переведено.
+        assert not s.get('access_note') or all(s['access_note'].get(k) for k in ('ru','it','en'))
         assert s['wikipedia'].startswith(('https://it.wikipedia.org/wiki/','https://en.wikipedia.org/wiki/'))
         assert 12 < s['lon'] < 12.6 and 45.2 < s['lat'] < 45.6
         assert s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02)

@@ -313,6 +313,41 @@ def category_inventory(lang, roots, fetch):
     return rows, sorted(seen)
 
 
+ACCESS_BOILERPLATE = (
+    'Exterior reference only. Opening, worship, entrance and step-free access must be checked locally.',
+    'Riferimento esterno. Verificare sul posto apertura, culto, ingresso e accessibilità.',
+    'Внешняя точка. Уточните часы работы, богослужения, вход и безбарьерный доступ на месте.',
+    'Exterior reference; opening and access require local verification.',
+    'Riferimento esterno; verificare apertura e accesso.',
+    'Внешняя точка; уточните часы работы и доступ.',
+)
+
+
+def strip_access_boilerplate(route):
+    """Убирает служебную фразу про «внешнюю точку» из примечаний к остановкам.
+
+    Остаются только содержательные примечания: частные и островные объекты, условия посещения.
+    Пустое примечание не пишем вовсе, чтобы в карточке не оставалось пустой строки.
+    """
+    for stop in route.get('stops', []):
+        note = stop.get('access_note')
+        if not isinstance(note, dict):
+            continue
+        cleaned = {}
+        for lang, value in note.items():
+            text = value or ''
+            for phrase in ACCESS_BOILERPLATE:
+                text = text.replace(phrase, '')
+            text = re.sub(r'\s{2,}', ' ', text).strip(' .;')
+            if text:
+                cleaned[lang] = text
+        if cleaned:
+            stop['access_note'] = cleaned
+        else:
+            stop.pop('access_note', None)
+    return route
+
+
 def gpx_document(route):
     ET.register_namespace('', 'http://www.topografix.com/GPX/1/1')
     tag=lambda s:'{http://www.topografix.com/GPX/1/1}'+s
@@ -323,7 +358,9 @@ def gpx_document(route):
     for i,s in enumerate(route['stops'],1):
         el=ET.SubElement(root,tag('wpt'),lon=str(s['lon']),lat=str(s['lat']))
         ET.SubElement(el,tag('name')).text=f"{i:03d} {s['name']['en']}"
-        ET.SubElement(el,tag('desc')).text=s['access_note']['en']
+        note = (s.get('access_note') or {}).get('en')
+        if note:
+            ET.SubElement(el,tag('desc')).text=note
         ET.SubElement(el,tag('link'),href=s['wikipedia'])
     for i,s in enumerate(route['segments'],1):
         if s['mode']=='walk':
@@ -723,6 +760,7 @@ def main():
         translated('Walking geometry is a shortest path between nearby mapped OSM nodes, not verified church entrances. Off-network approaches and ferry transfers are not navigable geometry.', 'La geometria pedonale segue percorsi minimi tra nodi OSM vicini, non ingressi verificati. Accessi fuori rete e traghetti non sono geometrie navigabili.', 'Пешеходная геометрия — кратчайшие пути между ближайшими узлами OSM, не проверенные входы. Подходы вне сети и паромные переезды не являются навигационными путями.'),
     ]
     route = {'id':'churches-lagoon','title':translated('Churches, temples and monasteries, synagogues of Venice','Chiese, templi e monasteri, sinagoghe di Venezia','Церкви, храмы, монастыри и синагоги Венеции'), 'summary':translated(f"{len(stops)} located church/temple and monastery stops, all confessions. The walk starts and finishes at Piazza San Marco; canal crossings use the traghetto.",f"{len(stops)} tappe di chiese, templi e monasteri, tutti i culti. Il percorso inizia e finisce a Piazza San Marco; gli attraversamenti del canale usano il traghetto.",f"{len(stops)} точек церквей, храмов и монастырей разных конфессий. Обход начинается и заканчивается на площади Сан-Марко; через канал — трагетто."),'status':'ready','generated_at':generated,'stops':stops,'segments':segments,'audit':audit,'sources':[{'url':article_url('Chiese di Venezia'),'role':'Italian list including unlinked mentions'}, {'url':article_url('List of churches in Venice','en'),'role':'English list'}, {'url':'https://www.wikidata.org/','role':'Identity/coordinate corroboration'}, {'url':'https://www.openstreetmap.org/copyright','role':'ODbL pedestrian-network geometry'}, {'url':article_url('San Servolo'),'role':'ACTV line 20 contextual source; no boat geometry asserted'}]}
+    strip_access_boilerplate(route)
     validate_route(route,allow_incomplete=True)
     args.output.parent.mkdir(parents=True,exist_ok=True)
     args.output.write_text(json.dumps(route,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

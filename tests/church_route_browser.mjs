@@ -51,7 +51,7 @@ try{
   await page.locator('.dock-back').click();await page.locator('.church-stops').waitFor({timeout:20000});
   assert.equal(await page.locator(`[data-church-stop="${i}"]`).getAttribute('aria-current'),'step');
  }
- for(const lang of ['it','en','ru']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await panel.innerText()).includes(data.title[lang]));const note=data.stops[laz].access_note;assert.ok((await panel.innerText()).includes(typeof note==='string'?note:note[lang]));assert.equal(await page.locator(`[data-church-stop="${laz}"]`).getAttribute('aria-current'),'step');}
+ for(const lang of ['it','en','ru']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await panel.innerText()).includes(data.title[lang]));const note=data.stops[laz].access_note;if(note)assert.ok((await panel.innerText()).includes(typeof note==='string'?note:note[lang]));assert.equal(await page.locator(`[data-church-stop="${laz}"]`).getAttribute('aria-current'),'step');}
  await page.evaluate(()=>window.__dbg.churchRoute.setVisible(false));assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),false);
  await page.evaluate(()=>window.__dbg.churchRoute.setVisible(true));assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),true);
  // Existing optional atlas assets are absent in this checkout. Report them,
