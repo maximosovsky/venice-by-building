@@ -44,7 +44,8 @@ try{
  await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',false));assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false);
  // Вкладка «Мосты» открывает мостовой маршрут и по-прежнему НЕ включает зелёный оверлей храмов.
  await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',true));await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>m.visible));
- await page.locator('.lenses [data-mode="3"]').click();await page.waitForFunction(()=>window.__dbg.bridgeRoute?.overlay?.visible===true,null,{timeout:30000});
+ await page.locator('.walks-open').click();await page.locator('[data-bridge-route-open]').click();
+ await page.waitForFunction(()=>{const g=window.__dbg.scene.children.find(c=>c.name==='all-bridges-route');return !!g&&g.visible;},null,{timeout:30000});
  assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'мостовой маршрут не красит храмы в зелёный');
  const bridgeColors=[];
  assert.deepEqual(errors,[]);const knownMissing=new Set(['/img/sun.webp','/data/suburbs.json','/data/suburbs.bin']);assert.deepEqual(httpErrors.filter(p=>!knownMissing.has(p)),[]);assert.deepEqual(consoleErrors.filter(e=>!/^Failed to load resource:.*404/.test(e)),[]);

@@ -14,7 +14,10 @@ try{
  await page.goto(base+'?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});
  await page.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});
  assert.equal(await page.evaluate(()=>!!window.__dbg.churchBuildingHighlight),true,'bridge view must install full-building highlight');
- await page.locator('.lenses [data-mode="3"]').click();await page.waitForFunction(()=>window.__dbg.bridgeRoute?.overlay?.visible===true,null,{timeout:30000});
+ await page.locator('.walks-open').click();await page.locator('[data-bridge-route-open]').click();await page.locator('[data-bridge-route-toggle]').waitFor();await page.locator('[data-bridge-route-toggle]').click();
+ // Владелец атласа: мостовой маршрут больше не включает зелёную заливку храмов — включаем её по источнику.
+ assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'мостовой маршрут не красит храмы зелёным');
+ await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',true));
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible),null,{timeout:30000});
  const report=await page.evaluate(()=>{
   const {churchBuildingHighlight:h,scene}=window.__dbg;
@@ -29,9 +32,13 @@ try{
   function assertFinite(...v){if(!v.every(Number.isFinite))throw Error('nonfinite mesh');}
  });
  assert.equal(report.actual,report.expected,'every church triangle including wall/part/roof must be gray');assert.ok(report.actual>1000);assert.equal(report.allGray,true);assert.equal(report.refs.length,2);for(const r of report.refs){assert.ok(r.vertices>100);assert.ok(r.distinctXZ>20);assert.ok(r.maxY>r.minY);}assert.notEqual(report.refs[0].gid,report.refs[1].gid);assert.ok(report.bridgeColors.length>100);assert.ok(report.bridgeColors.every(c=>c==='ff0000'));
+ await page.locator('[data-bridge-route-toggle]').click();
+ // Владелец атласа: мостовой маршрут больше НЕ включает зелёную заливку храмов, храмы остаются бирюзовыми.
  assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'мостовой маршрут не включает зелёный оверлей храмов');
  // Selecting a crossing also turns the bridge overlay (and gray churches) on.
- await page.locator('[data-crossing="0"]').click();assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>m.visible)),true);
+ await page.locator('[data-crossing="0"]').click();
+ // Клик по переходу открывает карточку моста, но зелёный оверлей храмов не включает.
+ assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>m.visible)),false,'клик по переходу не включает зелёную заливку храмов');
  await page.evaluate(()=>{window.__dbg.churchBuildingHighlight.setSourceVisible('church',true);window.__dbg.bridgeRoute.setVisible(false);});assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>m.visible)),true);
  await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',false));assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>!m.visible)),true);
  await page.evaluate(()=>window.__dbg.bridgeRoute.setVisible(true));
