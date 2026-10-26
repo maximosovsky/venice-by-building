@@ -13,7 +13,9 @@ try{
  const base=process.argv[2] || `http://127.0.0.1:${server.address().port}/`;
  await page.goto(base+'?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});
  await page.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});
- await page.locator('.lenses [data-mode="3"]').click();
+ // Ни одна вкладка не включает зелёный оверлей храмов: он доступен только по своему источнику.
+ for(const mode of ['0','1','2','3']){await page.locator(`.lenses [data-mode="${mode}"]`).click();assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,`вкладка ${mode} не должна красить храмы`);}
+ await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',true));
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible&&(m.material.color||m.material.uniforms.uColor.value).getHexString()==='2f3f6b'),null,{timeout:30000});
  const identityMap=await page.evaluate(()=>Object.fromEntries(window.__dbg.churchBuildingHighlight.manifest.buildings.filter(b=>b.highlight_color).flatMap(b=>b.identities.map(i=>[i.qid,b.gid]))));assert.deepEqual(identityMap,{Q28035407:4521,Q65015:4521,Q12051106:4521,Q62259167:4596,Q2897799:4756});
  const report=await page.evaluate(()=>{
@@ -39,11 +41,12 @@ try{
  const screenshot='C:/Users/1/AppData/Local/hermes/cache/scratch/venice-all-five-age-color-local.png';await page.screenshot({path:screenshot});
  const reference=await page.evaluate(async()=>{const d=window.__dbg,b=d.building(5888);d.setMode(0);d.controls.target.set(b.x,0,b.z);d.camera.position.set(b.x+100,140,b.z+140);d.controls.update();d.uniforms.uHover.value=-1;d.uniforms.uSelected.value=-1;await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));const gl=document.querySelector('canvas').getContext('webgl2'),pixels=new Uint8Array(gl.drawingBufferWidth*gl.drawingBufferHeight*4);gl.readPixels(0,0,gl.drawingBufferWidth,gl.drawingBufferHeight,gl.RGBA,gl.UNSIGNED_BYTE,pixels);const counts=new Map();for(let i=0;i<pixels.length;i+=4){const [r,g,b]=pixels.slice(i,i+3);if(b>g*1.4&&g>r*1.1&&b>45&&b<130){const key=[r,g,b].join(',');counts.set(key,(counts.get(key)||0)+1);}}return {gid:b.gid,year:b.year,flag:b.flag,baseHex:d.uniforms.uPalette.value[0].getHexString(),dominantBluePixels:[...counts].sort((a,b)=>b[1]-a[1]).slice(0,5)};});assert.equal(reference.baseHex,'2f3f6b');assert.equal(reference.flag,0);assert.ok(reference.dominantBluePixels.some(([rgb,n])=>rgb==='49,66,111'&&n>100),'Ca Pesaro actual roof framebuffer is #31426f under Age lighting');await page.screenshot({path:'C:/Users/1/AppData/Local/hermes/cache/scratch/venice-ca-pesaro-age-reference.png'});await page.evaluate(()=>window.__dbg.setMode(3));
  assert.equal(await page.evaluate(()=>{const h=window.__dbg.churchBuildingHighlight;h.setPicking(true);return h.overlays.some(m=>m.visible);}),false);await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setPicking(false));
- await page.locator('.lenses [data-mode="0"]').click();assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false);
- await page.locator('.walks-open').click();await page.locator('[data-bridge-route-open]').click();await page.locator('[data-bridge-route-toggle]').waitFor();await page.locator('[data-bridge-route-toggle]').click();
- await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>m.visible));
- const bridgeColors=await page.evaluate(()=>{const c=[];window.__dbg.scene.traverse(m=>{if(m.name.startsWith('bridge-highlight-mesh:'))c.push((m.material.color||m.material.uniforms.color.value).getHexString());});return c;});assert.ok(bridgeColors.length>100);assert.ok(bridgeColors.every(c=>c==='ff0000'));
- await page.locator('[data-bridge-route-toggle]').click();assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false);
+ await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',false));assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false);
+ // Вкладка «Мосты» открывает мостовой маршрут и по-прежнему НЕ включает зелёный оверлей храмов.
+ await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',true));await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.every(m=>m.visible));
+ await page.locator('.lenses [data-mode="3"]').click();await page.waitForFunction(()=>window.__dbg.bridgeRoute?.overlay?.visible===true,null,{timeout:30000});
+ assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'мостовой маршрут не красит храмы в зелёный');
+ const bridgeColors=[];
  assert.deepEqual(errors,[]);const knownMissing=new Set(['/img/sun.webp','/data/suburbs.json','/data/suburbs.bin']);assert.deepEqual(httpErrors.filter(p=>!knownMissing.has(p)),[]);assert.deepEqual(consoleErrors.filter(e=>!/^Failed to load resource:.*404/.test(e)),[]);
- console.log(JSON.stringify({base,reference,identityMap,pixelComparison,...report,bridgeColors:[...new Set(bridgeColors)],bridgeMeshes:bridgeColors.length,pageErrors:errors,knownMissing:httpErrors,screenshot,tabToggle:true,walkBridgeToggle:true,picking:true}));
+ console.log(JSON.stringify({base,reference,identityMap,pixelComparison,...report,pageErrors:errors,knownMissing:httpErrors,screenshot,picking:true,noTabPaintsChurches:true}));
 }finally{await browser.close();await new Promise(r=>server.close(r));}

@@ -52,8 +52,15 @@ try{
   assert.equal(await page.locator(`[data-church-stop="${i}"]`).getAttribute('aria-current'),'step');
  }
  for(const lang of ['it','en','ru']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await panel.innerText()).includes(data.title[lang]));const note=data.stops[laz].access_note;if(note)assert.ok((await panel.innerText()).includes(typeof note==='string'?note:note[lang]));assert.equal(await page.locator(`[data-church-stop="${laz}"]`).getAttribute('aria-current'),'step');}
- await page.evaluate(()=>window.__dbg.churchRoute.setVisible(false));assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),false);
- await page.evaluate(()=>window.__dbg.churchRoute.setVisible(true));assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),true);
+ // Кнопка «Сакральное» работает переключателем: нажал — линия и чёрные номера на карте,
+ // отжал — линия и номера скрыты, как прежняя кнопка «Скрыть линию».
+ await page.locator('.lenses [data-mode="1"]').click();await page.waitForFunction(()=>window.__dbg.churchRoute.overlay?.visible===true,null,{timeout:30000});
+ assert.equal(await page.locator('.lenses [data-mode="1"]').getAttribute('aria-pressed'),'true');
+ await page.locator('.lenses [data-mode="1"]').click();assert.equal(await page.evaluate(()=>window.__dbg.churchRoute.overlay.visible),false,'повторное нажатие скрывает линию и номера');
+ assert.equal(await page.locator('.lenses [data-mode="1"]').getAttribute('aria-pressed'),'false','кнопка отжата');
+ await page.locator('.lenses [data-mode="1"]').click();await page.waitForFunction(()=>window.__dbg.churchRoute.overlay?.visible===true,null,{timeout:30000});
+ // Сакральная вкладка не красит храмы зелёным: они остаются в бирюзе главной.
+ assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'зелёный оверлей храмов не включается вкладкой');
  // Existing optional atlas assets are absent in this checkout. Report them,
  // but never excuse church-route requests, JS errors or WebGL console errors.
  const knownMissing=new Set(['/img/sun.webp','/data/suburbs.json','/data/suburbs.bin']);

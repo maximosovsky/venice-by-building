@@ -15,6 +15,10 @@ try{
  await page.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});
  // Вкладка «Сакральное» (mode 1) включает зелёный оверлей храмовых зданий; вкладка «Мосты» его больше не включает.
  await page.locator('.lenses [data-mode="1"]').click();
+ // Владелец атласа: сакральная вкладка не красит храмы зелёным, они остаются в бирюзе главной.
+ assert.equal(await page.evaluate(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible)),false,'сакральная вкладка не включает зелёную заливку храмов');
+ // Сам оверлей остаётся доступен по своему источнику — включаем его явно.
+ await page.evaluate(()=>window.__dbg.churchBuildingHighlight.setSourceVisible('church',true));
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible),null,{timeout:30000});
  const report=await page.evaluate(()=>{
   const h=window.__dbg.churchBuildingHighlight,entry=h.manifest.buildings.find(b=>b.osm_id===138800498);let expected=0,actual=0,monasteryTriangles=0;

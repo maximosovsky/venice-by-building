@@ -1112,8 +1112,9 @@ const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLiv
   getDockView: () => dockView, showWalks, pickText, onLang,
   // Место маршрута → gid атласа: по цифре открывается карточка самого места.
   resolveStopGid,
-  openBuildingCard: gid => openBuilding(gid, { label: t('Сакральное'), go: () => churchRoute.show() }),
-  onVisibilityChange: visible => churchBuildingHighlight.setSourceVisible('church', visible) });
+  openBuildingCard: gid => openBuilding(gid, { label: t('Сакральное'), go: () => churchRoute.show() })});
+  // Зелёную заливку храмовых зданий маршрут больше не включает: владелец атласа требует, чтобы храмы
+  // на сакральной вкладке оставались в своей бирюзе, как на главной. Оверлей доступен отдельно.
 // Номера переходов рисуются на canvas шрифтом заголовков: просим его заранее, чтобы цифры не остались
 // подменными, и дорисовка повторится, когда файл придёт.
 document.fonts?.load?.('28px "IM Fell English SC"').catch(() => {});
@@ -1613,6 +1614,13 @@ function setMode(m) {
 // геометрия и числа — только из проверенного data/bridge-route.json) и показывает линию на карте.
 document.querySelectorAll('.lenses button').forEach(b => b.onclick = () => {
   const m = +b.dataset.mode;
+  // «Сакральное» — переключатель линии и номеров: первое нажатие открывает список и показывает линию
+  // с чёрными номерами зданий, повторное скрывает линию и номера, как прежняя кнопка «Скрыть линию».
+  if (m === MODE.floors && uniforms.uMode.value === MODE.floors && churchRoute.overlay?.visible) {
+    churchRoute.setVisible(false);
+    b.setAttribute('aria-pressed', 'false');
+    return;
+  }
   setMode(m);
   if (m === MODE.layers) { bridgeRoute.show(); void bridgeRoute.load().then(() => bridgeRoute.setVisible(true)); }
   // Вкладка «Сакральное» открывает маршрут «Церкви, храмы, монастыри и синагоги Венеции».
