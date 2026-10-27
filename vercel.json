@@ -3,7 +3,16 @@
   "outputDirectory": "web",
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/ru(/)?", "destination": "/index.html" }
+  ],
   "headers": [
+    {
+      "source": "/ru(/)?",
+      "headers": [
+        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+      ]
+    },
     {
       "source": "/data/(.*)",
       "headers": [

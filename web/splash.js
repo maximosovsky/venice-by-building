@@ -37,11 +37,7 @@
   };
 
   function lang() {
-    const q = new URLSearchParams(location.search).get('lang');
-    if (q && T[q]) return q;
-    try { const s = localStorage.getItem('venice-lang'); if (s && T[s]) return s; } catch (e) { /* приватный режим */ }
-    const n = (navigator.language || 'en').slice(0, 2).toLowerCase();
-    return T[n] ? n : 'en';
+    return window.__veniceInterfaceLanguage?.get() || 'en';
   }
 
   const t = T[lang()];

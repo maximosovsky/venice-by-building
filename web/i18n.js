@@ -7,6 +7,7 @@
 //
 // {фигурные скобки} — подстановка значений: t('Здание, {year} г.', { year: 1897 }).
 
+import './interface-language.js';
 export const LANGS = ['ru', 'it', 'en'];
 export const LANG_TITLE = { ru: 'Русский', it: 'Italiano', en: 'English' };
 const STORE_KEY = 'venice-lang';
@@ -561,16 +562,7 @@ let lang = detect();
 const listeners = new Set();
 
 function detect() {
-  // В Node словарь просто читается (так его проверяет тест): там нет ни location, ни navigator.
-  if (typeof location === 'undefined') return 'ru';
-  const fromUrl = new URLSearchParams(location.search).get('lang');
-  if (fromUrl && LANGS.includes(fromUrl)) return fromUrl;
-  try {
-    const saved = localStorage.getItem(STORE_KEY);
-    if (saved && LANGS.includes(saved)) return saved;
-  } catch (e) { /* приватный режим */ }
-  const nav = (typeof navigator !== 'undefined' && navigator.language ? navigator.language : 'en').slice(0, 2).toLowerCase();
-  return LANGS.includes(nav) ? nav : 'en';
+  return globalThis.__veniceInterfaceLanguage.get();
 }
 
 // Пробелы и неразрывные пробелы считаются одинаковыми: словарь не должен зависеть от вёрстки.
@@ -601,6 +593,7 @@ export function fmtNum(n) {
 export function setLang(next) {
   if (!LANGS.includes(next) || next === lang) return;
   lang = next;
+  globalThis.__veniceInterfaceLanguage.set(next);
   try { localStorage.setItem(STORE_KEY, next); } catch (e) { /* приватный режим */ }
   if (typeof document !== 'undefined') document.documentElement.lang = next;
   applyStatic();
@@ -659,9 +652,13 @@ export function translateTree(start) {
 export function applyStatic(root) {
   if (typeof document === 'undefined') return;
   translateTree(root || document.body);
+  globalThis.__veniceInterfaceLanguage.updateDocument();
 }
 
 export const DICT_ALL = DICT;
 
 // Язык документа сразу: от него зависит перенос строк и произношение в читалках.
-if (typeof document !== 'undefined') document.documentElement.lang = lang;
+if (typeof document !== 'undefined') {
+  applyStatic();
+  document.documentElement.removeAttribute('data-language-pending');
+}

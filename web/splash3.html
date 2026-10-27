@@ -1,12 +1,17 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
+<base href="/">
+<script src="interface-language.js"></script>
+<style>html[data-language-pending] body { visibility: hidden; } html[data-language-pending] #loading.fatal { visibility: visible; }</style>
+<script type="module" src="i18n.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Венеция, здание за зданием</title>
-<meta name="description" content="Здания исторической Венеции в 3D, раскрашенные по эпохам застройки: средневековое ядро, XIX век, XX век и постройки с неизвестным возрастом. Данные муниципальной классификации VPRG и географических источников.">
-<meta property="og:title" content="Венеция, здание за зданием">
-<meta property="og:description" content="Здания исторической Венеции в 3D, раскрашенные по эпохам застройки.">
+<title>Venice, building by building</title>
+<meta name="description" content="Historic Venice buildings in 3D, coloured by era of construction: the medieval core, the 19th century, the 20th century and buildings of unknown age. Data from the municipal VPRG classification and geographical sources.">
+<meta property="og:title" content="Venice, building by building">
+<meta property="og:description" content="Historic Venice buildings in 3D, coloured by era of construction.">
+<script>window.__veniceInterfaceLanguage?.updateDocument();</script>
 <meta name="theme-color" content="#eddec6">
 <link rel="icon" href="favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="icon" href="favicon.png" type="image/png" sizes="500x500">
@@ -196,11 +201,10 @@ const FATAL = {
   en: { title: 'The map could not be built.', hint: 'Details in the browser console (F12).', late: 'loading did not finish within 30 seconds' },
 };
 function fatalLang() {
-  const q = new URLSearchParams(location.search).get('lang');
-  if (q && FATAL[q]) return q;
-  try { const s = localStorage.getItem('venice-lang'); if (s && FATAL[s]) return s; } catch (e) { /* приватный режим */ }
-  const n = (navigator.language || 'en').slice(0, 2).toLowerCase();
-  return FATAL[n] ? n : 'en';
+  if (window.__veniceInterfaceLanguage) return window.__veniceInterfaceLanguage.get();
+  if (/^\/ru\/?$/.test(location.pathname)) return 'ru';
+  const requested = new URLSearchParams(location.search).get('lang');
+  return FATAL[requested] ? requested : 'en';
 }
 function showFatal(text) {
   const el = document.getElementById('loading');

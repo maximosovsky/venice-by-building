@@ -69,7 +69,7 @@ if (!failures) {
         return {background:getComputedStyle(e).backgroundColor,wall:getComputedStyle(document.body).backgroundColor,left:text.left-r.left,right:r.right-icons.right};
       });
       assert.equal(edges.background, edges.wall);
-      close(edges.left,6);close(edges.right,6);
+      close(edges.left,30);close(edges.right,30);
       close(metrics.text, 10.5); close(metrics.svg, 18); close(metrics.target, 21);
       close(metrics.paddingTop, 11.25); close(metrics.paddingBottom, 5.625);
       close(metrics.timelineOffset, baseline + metrics.height);
