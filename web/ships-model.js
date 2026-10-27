@@ -1,14 +1,22 @@
-// Three lightweight GLB ships on Canale della Giudecca: draggable, with localStorage positions.
+// Three lightweight GLB ships across Bacino San Marco and Giudecca: draggable, with localStorage positions.
 import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
 
+// Approved WGS84 centres (lon, lat), projected via EPSG:32633 from
+// (12.3387, 45.4340): x = easting delta, z = negative northing delta.
+// Mini: (12.3379, 45.4312), outside the Grand Canal mouth on the Bacino side.
+// R: (12.3308, 45.4279), opposite Zattere, west of Punta della Dogana.
+// Aleksandr: (12.3430, 45.4320), open Bacino between Riva and San Giorgio.
+// Actual zero-rotation GLBs: Mini/Aleksandr length along Z, R along X.
 const SHIPS = [
-  { path: 'models/mini_pirate_ship_light_v2.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/ship_r_optimized_light_v2.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/aleksandr_optimized_light_v2.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/mini_pirate_ship_light_v2.glb', name: 'mini_pirate', targetLength: 50, start: { x: -72.877, z: 308.991, rotY: 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/ship_r_optimized_light_v2.glb', name: 'ship_r', targetLength: 45, start: { x: -640.420, z: 657.181, rotY: -0.22 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/aleksandr_optimized_light_v2.glb', name: 'aleksandr', targetLength: 60, start: { x: 328.987, z: 233.317, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
 ];
-const STORAGE_KEY = 'venice-ships-pos';
+// Start the approved composition once for returning visitors; never erase
+// their legacy venice-ships-pos data. Drag/save continues on this version.
+const STORAGE_KEY = 'venice-ships-pos-v2';
 const WATER_Y = -0.4;
 const SHIP_Y_OFFSET = 0.0; // ships sit exactly on water surface
 
