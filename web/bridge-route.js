@@ -416,6 +416,12 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
     })();
     return pending;
   }
+  function preload() {
+    return load().then(route => {
+      if (route && !disposed) ensureOverlay().visible = state.visible;
+      return route;
+    });
+  }
   function show() { if (disposed) return; render(); void load(); }
   function loadVariants() {
     if (variantPending) return variantPending;
@@ -498,7 +504,7 @@ export function installBridgeRoute({ THREE, scene, aimFly, openDock, dockLive, g
   }
   const unsubscribe = onLang(() => { if (getDockView() === 'bridge-route') render(true); });
   return {
-    show, load, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing, spriteAt,
+    show, load, preload, retry, loadVariants, retryVariants, selectVariant, setTraghettiVisible, setVisible, focusCrossing, spriteAt,
     // Вкладке нужно знать, показана ли линия: она работает переключателем, как «Сакральное».
     get visible() { return !!overlay?.visible; },
     listHTML() { if (state.status === 'idle') void load(); return routeEntryHTML(state, pickText); },

@@ -1122,6 +1122,9 @@ const churchRoute = installChurchRoute({ THREE, scene, aimFly, openDock, dockLiv
   openBuildingCard: gid => openBuilding(gid, { label: t('Сакральное'), go: () => churchRoute.show() })});
   // Зелёную заливку храмовых зданий маршрут больше не включает: владелец атласа требует, чтобы храмы
   // на сакральной вкладке оставались в своей бирюзе, как на главной. Оверлей доступен отдельно.
+// Prepare route JSON, bands and number sprites during atlas startup, invisibly.
+// A tab only reveals cached geometry; preloading never opens the reading dock.
+void Promise.all([bridgeRoute.preload(), churchRoute.preload()]).catch(e => console.warn('route preload failed', e));
 // Номера переходов рисуются на canvas шрифтом заголовков: просим его заранее, чтобы цифры не остались
 // подменными, и дорисовка повторится, когда файл придёт.
 document.fonts?.load?.('28px "IM Fell English SC"').catch(() => {});

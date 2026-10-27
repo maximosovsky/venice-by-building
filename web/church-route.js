@@ -139,6 +139,7 @@ export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDock
   pending=(async()=>{try{const response=await fetchRoute('data/church-route.json');if(!response.ok)throw new Error(`HTTP ${response.status}`);const route=await response.json();validateRoute(route);if(!disposed){state.route=route;state.status='ready';}}catch{if(!disposed){state.route=null;state.status='error';}}finally{pending=null;refresh();}return state.route;})();return pending;
  }
  // Кнопки «Показать на карте» больше нет: полоса появляется сразу, как только открылась карточка.
+ function preload(){return load().then(route=>{if(route&&!disposed)ensureOverlay().visible=state.visible;return route;});}
  function show(){if(disposed)return;render();void load().then(()=>setVisible(true));}
  function retry(){if(pending||disposed)return pending;state.status='idle';const result=load();refresh();return result;}
  function ensureOverlay(){if(!overlay&&state.route&&!disposed){overlay=buildRouteOverlay(THREE,state.route,resolveStopGid);scene.add(overlay);}return overlay;}
@@ -164,5 +165,5 @@ export function installChurchRoute({THREE,scene,aimFly,openDock,dockLive,getDock
   return null;
  }
  const unsubscribe=onLang(()=>{if(getDockView()==='church-route')render(true);});
- return {show,load,retry,setVisible,focusStop,spriteAt,get overlay(){return overlay;},listHTML(){if(state.status==='idle')void load();return routeEntryHTML(state,pickText);},wireList(){dockLive.querySelector('[data-church-route-open]')?.addEventListener('click',show);},dispose(){if(disposed)return;disposed=true;onVisibilityChange(false);unsubscribe?.();if(overlay){scene.remove(overlay);disposeObject(overlay);overlay=null;}}};
+ return {show,load,preload,retry,setVisible,focusStop,spriteAt,get overlay(){return overlay;},listHTML(){if(state.status==='idle')void load();return routeEntryHTML(state,pickText);},wireList(){dockLive.querySelector('[data-church-route-open]')?.addEventListener('click',show);},dispose(){if(disposed)return;disposed=true;onVisibilityChange(false);unsubscribe?.();if(overlay){scene.remove(overlay);disposeObject(overlay);overlay=null;}}};
 }
