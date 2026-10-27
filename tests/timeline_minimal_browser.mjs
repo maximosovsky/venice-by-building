@@ -19,11 +19,11 @@ try{for(const [route,reduce,disableCache] of cases){
  const r=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:60000});
  if(!disableCache&&process.env.VENICE_DIAG){await page.waitForFunction(()=>document.body.dataset.ready==='1',null,{timeout:60000});await page.reload({waitUntil:'domcontentloaded'});}
  try{
- await page.waitForFunction(()=>document.body.dataset.ready==='1'&&!document.querySelector('#splash')&&!document.querySelector('#map-layer')&&window.__veniceReveal?.mode==='run',null,{timeout:65000});
+ await page.waitForFunction(()=>document.body.dataset.ready==='1'&&!document.querySelector('#splash')&&!document.querySelector('#map-layer')&&window.__veniceReveal?.mode==='run',null,{timeout:65000,polling:100});
  const state=await page.evaluate(()=>({lang:document.documentElement.lang,ready:document.body.dataset.ready,ships:window.__veniceShipsReady,sceneVisible:getComputedStyle(document.querySelector('#scene')).visibility,children:window.__dbg.scene.children.length,errors:window.__veniceErrors,reveal:window.__veniceReveal,emblem:window.__splash3Emblem,old:localStorage.getItem('venice-ships-pos'),key:document.querySelector('#key').innerText,shipPositions:window.__dbg.scene.children.filter(x=>x.userData.isVeniceShip).map(x=>({name:x.userData.shipName,x:x.position.x,z:x.position.z})),handoff:window.__testHandoff}));
  assert.equal(state.lang,route==='/ru'?'ru':'en');assert.equal(state.ships.status,'ready');assert.equal(state.ships.loaded,3);assert.equal(state.ships.gpuPrepared,true);assert.equal(state.ships.rendered,true);assert.equal(state.sceneVisible,'visible');assert.equal(state.old,legacy);assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
  if(route==='/splash3'){assert.equal(state.emblem.released,true);if(!reduce)assert.ok(state.handoff.some(x=>x.p>0&&x.p<1&&Math.abs(x.map+x.emblem-1)<.002),'original engraving/emblem crossfade');}
- const screenshot=path.join(out,`${label}-${reduce?'reduced':'normal'}.png`);await page.screenshot({path:screenshot,timeout:60000});
+ const screenshot=path.join(out,`${label}-${reduce?'reduced':'normal'}.png`);const c=await context.newCDPSession(page);const shot=await c.send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});fs.writeFileSync(screenshot,Buffer.from(shot.data,'base64'));await c.detach();
  // Change age, language and controls in the real UI; the removed key must not regenerate.
  const initialYear=await page.evaluate(()=>__dbg.uniforms.uYear.value),sun=page.locator('.year-sun'),box=await sun.boundingBox();
  await page.mouse.move(box.x+box.width/2,box.y+box.height/2);await page.mouse.down();await page.mouse.move(box.x+box.width/2-90,box.y+box.height/2,{steps:6});await page.mouse.up();

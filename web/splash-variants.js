@@ -146,6 +146,17 @@
         requestAnimationFrame(tick);
       }
     }
+    // The reveal clock completes via timers. A throttled/background RAF must
+    // not strand the engraving over an already-ready map after that completion.
+    const completion = setInterval(() => {
+      if (!mapLayer.isConnected) { clearInterval(completion); return; }
+      const state = window.__veniceReveal?.state;
+      if (state === 'completed' || state === 'cancelled') {
+        if (handoff) handoff.render(1);
+        else mapLayer.remove();
+        clearInterval(completion);
+      }
+    }, 150);
     requestAnimationFrame(tick);
   }
 
