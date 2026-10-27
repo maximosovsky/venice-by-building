@@ -18,7 +18,8 @@ for(const [width,height,reduce] of cases.filter(([w,h]) => !process.env.VENICE_V
  });
  await page.goto(base+'/splash3.html?lang=en');
  await page.waitForFunction(()=>!!window.__splash3Emblem?.geometry);
- await shot(`${width}x${height}-initial.png`);
+ // Capture during the handoff, not before it: software-rendered screenshot
+ // capture can outlast the transition and is not a loading prerequisite.
  if(!reduce) {
   await page.waitForFunction(()=>__veniceReveal.state==='running',{},{timeout:60000});
   await page.waitForFunction(()=>__veniceReveal.progress>.25 && __veniceReveal.progress<.9);

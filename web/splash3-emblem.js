@@ -6,9 +6,9 @@
   if (!document.body.classList.contains('splash-variant-3')) return;
   const el = document.querySelector('.venice-arms');
   if (!el) return;
-  // Sampled from the same JPEG through this registration; preserve the original
-  // cutout alpha, but do not crossfade two differently resampled drawings.
-  el.src = 'img/venice-merian-emblem-registered.png';
+  // Use the owner's original PNG unchanged; the public copy is byte-identical
+  // to D:/100_star/venice/Venice-1642.png. Keep the map registration for placement.
+  el.src = 'img/Venice-1642.png';
   const source = { a: .6277699827, b: .0048072373, x: 2153.8452382, y: 220.5698330,
                    width: 455, height: 549, mapWidth: 2560, mapHeight: 1104 };
   const s = Math.hypot(source.a, source.b), angle = Math.atan2(source.b, source.a);
@@ -19,7 +19,7 @@
   let map, image, progress = 0, geometry, released = false, moved = false;
   document.body.appendChild(el);
   Object.assign(el.style, {position:'fixed',zIndex:'36',margin:'0',opacity:'0',pointerEvents:'none',
-    objectFit:'fill',transformOrigin:'0 0',filter:'sepia(12%) contrast(1.05)'});
+    objectFit:'fill',transformOrigin:'0 0',filter:'none'});
   const clamp = (v,lo,hi) => Math.max(lo,Math.min(hi,v));
   function layout() {
     if (!image) return;

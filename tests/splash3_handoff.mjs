@@ -29,7 +29,9 @@ await test('accepted reveal holds map during pending clock',async()=>{
 });
 await test('same emblem is transparent, map-aligned, responsive and does not restore/write saved position',async()=>{
  const p=await fixture();await p.waitForTimeout(50);
- assert.equal(await p.locator('.venice-arms').getAttribute('src'),'img/venice-merian-emblem-registered.png');
+ assert.equal(await p.locator('.venice-arms').getAttribute('src'),'img/Venice-1642.png');
+ assert.equal(await p.locator('.venice-arms').evaluate(e=>getComputedStyle(e).filter),'none');
+ assert.deepEqual(fs.readFileSync(new URL('img/Venice-1642.png',root)),fs.readFileSync(new URL('../Venice-1642.png',root)));
  for(const [width,height] of [[1440,900],[390,844],[844,390],[320,640],[2560,1080],[240,320],[900,200]]){
   await p.setViewportSize({width,height});await p.waitForTimeout(20);
   const v=await p.evaluate(()=>{const e=document.querySelector('.venice-arms'),r=e.getBoundingClientRect();return {opacity:+getComputedStyle(e).opacity,r:{x:r.x,y:r.y,width:r.width,height:r.height},state:window.__splash3Emblem?.geometry,saved:localStorage.getItem('venice-emblem-pos')}});
