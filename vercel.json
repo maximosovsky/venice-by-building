@@ -4,7 +4,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/ru(/)?", "destination": "/index.html" }
+    { "source": "/ru(/)?", "destination": "/" }
   ],
   "headers": [
     {

@@ -69,7 +69,7 @@ try {
  }
  const rewrites = config.rewrites || [];
  try {
-  assert.ok(rewrites.some(r=>r.source==='/ru(/)?' && r.destination==='/index.html'), 'one optional-trailing /ru rewrite to main index.html');
+  assert.ok(rewrites.some(r=>r.source==='/ru(/)?' && r.destination==='/'), 'one optional-trailing /ru rewrite to main index.html');
   assert.ok((config.headers||[]).some(h=>h.source==='/ru(/)?' && h.headers.some(v=>v.key.toLowerCase()==='x-robots-tag' && v.value==='noindex, nofollow')), 'exact and trailing /ru noindex response header');
   for(const file of ['index.html','splash3.html']) assert.doesNotMatch(fs.readFileSync(new URL(file,web),'utf8'), /href=["'](?:https:\/\/venice-by-building\.vercel\.app)?\/ru\/?["']/,'Russian route remains unlinked');
   console.log('PASS unlinked /ru rewrite and noindex headers');
