@@ -23,7 +23,7 @@ async function fixture({reduce=false, saved=true}={}) {
 }
 async function test(name,fn){try{await fn();console.log('PASS',name)}catch(e){failures++;console.error('FAIL',name,e.message)}}
 await test('accepted reveal holds map during pending clock',async()=>{
- const p=await fixture();await p.waitForTimeout(370);
+ const p=await fixture();await p.waitForFunction(()=>__veniceReveal.state==='pending');
  const v=await p.evaluate(()=>({progress:__veniceReveal.progress,opacity:getComputedStyle(document.querySelector('#map-layer')).opacity}));
  assert.equal(v.progress,0,'progress must be zero before slow clock starts');assert.equal(+v.opacity,1);await p.close();
 });

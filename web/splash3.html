@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Венеция — вариант заставки 3</title>
+<title>Венеция, здание за зданием</title>
 <meta name="description" content="Здания исторической Венеции в 3D, раскрашенные по эпохам застройки: средневековое ядро, XIX век, XX век и постройки с неизвестным возрастом. Данные муниципальной классификации VPRG и географических источников.">
 <meta property="og:title" content="Венеция, здание за зданием">
 <meta property="og:description" content="Здания исторической Венеции в 3D, раскрашенные по эпохам застройки.">
@@ -12,6 +12,7 @@
 <link rel="icon" href="favicon.png" type="image/png" sizes="500x500">
 <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/im-fell-english-sc-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="splash.css">
 <link rel="stylesheet" href="splash-variants.css">
@@ -34,8 +35,7 @@
   <div class="lenses" role="group" aria-label="Раскрасить город по">
     <button data-mode="0" aria-pressed="true">Возраст</button>
     <button data-mode="3" aria-pressed="false">Мосты</button>
-    <button data-mode="1" aria-pressed="false">Высоты</button>
-    <button data-mode="2" aria-pressed="false">Все Palazzo</button>
+    <button data-mode="1" aria-pressed="false">Сакральное</button>
     <button data-mode="4" aria-pressed="false" hidden>Районы</button>
   </div>
   <i class="bar-sep" aria-hidden="true"></i>
@@ -179,7 +179,7 @@
       <div id="rail" class="rail"></div>
       <span class="from-mark" hidden aria-hidden="true"></span>
       <span class="year-ring" aria-hidden="true"></span>
-      <span class="year-sun sun-disc" aria-hidden="true"></span>
+      <span class="year-sun" aria-hidden="true"></span>
     </div>
   </div>
 </section>
