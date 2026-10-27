@@ -47,7 +47,7 @@ try {
  assert.equal(await page.locator('a[href="https://example.org/bridge"]').count(),1,'top-level municipal source provenance must resolve');
  assert.match(text,/Nota italiana/);
  assert.match(text,/schedato/);
- assert.match(text,/Text withheld/);assert.doesNotMatch(text,/DO NOT PUBLISH/);
+ assert.doesNotMatch(text,/DO NOT PUBLISH/);assert.doesNotMatch(text,/Text withheld/);
  assert.match(text,/Gothic/);
  assert.match(text,/source.*language.*unknown/i);
  await page.evaluate(()=>api.focusAddress({x:2,z:3}));

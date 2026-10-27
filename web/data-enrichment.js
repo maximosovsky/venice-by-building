@@ -9,11 +9,9 @@ export const DATA_UI = {
  retry:{ru:'Повторить',it:'Riprova',en:'Retry'},unknown:{ru:'Не указано',it:'Non indicato',en:'Not specified'},
  original:{ru:'Исходные подписи и текст (без перевода)',it:'Etichette e testo della fonte (non tradotti)',en:'Original source labels and text (not translated)'},
  sourceLanguageUnknown:{ru:'Язык источника неизвестен',it:'Lingua della fonte sconosciuta',en:'Source language unknown'},
- withheld:{ru:'Текст не опубликован: права на воспроизведение не установлены',it:'Testo non pubblicato: diritti di riproduzione non accertati',en:'Text withheld: reproduction rights not established'},
  sheetCaveat:{ru:'Типологическая карточка, не индивидуальный чертёж здания.',it:'Scheda tipologica, non rilievo individuale dell’edificio.',en:'Typology sheet, not an individual building schematic.'},
  styles:{ru:'Стили и типологии',it:'Stili e tipologie',en:'Styles and typologies'},
  association:{ru:'Связь с историческим участком, а не подтверждение тождества современного здания.',it:'Associazione a una particella storica, non identità accertata dell’edificio attuale.',en:'Historical parcel association, not confirmation of current building identity.'},
- rights:{ru:'Лицензия: права не установлены, публикация — решение оператора',it:'Licenza: diritti non accertati, pubblicazione su decisione dell’operatore',en:'License: rights unestablished, publication is the operator’s decision'},
  source:{ru:'Источник',it:'Fonte',en:'Source'},sheet:{ru:'Карточка VPRG',it:'Scheda VPRG',en:'VPRG sheet'},
  material:{ru:'Материал',it:'Materiale',en:'Material'},purpose:{ru:'Назначение',it:'Uso',en:'Purpose'},type:{ru:'Тип',it:'Tipo',en:'Type'},
  length_m:{ru:'Длина',it:'Lunghezza',en:'Length'},width_m:{ru:'Ширина',it:'Larghezza',en:'Width'},height_m:{ru:'Высота',it:'Altezza',en:'Height'},
@@ -101,12 +99,13 @@ export function installDataEnrichment({dockLive,getDockView,aimFly=()=>{},pickTe
   else if(root&&typeof root==='object')sources.push(...Object.values(root).filter(s=>s&&typeof s==='object'&&(s.url||s.portal_url)));
   if(r.source_url||r.url)sources.push({url:r.source_url||r.url});
   const seen=new Set();sources=sources.filter(s=>{const key=stringify(s);if(seen.has(key))return false;seen.add(key);return true;});
-  const rows=sources.map(s=>`${esc(s.title||s.label||s.id||s.key||'')} ${link(s.url||s.source_url||s.portal_url,t('source'))}${s.license?` · ${esc(stringify(s.license))}`:` · ${t('rights')}`}${s.rights_evidence||s.license_status||s.redistribution?` · ${esc(s.rights_evidence||s.license_status||s.redistribution)}`:''}`).join('<br>');
-  return `<small class="de-provenance">${rows||t('rights')}<br>${r.language?`lang: ${esc(r.language)}`:t('sourceLanguageUnknown')}${r.match?`<br>${t('match')}: ${esc(stringify(r.match))}`:''}</small>`;
+  const openLicence=s=>{const v=s&&typeof s==='object'?s.license:null;if(typeof v==='string'&&v.trim())return v.trim();if(v&&typeof v==='object'){const id=v.id||v.name;if(typeof id==='string'&&id.trim())return id.trim();}return '';};
+  const rows=sources.map(s=>`${esc(s.title||s.label||s.id||s.key||'')} ${link(s.url||s.source_url||s.portal_url,t('source'))}${openLicence(s)?` · ${esc(openLicence(s))}`:''}`).join('<br>');
+  return `<small class="de-provenance">${rows?`${rows}<br>`:''}${r.language?`lang: ${esc(r.language)}`:t('sourceLanguageUnknown')}${r.match?`<br>${t('match')}: ${esc(stringify(r.match))}`:''}</small>`;
  }
  function evidenceRecord(r,data,kind){
   const prose=kind==='vprg'?['note','state']:['text','description_it','description','text_it'];
-  const body=prose.filter(k=>Object.hasOwn(r,k)).map(k=>`<p><b>${esc(k)}</b>: ${r[k+'_withheld']||/blocked|private/.test(r[k+'_publication_status']||'')?t('withheld'):original(r[k],r.language)}</p>`).join('');
+  const body=prose.filter(k=>Object.hasOwn(r,k)&&!r[k+'_withheld']&&!/blocked|private/.test(r[k+'_publication_status']||'')).map(k=>`<p><b>${esc(k)}</b>: ${original(r[k],r.language)}</p>`).join('');
   return `<div class="de-record">${body}${['style','typology','sheet'].filter(k=>Object.hasOwn(r,k)).map(k=>`<p><b>${esc(k)}</b>: ${original(r[k],r.language)}</p>`).join('')}${kind==='vprg'?`${link(r.sheet_url||r.url,t('sheet'))}<p class="de-caveat">${t('sheetCaveat')}</p>`:''}${provenance(r,data)}</div>`;
  }
  function historyRecord(r,data){
