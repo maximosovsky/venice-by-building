@@ -62,9 +62,16 @@ if (!failures) {
         const time = document.querySelector('.time').getBoundingClientRect();
         return { height: r.height, top: r.top, bottom: r.bottom, paddingTop: parseFloat(s.paddingTop), paddingBottom: parseFloat(s.paddingBottom), text: parseFloat(getComputedStyle(e.querySelector('span')).fontSize), svg: svg.getBoundingClientRect().height, target: a.getBoundingClientRect().height, timelineBottom: time.bottom, timelineOffset: parseFloat(getComputedStyle(document.querySelector('.time')).bottom), overflow: document.documentElement.scrollWidth > innerWidth, visible: [...e.querySelectorAll('li a')].every(a => { const r=a.getBoundingClientRect();return document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.closest('a')===a; }) };
       });
-      close(metrics.height, referenceMetrics[width] * .75);
+      // New owner contract replaces the former template-height ratio.
+      assert.ok(metrics.height < referenceMetrics[width] * .75);
+      const edges = await footer.evaluate(e => {
+        const r=e.getBoundingClientRect(), text=e.querySelector('.footer-inner span').getBoundingClientRect(), icons=e.querySelector('.footer-social').getBoundingClientRect();
+        return {background:getComputedStyle(e).backgroundColor,wall:getComputedStyle(document.body).backgroundColor,left:text.left-r.left,right:r.right-icons.right};
+      });
+      assert.equal(edges.background, edges.wall);
+      close(edges.left,6);close(edges.right,6);
       close(metrics.text, 10.5); close(metrics.svg, 18); close(metrics.target, 21);
-      close(metrics.paddingTop, 22.5); close(metrics.paddingBottom, 11.25);
+      close(metrics.paddingTop, 11.25); close(metrics.paddingBottom, 5.625);
       close(metrics.timelineOffset, baseline + metrics.height);
       assert.ok(metrics.timelineBottom <= metrics.top - baseline + .1, JSON.stringify(metrics));
       assert.equal(metrics.bottom, 900); assert.equal(metrics.overflow, false); assert.equal(metrics.visible, true);
@@ -75,7 +82,7 @@ if (!failures) {
       await page.waitForTimeout(80);
       const resized = await footer.evaluate(e => ({ height:e.getBoundingClientRect().height, offset:parseFloat(getComputedStyle(document.querySelector('.time')).bottom) }));
       const resizedWidth = width === 390 ? 1440 : 390;
-      close(resized.height, referenceMetrics[resizedWidth] * .75);
+      assert.ok(resized.height < referenceMetrics[resizedWidth] * .75);
       close(resized.offset, resized.height + (resizedWidth <= 720 ? 8 : 12));
       assert.deepEqual(errors, []);
       await page.setViewportSize({ width, height: 900 });
