@@ -403,8 +403,7 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
 /* Стеклянный отражённый круг в прозрачной середине значка: блик сверху слева, тень снизу справа. */
 .year-sun::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
   width: 36%; height: 40%; border-radius: 50%;
-  background: radial-gradient(circle at 34% 28%, #fff9f0 0% 8%, #e8d5c0 28%, #8b6a4e 65%, #4a3020 100%);
-  z-index: -1; }
+  background: radial-gradient(circle at 34% 28%, #fff9f0 0% 8%, #e8d5c0 28%, #8b6a4e 65%, #4a3020 100%); }
 .year-ring { position: absolute; top: 68px; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; background: var(--paper);
   box-shadow: 0 2px 8px rgba(44, 47, 42, .22); pointer-events: none; }
 .from-mark { position: absolute; top: 68px; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--paper);
