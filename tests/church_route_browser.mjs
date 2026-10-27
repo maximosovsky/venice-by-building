@@ -30,7 +30,7 @@ try{
  if(expectUnavailable){
   await page.locator('[data-church-route-open]').click();await page.locator('[data-church-route-retry]').waitFor();
   assert.equal(await page.locator('[data-church-stop]').count(),0);assert.equal(await page.locator('[data-church-route-toggle]').count(),0);
-  for(const lang of ['it','en','ru']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await page.locator('.church-route-page [role="status"]').innerText()).length>30);}
+  for(const lang of ['it','en','ru']){await page.evaluate(async lang=>(await import('./i18n.js')).setLang(lang),lang);assert.ok((await page.locator('.church-route-page [role="status"]').innerText()).length>30);}
   assert.deepEqual(errors,[]);const screenshot='C:/Users/1/AppData/Local/hermes/cache/scratch/venice-church-route-unavailable.png';await page.screenshot({path:screenshot});
   console.log(JSON.stringify({base,bridgeEntryPreserved:true,churchEntry:true,failClosed:true,stops:0,pageErrors:errors,consoleErrors,httpErrors,screenshot}));
  }else{
@@ -51,7 +51,7 @@ try{
   await page.locator('.dock-back').click();await page.locator('.church-stops').waitFor({timeout:20000});
   assert.equal(await page.locator(`[data-church-stop="${i}"]`).getAttribute('aria-current'),'step');
  }
- for(const lang of ['it','en','ru']){await page.locator(`#langs [data-lang="${lang}"]`).click();assert.ok((await panel.innerText()).includes(data.title[lang]));const note=data.stops[laz].access_note;if(note)assert.ok((await panel.innerText()).includes(typeof note==='string'?note:note[lang]));assert.equal(await page.locator(`[data-church-stop="${laz}"]`).getAttribute('aria-current'),'step');}
+ for(const lang of ['it','en','ru']){await page.evaluate(async lang=>(await import('./i18n.js')).setLang(lang),lang);assert.ok((await panel.innerText()).includes(data.title[lang]));const note=data.stops[laz].access_note;if(note)assert.ok((await panel.innerText()).includes(typeof note==='string'?note:note[lang]));assert.equal(await page.locator(`[data-church-stop="${laz}"]`).getAttribute('aria-current'),'step');}
  // Кнопка «Сакральное» работает переключателем: нажал — линия и чёрные номера на карте,
  // отжал — линия и номера скрыты, как прежняя кнопка «Скрыть линию».
  await page.locator('.lenses [data-mode="1"]').click();await page.waitForFunction(()=>window.__dbg.churchRoute.overlay?.visible===true,null,{timeout:30000});

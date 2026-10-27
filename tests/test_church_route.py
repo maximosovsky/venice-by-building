@@ -290,7 +290,8 @@ def test_generated_artifact_reconciles_every_candidate_and_required_islands():
         assert s['wikipedia'].startswith(('https://it.wikipedia.org/wiki/','https://en.wikipedia.org/wiki/'))
         assert 12 < s['lon'] < 12.6 and 45.2 < s['lat'] < 45.6
         assert s['local'] == pytest.approx(m.local_coordinates(s['lon'],s['lat']),abs=.02)
-    assert len(data['segments']) == len(data['stops'])-1
+    # Explicit San Marco return adds one leg without duplicating the inventory stop.
+    assert len(data['segments']) == len(data['stops'])
     assert not any(s.get('day') for s in data['stops'])
     # Обход считает владелец атласа: старт и финиш на площади Сан-Марко, переход через канал — трагетто.
     # Водный переход допустим только как проверенное ребро трагетто, не как выдуманная линия по воде.
@@ -344,7 +345,10 @@ def test_generated_route_has_150_continuous_stops_and_no_user_excluded_waypoints
     assert len(ids) == len(set(ids)) == 134
     assert not (set(ids) & USER_APPROVED_ROUTE_EXCLUSIONS)
     assert not PRESERVED_ISLAND_STOPS & set(ids)
-    assert [(s['from'],s['to']) for s in data['segments']] == list(zip(ids,ids[1:]))
+    expected = list(zip(ids,ids[1:]))
+    main_count = data['audit']['tour']['phase_counts']['main_venice']
+    expected[main_count-1:main_count] = [(ids[main_count-1],ids[0]),(ids[0],ids[main_count])]
+    assert [(s['from'],s['to']) for s in data['segments']] == expected
     module().validate_route(data, allow_incomplete=True)
     ns = {'g':'http://www.topografix.com/GPX/1/1'}
     gpx = ET.parse(ROOT/'web/data/church-route.gpx')
