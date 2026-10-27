@@ -1,12 +1,12 @@
-// Two GLB ships on Canale della Giudecca: draggable, with localStorage positions.
+// Three lightweight GLB ships on Canale della Giudecca: draggable, with localStorage positions.
 import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
 
 const SHIPS = [
-  { path: 'models/mini_pirate_ship.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/ship_r_optimized.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/aleksandr_optimized.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/mini_pirate_ship_light.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/ship_r_optimized_light.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/aleksandr_optimized_light.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.4;
@@ -30,8 +30,10 @@ function savePositions(all) {
 export async function installShips(scene, camera, renderer, controls) {
   // The ships use PBR materials, the city shades itself; add lights for the ships only.
   if (!scene.userData.veniceShipLights) {
-    scene.add(new THREE.HemisphereLight(0xffffff, 0x9fb6b8, 0.85));
-    const sunLight = new THREE.DirectionalLight(0xfff8ee, 0.7);
+    // Standard PBR divides irradiance by pi. The atlas intentionally bypasses
+    // sRGB output conversion; compensate with real lights, not emissive/unlit.
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x9fb6b8, 3.0));
+    const sunLight = new THREE.DirectionalLight(0xfff8ee, 2.5);
     sunLight.position.set(-0.55, 0.55, -0.62).multiplyScalar(400);
     scene.add(sunLight);
     scene.userData.veniceShipLights = true;
