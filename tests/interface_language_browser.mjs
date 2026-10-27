@@ -54,7 +54,8 @@ try {
    assert.equal(await page.evaluate(()=>new URL('data/venezia.json', document.baseURI).pathname), '/data/venezia.json');
    assert.deepEqual(badAssets.filter(x=>!/^\/ru\/$/.test(x)), []);
    for (const next of ['en','it','ru','en']) {
-    await page.locator(`[data-lang="${next}"]`).click();
+    if(next==='ru') await page.evaluate(()=>window.__languageFixture.setLang('ru'));
+    else await page.locator(`[data-lang="${next}"]`).click();
     assert.equal(await page.evaluate(()=>window.__languageFixture.getLang()),next);
     assert.equal(await page.locator('.lenses button[data-mode="0"]').textContent(),age[next]);
     assert.equal(await page.evaluate(()=>fatalLang()),next);

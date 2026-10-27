@@ -6,11 +6,11 @@ import { chromium } from 'playwright';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = process.env.SITE_FOOTER_REFERENCE || 'D:/100_GitHub Design Code/site-design/template';
-const reference = fs.readFileSync(path.join(source, 'index.html'), 'utf8').match(/<footer\b[\s\S]*?<\/footer>/)[0];
+const reference = fs.readFileSync(path.join(source, 'index.html'), 'utf8').match(/<footer\b[\s\S]*?<\/footer>/)[0].replace(/<li>[\s\S]*?<\/li>/g, block => /social-youtube|social-devto/.test(block) ? '' : block);
 const expectedPaths = [...reference.matchAll(/\bd="([^"]+)"/g)].map(m => m[1]);
 const expectedViews = [...reference.matchAll(/viewBox="([^"]+)"/g)].map(m => m[1]);
-const links = ['https://www.linkedin.com/in/osovsky/', 'https://www.youtube.com/channel/UCNM7ujA8p9deMlHljRHqohw/', 'https://x.com/maximosovsky', 'https://www.instagram.com/osovsky/', 'https://github.com/maximosovsky', 'https://t.me/maxim_osovsky', 'https://dev.to/osovsky'];
-const colors = ['rgb(10, 102, 194)', 'rgb(255, 0, 0)', 'rgb(0, 0, 0)', 'rgb(228, 64, 95)', 'rgb(51, 51, 51)', 'rgb(0, 136, 204)', 'rgb(0, 0, 0)'];
+const links = ['https://www.linkedin.com/in/osovsky/', 'https://x.com/maximosovsky', 'https://www.instagram.com/osovsky/', 'https://github.com/maximosovsky', 'https://t.me/maxim_osovsky'];
+const colors = ['rgb(10, 102, 194)', 'rgb(0, 0, 0)', 'rgb(228, 64, 95)', 'rgb(51, 51, 51)', 'rgb(0, 136, 204)'];
 const browser = await chromium.launch({ headless: true });
 let failures = 0;
 async function test(name, run) {

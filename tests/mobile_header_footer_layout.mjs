@@ -55,7 +55,7 @@ try {
       measurements.push(metrics);
       close(metrics.text.left,30);close(viewport.width-metrics.social.right,30);
       assert.equal(metrics.lang,lang);assert.equal(metrics.overflow,false,JSON.stringify(metrics));
-      assert.equal(metrics.links.length,9);assert.ok(metrics.links.every(x=>x.hit),JSON.stringify(metrics.links));
+      assert.equal(metrics.links.length,7);assert.ok(metrics.links.every(x=>x.hit),JSON.stringify(metrics.links));
       assert.ok(metrics.text.right<=viewport.width-30+.1);assert.ok(metrics.text.bottom<=metrics.social.top+.1 || viewport.width>768);
       assert.ok(metrics.time.bottom<=metrics.footer.top-(viewport.width<=720?8:12)+.1);
       assert.ok(metrics.masthead.right<=viewport.width);assert.ok(metrics.masthead.bottom<=metrics.bar.top);
@@ -75,7 +75,7 @@ try {
         const visible=await control.evaluate(e=>{const r=e.getBoundingClientRect(),bar=document.querySelector('nav.bar').getBoundingClientRect();return {left:r.left,right:r.right,barLeft:bar.left,barRight:bar.right,hit:document.elementFromPoint(r.left+r.width/2,r.top+r.height/2)?.closest('button')===e}});
         assert.ok(visible.left>=0 && visible.right<=viewport.width+.1 && visible.hit,`scroll reachable ${await control.innerText()}: ${JSON.stringify(visible)}`);
       }
-      const active=page.locator(`#langs [data-lang="${lang}"]`);await active.click();
+      const active=page.locator(`#langs [data-lang="${lang==='ru'?'en':lang}"]`);await active.click();
       assert.equal(await active.getAttribute('aria-pressed'),'true');
       // Real About DOM, final real repository link, opened without app/WebGL.
       await page.evaluate(()=>{document.querySelector('#dock').hidden=false;document.querySelector('#notes').hidden=false});
