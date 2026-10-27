@@ -8,13 +8,14 @@ const out=path.join(process.env.TMPDIR,'venice-minimal-timeline-'+(process.env.V
 const browser=await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const reports=[], failures=[];
 const legacy=JSON.stringify({mini_pirate:{x:-200,z:200,rotY:-1},ship_r:{x:-280,z:260,rotY:-1.4},aleksandr:{x:-120,z:140,rotY:-.78}});
-const cases=process.env.VENICE_CASE==='cached-splash3' ? [['/splash3',false,false]] : process.env.VENICE_REPORT==='live' ? [['/',true,false],['/ru',false,false],['/splash3',false,true],['/ru',true,true],['/splash3',true,true]] : process.env.VENICE_DIAG ? [['/ru',false,false],['/splash3',false,false],['/ru',true,true],['/splash3',true,true]] : [['/',true,false],['/ru',false,true],['/splash3',false,true],['/ru',true,true],['/splash3',true,true]];
+const cases=process.env.VENICE_CASE==='late-splash3' ? [['/splash3',false,true]] : process.env.VENICE_CASE==='cached-splash3' ? [['/splash3',false,false]] : process.env.VENICE_REPORT==='live' ? [['/',true,false],['/ru',false,false],['/splash3',false,true],['/ru',true,true],['/splash3',true,true]] : process.env.VENICE_DIAG ? [['/ru',false,false],['/splash3',false,false],['/ru',true,true],['/splash3',true,true]] : [['/',true,false],['/ru',false,true],['/splash3',false,true],['/ru',true,true],['/splash3',true,true]];
 try{for(const [route,reduce,disableCache] of cases){
  const label=route.slice(1)||'main', context=await browser.newContext({viewport:{width:1280,height:800},reducedMotion:reduce?'reduce':'no-preference',locale:'ru-RU'}),page=await context.newPage();
  const errors=[],bad=[],failed=[],handoff=[];
  page.on('pageerror',e=>errors.push(e.stack));page.on('response',r=>{if(r.status()>=400)bad.push({url:r.url(),status:r.status()})});page.on('requestfailed',r=>failed.push({url:r.url(),error:r.failure()}));
  await context.addInitScript(value=>{localStorage.setItem('venice-ships-pos',value);localStorage.setItem('venice-lang','it');window.__testHandoff=[];setInterval(()=>{const m=document.querySelector('#map-layer'),e=document.querySelector('.venice-arms'),r=window.__veniceReveal;if(m&&e&&r)window.__testHandoff.push({t:performance.now(),state:r.state,p:r.progress,map:+getComputedStyle(m).opacity,emblem:+getComputedStyle(e).opacity});},100)},legacy);
  if(disableCache){const cdp=await context.newCDPSession(page);await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});}
+ if(process.env.VENICE_CASE==='late-splash3') await page.route('**/aleksandr_optimized_light_v2.glb*',async request=>{const delay=Math.max(0,23000-await page.evaluate(()=>performance.now()));await new Promise(resolve=>setTimeout(resolve,delay));await request.continue();});
  const r=await page.goto(base+route,{waitUntil:'domcontentloaded',timeout:60000});
  if(!disableCache&&process.env.VENICE_DIAG){await page.waitForFunction(()=>document.body.dataset.ready==='1',null,{timeout:60000});await page.reload({waitUntil:'domcontentloaded'});}
  try{

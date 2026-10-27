@@ -187,10 +187,9 @@
         }
       }, 140);
     }
-    if (!done && ready && performance.now() > 22000) {
-      finish();
-      if (handoff) handoff.render(1);
-    }
+    // A late-ready scene still gets the original handoff. A wall-clock hold
+    // limit must not release the engraving/emblem before reveal.play starts.
+    // Completion and reduced-motion/error paths above already finish it.
   }, 150);
 
   setTimeout(() => {
