@@ -7,7 +7,9 @@
   // Вынимаем эмблему из masthead, чтобы она могла летать свободно.
   document.body.appendChild(el);
   el.style.position = 'fixed';
-  el.style.zIndex = '10';
+  const owner = window.__splash3Emblem;
+  let suspended = !!owner && !owner.released;
+  el.style.zIndex = owner ? '36' : '10';
   el.style.cursor = 'grab';
   el.style.userSelect = 'none';
   el.style.touchAction = 'none';
@@ -19,7 +21,8 @@
   let x = gutter;
   let y = Math.max(gutter, safeTop + gutter);
 
-  const saved = localStorage.getItem('venice-emblem-pos');
+  let saved = null;
+  try { if (!owner) saved = localStorage.getItem('venice-emblem-pos'); } catch (e) { /* storage unavailable */ }
   if (saved) {
     try {
       const p = JSON.parse(saved);
@@ -31,9 +34,16 @@
     el.style.left = x + 'px';
     el.style.top = y + 'px';
   };
-  apply();
+  if (owner) {
+    x = owner.geometry?.originX ?? x;
+    y = owner.geometry?.originY ?? y;
+  } else apply();
 
-  let dragging = false, startX, startY, startLeft, startTop;
+  let dragging = false, didMove = false, startX, startY, startLeft, startTop;
+  window.__veniceEmblemDrag = {
+    place(left, top) { if (!dragging) { x = left; y = top; } },
+    resume() { suspended = false; }
+  };
 
   const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
@@ -43,6 +53,8 @@
   };
 
   const onDown = e => {
+    if (suspended) return;
+    didMove = false;
     dragging = true;
     const c = client(e);
     startX = c.x; startY = c.y;
@@ -54,10 +66,13 @@
   const onMove = e => {
     if (!dragging) return;
     const c = client(e);
-    const w = el.offsetWidth || 112;
-    const h = el.offsetHeight || 218;
-    x = clamp(startLeft + c.x - startX, 0, window.innerWidth - w);
-    y = clamp(startTop + c.y - startY, 0, window.innerHeight - h);
+    if (c.x !== startX || c.y !== startY) { didMove = true; owner?.moved(); }
+    const rect = el.getBoundingClientRect();
+    const w = rect.width || 112;
+    const h = rect.height || 218;
+    const insetX = rect.left - x, insetY = rect.top - y;
+    x = clamp(startLeft + c.x - startX, -insetX, window.innerWidth - w - insetX);
+    y = clamp(startTop + c.y - startY, -insetY, window.innerHeight - h - insetY);
     apply();
     if (e.cancelable) e.preventDefault();
   };
@@ -66,7 +81,9 @@
     if (!dragging) return;
     dragging = false;
     el.style.cursor = 'grab';
-    localStorage.setItem('venice-emblem-pos', JSON.stringify({ x, y }));
+    try {
+      if (!owner || didMove) localStorage.setItem('venice-emblem-pos', JSON.stringify({ x, y }));
+    } catch (e) { /* storage unavailable */ }
   };
 
   el.addEventListener('mousedown', onDown);

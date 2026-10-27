@@ -17,6 +17,10 @@
   let base = 0;                // показание часов при переходе
   let t0 = 0;                  // настоящее время в момент перехода
   let speed = 1;
+  // An accepted play has a pending label prelude, not a completed reveal.
+  let state = 'idle';
+  let duration = SIGHT_MS;
+  let cancelPlay = null;
 
   function vt(t) {
     if (mode === 'run') return t;
@@ -44,36 +48,41 @@
     const last = Math.max.apply(null, borns);
     if (!(last > first)) return false;                    // всё выросло разом — переигрывать нечего
 
-  // Подписи появляются первыми, потом дома: дадим labels полсекунды на отрисовку,
-  // затем отматываем часы к самому раннему uBorn и запускаем медленное время.
-  const labels = window.__dbg && window.__dbg.labelGroup;
-  if (labels) labels.visible = true;
+    if (cancelPlay) cancelPlay();
+    state = 'pending';
+    const labels = window.__dbg && window.__dbg.labelGroup;
+    if (labels) labels.visible = true;
+    const timers = [];
+    const inputs = ['pointerdown', 'wheel', 'keydown', 'touchstart'];
+    const stop = (completed = false) => {
+      timers.forEach(clearTimeout);
+      inputs.forEach(name => removeEventListener(name, cancel));
+      mode = 'run';
+      state = completed ? 'completed' : 'cancelled';
+      cancelPlay = null;
+    };
+    const cancel = () => stop(false);
+    cancelPlay = cancel;
+    inputs.forEach(name => addEventListener(name, cancel, { passive: true }));
 
-  setTimeout(() => {
-    base = (first - 0.05) * 1000;
-    t0 = performance.now();
-    // Ход часов такой, чтобы весь поток падений уложился в SIGHT_MS: обычно это замедление в несколько раз.
-    const span = ((last + 0.9) - first + 0.05) * 1000;
-    speed = Math.min(6, Math.max(SLOWEST, span / SIGHT_MS));
-    mode = 'slow';
-
-    // Конец сборки — когда последний дом достроился: дальше часы возвращаются к настоящему времени
-    // (прыжок вперёд, уже выросшие дома от него не меняются).
-    const endAt = ((last + 1.0) * 1000 - base) / speed;
-    setTimeout(stop, endAt);
-    setTimeout(() => { if (mode === 'slow') stop(); }, 30000);   // страховка
-  }, 520);
-
-  const stop = () => { mode = 'run'; };
-
-    // Тронул карту — не заставляем ждать.
-    for (const name of ['pointerdown', 'wheel', 'keydown', 'touchstart']) {
-      addEventListener(name, stop, { once: true, passive: true });
-    }
+    // Keep normal RAF time during the label prelude. Cancellation clears this
+    // timer as well as the completion timers: input must never restart slow time.
+    timers.push(setTimeout(() => {
+      base = (first - 0.05) * 1000;
+      t0 = performance.now();
+      const span = ((last + 0.9) - first + 0.05) * 1000;
+      speed = Math.min(6, Math.max(SLOWEST, span / SIGHT_MS));
+      duration = ((last + 1.0) * 1000 - base) / speed;
+      mode = 'slow';
+      state = 'running';
+      timers.push(setTimeout(() => stop(true), duration));
+      timers.push(setTimeout(() => stop(true), 30000));
+    }, 520));
     return true;
   }
 
-  window.__veniceReveal = { play, get mode() { return mode; }, get speed() { return speed; },
-                            get progress() { return mode === 'slow'
-                              ? Math.min(1, (performance.now() - t0) / SIGHT_MS) : 1; } };
+  window.__veniceReveal = { play, get mode() { return mode; }, get state() { return state; },
+                            get speed() { return speed; },
+                            get progress() { return state === 'pending' ? 0 : mode === 'slow'
+                              ? Math.min(1, (performance.now() - t0) / duration) : 1; } };
 })();

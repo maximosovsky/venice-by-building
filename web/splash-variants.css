@@ -63,7 +63,8 @@ body.splash-variant-2.map-fade #map-layer { opacity: 0; }
 
 /* ---------- Вариант 3: карта синхронно с reveal — уменьшается и растворяется ---------- */
 body.splash-variant-3 #splash { background: transparent; }
-body.splash-variant-3 #map-layer { opacity: 1; }
+body.splash-variant-3 #map-layer { opacity: 1; transition: none; }
+body.splash-variant-3 .venice-arms { opacity: 0; }
 body.splash-variant-3.map-fade #map-layer { opacity: 0; }
 
 @media (prefers-reduced-motion: reduce) {

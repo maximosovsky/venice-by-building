@@ -68,6 +68,8 @@
     'sizes="100vw" alt="" loading="eager">' +
     '<p class="map-caption">' + t.caption + '</p>';
   if (variant !== 1) document.body.appendChild(mapLayer);
+  const handoff = variant === 3 && window.__splash3Emblem;
+  if (handoff) handoff.attach(mapLayer);
 
   const start = () => {
     document.body.appendChild(box);
@@ -133,6 +135,11 @@
       if (!document.body.contains(mapLayer)) return;
       const r = window.__veniceReveal;
       const p = r ? r.progress : 1;
+      if (handoff) {
+        handoff.render(p);
+        if (p < 1) requestAnimationFrame(tick);
+        return;
+      }
       mapLayer.style.opacity = Math.max(0, 1 - p).toFixed(3);
       const scale = 1 + 0.12 * (1 - p);
       mapLayer.style.transform = 'scale(' + scale.toFixed(4) + ')';
@@ -161,7 +168,7 @@
     if (performance.now() > 12000) slowEl.hidden = false;
     const line = document.getElementById('loading');
     const fatal = !!line && line.classList.contains('fatal');
-    if (fatal) { finish(); return; }
+    if (fatal) { finish(); if (handoff) handoff.render(1); return; }
     const filesDone = got.size >= NEEDED.length;
     const tilesDone = !line || line.hidden || document.body.dataset.ready === '1';
     const ready = filesDone && tilesDone && fontsReady && sceneReady();
@@ -175,20 +182,25 @@
           setTimeout(finish, 420);
         } else {
           finish();
-          if (variant !== 1) {
+          if (handoff) handoff.render(1);
+          else if (variant !== 1) {
             document.body.classList.add('map-fade');
             setTimeout(() => mapLayer.remove(), 950);
           }
         }
       }, 140);
     }
-    if (!done && performance.now() > 22000) finish();
+    if (!done && performance.now() > 22000) {
+      finish();
+      if (handoff) handoff.render(1);
+    }
   }, 150);
 
   setTimeout(() => {
     const line = document.getElementById('loading');
     if (line && line.classList.contains('fatal')) finish();
     if (!done) finish();
+    if (handoff) handoff.render(1);
     if (!document.body.classList.contains('map-fade')) {
       document.body.classList.add('map-fade');
       setTimeout(() => mapLayer && mapLayer.remove(), 950);
