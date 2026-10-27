@@ -141,7 +141,10 @@ export async function installShips(scene, camera, renderer, controls) {
       group.userData.isVeniceShip = true;
       group.userData.shipName = cfg.name;
       const centre = box.getCenter(new THREE.Vector3());
-      model.position.sub(centre);
+      // Center horizontally only. Keep the original vertical bounds consistent
+      // with the keel-to-water correction (subtracting centre.y would sink it).
+      model.position.x -= centre.x;
+      model.position.z -= centre.z;
       model.position.y += WATER_Y - box.min.y + (cfg.waterOffset || 0);
       group.add(model);
 
