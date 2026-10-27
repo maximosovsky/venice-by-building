@@ -76,8 +76,11 @@ html.site-footer-installed .time {
   bottom: calc(env(safe-area-inset-bottom, 0px) + 12px + var(--site-footer-height, 55.5px));
 }
 @media (max-width: 768px) {
-  #venice-site-footer .footer-inner { flex-direction: column; align-items: stretch; text-align: left; }
-  #venice-site-footer .footer-social { justify-content: flex-end; }
+  /* Keep attribution and all four icons on one row, retaining 30px edge insets
+     and the existing text, SVG, target sizes and inner gaps. */
+  #venice-site-footer .footer-inner { flex-direction: row; flex-wrap: nowrap; text-align: left; }
+  #venice-site-footer .footer-inner span { white-space: nowrap; flex-shrink: 0; }
+  #venice-site-footer .footer-social { flex-shrink: 0; justify-content: flex-end; }
 }
 @media (max-width: 720px) {
   html.site-footer-installed .dock {
