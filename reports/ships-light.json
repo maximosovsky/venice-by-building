@@ -5,29 +5,47 @@
     "meshoptimizer": "1.3.0"
   },
   "settings": {
-    "ratio": 0.25,
+    "ratios": {
+      "ship_r_optimized": 0.1,
+      "aleksandr_optimized": 0.1
+    },
     "error": 0.005,
     "errorUnits": "fraction of each mesh radius",
-    "color": "#b04f3e",
+    "color": "#8e3634",
     "baseColorFactor": [
-      0.6901960784313725,
-      0.30980392156862746,
-      0.24313725490196078,
+      0.557,
+      0.212,
+      0.204,
       1
     ],
+    "hotel": {
+      "qid": "Q56308132",
+      "gid": 9223,
+      "kind": 5,
+      "shaderBranch": "k > 4.5",
+      "year": 500,
+      "yfrom": 0,
+      "yto": 1800,
+      "flag": 1,
+      "src": 0
+    },
     "metallicFactor": 0,
     "roughnessFactor": 1,
     "doubleSided": true,
     "compression": false,
-    "notes": "Palette components intentionally authored directly in linear working space to match atlas ColorManagement.enabled=false / LinearSRGB output."
+    "notes": "Exact shader linear RGB, not rounded hex. Mini geometry copied unchanged from v1. R/A simplified from originals, hard normals regenerated then exact duplicate accessors/meshes deduplicated."
   },
   "models": [
     {
       "source": "mini_pirate_ship.glb",
-      "output": "mini_pirate_ship_light.glb",
+      "output": "mini_pirate_ship_light_v2.glb",
+      "ratio": null,
       "before": {
         "bytes": 4189676,
         "sha256": "9bbb12df80abf75297e44c8b4813406a0f7626e3ec7fff87c56b9e3deea70744",
+        "vertices": 50996,
+        "uniquePositionAccessors": 2,
+        "normalBytes": 611952,
         "triangles": 89915,
         "lineSegments": 0,
         "images": 1,
@@ -59,9 +77,12 @@
           ]
         }
       },
-      "after": {
+      "beforeLight": {
         "bytes": 411336,
         "sha256": "ae4028b43fe4b2d731e6f7a1383b9de08554b4a5a63eed8a498ee3fc88550ce3",
+        "vertices": 11426,
+        "uniquePositionAccessors": 2,
+        "normalBytes": 137112,
         "triangles": 22476,
         "lineSegments": 0,
         "images": 0,
@@ -82,26 +103,69 @@
         "rootExtras": null,
         "bounds": {
           "min": [
-            -0.020184956476714068,
-            -0.04201065596266442,
-            -0.010001904466136705
+            -0.02018495597868644,
+            -0.04201065597144197,
+            -0.010001903756847057
           ],
           "max": [
-            0.019087365132077223,
-            0.04263662138669539,
-            0.09491611415197654
+            0.019087364597185304,
+            0.04263661911866116,
+            0.09491611342707904
           ]
         }
       },
-      "bytesReductionFraction": 0.901821525101225,
-      "triangleReductionFraction": 0.7500305844408608
+      "after": {
+        "bytes": 411304,
+        "sha256": "66db7c94b909d730c52288ea78e9990ffb9470c944c4b3e98c3d602a9023568c",
+        "vertices": 11426,
+        "uniquePositionAccessors": 2,
+        "normalBytes": 137112,
+        "triangles": 22476,
+        "lineSegments": 0,
+        "images": 0,
+        "textures": 0,
+        "meshes": 2,
+        "primitives": 2,
+        "extensionsRequired": [],
+        "asset": {
+          "generator": "glTF-Transform v4.5.1",
+          "version": "2.0",
+          "extras": {
+            "author": "emm (https://sketchfab.com/edemaistre)",
+            "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+            "source": "https://sketchfab.com/3d-models/mini-pirate-ship-cc0c7762bdd64b899a32262191945063",
+            "title": "Mini pirate ship"
+          }
+        },
+        "rootExtras": null,
+        "bounds": {
+          "min": [
+            -0.02018495597868644,
+            -0.04201065597144197,
+            -0.010001903756847057
+          ],
+          "max": [
+            0.019087364597185304,
+            0.04263661911866116,
+            0.09491611342707904
+          ]
+        }
+      },
+      "bytesReductionFraction": 0.9018291629233383,
+      "triangleReductionFraction": 0.7500305844408608,
+      "furtherBytesReductionFraction": 0.00007779528171614203,
+      "furtherTriangleReductionFraction": 0
     },
     {
       "source": "ship_r_optimized.glb",
-      "output": "ship_r_optimized_light.glb",
+      "output": "ship_r_optimized_light_v2.glb",
+      "ratio": 0.1,
       "before": {
         "bytes": 17274364,
         "sha256": "6171766bf8af8fa61047f3e0393b0dfe8366988f8a01ea5477fc18a93a6f75ff",
+        "vertices": 234077,
+        "uniquePositionAccessors": 15,
+        "normalBytes": 2808924,
         "triangles": 325505,
         "lineSegments": 0,
         "images": 15,
@@ -133,9 +197,12 @@
           ]
         }
       },
-      "after": {
+      "beforeLight": {
         "bytes": 5164892,
         "sha256": "04f07253dc520476fed998b04509d53938502cb886c7e59098559668e2dd0f6b",
+        "vertices": 182271,
+        "uniquePositionAccessors": 15,
+        "normalBytes": 2187252,
         "triangles": 80563,
         "lineSegments": 0,
         "images": 0,
@@ -167,15 +234,58 @@
           ]
         }
       },
-      "bytesReductionFraction": 0.7010082686691099,
-      "triangleReductionFraction": 0.7524984255234175
+      "after": {
+        "bytes": 2253444,
+        "sha256": "d6b5975b79386cb2cfe774046ac2170a57bee3c530b3d1d0f4de3ce74abef927",
+        "vertices": 83509,
+        "uniquePositionAccessors": 15,
+        "normalBytes": 1002108,
+        "triangles": 39768,
+        "lineSegments": 0,
+        "images": 0,
+        "textures": 0,
+        "meshes": 15,
+        "primitives": 15,
+        "extensionsRequired": [],
+        "asset": {
+          "generator": "glTF-Transform v4.5.1",
+          "version": "2.0",
+          "extras": {
+            "author": "gogiart (https://sketchfab.com/agt14032013)",
+            "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+            "source": "https://sketchfab.com/3d-models/ship-r-a9185da7860e4ebfa15987c37b710dd1",
+            "title": "Ship R"
+          }
+        },
+        "rootExtras": null,
+        "bounds": {
+          "min": [
+            -9.269390106201172,
+            -0.35870400071144104,
+            -2.8347299098968497
+          ],
+          "max": [
+            6.81102991104126,
+            11.3100004196167,
+            2.405499935150147
+          ]
+        }
+      },
+      "bytesReductionFraction": 0.8695498138165897,
+      "triangleReductionFraction": 0.877826761493679,
+      "furtherBytesReductionFraction": 0.5636996862664312,
+      "furtherTriangleReductionFraction": 0.506373893722925
     },
     {
       "source": "aleksandr_optimized.glb",
-      "output": "aleksandr_optimized_light.glb",
+      "output": "aleksandr_optimized_light_v2.glb",
+      "ratio": 0.1,
       "before": {
         "bytes": 57577588,
         "sha256": "8bfa8a55d10830b2d0a833ecde97392e7e25f8137da9a51619e78470df2b2af7",
+        "vertices": 695491,
+        "uniquePositionAccessors": 36,
+        "normalBytes": 8341356,
         "triangles": 575001,
         "lineSegments": 189,
         "images": 56,
@@ -207,9 +317,12 @@
           ]
         }
       },
-      "after": {
+      "beforeLight": {
         "bytes": 11309512,
         "sha256": "896dc676a3cbad4f37674084a76f192912799c208897ac2ade2e3db8f8ced131",
+        "vertices": 421878,
+        "uniquePositionAccessors": 36,
+        "normalBytes": 5062536,
         "triangles": 140799,
         "lineSegments": 189,
         "images": 0,
@@ -241,8 +354,1116 @@
           ]
         }
       },
-      "bytesReductionFraction": 0.803577878253601,
-      "triangleReductionFraction": 0.7551325997693917
+      "after": {
+        "bytes": 4565928,
+        "sha256": "bf8bc6d6761bbb4d8b1f76a3765d728db4c551e68d17d1943e262a14398b2af0",
+        "vertices": 174602,
+        "uniquePositionAccessors": 36,
+        "normalBytes": 2095224,
+        "triangles": 58475,
+        "lineSegments": 189,
+        "images": 0,
+        "textures": 0,
+        "meshes": 36,
+        "primitives": 36,
+        "extensionsRequired": [],
+        "asset": {
+          "generator": "glTF-Transform v4.5.1",
+          "version": "2.0",
+          "extras": {
+            "author": "Museovirasto Museiverket Finnish Heritage Agency (https://sketchfab.com/Museovirasto)",
+            "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+            "source": "https://sketchfab.com/3d-models/aleksandr-class-archipelago-frigate-f82f40ca04d84a24868a453c4e3a16c2",
+            "title": "Aleksandr class archipelago frigate"
+          }
+        },
+        "rootExtras": null,
+        "bounds": {
+          "min": [
+            -9.051892280578613,
+            -4.234151840209956,
+            -25.054515838623047
+          ],
+          "max": [
+            9.159428596496582,
+            37.859378814697266,
+            30.045934677124027
+          ]
+        }
+      },
+      "bytesReductionFraction": 0.9206995610861642,
+      "triangleReductionFraction": 0.8983045246877832,
+      "furtherBytesReductionFraction": 0.5962754184265422,
+      "furtherTriangleReductionFraction": 0.5846916526395785
     }
-  ]
+  ],
+  "verification": {
+    "base": "http://127.0.0.1:8770",
+    "renderer": "SwiftShader, ColorManagement disabled / LinearSRGB output; stable Hemisphere3/Directional2.5 snapshot",
+    "integrated": false,
+    "models": [
+      {
+        "name": "mini_pirate_ship",
+        "relativeBounds": [
+          0.0006379774237273705,
+          1.4212577004196844e-10,
+          5.032659877058786e-9,
+          3.972590321702918e-9,
+          0.000018637746812006873,
+          5.1580969248298345e-9
+        ],
+        "triangles": 22476,
+        "lines": 0,
+        "riggingPreserved": true,
+        "materials": [
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          }
+        ],
+        "silhouetteIoU": [
+          0.9948257080610022,
+          0.9924587060727261,
+          0.996951883300675
+        ],
+        "terracottaPixels": 74803,
+        "medianTerracottaRGB": [
+          110,
+          44,
+          42
+        ]
+      },
+      {
+        "name": "ship_r_optimized",
+        "relativeBounds": [
+          0.00016117851159122614,
+          5.373324255005422e-18,
+          0.00016262090233785438,
+          0.0017012133422032122,
+          0.006712863456555886,
+          0.0008251975157090245
+        ],
+        "triangles": 39768,
+        "lines": 0,
+        "riggingPreserved": true,
+        "materials": [
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          }
+        ],
+        "silhouetteIoU": [
+          0.9261223482979773,
+          0.9906759906759907,
+          0.956890214900333
+        ],
+        "terracottaPixels": 49656,
+        "medianTerracottaRGB": [
+          108,
+          44,
+          42
+        ]
+      },
+      {
+        "name": "aleksandr_optimized",
+        "relativeBounds": [
+          0.0025432784302070223,
+          0,
+          0.000553378587829922,
+          0.00189491972230657,
+          0.0005219661682311768,
+          0.0012110230616590575
+        ],
+        "triangles": 58475,
+        "lines": 1,
+        "riggingPreserved": true,
+        "materials": [
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          },
+          {
+            "type": "MeshStandardMaterial",
+            "color": [
+              0.557,
+              0.212,
+              0.204
+            ],
+            "side": 2,
+            "roughness": 1,
+            "metalness": 0,
+            "vertexColors": false,
+            "emissive": [
+              0,
+              0,
+              0
+            ],
+            "map": false
+          }
+        ],
+        "silhouetteIoU": [
+          0.9247257383966244,
+          0.8954467487915172,
+          0.9119732659548455
+        ],
+        "terracottaPixels": 28237,
+        "medianTerracottaRGB": [
+          109,
+          44,
+          42
+        ]
+      }
+    ],
+    "interactions": [],
+    "pageErrors": []
+  },
+  "hotelBrowserEvidence": {
+    "qid": "Q56308132",
+    "gid": 9223,
+    "actualKind": 5,
+    "mode": 0,
+    "effectiveBase": [
+      0.557,
+      0.212,
+      0.204
+    ],
+    "colorManagement": false,
+    "outputColorSpace": "srgb-linear",
+    "shading": "\n  precision highp float;\n  uniform vec3 uFogColor;\n  uniform vec2 uFog;\n  in vec3 vColor;\n  in vec3 vWorld;\n  in float vGid;\n  in float vShaped;\n  out vec4 outColor;\n  void main() {\n    #ifdef PICK\n      float id = vGid + 1.0;\n      outColor = vec4(mod(id, 256.0), mod(floor(id / 256.0), 256.0), floor(id / 65536.0), 255.0) / 255.0;\n    #else\n      vec3 n = normalize(cross(dFdx(vWorld), dFdy(vWorld)));\n      // A low afternoon sun from the north-west (the southern hemisphere's sunny side), a soft sky from above.\n      float sun = max(dot(n, normalize(vec3(-0.55, 0.55, -0.62))), 0.0);\n      float light = mix(0.66 + 0.34 * sun, 1.04, smoothstep(0.86, 0.94, n.y));\n      // The Opera House's curved shells also take a soft fill from the south-east, to keep their form against the sun.\n      if (vShaped > 0.5) light = 0.6 + 0.3 * sun + 0.2 * max(dot(n, normalize(vec3(0.6, 0.45, 0.66))), 0.0);\n      float foot = mix(0.82, 1.0, clamp(vWorld.y / 12.0, 0.0, 1.0));\n      vec3 c = vColor * light * foot;\n      float d = length(vWorld - cameraPosition);\n      c = mix(c, uFogColor, smoothstep(uFog.x, uFog.y, d));\n      outColor = vec4(c, 1.0);\n    #endif\n  }\n",
+    "selectedTriangles": 13,
+    "bounds": {
+      "min": [
+        348.3,
+        0,
+        -7.5
+      ],
+      "max": [
+        389.3,
+        18.400000000000002,
+        7.100000000000023
+      ]
+    },
+    "pixels": 191526,
+    "min": [
+      77,
+      29,
+      28
+    ],
+    "median": [
+      94,
+      36,
+      34
+    ],
+    "max": [
+      173,
+      103,
+      99
+    ]
+  }
 }

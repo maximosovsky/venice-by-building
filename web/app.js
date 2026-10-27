@@ -7,7 +7,7 @@ import { installChurchBuildingHighlight } from './church-building-highlight.js';
 import { buildPalazzoMask } from './palazzo-highlight.js';
 import { DATA_UI } from './data-enrichment.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
-import { installShips } from './ships-model.js';
+import { installShips } from './ships-model.js?v=ships-ready-1';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -16,6 +16,17 @@ import { installShips } from './ships-model.js';
 
 // Colours are authored in sRGB and drawn as they are.
 THREE.ColorManagement.enabled = false;
+
+// One startup barrier shared by the tile workers and both splash controllers.
+window.__veniceShipsReady = { status: document.getElementById('loading')?.classList.contains('fatal') ? 'error' : 'pending', loaded: 0, total: 3, gpuPrepared: false, rendered: false };
+let tilesReady = false;
+function finishStartup() {
+  const loading = document.getElementById('loading');
+  if (!tilesReady || window.__veniceShipsReady.status !== 'ready' || loading?.classList.contains('fatal')) return;
+  if (loading) loading.hidden = true;
+  document.getElementById('scene').style.visibility = 'visible';
+  document.body.dataset.ready = '1';
+}
 
 // The Third Script's palette (see styles.css): a white wall for the sky, warm stone for the land, the logo's cypress
 // teal for the harbour, its terracotta sun for the marks. Distant buildings fade into the white.
@@ -638,7 +649,7 @@ for (const w of pool) {
     loaded++;
     const progress = document.getElementById('progress');
     if (progress) progress.textContent = Math.round(100 * loaded / config.tiles.length);
-    if (loaded === config.tiles.length) { const loading = document.getElementById('loading'); if (loading) loading.hidden = true; document.body.dataset.ready = '1'; }
+    if (loaded === config.tiles.length) { tilesReady = true; finishStartup(); }
     next();
   };
   next();
@@ -1129,7 +1140,19 @@ void Promise.all([bridgeRoute.preload(), churchRoute.preload()]).catch(e => cons
 // подменными, и дорисовка повторится, когда файл придёт.
 document.fonts?.load?.('28px "IM Fell English SC"').catch(() => {});
 // Data enrichment module kept imported but not attached to building cards.
-installShips(scene, camera, renderer, controls).catch(e => console.warn('ships failed to load', e));
+window.__veniceShipsReady.promise = installShips(scene, camera, renderer, controls).then(groups => {
+  if (document.getElementById('loading')?.classList.contains('fatal')) return null;
+  window.__veniceShipsReady.loaded = groups.length;
+  window.__veniceShipsReady.status = 'ready';
+  finishStartup();
+  return groups;
+}, error => {
+  window.__veniceShipsReady.status = 'error';
+  window.__veniceShipsReady.error = error.message;
+  window.__veniceErrors?.push(error.message);
+  window.showFatal(error.message);
+  return null; // handled fatal, never a successful readiness signal
+});
 const qStore = () => { try { return JSON.parse(localStorage.getItem('venezia-quests') || '{}'); } catch { return {}; } };
 function qSave(id, patch) {
   try { const p = qStore(); p[id] = { ...(p[id] || {}), ...patch }; localStorage.setItem('venezia-quests', JSON.stringify(p)); } catch {}

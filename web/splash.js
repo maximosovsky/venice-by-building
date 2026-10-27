@@ -132,7 +132,8 @@
     if (fatal) { finish(); return; }                         // ошибка важнее заставки
     const filesDone = got.size >= NEEDED.length;
     const tilesDone = !line || line.hidden || document.body.dataset.ready === '1';
-    const ready = filesDone && tilesDone && fontsReady && sceneReady();
+    const shipsReady = window.__veniceShipsReady?.status === 'ready';
+    const ready = filesDone && tilesDone && fontsReady && sceneReady() && shipsReady;
     if (ready && !revealStarted) {
       revealStarted = true;
       // Сборка: часы приложения отводятся назад, город вырастает заново — уже на глазах.
@@ -142,11 +143,11 @@
         else finish();
       }, 140);
     }
-    // Страховка: не держим экран дольше 22 секунд (своя планка приложения — 30).
-    if (!done && performance.now() > 22000) finish();
+    // Декоративная задержка не обходит полную готовность кораблей и карты.
+    if (!done && ready && performance.now() > 22000) finish();
   }, 150);
 
-  // Страховка: если через минуту заставка всё ещё висит (что-то пошло не так), уходим молча.
+  // Ошибка приложения важнее заставки; незавершённую загрузку успехом не считаем.
   setTimeout(() => { const line = document.getElementById('loading');
-    if (line && line.classList.contains('fatal')) finish(); if (!done) finish(); }, 60000);
+    if (line && line.classList.contains('fatal')) finish(); }, 60000);
 })();

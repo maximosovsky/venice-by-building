@@ -168,10 +168,11 @@
     if (performance.now() > 12000) slowEl.hidden = false;
     const line = document.getElementById('loading');
     const fatal = !!line && line.classList.contains('fatal');
-    if (fatal) { finish(); if (handoff) handoff.render(1); return; }
+    if (fatal) { finish(); if (handoff) handoff.render(1); mapLayer.remove(); return; }
     const filesDone = got.size >= NEEDED.length;
     const tilesDone = !line || line.hidden || document.body.dataset.ready === '1';
-    const ready = filesDone && tilesDone && fontsReady && sceneReady();
+    const shipsReady = window.__veniceShipsReady?.status === 'ready';
+    const ready = filesDone && tilesDone && fontsReady && sceneReady() && shipsReady;
     if (ready && !revealStarted) {
       revealStarted = true;
       setTimeout(() => {
@@ -190,7 +191,7 @@
         }
       }, 140);
     }
-    if (!done && performance.now() > 22000) {
+    if (!done && ready && performance.now() > 22000) {
       finish();
       if (handoff) handoff.render(1);
     }
@@ -198,8 +199,8 @@
 
   setTimeout(() => {
     const line = document.getElementById('loading');
-    if (line && line.classList.contains('fatal')) finish();
-    if (!done) finish();
+    if (!line || !line.classList.contains('fatal')) return;
+    finish();
     if (handoff) handoff.render(1);
     if (!document.body.classList.contains('map-fade')) {
       document.body.classList.add('map-fade');

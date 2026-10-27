@@ -1,0 +1,93 @@
+/* Additive reference footer: every reference dimension is multiplied by .75.
+   Reference desktop: 30 + 28 + 15 + 1 = 74px; compact footer: 55.5px.
+   No template resets, remote fonts, or styling outside the footer/time reserve. */
+#venice-site-footer {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 100;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 22.5px 0 11.25px;
+  background: #fff;
+  color: #999;
+  font-family: Arial, sans-serif;
+  font-size: 10.5px;
+  line-height: 1.6;
+  letter-spacing: normal;
+  text-transform: none;
+  box-shadow: inset 0 .75px 0 #eee;
+}
+/* A fractional border is snapped to 1px by Chromium. Reserve its scaled .75px
+   separately so the measured outer height, not only its content, is 75%. */
+#venice-site-footer::after { content: ""; display: block; height: .75px; }
+#venice-site-footer *,
+#venice-site-footer *::before,
+#venice-site-footer *::after { box-sizing: border-box; }
+#venice-site-footer .container {
+  max-width: 772.5px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+#venice-site-footer .footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+#venice-site-footer .footer-inner span { color: #999; font-size: 10.5px; }
+#venice-site-footer a {
+  color: #999;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color .2s;
+}
+#venice-site-footer a:hover { color: #6078ff; text-decoration: underline; }
+#venice-site-footer a:focus-visible { outline: 2px solid #6078ff; outline-offset: 2px; }
+#venice-site-footer .footer-social {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#venice-site-footer .footer-social li { margin: 0; padding: 0; }
+#venice-site-footer .footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  transition: transform .25s;
+}
+#venice-site-footer .footer-social svg { display: block; width: 18px; height: 18px; flex: none; }
+#venice-site-footer .footer-social svg path { fill: currentColor; }
+#venice-site-footer .footer-social a:hover { transform: scale(1.2); text-decoration: none; }
+/* The reference's real brand palette is visible without requiring hover. */
+#venice-site-footer .footer-social .social-linkedin { color: #0A66C2; }
+#venice-site-footer .footer-social .social-youtube { color: #FF0000; }
+#venice-site-footer .footer-social .social-x { color: #000; }
+#venice-site-footer .footer-social .social-instagram { color: #E4405F; }
+#venice-site-footer .footer-social .social-github { color: #333; }
+#venice-site-footer .footer-social .social-telegram { color: #0088cc; }
+#venice-site-footer .footer-social .social-devto { color: #000; }
+html.site-footer-installed .time {
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 12px + var(--site-footer-height, 55.5px));
+}
+@media (max-width: 768px) {
+  #venice-site-footer .footer-inner { flex-direction: column; text-align: center; }
+  #venice-site-footer .footer-social { justify-content: center; }
+}
+@media (max-width: 720px) {
+  html.site-footer-installed .dock {
+    bottom: var(--site-footer-height, 81.3px);
+    max-height: min(64vh, calc(100vh - var(--site-footer-height, 81.3px) - env(safe-area-inset-top, 0px)));
+  }
+  html.site-footer-installed .time {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 8px + var(--site-footer-height, 81.3px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #venice-site-footer a { transition: none; }
+}

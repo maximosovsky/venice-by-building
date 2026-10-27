@@ -16,7 +16,7 @@ async function fixture({reduce=false, saved=true}={}) {
  await p.goto('http://splash.test/');
  await p.addStyleTag({path:new URL('styles.css',root).pathname.replace(/^\/([A-Z]:)/,'$1')});
  await p.addStyleTag({path:new URL('splash-variants.css',root).pathname.replace(/^\/([A-Z]:)/,'$1')});
- await p.evaluate(saved=>{if(saved)localStorage.setItem('venice-emblem-pos','{"x":7,"y":13}');window.__dbg={uniforms:{},labelGroup:{visible:true,parent:{traverse(cb){for(let i=0;i<12;i++)cb({isMesh:true,material:{uniforms:{uBorn:{value:1+i/10}}}})}}}};},saved);
+ await p.evaluate(saved=>{if(saved)localStorage.setItem('venice-emblem-pos','{"x":7,"y":13}');window.__veniceShipsReady={status:'ready',loaded:3,gpuPrepared:true,rendered:true};window.__dbg={uniforms:{},labelGroup:{visible:true,parent:{traverse(cb){for(let i=0;i<12;i++)cb({isMesh:true,material:{uniforms:{uBorn:{value:1+i/10}}}})}}}};},saved);
  for(const f of ['reveal.js','splash3-emblem.js','splash-variants.js','draggable-emblem.js'])if(fs.existsSync(new URL(f,root)))await p.addScriptTag({url:f});
  await p.evaluate(()=>Promise.all(['layers.json','attrs.bin','pack0.bin','pack1.bin','land.bin','water.bin','context.bin','labels.json','names.json','wiki.json','heritage.json','quests.json'].map(f=>fetch('data/'+f))));
  return p;
@@ -59,9 +59,11 @@ await test('resize after drag keeps entire emblem inside new viewport without ov
  }
  assert.equal(await p.evaluate(()=>localStorage.getItem('venice-emblem-pos')),saved);await p.close();
 });
-await test('22 second incomplete-loading fallback releases map and emblem together',async()=>{
- const p=await fixture();await p.evaluate(()=>{window.__dbg=null;performance.now=()=>23001;});await p.waitForTimeout(1000);
- assert.equal(await p.locator('#splash').count(),0);assert.equal(await p.locator('#map-layer').count(),0);
- assert.equal(await p.evaluate(()=>__splash3Emblem.released),true);await p.close();
+await test('22 second protection never bypasses pending ships',async()=>{
+ const p=await fixture();await p.evaluate(()=>{window.__veniceShipsReady.status='pending';performance.now=()=>23001;});await p.waitForTimeout(1000);
+ assert.equal(await p.locator('#splash').count(),1);assert.equal(await p.locator('#map-layer').count(),1);
+ assert.equal(await p.evaluate(()=>__splash3Emblem.released),false);
+ await p.evaluate(()=>document.querySelector('#loading').classList.add('fatal'));await p.waitForTimeout(1000);
+ assert.equal(await p.locator('#splash').count(),0);assert.equal(await p.locator('#map-layer').count(),0);await p.close();
 });
 await browser.close();if(failures)process.exitCode=1;

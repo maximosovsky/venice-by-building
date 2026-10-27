@@ -10,7 +10,8 @@ try{
   const THREE=await import('./vendor/three.module.js');
   const {installShips}=await import('./ships-model.js');
   const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera();
-  const groups=await installShips(scene,camera,{domElement:document.querySelector('canvas')},{enabled:true});
+  const renderer=new THREE.WebGLRenderer({canvas:document.querySelector('canvas')});
+  const groups=await installShips(scene,camera,renderer,{enabled:true});
   return groups.map(g=>{g.updateMatrixWorld(true);const box=new THREE.Box3().setFromObject(g);return {name:g.userData.shipName,minY:box.min.y,maxY:box.max.y,x:g.position.x,z:g.position.z};});
  });
  console.log(JSON.stringify(rows,null,2));

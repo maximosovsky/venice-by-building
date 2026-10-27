@@ -4,9 +4,9 @@ import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
 
 const SHIPS = [
-  { path: 'models/mini_pirate_ship_light.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/ship_r_optimized_light.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/aleksandr_optimized_light.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/mini_pirate_ship_light_v2.glb', name: 'mini_pirate', targetLength: 50, start: { x: -200, z: 200, rotY: -Math.PI * 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/ship_r_optimized_light_v2.glb', name: 'ship_r', targetLength: 45, start: { x: -280, z: 260, rotY: -Math.PI * 0.45 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/aleksandr_optimized_light_v2.glb', name: 'aleksandr', targetLength: 60, start: { x: -120, z: 140, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
 ];
 const STORAGE_KEY = 'venice-ships-pos';
 const WATER_Y = -0.4;
@@ -28,6 +28,10 @@ function savePositions(all) {
 }
 
 export async function installShips(scene, camera, renderer, controls) {
+  if (typeof window !== 'undefined') {
+    window.__veniceShipsReady ??= { status: 'pending', loaded: 0, total: SHIPS.length, gpuPrepared: false, rendered: false };
+    window.__veniceShipsLoaded = 0;
+  }
   // The ships use PBR materials, the city shades itself; add lights for the ships only.
   if (!scene.userData.veniceShipLights) {
     // Standard PBR divides irradiance by pi. The atlas intentionally bypasses
@@ -121,9 +125,10 @@ export async function installShips(scene, camera, renderer, controls) {
     savePositions(all);
   }
 
-  for (const cfg of SHIPS) {
+  const failures = [];
+  await Promise.all(SHIPS.map(async cfg => {
     try {
-      const gltf = await new Promise((resolve, reject) => loader.load(cfg.path, resolve, undefined, reject));
+      const gltf = await loader.loadAsync(cfg.path + '?v=terracotta-4a72fa6');
       const model = gltf.scene;
       const origBox = new THREE.Box3().setFromObject(model);
       const origSize = origBox.getSize(new THREE.Vector3());
@@ -155,10 +160,36 @@ export async function installShips(scene, camera, renderer, controls) {
       group.rotation.y = pos.rotY || cfg.start.rotY;
       scene.add(group);
       shipGroups.push(group);
+      if (typeof window !== 'undefined') window.__veniceShipsLoaded = shipGroups.length;
       console.log('ship loaded', cfg.name, 'size', size.x.toFixed(2), size.y.toFixed(2), size.z.toFixed(2), 'scale', scale.toFixed(2), 'pos', group.position.x, group.position.z);
     } catch (err) {
       console.warn('ship failed', cfg.name, err);
+      failures.push(new Error(cfg.name + ': ' + (err?.message || String(err))));
     }
+  }));
+  if (failures.length) throw new AggregateError(failures, 'Ships failed: ' + failures.map(e => e.message).join('; '));
+
+  // GLB decode is not GPU readiness. Prepare PBR programs with the real scene
+  // lights and submit an actual frame before the atlas may reveal the ships.
+  scene.updateMatrixWorld(true);
+  camera.updateMatrixWorld(true);
+  if (renderer.compileAsync) await renderer.compileAsync(scene, camera);
+  else renderer.compile(scene, camera);
+  const culling = [];
+  shipGroups.forEach(group => group.traverse(object => {
+    if (object.isMesh || object.isLine) {
+      culling.push([object, object.frustumCulled]);
+      object.frustumCulled = false;
+    }
+  }));
+  try { renderer.render(scene, camera); }
+  finally { culling.forEach(([object, original]) => { object.frustumCulled = original; }); }
+  if (renderer.info.programs?.some(program => program.diagnostics?.runnable === false)) {
+    throw new Error('Ship GPU shader compilation failed');
+  }
+  if (typeof window !== 'undefined') {
+    window.__veniceShipsReady.gpuPrepared = true;
+    window.__veniceShipsReady.rendered = true;
   }
 
   dom.addEventListener('mousedown', onDown, { passive: false });
@@ -169,6 +200,5 @@ export async function installShips(scene, camera, renderer, controls) {
   window.addEventListener('touchend', onUp);
   dom.addEventListener('wheel', onWheel, { passive: false });
 
-  if (typeof window !== 'undefined') window.__veniceShipsLoaded = shipGroups.length;
   return shipGroups;
 }

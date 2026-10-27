@@ -16,9 +16,11 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="splash.css">
 <link rel="stylesheet" href="splash-variants.css">
+<link rel="stylesheet" href="site-footer.css">
+<script defer src="site-footer.js"></script>
 </head>
 <body class="splash-variant-3">
-<canvas id="scene" aria-label="Трёхмерная модель застройки Венеции"></canvas>
+<canvas id="scene" style="visibility:hidden" aria-label="Трёхмерная модель застройки Венеции"></canvas>
 <div class="veil veil-top" aria-hidden="true"></div>
 <div class="veil veil-bottom" aria-hidden="true"></div>
 
@@ -149,9 +151,9 @@
       <a href="https://github.com/amarashi/SydMap" target="_blank" rel="noopener">SydMap</a> Амира Мараши
       (лицензия MIT), который продолжает
       <a href="https://stop-token.com/lab/amsterdam/" target="_blank" rel="noopener">LAYRS: Амстердам</a>
-      <a href="https://www.linkedin.com/in/alexanderbarakov" target="_blank" rel="noopener noreferrer">Алекса Баракова</a> и
-      <a href="https://paris.bogachev.fr" target="_blank" rel="noopener">«Париж, здание за зданием»</a>
-      <a href="https://www.linkedin.com/in/bogachev-aleksandr/" target="_blank" rel="noopener noreferrer">Александра Богачёва</a>.</p>
+      <a href="https://www.linkedin.com/in/alexanderbarakov" target="_blank" rel="noopener noreferrer" data-no-i18n>Alex Barakov</a> и
+      <a href="https://paris.bogachev.fr" target="_blank" rel="noopener" data-no-i18n>“Paris, building by building”</a>
+      <a href="https://www.linkedin.com/in/bogachev-aleksandr/" target="_blank" rel="noopener noreferrer" data-no-i18n>Aleksandr Bogachev</a>.</p>
 
     <footer class="colophon">
       <p>Некоммерческий проект: данные города, показанные как есть. Атрибуция обязательна для всех источников,
@@ -204,6 +206,12 @@ function showFatal(text) {
   const el = document.getElementById('loading');
   if (!el) return;
   const w = FATAL[fatalLang()];
+  delete document.body.dataset.ready;
+  document.getElementById('scene').style.visibility = 'hidden';
+  if (window.__veniceShipsReady) {
+    window.__veniceShipsReady.status = 'error';
+    window.__veniceShipsReady.error = String(text);
+  }
   el.hidden = false;
   el.style.display = '';
   el.classList.add('fatal');
@@ -222,14 +230,14 @@ window.addEventListener('unhandledrejection', e => {
 });
 setTimeout(() => {
   const el = document.getElementById('loading');
-  if (el && !el.hidden) showFatal(FATAL[fatalLang()].late +
+  if (el && !el.hidden && !el.classList.contains('fatal')) showFatal(FATAL[fatalLang()].late +
     (window.__veniceErrors.length ? ': ' + window.__veniceErrors.join('; ') : ''));
 }, 30000);
 </script>
 <script defer src="reveal.js"></script>
 <script defer src="splash3-emblem.js"></script>
-<script defer src="splash-variants.js"></script>
+<script defer src="splash-variants.js?v=ships-ready-1"></script>
 <script defer src="draggable-emblem.js"></script>
-<script type="module" src="app.js"></script>
+<script type="module" src="app.js?v=ships-ready-1"></script>
 </body>
 </html>
