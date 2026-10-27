@@ -1580,22 +1580,10 @@ function renderKey() {
   if (mode === MODE.period) {
     const on = maskTarget.map((v, i) => v ? i : -1).filter(i => i >= 0);
     const solo = on.length === 1 ? periods[on[0]] : null;
-    keyEl.innerHTML = (solo ? `<button class="chip k-all">${dot(solo.color)}${t('Только {name}', { name: ageParts(solo).name })} <span class="n">${fmt(totals[on[0]])}</span>${CLOSE}</button>`
-      : `<span class="key-label">Each station on the line is an age: choose one to see its buildings</span>`) +
-      // Две синие ступени и два ярлыка вне времени: без подписи синий читается как один цвет.
-      `<span class="key-label">${dot('#7a675e')}${t('Palazzo')} <span class="n">${fmt(kindCount[7] || 0)}</span></span>` +
-      `<span class="key-label">${dot('#4a5c8f')}${esc(pickText(periods[14].name))} <span class="n">${fmt(kindCount[2] || 0)}</span></span>` +
-      `<span class="key-label">${dot(POSTWAR_COLOR)}${t('после 1945 года')} <span class="n">${fmt(kindCount[4] || 0)}</span></span>` +
-      [16, 17].map(i => `<button class="chip b-bucket" data-b="${i}" aria-pressed="${!!maskTarget[i]}">${dot(periods[i].color)}${esc(pickText(periods[i].label))} <span class="n">${fmt(totals[i])}</span></button>`).join('') +
-      `<button class="chip k-est" aria-pressed="${!uniforms.uDocOnly.value}" title="Estimated years are paler; switch them off to see the documented and strata years alone">${dot('#d9b2a8')}Estimated years</button>`;
+    // Keep the selected-age reset, but omit the explanatory line and auxiliary
+    // age legend. Categories, masks and estimated-year shading remain unchanged.
+    keyEl.innerHTML = solo ? `<button class="chip k-all">${dot(solo.color)}${t('Только {name}', { name: ageParts(solo).name })} <span class="n">${fmt(totals[on[0]])}</span>${CLOSE}</button>` : '';
     keyEl.querySelector('.k-all')?.addEventListener('click', () => { maskTarget = periods.map(() => 1); updateRail(); renderKey(); drawHist(); });
-    keyEl.querySelectorAll('.b-bucket').forEach(b => b.onclick = () => {
-      const i = +b.dataset.b;
-      maskTarget[i] = maskTarget[i] ? 0 : 1;
-      uniforms.uMask.value = maskTarget;
-      updateRail(); renderKey(); drawHist();
-    });
-    keyEl.querySelector('.k-est').onclick = () => { uniforms.uDocOnly.value = uniforms.uDocOnly.value ? 0 : 1; renderKey(); };
   } else if (mode === MODE.floors) {
     // Вкладка переименована в «Сакральное»: ключ говорит о сакральных зданиях, а не о высотах.
     keyEl.innerHTML = `<span class="key-label">${dot('#619394')}${t('Сакральное')} <span class="n">${fmt(churchGids.size)}</span></span>`;
