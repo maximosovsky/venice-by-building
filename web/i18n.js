@@ -29,6 +29,7 @@ const DICT = {
     'Районы': 'Quartieri',
     'Маршруты': 'Percorsi',
     'О проекте': 'Informazioni sul progetto',
+    'О проекте (меню)': 'Info',
     'OpenStreetMap, ODbL 1.0, © участники OpenStreetMap.': 'OpenStreetMap, ODbL 1.0, © contributori di OpenStreetMap.',
     'OpenStreetMap: авторские права и лицензия': 'OpenStreetMap: copyright e licenza',
     '. Извлечение Венето —': '. Estrazione del Veneto —',
@@ -300,6 +301,7 @@ const DICT = {
     'Районы': 'Districts',
     'Маршруты': 'Walks',
     'О проекте': 'About the project',
+    'О проекте (меню)': 'Info',
     'OpenStreetMap, ODbL 1.0, © участники OpenStreetMap.': 'OpenStreetMap, ODbL 1.0, © OpenStreetMap contributors.',
     'OpenStreetMap: авторские права и лицензия': 'OpenStreetMap: copyright and license',
     '. Извлечение Венето —': '. Veneto extract —',
@@ -624,7 +626,9 @@ export function translateTree(start) {
         }
         const raw = ORIG_NODE.get(child);
         const key = norm(raw);
-        const out = lang === 'ru' ? key : (DICT[lang][key] ?? DICT[OTHER[lang]]?.[key] ?? key);
+        const lookupKey = key === 'О проекте' && child.parentElement?.matches('.notes-open')
+          ? 'О проекте (меню)' : key;
+        const out = lang === 'ru' ? key : (DICT[lang][lookupKey] ?? DICT[OTHER[lang]]?.[key] ?? key);
         const lead = raw.match(/^\s*/)[0], tail = raw.match(/\s*$/)[0];
         child.nodeValue = lead + (inAbout ? out : sourcePresentationText(out, lang)) + tail;
       } else if (child.nodeType === 1) {

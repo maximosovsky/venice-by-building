@@ -34,7 +34,7 @@ try{
   await page.waitForFunction(()=>document.body.dataset.ready==='1'&&window.__dbg,null,{timeout:120000});
   await page.waitForFunction(()=>!document.querySelector('#splash'),null,{timeout:30000});await audit(page,lang,'initial');
   const title={ru:'О проекте',it:'Informazioni sul progetto',en:'About the project'}[lang];
-  assert.equal(await page.locator('.notes-open').innerText(),title);
+  assert.equal(await page.locator('.notes-open').innerText(),lang==='ru'?'О проекте':'Info');
   await page.locator('.notes-open').click();assert.equal(await page.locator('#notes-title').innerText(),title);
   const about=await page.locator('#notes').innerText();assert.match(about,/OpenStreetMap/);assert.match(about,/ODbL 1\.0/);assert.match(about,/©/);
   assert.equal(await page.locator('#notes a[href="https://www.openstreetmap.org/copyright"]').count(),1);await audit(page,lang,'About with attribution');
