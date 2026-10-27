@@ -398,8 +398,9 @@ h1 .sun-disc { position: absolute; z-index: -1; width: .4em; height: .4em; right
    Прежний диск остаётся у солнца в шапке (.sun-disc), здесь он не нужен: у значка прозрачная
    середина, и подложка просвечивала бы сквозь неё. */
 /* Лучи выходят за окружность года: значок крупнее кольца (.year-ring, 26px), и рисунок ничем не обрезан. */
-.year-sun { position: absolute; top: 68px; width: 54px; height: 60px; margin: -30px 0 0 -27px; pointer-events: none; z-index: 2;
+.year-sun { position: absolute; top: 68px; width: 54px; height: 60px; margin: -30px 0 0 -27px; pointer-events: auto; cursor: grab; touch-action: none; z-index: 2;
   background: transparent url("img/sun-icon.png") center / contain no-repeat; }
+ .track.sun-dragging .year-sun, .track.sun-dragging canvas { cursor: grabbing; }
 /* Стеклянный отражённый круг в прозрачной середине значка: блик сверху слева, тень снизу справа. */
 .year-sun::after { content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
   width: 36%; height: 40%; border-radius: 50%;

@@ -6,11 +6,11 @@ import { chromium } from 'playwright';
 
 const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const source = process.env.SITE_FOOTER_REFERENCE || 'D:/100_GitHub Design Code/site-design/template';
-const reference = fs.readFileSync(path.join(source, 'index.html'), 'utf8').match(/<footer\b[\s\S]*?<\/footer>/)[0].replace(/<li>[\s\S]*?<\/li>/g, block => /social-youtube|social-devto/.test(block) ? '' : block);
+const reference = fs.readFileSync(path.join(source, 'index.html'), 'utf8').match(/<footer\b[\s\S]*?<\/footer>/)[0].replace(/<li>[\s\S]*?<\/li>/g, block => /social-youtube|social-devto|social-instagram/.test(block) ? '' : block);
 const expectedPaths = [...reference.matchAll(/\bd="([^"]+)"/g)].map(m => m[1]);
 const expectedViews = [...reference.matchAll(/viewBox="([^"]+)"/g)].map(m => m[1]);
-const links = ['https://www.linkedin.com/in/osovsky/', 'https://x.com/maximosovsky', 'https://www.instagram.com/osovsky/', 'https://github.com/maximosovsky', 'https://t.me/maxim_osovsky'];
-const colors = ['rgb(10, 102, 194)', 'rgb(0, 0, 0)', 'rgb(228, 64, 95)', 'rgb(51, 51, 51)', 'rgb(0, 136, 204)'];
+const links = ['https://www.linkedin.com/in/osovsky/', 'https://x.com/maximosovsky', 'https://github.com/maximosovsky', 'https://t.me/maxim_osovsky'];
+const colors = ['rgb(10, 102, 194)', 'rgb(0, 0, 0)', 'rgb(51, 51, 51)', 'rgb(0, 136, 204)'];
 const browser = await chromium.launch({ headless: true });
 let failures = 0;
 async function test(name, run) {
@@ -48,8 +48,10 @@ if (!failures) {
       const footer = page.locator('#venice-site-footer');
       await footer.waitFor();
       await page.waitForTimeout(80);
-      assert.equal(await footer.locator('span').innerText(), '2022-2026 | Maxim Osovsky. Licensed under MIT.');
-      assert.equal(await footer.locator('span a').last().getAttribute('href'), 'https://github.com/maximosovsky/venice-by-building/blob/main/LICENSE');
+      assert.equal(await footer.locator('span').innerText(), '2026 | Maxim Osovsky');
+      assert.equal(await footer.locator('span a').getAttribute('href'), links[0]);
+      assert.equal(await footer.locator('li a').count(), 4);
+      assert.equal(await footer.locator('.social-instagram').count(), 0);
       assert.deepEqual(await footer.locator('li a').evaluateAll(es => es.map(e => e.href)), links);
       assert.deepEqual(await footer.locator('svg path').evaluateAll(es => es.map(e => e.getAttribute('d'))), expectedPaths);
       assert.deepEqual(await footer.locator('svg').evaluateAll(es => es.map(e => e.getAttribute('viewBox'))), expectedViews);

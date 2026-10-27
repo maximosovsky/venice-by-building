@@ -1827,6 +1827,22 @@ hist.addEventListener('pointerdown', e => {
 });
 hist.addEventListener('pointermove', e => handle && moveHandle(e.offsetX));
 hist.addEventListener('pointerup', () => handle = null);
+// The sun uses the same year handle as the histogram, with its own pointer capture.
+yearSun.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  yearSun.setPointerCapture(e.pointerId);
+  handle = 'uYear';
+  track.classList.add('sun-dragging');
+  stopPlay();
+});
+yearSun.addEventListener('pointermove', e => {
+  if (track.classList.contains('sun-dragging')) moveHandle(e.clientX - hist.getBoundingClientRect().left);
+});
+function releaseSun() {
+  handle = null;
+  track.classList.remove('sun-dragging');
+}
+for (const event of ['pointerup', 'pointercancel', 'lostpointercapture']) yearSun.addEventListener(event, releaseSun);
 function moveHandle(x) {
   const y = Math.max(T0, Math.min(config.yearMax, yearOf(x)));
   if (handle === 'uYear') uniforms.uYear.value = Math.max(y, uniforms.uYearFrom.value + 1);
