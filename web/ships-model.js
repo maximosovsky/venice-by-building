@@ -11,8 +11,8 @@ import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
 // Actual zero-rotation GLBs: Mini/Aleksandr length along Z, R along X.
 const SHIPS = [
   { path: 'models/mini_pirate_ship_light_v2.glb', name: 'mini_pirate', targetLength: 50, start: { x: -72.877, z: 308.991, rotY: 0.35 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/ship_r_optimized_light_v2.glb', name: 'ship_r', targetLength: 45, start: { x: -640.420, z: 657.181, rotY: -0.22 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
-  { path: 'models/aleksandr_optimized_light_v2.glb', name: 'aleksandr', targetLength: 60, start: { x: 328.987, z: 233.317, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/ship_r_optimized_light_v2.glb', name: 'ship_r', targetLength: 56.25, start: { x: -640.420, z: 657.181, rotY: -0.22 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
+  { path: 'models/aleksandr_optimized_light_v2.glb', name: 'aleksandr', targetLength: 75, start: { x: 328.987, z: 233.317, rotY: -Math.PI * 0.25 }, rotFix: { x: 0, y: 0, z: 0 }, waterOffset: 0 },
 ];
 // Start the approved composition once for returning visitors; never erase
 // their legacy venice-ships-pos data. Drag/save continues on this version.

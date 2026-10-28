@@ -7,7 +7,7 @@ import path from 'node:path';
 const base = process.env.VENICE_URL || 'http://127.0.0.1:8770';
 const out = path.join(process.env.TMPDIR, 'venice-ships-placement');
 await fs.mkdir(out, { recursive: true });
-const expected = { mini_pirate: [-72.877, 308.991, .35, 12.3379, 45.4312, 50], ship_r: [-640.420, 657.181, -.22, 12.3308, 45.4279, 45], aleksandr: [328.987, 233.317, -Math.PI / 4, 12.3430, 45.4320, 60] };
+const expected = { mini_pirate: [-72.877, 308.991, .35, 12.3379, 45.4312, 50], ship_r: [-640.420, 657.181, -.22, 12.3308, 45.4279, 56.25], aleksandr: [328.987, 233.317, -Math.PI / 4, 12.3430, 45.4320, 75] };
 const legacy = JSON.stringify({mini_pirate:{x:-200,z:200,rotY:-1},ship_r:{x:-280,z:260,rotY:-1.4},aleksandr:{x:-120,z:140,rotY:-.78}});
 const browser = await chromium.launch({headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
 const reports = [];
