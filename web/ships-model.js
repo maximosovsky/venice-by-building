@@ -2,6 +2,8 @@
 import * as THREE from './vendor/three.module.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { MeshoptDecoder } from './vendor/meshopt_decoder.module.js';
+import { fetchBytes, preloadShips } from './startup-resources.js';
+import { SHIP_ASSETS } from './ship-assets.js';
 
 // Approved WGS84 centres (lon, lat), projected via EPSG:32633 from
 // (12.3387, 45.4340): x = easting delta, z = negative northing delta.
@@ -22,6 +24,8 @@ const SHIP_Y_OFFSET = 0.0; // ships sit exactly on water surface
 
 const loader = new GLTFLoader();
 loader.setMeshoptDecoder(MeshoptDecoder);
+const shipURL = cfg => SHIP_ASSETS[cfg.path.slice('models/'.length)];
+preloadShips(SHIPS.map(shipURL));
 
 function loadPositions() {
   try {
@@ -136,7 +140,7 @@ export async function installShips(scene, camera, renderer, controls) {
   const failures = [];
   await Promise.all(SHIPS.map(async cfg => {
     try {
-      const gltf = await loader.loadAsync(cfg.path + '?v=terracotta-4a72fa6');
+      const gltf = await loader.parseAsync(await fetchBytes(shipURL(cfg)), new URL('models/', document.baseURI).href);
       const model = gltf.scene;
       const origBox = new THREE.Box3().setFromObject(model);
       const origSize = origBox.getSize(new THREE.Vector3());

@@ -8,6 +8,10 @@ import { buildPalazzoMask } from './palazzo-highlight.js';
 import { DATA_UI } from './data-enrichment.js';
 import { sourcePresentationText, sourcePresentationHref, sourceAboutLabel } from './source-presentation.js';
 import { installShips } from './ships-model.js?v=ships-ready-1';
+import { fetchBin, fetchJSON } from './startup-resources.js';
+import { GROUND_ASSET } from './ground-asset.js';
+import { FrameState, uniformSignature, sceneSignature } from './render-state.js';
+import { polygonGeometry, edgeField, decodeGround, validateGround, fingerprint, edgeUniforms } from './ground-cache.js';
 
 // SydMap's viewer. Its 3D engine began as LAYRS: Amsterdam's (github.com/alexbarakov/amsterdam-by-building, MIT);
 // the page around it, the line through time and the dock, is SydMap's own.
@@ -56,22 +60,15 @@ const REPO = 'https://github.com/amarashi/SydMap';
 
 // The binary files are stored gzipped, because Cloudflare compresses text on the way to the browser but not binary
 // files (see write_bin in pipeline/s03_tiles.py). A file that starts with gzip's two magic bytes is unpacked here.
-async function fetchBin(url) {
-  const buf = await (await fetch(url)).arrayBuffer();
-  const head = new Uint8Array(buf, 0, Math.min(2, buf.byteLength));
-  if (head[0] !== 0x1f || head[1] !== 0x8b) return buf;
-  return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
-}
-
 const [config, layers, attrBuf, subData, subOf, churchBuildings, churchTurquoise] = await Promise.all([
-  fetch('data/venezia.json').then(r => r.json()),
-  fetch('data/layers.json').then(r => r.json()),
+  fetchJSON('data/venezia.json'),
+  fetchJSON('data/layers.json'),
   fetchBin('data/attrs.bin'),
-  fetch('data/suburbs.json').then(r => r.json()).catch(() => null),
+  fetchJSON('data/suburbs.json').catch(() => null),
   fetchBin('data/suburbs.bin').then(b => new Uint8Array(b)).catch(() => null),
-  fetch('data/church-buildings.json').then(r => r.json()).catch(() => null),
+  fetchJSON('data/church-buildings.json').catch(() => null),
   // Бирюзовый набор по тегам: маршрутный манифест идёт по центру и островные церкви не покрывает.
-  fetch('data/church-turquoise.json').then(r => r.json()).catch(() => null),
+  fetchJSON('data/church-turquoise.json').catch(() => null),
 ]);
 const attrs = new DataView(attrBuf);
 const HERITAGE_COLORS = config.heritage.colors;
@@ -134,61 +131,23 @@ function goHome() {
 goHome();
 
 // Land and water: flat polygons in the local frame (see pipeline/s04_water.py).
-async function loadPolygons(url) {
-  const buf = await fetchBin(url);
-  const [nPoly, nRing, nVert] = new Uint32Array(buf, 0, 3);
-  const ringStart = new Uint32Array(buf, 12, nPoly + 1);
-  const vertStart = new Uint32Array(buf, 12 + 4 * (nPoly + 1), nRing + 1);
-  const xz = new Float32Array(buf, 12 + 4 * (nPoly + 1) + 4 * (nRing + 1), 2 * nVert);
-  const ring = r => {
-    const pts = [];
-    for (let v = vertStart[r]; v < vertStart[r + 1]; v++) pts.push(new THREE.Vector2(xz[2 * v], -xz[2 * v + 1]));
-    return pts;
-  };
-  const shapes = [];
-  for (let p = 0; p < nPoly; p++) {
-    const shape = new THREE.Shape(ring(ringStart[p]));
-    for (let r = ringStart[p] + 1; r < ringStart[p + 1]; r++) shape.holes.push(new THREE.Path(ring(r)));
-    shapes.push(shape);
-  }
-  const g = new THREE.ShapeGeometry(shapes);
-  g.rotateX(-Math.PI / 2);
-  return g;
-}
 const flat = new THREE.Group();
 scene.add(flat);
-const [landGeo, waterGeo, contextGeo] = await Promise.all(['land', 'water', 'context'].map(n => loadPolygons(`data/${n}.bin`)));
-// The ground fades into the white wall with distance from the nearest building, so the edge follows the outline of
-// the councils (their shores, the harbour between them) rather than any box. A coarse distance field over the mapped
-// ground (about 50 m a cell, metres stored in tens), smoothed, sampled by the ground's shader.
-const EDGE = (() => {
-  contextGeo.computeBoundingBox();
-  const g = contextGeo.boundingBox, cell = 50;
-  const W = Math.ceil((g.max.x - g.min.x) / cell) + 1, H = Math.ceil((g.max.z - g.min.z) / cell) + 1;
-  const d = new Float32Array(W * H).fill(1e6);
-  const [ox, oz] = [config.attrFields.x[0], config.attrFields.z[0]];
-  for (let o = 0; o < attrBuf.byteLength; o += config.attrStride) {
-    const i = Math.round((attrs.getFloat32(o + ox, true) - g.min.x) / cell), j = Math.round((attrs.getFloat32(o + oz, true) - g.min.z) / cell);
-    if (i >= 0 && i < W && j >= 0 && j < H) d[j * W + i] = 0;
-  }
-  // Two chamfer passes (straight steps of one cell, diagonal ones of 1.414), then a box blur to soften the steps.
-  const pass = (dirs, ys, xs) => { for (const y of ys) for (const x of xs) { let v = d[y * W + x];
-    for (const [dx, dy, w] of dirs) { const X = x + dx, Y = y + dy; if (X >= 0 && X < W && Y >= 0 && Y < H) v = Math.min(v, d[Y * W + X] + w); }
-    d[y * W + x] = v; } };
-  const range = (n, back) => Array.from({ length: n }, (_, k) => back ? n - 1 - k : k);
-  pass([[-1, 0, 1], [0, -1, 1], [-1, -1, 1.414], [1, -1, 1.414]], range(H), range(W));
-  pass([[1, 0, 1], [0, 1, 1], [1, 1, 1.414], [-1, 1, 1.414]], range(H, true), range(W, true));
-  const bytes = new Uint8Array(W * H), r = 3;
-  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-    let sum = 0, n = 0;
-    for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) { const X = x + dx, Y = y + dy; if (X >= 0 && X < W && Y >= 0 && Y < H) { sum += d[Y * W + X]; n++; } }
-    bytes[y * W + x] = Math.min(255, Math.round(sum / n * cell / 10));
-  }
-  const tex = new THREE.DataTexture(bytes, W, H, THREE.RedFormat, THREE.UnsignedByteType);
-  tex.magFilter = tex.minFilter = THREE.LinearFilter;
-  tex.needsUpdate = true;
-  return { uEdge: { value: tex }, uEdgeMin: { value: new THREE.Vector2(g.min.x, g.min.z) }, uEdgeSize: { value: new THREE.Vector2((W - 1) * cell, (H - 1) * cell) } };
-})();
+const groundNames = ['land', 'water', 'context'];
+const groundBuffers = await Promise.all(groundNames.map(n => fetchBin(`data/${n}.bin`)));
+let ground;
+try {
+  const inputValues = await Promise.all([fingerprint(new TextEncoder().encode(JSON.stringify(config))), fingerprint(attrBuf), ...groundBuffers.map(fingerprint)]);
+  const groundInputs = Object.fromEntries(['config', 'attrs', ...groundNames].map((n, i) => [n, inputValues[i]]));
+  ground = decodeGround(await fetchBin(GROUND_ASSET));
+  if (!validateGround(ground, groundInputs)) throw new Error('Stale ground source fingerprint');
+} catch (error) {
+  console.warn('Ground cache fallback:', error.message);
+  const geos = Object.fromEntries(groundNames.map((n, i) => [n, polygonGeometry(groundBuffers[i])]));
+  ground = {geos, edge: edgeField(geos.context, attrBuf, config)};
+}
+const {land: landGeo, water: waterGeo, context: contextGeo} = ground.geos;
+const EDGE = edgeUniforms(ground.edge);
 const EDGE_GLSL = `
   uniform sampler2D uEdge;
   uniform vec2 uEdgeMin, uEdgeSize;
@@ -224,7 +183,7 @@ flat.add(land, context, water);
 
 // ---------- Street and water names ----------
 // Flat on the ground, turned along the street (pipeline/s07_labels.py). Textures are drawn on first use.
-const labelData = await fetch('data/labels.json').then(r => r.json());
+const labelData = await fetchJSON('data/labels.json');
 const labelGroup = new THREE.Group();
 scene.add(labelGroup);
 const labelTex = new Map();
@@ -258,6 +217,7 @@ const LABEL_FONTS = ['500 16px Inter', 'italic 400 16px "Cormorant Garamond"'];
 LABEL_FONTS.forEach(f => document.fonts.load(f));
 function updateLabels(dist) {
   if (!LABEL_FONTS.every(f => document.fonts.check(f))) return;
+  let changed = false, visualChanged = false;
   // Label height in metres, roughly constant on screen; the harbour and main streets read larger.
   const h1 = THREE.MathUtils.clamp(dist * 0.014, 4, 60), h2 = THREE.MathUtils.clamp(dist * 0.01, 3, 15);
   // Names appear only when the camera comes close: water and main streets first, the rest closer still.
@@ -280,7 +240,9 @@ function updateLabels(dist) {
     const sep = (big || wide ? h1 : h2) * 5;
     if (show && !clear(l, sep)) show = false;
     // Hysteresis: a label needs a few consecutive frames to appear and a few to disappear — stops flicker.
-    l._vis = Math.max(0, Math.min(4, (l._vis || 0) + (show ? 1 : -1)));
+    const previous = l._vis || 0;
+    l._vis = Math.max(0, Math.min(4, previous + (show ? 1 : -1)));
+    if (l._vis !== previous) changed = true;
     const wants = l._vis > 1;
     if (wants) {
       const key = cellOf(l.x, l.z);
@@ -302,10 +264,13 @@ function updateLabels(dist) {
       const w = h * l.mesh.material.map.userData.aspect;
       // A name much longer than its stretch of street would spill over the buildings.
       const fits = !(w > l.len * 1.1 || h < 2.5);
-      l.mesh.visible = wants && fits;
-      if (wants && fits) l.mesh.scale.set(w, h, 1);
+      const visible = wants && fits;
+      if (l.mesh.visible !== visible || (visible && (l.mesh.scale.x !== w || l.mesh.scale.y !== h))) visualChanged = true;
+      l.mesh.visible = visible;
+      if (visible) l.mesh.scale.set(w, h, 1);
     }
   }
+  return {pending: changed, visualChanged};
 }
 
 // ---------- Shared uniforms ----------
@@ -701,9 +666,9 @@ const periodOf = y => periods.find(p => y >= p.from && y <= p.to) || periods[0];
 // ---------- Reading ----------
 let wiki = [], names = [], heritageItems = [];
 const ready = Promise.all([
-  fetch('data/wiki.json').then(r => r.json()).then(w => { wiki = w; }),
-  fetch('data/names.json').then(r => r.json()).then(n => { names = n; }),
-  fetch('data/heritage.json').then(r => r.json()).then(h => { heritageItems = h; }),
+  fetchJSON('data/wiki.json').then(w => { wiki = w; }),
+  fetchJSON('data/names.json').then(n => { names = n; }),
+  fetchJSON('data/heritage.json').then(h => { heritageItems = h; }),
 ]).then(() => {
   const palazzoMask = buildPalazzoMask(attrs, config, wiki, names);
   palazzoTex.image.data.set(palazzoMask);
@@ -1944,7 +1909,10 @@ resize();
 document.fonts?.ready.then(drawHist);
 
 let frame = 0;
-renderer.setAnimationLoop(now => {
+const frameState = new FrameState();
+let labelPasses = 4, labelCamera = '', labelFonts = false;
+function renderFrame(now) {
+  requestAnimationFrame(renderFrame);
   frame++;
   stepFlight(now);
   uniforms.uNow.value = now / 1000;
@@ -1952,7 +1920,17 @@ renderer.setAnimationLoop(now => {
   controls.update();
   const dist = camera.position.distanceTo(controls.target);
   uniforms.uFog.value.set(dist * 1.6, dist * 4);
-  if (frame % 6 === 0) updateLabels(dist);
+  const cameraState = [...camera.position.toArray(), ...camera.quaternion.toArray(), ...controls.target.toArray(), camera.aspect, renderer.domElement.width, renderer.domElement.height].join(',');
+  const fontsLoaded = LABEL_FONTS.every(f => document.fonts.check(f));
+  if (cameraState !== labelCamera || fontsLoaded !== labelFonts) {
+    labelCamera = cameraState; labelFonts = fontsLoaded; labelPasses = 4;
+  }
+  let labelsChanged = false;
+  if (frame % 6 === 0 && labelPasses > 0 && fontsLoaded) {
+    const result = updateLabels(dist);
+    labelPasses = result.pending ? 1 : 0;
+    labelsChanged = result.visualChanged;
+  }
   if (playing) {
     const prog = Math.min(1, playT0 + (now - playStart) / DURATION);
     uniforms.uYear.value = playYear(prog);
@@ -1961,12 +1939,31 @@ renderer.setAnimationLoop(now => {
     if (prog >= 1) stopPlay();
     drawHist();
   }
-  if (pointer && !dragging && frame % 3 === 0) {
+  // Vertex arrival lasts .9 * (1 + .35); context layer rise lasts .55 * (1 + .6).
+  // Read born values, not a startup timeout: reveal rewinds them externally.
+  const shaderMoving = meshes.some(m => now / 1000 - m.material.uniforms.uBorn.value < 1.215)
+    || now / 1000 - uniforms.uLayerAt.value < .88;
+  const animated = !!flight || playing || shaderMoving;
+  const pickState = uniformSignature(uniforms);
+  const decision = frameState.update({camera: cameraState, visual: uniformSignature(uniforms, ['uNow']) + sceneSignature(scene),
+    pick: pickState, pointer: pointer && !dragging ? pointer.join(',') : null, animated});
+  // Dirty hover requests survive the three-frame throttle.
+  if (decision.pick) hoverDirty = true;
+  let hoverChanged = false;
+  if (pointer && !dragging && hoverDirty && frame % 3 === 0) {
     const gid = pick(pointer[0], pointer[1]);
+    hoverChanged = uniforms.uHover.value !== gid;
     uniforms.uHover.value = gid;
     showTip(gid, pointer[0], pointer[1]);
+    hoverDirty = false;
   }
-  renderer.render(scene, camera);
-});
+  // Picking changes uHover after the frame snapshot. The frame below already
+  // draws that hover, so acknowledge its final state instead of queuing a
+  // redundant frame after a slow GPU readback.
+  if (hoverChanged) frameState.visual = uniformSignature(uniforms, ['uNow']) + sceneSignature(scene);
+  if (decision.render || labelsChanged || hoverChanged || !tilesReady || window.__veniceShipsReady.status !== 'ready') renderer.render(scene, camera);
+}
+let hoverDirty = false;
+requestAnimationFrame(renderFrame);
 
 window.__dbg = { churchBuildingHighlight, bridgeRoute, scene, churchRoute, setMeasure, showSuburb, get measures() { return MEASURES; }, pick, uniforms, camera, controls, setLayer, setMode, layers, pinCard, openBuilding, showStory, showWalks, building, labelGroup, labels, flyTo, startPlay, questClick, startQuest, goHome, drawHist, get quests() { return quests; } };

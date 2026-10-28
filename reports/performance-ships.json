@@ -1,0 +1,44 @@
+{
+  "toolchain": {
+    "meshoptimizer": "1.3.0"
+  },
+  "settings": {
+    "mode": "ATTRIBUTES",
+    "filter": "NONE",
+    "quantization": false,
+    "reorder": false,
+    "simplification": false,
+    "notes": "Compress complete raw buffer views including padding. Index views use 4-byte attribute codec: exact bytes/order preserved, no triangle codec rotation."
+  },
+  "models": [
+    {
+      "source": "mini_pirate_ship_light_v2.glb",
+      "sourceSha256": "66db7c94b909d730c52288ea78e9990ffb9470c944c4b3e98c3d602a9023568c",
+      "beforeBytes": 411304,
+      "url": "assets/mini_pirate_ship_light_v2_meshopt.74568c87beb5ddebf59e1a68ff46b2047d9ab9eb509da53f891d0efaf21dfd24.glb",
+      "sha256": "74568c87beb5ddebf59e1a68ff46b2047d9ab9eb509da53f891d0efaf21dfd24",
+      "afterBytes": 331352,
+      "bufferViews": 3
+    },
+    {
+      "source": "ship_r_optimized_light_v2.glb",
+      "sourceSha256": "d6b5975b79386cb2cfe774046ac2170a57bee3c530b3d1d0f4de3ce74abef927",
+      "beforeBytes": 2253444,
+      "url": "assets/ship_r_optimized_light_v2_meshopt.09a293737bcb655831f835e544b31e5a42e581fe5f56a4ee66c9da0e925efd14.glb",
+      "sha256": "09a293737bcb655831f835e544b31e5a42e581fe5f56a4ee66c9da0e925efd14",
+      "afterBytes": 1253632,
+      "bufferViews": 16
+    },
+    {
+      "source": "aleksandr_optimized_light_v2.glb",
+      "sourceSha256": "bf8bc6d6761bbb4d8b1f76a3765d728db4c551e68d17d1943e262a14398b2af0",
+      "beforeBytes": 4565928,
+      "url": "assets/aleksandr_optimized_light_v2_meshopt.a0ecae029cec0a1e90b6eb87414250ee0f2955125d9c0cdfd9caf9af2c29eea6.glb",
+      "sha256": "a0ecae029cec0a1e90b6eb87414250ee0f2955125d9c0cdfd9caf9af2c29eea6",
+      "afterBytes": 2782616,
+      "bufferViews": 37
+    }
+  ],
+  "beforeBytes": 7230676,
+  "afterBytes": 4367600
+}

@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+assert.equal(await fs.access(new URL('../web/render-state.js',import.meta.url)).then(()=>true,()=>false),true,'demand frame state must exist');
+const {FrameState}=await import('../web/render-state.js');
+const f=new FrameState();
+assert.deepEqual(f.update({camera:'a',visual:'a',pick:'a',pointer:null,animated:false}),{render:true,labels:true,pick:false});
+assert.deepEqual(f.update({camera:'a',visual:'a',pick:'a',pointer:null,animated:false}),{render:false,labels:false,pick:false});
+assert.equal(f.update({camera:'a',visual:'a',pick:'a',pointer:'10,20',animated:false}).pick,true);
+assert.equal(f.update({camera:'a',visual:'a',pick:'a',pointer:'10,20',animated:false}).pick,false);
+assert.equal(f.update({camera:'a',visual:'b',pick:'b',pointer:'10,20',animated:false}).pick,true);
+assert.equal(f.update({camera:'b',visual:'b',pick:'b',pointer:'10,20',animated:false}).labels,true);
+assert.equal(f.update({camera:'b',visual:'b',pick:'b',pointer:'10,20',animated:true}).render,true);
+assert.equal(f.update({camera:'b',visual:'b',pick:'b',pointer:'10,20',animated:true}).pick,true);
+assert.equal(f.update({camera:'b',visual:'b',pick:'b',pointer:'10,20',animated:false}).render,true,'animation completion draws final settled uniforms');
+assert.equal(f.update({camera:'b',visual:'b',pick:'b',pointer:'10,20',animated:false}).render,false);
+console.log('PASS stationary frames and picking dedupe; camera/visual/time invalidation');

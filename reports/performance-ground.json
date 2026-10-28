@@ -1,0 +1,32 @@
+{
+  "url": "assets/ground.8d7b3977b98e5d6ffa1b7911d1c24bff70790b81650de2ea44c571bbbfa3c4ac.bin",
+  "sha256": "8d7b3977b98e5d6ffa1b7911d1c24bff70790b81650de2ea44c571bbbfa3c4ac",
+  "bytes": 2528116,
+  "decodedBytes": 4629772,
+  "inputs": {
+    "config": "451c16320b1c49cc83b64b76de7fd9db7fdcd80abde83a54353df8035b32078b",
+    "attrs": "2bec152883e7c4f560741e7f8e99eb98ca30f1f6b25eaf534f675bc623bef3fc",
+    "land": "39ffc527916ef5cdeae0a747ed645c2ad81ca6d1181fca9eb8f322d4a0582f76",
+    "water": "c5511005edc13df9ce8cac165c2fa390325c90aeb323d632b82cbce49ad954a8",
+    "context": "39ffc527916ef5cdeae0a747ed645c2ad81ca6d1181fca9eb8f322d4a0582f76"
+  },
+  "edge": {
+    "width": 615,
+    "height": 511,
+    "bytes": 314265
+  },
+  "geometry": {
+    "land": {
+      "vertices": 48664,
+      "indices": 3135
+    },
+    "water": {
+      "vertices": 32726,
+      "indices": 69828
+    },
+    "context": {
+      "vertices": 48664,
+      "indices": 3135
+    }
+  }
+}

@@ -10,19 +10,19 @@
   "deployment_warning": "Local uploads must exclude prepared files above; UI URL redirection alone is not a release gate. Parent owns Vercel ignore configuration.",
   "files": {
     "addresses.json": {
-      "sha256": "ee28c27c0ec759d15773244cd302f6384791fe51fdb6c8c9c4355f6165fce76f",
-      "bytes": 12598392
+      "sha256": "5c7371c77d1d434a19de7da010f8fd844f7b3bd5817df58f869eed406c36d9ad",
+      "bytes": 12596326
     },
     "building-evidence.json": {
-      "sha256": "d0942bb33c36722ac43d6c9780118119c4cb0cab227dbd39ea62dbb12a8063e4",
+      "sha256": "3c7a790294884c44a889a192741815cabd13af76c49b643c6c3ead7704c1f36b",
       "bytes": 6010484
     },
     "bridge-characteristics.json": {
-      "sha256": "b316c0dbfea801127d7fd91de0bfe8962dd5409621ac7b8a1513a078c9cded91",
+      "sha256": "28d44af5b62ab929f2ef58c8db898e67589b8702044622342e3b5a8b17679e8d",
       "bytes": 1576475
     },
     "history-registers.json": {
-      "sha256": "745d532667cc464336f460b9ac5515e6fa72029b1e1fe3feb5227f79ff2b1b9f",
+      "sha256": "f7534ce8064de86da690e13b7168fec11c3c3f981fd28dc613e4551fc5e158f9",
       "bytes": 335910
     },
     "history-registers/register-1740-000.json": {

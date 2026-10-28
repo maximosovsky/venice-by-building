@@ -159,7 +159,10 @@ def build_characteristics(census, ledger, source_rows, route, origin, source, so
             from shapely.geometry import mapping
             entries[bridge_id]['geometry_source'] = [
                 {'municipal_id': mid, 'crs': 'EPSG:6706',
-                 'geometry': mapping(source_geometries[rows[mid]['source_fid_zero_based']])}
+                 # Shapely mappings contain tuples; normalize coordinates at the
+                 # GeoJSON boundary so strict written-result equality is meaningful.
+                 'geometry': json.loads(json.dumps(
+                     mapping(source_geometries[rows[mid]['source_fid_zero_based']]), allow_nan=False))}
                 for mid in ids]
     return {'schema_version': 1, 'by_bridge_id': dict(sorted(entries.items())), 'by_gid': {},
             'unmatched_bridge_ids': sorted(route_ids - set(entries)),

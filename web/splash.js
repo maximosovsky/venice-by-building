@@ -112,6 +112,11 @@
   let last = 0;
   setInterval(() => {
     if (done) return;
+    // Early module fetches can complete before this controller installs its hook.
+    for (const entry of performance.getEntriesByType('resource')) {
+      const key = NEEDED.find(n => entry.name.split('?')[0].endsWith(n));
+      if (key && entry.responseEnd > 0) got.add(key);
+    }
     const p = document.getElementById('progress');
     const pct = p ? Math.max(0, Math.min(100, parseInt(p.textContent, 10) || 0)) : 0;
     if (pct > last) last = pct;
