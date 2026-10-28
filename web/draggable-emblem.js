@@ -77,10 +77,24 @@
     if (e.cancelable) e.preventDefault();
   };
 
-  const onUp = () => {
+  let compact = false;
+  const compactOnTap = () => {
+    if (compact || document.body.dataset.ready !== '1' || !matchMedia('(max-width: 760px)').matches) return;
+    compact = true;
+    owner?.moved(); // Keep the released decoration independent of map relayout.
+    const style = getComputedStyle(el);
+    const width = parseFloat(style.width), height = parseFloat(style.height);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    el.style.transition = reduced ? 'none' : 'width 420ms cubic-bezier(.22,1,.36,1), height 420ms cubic-bezier(.22,1,.36,1)';
+    el.style.width = width / 3 + 'px';
+    el.style.height = height / 3 + 'px';
+  };
+
+  const onUp = e => {
     if (!dragging) return;
     dragging = false;
     el.style.cursor = 'grab';
+    if (!didMove && e?.type !== 'touchcancel') compactOnTap();
     try {
       if (!owner || didMove) localStorage.setItem('venice-emblem-pos', JSON.stringify({ x, y }));
     } catch (e) { /* storage unavailable */ }
