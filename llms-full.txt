@@ -1,7 +1,7 @@
 # Venice, Building by Building — Full Documentation
 
 ## Project
-- Live site: https://venice-by-building.vercel.app
+- Live site: https://venice.osovsky.com
 - Repository: https://github.com/maximosovsky/venice-by-building
 - Author: Maxim Osovsky
 

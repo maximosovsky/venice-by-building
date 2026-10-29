@@ -9,7 +9,7 @@
 
 **A 3D atlas of Venice's historic centre: 11,137 buildings coloured by epoch, assembling through time**
 
-<a href="https://venice-by-building.vercel.app">🌐 Live Site</a> · <a href="#-quick-start">Quick Start</a> · <a href="#-features">Features</a> · <a href="#-pipeline">Pipeline</a> · <a href="#-tech-stack">Tech Stack</a>
+<a href="https://venice.osovsky.com">🌐 Live Site</a> · <a href="#-quick-start">Quick Start</a> · <a href="#-features">Features</a> · <a href="#-pipeline">Pipeline</a> · <a href="#-tech-stack">Tech Stack</a>
 
 <img src="web/img/venice-link-preview-v1.jpg" width="600" alt="Venice by Building preview">
 

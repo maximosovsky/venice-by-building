@@ -34,7 +34,7 @@ check(ruKeys.size > 120, `словарь слишком мал: ${ruKeys.size} �
 // --- 2. Страница: каждый русский текст и подпись должны быть в словаре.
 const html = read('web/index.html');
 // Содержимое с data-no-i18n модуль не переводит (сам переключатель языка), и тест тоже не требует.
-const body = html.split('<body>')[1].split('</body>')[0]
+const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/)[1]
   .replace(/<script[\s\S]*?<\/script>/g, '')
   .replace(/<[^>]*data-no-i18n[^>]*>[\s\S]*?<\/div>/g, '')
   .replace(/<[^>]*data-no-i18n[^>]*>/g, '');

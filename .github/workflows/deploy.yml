@@ -73,7 +73,7 @@ jobs:
         run: |
           set -e
           for path in "" "data/venezia.json" "data/pack0.bin"; do
-            code=$(curl -sS -o /dev/null -w '%{http_code}' "https://venice-by-building.vercel.app/$path")
+            code=$(curl -sS -o /dev/null -w '%{http_code}' "https://venice.osovsky.com/$path")
             echo "/$path -> $code"
             [ "$code" = "200" ] || { echo "::error::$path answered $code"; exit 1; }
           done

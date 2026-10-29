@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--enable-unsafe-swiftshader','--use-angle=swiftshader','--no-sandbox']});
 try{
 const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
-await page.goto('https://venice-by-building.vercel.app/?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});await page.waitForFunction(()=>window.__dbg);
+await page.goto('https://venice.osovsky.com/?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});await page.waitForFunction(()=>window.__dbg);
 let verified=0;
 for(const lang of ['ru','it','en']){
 await page.locator(`#langs [data-lang="${lang}"]`).click();

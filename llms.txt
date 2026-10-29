@@ -4,6 +4,6 @@ A 3D atlas of Venice's historic centre: 11,137 buildings coloured by constructio
 
 - Pipeline: Python (geopandas, shapely) → GeoJSON/GeoParquet → viewer binary tiles
 - Viewer: Three.js r186 (SydMap engine), vanilla JS
-- Live: https://venice-by-building.vercel.app
+- Live: https://venice.osovsky.com
 - Docs: docs/ (engine audit, VPRG classification, data inventories, viewer contract)
 - Licence: MIT (pipeline), ODbL (OSM), CC BY 4.0 (VPRG), CC0 (Wikidata)

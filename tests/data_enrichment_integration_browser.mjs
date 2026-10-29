@@ -2,7 +2,7 @@
 // never in a separate catalog section. Usage: node tests/data_enrichment_integration_browser.mjs [baseURL]
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
-const base=process.argv[2]||'https://venice-by-building.vercel.app/';
+const base=process.argv[2]||'https://venice.osovsky.com/';
 const abs=path=>new URL(path,base).href;
 const get=path=>fetch(abs(path),{cache:'no-store'}).then(r=>{assert.equal(r.ok,true,`${path} HTTP ${r.status}`);return r.json();});
 const head=path=>fetch(abs(path),{cache:'no-store',method:'GET'}).then(r=>r.status);

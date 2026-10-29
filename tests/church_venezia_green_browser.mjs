@@ -4,7 +4,7 @@ const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chr
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];
  page.on('pageerror',e=>errors.push(e.stack || e.message));
- await page.goto('https://venice-by-building.vercel.app/?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});
+ await page.goto('https://venice.osovsky.com/?lang=ru&shot',{waitUntil:'networkidle',timeout:120000});
  await page.waitForFunction(()=>window.__dbg,null,{timeout:120000});
  await page.locator('.lenses [data-mode="3"]').click();
  await page.waitForFunction(()=>window.__dbg.churchBuildingHighlight.overlays.some(m=>m.visible),null,{timeout:30000});
