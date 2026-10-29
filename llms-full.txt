@@ -1,0 +1,64 @@
+# Venice, Building by Building — Full Documentation
+
+## Project
+- Live site: https://venice-by-building.vercel.app
+- Repository: https://github.com/maximosovsky/venice-by-building
+- Author: Maxim Osovsky
+
+## What it is
+A 3D atlas of the historic centre of Venice: every building drawn from its OpenStreetMap footprint, dated from the municipal VPRG classification and Italian Wikipedia, enriched with Wikidata and Commons photographs. Includes a timeline that assembles the city epoch by epoch.
+
+## Scale
+- 11,137 buildings (historic centre: Venice island, Giudecca, San Giorgio Maggiore, La Certosa, Murano, Burano)
+- 465 bridges with municipal characteristics
+- 1,536 buildings matched to Wikidata by geometry
+- 1,082 buildings with Commons photographs
+- 8,915 buildings with measured heights from 2010 topographic survey
+- Trilingual: Russian, Italian, English
+
+## Pipeline (pipeline/venice/)
+All stages in order:
+1. s01_buildings.py — OSM extract: buildings, parts, addresses, streets, water
+2. s02_dating.py — Municipal VPRG classification + OSM dates → evidence table
+3. s04_wikimedia.py — Wikidata labels, Wikipedia articles, Commons photos
+4. s05_streets.py — Streets as ordered rows of facades
+5. s07_wikidata.py — Wikidata items matched to footprints by geometry
+6. s08_wikidata_enrich.py — Names, articles, dates, architects, styles, heritage, heights
+7. s09_municipal.py — Measured heights from 2010 topographic survey
+8. s10_itwiki.py — Construction dates from Italian Wikipedia prose
+9. s11_media.py — Commons photos fetched, shrunk to 560 px WebP
+10. s06_export.py — Tiles, packs, attributes, cards → viewer binary format
+
+## Viewer (web/)
+- Engine: SydMap by Amir Marashi (MIT), vendored unchanged except data path and wording
+- Three.js r186
+- Data contract: 600 m tiles in gzipped SYD2-format pack*.bin, 56-byte attrs.bin, wiki.json, names.json, heritage.json, labels.json, layers.json, land/water polygon bins
+- Tests: web/tests/ — contract, i18n coverage, worker smoke, UI tests
+
+## Data sources
+- OpenStreetMap geometry, addresses, parts, street names (ODbL 1.0)
+- VPRG Città Antica classification, Comune di Venezia (CC BY 4.0)
+- Wikidata (CC0)
+- Wikipedia text (CC BY-SA)
+- Wikimedia Commons photos (per file, author and licence on each card)
+
+## Documentation (docs/)
+- viewer-contract_20261022.md — data contract implemented by s06_export.py
+- vprg-classification_20261022.md — municipal class descriptions and state flags
+- engine-analysis_20261022.md — comparative analysis of building atlas engines
+- topographic-data-inventory_20261022.md — 1987–2010 topographic releases
+- historical-data-inventory_20261022.md — 1740/1808/1857 registers + TimeMachine Atlas
+- itwiki-dates_20261023.md — Italian Wikipedia date extraction methodology
+- municipal-heights_20261023.md — height source methodology
+- wikidata-enrichment_20261023.md — Wikidata geometric matching methodology
+- bridge-route_20261023.md — bridge route construction
+- church-route-contract.md — church route methodology
+
+## Licences
+- Pipeline, site content, enrichment data: MIT (Maxim Osovsky)
+- OpenStreetMap: ODbL 1.0, © OpenStreetMap contributors
+- VPRG Città Antica: CC BY 4.0, Comune di Venezia
+- Wikidata: CC0
+- Wikipedia text: CC BY-SA
+- Wikimedia Commons photos: per file
+- SydMap viewer code, three.js: MIT
