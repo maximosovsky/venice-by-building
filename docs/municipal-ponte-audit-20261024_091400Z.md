@@ -85,7 +85,7 @@ These are municipal polygon overlaps with real OSM island way/relation geometry,
 
 ## Source schema, dates and reuse rights
 
-Original archive: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip`; internal layer `ComuneVenezia_aree/PONTE.shp`; ZIP SHA256 `6c83cdc4b97f269c752d9c9be4d0609631570580dd45ae12db3cd4851f9ca336`. CRC tested for the complete real archive. All 21 nongeometry DBF fields, value counts, component hashes and catalog rows are preserved in `source-manifest.json`.
+Original archive: `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip`; internal layer `ComuneVenezia_aree/PONTE.shp`; ZIP SHA256 `6c83cdc4b97f269c752d9c9be4d0609631570580dd45ae12db3cd4851f9ca336`. CRC tested for the complete real archive. All 21 nongeometry DBF fields, value counts, component hashes and catalog rows are preserved in `source-manifest.json`.
 
 The local official **DB Topografico, Versione 2.6** PDF dictionary (pages **14, 57–58**) establishes actual meanings: material `03=muratura`; use `04=pedonale`, `03=ferroviario`; type `01=ponte`; structure `08=fisso non specificato`. Enum `92=Non assegnato` is missing information, not a structure property. Repeated numeric `92` values are retained raw and are not promoted to surveyed elevations/heights. Materials/type/use are source classifications, not public access or current condition.
 
@@ -101,7 +101,7 @@ Acceptance gaps are explicit: broader historic-centre land definition; municipal
 
 ## Artifacts and reproducibility
 
-Primary artifact directory: `D:\100_star\venice\reports\municipal-ponte-audit_20261024_091400Z`.
+Primary artifact directory: `data/reports\municipal-ponte-audit_20261024_091400Z`.
 
 - `municipal-census.csv/json`: exhaustive 1259 source rows and geometry/tag evidence.
 - `physical-groups.csv/json` and `part-grouping-evidence.json`: inferred parts and unresolved contacts.

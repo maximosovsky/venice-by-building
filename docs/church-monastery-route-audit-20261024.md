@@ -512,4 +512,4 @@ Segments: {'walk': 117, 'schematic': 16}. Verified network length only: 38319.41
 
 Full per-identity reconciliation, source-row counts and provenance are embedded in church-route.json.
 
-Artifacts: `D:\100_star\venice\web\data\church-route.json`; `D:\100_star\venice\web\data\church-route.gpx`.
+Artifacts: `data/web\data\church-route.json`; `data/web\data\church-route.gpx`.

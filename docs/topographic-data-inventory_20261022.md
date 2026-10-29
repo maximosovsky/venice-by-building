@@ -2,7 +2,7 @@
 
 ## Scope, method and verified totals
 
-Raw source directory: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004`. This is a read-only examination of the existing local holdings, not a download or a claim of complete regional coverage. No archive was unpacked; ZIP members were read in memory. Python standard-library ZIP/DBF/SHP/SHX parsing was used because geopandas, pyogrio and fiona are not installed. PDF text was read with PyMuPDF. Every valid archive passed ZIP CRC checking; every shapefile DBF record count matched its SHX record count. Actual Z arrays were examined for the building, volume, roof and spot-height layers. Record counts are physical shapefile feature counts, not deduplicated buildings. Selected detailed DBFs contain no deleted rows. Other layers are enumerated by header/index counts, not a full topology-validity audit.
+Raw source directory: `data/data\raw\Venice_Geodata_20261022_2004`. This is a read-only examination of the existing local holdings, not a download or a claim of complete regional coverage. No archive was unpacked; ZIP members were read in memory. Python standard-library ZIP/DBF/SHP/SHX parsing was used because geopandas, pyogrio and fiona are not installed. PDF text was read with PyMuPDF. Every valid archive passed ZIP CRC checking; every shapefile DBF record count matched its SHX record count. Actual Z arrays were examined for the building, volume, roof and spot-height layers. Record counts are physical shapefile feature counts, not deduplicated buildings. Selected detailed DBFs contain no deleted rows. Other layers are enumerated by header/index counts, not a full topology-validity audit.
 
 Verified: **124 valid archives; 3169 shapefile layer instances; 96 distinct complete DBF schemas**. The legacy archives additionally contain **122 DXF annotation drawings, 1,441 drawing-layer instances, 139,265 TEXT entities**. Two incomplete ZIP files are retained locally but excluded from geodata totals.
 | Release | Valid archives | Distinct shapefile layer names | Shapefile instances | All-layer feature records |
@@ -19,11 +19,11 @@ Map-sheet archives intersect the municipality but are not necessarily clipped to
 
 | Release / source | Horizontal CRS actually available | Evidence and limitations |
 | --- | --- | --- |
-| 1987 CTRN5000 | Inferred Monte Mario / Italy zone 1 (Gauss–Boaga west), EPSG:3003; metres | 31 sheet ZIPs under `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987`; catalog fuso="Fuso Ovest"; no .prj in these shapefiles. Coordinates approximately 1.77 million E, 5.05 million N. EPSG assignment is an interpretation, not an embedded authority code. |
-| 1994 CTRN5000 | Same inferred EPSG:3003; metres | 45 sheet ZIPs under `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994`; no .prj; catalog "Fuso Ovest". |
-| 2005 CTRN5000 | Same inferred EPSG:3003; metres | 46 sheet ZIPs under `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005`; no .prj; catalog "Fuso Ovest". |
-| 2006 GEODBT LOTTO LAGUNA DI VENEZIA | RDN2008 geographic 2D, EPSG:6706; longitude/latitude in degrees | `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip`; all 25 layers have identical .prj. Catalog/download label ETRF2000 is not a projected UTM CRS. |
-| 2010 GEODBT LOTTO COMUNE DI VENEZIA | RDN2008 geographic 2D, EPSG:6706; longitude/latitude in degrees | `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip`; all 45 layers have identical .prj. |
+| 1987 CTRN5000 | Inferred Monte Mario / Italy zone 1 (Gauss–Boaga west), EPSG:3003; metres | 31 sheet ZIPs under `data/data\raw\Venice_Geodata_20261022_2004\1987`; catalog fuso="Fuso Ovest"; no .prj in these shapefiles. Coordinates approximately 1.77 million E, 5.05 million N. EPSG assignment is an interpretation, not an embedded authority code. |
+| 1994 CTRN5000 | Same inferred EPSG:3003; metres | 45 sheet ZIPs under `data/data\raw\Venice_Geodata_20261022_2004\1994`; no .prj; catalog "Fuso Ovest". |
+| 2005 CTRN5000 | Same inferred EPSG:3003; metres | 46 sheet ZIPs under `data/data\raw\Venice_Geodata_20261022_2004\2005`; no .prj; catalog "Fuso Ovest". |
+| 2006 GEODBT LOTTO LAGUNA DI VENEZIA | RDN2008 geographic 2D, EPSG:6706; longitude/latitude in degrees | `data/data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip`; all 25 layers have identical .prj. Catalog/download label ETRF2000 is not a projected UTM CRS. |
+| 2010 GEODBT LOTTO COMUNE DI VENEZIA | RDN2008 geographic 2D, EPSG:6706; longitude/latitude in degrees | `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip`; all 45 layers have identical .prj. |
 
 Exact embedded GEODBT WKT (70 matching .prj files):
 ```text
@@ -142,7 +142,7 @@ DBF strings below deliberately preserve leading zeros, raw decimal artefacts, bl
 
 #### 1987 / FABBRIC
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128022.zip::128022o/FABBRIC.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\1987\128022.zip::128022o/FABBRIC.shp`
 
 ```json
 [
@@ -255,7 +255,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128
 ```
 #### 1994 / FABBRIC
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127033.zip::127033o/FABBRIC.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\1994\127033.zip::127033o/FABBRIC.shp`
 
 ```json
 [
@@ -368,7 +368,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127
 ```
 #### 2005 / FABBRIC
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127033.zip::127033o/FABBRIC.Shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2005\127033.zip::127033o/FABBRIC.Shp`
 
 ```json
 [
@@ -481,7 +481,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127
 ```
 #### 2006 / EDIFC
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip::LagunaVenazia_aree/EDIFC.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip::LagunaVenazia_aree/EDIFC.shp`
 
 ```json
 [
@@ -591,7 +591,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Lag
 ```
 #### 2006 / EDI_MIN
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip::LagunaVenazia_aree/EDI_MIN.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip::LagunaVenazia_aree/EDI_MIN.shp`
 
 ```json
 [
@@ -691,7 +691,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Lag
 ```
 #### 2010 / EDIFC
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip::ComuneVenezia_aree/EDIFC.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip::ComuneVenezia_aree/EDIFC.shp`
 
 ```json
 [
@@ -747,7 +747,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Ven
 ```
 #### 2010 / UN_VOL
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip::ComuneVenezia_aree/UN_VOL.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip::ComuneVenezia_aree/UN_VOL.shp`
 
 ```json
 [
@@ -833,7 +833,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Ven
 ```
 #### 2010 / ELE_CP
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip::ComuneVenezia_aree/ELE_CP.shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip::ComuneVenezia_aree/ELE_CP.shp`
 
 ```json
 [
@@ -970,7 +970,7 @@ Additional 2010 UN_VOL rows where QE differs from QG:
 ```
 ### Additional populated legacy elevation samples
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127033.zip::127033o/FABBRIC.Shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2005\127033.zip::127033o/FABBRIC.Shp`
 
 ```json
 [
@@ -1046,7 +1046,7 @@ Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127
 ]
 ```
 
-Exact source: `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127033.zip::127033o/PUNTI_Q.Shp`
+Exact source: `data/data\raw\Venice_Geodata_20261022_2004\2005\127033.zip::127033o/PUNTI_Q.Shp`
 
 ```json
 [
@@ -1412,9 +1412,9 @@ Actual GEODBT date/change distributions (all rows, not only samples):
 
 ## Licence / usage statements
 
-The locally held catalog `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\catalog.json` has no licence/rights field or grant, and `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\download_manifest.json` records download provenance/verification, not permissions. Neither held PDF provides an explicit dataset redistribution licence, copyright licence or named Creative Commons grant. **Licence is unestablished for all five releases from these local holdings**; availability on a public portal is not itself a licence. This report does not assert that reuse is prohibited, only that permission has not been evidenced here.
+The locally held catalog `data/data\raw\Venice_Geodata_20261022_2004\catalog.json` has no licence/rights field or grant, and `data/data\raw\Venice_Geodata_20261022_2004\download_manifest.json` records download provenance/verification, not permissions. Neither held PDF provides an explicit dataset redistribution licence, copyright licence or named Creative Commons grant. **Licence is unestablished for all five releases from these local holdings**; availability on a public portal is not itself a licence. This report does not assert that reuse is prohibited, only that permission has not been evidenced here.
 
-Exact usage caution in local `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\README.md`, line 32:
+Exact usage caution in local `data/data\raw\Venice_Geodata_20261022_2004\README.md`, line 32:
 
 > No dataset redistribution license was independently established in this download task. Consult portal terms and metadata before public redistribution.
 
@@ -2035,7 +2035,7 @@ DBF notation: C=character string; N=numeric; D=date; L=logical. `FIELD:TYPE(widt
 
 An archive-member location written `absolute ZIP path::member` identifies data stored inside the ZIP, not an unpacked file. Each heading supplies the exact absolute ZIP path; combining it with its member column is the full logical location. Counts include all SHX/DBF records. Every count was reconciled programmatically.
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128022.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128022.zip`
 
 Release 1987; 606647 bytes; 83 ZIP entries; CRC verified.
 
@@ -2068,7 +2068,7 @@ Release 1987; 606647 bytes; 83 ZIP entries; CRC verified.
 | 128022o/VEGET_A.shp | PolygonZ | 5 | S062 |
 | 128022o/VIABILIT.shp | PolyLineZ | 217 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128023.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128023.zip`
 
 Release 1987; 862888 bytes; 86 ZIP entries; CRC verified.
 
@@ -2102,7 +2102,7 @@ Release 1987; 862888 bytes; 86 ZIP entries; CRC verified.
 | 128023o/VIABILIT.shp | PolyLineZ | 852 | S059 |
 | 128023o/ZONENC.shp | PolyLineZ | 19 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128031.zip`
 
 Release 1987; 849226 bytes; 86 ZIP entries; CRC verified.
 
@@ -2136,7 +2136,7 @@ Release 1987; 849226 bytes; 86 ZIP entries; CRC verified.
 | 128031o/VEGET_A.shp | PolygonZ | 46 | S062 |
 | 128031o/VIABILIT.shp | PolyLineZ | 1237 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128032.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128032.zip`
 
 Release 1987; 752944 bytes; 80 ZIP entries; CRC verified.
 
@@ -2168,7 +2168,7 @@ Release 1987; 752944 bytes; 80 ZIP entries; CRC verified.
 | 128032o/VEGET_A.shp | PolygonZ | 32 | S062 |
 | 128032o/VIABILIT.shp | PolyLineZ | 389 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128033.zip`
 
 Release 1987; 597060 bytes; 80 ZIP entries; CRC verified.
 
@@ -2200,7 +2200,7 @@ Release 1987; 597060 bytes; 80 ZIP entries; CRC verified.
 | 128033o/VEGET_A.shp | PolygonZ | 2 | S062 |
 | 128033o/VIABILIT.shp | PolyLineZ | 74 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128034.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128034.zip`
 
 Release 1987; 578087 bytes; 86 ZIP entries; CRC verified.
 
@@ -2234,7 +2234,7 @@ Release 1987; 578087 bytes; 86 ZIP entries; CRC verified.
 | 128034o/VEGET_A.shp | PolygonZ | 67 | S062 |
 | 128034o/VIABILIT.shp | PolyLineZ | 858 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128051.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128051.zip`
 
 Release 1987; 967718 bytes; 83 ZIP entries; CRC verified.
 
@@ -2267,7 +2267,7 @@ Release 1987; 967718 bytes; 83 ZIP entries; CRC verified.
 | 128051o/VEGET_A.shp | PolygonZ | 13 | S062 |
 | 128051o/VIABILIT.shp | PolyLineZ | 562 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128052.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128052.zip`
 
 Release 1987; 499148 bytes; 62 ZIP entries; CRC verified.
 
@@ -2293,7 +2293,7 @@ Release 1987; 499148 bytes; 62 ZIP entries; CRC verified.
 | 128052o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 128052o/VIABILIT.shp | PolyLineZ | 82 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128053.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128053.zip`
 
 Release 1987; 711114 bytes; 89 ZIP entries; CRC verified.
 
@@ -2328,7 +2328,7 @@ Release 1987; 711114 bytes; 89 ZIP entries; CRC verified.
 | 128053o/VEGET_A.shp | PolygonZ | 17 | S062 |
 | 128053o/VIABILIT.shp | PolyLineZ | 856 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128054.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128054.zip`
 
 Release 1987; 597751 bytes; 83 ZIP entries; CRC verified.
 
@@ -2361,7 +2361,7 @@ Release 1987; 597751 bytes; 83 ZIP entries; CRC verified.
 | 128054o/VEGET_A.shp | PolygonZ | 24 | S062 |
 | 128054o/VIABILIT.shp | PolyLineZ | 776 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128061.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128061.zip`
 
 Release 1987; 253185 bytes; 44 ZIP entries; CRC verified.
 
@@ -2381,7 +2381,7 @@ Release 1987; 253185 bytes; 44 ZIP entries; CRC verified.
 | 128061o/testi.shp | PointZ | 1513 | S016 |
 | 128061o/VIABILIT.shp | PolyLineZ | 2 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128062.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128062.zip`
 
 Release 1987; 328098 bytes; 50 ZIP entries; CRC verified.
 
@@ -2403,7 +2403,7 @@ Release 1987; 328098 bytes; 50 ZIP entries; CRC verified.
 | 128062o/testi.shp | PointZ | 1604 | S016 |
 | 128062o/VIABILIT.shp | PolyLineZ | 13 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128063.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128063.zip`
 
 Release 1987; 434283 bytes; 65 ZIP entries; CRC verified.
 
@@ -2430,7 +2430,7 @@ Release 1987; 434283 bytes; 65 ZIP entries; CRC verified.
 | 128063o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 128063o/VIABILIT.shp | PolyLineZ | 18 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128064.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128064.zip`
 
 Release 1987; 626257 bytes; 68 ZIP entries; CRC verified.
 
@@ -2458,7 +2458,7 @@ Release 1987; 626257 bytes; 68 ZIP entries; CRC verified.
 | 128064o/VEGET_A.shp | PolygonZ | 2 | S062 |
 | 128064o/VIABILIT.shp | PolyLineZ | 194 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128071.zip`
 
 Release 1987; 713376 bytes; 62 ZIP entries; CRC verified.
 
@@ -2484,7 +2484,7 @@ Release 1987; 713376 bytes; 62 ZIP entries; CRC verified.
 | 128071o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 128071o/VIABILIT.shp | PolyLineZ | 47 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128072.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128072.zip`
 
 Release 1987; 951783 bytes; 71 ZIP entries; CRC verified.
 
@@ -2513,7 +2513,7 @@ Release 1987; 951783 bytes; 71 ZIP entries; CRC verified.
 | 128072o/VEGET_A.shp | PolygonZ | 9 | S062 |
 | 128072o/VIABILIT.shp | PolyLineZ | 145 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128073.zip`
 
 Release 1987; 564510 bytes; 59 ZIP entries; CRC verified.
 
@@ -2538,7 +2538,7 @@ Release 1987; 564510 bytes; 59 ZIP entries; CRC verified.
 | 128073o/VEGET_A.shp | PolygonZ | 3 | S062 |
 | 128073o/VIABILIT.shp | PolyLineZ | 17 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128074.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128074.zip`
 
 Release 1987; 289870 bytes; 38 ZIP entries; CRC verified.
 
@@ -2556,7 +2556,7 @@ Release 1987; 289870 bytes; 38 ZIP entries; CRC verified.
 | 128074o/TESTI.shp | PointZ | 1229 | S016 |
 | 128074o/VIABILIT.shp | PolyLineZ | 15 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128084.zip`
 
 Release 1987; 665074 bytes; 77 ZIP entries; CRC verified.
 
@@ -2587,7 +2587,7 @@ Release 1987; 665074 bytes; 77 ZIP entries; CRC verified.
 | 128084o/VEGET_A.shp | PolygonZ | 58 | S062 |
 | 128084o/VIABILIT.shp | PolyLineZ | 476 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128092.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128092.zip`
 
 Release 1987; 418184 bytes; 68 ZIP entries; CRC verified.
 
@@ -2615,7 +2615,7 @@ Release 1987; 418184 bytes; 68 ZIP entries; CRC verified.
 | 128092o/VEGET_A.shp | PolygonZ | 95 | S062 |
 | 128092o/VIABILIT.shp | PolyLineZ | 561 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128101.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128101.zip`
 
 Release 1987; 800112 bytes; 68 ZIP entries; CRC verified.
 
@@ -2643,7 +2643,7 @@ Release 1987; 800112 bytes; 68 ZIP entries; CRC verified.
 | 128101o/VEGET_A.shp | PolygonZ | 43 | S062 |
 | 128101o/VIABILIT.shp | PolyLineZ | 193 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148031.zip`
 
 Release 1987; 452001 bytes; 41 ZIP entries; CRC verified.
 
@@ -2662,7 +2662,7 @@ Release 1987; 452001 bytes; 41 ZIP entries; CRC verified.
 | 148031o/testi.shp | PointZ | 926 | S016 |
 | 148031o/VIABILIT.shp | PolyLineZ | 5 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148041.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148041.zip`
 
 Release 1987; 148668 bytes; 56 ZIP entries; CRC verified.
 
@@ -2686,7 +2686,7 @@ Release 1987; 148668 bytes; 56 ZIP entries; CRC verified.
 | 148041o/VEGETAZ.shp | PolyLineZ | 8 | S059 |
 | 148041o/VIABILIT.shp | PolyLineZ | 7 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148043.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148043.zip`
 
 Release 1987; 180304 bytes; 47 ZIP entries; CRC verified.
 
@@ -2707,7 +2707,7 @@ Release 1987; 180304 bytes; 47 ZIP entries; CRC verified.
 | 148043o/testi.shp | PointZ | 1797 | S016 |
 | 148043o/VIABILIT.shp | PolyLineZ | 6 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148044.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148044.zip`
 
 Release 1987; 179591 bytes; 38 ZIP entries; CRC verified.
 
@@ -2725,7 +2725,7 @@ Release 1987; 179591 bytes; 38 ZIP entries; CRC verified.
 | 148044o/SIM_VEGE.shp | PointZ | 42 | S014 |
 | 148044o/testi.shp | PointZ | 1316 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148071.zip`
 
 Release 1987; 233914 bytes; 38 ZIP entries; CRC verified.
 
@@ -2743,7 +2743,7 @@ Release 1987; 233914 bytes; 38 ZIP entries; CRC verified.
 | 148071o/SIM_IDRO.shp | PointZ | 126 | S011 |
 | 148071o/testi.shp | PointZ | 1807 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148084.zip`
 
 Release 1987; 159287 bytes; 35 ZIP entries; CRC verified.
 
@@ -2760,7 +2760,7 @@ Release 1987; 159287 bytes; 35 ZIP entries; CRC verified.
 | 148084o/SIM_IDRO.shp | PointZ | 154 | S011 |
 | 148084o/testi.shp | PointZ | 1875 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148123.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148123.zip`
 
 Release 1987; 135107 bytes; 32 ZIP entries; CRC verified.
 
@@ -2776,7 +2776,7 @@ Release 1987; 135107 bytes; 32 ZIP entries; CRC verified.
 | 148123o/SIM_IDRO.shp | PointZ | 84 | S011 |
 | 148123o/testi.shp | PointZ | 1737 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148124.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148124.zip`
 
 Release 1987; 116264 bytes; 32 ZIP entries; CRC verified.
 
@@ -2792,7 +2792,7 @@ Release 1987; 116264 bytes; 32 ZIP entries; CRC verified.
 | 148124o/SIM_IDRO.shp | PointZ | 68 | S011 |
 | 148124o/testi.shp | PointZ | 1498 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148161.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148161.zip`
 
 Release 1987; 291665 bytes; 80 ZIP entries; CRC verified.
 
@@ -2824,7 +2824,7 @@ Release 1987; 291665 bytes; 80 ZIP entries; CRC verified.
 | 148161o/VEGETAZ.shp | PolyLineZ | 4 | S059 |
 | 148161o/VIABILIT.shp | PolyLineZ | 31 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148164.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148164.zip`
 
 Release 1987; 233076 bytes; 74 ZIP entries; CRC verified.
 
@@ -2854,7 +2854,7 @@ Release 1987; 233076 bytes; 74 ZIP entries; CRC verified.
 | 148164o/VEGETAZ.shp | PolyLineZ | 2 | S059 |
 | 148164o/VIABILIT.shp | PolyLineZ | 25 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127033.zip`
 
 Release 1994; 846790 bytes; 83 ZIP entries; CRC verified.
 
@@ -2887,7 +2887,7 @@ Release 1994; 846790 bytes; 83 ZIP entries; CRC verified.
 | 127033o/VIABILIT.shp | PolyLineZ | 2430 | S059 |
 | 127033o/ZONENC.shp | PolyLineZ | 18 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127071.zip`
 
 Release 1994; 1562490 bytes; 101 ZIP entries; CRC verified.
 
@@ -2926,7 +2926,7 @@ Release 1994; 1562490 bytes; 101 ZIP entries; CRC verified.
 | 127071o/VEGET_A.shp | PolygonZ | 111 | S062 |
 | 127071o/VIABILIT.shp | PolyLineZ | 1622 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127072.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127072.zip`
 
 Release 1994; 2005207 bytes; 98 ZIP entries; CRC verified.
 
@@ -2964,7 +2964,7 @@ Release 1994; 2005207 bytes; 98 ZIP entries; CRC verified.
 | 127072o/VEGET_A.shp | PolygonZ | 19 | S062 |
 | 127072o/VIABILIT.shp | PolyLineZ | 1608 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127073.zip`
 
 Release 1994; 1979414 bytes; 101 ZIP entries; CRC verified.
 
@@ -3003,7 +3003,7 @@ Release 1994; 1979414 bytes; 101 ZIP entries; CRC verified.
 | 127073o/VEGET_A.shp | PolygonZ | 31 | S062 |
 | 127073o/VIABILIT.shp | PolyLineZ | 1690 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127074.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127074.zip`
 
 Release 1994; 1706332 bytes; 95 ZIP entries; CRC verified.
 
@@ -3040,7 +3040,7 @@ Release 1994; 1706332 bytes; 95 ZIP entries; CRC verified.
 | 127074o/VEGET_A.shp | PolygonZ | 106 | S062 |
 | 127074o/VIABILIT.shp | PolyLineZ | 1765 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127081.zip`
 
 Release 1994; 1560015 bytes; 95 ZIP entries; CRC verified.
 
@@ -3077,7 +3077,7 @@ Release 1994; 1560015 bytes; 95 ZIP entries; CRC verified.
 | 127081o/VEGET_A.shp | PolygonZ | 60 | S062 |
 | 127081o/VIABILIT.shp | PolyLineZ | 1428 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127082.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127082.zip`
 
 Release 1994; 782674 bytes; 92 ZIP entries; CRC verified.
 
@@ -3113,7 +3113,7 @@ Release 1994; 782674 bytes; 92 ZIP entries; CRC verified.
 | 127082o/VEGET_A.shp | PolygonZ | 5 | S062 |
 | 127082o/VIABILIT.shp | PolyLineZ | 804 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127083.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127083.zip`
 
 Release 1994; 2493811 bytes; 95 ZIP entries; CRC verified.
 
@@ -3150,7 +3150,7 @@ Release 1994; 2493811 bytes; 95 ZIP entries; CRC verified.
 | 127083o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 127083o/VIABILIT.shp | PolyLineZ | 1876 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127084.zip`
 
 Release 1994; 1333321 bytes; 98 ZIP entries; CRC verified.
 
@@ -3188,7 +3188,7 @@ Release 1994; 1333321 bytes; 98 ZIP entries; CRC verified.
 | 127084o/VEGET_A.shp | PolygonZ | 79 | S062 |
 | 127084o/VIABILIT.shp | PolyLineZ | 1027 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127111.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127111.zip`
 
 Release 1994; 3410910 bytes; 101 ZIP entries; CRC verified.
 
@@ -3227,7 +3227,7 @@ Release 1994; 3410910 bytes; 101 ZIP entries; CRC verified.
 | 127111o/VEGET_A.shp | PolygonZ | 2 | S062 |
 | 127111o/VIABILIT.shp | PolyLineZ | 2107 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127112.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127112.zip`
 
 Release 1994; 2181875 bytes; 95 ZIP entries; CRC verified.
 
@@ -3264,7 +3264,7 @@ Release 1994; 2181875 bytes; 95 ZIP entries; CRC verified.
 | 127112o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 127112o/VIABILIT.shp | PolyLineZ | 1502 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127113.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127113.zip`
 
 Release 1994; 2350410 bytes; 98 ZIP entries; CRC verified.
 
@@ -3302,7 +3302,7 @@ Release 1994; 2350410 bytes; 98 ZIP entries; CRC verified.
 | 127113o/VEGET_A.shp | PolygonZ | 57 | S062 |
 | 127113o/VIABILIT.shp | PolyLineZ | 1701 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127114.zip`
 
 Release 1994; 2215939 bytes; 98 ZIP entries; CRC verified.
 
@@ -3340,7 +3340,7 @@ Release 1994; 2215939 bytes; 98 ZIP entries; CRC verified.
 | 127114o/VEGET_A.shp | PolygonZ | 10 | S062 |
 | 127114o/VIABILIT.shp | PolyLineZ | 1786 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127121.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127121.zip`
 
 Release 1994; 1291428 bytes; 92 ZIP entries; CRC verified.
 
@@ -3376,7 +3376,7 @@ Release 1994; 1291428 bytes; 92 ZIP entries; CRC verified.
 | 127121o/VEGET_A.shp | PolygonZ | 28 | S062 |
 | 127121o/VIABILIT.shp | PolyLineZ | 700 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127122.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127122.zip`
 
 Release 1994; 138735 bytes; 59 ZIP entries; CRC verified.
 
@@ -3401,7 +3401,7 @@ Release 1994; 138735 bytes; 59 ZIP entries; CRC verified.
 | 127122o/testi.shp | PointZ | 1446 | S016 |
 | 127122o/VIABILIT.shp | PolyLineZ | 6 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127123.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127123.zip`
 
 Release 1994; 871991 bytes; 104 ZIP entries; CRC verified.
 
@@ -3441,7 +3441,7 @@ Release 1994; 871991 bytes; 104 ZIP entries; CRC verified.
 | 127123o/VEGET_A.shp | PolygonZ | 2 | S062 |
 | 127123o/VIABILIT.shp | PolyLineZ | 307 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127124.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127124.zip`
 
 Release 1994; 2093568 bytes; 98 ZIP entries; CRC verified.
 
@@ -3479,7 +3479,7 @@ Release 1994; 2093568 bytes; 98 ZIP entries; CRC verified.
 | 127124o/VEGET_A.shp | PolygonZ | 4 | S062 |
 | 127124o/VIABILIT.shp | PolyLineZ | 1968 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127151.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127151.zip`
 
 Release 1994; 1353934 bytes; 83 ZIP entries; CRC verified.
 
@@ -3512,7 +3512,7 @@ Release 1994; 1353934 bytes; 83 ZIP entries; CRC verified.
 | 127151o/VEGET_A.shp | PolygonZ | 10 | S062 |
 | 127151o/VIABILIT.shp | PolyLineZ | 1025 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127152.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127152.zip`
 
 Release 1994; 709558 bytes; 71 ZIP entries; CRC verified.
 
@@ -3541,7 +3541,7 @@ Release 1994; 709558 bytes; 71 ZIP entries; CRC verified.
 | 127152o/VEGETAZ.shp | PolyLineZ | 2 | S059 |
 | 127152o/VIABILIT.shp | PolyLineZ | 88 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127154.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127154.zip`
 
 Release 1994; 1173976 bytes; 83 ZIP entries; CRC verified.
 
@@ -3574,7 +3574,7 @@ Release 1994; 1173976 bytes; 83 ZIP entries; CRC verified.
 | 127154o/VEGET_A.shp | PolygonZ | 52 | S062 |
 | 127154o/VIABILIT.shp | PolyLineZ | 1395 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127161.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127161.zip`
 
 Release 1994; 2631537 bytes; 95 ZIP entries; CRC verified.
 
@@ -3611,7 +3611,7 @@ Release 1994; 2631537 bytes; 95 ZIP entries; CRC verified.
 | 127161o/VEGETAZ.shp | PolyLineZ | 2 | S059 |
 | 127161o/VIABILIT.shp | PolyLineZ | 507 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127162.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127162.zip`
 
 Release 1994; 212542 bytes; 77 ZIP entries; CRC verified.
 
@@ -3642,7 +3642,7 @@ Release 1994; 212542 bytes; 77 ZIP entries; CRC verified.
 | 127162o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 127162o/VIABILIT.shp | PolyLineZ | 87 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127163.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127163.zip`
 
 Release 1994; 242878 bytes; 80 ZIP entries; CRC verified.
 
@@ -3674,7 +3674,7 @@ Release 1994; 242878 bytes; 80 ZIP entries; CRC verified.
 | 127163o/VEGETAZ.shp | PolyLineZ | 2 | S059 |
 | 127163o/VIABILIT.shp | PolyLineZ | 107 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127164.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127164.zip`
 
 Release 1994; 389937 bytes; 71 ZIP entries; CRC verified.
 
@@ -3703,7 +3703,7 @@ Release 1994; 389937 bytes; 71 ZIP entries; CRC verified.
 | 127164o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 127164o/VIABILIT.shp | PolyLineZ | 196 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128091.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128091.zip`
 
 Release 1994; 521864 bytes; 86 ZIP entries; CRC verified.
 
@@ -3737,7 +3737,7 @@ Release 1994; 521864 bytes; 86 ZIP entries; CRC verified.
 | 128091o/VEGET_A.shp | PolygonZ | 7 | S062 |
 | 128091o/VIABILIT.shp | PolyLineZ | 97 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128093.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128093.zip`
 
 Release 1994; 913798 bytes; 77 ZIP entries; CRC verified.
 
@@ -3768,7 +3768,7 @@ Release 1994; 913798 bytes; 77 ZIP entries; CRC verified.
 | 128093o/VEGETAZ.shp | PolyLineZ | 9 | S059 |
 | 128093o/VIABILIT.shp | PolyLineZ | 134 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128094.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128094.zip`
 
 Release 1994; 275155 bytes; 59 ZIP entries; CRC verified.
 
@@ -3793,7 +3793,7 @@ Release 1994; 275155 bytes; 59 ZIP entries; CRC verified.
 | 128094o/VEGETAZ.shp | PolyLineZ | 2 | S059 |
 | 128094o/VIABILIT.shp | PolyLineZ | 31 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128102.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128102.zip`
 
 Release 1994; 1677395 bytes; 98 ZIP entries; CRC verified.
 
@@ -3831,7 +3831,7 @@ Release 1994; 1677395 bytes; 98 ZIP entries; CRC verified.
 | 128102o/VEGET_A.shp | PolygonZ | 369 | S062 |
 | 128102o/VIABILIT.shp | PolyLineZ | 2365 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128103.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128103.zip`
 
 Release 1994; 1147908 bytes; 92 ZIP entries; CRC verified.
 
@@ -3867,7 +3867,7 @@ Release 1994; 1147908 bytes; 92 ZIP entries; CRC verified.
 | 128103o/VEGET_A.shp | PolygonZ | 116 | S062 |
 | 128103o/VIABILIT.shp | PolyLineZ | 1351 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128104.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128104.zip`
 
 Release 1994; 615423 bytes; 86 ZIP entries; CRC verified.
 
@@ -3901,7 +3901,7 @@ Release 1994; 615423 bytes; 86 ZIP entries; CRC verified.
 | 128104o/VEGET_A.shp | PolygonZ | 1 | S062 |
 | 128104o/VIABILIT.shp | PolyLineZ | 85 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128114.zip`
 
 Release 1994; 897274 bytes; 95 ZIP entries; CRC verified.
 
@@ -3938,7 +3938,7 @@ Release 1994; 897274 bytes; 95 ZIP entries; CRC verified.
 | 128114o/VEGET_A.shp | PolygonZ | 141 | S062 |
 | 128114o/VIABILIT.shp | PolyLineZ | 370 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128131.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128131.zip`
 
 Release 1994; 558408 bytes; 92 ZIP entries; CRC verified.
 
@@ -3974,7 +3974,7 @@ Release 1994; 558408 bytes; 92 ZIP entries; CRC verified.
 | 128131o/VEGET_A.shp | PolygonZ | 5 | S062 |
 | 128131o/VIABILIT.shp | PolyLineZ | 410 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128132.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128132.zip`
 
 Release 1994; 414247 bytes; 80 ZIP entries; CRC verified.
 
@@ -4006,7 +4006,7 @@ Release 1994; 414247 bytes; 80 ZIP entries; CRC verified.
 | 128132o/VEGETAZ.shp | PolyLineZ | 37 | S059 |
 | 128132o/VIABILIT.shp | PolyLineZ | 294 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128133.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128133.zip`
 
 Release 1994; 963337 bytes; 95 ZIP entries; CRC verified.
 
@@ -4043,7 +4043,7 @@ Release 1994; 963337 bytes; 95 ZIP entries; CRC verified.
 | 128133o/VEGETAZ.shp | PolyLineZ | 77 | S059 |
 | 128133o/VIABILIT.shp | PolyLineZ | 501 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128134.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128134.zip`
 
 Release 1994; 2423981 bytes; 80 ZIP entries; CRC verified.
 
@@ -4075,7 +4075,7 @@ Release 1994; 2423981 bytes; 80 ZIP entries; CRC verified.
 | 128134o/VEGET_A.shp | PolygonZ | 2 | S062 |
 | 128134o/VIABILIT.shp | PolyLineZ | 488 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128143.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128143.zip`
 
 Release 1994; 45689 bytes; 32 ZIP entries; CRC verified.
 
@@ -4091,7 +4091,7 @@ Release 1994; 45689 bytes; 32 ZIP entries; CRC verified.
 | 128143o/SIM_ELEM.shp | PointZ | 22 | S008 |
 | 128143o/testi.shp | PointZ | 553 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128144.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128144.zip`
 
 Release 1994; 968737 bytes; 101 ZIP entries; CRC verified.
 
@@ -4130,7 +4130,7 @@ Release 1994; 968737 bytes; 101 ZIP entries; CRC verified.
 | 128144o/VEGET_A.shp | PolygonZ | 132 | S062 |
 | 128144o/VIABILIT.shp | PolyLineZ | 1584 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148042.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148042.zip`
 
 Release 1994; 338073 bytes; 71 ZIP entries; CRC verified.
 
@@ -4159,7 +4159,7 @@ Release 1994; 338073 bytes; 71 ZIP entries; CRC verified.
 | 148042o/VEGET_A.shp | PolygonZ | 3 | S062 |
 | 148042o/VIABILIT.shp | PolyLineZ | 227 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148081.zip`
 
 Release 1994; 541824 bytes; 92 ZIP entries; CRC verified.
 
@@ -4195,7 +4195,7 @@ Release 1994; 541824 bytes; 92 ZIP entries; CRC verified.
 | 148081o/VEGET_A.shp | PolygonZ | 2 | S062 |
 | 148081o/VIABILIT.shp | PolyLineZ | 347 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148082.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148082.zip`
 
 Release 1994; 344899 bytes; 98 ZIP entries; CRC verified.
 
@@ -4233,7 +4233,7 @@ Release 1994; 344899 bytes; 98 ZIP entries; CRC verified.
 | 148082o/VEGETAZ.shp | PolyLineZ | 5 | S059 |
 | 148082o/VIABILIT.shp | PolyLineZ | 153 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148121.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148121.zip`
 
 Release 1994; 312150 bytes; 98 ZIP entries; CRC verified.
 
@@ -4271,7 +4271,7 @@ Release 1994; 312150 bytes; 98 ZIP entries; CRC verified.
 | 148121o/VEGETAZ.shp | PolyLineZ | 1 | S059 |
 | 148121o/VIABILIT.shp | PolyLineZ | 132 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148122.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148122.zip`
 
 Release 1994; 229930 bytes; 86 ZIP entries; CRC verified.
 
@@ -4305,7 +4305,7 @@ Release 1994; 229930 bytes; 86 ZIP entries; CRC verified.
 | 148122o/TESTI.shp | PointZ | 544 | S016 |
 | 148122o/VIABILIT.shp | PolyLineZ | 69 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\149013.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\149013.zip`
 
 Release 1994; 289240 bytes; 74 ZIP entries; CRC verified.
 
@@ -4335,7 +4335,7 @@ Release 1994; 289240 bytes; 74 ZIP entries; CRC verified.
 | 149013o/VEGETAZ.shp | PolyLineZ | 55 | S059 |
 | 149013o/VIABILIT.shp | PolyLineZ | 254 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\149014.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\149014.zip`
 
 Release 1994; 607738 bytes; 83 ZIP entries; CRC verified.
 
@@ -4368,7 +4368,7 @@ Release 1994; 607738 bytes; 83 ZIP entries; CRC verified.
 | 149014o/VEGETAZ.shp | PolyLineZ | 114 | S059 |
 | 149014o/VIABILIT.shp | PolyLineZ | 479 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\149054.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\149054.zip`
 
 Release 1994; 58203 bytes; 32 ZIP entries; CRC verified.
 
@@ -4384,7 +4384,7 @@ Release 1994; 58203 bytes; 32 ZIP entries; CRC verified.
 | 149054o/SIM_IDRO.shp | PointZ | 4 | S011 |
 | 149054o/testi.shp | PointZ | 723 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127033.zip`
 
 Release 2005; 2516393 bytes; 105 ZIP entries; CRC verified.
 
@@ -4425,7 +4425,7 @@ Release 2005; 2516393 bytes; 105 ZIP entries; CRC verified.
 | 127033o/VIABILIT.Shp | PolyLineZ | 3475 | S059 |
 | 127033o/VIAB_A.Shp | PolygonZ | 666 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127071.zip`
 
 Release 2005; 1277293 bytes; 117 ZIP entries; CRC verified.
 
@@ -4470,7 +4470,7 @@ Release 2005; 1277293 bytes; 117 ZIP entries; CRC verified.
 | 127071o_p/VIABILIT.Shp | PolyLineZ | 1231 | S059 |
 | 127071o_p/VIAB_A.Shp | PolygonZ | 280 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127073.zip`
 
 Release 2005; 2260601 bytes; 111 ZIP entries; CRC verified.
 
@@ -4513,7 +4513,7 @@ Release 2005; 2260601 bytes; 111 ZIP entries; CRC verified.
 | 127073o_p/VIABILIT.Shp | PolyLineZ | 2745 | S059 |
 | 127073o_p/VIAB_A.Shp | PolygonZ | 491 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127074.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127074.zip`
 
 Release 2005; 1224429 bytes; 96 ZIP entries; CRC verified.
 
@@ -4551,7 +4551,7 @@ Release 2005; 1224429 bytes; 96 ZIP entries; CRC verified.
 | 127074o_p/VIABILIT.Shp | PolyLineZ | 1262 | S059 |
 | 127074o_p/VIAB_A.Shp | PolygonZ | 266 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127081.zip`
 
 Release 2005; 1225707 bytes; 111 ZIP entries; CRC verified.
 
@@ -4594,7 +4594,7 @@ Release 2005; 1225707 bytes; 111 ZIP entries; CRC verified.
 | 127081o_p/VIABILIT.Shp | PolyLineZ | 1104 | S059 |
 | 127081o_p/VIAB_A.Shp | PolygonZ | 221 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127084.zip`
 
 Release 2005; 1008532 bytes; 102 ZIP entries; CRC verified.
 
@@ -4634,7 +4634,7 @@ Release 2005; 1008532 bytes; 102 ZIP entries; CRC verified.
 | 127084o_p/VIABILIT.Shp | PolyLineZ | 1112 | S059 |
 | 127084o_p/VIAB_A.Shp | PolygonZ | 183 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127113.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127113.zip`
 
 Release 2005; 2486287 bytes; 111 ZIP entries; CRC verified.
 
@@ -4677,7 +4677,7 @@ Release 2005; 2486287 bytes; 111 ZIP entries; CRC verified.
 | 127113o_p/VIABILIT.Shp | PolyLineZ | 2439 | S059 |
 | 127113o_p/VIAB_A.Shp | PolygonZ | 674 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127114.zip`
 
 Release 2005; 1539902 bytes; 108 ZIP entries; CRC verified.
 
@@ -4719,7 +4719,7 @@ Release 2005; 1539902 bytes; 108 ZIP entries; CRC verified.
 | 127114o_p/VIABILIT.Shp | PolyLineZ | 1953 | S059 |
 | 127114o_p/VIAB_A.Shp | PolygonZ | 517 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127151.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127151.zip`
 
 Release 2005; 421978 bytes; 99 ZIP entries; CRC verified.
 
@@ -4758,7 +4758,7 @@ Release 2005; 421978 bytes; 99 ZIP entries; CRC verified.
 | 127151o_p/VIABILIT.Shp | PolyLineZ | 301 | S059 |
 | 127151o_p/VIAB_A.Shp | PolygonZ | 82 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127152.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127152.zip`
 
 Release 2005; 2257186 bytes; 99 ZIP entries; CRC verified.
 
@@ -4797,7 +4797,7 @@ Release 2005; 2257186 bytes; 99 ZIP entries; CRC verified.
 | 127152o/VIABILIT.Shp | PolyLineZ | 241 | S059 |
 | 127152o/VIAB_A.Shp | PolygonZ | 9 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127154.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127154.zip`
 
 Release 2005; 2049823 bytes; 108 ZIP entries; CRC verified.
 
@@ -4839,7 +4839,7 @@ Release 2005; 2049823 bytes; 108 ZIP entries; CRC verified.
 | 127154o_p/VIABILIT.Shp | PolyLineZ | 1953 | S059 |
 | 127154o_p/VIAB_A.Shp | PolygonZ | 354 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127163.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127163.zip`
 
 Release 2005; 258527 bytes; 84 ZIP entries; CRC verified.
 
@@ -4873,7 +4873,7 @@ Release 2005; 258527 bytes; 84 ZIP entries; CRC verified.
 | 127163o_p/VEGETAZ.Shp | PolyLineZ | 3 | S059 |
 | 127163o_p/VIABILIT.Shp | PolyLineZ | 92 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128022.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128022.zip`
 
 Release 2005; 1039009 bytes; 99 ZIP entries; CRC verified.
 
@@ -4912,7 +4912,7 @@ Release 2005; 1039009 bytes; 99 ZIP entries; CRC verified.
 | 128022o/VIABILIT.Shp | PolyLineZ | 274 | S059 |
 | 128022o/VIAB_A.Shp | PolygonZ | 12 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128023.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128023.zip`
 
 Release 2005; 1673060 bytes; 108 ZIP entries; CRC verified.
 
@@ -4954,7 +4954,7 @@ Release 2005; 1673060 bytes; 108 ZIP entries; CRC verified.
 | 128023o/VIABILIT.Shp | PolyLineZ | 1374 | S059 |
 | 128023o/VIAB_A.Shp | PolygonZ | 355 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128031.zip`
 
 Release 2005; 1890408 bytes; 108 ZIP entries; CRC verified.
 
@@ -4996,7 +4996,7 @@ Release 2005; 1890408 bytes; 108 ZIP entries; CRC verified.
 | 128031o/VIABILIT.Shp | PolyLineZ | 2089 | S059 |
 | 128031o/VIAB_A.Shp | PolygonZ | 522 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128032.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128032.zip`
 
 Release 2005; 731601 bytes; 99 ZIP entries; CRC verified.
 
@@ -5035,7 +5035,7 @@ Release 2005; 731601 bytes; 99 ZIP entries; CRC verified.
 | 128032o_p/VIABILIT.Shp | PolyLineZ | 712 | S059 |
 | 128032o_p/VIAB_A.Shp | PolygonZ | 247 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128033.zip`
 
 Release 2005; 266925 bytes; 99 ZIP entries; CRC verified.
 
@@ -5074,7 +5074,7 @@ Release 2005; 266925 bytes; 99 ZIP entries; CRC verified.
 | 128033o_p/VIABILIT.Shp | PolyLineZ | 74 | S059 |
 | 128033o_p/VIAB_A.Shp | PolygonZ | 8 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128034.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128034.zip`
 
 Release 2005; 1194934 bytes; 105 ZIP entries; CRC verified.
 
@@ -5115,7 +5115,7 @@ Release 2005; 1194934 bytes; 105 ZIP entries; CRC verified.
 | 128034o/VIABILIT.Shp | PolyLineZ | 1140 | S059 |
 | 128034o/VIAB_A.Shp | PolygonZ | 64 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128051.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128051.zip`
 
 Release 2005; 861264 bytes; 99 ZIP entries; CRC verified.
 
@@ -5154,7 +5154,7 @@ Release 2005; 861264 bytes; 99 ZIP entries; CRC verified.
 | 128051o_p/VIABILIT.Shp | PolyLineZ | 422 | S059 |
 | 128051o_p/VIAB_A.Shp | PolygonZ | 106 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128054.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128054.zip`
 
 Release 2005; 860667 bytes; 96 ZIP entries; CRC verified.
 
@@ -5192,7 +5192,7 @@ Release 2005; 860667 bytes; 96 ZIP entries; CRC verified.
 | 128054o_p/VIABILIT.Shp | PolyLineZ | 885 | S059 |
 | 128054o_p/VIAB_A.Shp | PolygonZ | 135 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128061.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128061.zip`
 
 Release 2005; 126046 bytes; 54 ZIP entries; CRC verified.
 
@@ -5216,7 +5216,7 @@ Release 2005; 126046 bytes; 54 ZIP entries; CRC verified.
 | 128061o_p/TESTI.Shp | PointZ | 324 | S016 |
 | 128061o_p/VIABILIT.Shp | PolyLineZ | 2 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128062.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128062.zip`
 
 Release 2005; 112249 bytes; 36 ZIP entries; CRC verified.
 
@@ -5234,7 +5234,7 @@ Release 2005; 112249 bytes; 36 ZIP entries; CRC verified.
 | 128062o_p/SIM_CORN.Shp | PointZ | 40 | S006 |
 | 128062o_p/TESTI.Shp | PointZ | 366 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128064.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128064.zip`
 
 Release 2005; 414840 bytes; 93 ZIP entries; CRC verified.
 
@@ -5271,7 +5271,7 @@ Release 2005; 414840 bytes; 93 ZIP entries; CRC verified.
 | 128064o_p/VIABILIT.Shp | PolyLineZ | 167 | S059 |
 | 128064o_p/VIAB_A.Shp | PolygonZ | 41 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128071.zip`
 
 Release 2005; 202111 bytes; 78 ZIP entries; CRC verified.
 
@@ -5303,7 +5303,7 @@ Release 2005; 202111 bytes; 78 ZIP entries; CRC verified.
 | 128071o_p/VIABILIT.Shp | PolyLineZ | 38 | S059 |
 | 128071o_p/VIAB_A.Shp | PolygonZ | 14 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128072.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128072.zip`
 
 Release 2005; 1731634 bytes; 99 ZIP entries; CRC verified.
 
@@ -5342,7 +5342,7 @@ Release 2005; 1731634 bytes; 99 ZIP entries; CRC verified.
 | 128072o_p/VIABILIT.Shp | PolyLineZ | 312 | S059 |
 | 128072o_p/VIAB_A.Shp | PolygonZ | 92 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128073.zip`
 
 Release 2005; 738676 bytes; 96 ZIP entries; CRC verified.
 
@@ -5380,7 +5380,7 @@ Release 2005; 738676 bytes; 96 ZIP entries; CRC verified.
 | 128073o_p/VIABILIT.Shp | PolyLineZ | 82 | S059 |
 | 128073o_p/VIAB_A.Shp | PolygonZ | 48 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128084.zip`
 
 Release 2005; 1192603 bytes; 105 ZIP entries; CRC verified.
 
@@ -5421,7 +5421,7 @@ Release 2005; 1192603 bytes; 105 ZIP entries; CRC verified.
 | 128084o_p/VIABILIT.Shp | PolyLineZ | 665 | S059 |
 | 128084o_p/VIAB_A.Shp | PolygonZ | 198 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128101.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128101.zip`
 
 Release 2005; 1579046 bytes; 99 ZIP entries; CRC verified.
 
@@ -5460,7 +5460,7 @@ Release 2005; 1579046 bytes; 99 ZIP entries; CRC verified.
 | 128101o_p/VIABILIT.Shp | PolyLineZ | 428 | S059 |
 | 128101o_p/VIAB_A.Shp | PolygonZ | 69 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128102.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128102.zip`
 
 Release 2005; 3946095 bytes; 105 ZIP entries; CRC verified.
 
@@ -5501,7 +5501,7 @@ Release 2005; 3946095 bytes; 105 ZIP entries; CRC verified.
 | 128102o_p/VIABILIT.Shp | PolyLineZ | 4976 | S059 |
 | 128102o_p/VIAB_A.Shp | PolygonZ | 1184 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128103.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128103.zip`
 
 Release 2005; 2111441 bytes; 108 ZIP entries; CRC verified.
 
@@ -5543,7 +5543,7 @@ Release 2005; 2111441 bytes; 108 ZIP entries; CRC verified.
 | 128103o_p/VIABILIT.Shp | PolyLineZ | 2497 | S059 |
 | 128103o_p/VIAB_A.Shp | PolygonZ | 786 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128104.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128104.zip`
 
 Release 2005; 120621 bytes; 42 ZIP entries; CRC verified.
 
@@ -5563,7 +5563,7 @@ Release 2005; 120621 bytes; 42 ZIP entries; CRC verified.
 | 128104o/SIM_IDRO.Shp | PointZ | 12 | S011 |
 | 128104o/TESTI.Shp | PointZ | 431 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128114.zip`
 
 Release 2005; 1652322 bytes; 105 ZIP entries; CRC verified.
 
@@ -5604,7 +5604,7 @@ Release 2005; 1652322 bytes; 105 ZIP entries; CRC verified.
 | 128114o/VIABILIT.Shp | PolyLineZ | 831 | S059 |
 | 128114o/VIAB_A.Shp | PolygonZ | 141 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128143.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128143.zip`
 
 Release 2005; 165743 bytes; 48 ZIP entries; CRC verified.
 
@@ -5626,7 +5626,7 @@ Release 2005; 165743 bytes; 48 ZIP entries; CRC verified.
 | 128143o/TESTI.Shp | PointZ | 1146 | S016 |
 | 128143o/VIABILIT.Shp | PolyLineZ | 1 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128144.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128144.zip`
 
 Release 2005; 1916460 bytes; 111 ZIP entries; CRC verified.
 
@@ -5669,7 +5669,7 @@ Release 2005; 1916460 bytes; 111 ZIP entries; CRC verified.
 | 128144o/VIABILIT.Shp | PolyLineZ | 2848 | S059 |
 | 128144o/VIAB_A.Shp | PolygonZ | 564 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148031.zip`
 
 Release 2005; 1347637 bytes; 69 ZIP entries; CRC verified.
 
@@ -5698,7 +5698,7 @@ Release 2005; 1347637 bytes; 69 ZIP entries; CRC verified.
 | 148031o/TESTI.Shp | PointZ | 2026 | S016 |
 | 148031o/VEGET_A.Shp | PolygonZ | 15 | S062 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148043.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148043.zip`
 
 Release 2005; 294524 bytes; 78 ZIP entries; CRC verified.
 
@@ -5730,7 +5730,7 @@ Release 2005; 294524 bytes; 78 ZIP entries; CRC verified.
 | 148043o_p/VEGET_A.Shp | PolygonZ | 7 | S062 |
 | 148043o_p/VIABILIT.Shp | PolyLineZ | 12 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148044.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148044.zip`
 
 Release 2005; 397031 bytes; 72 ZIP entries; CRC verified.
 
@@ -5760,7 +5760,7 @@ Release 2005; 397031 bytes; 72 ZIP entries; CRC verified.
 | 148044o_p/VEGET_A.Shp | PolygonZ | 59 | S062 |
 | 148044o_p/VIABILIT.Shp | PolyLineZ | 4 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148071.zip`
 
 Release 2005; 717341 bytes; 57 ZIP entries; CRC verified.
 
@@ -5785,7 +5785,7 @@ Release 2005; 717341 bytes; 57 ZIP entries; CRC verified.
 | 148071o/SIM_IDRO.Shp | PointZ | 109 | S011 |
 | 148071o/TESTI.Shp | PointZ | 4083 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148081.zip`
 
 Release 2005; 108347 bytes; 33 ZIP entries; CRC verified.
 
@@ -5802,7 +5802,7 @@ Release 2005; 108347 bytes; 33 ZIP entries; CRC verified.
 | 148081o_p/SIM_CORN.Shp | PointZ | 40 | S006 |
 | 148081o_p/TESTI.Shp | PointZ | 409 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148082.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148082.zip`
 
 Release 2005; 168616 bytes; 36 ZIP entries; CRC verified.
 
@@ -5820,7 +5820,7 @@ Release 2005; 168616 bytes; 36 ZIP entries; CRC verified.
 | 148082o_p/SIM_CORN.Shp | PointZ | 41 | S006 |
 | 148082o_p/TESTI.Shp | PointZ | 982 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148084.zip`
 
 Release 2005; 237732 bytes; 63 ZIP entries; CRC verified.
 
@@ -5847,7 +5847,7 @@ Release 2005; 237732 bytes; 63 ZIP entries; CRC verified.
 | 148084o_p/SIM_IDRO.Shp | PointZ | 34 | S011 |
 | 148084o_p/TESTI.Shp | PointZ | 1682 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148121.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148121.zip`
 
 Release 2005; 123881 bytes; 33 ZIP entries; CRC verified.
 
@@ -5864,7 +5864,7 @@ Release 2005; 123881 bytes; 33 ZIP entries; CRC verified.
 | 148121o_p/SIM_CORN.Shp | PointZ | 38 | S006 |
 | 148121o_p/TESTI.Shp | PointZ | 479 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148123.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148123.zip`
 
 Release 2005; 393593 bytes; 60 ZIP entries; CRC verified.
 
@@ -5890,7 +5890,7 @@ Release 2005; 393593 bytes; 60 ZIP entries; CRC verified.
 | 148123o_p/SIM_IDRO.Shp | PointZ | 89 | S011 |
 | 148123o_p/TESTI.Shp | PointZ | 3759 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148124.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148124.zip`
 
 Release 2005; 369572 bytes; 51 ZIP entries; CRC verified.
 
@@ -5913,7 +5913,7 @@ Release 2005; 369572 bytes; 51 ZIP entries; CRC verified.
 | 148124o_p/SIM_IDRO.Shp | PointZ | 75 | S011 |
 | 148124o_p/TESTI.Shp | PointZ | 3510 | S016 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148161.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148161.zip`
 
 Release 2005; 552352 bytes; 105 ZIP entries; CRC verified.
 
@@ -5954,7 +5954,7 @@ Release 2005; 552352 bytes; 105 ZIP entries; CRC verified.
 | 148161o/VIABILIT.Shp | PolyLineZ | 91 | S059 |
 | 148161o/VIAB_A.Shp | PolygonZ | 5 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148164.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148164.zip`
 
 Release 2005; 626571 bytes; 84 ZIP entries; CRC verified.
 
@@ -5988,7 +5988,7 @@ Release 2005; 626571 bytes; 84 ZIP entries; CRC verified.
 | 148164o/VEGETAZ.Shp | PolyLineZ | 2 | S059 |
 | 148164o/VIABILIT.Shp | PolyLineZ | 19 | S059 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree_complete.zip`
 
 Release 2006; 89904908 bytes; 100 ZIP entries; CRC verified.
 
@@ -6020,7 +6020,7 @@ Release 2006; 89904908 bytes; 100 ZIP entries; CRC verified.
 | LagunaVenazia_aree/sv_fer.shp | PolygonZ | 32 | S055 |
 | LagunaVenazia_aree/sv_str.shp | PolygonZ | 143 | S056 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree_retry.zip`
 
 Release 2010; 155205253 bytes; 180 ZIP entries; CRC verified.
 
@@ -6076,7 +6076,7 @@ Release 2010; 155205253 bytes; 180 ZIP entries; CRC verified.
 
 These are ancillary cartographic text drawings, not extra building datasets. DXF has group-code properties rather than DBF schemas. All parsed entities are TEXT (point-anchored annotation), so counts below are annotations, not buildings. CAD layer names and all actual group-code keys are recorded. Group codes: 1=text; 8=layer; 10/20/30=insertion X/Y/Z; 11/21/31=alignment X/Y/Z; 40=text height; 41=width factor; 50=rotation; 51=oblique angle; 7=text style; 62=colour; 67=space; 71=text generation flags; 72/73=alignment; 5=handle; 6=linetype. DXF CRS is not embedded; XY aligns with the legacy west-zone sheets. Annotation Z and text contents must not be treated as building volume geometry.
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128022.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128022.zip`
 
 Exact member: `128022o/Testo/128022O_text.dxf`
 
@@ -6096,7 +6096,7 @@ Exact member: `128022o/Testo/128022O_text.dxf`
 | 14S19 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11A1 | TEXT / insertion point | 479 | 1, 5, 8, 10, 20, 30, 40 | -2.68 … 3.5 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128023.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128023.zip`
 
 Exact member: `128023o/Testo/128023O_text.dxf`
 
@@ -6118,7 +6118,7 @@ Exact member: `128023o/Testo/128023O_text.dxf`
 | 14R18 | TEXT / insertion point | 7 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 5 | 1, 5, 8, 10, 20, 30, 40 | -3.7 … -3.4 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128031.zip`
 
 Exact member: `128031o/Testo/128031O_text.dxf`
 
@@ -6139,7 +6139,7 @@ Exact member: `128031o/Testo/128031O_text.dxf`
 | 11A1 | TEXT / insertion point | 808 | 1, 5, 8, 10, 20, 30, 40 | -7.8 … 5.9 |
 | 2AC29 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 1.26 … 2.94 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128032.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128032.zip`
 
 Exact member: `128032o/Testo/128032O_text.dxf`
 
@@ -6159,7 +6159,7 @@ Exact member: `128032o/Testo/128032O_text.dxf`
 | 14N14 | TEXT / insertion point | 7 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14S19 | TEXT / insertion point | 7 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128033.zip`
 
 Exact member: `128033o/Testo/128033O_text.dxf`
 
@@ -6179,7 +6179,7 @@ Exact member: `128033o/Testo/128033O_text.dxf`
 | 14S19 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128034.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128034.zip`
 
 Exact member: `128034o/Testo/128034O_text.dxf`
 
@@ -6199,7 +6199,7 @@ Exact member: `128034o/Testo/128034O_text.dxf`
 | 12D4 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | -0.5 … -0.5 |
 | 14S19 | TEXT / insertion point | 9 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128051.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128051.zip`
 
 Exact member: `128051o/Testo/128051O_text.dxf`
 
@@ -6221,7 +6221,7 @@ Exact member: `128051o/Testo/128051O_text.dxf`
 | 14F6 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11B2 | TEXT / insertion point | 367 | 1, 5, 8, 10, 20, 30, 40 | -2.25 … 5.54 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128052.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128052.zip`
 
 Exact member: `128052o/Testo/128052O_text.dxf`
 
@@ -6238,7 +6238,7 @@ Exact member: `128052o/Testo/128052O_text.dxf`
 | 11E5 | TEXT / insertion point | 1207 | 1, 5, 8, 10, 20, 30, 40 | -16.35 … 1.0 |
 | 11B2 | TEXT / insertion point | 53 | 1, 5, 8, 10, 20, 30, 40 | -1.25 … 3.29 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128053.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128053.zip`
 
 Exact member: `128053o/Testo/128053O_text.dxf`
 
@@ -6253,7 +6253,7 @@ Exact member: `128053o/Testo/128053O_text.dxf`
 | 14S19 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14P16 | TEXT / insertion point | 5 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128054.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128054.zip`
 
 Exact member: `128054o/Testo/128054O_text.dxf`
 
@@ -6273,7 +6273,7 @@ Exact member: `128054o/Testo/128054O_text.dxf`
 | 12B2 | TEXT / insertion point | 5 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.35 … 2.23 |
 | 11A1 | TEXT / insertion point | 71 | 1, 5, 8, 10, 20, 30, 40 | -0.57 … 4.93 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128061.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128061.zip`
 
 Exact member: `128061o/Testo/128061O_text.dxf`
 
@@ -6286,7 +6286,7 @@ Exact member: `128061o/Testo/128061O_text.dxf`
 | 14O15 | TEXT / insertion point | 10 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 1409 | 1, 5, 8, 10, 20, 30, 40 | -10.25 … 0.28 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128062.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128062.zip`
 
 Exact member: `128062o/Testo/128062O_text.dxf`
 
@@ -6302,7 +6302,7 @@ Exact member: `128062o/Testo/128062O_text.dxf`
 | 14V22 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 1483 | 1, 5, 8, 10, 20, 30, 40 | -21.75 … 1.5 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128063.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128063.zip`
 
 Exact member: `128063o/Testo/128063O_text.dxf`
 
@@ -6319,7 +6319,7 @@ Exact member: `128063o/Testo/128063O_text.dxf`
 | 14G7 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 1250 | 1, 5, 8, 10, 20, 30, 40 | -6.4 … 1.2 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128064.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128064.zip`
 
 Exact member: `128064o/Testo/128064O_text.dxf`
 
@@ -6338,7 +6338,7 @@ Exact member: `128064o/Testo/128064O_text.dxf`
 | 12B2 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 11A1 | TEXT / insertion point | 112 | 1, 5, 8, 10, 20, 30, 40 | -1.7 … 4.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128071.zip`
 
 Exact member: `128071o/Testo/128071O_text.dxf`
 
@@ -6354,7 +6354,7 @@ Exact member: `128071o/Testo/128071O_text.dxf`
 | 11A1 | TEXT / insertion point | 21 | 1, 5, 8, 10, 20, 30, 40 | -0.7 … 1.5 |
 | 11E5 | TEXT / insertion point | 1465 | 1, 5, 8, 10, 20, 30, 40 | -3.95 … 0.55 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128072.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128072.zip`
 
 Exact member: `128072o/Testo/128072O_text.dxf`
 
@@ -6369,7 +6369,7 @@ Exact member: `128072o/Testo/128072O_text.dxf`
 | 11A1 | TEXT / insertion point | 41 | 1, 5, 8, 10, 20, 30, 40 | -0.4 … 2.0 |
 | 11E5 | TEXT / insertion point | 1429 | 1, 5, 8, 10, 20, 30, 40 | -4.05 … 0.4 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128073.zip`
 
 Exact member: `128073o/Testo/128073O_text.dxf`
 
@@ -6384,7 +6384,7 @@ Exact member: `128073o/Testo/128073O_text.dxf`
 | 11A1 | TEXT / insertion point | 21 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 2.0 |
 | 11E5 | TEXT / insertion point | 1532 | 1, 5, 8, 10, 20, 30, 40 | -12.15 … 0.75 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128074.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128074.zip`
 
 Exact member: `128074o/Testo/128074O_text.dxf`
 
@@ -6398,7 +6398,7 @@ Exact member: `128074o/Testo/128074O_text.dxf`
 | 14W23 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14G7 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128084.zip`
 
 Exact member: `128084o/Testo/128084O_text.dxf`
 
@@ -6419,7 +6419,7 @@ Exact member: `128084o/Testo/128084O_text.dxf`
 | 12B2 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.07 |
 | 11A1 | TEXT / insertion point | 470 | 1, 5, 8, 10, 20, 30, 40 | -1.93 … 3.19 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128092.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128092.zip`
 
 Exact member: `128092o/Testo/128092O_text.dxf`
 
@@ -6435,7 +6435,7 @@ Exact member: `128092o/Testo/128092O_text.dxf`
 | 12B2 | TEXT / insertion point | 7 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 11E5 | TEXT / insertion point | 1303 | 1, 5, 8, 10, 20, 30, 40 | -10.3 … 0.36 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\128101.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\128101.zip`
 
 Exact member: `128101o/Testo/128101O_text.dxf`
 
@@ -6451,7 +6451,7 @@ Exact member: `128101o/Testo/128101O_text.dxf`
 | 11A1 | TEXT / insertion point | 63 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 2.0 |
 | 11B2 | TEXT / insertion point | 9 | 1, 5, 8, 10, 20, 30, 40 | 0.1 … 2.5 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148031.zip`
 
 Exact member: `148031o/Testo/148031O_text.dxf`
 
@@ -6466,7 +6466,7 @@ Exact member: `148031o/Testo/148031O_text.dxf`
 | 14M13 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 649 | 1, 5, 8, 10, 20, 30, 40 | -6.45 … 0.64 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148041.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148041.zip`
 
 Exact member: `148041o/Testo/148041O_text.dxf`
 
@@ -6481,7 +6481,7 @@ Exact member: `148041o/Testo/148041O_text.dxf`
 | 14V22 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14W23 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148043.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148043.zip`
 
 Exact member: `148043o/Testo/148043O_text.dxf`
 
@@ -6497,7 +6497,7 @@ Exact member: `148043o/Testo/148043O_text.dxf`
 | 11E5 | TEXT / insertion point | 1664 | 1, 5, 8, 10, 20, 30, 40 | -21.55 … 0.35 |
 | 14O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148044.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148044.zip`
 
 Exact member: `148044o/Testo/148044O_text.dxf`
 
@@ -6511,7 +6511,7 @@ Exact member: `148044o/Testo/148044O_text.dxf`
 | 14W23 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 1176 | 1, 5, 8, 10, 20, 30, 40 | -14.05 … 0.56 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148071.zip`
 
 Exact member: `148071o/Testo/148071O_text.dxf`
 
@@ -6526,7 +6526,7 @@ Exact member: `148071o/Testo/148071O_text.dxf`
 | 14O15 | TEXT / insertion point | 7 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14V22 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148084.zip`
 
 Exact member: `148084o/Testo/148084O_text.dxf`
 
@@ -6539,7 +6539,7 @@ Exact member: `148084o/Testo/148084O_text.dxf`
 | 14N14 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14V22 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148123.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148123.zip`
 
 Exact member: `148123o/Testo/148123O_text.dxf`
 
@@ -6552,7 +6552,7 @@ Exact member: `148123o/Testo/148123O_text.dxf`
 | 14N14 | TEXT / insertion point | 10 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14M13 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148124.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148124.zip`
 
 Exact member: `148124o/Testo/148124O_text.dxf`
 
@@ -6566,7 +6566,7 @@ Exact member: `148124o/Testo/148124O_text.dxf`
 | 14V22 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14M13 | TEXT / insertion point | 7 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148161.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148161.zip`
 
 Exact member: `148161o/Testo/148161O_text.dxf`
 
@@ -6583,7 +6583,7 @@ Exact member: `148161o/Testo/148161O_text.dxf`
 | 14N14 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14Y25 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1987\148164.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1987\148164.zip`
 
 Exact member: `148164o/Testo/148164O_text.dxf`
 
@@ -6601,7 +6601,7 @@ Exact member: `148164o/Testo/148164O_text.dxf`
 | 14G7 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127033.zip`
 
 Exact member: `127033o/Testo/127033O_text.dxf`
 
@@ -6619,7 +6619,7 @@ Exact member: `127033o/Testo/127033O_text.dxf`
 | 12B2 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50 | 9.32 … 11.64 |
 | 16C3 | TEXT / insertion point | 62 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127071.zip`
 
 Exact member: `127071o/Testo/127071O_text.dxf`
 
@@ -6636,7 +6636,7 @@ Exact member: `127071o/Testo/127071O_text.dxf`
 | 14O15 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14E5 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127072.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127072.zip`
 
 Exact member: `127072o/Testo/127072O_text.dxf`
 
@@ -6650,7 +6650,7 @@ Exact member: `127072o/Testo/127072O_text.dxf`
 | 14E5 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127073.zip`
 
 Exact member: `127073o/Testo/127073O_text.dxf`
 
@@ -6667,7 +6667,7 @@ Exact member: `127073o/Testo/127073O_text.dxf`
 | 14E5 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127074.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127074.zip`
 
 Exact member: `127074o/Testo/127074O_text.dxf`
 
@@ -6684,7 +6684,7 @@ Exact member: `127074o/Testo/127074O_text.dxf`
 | 14E5 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 12 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127081.zip`
 
 Exact member: `127081o/Testo/127081O_text.dxf`
 
@@ -6701,7 +6701,7 @@ Exact member: `127081o/Testo/127081O_text.dxf`
 | 14E5 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127082.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127082.zip`
 
 Exact member: `127082o/Testo/127082O_text.dxf`
 
@@ -6716,7 +6716,7 @@ Exact member: `127082o/Testo/127082O_text.dxf`
 | 14E5 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14S19 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127083.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127083.zip`
 
 Exact member: `127083o/Testo/127083O_text.dxf`
 
@@ -6732,7 +6732,7 @@ Exact member: `127083o/Testo/127083O_text.dxf`
 | 14F6 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14Y25 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127084.zip`
 
 Exact member: `127084o/Testo/127084O_text.dxf`
 
@@ -6749,7 +6749,7 @@ Exact member: `127084o/Testo/127084O_text.dxf`
 | 14S19 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127111.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127111.zip`
 
 Exact member: `127111o/Testo/127111O_text.dxf`
 
@@ -6765,7 +6765,7 @@ Exact member: `127111o/Testo/127111O_text.dxf`
 | 14S19 | TEXT / insertion point | 5 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127112.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127112.zip`
 
 Exact member: `127112o/Testo/127112O_text.dxf`
 
@@ -6781,7 +6781,7 @@ Exact member: `127112o/Testo/127112O_text.dxf`
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127113.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127113.zip`
 
 Exact member: `127113o/Testo/127113O_text.dxf`
 
@@ -6798,7 +6798,7 @@ Exact member: `127113o/Testo/127113O_text.dxf`
 | 14P16 | TEXT / insertion point | 20 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14N14 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127114.zip`
 
 Exact member: `127114o/Testo/127114O_text.dxf`
 
@@ -6814,7 +6814,7 @@ Exact member: `127114o/Testo/127114O_text.dxf`
 | 14F6 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14E5 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127121.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127121.zip`
 
 Exact member: `127121o/Testo/127121O_text.dxf`
 
@@ -6829,7 +6829,7 @@ Exact member: `127121o/Testo/127121O_text.dxf`
 | 14P16 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127122.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127122.zip`
 
 Exact member: `127122o/Testo/127122O_text.dxf`
 
@@ -6844,7 +6844,7 @@ Exact member: `127122o/Testo/127122O_text.dxf`
 | 16C3 | TEXT / insertion point | 60 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 1338 | 1, 5, 8, 10, 20, 30, 40 | -7.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127123.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127123.zip`
 
 Exact member: `127123o/Testo/127123O_text.dxf`
 
@@ -6861,7 +6861,7 @@ Exact member: `127123o/Testo/127123O_text.dxf`
 | 14W23 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14G7 | TEXT / insertion point | 45 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127124.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127124.zip`
 
 Exact member: `127124o/Testo/127124O_text.dxf`
 
@@ -6878,7 +6878,7 @@ Exact member: `127124o/Testo/127124O_text.dxf`
 | 14E5 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127151.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127151.zip`
 
 Exact member: `127151o/Testo/127151O_text.dxf`
 
@@ -6894,7 +6894,7 @@ Exact member: `127151o/Testo/127151O_text.dxf`
 | 11E5 | TEXT / insertion point | 162 | 1, 5, 8, 10, 20, 30, 40 | -12.05 … -1.7 |
 | 11A1 | TEXT / insertion point | 486 | 1, 5, 8, 10, 20, 30, 40 | -0.56 … 4.17 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127152.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127152.zip`
 
 Exact member: `127152o/Testo/127152O_text.dxf`
 
@@ -6909,7 +6909,7 @@ Exact member: `127152o/Testo/127152O_text.dxf`
 | 16C3 | TEXT / insertion point | 60 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 11E5 | TEXT / insertion point | 1031 | 1, 5, 8, 10, 20, 30, 40 | -8.15 … 1.7 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127154.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127154.zip`
 
 Exact member: `127154o/Testo/127154O_text.dxf`
 
@@ -6928,7 +6928,7 @@ Exact member: `127154o/Testo/127154O_text.dxf`
 | 14F6 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14E5 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127161.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127161.zip`
 
 Exact member: `127161o/Testo/127161O_text.dxf`
 
@@ -6947,7 +6947,7 @@ Exact member: `127161o/Testo/127161O_text.dxf`
 | 14V22 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14M13 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127162.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127162.zip`
 
 Exact member: `127162o/Testo/127162O_text.dxf`
 
@@ -6962,7 +6962,7 @@ Exact member: `127162o/Testo/127162O_text.dxf`
 | 16C3 | TEXT / insertion point | 61 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 11E5 | TEXT / insertion point | 1439 | 1, 5, 8, 10, 20, 30, 40 | -10.4 … -0.2 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127163.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127163.zip`
 
 Exact member: `127163o/Testo/127163O_text.dxf`
 
@@ -6981,7 +6981,7 @@ Exact member: `127163o/Testo/127163O_text.dxf`
 | 16C3 | TEXT / insertion point | 61 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 1125 | 1, 5, 8, 10, 20, 30, 40 | -12.3 … 0.34 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\127164.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\127164.zip`
 
 Exact member: `127164o/Testo/127164O_text.dxf`
 
@@ -6994,7 +6994,7 @@ Exact member: `127164o/Testo/127164O_text.dxf`
 | 14O15 | TEXT / insertion point | 5 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 14N14 | TEXT / insertion point | 8 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128091.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128091.zip`
 
 Exact member: `128091o/Testo/128091O_text.dxf`
 
@@ -7012,7 +7012,7 @@ Exact member: `128091o/Testo/128091O_text.dxf`
 | 14U21 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14W23 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128093.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128093.zip`
 
 Exact member: `128093o/Testo/128093O_text.dxf`
 
@@ -7028,7 +7028,7 @@ Exact member: `128093o/Testo/128093O_text.dxf`
 | 14W23 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14U21 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128094.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128094.zip`
 
 Exact member: `128094o/Testo/128094O_text.dxf`
 
@@ -7042,7 +7042,7 @@ Exact member: `128094o/Testo/128094O_text.dxf`
 | 14R18 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14W23 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128102.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128102.zip`
 
 Exact member: `128102o/Testo/128102O_text.dxf`
 
@@ -7061,7 +7061,7 @@ Exact member: `128102o/Testo/128102O_text.dxf`
 | 14O15 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14L12 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128103.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128103.zip`
 
 Exact member: `128103o/Testo/128103O_text.dxf`
 
@@ -7082,7 +7082,7 @@ Exact member: `128103o/Testo/128103O_text.dxf`
 | 14O15 | TEXT / insertion point | 5 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14W23 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128104.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128104.zip`
 
 Exact member: `128104o/Testo/128104O_text.dxf`
 
@@ -7102,7 +7102,7 @@ Exact member: `128104o/Testo/128104O_text.dxf`
 | 14U21 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 | 14G7 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128114.zip`
 
 Exact member: `128114o/Testo/128114O_text.dxf`
 
@@ -7119,7 +7119,7 @@ Exact member: `128114o/Testo/128114O_text.dxf`
 | 14S19 | TEXT / insertion point | 9 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14P16 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128131.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128131.zip`
 
 Exact member: `128131o/Testo/128131O_text.dxf`
 
@@ -7138,7 +7138,7 @@ Exact member: `128131o/Testo/128131O_text.dxf`
 | 16C3 | TEXT / insertion point | 36 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128132.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128132.zip`
 
 Exact member: `128132o/Testo/128132O_text.dxf`
 
@@ -7151,7 +7151,7 @@ Exact member: `128132o/Testo/128132O_text.dxf`
 | 16C3 | TEXT / insertion point | 35 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128133.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128133.zip`
 
 Exact member: `128133o/Testo/128133O_text.dxf`
 
@@ -7169,7 +7169,7 @@ Exact member: `128133o/Testo/128133O_text.dxf`
 | 16C3 | TEXT / insertion point | 36 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128134.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128134.zip`
 
 Exact member: `128134o/Testo/128134O_text.dxf`
 
@@ -7191,7 +7191,7 @@ Exact member: `128134o/Testo/128134O_text.dxf`
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14M13 | TEXT / insertion point | 6 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128143.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128143.zip`
 
 Exact member: `128143o/Testo/128143O_text.dxf`
 
@@ -7204,7 +7204,7 @@ Exact member: `128143o/Testo/128143O_text.dxf`
 | 14G7 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 468 | 1, 5, 8, 10, 20, 30, 40 | -17.5 … -2.75 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\128144.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\128144.zip`
 
 Exact member: `128144o/Testo/128144O_text.dxf`
 
@@ -7221,7 +7221,7 @@ Exact member: `128144o/Testo/128144O_text.dxf`
 | 14P16 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148042.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148042.zip`
 
 Exact member: `148042o/Testo/148042O_text.dxf`
 
@@ -7237,7 +7237,7 @@ Exact member: `148042o/Testo/148042O_text.dxf`
 | 16C3 | TEXT / insertion point | 37 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148081.zip`
 
 Exact member: `148081o/Testo/148081O_text.dxf`
 
@@ -7253,7 +7253,7 @@ Exact member: `148081o/Testo/148081O_text.dxf`
 | 16C3 | TEXT / insertion point | 36 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148082.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148082.zip`
 
 Exact member: `148082o/Testo/148082O_text.dxf`
 
@@ -7270,7 +7270,7 @@ Exact member: `148082o/Testo/148082O_text.dxf`
 | 16C3 | TEXT / insertion point | 35 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148121.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148121.zip`
 
 Exact member: `148121o/Testo/148121O_text.dxf`
 
@@ -7285,7 +7285,7 @@ Exact member: `148121o/Testo/148121O_text.dxf`
 | 16C3 | TEXT / insertion point | 37 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\148122.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\148122.zip`
 
 Exact member: `148122o/Testo/148122O_text.dxf`
 
@@ -7299,7 +7299,7 @@ Exact member: `148122o/Testo/148122O_text.dxf`
 | 16C3 | TEXT / insertion point | 36 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\149013.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\149013.zip`
 
 Exact member: `149013o/Testo/149013O_text.dxf`
 
@@ -7314,7 +7314,7 @@ Exact member: `149013o/Testo/149013O_text.dxf`
 | 16C3 | TEXT / insertion point | 34 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\149014.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\149014.zip`
 
 Exact member: `149014o/Testo/149014O_text.dxf`
 
@@ -7328,7 +7328,7 @@ Exact member: `149014o/Testo/149014O_text.dxf`
 | 16C3 | TEXT / insertion point | 36 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 | 16D4 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\1994\149054.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\1994\149054.zip`
 
 Exact member: `149054o/Testo/149054O_text.dxf`
 
@@ -7341,7 +7341,7 @@ Exact member: `149054o/Testo/149054O_text.dxf`
 | 14G7 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50 | -3333.0 … -3333.0 |
 | 11E5 | TEXT / insertion point | 632 | 1, 5, 8, 10, 20, 30, 40 | -38.3 … -0.1 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127033.zip`
 
 Exact member: `127033o/testo/127033o_text.dxf`
 
@@ -7365,7 +7365,7 @@ Exact member: `127033o/testo/127033o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127071.zip`
 
 Exact member: `127071o_p/testo/127071o_text.dxf`
 
@@ -7387,7 +7387,7 @@ Exact member: `127071o_p/testo/127071o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127073.zip`
 
 Exact member: `127073o_p/testo/127073o_p_text.dxf`
 
@@ -7409,7 +7409,7 @@ Exact member: `127073o_p/testo/127073o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127074.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127074.zip`
 
 Exact member: `127074o_p/testo/127074o_p_text.dxf`
 
@@ -7432,7 +7432,7 @@ Exact member: `127074o_p/testo/127074o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127081.zip`
 
 Exact member: `127081o_p/testo/127081o_p_text.dxf`
 
@@ -7454,7 +7454,7 @@ Exact member: `127081o_p/testo/127081o_p_text.dxf`
 | 14G7 | TEXT / insertion point | 30 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127084.zip`
 
 Exact member: `127084o_p/testo/127084o_p_text.dxf`
 
@@ -7476,7 +7476,7 @@ Exact member: `127084o_p/testo/127084o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127113.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127113.zip`
 
 Exact member: `127113o_p/testo/127113o_p_text.dxf`
 
@@ -7499,7 +7499,7 @@ Exact member: `127113o_p/testo/127113o_p_text.dxf`
 | 14P16 | TEXT / insertion point | 13 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 14N14 | TEXT / insertion point | 4 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127114.zip`
 
 Exact member: `127114o_p/testo/127114o_p_text.dxf`
 
@@ -7520,7 +7520,7 @@ Exact member: `127114o_p/testo/127114o_p_text.dxf`
 | 11B2 | TEXT / insertion point | 234 | 1, 5, 8, 10, 20, 30, 40, 100, 330 | 0.0 … 0.0 |
 | 14P16 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127151.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127151.zip`
 
 Exact member: `127151o_p/testo/127151o_p_text.dxf`
 
@@ -7540,7 +7540,7 @@ Exact member: `127151o_p/testo/127151o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127152.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127152.zip`
 
 Exact member: `127152o/testo/127152o_text.dxf`
 
@@ -7564,7 +7564,7 @@ Exact member: `127152o/testo/127152o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127154.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127154.zip`
 
 Exact member: `127154o_p/testo/127154o_p_text.dxf`
 
@@ -7589,7 +7589,7 @@ Exact member: `127154o_p/testo/127154o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\127163.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\127163.zip`
 
 Exact member: `127163o_p/testo/127163o_p_text.dxf`
 
@@ -7610,7 +7610,7 @@ Exact member: `127163o_p/testo/127163o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128022.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128022.zip`
 
 Exact member: `128022o/testo/128022o_text.dxf`
 
@@ -7636,7 +7636,7 @@ Exact member: `128022o/testo/128022o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128023.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128023.zip`
 
 Exact member: `128023o/testo/128023o_text.dxf`
 
@@ -7663,7 +7663,7 @@ Exact member: `128023o/testo/128023o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128031.zip`
 
 Exact member: `128031o/testo/128031o_text.dxf`
 
@@ -7690,7 +7690,7 @@ Exact member: `128031o/testo/128031o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128032.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128032.zip`
 
 Exact member: `128032o_p/testo/128032o_p_text.dxf`
 
@@ -7715,7 +7715,7 @@ Exact member: `128032o_p/testo/128032o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128033.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128033.zip`
 
 Exact member: `128033o_p/testo/128033o_p_text.dxf`
 
@@ -7738,7 +7738,7 @@ Exact member: `128033o_p/testo/128033o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128034.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128034.zip`
 
 Exact member: `128034o/testo/128034o_text.dxf`
 
@@ -7765,7 +7765,7 @@ Exact member: `128034o/testo/128034o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128051.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128051.zip`
 
 Exact member: `128051o_p/testo/128051o_p_text.dxf`
 
@@ -7793,7 +7793,7 @@ Exact member: `128051o_p/testo/128051o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128054.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128054.zip`
 
 Exact member: `128054o_p/testo/128054o_p_text.dxf`
 
@@ -7816,7 +7816,7 @@ Exact member: `128054o_p/testo/128054o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128061.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128061.zip`
 
 Exact member: `128061o_p/testo/128061o_p_text.dxf`
 
@@ -7834,7 +7834,7 @@ Exact member: `128061o_p/testo/128061o_p_text.dxf`
 | 14P16 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 11E5 | TEXT / insertion point | 9 | 1, 5, 8, 10, 20, 30, 40, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128062.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128062.zip`
 
 Exact member: `128062o_p/testo/128062o_p_text.dxf`
 
@@ -7851,7 +7851,7 @@ Exact member: `128062o_p/testo/128062o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128064.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128064.zip`
 
 Exact member: `128064o_p/testo/128064o_p_text.dxf`
 
@@ -7874,7 +7874,7 @@ Exact member: `128064o_p/testo/128064o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128071.zip`
 
 Exact member: `128071o_p/testo/128071o_p_text.dxf`
 
@@ -7893,7 +7893,7 @@ Exact member: `128071o_p/testo/128071o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128072.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128072.zip`
 
 Exact member: `128072o_p/testo/128072o_p_text.dxf`
 
@@ -7918,7 +7918,7 @@ Exact member: `128072o_p/testo/128072o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128073.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128073.zip`
 
 Exact member: `128073o_p/testo/128073o_p_text.dxf`
 
@@ -7940,7 +7940,7 @@ Exact member: `128073o_p/testo/128073o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128084.zip`
 
 Exact member: `128084o_p/testo/128084o_p_text.dxf`
 
@@ -7966,7 +7966,7 @@ Exact member: `128084o_p/testo/128084o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128101.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128101.zip`
 
 Exact member: `128101o_p/testo/128101o_p_text.dxf`
 
@@ -7989,7 +7989,7 @@ Exact member: `128101o_p/testo/128101o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128102.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128102.zip`
 
 Exact member: `128102o_p/testo/128102o_p_text.dxf`
 
@@ -8014,7 +8014,7 @@ Exact member: `128102o_p/testo/128102o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128103.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128103.zip`
 
 Exact member: `128103o_p/testo/128103o_p_text.dxf`
 
@@ -8041,7 +8041,7 @@ Exact member: `128103o_p/testo/128103o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128104.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128104.zip`
 
 Exact member: `128104o/testo/128104o_text.dxf`
 
@@ -8059,7 +8059,7 @@ Exact member: `128104o/testo/128104o_text.dxf`
 | 11E5 | TEXT / insertion point | 91 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 14O15 | TEXT / insertion point | 3 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128114.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128114.zip`
 
 Exact member: `128114o/testo/128114o_text.dxf`
 
@@ -8083,7 +8083,7 @@ Exact member: `128114o/testo/128114o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128143.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128143.zip`
 
 Exact member: `128143o/testo/128143o_text.dxf`
 
@@ -8104,7 +8104,7 @@ Exact member: `128143o/testo/128143o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\128144.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\128144.zip`
 
 Exact member: `128144o/testo/128144o_text.dxf`
 
@@ -8127,7 +8127,7 @@ Exact member: `128144o/testo/128144o_text.dxf`
 | 14F6 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 100, 330 | 0.0 … 0.0 |
 | 11B2 | TEXT / insertion point | 172 | 1, 5, 8, 10, 20, 30, 40, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148031.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148031.zip`
 
 Exact member: `148031o/testo/148031o_text.dxf`
 
@@ -8149,7 +8149,7 @@ Exact member: `148031o/testo/148031o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148043.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148043.zip`
 
 Exact member: `148043o_p/testo/148043o_p_text.dxf`
 
@@ -8169,7 +8169,7 @@ Exact member: `148043o_p/testo/148043o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148044.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148044.zip`
 
 Exact member: `148044o_p/testo/148044o_p_text.dxf`
 
@@ -8189,7 +8189,7 @@ Exact member: `148044o_p/testo/148044o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148071.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148071.zip`
 
 Exact member: `148071o/testo/148071o_text.dxf`
 
@@ -8213,7 +8213,7 @@ Exact member: `148071o/testo/148071o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148081.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148081.zip`
 
 Exact member: `148081o_p/testo/148081o_p_text.dxf`
 
@@ -8230,7 +8230,7 @@ Exact member: `148081o_p/testo/148081o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148082.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148082.zip`
 
 Exact member: `148082o_p/testo/148082o_p_text.dxf`
 
@@ -8248,7 +8248,7 @@ Exact member: `148082o_p/testo/148082o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148084.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148084.zip`
 
 Exact member: `148084o_p/testo/148084o_p_text.dxf`
 
@@ -8268,7 +8268,7 @@ Exact member: `148084o_p/testo/148084o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148121.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148121.zip`
 
 Exact member: `148121o_p/testo/148121o_p_text.dxf`
 
@@ -8285,7 +8285,7 @@ Exact member: `148121o_p/testo/148121o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148123.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148123.zip`
 
 Exact member: `148123o_p/testo/148123o_p_text.dxf`
 
@@ -8305,7 +8305,7 @@ Exact member: `148123o_p/testo/148123o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148124.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148124.zip`
 
 Exact member: `148124o_p/testo/148124o_p_text.dxf`
 
@@ -8326,7 +8326,7 @@ Exact member: `148124o_p/testo/148124o_p_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148161.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148161.zip`
 
 Exact member: `148161o/testo/148161o_text.dxf`
 
@@ -8349,7 +8349,7 @@ Exact member: `148161o/testo/148161o_text.dxf`
 | 16N14 | TEXT / insertion point | 1 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 | 16O15 | TEXT / insertion point | 2 | 1, 5, 8, 10, 20, 30, 40, 50, 100, 330 | 0.0 … 0.0 |
 
-### `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2005\148164.zip`
+### `data/data\raw\Venice_Geodata_20261022_2004\2005\148164.zip`
 
 Exact member: `148164o/testo/148164o_text.dxf`
 
@@ -8373,15 +8373,15 @@ Exact member: `148164o/testo/148164o_text.dxf`
 
 ## Source documentation and retained failures
 
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Laguna_doc.pdf` — 8 pages; DB Cartografico v1.5, overview only.
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_doc.pdf` — 100 pages; DB Topografico v2.6, including class/attribute dictionaries.
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\catalog.json`
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\download_manifest.json`
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\README.md`
+- `data/data\raw\Venice_Geodata_20261022_2004\2006_Laguna_doc.pdf` — 8 pages; DB Cartografico v1.5, overview only.
+- `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_doc.pdf` — 100 pages; DB Topografico v2.6, including class/attribute dictionaries.
+- `data/data\raw\Venice_Geodata_20261022_2004\catalog.json`
+- `data/data\raw\Venice_Geodata_20261022_2004\download_manifest.json`
+- `data/data\raw\Venice_Geodata_20261022_2004\README.md`
 
 Invalid/incomplete archives (not counted as additional releases):
 
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree.zip` — 42917493 bytes; ZIP central directory unavailable (`BadZipFile: File is not a zip file`). The complete/retry archive is used instead.
-- `D:\100_star\venice\data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree.zip` — 30990016 bytes; ZIP central directory unavailable (`BadZipFile: File is not a zip file`). The complete/retry archive is used instead.
+- `data/data\raw\Venice_Geodata_20261022_2004\2006_Laguna_aree.zip` — 42917493 bytes; ZIP central directory unavailable (`BadZipFile: File is not a zip file`). The complete/retry archive is used instead.
+- `data/data\raw\Venice_Geodata_20261022_2004\2010_Venezia_aree.zip` — 30990016 bytes; ZIP central directory unavailable (`BadZipFile: File is not a zip file`). The complete/retry archive is used instead.
 
 **Conclusion:** real elevation data and usable building volumetric-part inputs exist locally, especially 2005 FABBRIC, 2006 EDIFC/EDI_MIN and 2010 UN_VOL plus ELE_CP roof Z geometry. No held archive supplies ready-made closed building solids, a populated cubic-volume field, a stable five-release building identifier, verified construction dates, an explicit building vertical datum, or an established local redistribution licence.

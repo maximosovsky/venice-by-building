@@ -4,7 +4,7 @@
 
 ## 0. Scope, evidence and compatibility level
 
-Source root: `D:\100_star\venice\research\engines\venice-repo-audit\SydMap`.
+Source root: `data/research\engines\venice-repo-audit\SydMap`.
 
 Line citations below use `web/app.js` (A), `web/worker.js` (W), `web/index.html` (H), `pipeline/s03_tiles.py` (T), `pipeline/s02_years.py` (Y), `pipeline/config.py` (C), and `pipeline/periods.py` (P). For example, **T:99–117** means those exact lines in `pipeline/s03_tiles.py`. JSON files are compact, single-line documents: their structural evidence is `web/data/sydney.json:1` and `web/data/wiki.json:1`; the first approximately 2 KB and top-level/nested keys were inspected, not reproduced wholesale.
 

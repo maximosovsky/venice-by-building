@@ -2,7 +2,7 @@
 
 ## Scope and conclusion
 
-Read-only inspection of `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025`: **490 files; 937,472,050 bytes**. No source files were changed. Every existing file is listed with its absolute path and exact byte size in Appendix A; actual schemas and date distributions follow. The folder-name suffix `2025` is not a historical date or a reliable release date.
+Read-only inspection of `data/data\raw\Venice_Historical_20261022_2025`: **490 files; 937,472,050 bytes**. No source files were changed. Every existing file is listed with its absolute path and exact byte size in Appendix A; actual schemas and date distributions follow. The folder-name suffix `2025` is not a historical date or a reliable release date.
 
 **There is no universal, verified construction-year column for Venice buildings in this collection.** There are nevertheless several usable, differently qualified forms of datable evidence:
 
@@ -16,13 +16,13 @@ Read-only inspection of `D:\100_star\venice\data\raw\Venice_Historical_20261022_
 
 Canonical, publisher-checksummed files:
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_geometries.geojson` — **12,903,992 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\README.md` — **12,153 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\zenodo_record.json` — **8,899 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_geometries.geojson` — **12,903,992 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\README.md` — **12,153 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\1808\zenodo_record.json` — **8,899 bytes**
 
 - **Geometry:** 24,430 Polygon features, CRS84 longitude/latitude; `geometry_type` values: building 15,246; courtyard 7,887; sottoportico 704; street 327; water 264; null 2. These are cadastral geometry parts, not 24,430 distinct buildings. A parcel may comprise building/courtyard/passage parts.
 - **Register:** 23,662 textual entries; `parcel_id` is integer, unique entry identity; `geometry_id` is integer in the text but string/null in GeoJSON. There are 16,004 distinct text geometry groups versus 16,022 non-null polygon geometry groups. The join is many-to-many/grouped: cast consistently before matching, retain unjoined geometries. Never assume one entry = one building.
@@ -35,19 +35,19 @@ Canonical, publisher-checksummed files:
 
 ### Repository variants and CSV exports
 
-`D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main` contains overlapping exports of the same 1808 source, not additional observation years. Exact filenames/sizes appear in Appendix A.
+`data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main` contains overlapping exports of the same 1808 source, not additional observation years. Exact filenames/sizes appear in Appendix A.
 
-`D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni` contains overlapping exports of the same 1808 source, not additional observation years. Exact filenames/sizes appear in Appendix A.
+`data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni` contains overlapping exports of the same 1808 source, not additional observation years. Exact filenames/sizes appear in Appendix A.
 
 The dedicated repository includes geometry CSV (24,430 rows, `geometry` is WKT Polygon), text CSV (23,662), people CSV (12,277), log CSV (9,312), JSON counterparts, aggregated JSON, and eight processing notebooks. Data Week contains geometry, text, people and aggregate JSON. Keep these variants separate: one polygon's geometry-group assignment differs between the canonical Zenodo and repository exports; text/aggregate Data Week files also have different byte sizes. Notebooks are documentation and were not executed.
 
 ## 2. 1740 Catastici / 1741-labelled processing material
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.geojson` — **46,730,299 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.tsv` — **9,448,321 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\README.md` — **6,735 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\1740_catastici_version20250625.geojson` — **32,824,244 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740_redrawn_parishes_cleaned_wikidata_standardised.geojson` — **106,216 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.geojson` — **46,730,299 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.tsv` — **9,448,321 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\README.md` — **6,735 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\1740_catastici_version20250625.geojson` — **32,824,244 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740_redrawn_parishes_cleaned_wikidata_standardised.geojson` — **106,216 bytes**
 
 - Newer dedicated repository: **32,361 Point features** in EPSG:32633; matching TSV has 32,361 rows, with `x`/`y` coordinate columns. Points are manually interpreted locations of property entries, not per-building/per-parcel boundary polygons. The README advertises a CRS84 export but it is absent from both local ZIP and extracted snapshot.
 - Older Data Week version: **32,676 Point features**, EPSG:32633; 2025-06-25 and 2026-05-12 in filenames are data-production/version dates. There is no per-record historical date column.
@@ -60,9 +60,9 @@ The dedicated repository includes geometry CSV (24,430 rows, `geometry` is WKT P
 
 ## 3. 1857 commercial guide
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_commercial_guide_with_pages_20250624.csv` — **1,501,744 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_Nuova_Guida_commerciale_della_citta_di_Venezia.pdf` — **18,132,651 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\README.md` — **2,482 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_commercial_guide_with_pages_20250624.csv` — **1,501,744 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_Nuova_Guida_commerciale_della_citta_di_Venezia.pdf` — **18,132,651 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\README.md` — **2,482 bytes**
 
 CSV: **5,883 entries**, each a professional/business/address entry; 383-page source PDF. `geometry` contains WKT Point longitude/latitude, not building polygons. Operational `index`; location candidates `DISTRICT` + `NUM` + `LOC_STR` / `LOC_PAR` / `NORM_PARISH`; `PAGE_NUM` locates the printed source page (README says add 7 for PDF page). These are address matching inputs, not a documented join to an 1808 `geometry_id` or 2024 `EDIFI_ID`.
 
@@ -70,12 +70,12 @@ CSV: **5,883 entries**, each a professional/business/address entry; 383-page sou
 
 ## 4. Contemporary 2024 geometry layer — with hidden historical prose
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Canals_EPSG32633.geojson` — **1,268,100 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Civici_EPSG32633.geojson` — **6,728,890 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Edifici_EPSG32633.geojson` — **14,442,426 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Isole_EPSG32633.geojson` — **262,593 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Sestiere_EPSG32633.geojson` — **97,373 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Streets_EPSG32633.geojson` — **6,930,875 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Canals_EPSG32633.geojson` — **1,268,100 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Civici_EPSG32633.geojson` — **6,728,890 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Edifici_EPSG32633.geojson` — **14,442,426 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Isole_EPSG32633.geojson` — **262,593 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Sestiere_EPSG32633.geojson` — **97,373 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Streets_EPSG32633.geojson` — **6,930,875 bytes**
 
 All six GeoJSON layers declare **EPSG:32633**. Buildings: **8,512** features (6,787 MultiPolygon; 1,725 Polygon); addresses 31,623 Points; canals 169 areas; islands 119; districts 8; streets 3,773 areas. The `2024` filename prefix denotes the contemporary dataset, not construction year.
 
@@ -93,11 +93,11 @@ Join/identity fields: `EDIFI_ID`, `EDIFI_ID_old`, `CIVICI`, `door_indices`, `osm
 
 ## 5. Dorigo medieval observations, zones and indices
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\README.md` — **916 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\geometries_generalized.geojson` — **1,054,104 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\centroids.geojson` — **160,210 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\README.md` — **1,613 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\README.md` — **778 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\README.md` — **916 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\geometries_generalized.geojson` — **1,054,104 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\centroids.geojson` — **160,210 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\README.md` — **1,613 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\README.md` — **778 bytes**
 
 Source identified by README: W. Dorigo, **_Venezia Romanica_ (2003)**. Folder title `946_1408` is a thematic/source label, **not the observed minimum in downloaded records**.
 
@@ -113,11 +113,11 @@ Usable as dated **zone-associated observations with cited source**, not a ready 
 
 ## 6. TimeMachine Atlas: vectors, coverage and date semantics
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\decoded_z14_all_layers.geojson` — **21,771,368 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\venice_atlas_downloaded.mbtiles` — **4,796,416 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\search.json` — **114,964 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tilejson.json` — **2,927 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\index.html` — **4,710 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\atlas\decoded_z14_all_layers.geojson` — **21,771,368 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\atlas\venice_atlas_downloaded.mbtiles` — **4,796,416 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\atlas\search.json` — **114,964 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\atlas\tilejson.json` — **2,927 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\atlas\index.html` — **4,710 bytes**
 
 **These are vector data, not map images.** All **165 PBF files** were freshly decoded as Mapbox vector tiles; layers are `building`, `waterway`, `landuse`, `landcover`. Exact PBF paths/sizes are in Appendix A. Downloaded zoom counts: z13 6, z14 12, z15 35, z16 **112 physical nonempty PBF files**; five confirmed empty z16 positions exist only as zero-byte tile payloads in MBTiles (170 tile rows total). The manifest's z16 117 is positions/rows, not 117 on-disk PBF files.
 
@@ -153,10 +153,10 @@ Search index: **342 records**, `start_year` 365–1700 (all), `end_year`1451–1
 
 ### Municipal PDFs
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\NTA_Citta_Antica.pdf` — **622,881 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\NTA_Appendice_1.pdf` — **1,130,274 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\elaborati_di_analisi.pdf` — **424,977 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\San_Servolo_A5_ages.pdf` — **542,003 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\municipal\NTA_Citta_Antica.pdf` — **622,881 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\municipal\NTA_Appendice_1.pdf` — **1,130,274 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\municipal\elaborati_di_analisi.pdf` — **424,977 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\municipal\San_Servolo_A5_ages.pdf` — **542,003 bytes**
 
 - `NTA_Citta_Antica.pdf`:64 pages, planning/regulatory prose and typological rules, not individually geolocated dated building rows. Metadata dates2018/2019 are PDF production/update dates. “data della sua costruzione” appears in legal classification discussion, not an exported building field.
 - `NTA_Appendice_1.pdf`:99 pages, **63 typological/open-space sheets**, not63 identified buildings. Text explicitly says “TESTO AGGIORNATO AL03/07/2019” (regulation update). Preottocentesca (pre19th century), ottocentesca (19th), novecentesca (20th) classes; types A/A1/B/Bg/B1/C/D/pt/fa are pre19th residential classes, O/Or19th, N/Ne/Nr20th, other special/non-residential codes with similarly broad periods. Definitions alone cannot assign a period to an arbitrary building polygon.
@@ -167,29 +167,29 @@ No explicit reusable licence or rights grant appears in the extracted text/metad
 
 ### Tassini toponymy
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\A-C.txt` — **417,734 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.pdf` — **4,070,980 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.txt` — **1,854,758 bytes**
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana_with_pages_delim.txt` — **1,876,782 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\A-C.txt` — **417,734 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.pdf` — **4,070,980 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.txt` — **1,854,758 bytes**
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana_with_pages_delim.txt` — **1,876,782 bytes**
 
 434-page PDF and Italian plain-text versions of _Toponomastica Veneziana_: unstructured place/building-history prose with potentially useful historical mentions and dates. No per-record DATE schema, coordinates or durable building/parcel join keys. A-C text is explicitly a subset by filename; page-delimited full text is an alternate representation. Individual dates must be extracted with their subject and source, not presented as a parsed building-age dataset. PDF creation2015-09-30 is file production; no explicit reuse licence for the digital transcription found.
 
 ### Exact local rights statements
 
 1. **Canonical1808 publisher metadata:**
-`D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\zenodo_record.json` — **8,899 bytes**
+`data/data\raw\Venice_Historical_20261022_2025\1808\zenodo_record.json` — **8,899 bytes**
    At `metadata.license`: **`{"id": "cc-by-4.0"}`**; at `metadata.access_right`: **`"open"`**; DOI`10.5281/zenodo.20715172`, version1.1. This supports attribution-based reuse of that canonical release. The saved metadata is the licence evidence, not an inferred licence from GitHub visibility. The root README independently states: “Each file verified against the publisher's MD5 checksum. **CC BY4.0.** The dataset records cadastral state in1808, not construction in that year.”
 
 2. **Atlas attribution, not a historical-dataset licence:**
-`D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tilejson.json` — **2,927 bytes**
+`data/data\raw\Venice_Historical_20261022_2025\atlas\tilejson.json` — **2,927 bytes**
    `attribution` exactly: `<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>`.
 
-`D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\index.html` — **4,710 bytes**
+`data/data\raw\Venice_Historical_20261022_2025\atlas\index.html` — **4,710 bytes**
    Visible-source anchor: `<a href="https://www.maptiler.com/license/maps/" target="_blank">© MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">© OpenStreetMap contributors</a>`.
    Saved MBTiles description: “Historical states. Dates are not necessarily construction/demolition dates; source redistribution license not established.” Root README: “A redistribution license for the historical Atlas dataset was not established; keep separate from CC BY data and do not assume the software's license covers the data.” Attribution to OpenStreetMap is not evidence that every historical layer is solely OSM or licensed under the same terms.
 
 3. **1857 scan, printed Google Books notice, PDF page1:**
-`D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_Nuova_Guida_commerciale_della_citta_di_Venezia.pdf` — **18,132,651 bytes**
+`data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_Nuova_Guida_commerciale_della_citta_di_Venezia.pdf` — **18,132,651 bytes**
    “Ha sopravvissuto abbastanza per non essere più protetto dai diritti di copyright e diventare di pubblico dominio.”
    “La classificazione di un libro come di pubblico dominio può variare da paese a paese.”
    “Non fare un uso commerciale di questi file … ti chiediamo di utilizzare questi file per uso personale e non a fini commerciali.”
@@ -222,24 +222,24 @@ No explicit reusable licence or rights grant appears in the extracted text/metad
 The following groups were confirmed by SHA-256. They are repeated exports/representations, not independent historical observations:
 
 - SHA-256`0bc71fd7db170e32bf3b7fe8aacb605eb03aa33410b9a003ba26984e849b755c`:
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
 - SHA-256`c9433910c377ce9d20a5224c26d73a245a8f414c18133fb836cfa6684bd879a5`:
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
 - SHA-256`b8d9526b8e0da05d02489deeab007efcb97ddfb29a6c988a73a57caf905d0081`:
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
 - SHA-256`94573eeb1715d895cc425f854b4570fa74a14bfa2ea8d5c604a6212c7d735f2e`:
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
 - SHA-256`144775c748b0bac22b7388ad603f8c5d0dc9513f31e99f2b46a4215fb5aacc8d`:
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
 - SHA-256`ebaed4c5c766ccb1df2373eac2184a03bf62e628c4ddb55106b7e2831c8823da`:
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD.json` — **24,049,565 bytes**
-  - `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step8.json` — **24,049,565 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD.json` — **24,049,565 bytes**
+  - `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step8.json` — **24,049,565 bytes**
 
 Further non-byte-identical duplicates/versions:
 - Canonical1808 geometry differs from repository geometry in exactly **one feature** (index807, `properties.id=way/11957`): canonical `geometry_id="16827"`, repository null. All other feature content is equal. Keep provenance; do not overwrite/collapse variants silently.
@@ -264,806 +264,806 @@ Further non-byte-identical duplicates/versions:
 
 No inferred/unavailable file is included below. Files are grouped by relative parent directory; every row itself gives a full absolute path.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025`
+### `data/data\raw\Venice_Historical_20261022_2025`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\download_root.txt` | 52 | Text / OCR / reference |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\manifest.json` | 70,034 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\README.md` | 3,981 | Markdown documentation |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\verification_summary.json` | 1,864 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\download_root.txt` | 52 | Text / OCR / reference |
+| `data/data\raw\Venice_Historical_20261022_2025\manifest.json` | 70,034 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\README.md` | 3,981 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\verification_summary.json` | 1,864 | JSON data / metadata / processing intermediate |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\README.md` | 12,153 | Markdown documentation |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` | 75,969,502 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_geometries.geojson` | 12,903,992 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` | 2,724,903 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` | 3,938,260 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` | 28,237,771 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\zenodo_record.json` | 8,899 | JSON data / metadata / processing intermediate |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas`
+### `data/data\raw\Venice_Historical_20261022_2025\1808`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\decoded_z14_all_layers.geojson` | 21,771,368 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\index.html` | 4,710 | HTML viewer / saved page |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\search.json` | 114,964 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tilejson.json` | 2,927 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\venice_atlas_downloaded.mbtiles` | 4,796,416 | SQLite vector MBTiles (local assembly) |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\README.md` | 12,153 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` | 75,969,502 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_geometries.geojson` | 12,903,992 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` | 2,724,903 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` | 3,938,260 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` | 28,237,771 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\1808\zenodo_record.json` | 8,899 | JSON data / metadata / processing intermediate |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4375`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4375\2932.pbf` | 2,356 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4375\2933.pbf` | 1,439 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4376`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4376\2932.pbf` | 1,300,465 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4376\2933.pbf` | 82,701 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\decoded_z14_all_layers.geojson` | 21,771,368 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\index.html` | 4,710 | HTML viewer / saved page |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\search.json` | 114,964 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tilejson.json` | 2,927 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\venice_atlas_downloaded.mbtiles` | 4,796,416 | SQLite vector MBTiles (local assembly) |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4377`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4377\2932.pbf` | 146,745 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4377\2933.pbf` | 16,161 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4375`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751\5864.pbf` | 328 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751\5865.pbf` | 1,320 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751\5866.pbf` | 693 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4375\2932.pbf` | 2,356 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4375\2933.pbf` | 1,439 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752\5864.pbf` | 87,058 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752\5865.pbf` | 471,520 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752\5866.pbf` | 37,743 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4376`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753\5864.pbf` | 102,930 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753\5865.pbf` | 1,058,483 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753\5866.pbf` | 58,516 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4376\2932.pbf` | 1,300,465 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4376\2933.pbf` | 82,701 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754\5864.pbf` | 3,783 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754\5865.pbf` | 160,644 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754\5866.pbf` | 16,401 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4377`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11729.pbf` | 114 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11730.pbf` | 1,033 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11731.pbf` | 666 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11732.pbf` | 371 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11733.pbf` | 258 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4377\2932.pbf` | 146,745 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\13\4377\2933.pbf` | 16,161 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11729.pbf` | 528 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11730.pbf` | 7,871 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11731.pbf` | 25,441 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11732.pbf` | 7,895 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11733.pbf` | 373 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751\5864.pbf` | 328 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751\5865.pbf` | 1,320 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8751\5866.pbf` | 693 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11729.pbf` | 89,547 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11730.pbf` | 218,369 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11731.pbf` | 278,425 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11732.pbf` | 32,887 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11733.pbf` | 205 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752\5864.pbf` | 87,058 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752\5865.pbf` | 471,520 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8752\5866.pbf` | 37,743 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11729.pbf` | 98,307 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11730.pbf` | 463,518 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11731.pbf` | 359,216 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11732.pbf` | 45,756 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11733.pbf` | 235 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753\5864.pbf` | 102,930 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753\5865.pbf` | 1,058,483 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8753\5866.pbf` | 58,516 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11729.pbf` | 5,849 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11730.pbf` | 214,545 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11731.pbf` | 174,910 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11732.pbf` | 12,289 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11733.pbf` | 1,610 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754\5864.pbf` | 3,783 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754\5865.pbf` | 160,644 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\14\8754\5866.pbf` | 16,401 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11729.pbf` | 2,229 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11730.pbf` | 19,134 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11731.pbf` | 144,969 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11732.pbf` | 3,116 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11733.pbf` | 1,302 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11729.pbf` | 114 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11730.pbf` | 1,033 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11731.pbf` | 666 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11732.pbf` | 371 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17503\11733.pbf` | 258 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11729.pbf` | 402 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11730.pbf` | 3,691 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11731.pbf` | 14,013 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11732.pbf` | 13,514 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11733.pbf` | 628 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23459.pbf` | 114 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23460.pbf` | 284 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23461.pbf` | 723 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23462.pbf` | 757 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23463.pbf` | 224 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23464.pbf` | 223 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23465.pbf` | 160 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11729.pbf` | 528 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11730.pbf` | 7,871 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11731.pbf` | 25,441 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11732.pbf` | 7,895 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17504\11733.pbf` | 373 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23458.pbf` | 160 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23459.pbf` | 213 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23460.pbf` | 1,350 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23461.pbf` | 1,984 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23462.pbf` | 1,859 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23463.pbf` | 1,244 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23464.pbf` | 1,194 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23465.pbf` | 277 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23466.pbf` | 129 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11729.pbf` | 89,547 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11730.pbf` | 218,369 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11731.pbf` | 278,425 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11732.pbf` | 32,887 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17505\11733.pbf` | 205 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23458.pbf` | 171 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23459.pbf` | 389 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23460.pbf` | 1,019 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23461.pbf` | 7,004 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23462.pbf` | 8,546 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23463.pbf` | 21,950 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23464.pbf` | 7,603 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23465.pbf` | 1,303 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23466.pbf` | 194 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11729.pbf` | 98,307 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11730.pbf` | 463,518 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11731.pbf` | 359,216 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11732.pbf` | 45,756 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17506\11733.pbf` | 235 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23458.pbf` | 250 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23459.pbf` | 34,875 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23460.pbf` | 23,203 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23461.pbf` | 45,808 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23462.pbf` | 75,103 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23463.pbf` | 47,568 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23464.pbf` | 10,982 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23465.pbf` | 1,527 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23466.pbf` | 145 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11729.pbf` | 5,849 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11730.pbf` | 214,545 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11731.pbf` | 174,910 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11732.pbf` | 12,289 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17507\11733.pbf` | 1,610 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23458.pbf` | 1,380 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23459.pbf` | 69,493 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23460.pbf` | 94,732 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23461.pbf` | 103,229 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23462.pbf` | 125,599 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23463.pbf` | 98,304 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23464.pbf` | 16,761 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23465.pbf` | 11,245 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23466.pbf` | 173 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11729.pbf` | 2,229 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11730.pbf` | 19,134 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11731.pbf` | 144,969 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11732.pbf` | 3,116 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17508\11733.pbf` | 1,302 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23458.pbf` | 2,456 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23459.pbf` | 86,864 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23460.pbf` | 117,621 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23461.pbf` | 150,249 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23462.pbf` | 115,455 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23463.pbf` | 100,804 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23464.pbf` | 23,446 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23465.pbf` | 11,436 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11729.pbf` | 402 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11730.pbf` | 3,691 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11731.pbf` | 14,013 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11732.pbf` | 13,514 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\15\17509\11733.pbf` | 628 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23458.pbf` | 320 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23459.pbf` | 29,618 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23460.pbf` | 132,442 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23461.pbf` | 156,534 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23462.pbf` | 147,791 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23463.pbf` | 74,848 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23464.pbf` | 11,091 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23465.pbf` | 10,231 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23466.pbf` | 154 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23459.pbf` | 114 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23460.pbf` | 284 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23461.pbf` | 723 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23462.pbf` | 757 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23463.pbf` | 224 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23464.pbf` | 223 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35007\23465.pbf` | 160 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23458.pbf` | 333 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23459.pbf` | 904 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23460.pbf` | 59,187 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23461.pbf` | 126,474 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23462.pbf` | 112,453 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23463.pbf` | 4,336 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23464.pbf` | 7,632 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23465.pbf` | 4,664 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23466.pbf` | 1,424 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23458.pbf` | 160 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23459.pbf` | 213 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23460.pbf` | 1,350 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23461.pbf` | 1,984 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23462.pbf` | 1,859 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23463.pbf` | 1,244 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23464.pbf` | 1,194 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23465.pbf` | 277 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35008\23466.pbf` | 129 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23458.pbf` | 1,434 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23459.pbf` | 4,560 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23460.pbf` | 2,087 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23461.pbf` | 63,946 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23462.pbf` | 83,625 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23463.pbf` | 2,341 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23464.pbf` | 3,558 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23465.pbf` | 137 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23466.pbf` | 159 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23458.pbf` | 505 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23459.pbf` | 1,790 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23461.pbf` | 16,994 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23462.pbf` | 38,756 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23463.pbf` | 37,465 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23464.pbf` | 419 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23465.pbf` | 323 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23466.pbf` | 206 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23458.pbf` | 171 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23459.pbf` | 389 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23460.pbf` | 1,019 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23461.pbf` | 7,004 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23462.pbf` | 8,546 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23463.pbf` | 21,950 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23464.pbf` | 7,603 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23465.pbf` | 1,303 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35009\23466.pbf` | 194 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23458.pbf` | 154 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23460.pbf` | 165 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23461.pbf` | 4,633 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23462.pbf` | 35,026 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23463.pbf` | 68,769 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23464.pbf` | 3,290 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23465.pbf` | 284 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23466.pbf` | 1,248 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23458.pbf` | 155 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23459.pbf` | 143 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23460.pbf` | 667 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23461.pbf` | 3,738 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23462.pbf` | 6,447 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23463.pbf` | 9,695 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23464.pbf` | 12,694 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23465.pbf` | 811 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23466.pbf` | 183 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23458.pbf` | 250 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23459.pbf` | 34,875 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23460.pbf` | 23,203 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23461.pbf` | 45,808 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23462.pbf` | 75,103 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23463.pbf` | 47,568 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23464.pbf` | 10,982 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23465.pbf` | 1,527 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35010\23466.pbf` | 145 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23458.pbf` | 282 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23459.pbf` | 315 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23460.pbf` | 165 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23461.pbf` | 483 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23462.pbf` | 560 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23463.pbf` | 1,052 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23464.pbf` | 3,240 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23465.pbf` | 907 | Mapbox vector tile PBF |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23466.pbf` | 403 | Mapbox vector tile PBF |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\elaborati_di_analisi.pdf` | 424,977 | PDF document / graphical map |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\NTA_Appendice_1.pdf` | 1,130,274 | PDF document / graphical map |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\NTA_Citta_Antica.pdf` | 622,881 | PDF document / graphical map |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\municipal\San_Servolo_A5_ages.pdf` | 542,003 | PDF document / graphical map |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23458.pbf` | 1,380 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23459.pbf` | 69,493 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23460.pbf` | 94,732 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23461.pbf` | 103,229 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23462.pbf` | 125,599 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23463.pbf` | 98,304 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23464.pbf` | 16,761 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23465.pbf` | 11,245 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35011\23466.pbf` | 173 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister.zip` | 4,429,191 | ZIP repository snapshot |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister.zip` | 11,663,091 | ZIP repository snapshot |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data.zip` | 77,787,653 | ZIP repository snapshot |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.geojson` | 46,730,299 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.tsv` | 9,448,321 | TSV register and coordinates |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\README.md` | 6,735 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23458.pbf` | 2,456 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23459.pbf` | 86,864 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23460.pbf` | 117,621 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23461.pbf` | 150,249 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23462.pbf` | 115,455 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23463.pbf` | 100,804 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23464.pbf` | 23,446 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35012\23465.pbf` | 11,436 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\README.md` | 12,115 | Markdown documentation |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_aggregated_data.json` | 75,969,502 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.csv` | 8,828,028 | CSV table; WKT geometry where present |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.geojson` | 12,903,989 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.csv` | 611,213 | CSV table; WKT geometry where present |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.json` | 2,724,903 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.csv` | 722,852 | CSV table; WKT geometry where present |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.json` | 3,938,260 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.csv` | 8,479,191 | CSV table; WKT geometry where present |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.json` | 28,237,771 | JSON data / metadata / processing intermediate |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\1_alignement&generation.ipynb` | 13,546 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\2_align_pages_and_parcel_numbers.ipynb` | 32,513 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\3_new_transcription.ipynb` | 9,077 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\4_Church_standardisation_part1.ipynb` | 3,792 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\5_aggregated_version_production.ipynb` | 4,007 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\6_institution_standardisation.ipynb` | 26,713 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\7_institution_standardisation_from_isabella.ipynb` | 27,142 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\8_last_cleanup_and_misc.ipynb` | 35,697 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23458.pbf` | 320 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23459.pbf` | 29,618 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23460.pbf` | 132,442 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23461.pbf` | 156,534 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23462.pbf` | 147,791 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23463.pbf` | 74,848 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23464.pbf` | 11,091 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23465.pbf` | 10,231 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35013\23466.pbf` | 154 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\.gitignore` | 11 | Repository configuration |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740_redrawn_parishes_cleaned_wikidata_standardised.geojson` | 106,216 | GeoJSON vectors |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\1740_catastici_version20250625.geojson` | 32,824,244 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\README.md` | 2,404 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23458.pbf` | 333 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23459.pbf` | 904 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23460.pbf` | 59,187 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23461.pbf` | 126,474 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23462.pbf` | 112,453 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23463.pbf` | 4,336 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23464.pbf` | 7,632 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23465.pbf` | 4,664 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35014\23466.pbf` | 1,424 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\README.md` | 4,771 | Markdown documentation |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\Catastici 1741 - Project Documentation.md` | 26,573 | Markdown documentation |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\Catastici 1741 - Project Documentation.pdf` | 845,384 | PDF document / graphical map |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images\Entity Mapping - Catastici 1741.jpg` | 423,120 | JPEG processing diagram |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images\entity_types.png` | 91,379 | PNG processing diagram |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images\family_ownership.png` | 71,091 | PNG processing diagram |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23458.pbf` | 1,434 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23459.pbf` | 4,560 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23460.pbf` | 2,087 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23461.pbf` | 63,946 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23462.pbf` | 83,625 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23463.pbf` | 2,341 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23464.pbf` | 3,558 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23465.pbf` | 137 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35015\23466.pbf` | 159 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD.xlsx` | 5,365,640 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD_expanded.xlsx` | 6,144,641 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\README.md` | 2,227 | Markdown documentation |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD.json` | 24,049,565 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD_expanded.json` | 28,340,115 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step1.json` | 22,654,823 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step2.json` | 22,654,115 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step3.json` | 22,665,126 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step4.json` | 22,839,220 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step5.json` | 23,267,073 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step6_patterns.json` | 1,867,396 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step7.json` | 23,474,565 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step8.json` | 24,049,565 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23458.pbf` | 505 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23459.pbf` | 1,790 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23461.pbf` | 16,994 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23462.pbf` | 38,756 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23463.pbf` | 37,465 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23464.pbf` | 419 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23465.pbf` | 323 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35016\23466.pbf` | 206 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_pre-processing`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_pre-processing\catastici_20240123.json` | 16,909,660 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23458.pbf` | 154 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23460.pbf` | 165 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23461.pbf` | 4,633 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23462.pbf` | 35,026 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23463.pbf` | 68,769 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23464.pbf` | 3,290 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23465.pbf` | 284 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35017\23466.pbf` | 1,248 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\README.md` | 9,015 | Markdown documentation |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\entities.json` | 45,217 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\guild_entities.json` | 895 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\jew_entities.json` | 533 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\religious_entities.json` | 13,154 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\religious_titles_entities.json` | 10,881 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\scuole_grandi_entities.json` | 3,374 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\scuole_mestieri_entities.json` | 1,319 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\scuole_religious_entities.json` | 1,671 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\social_care_entities.json` | 3,600 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\unlinked_entities.json` | 6,413 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\venezia_entities.json` | 1,349 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\venezia_titles_entities.json` | 1,790 | JSON data / metadata / processing intermediate |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\cities.json` | 1,387 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\ignore_next.json` | 4,334 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\places.json` | 2,558 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\separators.json` | 190 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\unknown_owners.json` | 1,935 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23458.pbf` | 155 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23459.pbf` | 143 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23460.pbf` | 667 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23461.pbf` | 3,738 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23462.pbf` | 6,447 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23463.pbf` | 9,695 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23464.pbf` | 12,694 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23465.pbf` | 811 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35018\23466.pbf` | 183 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\family_names.json` | 84,903 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\family_names_comp.json` | 225 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\first_names.json` | 27,587 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\mestieri.json` | 1,373 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\titles.json` | 18,667 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\titles_plur.json` | 1,600 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\titles_sing.json` | 10,213 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\unknown_relatives.json` | 1,793 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\unknown_relatives_plur.json` | 1,186 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\unknown_relatives_sing.json` | 610 | JSON data / metadata / processing intermediate |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions`
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\mestieri_to_mentions.json` | 7,250 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\religious_to_mentions.json` | 35,158 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\scuole_grandi_to_mentions.json` | 3,619 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\scuole_mestieri_to_mentions.json` | 1,752 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\scuole_religious_to_mentions.json` | 3,363 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\social_care_to_mentions.json` | 4,830 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\venezia_to_mentions.json` | 5,015 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23458.pbf` | 282 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23459.pbf` | 315 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23460.pbf` | 165 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23461.pbf` | 483 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23462.pbf` | 560 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23463.pbf` | 1,052 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23464.pbf` | 3,240 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23465.pbf` | 907 | Mapbox vector tile PBF |
+| `data/data\raw\Venice_Historical_20261022_2025\atlas\tiles\16\35019\23466.pbf` | 403 | Mapbox vector tile PBF |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\family_name_groups.json` | 306,862 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\mestieri_to_std.json` | 3,520 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\title_plur_to_sing.json` | 1,963 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\title_to_std.json` | 46,556 | JSON data / metadata / processing intermediate |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline`
+### `data/data\raw\Venice_Historical_20261022_2025\municipal`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\1-SetUp_Dataset.ipynb` | 5,569 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\10-Statistics&Insights.ipynb` | 1,211,881 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\2-Unknowns_Assignation.ipynb` | 6,673 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\3-RepubblicaVenezia_Assignation.ipynb` | 11,189 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\4-Entity_Assignation.ipynb` | 14,046 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\5-People_Assignation.ipynb` | 16,495 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\6-Assignation_NER_Model.ipynb` | 16,655 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\7-Model_Patterns_Assignation.ipynb` | 37,388 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\8-Terminology_Standardisation.ipynb` | 21,238 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\9-Format_Verification.ipynb` | 6,800 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\README.md` | 12,808 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\municipal\elaborati_di_analisi.pdf` | 424,977 | PDF document / graphical map |
+| `data/data\raw\Venice_Historical_20261022_2025\municipal\NTA_Appendice_1.pdf` | 1,130,274 | PDF document / graphical map |
+| `data/data\raw\Venice_Historical_20261022_2025\municipal\NTA_Citta_Antica.pdf` | 622,881 | PDF document / graphical map |
+| `data/data\raw\Venice_Historical_20261022_2025\municipal\San_Servolo_A5_ages.pdf` | 542,003 | PDF document / graphical map |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\utils.py` | 2,629 | Python processing source |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\utils_entities.py` | 2,419 | Python processing source |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\utils_people.py` | 12,083 | Python processing source |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\UtilsCommonString.ipynb` | 7,645 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\UtilsFormatting.ipynb` | 19,616 | Jupyter processing/documentation notebook |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\UtilsSearch.ipynb` | 2,048 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister.zip` | 4,429,191 | ZIP repository snapshot |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister.zip` | 11,663,091 | ZIP repository snapshot |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data.zip` | 77,787,653 | ZIP repository snapshot |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\README.md` | 9,632 | Markdown documentation |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_aggregated_data.json` | 75,969,598 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_geometries.geojson` | 12,903,989 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_standardised_people.json` | 3,938,260 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_textual_entries.json` | 28,237,867 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.geojson` | 46,730,299 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.tsv` | 9,448,321 | TSV register and coordinates |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\README.md` | 6,735 | Markdown documentation |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_commercial_guide_with_pages_20250624.csv` | 1,501,744 | CSV table; WKT geometry where present |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_Nuova_Guida_commerciale_della_citta_di_Venezia.pdf` | 18,132,651 | PDF document / graphical map |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\README.md` | 2,482 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\README.md` | 12,115 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_aggregated_data.json` | 75,969,502 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.csv` | 8,828,028 | CSV table; WKT geometry where present |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.geojson` | 12,903,989 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.csv` | 611,213 | CSV table; WKT geometry where present |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.json` | 2,724,903 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.csv` | 722,852 | CSV table; WKT geometry where present |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.json` | 3,938,260 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.csv` | 8,479,191 | CSV table; WKT geometry where present |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.json` | 28,237,771 | JSON data / metadata / processing intermediate |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Canals_EPSG32633.geojson` | 1,268,100 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Civici_EPSG32633.geojson` | 6,728,890 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Edifici_EPSG32633.geojson` | 14,442,426 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Isole_EPSG32633.geojson` | 262,593 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Sestiere_EPSG32633.geojson` | 97,373 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Streets_EPSG32633.geojson` | 6,930,875 | GeoJSON vectors |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\README.md` | 916 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\1_alignement&generation.ipynb` | 13,546 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\2_align_pages_and_parcel_numbers.ipynb` | 32,513 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\3_new_transcription.ipynb` | 9,077 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\4_Church_standardisation_part1.ipynb` | 3,792 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\5_aggregated_version_production.ipynb` | 4,007 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\6_institution_standardisation.ipynb` | 26,713 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\7_institution_standardisation_from_isabella.ipynb` | 27,142 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\scripts\8_last_cleanup_and_misc.ipynb` | 35,697 | Jupyter processing/documentation notebook |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\103_0.json` | 120,165 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\104_2.json` | 105,713 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\105_2.json` | 32,033 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\107_0.json` | 298,258 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\112_2.json` | 170,027 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\115_0.json` | 64,003 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\118_0.json` | 327,297 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\121_1.json` | 77,638 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\123_0.json` | 70,920 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\125_1.json` | 97,675 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\126_2.json` | 78,213 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\129_0.json` | 150,951 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\130_2.json` | 185,787 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\136_0.json` | 163,480 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\137_3.json` | 169,950 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\139_3.json` | 66,428 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\140_2.json` | 125,352 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\141_3.json` | 94,645 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\145_0.json` | 178,625 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\146_3.json` | 66,116 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\147_2.json` | 39,157 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\149_0.json` | 95,880 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\152_2.json` | 202,044 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\154_3.json` | 81,594 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\156_0.json` | 206,326 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\160_2.json` | 78,464 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\165_0.json` | 125,124 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\166_1.json` | 218,934 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\172_0.json` | 247,463 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\174_2.json` | 106,895 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\179_0.json` | 144,401 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\180_2.json` | 107,940 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\181_2.json` | 204,704 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\187_0.json` | 247,082 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\189_2.json` | 228,234 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\193_0.json` | 229,846 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\25_0.json` | 381,733 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\32_0.json` | 119,558 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\34_3.json` | 22,858 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\38_0.json` | 68,490 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\38_3.json` | 151,606 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\42_0.json` | 73,825 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\42_3.json` | 82,650 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\47_0.json` | 178,859 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\48_3.json` | 103,624 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\49_3.json` | 95,148 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\50_3.json` | 171,976 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\56_0.json` | 66,166 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\56_3.json` | 152,341 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\58_1.json` | 95,488 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\59_1.json` | 152,423 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\61_0.json` | 165,501 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\65_0.json` | 167,032 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\66_3.json` | 25,205 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\67_0.json` | 33,784 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\67_2.json` | 61,918 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\72_0.json` | 63,908 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\72_2.json` | 111,595 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\73_3.json` | 139,577 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\75_2.json` | 131,194 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\76_3.json` | 92,627 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\81_0.json` | 64,731 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\81_2.json` | 99,380 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\82_3.json` | 47,547 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\83_1.json` | 161,087 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\87_0.json` | 170,065 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\88_3.json` | 76,320 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\90_0.json` | 140,931 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\93_0.json` | 107,909 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\96_0.json` | 204,158 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\99_0.json` | 142,325 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\additional_lists.txt` | 3,473 | Text / OCR / reference |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\files.json` | 959 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\index.html` | 4,183 | HTML viewer / saved page |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\README.md` | 1,613 | Markdown documentation |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\centroids.geojson` | 160,210 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\geometries_generalized.geojson` | 1,054,104 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\README.md` | 619 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\.gitignore` | 11 | Repository configuration |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740_redrawn_parishes_cleaned_wikidata_standardised.geojson` | 106,216 | GeoJSON vectors |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters`
-
-| Absolute file path | Bytes | Format / role |
-|---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\106_modificato.geojson` | 577,490 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\114_modificato.geojson` | 309,058 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\122_modificato.geojson` | 311,748 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\127_modificato.geojson` | 389,730 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\133_modificato.geojson` | 707,347 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\143_modificato.geojson` | 343,539 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\148_modificato.geojson` | 644,408 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\156_modificato.geojson` | 363,987 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\162_modificato.geojson` | 391,527 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\169_modificato.geojson` | 505,960 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\176_modificato.geojson` | 491,771 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\184_modificato.geojson` | 387,954 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\192_modificato.geojson` | 282,814 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\24_modificato.geojson` | 353,011 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\32_modificato.geojson` | 210,333 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\35_modificato.geojson` | 293,187 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\40_modificato.geojson` | 201,846 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\44_modificato.geojson` | 418,183 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\53_modificato.geojson` | 731,837 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\63_modificato.geojson` | 357,943 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\68_modificato.geojson` | 515,461 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\78_modificato.geojson` | 402,574 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\85_modificato.geojson` | 285,680 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\90_modificato.geojson` | 282,909 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\94_modificato.geojson` | 248,497 | GeoJSON vectors |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\98_modificato.geojson` | 408,314 | GeoJSON vectors |
-
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_0_entries.json` | 132,873 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_1_entries.json` | 787,299 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_2_entries.json` | 50,291 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_3_entries.json` | 278,896 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_4_entries.json` | 119,212 | JSON data / metadata / processing intermediate |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\README.md` | 401 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\1740_catastici_version20250625.geojson` | 32,824,244 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\README.md` | 2,404 | Markdown documentation |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\103_0.xlsx` | 17,556 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\104_2.xlsx` | 15,192 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\105_2.xlsx` | 8,760 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\107_0.xlsx` | 31,333 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\112_2.xlsx` | 22,935 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\115_0.xlsx` | 11,206 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\118_0.xlsx` | 33,647 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\121_1.xlsx` | 14,258 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\123_0.xlsx` | 13,185 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\125_1.xlsx` | 16,755 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\126_2.xlsx` | 14,816 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\129_0.xlsx` | 19,875 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\130_2.xlsx` | 22,262 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\136_0.xlsx` | 20,489 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\137_3.xlsx` | 21,691 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\139_3.xlsx` | 11,507 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\140_2.xlsx` | 17,120 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\141_3.xlsx` | 13,941 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\145_0.xlsx` | 21,878 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\146_3.xlsx` | 12,198 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\147_2.xlsx` | 9,596 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\149_0.xlsx` | 14,189 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\152_2.xlsx` | 23,878 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\154_3.xlsx` | 13,022 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\156_0.xlsx` | 24,760 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\160_2.xlsx` | 13,080 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\165_0.xlsx` | 18,535 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\166_1.xlsx` | 25,259 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\172_0.xlsx` | 27,607 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\174_2.xlsx` | 15,723 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\179_0.xlsx` | 18,664 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\180_2.xlsx` | 15,302 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\181_2.xlsx` | 25,696 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\187_0.xlsx` | 27,755 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\189_2.xlsx` | 25,540 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\193_0.xlsx` | 29,268 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\25_0.xlsx` | 41,442 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\32_0.xlsx` | 17,313 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\34_3.xlsx` | 8,521 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_0.xlsx` | 12,645 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_3.xlsx` | 19,539 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_0.xlsx` | 12,467 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_3.xlsx` | 13,594 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\47_0.xlsx` | 22,000 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\48_3.xlsx` | 15,489 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\49_3.xlsx` | 14,153 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\50_3.xlsx` | 20,703 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_0.xlsx` | 12,236 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_3.xlsx` | 19,177 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\58_1.xlsx` | 14,450 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\59_1.xlsx` | 19,546 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\61_0.xlsx` | 21,868 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\65_0.xlsx` | 21,678 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\66_3.xlsx` | 8,655 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_0.xlsx` | 10,253 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_2.xlsx` | 12,539 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_0.xlsx` | 11,809 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_2.xlsx` | 16,452 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\73_3.xlsx` | 18,878 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\75_2.xlsx` | 18,148 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\76_3.xlsx` | 13,805 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_0.xlsx` | 11,770 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_2.xlsx` | 15,005 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\82_3.xlsx` | 10,824 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\83_1.xlsx` | 21,048 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\87_0.xlsx` | 20,790 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\88_3.xlsx` | 13,026 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\90_0.xlsx` | 18,202 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\93_0.xlsx` | 15,906 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\96_0.xlsx` | 23,837 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\99_0.xlsx` | 19,400 | Excel tabular records |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\README.md` | 778 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\README.md` | 4,771 | Markdown documentation |
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini`
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation`
 
 | Absolute file path | Bytes | Format / role |
 |---|---:|---|
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\A-C.txt` | 417,734 | Text / OCR / reference |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.pdf` | 4,070,980 | PDF document / graphical map |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.txt` | 1,854,758 | Text / OCR / reference |
-| `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana_with_pages_delim.txt` | 1,876,782 | Text / OCR / reference |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\Catastici 1741 - Project Documentation.md` | 26,573 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\Catastici 1741 - Project Documentation.pdf` | 845,384 | PDF document / graphical map |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images\Entity Mapping - Catastici 1741.jpg` | 423,120 | JPEG processing diagram |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images\entity_types.png` | 91,379 | PNG processing diagram |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\az_documentation\images\family_ownership.png` | 71,091 | PNG processing diagram |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD.xlsx` | 5,365,640 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD_expanded.xlsx` | 6,144,641 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\README.md` | 2,227 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD.json` | 24,049,565 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD_expanded.json` | 28,340,115 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step1.json` | 22,654,823 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step2.json` | 22,654,115 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step3.json` | 22,665,126 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step4.json` | 22,839,220 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step5.json` | 23,267,073 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step6_patterns.json` | 1,867,396 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step7.json` | 23,474,565 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step8.json` | 24,049,565 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_pre-processing`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_pre-processing\catastici_20240123.json` | 16,909,660 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\README.md` | 9,015 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\entities.json` | 45,217 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\guild_entities.json` | 895 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\jew_entities.json` | 533 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\religious_entities.json` | 13,154 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\religious_titles_entities.json` | 10,881 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\scuole_grandi_entities.json` | 3,374 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\scuole_mestieri_entities.json` | 1,319 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\scuole_religious_entities.json` | 1,671 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\social_care_entities.json` | 3,600 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\unlinked_entities.json` | 6,413 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\venezia_entities.json` | 1,349 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\ENT_dictionary\venezia_titles_entities.json` | 1,790 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\cities.json` | 1,387 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\ignore_next.json` | 4,334 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\places.json` | 2,558 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\separators.json` | 190 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\MSC_dictionary\unknown_owners.json` | 1,935 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\family_names.json` | 84,903 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\family_names_comp.json` | 225 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\first_names.json` | 27,587 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\mestieri.json` | 1,373 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\titles.json` | 18,667 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\titles_plur.json` | 1,600 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\titles_sing.json` | 10,213 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\unknown_relatives.json` | 1,793 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\unknown_relatives_plur.json` | 1,186 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\PPL_dictionary\unknown_relatives_sing.json` | 610 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\mestieri_to_mentions.json` | 7,250 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\religious_to_mentions.json` | 35,158 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\scuole_grandi_to_mentions.json` | 3,619 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\scuole_mestieri_to_mentions.json` | 1,752 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\scuole_religious_to_mentions.json` | 3,363 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\social_care_to_mentions.json` | 4,830 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\entities_to_mentions\venezia_to_mentions.json` | 5,015 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\family_name_groups.json` | 306,862 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\mestieri_to_std.json` | 3,520 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\title_plur_to_sing.json` | 1,963 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\dictionaries\std_mappings\people_to_mentions\title_to_std.json` | 46,556 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\1-SetUp_Dataset.ipynb` | 5,569 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\10-Statistics&Insights.ipynb` | 1,211,881 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\2-Unknowns_Assignation.ipynb` | 6,673 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\3-RepubblicaVenezia_Assignation.ipynb` | 11,189 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\4-Entity_Assignation.ipynb` | 14,046 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\5-People_Assignation.ipynb` | 16,495 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\6-Assignation_NER_Model.ipynb` | 16,655 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\7-Model_Patterns_Assignation.ipynb` | 37,388 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\8-Terminology_Standardisation.ipynb` | 21,238 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\9-Format_Verification.ipynb` | 6,800 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\pipeline\README.md` | 12,808 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\utils.py` | 2,629 | Python processing source |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\utils_entities.py` | 2,419 | Python processing source |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\utils_people.py` | 12,083 | Python processing source |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\UtilsCommonString.ipynb` | 7,645 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\UtilsFormatting.ipynb` | 19,616 | Jupyter processing/documentation notebook |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\utils\UtilsSearch.ipynb` | 2,048 | Jupyter processing/documentation notebook |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\README.md` | 9,632 | Markdown documentation |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_aggregated_data.json` | 75,969,598 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_geometries.geojson` | 12,903,989 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_standardised_people.json` | 3,938,260 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_textual_entries.json` | 28,237,867 | JSON data / metadata / processing intermediate |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_commercial_guide_with_pages_20250624.csv` | 1,501,744 | CSV table; WKT geometry where present |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_Nuova_Guida_commerciale_della_citta_di_Venezia.pdf` | 18,132,651 | PDF document / graphical map |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\README.md` | 2,482 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Canals_EPSG32633.geojson` | 1,268,100 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Civici_EPSG32633.geojson` | 6,728,890 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Edifici_EPSG32633.geojson` | 14,442,426 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Isole_EPSG32633.geojson` | 262,593 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Sestiere_EPSG32633.geojson` | 97,373 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Streets_EPSG32633.geojson` | 6,930,875 | GeoJSON vectors |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\README.md` | 916 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\103_0.json` | 120,165 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\104_2.json` | 105,713 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\105_2.json` | 32,033 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\107_0.json` | 298,258 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\112_2.json` | 170,027 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\115_0.json` | 64,003 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\118_0.json` | 327,297 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\121_1.json` | 77,638 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\123_0.json` | 70,920 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\125_1.json` | 97,675 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\126_2.json` | 78,213 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\129_0.json` | 150,951 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\130_2.json` | 185,787 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\136_0.json` | 163,480 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\137_3.json` | 169,950 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\139_3.json` | 66,428 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\140_2.json` | 125,352 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\141_3.json` | 94,645 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\145_0.json` | 178,625 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\146_3.json` | 66,116 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\147_2.json` | 39,157 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\149_0.json` | 95,880 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\152_2.json` | 202,044 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\154_3.json` | 81,594 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\156_0.json` | 206,326 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\160_2.json` | 78,464 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\165_0.json` | 125,124 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\166_1.json` | 218,934 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\172_0.json` | 247,463 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\174_2.json` | 106,895 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\179_0.json` | 144,401 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\180_2.json` | 107,940 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\181_2.json` | 204,704 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\187_0.json` | 247,082 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\189_2.json` | 228,234 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\193_0.json` | 229,846 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\25_0.json` | 381,733 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\32_0.json` | 119,558 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\34_3.json` | 22,858 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\38_0.json` | 68,490 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\38_3.json` | 151,606 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\42_0.json` | 73,825 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\42_3.json` | 82,650 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\47_0.json` | 178,859 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\48_3.json` | 103,624 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\49_3.json` | 95,148 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\50_3.json` | 171,976 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\56_0.json` | 66,166 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\56_3.json` | 152,341 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\58_1.json` | 95,488 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\59_1.json` | 152,423 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\61_0.json` | 165,501 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\65_0.json` | 167,032 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\66_3.json` | 25,205 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\67_0.json` | 33,784 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\67_2.json` | 61,918 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\72_0.json` | 63,908 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\72_2.json` | 111,595 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\73_3.json` | 139,577 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\75_2.json` | 131,194 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\76_3.json` | 92,627 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\81_0.json` | 64,731 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\81_2.json` | 99,380 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\82_3.json` | 47,547 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\83_1.json` | 161,087 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\87_0.json` | 170,065 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\88_3.json` | 76,320 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\90_0.json` | 140,931 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\93_0.json` | 107,909 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\96_0.json` | 204,158 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\99_0.json` | 142,325 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\additional_lists.txt` | 3,473 | Text / OCR / reference |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\files.json` | 959 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\index.html` | 4,183 | HTML viewer / saved page |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\entities\README.md` | 1,613 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\centroids.geojson` | 160,210 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\geometries_generalized.geojson` | 1,054,104 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\README.md` | 619 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\106_modificato.geojson` | 577,490 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\114_modificato.geojson` | 309,058 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\122_modificato.geojson` | 311,748 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\127_modificato.geojson` | 389,730 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\133_modificato.geojson` | 707,347 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\143_modificato.geojson` | 343,539 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\148_modificato.geojson` | 644,408 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\156_modificato.geojson` | 363,987 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\162_modificato.geojson` | 391,527 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\169_modificato.geojson` | 505,960 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\176_modificato.geojson` | 491,771 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\184_modificato.geojson` | 387,954 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\192_modificato.geojson` | 282,814 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\24_modificato.geojson` | 353,011 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\32_modificato.geojson` | 210,333 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\35_modificato.geojson` | 293,187 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\40_modificato.geojson` | 201,846 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\44_modificato.geojson` | 418,183 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\53_modificato.geojson` | 731,837 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\63_modificato.geojson` | 357,943 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\68_modificato.geojson` | 515,461 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\78_modificato.geojson` | 402,574 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\85_modificato.geojson` | 285,680 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\90_modificato.geojson` | 282,909 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\94_modificato.geojson` | 248,497 | GeoJSON vectors |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\98_modificato.geojson` | 408,314 | GeoJSON vectors |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_0_entries.json` | 132,873 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_1_entries.json` | 787,299 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_2_entries.json` | 50,291 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_3_entries.json` | 278,896 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\content_4_entries.json` | 119,212 | JSON data / metadata / processing intermediate |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\indices\README.md` | 401 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\103_0.xlsx` | 17,556 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\104_2.xlsx` | 15,192 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\105_2.xlsx` | 8,760 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\107_0.xlsx` | 31,333 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\112_2.xlsx` | 22,935 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\115_0.xlsx` | 11,206 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\118_0.xlsx` | 33,647 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\121_1.xlsx` | 14,258 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\123_0.xlsx` | 13,185 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\125_1.xlsx` | 16,755 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\126_2.xlsx` | 14,816 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\129_0.xlsx` | 19,875 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\130_2.xlsx` | 22,262 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\136_0.xlsx` | 20,489 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\137_3.xlsx` | 21,691 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\139_3.xlsx` | 11,507 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\140_2.xlsx` | 17,120 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\141_3.xlsx` | 13,941 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\145_0.xlsx` | 21,878 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\146_3.xlsx` | 12,198 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\147_2.xlsx` | 9,596 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\149_0.xlsx` | 14,189 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\152_2.xlsx` | 23,878 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\154_3.xlsx` | 13,022 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\156_0.xlsx` | 24,760 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\160_2.xlsx` | 13,080 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\165_0.xlsx` | 18,535 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\166_1.xlsx` | 25,259 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\172_0.xlsx` | 27,607 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\174_2.xlsx` | 15,723 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\179_0.xlsx` | 18,664 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\180_2.xlsx` | 15,302 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\181_2.xlsx` | 25,696 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\187_0.xlsx` | 27,755 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\189_2.xlsx` | 25,540 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\193_0.xlsx` | 29,268 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\25_0.xlsx` | 41,442 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\32_0.xlsx` | 17,313 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\34_3.xlsx` | 8,521 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_0.xlsx` | 12,645 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_3.xlsx` | 19,539 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_0.xlsx` | 12,467 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_3.xlsx` | 13,594 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\47_0.xlsx` | 22,000 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\48_3.xlsx` | 15,489 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\49_3.xlsx` | 14,153 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\50_3.xlsx` | 20,703 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_0.xlsx` | 12,236 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_3.xlsx` | 19,177 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\58_1.xlsx` | 14,450 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\59_1.xlsx` | 19,546 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\61_0.xlsx` | 21,868 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\65_0.xlsx` | 21,678 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\66_3.xlsx` | 8,655 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_0.xlsx` | 10,253 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_2.xlsx` | 12,539 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_0.xlsx` | 11,809 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_2.xlsx` | 16,452 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\73_3.xlsx` | 18,878 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\75_2.xlsx` | 18,148 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\76_3.xlsx` | 13,805 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_0.xlsx` | 11,770 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_2.xlsx` | 15,005 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\82_3.xlsx` | 10,824 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\83_1.xlsx` | 21,048 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\87_0.xlsx` | 20,790 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\88_3.xlsx` | 13,026 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\90_0.xlsx` | 18,202 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\93_0.xlsx` | 15,906 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\96_0.xlsx` | 23,837 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\99_0.xlsx` | 19,400 | Excel tabular records |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\README.md` | 778 | Markdown documentation |
+
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini`
+
+| Absolute file path | Bytes | Format / role |
+|---|---:|---|
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\A-C.txt` | 417,734 | Text / OCR / reference |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.pdf` | 4,070,980 | PDF document / graphical map |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana.txt` | 1,854,758 | Text / OCR / reference |
+| `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\tassini\Toponomastica Veneziana_with_pages_delim.txt` | 1,876,782 | Text / OCR / reference |
 
 ## Appendix B — inspected data schemas and temporal columns
 
 Actual union of fields across complete files, not a README-only contract. Type notation is Python JSON value type: int,float,str,list,dict,NoneType. Different representations/versions are retained. Nulls and omitted fields are distinct. Dates in narrative strings are discussed separately in §4; a regex over field names does not identify all historical evidence.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_aggregated_data.json` — **75,969,502 bytes**
 
 Records/features: **16,870**. 
 
@@ -1075,7 +1075,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_geometries.geojson` — **12,903,992 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_geometries.geojson` — **12,903,992 bytes**
 
 Records/features: **24,430**. Geometry types: `{"Polygon": 24430}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}`.
 
@@ -1090,7 +1090,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_merge_log.json` — **2,724,903 bytes**
 
 Records/features: **9,312**. 
 
@@ -1110,7 +1110,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_standardised_people.json` — **3,938,260 bytes**
 
 Records/features: **12,277**. 
 
@@ -1132,7 +1132,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\1808\venice_1808_landregister_textual_entries.json` — **28,237,771 bytes**
 
 Records/features: **23,662**. 
 
@@ -1171,7 +1171,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\decoded_z14_all_layers.geojson` — **21,771,368 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\decoded_z14_all_layers.geojson` — **21,771,368 bytes**
 
 Records/features: **49,969**. Geometry types: `{"Polygon": 49843, "MultiPolygon": 126}`; declared CRS: `null`.
 
@@ -1190,7 +1190,7 @@ Fields (actual type:count):
 
 Temporal fields: `end_date`, `start_date`, `transform_date`, `fire_date`. See main report and Appendix C for numeric/date-year ranges; lexical string order is not used to infer years.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\atlas\search.json` — **114,964 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\atlas\search.json` — **114,964 bytes**
 
 Records/features: **342**. 
 
@@ -1206,7 +1206,7 @@ Fields (actual type:count):
 
 Temporal fields: `start_year`, `end_year`. See main report and Appendix C for numeric/date-year ranges; lexical string order is not used to infer years.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.geojson` — **46,730,299 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.geojson` — **46,730,299 bytes**
 
 Records/features: **32,361**. Geometry types: `{"Point": 32361}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1249,7 +1249,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
 
 Records/features: **24,430**. Geometry types: `{"Polygon": 24430}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}`.
 
@@ -1264,7 +1264,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\1740_catastici_version20250625.geojson` — **32,824,244 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\1740_catastici_version20250625.geojson` — **32,824,244 bytes**
 
 Records/features: **32,676**. Geometry types: `{"Point": 32676}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1303,7 +1303,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740_redrawn_parishes_cleaned_wikidata_standardised.geojson` — **106,216 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740_redrawn_parishes_cleaned_wikidata_standardised.geojson` — **106,216 bytes**
 
 Records/features: **73**. Geometry types: `{"Polygon": 70, "MultiPolygon": 3}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}`.
 
@@ -1320,7 +1320,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1808-sommarioni\venice_1808_landregister_geometries.geojson` — **12,903,989 bytes**
 
 Records/features: **24,430**. Geometry types: `{"Polygon": 24430}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}`.
 
@@ -1335,7 +1335,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Canals_EPSG32633.geojson` — **1,268,100 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Canals_EPSG32633.geojson` — **1,268,100 bytes**
 
 Records/features: **169**. Geometry types: `{"MultiPolygon": 9, "Polygon": 160}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1354,7 +1354,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Civici_EPSG32633.geojson` — **6,728,890 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Civici_EPSG32633.geojson` — **6,728,890 bytes**
 
 Records/features: **31,623**. Geometry types: `{"Point": 31623}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1367,7 +1367,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Edifici_EPSG32633.geojson` — **14,442,426 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Edifici_EPSG32633.geojson` — **14,442,426 bytes**
 
 Records/features: **8,512**. Geometry types: `{"MultiPolygon": 6787, "Polygon": 1725}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1399,7 +1399,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Isole_EPSG32633.geojson` — **262,593 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Isole_EPSG32633.geojson` — **262,593 bytes**
 
 Records/features: **119**. Geometry types: `{"Polygon": 118, "MultiPolygon": 1}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1411,7 +1411,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Sestiere_EPSG32633.geojson` — **97,373 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Sestiere_EPSG32633.geojson` — **97,373 bytes**
 
 Records/features: **8**. Geometry types: `{"Polygon": 6, "MultiPolygon": 2}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1421,7 +1421,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Streets_EPSG32633.geojson` — **6,930,875 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\2024-geometries\2024_Streets_EPSG32633.geojson` — **6,930,875 bytes**
 
 Records/features: **3,773**. Geometry types: `{"Polygon": 3542, "MultiPolygon": 231}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::32633"}}`.
 
@@ -1447,7 +1447,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\centroids.geojson` — **160,210 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\centroids.geojson` — **160,210 bytes**
 
 Records/features: **693**. Geometry types: `{"Point": 693}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}`.
 
@@ -1459,7 +1459,7 @@ Fields (actual type:count):
 
 Temporal fields: `start_date`, `end_date`. See main report and Appendix C for numeric/date-year ranges; lexical string order is not used to infer years.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\geometries_generalized.geojson` — **1,054,104 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\geometries_generalized.geojson` — **1,054,104 bytes**
 
 Records/features: **693**. Geometry types: `{"Polygon": 691, "MultiPolygon": 2}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:OGC:1.3:CRS84"}}`.
 
@@ -1471,7 +1471,7 @@ Fields (actual type:count):
 
 Temporal fields: `start_date`, `end_date`. See main report and Appendix C for numeric/date-year ranges; lexical string order is not used to infer years.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\106_modificato.geojson` — **577,490 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\106_modificato.geojson` — **577,490 bytes**
 
 Records/features: **24**. Geometry types: `{"Polygon": 24}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1481,7 +1481,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\114_modificato.geojson` — **309,058 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\114_modificato.geojson` — **309,058 bytes**
 
 Records/features: **12**. Geometry types: `{"Polygon": 12}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1491,7 +1491,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\122_modificato.geojson` — **311,748 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\122_modificato.geojson` — **311,748 bytes**
 
 Records/features: **26**. Geometry types: `{"Polygon": 26}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1501,7 +1501,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\127_modificato.geojson` — **389,730 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\127_modificato.geojson` — **389,730 bytes**
 
 Records/features: **41**. Geometry types: `{"Polygon": 41}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1511,7 +1511,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\133_modificato.geojson` — **707,347 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\133_modificato.geojson` — **707,347 bytes**
 
 Records/features: **56**. Geometry types: `{"Polygon": 56}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1521,7 +1521,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\143_modificato.geojson` — **343,539 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\143_modificato.geojson` — **343,539 bytes**
 
 Records/features: **34**. Geometry types: `{"Polygon": 34}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1531,7 +1531,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\148_modificato.geojson` — **644,408 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\148_modificato.geojson` — **644,408 bytes**
 
 Records/features: **46**. Geometry types: `{"Polygon": 46}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1541,7 +1541,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\156_modificato.geojson` — **363,987 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\156_modificato.geojson` — **363,987 bytes**
 
 Records/features: **16**. Geometry types: `{"Polygon": 16}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1551,7 +1551,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\162_modificato.geojson` — **391,527 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\162_modificato.geojson` — **391,527 bytes**
 
 Records/features: **31**. Geometry types: `{"Polygon": 31}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1561,7 +1561,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\169_modificato.geojson` — **505,960 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\169_modificato.geojson` — **505,960 bytes**
 
 Records/features: **33**. Geometry types: `{"Polygon": 33}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1571,7 +1571,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\176_modificato.geojson` — **491,771 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\176_modificato.geojson` — **491,771 bytes**
 
 Records/features: **33**. Geometry types: `{"Polygon": 33}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1581,7 +1581,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\184_modificato.geojson` — **387,954 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\184_modificato.geojson` — **387,954 bytes**
 
 Records/features: **26**. Geometry types: `{"Polygon": 26}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1591,7 +1591,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\192_modificato.geojson` — **282,814 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\192_modificato.geojson` — **282,814 bytes**
 
 Records/features: **10**. Geometry types: `{"Polygon": 10}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1601,7 +1601,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\24_modificato.geojson` — **353,011 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\24_modificato.geojson` — **353,011 bytes**
 
 Records/features: **21**. Geometry types: `{"Polygon": 21}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1611,7 +1611,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\32_modificato.geojson` — **210,333 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\32_modificato.geojson` — **210,333 bytes**
 
 Records/features: **14**. Geometry types: `{"Polygon": 14}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1621,7 +1621,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\35_modificato.geojson` — **293,187 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\35_modificato.geojson` — **293,187 bytes**
 
 Records/features: **20**. Geometry types: `{"Polygon": 20}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1631,7 +1631,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\40_modificato.geojson` — **201,846 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\40_modificato.geojson` — **201,846 bytes**
 
 Records/features: **16**. Geometry types: `{"Polygon": 16}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1641,7 +1641,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\44_modificato.geojson` — **418,183 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\44_modificato.geojson` — **418,183 bytes**
 
 Records/features: **37**. Geometry types: `{"Polygon": 37}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1651,7 +1651,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\53_modificato.geojson` — **731,837 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\53_modificato.geojson` — **731,837 bytes**
 
 Records/features: **45**. Geometry types: `{"Polygon": 45}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1661,7 +1661,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\63_modificato.geojson` — **357,943 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\63_modificato.geojson` — **357,943 bytes**
 
 Records/features: **22**. Geometry types: `{"Polygon": 22}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1671,7 +1671,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\68_modificato.geojson` — **515,461 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\68_modificato.geojson` — **515,461 bytes**
 
 Records/features: **34**. Geometry types: `{"Polygon": 34}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1681,7 +1681,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\78_modificato.geojson` — **402,574 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\78_modificato.geojson` — **402,574 bytes**
 
 Records/features: **31**. Geometry types: `{"Polygon": 31}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1691,7 +1691,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\85_modificato.geojson` — **285,680 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\85_modificato.geojson` — **285,680 bytes**
 
 Records/features: **19**. Geometry types: `{"Polygon": 19}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1701,7 +1701,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\90_modificato.geojson` — **282,909 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\90_modificato.geojson` — **282,909 bytes**
 
 Records/features: **17**. Geometry types: `{"Polygon": 17}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1711,7 +1711,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\94_modificato.geojson` — **248,497 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\94_modificato.geojson` — **248,497 bytes**
 
 Records/features: **13**. Geometry types: `{"Polygon": 13}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1721,7 +1721,7 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\98_modificato.geojson` — **408,314 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\geometries\quarters\98_modificato.geojson` — **408,314 bytes**
 
 Records/features: **24**. Geometry types: `{"Polygon": 24}`; declared CRS: `{"type": "name", "properties": {"name": "urn:ogc:def:crs:EPSG::3004"}}`.
 
@@ -1731,27 +1731,27 @@ Fields (actual type:count):
 
 No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if any, is described in the main report.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.tsv` — **9,448,321 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1740-landregister\venice-1740-landregister-main\1740_Catastici_2026-05-12.tsv` — **9,448,321 bytes**
 
 32,361 rows. Header: `uid`, `author`, `owner_code`, `owner_count`, `PP_OwnerCode`, `owner_name`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `place`, `parish_std`, `sestiere`, `PP_Function_TOP`, `PP_Function_MID`, `PP_Function_PROPERTY`, `PP_Function_GEOMETRY`, `PP_Bottega_STD`, `PP_Bottega_COUNT`, `PP_Bottega_TRAD`, `PP_Bottega_METACATEGORY`, `PP_Owner_Title`, `PP_Owner_Entity`, `PP_Owner_FirstName`, `PP_Owner_LastName`, `PP_Owner_Mestiere`, `PP_Owner_Title_Categories`, `INDEX_Owner_Symbols`, `INDEX_Function_Symbols`, `INDEX_Owner_Index1`, `INDEX_Owner_Index2`, `patronymic`, `x`, `y`.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.csv` — **8,828,028 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_geometries.csv` — **8,828,028 bytes**
 
 24,430 rows. Header: `id`, `parcel_number`, `geometry_type`, `geometry_id`, `parish_standardised`, `geometry`, `area`.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.csv` — **611,213 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_merge_log.csv` — **611,213 bytes**
 
 9,312 rows. Header: `merge_log_uid`, `owner_uid`, `parcel_id`, `suddetto`, `same_father`, `same_mother`, `same_siblings`, `same_husband`, `same_title`, `same_other_note`, `same_name_only`.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.csv` — **722,852 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_standardised_people.csv` — **722,852 bytes**
 
 12,277 rows. Header: `uid`, `nucleus_uid`, `family`, `name`, `title`, `father`, `father_is_q`, `mother`, `siblings`, `husband`, `husband_is_q`, `other_notes`, `parcel_ids`.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.csv` — **8,479,191 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-1808-landregister\venice-1808-landregister-main\venice_1808_landregister_textual_entries.csv` — **8,479,191 bytes**
 
 23,662 rows. Header: `parcel_id`, `owner_transcription`, `owner_standardised`, `owner_standardised_class`, `owner_wd`, `owner_right_of_use`, `owner_type`, `old_entity`, `old_entity_standardised`, `old_entity_standardised_class`, `old_entity_wd`, `old_owner_right_of_use`, `old_owner_type`, `old_religious_entity_type`, `owner_supplementary`, `geometry_id`, `parcel_number`, `sub_parcel_number`, `place`, `house_number`, `quality`, `ownership_types`, `qualities`, `district`, `owner_right_of_use_en`, `old_religious_entity_type_en`, `old_owner_right_of_use_en`, `qualities_en`, `ownership_types_en`, `citation`.
 
-### `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_commercial_guide_with_pages_20250624.csv` — **1,501,744 bytes**
+### `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1857-commercial-guide\1857_commercial_guide_with_pages_20250624.csv` — **1,501,744 bytes**
 
 5,883 rows. Header: `index`, `OCC_COMPL`, `LAST_N`, `FIRST_N`, `PER_GRP`, `PER_COMPL`, `LOC_PAR`, `LOC_STR`, `NUM`, `LOC_COMPL`, `NORM_PARISH`, `DISTRICT`, `geometry`, `geometry_from`, `profession`, `profession_eng`, `category`, `category_eng`, `PAGE_NUM`.
 
@@ -1761,93 +1761,93 @@ No explicit DATE/YEAR/PERIOD-like field. Dataset year or narrative evidence, if 
 
 ### XLSX column names
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\103_0.xlsx` — **17,556 bytes**; 171 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\104_2.xlsx` — **15,192 bytes**; 147 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\105_2.xlsx` — **8,760 bytes**; 45 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\107_0.xlsx` — **31,333 bytes**; 398 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\112_2.xlsx` — **22,935 bytes**; 227 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\115_0.xlsx` — **11,206 bytes**; 87 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\118_0.xlsx` — **33,647 bytes**; 440 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\121_1.xlsx` — **14,258 bytes**; 111 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\123_0.xlsx` — **13,185 bytes**; 96 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\125_1.xlsx` — **16,755 bytes**; 144 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\126_2.xlsx` — **14,816 bytes**; 116 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\129_0.xlsx` — **19,875 bytes**; 212 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\130_2.xlsx` — **22,262 bytes**; 272 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\136_0.xlsx` — **20,489 bytes**; 228 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\137_3.xlsx` — **21,691 bytes**; 210 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\139_3.xlsx` — **11,507 bytes**; 95 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\140_2.xlsx` — **17,120 bytes**; 174 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\141_3.xlsx` — **13,941 bytes**; 132 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\145_0.xlsx` — **21,878 bytes**; 250 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\146_3.xlsx` — **12,198 bytes**; 94 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\147_2.xlsx` — **9,596 bytes**; 58 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\149_0.xlsx` — **14,189 bytes**; 136 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\152_2.xlsx` — **23,878 bytes**; 274 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\154_3.xlsx` — **13,022 bytes**; 108 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\156_0.xlsx` — **24,760 bytes**; 262 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\160_2.xlsx` — **13,080 bytes**; 109 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\165_0.xlsx` — **18,535 bytes**; 169 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\166_1.xlsx` — **25,259 bytes**; 303 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\172_0.xlsx` — **27,607 bytes**; 348 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\174_2.xlsx` — **15,723 bytes**; 145 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\179_0.xlsx` — **18,664 bytes**; 206 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\180_2.xlsx` — **15,302 bytes**; 152 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\181_2.xlsx` — **25,696 bytes**; 275 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\187_0.xlsx` — **27,755 bytes**; 324 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\189_2.xlsx` — **25,540 bytes**; 283 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\193_0.xlsx` — **29,268 bytes**; 257 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\25_0.xlsx` — **41,442 bytes**; 460 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\32_0.xlsx` — **17,313 bytes**; 159 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\34_3.xlsx` — **8,521 bytes**; 35 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_0.xlsx` — **12,645 bytes**; 85 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_3.xlsx` — **19,539 bytes**; 211 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_0.xlsx` — **12,467 bytes**; 103 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_3.xlsx` — **13,594 bytes**; 122 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\47_0.xlsx` — **22,000 bytes**; 258 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\48_3.xlsx` — **15,489 bytes**; 152 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\49_3.xlsx` — **14,153 bytes**; 127 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\50_3.xlsx` — **20,703 bytes**; 230 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_0.xlsx` — **12,236 bytes**; 83 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_3.xlsx` — **19,177 bytes**; 217 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\58_1.xlsx` — **14,450 bytes**; 126 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\59_1.xlsx` — **19,546 bytes**; 210 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\61_0.xlsx` — **21,868 bytes**; 223 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\65_0.xlsx` — **21,678 bytes**; 231 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\66_3.xlsx` — **8,655 bytes**; 38 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_0.xlsx` — **10,253 bytes**; 46 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_2.xlsx` — **12,539 bytes**; 83 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_0.xlsx` — **11,809 bytes**; 90 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_2.xlsx` — **16,452 bytes**; 164 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\73_3.xlsx` — **18,878 bytes**; 186 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\75_2.xlsx` — **18,148 bytes**; 168 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\76_3.xlsx` — **13,805 bytes**; 137 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_0.xlsx` — **11,770 bytes**; 90 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_2.xlsx` — **15,005 bytes**; 140 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\82_3.xlsx` — **10,824 bytes**; 69 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\83_1.xlsx` — **21,048 bytes**; 209 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\87_0.xlsx` — **20,790 bytes**; 230 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\88_3.xlsx` — **13,026 bytes**; 93 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\90_0.xlsx` — **18,202 bytes**; 195 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\93_0.xlsx` — **15,906 bytes**; 147 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\96_0.xlsx` — **23,837 bytes**; 272 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\99_0.xlsx` — **19,400 bytes**; 190 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD.xlsx` — **5,365,640 bytes**; 33,297 XML data rows (blank/styled rows not filtered); header `uidx`, `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD_expanded.xlsx` — **6,144,641 bytes**; 38,218 XML data rows (blank/styled rows not filtered); header `uidx`, `id`, `owner_name`, `owner_code`, `parcel_portion`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\103_0.xlsx` — **17,556 bytes**; 171 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\104_2.xlsx` — **15,192 bytes**; 147 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\105_2.xlsx` — **8,760 bytes**; 45 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\107_0.xlsx` — **31,333 bytes**; 398 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\112_2.xlsx` — **22,935 bytes**; 227 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\115_0.xlsx` — **11,206 bytes**; 87 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\118_0.xlsx` — **33,647 bytes**; 440 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\121_1.xlsx` — **14,258 bytes**; 111 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\123_0.xlsx` — **13,185 bytes**; 96 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\125_1.xlsx` — **16,755 bytes**; 144 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\126_2.xlsx` — **14,816 bytes**; 116 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\129_0.xlsx` — **19,875 bytes**; 212 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\130_2.xlsx` — **22,262 bytes**; 272 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\136_0.xlsx` — **20,489 bytes**; 228 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\137_3.xlsx` — **21,691 bytes**; 210 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\139_3.xlsx` — **11,507 bytes**; 95 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\140_2.xlsx` — **17,120 bytes**; 174 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\141_3.xlsx` — **13,941 bytes**; 132 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\145_0.xlsx` — **21,878 bytes**; 250 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\146_3.xlsx` — **12,198 bytes**; 94 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\147_2.xlsx` — **9,596 bytes**; 58 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\149_0.xlsx` — **14,189 bytes**; 136 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\152_2.xlsx` — **23,878 bytes**; 274 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\154_3.xlsx` — **13,022 bytes**; 108 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\156_0.xlsx` — **24,760 bytes**; 262 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\160_2.xlsx` — **13,080 bytes**; 109 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\165_0.xlsx` — **18,535 bytes**; 169 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\166_1.xlsx` — **25,259 bytes**; 303 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\172_0.xlsx` — **27,607 bytes**; 348 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\174_2.xlsx` — **15,723 bytes**; 145 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\179_0.xlsx` — **18,664 bytes**; 206 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\180_2.xlsx` — **15,302 bytes**; 152 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\181_2.xlsx` — **25,696 bytes**; 275 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\187_0.xlsx` — **27,755 bytes**; 324 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\189_2.xlsx` — **25,540 bytes**; 283 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\193_0.xlsx` — **29,268 bytes**; 257 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\25_0.xlsx` — **41,442 bytes**; 460 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\32_0.xlsx` — **17,313 bytes**; 159 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\34_3.xlsx` — **8,521 bytes**; 35 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_0.xlsx` — **12,645 bytes**; 85 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\38_3.xlsx` — **19,539 bytes**; 211 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_0.xlsx` — **12,467 bytes**; 103 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\42_3.xlsx` — **13,594 bytes**; 122 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\47_0.xlsx` — **22,000 bytes**; 258 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\48_3.xlsx` — **15,489 bytes**; 152 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\49_3.xlsx` — **14,153 bytes**; 127 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\50_3.xlsx` — **20,703 bytes**; 230 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_0.xlsx` — **12,236 bytes**; 83 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\56_3.xlsx` — **19,177 bytes**; 217 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\58_1.xlsx` — **14,450 bytes**; 126 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\59_1.xlsx` — **19,546 bytes**; 210 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\61_0.xlsx` — **21,868 bytes**; 223 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\65_0.xlsx` — **21,678 bytes**; 231 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\66_3.xlsx` — **8,655 bytes**; 38 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_0.xlsx` — **10,253 bytes**; 46 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\67_2.xlsx` — **12,539 bytes**; 83 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_0.xlsx` — **11,809 bytes**; 90 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\72_2.xlsx` — **16,452 bytes**; 164 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\73_3.xlsx` — **18,878 bytes**; 186 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\75_2.xlsx` — **18,148 bytes**; 168 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\76_3.xlsx` — **13,805 bytes**; 137 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_0.xlsx` — **11,770 bytes**; 90 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\81_2.xlsx` — **15,005 bytes**; 140 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\82_3.xlsx` — **10,824 bytes**; 69 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\83_1.xlsx` — **21,048 bytes**; 209 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\87_0.xlsx` — **20,790 bytes**; 230 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\88_3.xlsx` — **13,026 bytes**; 93 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\90_0.xlsx` — **18,202 bytes**; 195 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\93_0.xlsx` — **15,906 bytes**; 147 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\96_0.xlsx` — **23,837 bytes**; 272 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\946_1408-dorigo\tables\99_0.xlsx` — **19,400 bytes**; 190 XML data rows (blank/styled rows not filtered); header `unità areale`, `informazioni urbinistico-edilizie`, `data`, `proprietà`, `fonte`, `page`, `map_number`, `parcel_numbers`, `remark_number`, `asterisk_number`, `dates_start`, `dates_end`, `dates_comment`, `derived_from_row`, `sources`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD.xlsx` — **5,365,640 bytes**; 33,297 XML data rows (blank/styled rows not filtered); header `uidx`, `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\catastici_1741_STD_expanded.xlsx` — **6,144,641 bytes**; 38,218 XML data rows (blank/styled rows not filtered); header `uidx`, `id`, `owner_name`, `owner_code`, `parcel_portion`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`
 
 ### 1740 processing intermediate JSON schemas
 
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD.json` — **24,049,565 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD_expanded.json` — **28,340,115 bytes**; 38,218 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `parcel_portion`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step1.json` — **22,654,823 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step2.json` — **22,654,115 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step3.json` — **22,665,126 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step4.json` — **22,839,220 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step5.json` — **23,267,073 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step6_patterns.json` — **1,867,396 bytes**; 4,658 records; fields: `uidx`, `owner_text`, `patterns`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step7.json` — **23,474,565 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step8.json` — **24,049,565 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
-- `D:\100_star\venice\data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_pre-processing\catastici_20240123.json` — **16,909,660 bytes**; 33,297 records; fields: `id`, `owner_name`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD.json` — **24,049,565 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_STD_expanded.json` — **28,340,115 bytes**; 38,218 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `parcel_portion`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step1.json` — **22,654,823 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step2.json` — **22,654,115 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step3.json` — **22,665,126 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step4.json` — **22,839,220 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step5.json` — **23,267,073 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step6_patterns.json` — **1,867,396 bytes**; 4,658 records; fields: `uidx`, `owner_text`, `patterns`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step7.json` — **23,474,565 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_post-processing\pipeline_steps\catastici_1741_step8.json` — **24,049,565 bytes**; 33,297 records; fields: `uidx`, `id`, `owner_name`, `owner_code`, `owner_count`, `owner_count_remark`, `owner_entity`, `owner_entity_group`, `owner_first_name`, `owner_family_name`, `owner_family_group`, `owner_title`, `owner_title_std`, `owner_mestiere`, `owner_mestiere_std`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
+- `data/data\raw\Venice_Historical_20261022_2025\repositories\venice-data-week-data\venice-data-week-data-main\1740-catastici\index\data_catastici\data_pre-processing\catastici_20240123.json` — **16,909,660 bytes**; 33,297 records; fields: `id`, `owner_name`, `ten_name`, `function`, `an_rendi`, `id_napo`, `quantity_income`, `quality_income`, `author`, `place`, `parish`, `sestiere`, `uid`, `path_img`, `geometry`; no explicit historical date field.
 
 ## Appendix C — actual full-file date distributions
 
