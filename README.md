@@ -13,6 +13,14 @@
 
 <img src="web/img/venice-link-preview-v1.jpg" width="600" alt="Venice by Building preview">
 
+<br>
+
+<a href="https://youtu.be/IsmCoZj9Q80">
+  <img src="https://img.youtube.com/vi/IsmCoZj9Q80/maxresdefault.jpg" width="600" alt="Venice, Building by Building — demo">
+</a>
+
+▶️ [Watch demo (0:42)](https://youtu.be/IsmCoZj9Q80)
+
 </div>
 
 ---
