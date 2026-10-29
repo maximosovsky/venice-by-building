@@ -1,75 +1,49 @@
-# Venice, building by building
+<div align="center">
 
-A 3D atlas of the historic centre of Venice: every building as it stands today, coloured by the
-epoch it belongs to, with a timeline that lets the city assemble itself.
+# 🏛️ Venice, Building by Building
 
-Live site: https://venice-by-building.vercel.app (Vercel, from this repository)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-r186-000000?style=for-the-badge&logo=threedotjs&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![Vercel](https://img.shields.io/badge/Hosting-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-## Languages
+**A 3D atlas of Venice's historic centre: 11,137 buildings coloured by epoch, assembling through time**
 
-The site speaks Russian, Italian and English: the switch sits in the top bar, `?lang=it` or
-`?lang=en` sets it from a link, and the choice is remembered in the browser. Russian is the source
-of every text; `web/i18n.js` holds the dictionaries keyed by the Russian original, and both the
-page and the pipeline's own prose (stories, eras, layers) go through it. Wikipedia extracts and
-article titles are shown in the language of the map where Wikidata has that sitelink, and fall back
-to the Italian one.
+<a href="https://venice-by-building.vercel.app">🌐 Live Site</a> · <a href="#-quick-start">Quick Start</a> · <a href="#-features">Features</a> · <a href="#-pipeline">Pipeline</a> · <a href="#-tech-stack">Tech Stack</a>
 
-`node tests/i18n_coverage.mjs` fails if any Russian text the reader can see — on the page, in the
-code or in the exported data — has no Italian and English line, or if a translation lost its
-placeholders or kept Cyrillic in it.
+<img src="web/img/venice-link-preview-v1.jpg" width="600" alt="Venice by Building preview">
 
-## What the map shows
+</div>
 
-11,137 buildings of the historic centre — the island of Venice, Giudecca, San Giorgio Maggiore,
-La Certosa, Murano and Burano — each drawn from its OpenStreetMap footprint, with courtyards as
-holes and roof volumes as separate `building:part` prisms.
+---
 
-Colour is age:
+> Venice has no register of construction years. This atlas draws every building from OpenStreetMap footprints, dates it from the municipal VPRG classification and Italian Wikipedia, enriches it with Wikidata and Commons photographs, and lets you watch the city assemble itself — epoch by epoch, street by street, bridge by bridge.
 
-| Epoch | Buildings | Source of the statement |
-|---|---|---|
-| before 1800 | 3,642 | VPRG class preottocentesche |
-| 1800–1899 | 423 | VPRG class ottocentesche |
-| 1900– | 1,888 | VPRG class novecentesche |
-| year stated | 25 | `start_date` / `year_of_construction` on the OSM object |
-| unknown | 5,177 | no municipal classification for the building |
+## ✨ Features
 
-## What the data can and cannot say
+| 🏗️ Buildings | 11,137 buildings with courtyards as holes, roof volumes as prisms, and measured heights from the 2010 topographic survey |
+| 🎨 Epoch colours | 3,642 pre-1800, 423 19th-century, 1,888 modern, 25 with exact year — 5,177 shown as unknown grey |
+| 🌐 Trilingual | Russian, Italian, English — switch in the top bar, `?lang=it` from a link, choice remembered |
+| 📸 Wikimedia cards | 1,082 buildings with Commons photographs, author and licence on every card |
+| 🏛️ Wikidata enrichment | 1,536 buildings matched by geometry — names, architects, styles, heritage status, dates |
+| 🧱 Streets as rows | Every street as an ordered row of facades with a side for each house |
+| 🌉 Bridges & routes | 465 bridges with municipal characteristics, church walks and bridge visit routes |
+| ⏳ Timeline | Watch the city assemble epoch by epoch |
 
-Venice has no register of construction years. The municipal VPRG classification of *unità edilizie*
-describes typology and historic persistence in three epochs, and marks units that were transformed,
-merged or rebuilt (`pt`, `fa`, `Or`, and composite codes). `DATA_CSC` in that layer is the date of a
-Commissione Scientifica decision (2000–2013), not a construction date. The historical registers held in
-`data/raw/Venice_Historical_20261022_2025` record years of observation, not of building.
+---
 
-So the atlas carries intervals, never invented years:
+## 🚀 Quick Start
 
-* a stated year is drawn as a year (`flag 0`);
-* a VPRG epoch is drawn as an interval and labelled as an epoch (`flag 1`);
-* a building with neither is grey and unknown (`flag 2`).
+```bash
+git clone https://github.com/maximosovsky/venice-by-building.git
+cd venice-by-building/web
+npx serve .
+```
 
-Heights are an explicit tag, else a level count, else the median of the same epoch's measured
-buildings — the source is recorded in the `hsrc` attribute and shown in the building card either way.
+Open `http://localhost:3000` — the viewer runs with committed data, no build step.
 
-## Pipeline
-
-Everything in `pipeline/venice/` is ours; it writes plain GeoJSON/GeoParquet first and only then the
-viewer's binary format, so the data stays independent of the viewer.
-
-| Stage | What it does | Output |
-|---|---|---|
-| `s01_buildings.py` | OSM extract into buildings, parts, addresses, streets and water | `data/processed/*_island`, `*_centro` |
-| `s02_dating.py` | municipal classification and OSM dates into one evidence table | `evidence_<area>.csv`, `buildings_dated_*` |
-| `s04_wikimedia.py` | Wikidata labels, Wikipedia articles, Commons photos with licence and author | `data/ready/wikimedia.json` |
-| `s05_streets.py` | streets as ordered rows of facades, with a side for each house | `data/ready/streets.json` |
-| `s10_itwiki.py` | construction dates from Italian Wikipedia articles, with the sentence and a review list | `data/processed/itwiki_dates_*` |
-| `s11_media.py` | photographs from Wikimedia Commons fetched once, shrunk to 560 px WebP, kept in `web/media/` with author and licence in the manifest | `web/media/` |
-| `s09_municipal.py` | measured heights from the city's 2010 topographic survey, attached to our footprints | `data/processed/municipal_heights_*` |
-| `s07_wikidata.py` | every Wikidata item located in Venice, matched to our footprints by geometry | `data/processed/wikidata_match_*` |
-| `s08_wikidata_enrich.py` | names, articles, dates with precision, architects, styles, heritage, heights, Commons photos | `data/ready/wikidata_enriched.json` |
-| `s06_export.py` | tiles, packs, attributes, cards, ground and labels for the viewer | `web/data/*` |
-
-Run:
+<details>
+<summary>🔄 Run the full pipeline</summary>
 
 ```bash
 cd pipeline
@@ -85,76 +59,114 @@ python -m venice.s08_wikidata_enrich centro
 python -m venice.s06_export centro
 ```
 
-`pipeline/venice/periods.py` holds the epoch table and the state flags read out of the municipal class
-descriptions; nothing there may be turned into a single year.
+The pipeline writes GeoJSON/GeoParquet to `data/` first, then the viewer's binary tiles to `web/data/`. Source data lives in `data/raw/` — kept on disk, out of git. Run `node tests/i18n_coverage.mjs` to verify every visible text has all three languages.
 
-Dates gain one more narrow source. Italian Wikipedia states a construction year for some of the buildings Wikidata leaves undated, but its infobox fields `anno` and `data` are not construction dates and its prose often describes a portal, an altar or an institution. Reading only the construction fields and only prose about the building itself yields **11** usable years out of 711 articles, five disagreements are held back for review, and eight founding dates are recorded but never drawn. See `docs/itwiki-dates_20261023.md`.
+</details>
 
-Heights are **measured, not guessed** for most of the centre. The city's 2010 topographic lot carries
-volume parts with real base, eaves and ridge levels; 8 915 of the 11 602 objects now take their height
-from them, and the estimate from the epoch median is down from 8 303 objects to 2 055. The 2006 lot, whose
-167 939 measured buildings are often quoted, does not cover Venice at all, and the roof layer stops at
-Murano. See `docs/municipal-heights_20261023.md`.
+<details>
+<summary>🧪 Run the tests</summary>
 
-Wikidata is matched **by geometry**: the atlas used to know only the 382 buildings tagged with
-`wikidata` in OpenStreetMap, while the coordinates of 2 685 Venetian items reach 1 536 of our
-buildings and bridge decks (1 175 points fall inside a contour, 361 within 18 m). That is where the
-cards beyond those 382 come from — 1 290 in all, 1 082 of them with a Commons photograph — as well as
-252 dates (226 exact years, 53 as an interval), 43 heritage designations, 200 styles, 121 architects
-and 529 named places: vaporetto landings, hotels, schools. A link found by coordinates says so on the
-card and counts as tentative; implausible statements are dropped. See
-`docs/wikidata-enrichment_20261023.md`.
+```bash
+node tests/i18n_coverage.mjs          # all texts in RU/IT/EN
+node tests/worker_smoke.mjs           # viewer's worker on real tiles
+python3 tests/test_viewer_contract.py  # data contract integrity
+node tests/bridge_route_ui.mjs        # bridge route UI
+```
 
-## Viewer
+</details>
 
-The rendering and interface code in `web/` is **SydMap** by Amir Marashi (MIT), vendored unchanged apart
-from the data path, the language and the wording of the building card. Its data contract — 600 m tiles
-packed into gzipped `pack*.bin` with a `SYD2`-style layout, a 56-byte `attrs.bin`, `wiki.json`,
-`names.json`, `heritage.json`, `labels.json`, `layers.json` and land/water polygon bins — is implemented
-by `s06_export.py`. Three.js r186 is vendored under `web/vendor/`.
+---
 
-Attribution: SydMap (MIT) → [LAYRS: Amsterdam](https://stop-token.com/lab/amsterdam/) by Alex Barakov
-(MIT) → [Paris, building by building](https://paris.bogachev.fr) by Alexander Bogachev.
+## 🔄 Pipeline
 
-## Licences
+Everything in `pipeline/venice/` writes plain GeoJSON/GeoParquet first and the viewer's binary format only at export — the data stays independent of the viewer.
+
+| Stage | What it does | Output |
+|---|---|---|
+| `s01_buildings.py` | OSM extract: buildings, parts, addresses, streets, water | `data/processed/` |
+| `s02_dating.py` | Municipal VPRG classification + OSM dates → evidence table | `evidence_<area>.csv` |
+| `s04_wikimedia.py` | Wikidata labels, Wikipedia articles, Commons photos | `data/ready/wikimedia.json` |
+| `s05_streets.py` | Streets as ordered rows of facades | `data/ready/streets.json` |
+| `s07_wikidata.py` | Wikidata items matched to footprints by geometry | `data/processed/wikidata_match_*` |
+| `s08_wikidata_enrich.py` | Names, articles, dates, architects, styles, heritage, heights | `data/ready/wikidata_enriched.json` |
+| `s09_municipal.py` | Measured heights from 2010 topographic survey | `data/processed/municipal_heights_*` |
+| `s10_itwiki.py` | Construction dates from Italian Wikipedia prose | `data/processed/itwiki_dates_*` |
+| `s11_media.py` | Commons photos fetched, shrunk to 560 px WebP | `web/media/` |
+| `s06_export.py` | Tiles, packs, attributes, cards, labels → viewer format | `web/data/` |
+
+> [!NOTE]
+> `pipeline/venice/periods.py` holds the epoch table and state flags from municipal class descriptions. Nothing there may be turned into a single year: the atlas carries intervals, never invented years.
+
+---
+
+## 🏗️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Pipeline | Python 3.12, GeoPandas, Shapely, PyArrow |
+| Viewer | Three.js r186 (SydMap engine), vanilla JS |
+| Hosting | Vercel (static, no backend) |
+| Data sources | OpenStreetMap (ODbL), VPRG Città Antica (CC BY 4.0), Wikidata (CC0), Wikipedia (CC BY-SA) |
+
+<details>
+<summary>📁 Repository layout</summary>
+
+```
+venice-by-building/
+├── pipeline/venice/     data pipeline (ours, MIT)
+├── web/                 the site: viewer code, generated data, fonts, vendored three.js
+│   ├── data/            viewer binary tiles
+│   ├── media/           Commons photos (WebP)
+│   ├── models/          3D ship models
+│   ├── img/             static images
+│   └── vendor/          SydMap + three.js (MIT)
+├── data/
+│   ├── raw/             source data (on disk, out of git)
+│   ├── processed/       intermediate pipeline output
+│   └── routes/          bridge and church routes
+├── docs/                engine audit, VPRG docs, data inventories
+├── research/            engine source snapshots, provenance records
+├── reports/             performance baselines, municipal audits
+├── tests/               contract, i18n, UI tests
+└── scripts/             ground cache, ship compression
+```
+
+</details>
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Building geometry, parts, epochs, heights
+- [x] Wikimedia cards with photographs, architects, heritage
+- [x] Trilingual interface (RU/IT/EN)
+- [x] Bridge routes with municipal characteristics
+- [x] Church walks (Sacred Walk phases)
+- [x] Streets as ordered facade rows
+- [x] Address enrichment from municipal data
+- [x] Timeline animation
+- [ ] Historical register integration (1740/1808/1857)
+- [ ] Topographic releases 1987–2010 3D data
+- [ ] TimeMachine Atlas semantic date extraction
+
+---
+
+## 🤝 Contributing
+
+Fork → `feature/name` → PR. Tests must pass: `node tests/i18n_coverage.mjs` ensures every visible text has all three languages.
+
+---
+
+## 📄 Licence
 
 | Material | Licence |
 |---|---|
-| OpenStreetMap geometry, addresses, parts, street names | ODbL 1.0, © OpenStreetMap contributors |
-| VPRG Città Antica classification, Comune di Venezia | municipal open data, CC BY 4.0 |
+| Pipeline, site content, enrichment data | MIT |
+| OpenStreetMap geometry | ODbL 1.0, © OpenStreetMap contributors |
+| VPRG Città Antica classification | CC BY 4.0, Comune di Venezia |
 | Wikidata | CC0 |
 | Wikipedia text | CC BY-SA |
-| Wikimedia Commons photos | per file; author and licence shown on each card |
-| SydMap viewer code, three.js | MIT |
-| This pipeline | MIT |
+| Wikimedia Commons photos | Per file — author and licence on each card |
+| SydMap viewer, three.js | MIT |
 
-## Repository layout
-
-```
-pipeline/venice/   the data pipeline (ours)
-web/               the site: viewer code, generated data, fonts, vendored three.js
-data/raw/          source data, kept on disk and out of git
-docs/              engine audit, VPRG class documentation, data inventories
-research/          engine source snapshots and provenance records
-```
-
-## Status
-
-Working: geometry, parts, epochs, unknown-age layer, Wikimedia cards, streets.
-Not yet in this build, but held on disk and inventoried in `docs/`:
-
-* **Topographic releases 1987–2010** — `docs/topographic-data-inventory_20261022.md`. Usable 3D inputs
-  exist: base and eaves elevations in 2005 `FABBRIC` and 2006 `EDIFC`/`EDI_MIN`; 181,113 volumetric parts
-  in 2010 `UN_VOL`; 187,161 roof polygons with vertex Z in `ELE_CP`. Legacy horizontal CRS is inferred
-  EPSG:3003, the GEODBT archives declare EPSG:6706, the vertical datum is undocumented, and no stable
-  identifier links a building across all five releases.
-* **Historical registers 1740 / 1808 / 1857 and the TimeMachine Atlas** —
-  `docs/historical-data-inventory_20261022.md`. The nearest thing to per-building age evidence is
-  `2024_Edifici_EPSG32633.geojson`, attribute `description_piamonte`: 929 building-linked descriptions with
-  cited historical prose, from which dates need semantic extraction. Atlas `start_date`/`end_date` are
-  mostly map states; `transform_date` and `fire_date` are sparse candidates. Dorigo observations 976–1408
-  and the 1740/1808 registers date zones and parcels, not modern buildings. The 1808 Zenodo release is
-  CC BY 4.0; other historical datasets have no established reuse grant.
-
-The viewer's data contract, as implemented by `s06_export.py`, is written down in
-`docs/viewer-contract_20261022.md`.
+[Maxim Osovsky](https://linkedin.com/in/osovsky). Pipeline and site content licensed under [MIT](LICENSE).
