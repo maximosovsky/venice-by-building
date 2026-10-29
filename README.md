@@ -21,14 +21,21 @@
 
 ## ✨ Features
 
-| 🏗️ Buildings | 11,137 buildings with courtyards as holes, roof volumes as prisms, and measured heights from the 2010 topographic survey |
-| 🎨 Epoch colours | 3,642 pre-1800, 423 19th-century, 1,888 modern, 25 with exact year — 5,177 shown as unknown grey |
-| 🌐 Trilingual | Russian, Italian, English — switch in the top bar, `?lang=it` from a link, choice remembered |
-| 📸 Wikimedia cards | 1,082 buildings with Commons photographs, author and licence on every card |
-| 🏛️ Wikidata enrichment | 1,536 buildings matched by geometry — names, architects, styles, heritage status, dates |
-| 🧱 Streets as rows | Every street as an ordered row of facades with a side for each house |
-| 🌉 Bridges & routes | 465 bridges with municipal characteristics, church walks and bridge visit routes |
-| ⏳ Timeline | Watch the city assemble epoch by epoch |
+🏗️ **11,137 buildings** with courtyards as holes, roof volumes as prisms, and measured heights from the 2010 topographic survey
+
+🎨 **Coloured by epoch** — 3,642 pre-1800, 423 19th-century, 1,888 modern, 25 with exact year; 5,177 in unknown grey
+
+🌐 **Trilingual** — Russian, Italian, English; switch in the top bar, `?lang=it` from a link, choice remembered
+
+📸 **1,082 Commons photographs** — author and licence on every building card
+
+🏛️ **1,536 Wikidata matches** by geometry — names, architects, styles, heritage status, dates
+
+🧱 **Streets as ordered rows** of facades, with a side for each house
+
+🌉 **465 bridges** with municipal characteristics, plus church walk and bridge visit routes
+
+⏳ **Timeline** — watch the city assemble epoch by epoch
 
 ---
 
